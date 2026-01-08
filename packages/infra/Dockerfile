@@ -65,13 +65,15 @@ RUN groupadd --system --gid 1001 nodejs && \
     useradd --system --uid 1001 --gid nodejs nextjs
 
 # Copy standalone output from the specific app
-COPY --from=builder /app/apps/${APP_NAME}/public ./public
+# The standalone output preserves the monorepo structure
 COPY --from=builder --chown=nextjs:nodejs /app/apps/${APP_NAME}/.next/standalone ./
-COPY --from=builder --chown=nextjs:nodejs /app/apps/${APP_NAME}/.next/static ./.next/static
+COPY --from=builder --chown=nextjs:nodejs /app/apps/${APP_NAME}/.next/static ./apps/${APP_NAME}/.next/static
+COPY --from=builder /app/apps/${APP_NAME}/public ./apps/${APP_NAME}/public
 
 USER nextjs
 
 EXPOSE 8080
 
-# Start the Next.js server
-CMD ["bun", "server.js"]
+# Start the Next.js server (server.js is in the monorepo structure)
+# Use shell form to expand APP_NAME environment variable
+CMD bun ./apps/${APP_NAME}/server.js
