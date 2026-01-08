@@ -263,16 +263,55 @@ bun run clean
 ### Deployment Commands
 
 ```bash
-# Deploy single app
+# Manual deployment (single app)
 cd packages/infra
 ./scripts/deploy.sh <app-name> <project-id> <region>
 
 # Example: Deploy web app
-./scripts/deploy.sh web my-gcp-project europe-west1
+./scripts/deploy.sh web digital-africa-ai4su europe-west1
 
 # Deploy all apps
 ./scripts/deploy-all.sh <project-id> <region>
 ```
+
+### CI/CD Pipeline (Automated Deployments)
+
+**Automated deployments via Cloud Build:**
+
+```bash
+# One-time setup
+cd packages/infra
+./scripts/setup-cicd.sh
+
+# Then deployments are automatic:
+git push origin main              # → Production deployment
+git push origin staging/feature   # → Staging deployment
+```
+
+**Pipeline features:**
+- ✅ Automated testing (type check, lint) before deployment
+- 🐳 Optimized builds with Kaniko caching (24h TTL)
+- 🎯 Canary deployments (10% → 100% traffic)
+- 🏷️ Version tagging with rollback capability
+- 🔍 Smoke tests after deployment
+- 💰 Cost-optimized (scale-to-zero, right-sized resources)
+
+**Monitoring deployments:**
+
+```bash
+# List recent builds
+gcloud builds list --limit=10
+
+# Stream build logs
+gcloud builds log BUILD_ID --stream
+
+# Rollback if needed
+gcloud run services update-traffic ui-platform-web \
+  --to-revisions=PREVIOUS_VERSION=100 \
+  --region=europe-west1
+```
+
+**Documentation:** See `packages/infra/CICD.md` for complete guide
 
 ### Adding shadcn/ui Components
 
