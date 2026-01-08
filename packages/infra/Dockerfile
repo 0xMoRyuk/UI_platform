@@ -11,14 +11,18 @@ WORKDIR /app
 
 # Copy workspace configuration
 COPY package.json bun.lock ./
-COPY packages/*/package.json ./packages/
 
-# Copy app package.json
+# Create directory structure first
+RUN mkdir -p packages apps
+
+# Copy all package.json files
+COPY packages/*/package.json ./packages/
 ARG APP_NAME
+RUN mkdir -p apps/${APP_NAME}
 COPY apps/${APP_NAME}/package.json ./apps/${APP_NAME}/
 
-# Install dependencies with Bun workspaces
-RUN bun install --production
+# Install dependencies with Bun workspaces (allow lockfile changes in Docker environment)
+RUN bun install --production --no-frozen-lockfile
 
 # Rebuild the source code only when needed
 FROM base AS builder
@@ -27,11 +31,17 @@ WORKDIR /app
 # Copy workspace configuration
 COPY package.json bun.lock ./
 
+# Create directory structure
+RUN mkdir -p packages apps
+
 # Install all dependencies (including devDependencies)
 COPY packages/*/package.json ./packages/
 ARG APP_NAME
+RUN mkdir -p apps/${APP_NAME}
 COPY apps/${APP_NAME}/package.json ./apps/${APP_NAME}/
-RUN bun install 
+
+RUN bun install --no-frozen-lockfile
+
 # Copy all source code
 COPY packages ./packages
 COPY apps/${APP_NAME} ./apps/${APP_NAME}
