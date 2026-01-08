@@ -18,7 +18,7 @@ ARG APP_NAME
 COPY apps/${APP_NAME}/package.json ./apps/${APP_NAME}/
 
 # Install dependencies with Bun workspaces
-RUN bun install --frozen-lockfile --production
+RUN bun install --production
 
 # Rebuild the source code only when needed
 FROM base AS builder
@@ -31,8 +31,7 @@ COPY package.json bun.lock ./
 COPY packages/*/package.json ./packages/
 ARG APP_NAME
 COPY apps/${APP_NAME}/package.json ./apps/${APP_NAME}/
-RUN bun install --frozen-lockfile
-
+RUN bun install 
 # Copy all source code
 COPY packages ./packages
 COPY apps/${APP_NAME} ./apps/${APP_NAME}
