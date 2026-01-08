@@ -9,8 +9,8 @@ FROM oven/bun:1 AS base
 FROM base AS deps
 WORKDIR /app
 
-# Copy workspace configuration
-COPY package.json bun.lock ./
+# Copy workspace configuration (without lockfile - let Bun generate it fresh)
+COPY package.json ./
 
 # Create directory structure first
 RUN mkdir -p packages apps
@@ -21,15 +21,15 @@ ARG APP_NAME
 RUN mkdir -p apps/${APP_NAME}
 COPY apps/${APP_NAME}/package.json ./apps/${APP_NAME}/
 
-# Install dependencies with Bun workspaces (allow lockfile changes in Docker environment)
-RUN bun install --production --no-frozen-lockfile
+# Install dependencies with Bun workspaces (generate fresh lockfile)
+RUN bun install --production
 
 # Rebuild the source code only when needed
 FROM base AS builder
 WORKDIR /app
 
-# Copy workspace configuration
-COPY package.json bun.lock ./
+# Copy workspace configuration (without lockfile)
+COPY package.json ./
 
 # Create directory structure
 RUN mkdir -p packages apps
@@ -40,7 +40,7 @@ ARG APP_NAME
 RUN mkdir -p apps/${APP_NAME}
 COPY apps/${APP_NAME}/package.json ./apps/${APP_NAME}/
 
-RUN bun install --no-frozen-lockfile
+RUN bun install
 
 # Copy all source code
 COPY packages ./packages
