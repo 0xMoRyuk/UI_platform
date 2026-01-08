@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Home() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-950">
@@ -11,6 +13,15 @@ export default function Home() {
         <p className="text-sm text-muted-foreground">
           Built with Next.js • React • Tailwind CSS • shadcn/ui
         </p>
+
+        <div className="pt-4">
+          <Link
+            href="/form"
+            className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 transition-colors"
+          >
+            View Contact Form
+          </Link>
+        </div>
       </main>
     </div>
   );
