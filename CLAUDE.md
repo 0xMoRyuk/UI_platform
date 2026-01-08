@@ -1,0 +1,284 @@
+# CLAUDE.md
+
+## 1. Project Context
+
+This project builds a **web platform (desktop + mobile)** deployed on **Google Cloud Run**, designed for **users in Africa**, where **data usage has a direct monetary cost**.
+
+The system prioritizes:
+
+* **Low data consumption**
+* **Fast perceived UX under poor connectivity**
+* **Scale-to-zero infrastructure**
+* **Operational and cloud cost efficiency**
+
+The frontend stack is:
+
+* **React**
+* **Tailwind CSS**
+* **shadcn/ui**
+* **Bun** (runtime and package manager)
+
+Backend services are **serverless and managed**, primarily on **Google Cloud Run**, with async workloads offloaded to managed queues.
+
+This repository may use **Agent OS** or **Design OS** to structure product thinking, standards, and execution.
+
+---
+
+## 2. North Star Principles (Non-Negotiable)
+
+1. **Bytes are money**
+
+   * Treat every kilobyte downloaded as a user cost.
+   * Optimize for *value per megabyte*.
+
+2. **Perceived speed > raw speed**
+
+   * Always show something immediately.
+   * Skeletons, cached data, and progressive rendering are mandatory UX patterns.
+
+3. **Scale-to-zero by default**
+
+   * No always-on servers unless explicitly justified.
+   * Pay for warmth only on critical user paths.
+
+4. **Async by default**
+
+   * Heavy work must never block user requests.
+   * Use queues, background workers, and job status polling.
+
+5. **Offline-first mindset**
+
+   * Assume intermittent connectivity.
+   * Reads should be cached, writes should be queueable.
+
+---
+
+## 3. UX & Data Usage Standards
+
+### Low-Data UX
+
+* Support a **Low Data Mode** that:
+
+  * Disables media autoplay
+  * Reduces polling frequency
+  * Disables prefetching
+  * Loads smaller images
+* Persist the setting per user/device.
+
+### Network Discipline
+
+* **One API call per screen** whenever possible (BFF pattern).
+* Avoid chatty APIs and client-side request waterfalls.
+* Prefer server-side aggregation.
+
+### Loading States
+
+Every screen must define:
+
+* Initial loading state
+* Empty state
+* Error state
+* Offline / stale-data state
+
+Spinners alone are not acceptable.
+
+### Images & Media
+
+* Always responsive sizes.
+* Use modern formats (WebP/AVIF).
+* Never load images that are not visible.
+* Large media must be opt-in.
+
+---
+
+## 4. Frontend Engineering Rules (React / Tailwind / shadcn)
+
+* Code-split by **route and feature**
+* Lazy-load heavy components (charts, editors)
+* Do not ship admin or power-user features to regular users
+* Avoid heavy animation libraries; motion must be intentional and minimal
+* Tailwind utilities are preferred over custom CSS
+* shadcn/ui components must not introduce unnecessary dependencies
+
+**Bundle size budgets must be respected.**
+
+---
+
+## 5. Backend & Cloud Run Rules
+
+### Service Architecture
+
+* Separate services by responsibility:
+
+  * `web` (UI / SSR if used)
+  * `api` (fast request/response)
+  * `worker` (async jobs)
+
+### Cold Starts
+
+* Only critical UX services may use `minInstances > 0`
+* Workers and non-user-facing services must scale to zero
+
+### Async Work
+
+* Use **Cloud Tasks** for user-triggered background work
+* Use **Pub/Sub** for event-driven processing
+* APIs should return immediately with a `job_id` when work is async
+
+### Datastores
+
+* Prefer **Firestore** for:
+
+  * Simple data models
+  * Read-heavy workloads
+* Use **Cloud SQL** only when relational guarantees are required
+
+### Cost Guardrails
+
+* Rate limit expensive endpoints
+* Cap payload sizes and export frequencies
+* Log with intent (sampling for hot paths)
+
+---
+
+## 6. Observability & Metrics
+
+Track and optimize for:
+
+* p95 latency (user-facing)
+* Cold start rate
+* Bytes transferred per session
+* API calls per screen
+* Cache hit rate
+
+Avoid verbose logging on high-traffic endpoints.
+
+---
+
+## 7. Security & Secrets
+
+* Use **IAM and service accounts** between services
+* No hardcoded secrets
+* All secrets must come from **Secret Manager**
+* Public endpoints must be rate-limited and validated
+
+---
+
+## 8. Agent & AI Collaboration Rules (Claude)
+
+When acting as an agent on this repo:
+
+* **Never introduce features that increase data usage without justification**
+* Prefer **simpler, cheaper, managed GCP services**
+* Always consider:
+
+  * Data cost to users
+  * Cold start impact
+  * Operational cost
+* Propose async patterns before synchronous ones
+* Ask for clarification if a feature risks:
+
+  * Heavy data transfer
+  * Persistent infrastructure
+  * Complex state management
+
+---
+
+## 9. Design OS / Agent OS Integration
+
+### If using Agent OS
+
+* Follow the structure:
+
+  * `standards/` → non-negotiable rules (performance, UX, APIs)
+  * `product/` → vision, constraints, priorities
+  * `specs/` → feature-level implementation details
+* Standards override specs.
+
+### If using Design OS
+
+* Every screen must define:
+
+  * Data budget
+  * Loading/error/offline states
+  * API contract
+* Design decisions must be defensible in terms of cost and UX.
+
+---
+
+## 10. Definition of "Done"
+
+A feature is **not done** unless:
+
+* It respects data budgets
+* It works under poor connectivity
+* It has defined loading and error states
+* It does not introduce unnecessary cloud cost
+* It can scale to zero safely
+
+---
+
+## Quick Reference
+
+### Development Commands
+```bash
+# Setup
+bun install
+
+# Development
+bun run dev
+
+# Build & Deploy
+bun run build
+gcloud run deploy [service-name] --region=europe-west1
+
+# Testing
+bun test
+bun run test:e2e
+
+# Dependency Management
+bun add <package>           # Add dependency
+bun add -d <package>        # Add dev dependency
+bun remove <package>        # Remove dependency
+bun update                  # Update all dependencies
+```
+
+### Bun-Specific Optimizations
+* Use Bun's native bundler for faster builds
+* Leverage Bun's built-in testing framework (no jest/vitest needed)
+* Take advantage of Bun's faster install times
+* Use `bunfig.toml` for Bun-specific configuration
+* Consider Bun's native SQLite support for local development
+
+### Project Structure (Recommended)
+```
+UI_platform/
+├── CLAUDE.md              # This file
+├── README.md              # User-facing documentation
+├── .gitignore
+├── package.json           # Bun-compatible
+├── bunfig.toml            # Bun configuration (optional)
+├── tsconfig.json          # TypeScript configuration
+├── src/
+│   ├── components/        # Reusable UI components
+│   ├── features/          # Feature-specific code
+│   ├── pages/             # Route components
+│   ├── services/          # API clients, data layer
+│   ├── hooks/             # Custom React hooks
+│   ├── utils/             # Pure utilities
+│   └── styles/            # Global styles, Tailwind config
+├── public/                # Static assets
+├── tests/                 # Test files
+└── cloudbuild.yaml        # Cloud Build configuration
+```
+
+### Cost Monitoring
+* Use GCP Cost Management dashboard
+* Set up budget alerts
+* Monitor Cloud Run request counts and execution time
+* Track egress data (major cost driver)
+
+---
+
+**Last Updated:** 2026-01-08
+**Owner:** Mohamed
