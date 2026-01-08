@@ -61,8 +61,8 @@ ENV HOSTNAME="0.0.0.0"
 ENV APP_NAME=${APP_NAME}
 
 # Create a non-root user
-RUN addgroup --system --gid 1001 nodejs && \
-    adduser --system --uid 1001 nextjs
+RUN groupadd --system --gid 1001 nodejs && \
+    useradd --system --uid 1001 --gid nodejs nextjs
 
 # Copy standalone output from the specific app
 COPY --from=builder /app/apps/${APP_NAME}/public ./public
