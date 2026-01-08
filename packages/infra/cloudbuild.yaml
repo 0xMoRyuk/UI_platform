@@ -3,6 +3,7 @@
 #   _APP_NAME: Name of the app to build (e.g., "web")
 #   _SERVICE_NAME: Cloud Run service name (e.g., "ui-platform-web")
 #   _REGION: GCP region (default: "europe-west1")
+#   _TAG: Image tag (default: "latest")
 
 steps:
   # Build the container image
@@ -14,7 +15,7 @@ steps:
       - '--build-arg'
       - 'APP_NAME=${_APP_NAME}'
       - '-t'
-      - 'gcr.io/$PROJECT_ID/${_SERVICE_NAME}:$COMMIT_SHA'
+      - 'gcr.io/$PROJECT_ID/${_SERVICE_NAME}:${_TAG}'
       - '-t'
       - 'gcr.io/$PROJECT_ID/${_SERVICE_NAME}:latest'
       - '.'
@@ -23,7 +24,7 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     args:
       - 'push'
-      - 'gcr.io/$PROJECT_ID/${_SERVICE_NAME}:$COMMIT_SHA'
+      - 'gcr.io/$PROJECT_ID/${_SERVICE_NAME}:${_TAG}'
 
   - name: 'gcr.io/cloud-builders/docker'
     args:
@@ -38,7 +39,7 @@ steps:
       - 'deploy'
       - '${_SERVICE_NAME}'
       - '--image'
-      - 'gcr.io/$PROJECT_ID/${_SERVICE_NAME}:$COMMIT_SHA'
+      - 'gcr.io/$PROJECT_ID/${_SERVICE_NAME}:${_TAG}'
       - '--region'
       - '${_REGION}'
       - '--platform'
@@ -58,13 +59,14 @@ steps:
       - 'NODE_ENV=production'
 
 images:
-  - 'gcr.io/$PROJECT_ID/${_SERVICE_NAME}:$COMMIT_SHA'
+  - 'gcr.io/$PROJECT_ID/${_SERVICE_NAME}:${_TAG}'
   - 'gcr.io/$PROJECT_ID/${_SERVICE_NAME}:latest'
 
 substitutions:
   _APP_NAME: 'web'
   _SERVICE_NAME: 'ui-platform-web'
   _REGION: 'europe-west1'
+  _TAG: 'v1.0.0'
 
 options:
   machineType: 'N1_HIGHCPU_8'

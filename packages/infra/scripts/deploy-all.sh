@@ -4,8 +4,13 @@
 
 set -e
 
-PROJECT_ID=${1:-"your-project-id"}
-REGION=${2:-"europe-west1"}
+# Load environment variables from root .env if it exists
+if [ -f "../../.env" ]; then
+  export $(cat ../../.env | grep -v '^#' | xargs)
+fi
+
+PROJECT_ID=${1:-${GCP_PROJECT_ID:-"your-project-id"}}
+REGION=${2:-${GCP_REGION:-"europe-west1"}}
 
 echo "🚀 Deploying all apps to Cloud Run..."
 echo "   Project: $PROJECT_ID"

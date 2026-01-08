@@ -10,7 +10,7 @@ FROM base AS deps
 WORKDIR /app
 
 # Copy workspace configuration
-COPY package.json bun.lockb ./
+COPY package.json bun.lock ./
 COPY packages/*/package.json ./packages/
 
 # Copy app package.json
@@ -25,7 +25,7 @@ FROM base AS builder
 WORKDIR /app
 
 # Copy workspace configuration
-COPY package.json bun.lockb ./
+COPY package.json bun.lock ./
 
 # Install all dependencies (including devDependencies)
 COPY packages/*/package.json ./packages/

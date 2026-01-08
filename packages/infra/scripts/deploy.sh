@@ -4,6 +4,11 @@
 
 set -e
 
+# Load environment variables from root .env if it exists
+if [ -f "../../.env" ]; then
+  export $(cat ../../.env | grep -v '^#' | xargs)
+fi
+
 # Validate arguments
 if [ -z "$1" ]; then
   echo "❌ Error: App name is required"
@@ -15,9 +20,12 @@ if [ -z "$1" ]; then
 fi
 
 APP_NAME=$1
-PROJECT_ID=${2:-"your-project-id"}
-REGION=${3:-"europe-west1"}
-SERVICE_NAME="ui-platform-$APP_NAME"
+PROJECT_ID=${2:-${GCP_PROJECT_ID:-"your-project-id"}}
+REGION=${3:-${GCP_REGION:-"europe-west1"}}
+SERVICE_NAME="${SERVICE_NAME_PREFIX:-ui-platform}-$APP_NAME"
+
+# Generate a unique tag based on timestamp
+TAG="v$(date +%Y%m%d-%H%M%S)"
 
 # Check if app exists
 if [ ! -d "../../apps/$APP_NAME" ]; then
@@ -33,6 +41,7 @@ echo "   App: $APP_NAME"
 echo "   Service: $SERVICE_NAME"
 echo "   Project: $PROJECT_ID"
 echo "   Region: $REGION"
+echo "   Tag: $TAG"
 echo ""
 
 # Navigate to repo root
@@ -42,7 +51,7 @@ cd ../..
 gcloud builds submit \
   --project="$PROJECT_ID" \
   --config=packages/infra/cloudbuild.yaml \
-  --substitutions=_APP_NAME="$APP_NAME",_SERVICE_NAME="$SERVICE_NAME",_REGION="$REGION"
+  --substitutions=_APP_NAME="$APP_NAME",_SERVICE_NAME="$SERVICE_NAME",_REGION="$REGION",_TAG="$TAG"
 
 echo ""
 echo "✅ Deployment complete!"
