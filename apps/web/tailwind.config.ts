@@ -10,6 +10,10 @@ const config: Config = {
     // Include shared UI package components
     "../../packages/ui/src/**/*.{js,ts,jsx,tsx}",
   ],
+  plugins: [
+    ...(baseConfig.plugins || []),
+    require("tailwindcss-animate"),
+  ],
 };
 
 export default config;
