@@ -1,15 +1,6 @@
 # UI Platform
 
-Low-data, high-performance web platform designed for users in Africa, where data usage has a direct monetary cost.
-
-## Tech Stack
-
-- **Framework**: Next.js 15 (App Router)
-- **Runtime**: Bun
-- **Styling**: Tailwind CSS
-- **Components**: shadcn/ui
-- **Language**: TypeScript
-- **Deployment**: Google Cloud Run
+**Monorepo** for multiple independent web applications designed for users in Africa, where data usage has a direct monetary cost.
 
 ## Core Principles
 
@@ -21,12 +12,32 @@ Low-data, high-performance web platform designed for users in Africa, where data
 
 See [CLAUDE.md](./CLAUDE.md) for complete architectural guidelines.
 
+## Architecture
+
+**Monorepo Structure:**
+- **`apps/*`** - Independent applications (each deploys as separate Cloud Run service)
+- **`packages/*`** - Shared code across all applications
+  - `ui` - Shared UI components (shadcn/ui)
+  - `config` - Shared configurations
+  - `types` - Shared TypeScript types
+  - `utils` - Shared utility functions
+  - `infra` - Infrastructure and deployment code
+
+**Tech Stack:**
+- Monorepo: Bun workspaces
+- Framework: Next.js 15 (App Router)
+- Language: TypeScript
+- Styling: Tailwind CSS
+- Components: shadcn/ui
+- Runtime: Bun
+- Deployment: Google Cloud Run
+
 ## Getting Started
 
 ### Prerequisites
 
 - [Bun](https://bun.sh) >= 1.0
-- Node.js >= 18 (for compatibility)
+- [gcloud CLI](https://cloud.google.com/sdk/docs/install) (for deployment)
 
 ### Installation
 
@@ -35,117 +46,238 @@ See [CLAUDE.md](./CLAUDE.md) for complete architectural guidelines.
 git clone <repository-url>
 cd UI_platform
 
-# Install dependencies
+# Install all dependencies
 bun install
+```
 
-# Copy environment variables
-cp .env.example .env.local
+### Development
 
-# Start development server
+```bash
+# Run all apps (from root)
+bun run dev
+
+# Run specific app
+cd apps/web
 bun run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser.
+Open [http://localhost:3000](http://localhost:3000) to see the web app.
 
-## Development
+## Working with Apps
+
+### Developing an App
 
 ```bash
-# Development server
+# Navigate to app
+cd apps/web
+
+# Start development server
 bun run dev
+
+# Build for production
+bun run build
 
 # Type checking
 bun run type-check
 
 # Linting
 bun run lint
-
-# Build for production
-bun run build
-
-# Start production server
-bun run start
 ```
 
-## Adding shadcn/ui Components
+### Adding New App
+
+1. **Create app directory:**
+   ```bash
+   mkdir apps/new-app
+   cd apps/new-app
+   ```
+
+2. **Initialize framework:**
+   ```bash
+   bunx create-next-app@latest . --typescript --tailwind --app --use-bun
+   ```
+
+3. **Configure shared packages:**
+   - Update `tsconfig.json` to extend `@ui-platform/config/tsconfig/nextjs.json`
+   - Update `tailwind.config.ts` to extend `@ui-platform/config/tailwind`
+   - Add paths to shared packages in `tsconfig.json`
+
+4. **Deploy:**
+   ```bash
+   cd ../../packages/infra
+   ./scripts/deploy.sh new-app your-project-id europe-west1
+   ```
+
+## Working with Shared Packages
+
+### Using Shared Packages in Apps
+
+```typescript
+// Import UI components
+import { Button } from "@ui-platform/ui/components/button";
+import { cn } from "@ui-platform/ui";
+
+// Import types
+import type { User, ApiResponse } from "@ui-platform/types";
+
+// Import utilities
+import { formatBytes, shouldUseLowDataMode } from "@ui-platform/utils";
+```
+
+### Adding to Shared Packages
 
 ```bash
-# Add a component (e.g., button)
-bunx shadcn@latest add button
-
-# Add multiple components
+# Add shadcn/ui component to shared UI package
+cd packages/ui
 bunx shadcn@latest add button card dialog
+
+# Export in packages/ui/src/index.ts
+# export * from "./components/button";
+
+# Add utility function
+cd packages/utils
+# Edit src/format.ts or create new module
+```
+
+### Available Shared Packages
+
+- **`@ui-platform/ui`** - UI components, design system, utilities
+- **`@ui-platform/config`** - TypeScript, Tailwind, ESLint configurations
+- **`@ui-platform/types`** - Shared TypeScript type definitions
+- **`@ui-platform/utils`** - Pure utility functions (formatting, validation, network)
+- **`@ui-platform/infra`** - Infrastructure code (not imported in apps)
+
+## Cloud Run Deployment
+
+### Prerequisites
+
+1. **Google Cloud Project** with billing enabled
+2. **Enable APIs:**
+   ```bash
+   gcloud services enable run.googleapis.com cloudbuild.googleapis.com
+   ```
+
+### Deploy Single App
+
+```bash
+cd packages/infra
+./scripts/deploy.sh <app-name> <project-id> <region>
+```
+
+**Example:**
+```bash
+./scripts/deploy.sh web my-gcp-project europe-west1
+```
+
+### Deploy All Apps
+
+```bash
+cd packages/infra
+./scripts/deploy-all.sh <project-id> <region>
+```
+
+### Deployment Details
+
+Each app deploys as a separate Cloud Run service:
+- Service name: `ui-platform-<app-name>` (e.g., `ui-platform-web`)
+- Scale-to-zero enabled (minInstances: 0)
+- Memory: 512Mi (configurable)
+- CPU: 1 vCPU
+- Max instances: 10 (cost protection)
+- Region: europe-west1 (closest to Africa)
+
+### Environment Variables
+
+Set environment variables via Cloud Run:
+
+```bash
+gcloud run services update ui-platform-web \
+  --region=europe-west1 \
+  --set-env-vars="NODE_ENV=production,NEXT_PUBLIC_API_URL=https://api.example.com"
 ```
 
 ## Project Structure
 
 ```
 UI_platform/
-├── app/                   # Next.js App Router pages and layouts
-│   ├── api/              # API routes
-│   └── globals.css       # Global styles
-├── components/           # Reusable UI components
-│   └── ui/              # shadcn/ui components
-├── features/            # Feature-specific code
-├── hooks/               # Shared React hooks
-├── lib/                 # Utilities and configurations
-├── services/            # API clients and data layer
-├── utils/               # Pure utility functions
-├── public/              # Static assets
-└── scripts/             # Build and deployment scripts
-```
-
-## Cloud Run Deployment
-
-### Prerequisites
-
-- Google Cloud account
-- `gcloud` CLI installed and configured
-- Project with Cloud Run API enabled
-
-### Deploy
-
-```bash
-# Using Cloud Build (recommended)
-./scripts/deploy.sh your-project-id europe-west1
-
-# Or manually
-gcloud builds submit --config=cloudbuild.yaml
-
-# Or local Docker build
-docker build -t ui-platform .
-docker run -p 8080:8080 ui-platform
-```
-
-### Environment Variables
-
-Set environment variables in Cloud Run:
-
-```bash
-gcloud run services update ui-platform \
-  --region=europe-west1 \
-  --set-env-vars="NODE_ENV=production,NEXT_PUBLIC_API_URL=https://your-api.com"
+├── apps/                       # Independent applications
+│   └── web/                    # First app (Next.js)
+│       ├── app/                # Next.js App Router
+│       │   ├── layout.tsx
+│       │   ├── page.tsx
+│       │   └── globals.css
+│       ├── components/         # App-specific components
+│       ├── features/           # Feature-specific code
+│       ├── hooks/              # Custom React hooks
+│       ├── services/           # API clients
+│       ├── utils/              # App-specific utilities
+│       ├── package.json
+│       ├── tsconfig.json
+│       └── tailwind.config.ts
+├── packages/                   # Shared code
+│   ├── ui/                     # Shared UI components
+│   │   ├── src/
+│   │   │   ├── components/     # shadcn/ui components
+│   │   │   ├── lib/            # Utilities (cn)
+│   │   │   └── index.ts        # Exports
+│   │   ├── package.json
+│   │   └── tsconfig.json
+│   ├── config/                 # Shared configurations
+│   │   ├── tsconfig/           # TypeScript configs
+│   │   ├── tailwind/           # Tailwind config
+│   │   └── package.json
+│   ├── types/                  # Shared TypeScript types
+│   │   ├── src/
+│   │   │   ├── common.ts       # Common types
+│   │   │   ├── api.ts          # API types
+│   │   │   └── index.ts
+│   │   └── package.json
+│   ├── utils/                  # Shared utilities
+│   │   ├── src/
+│   │   │   ├── format.ts       # Formatting utilities
+│   │   │   ├── network.ts      # Network utilities
+│   │   │   ├── validation.ts   # Validation
+│   │   │   └── index.ts
+│   │   └── package.json
+│   └── infra/                  # Infrastructure code
+│       ├── Dockerfile          # Multi-stage build
+│       ├── .dockerignore
+│       ├── cloudbuild.yaml     # Cloud Build config
+│       ├── scripts/
+│       │   ├── deploy.sh       # Deploy single app
+│       │   └── deploy-all.sh   # Deploy all apps
+│       └── package.json
+├── package.json                # Workspace root
+├── bun.lockb                   # Lock file
+├── .gitignore
+├── CLAUDE.md                   # AI collaboration guidelines
+└── README.md                   # This file
 ```
 
 ## Performance Guidelines
 
-- **Bundle size**: Keep initial JS bundle < 200KB
-- **Images**: Always use WebP/AVIF, lazy load below the fold
-- **API calls**: Max 1 per screen load (BFF pattern)
+- **Bundle size**: Keep initial JS < 200KB per app
+- **Images**: Always WebP/AVIF, lazy load below fold
+- **API calls**: Max 1 per screen (BFF pattern)
 - **Loading states**: Required for every async operation
 - **Code splitting**: Lazy load features and heavy components
 
 ## Cost Optimization
 
-- Scale-to-zero enabled (minInstances: 0)
-- Memory limit: 512Mi (adjust as needed)
-- CPU: 1 vCPU
-- Request timeout: 300s
-- Max instances: 10 (prevents runaway costs)
+- All services scale to zero when not in use
+- Pay only for request execution time
+- Shared base image layers reduce build time
+- Separate services provide clear cost attribution
+- Max instances cap prevents runaway costs
+
+## Contributing
+
+See [CLAUDE.md](./CLAUDE.md) for:
+- Development guidelines
+- Architectural standards
+- Low-data UX principles
+- Agent/AI collaboration rules
 
 ## License
 
 Private - All Rights Reserved
-
-## Contributing
-
-See [CLAUDE.md](./CLAUDE.md) for development guidelines and architectural standards.

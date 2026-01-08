@@ -2,21 +2,33 @@
 
 ## 1. Project Context
 
-This project builds a **web platform (desktop + mobile)** deployed on **Google Cloud Run**, designed for **users in Africa**, where **data usage has a direct monetary cost**.
+This is a **monorepo** containing multiple independent **web applications** (desktop + mobile) deployed on **Google Cloud Run**, designed for **users in Africa**, where **data usage has a direct monetary cost**.
 
-The system prioritizes:
+### Architecture
 
+**Monorepo Structure:**
+- `apps/*` - Independent applications (e.g., `apps/web`)
+- `packages/*` - Shared code across applications
+  - `ui` - Shared UI components and shadcn/ui
+  - `config` - Shared configurations (TypeScript, Tailwind, ESLint)
+  - `types` - Shared TypeScript types
+  - `utils` - Shared utility functions
+  - `infra` - Infrastructure code (Dockerfiles, deployment scripts)
+
+**Tech Stack:**
+* **Monorepo:** Bun workspaces (native, no external tooling)
+* **Framework:** Next.js 15 (App Router)
+* **Language:** TypeScript
+* **Styling:** Tailwind CSS
+* **Components:** shadcn/ui
+* **Runtime:** Bun
+* **Deployment:** Google Cloud Run (separate service per app)
+
+**System Priorities:**
 * **Low data consumption**
 * **Fast perceived UX under poor connectivity**
 * **Scale-to-zero infrastructure**
 * **Operational and cloud cost efficiency**
-
-The frontend stack is:
-
-* **React**
-* **Tailwind CSS**
-* **shadcn/ui**
-* **Bun** (runtime and package manager)
 
 Backend services are **serverless and managed**, primarily on **Google Cloud Run**, with async workloads offloaded to managed queues.
 
@@ -220,63 +232,125 @@ A feature is **not done** unless:
 
 ## Quick Reference
 
-### Development Commands
+### Monorepo Commands
+
 ```bash
-# Setup
+# Install all dependencies
 bun install
 
-# Development
+# Development - all apps
 bun run dev
 
-# Build & Deploy
+# Development - specific app
+cd apps/web && bun run dev
+
+# Build all apps
 bun run build
-gcloud run deploy [service-name] --region=europe-west1
 
-# Testing
-bun test
-bun run test:e2e
+# Build specific app
+cd apps/web && bun run build
 
-# Dependency Management
-bun add <package>           # Add dependency
-bun add -d <package>        # Add dev dependency
-bun remove <package>        # Remove dependency
-bun update                  # Update all dependencies
+# Add dependency to specific app
+cd apps/web && bun add <package>
+
+# Add dependency to shared package
+cd packages/ui && bun add <package>
+
+# Clean all node_modules
+bun run clean
 ```
 
-### Bun-Specific Optimizations
-* Use Bun's native bundler for faster builds
-* Leverage Bun's built-in testing framework (no jest/vitest needed)
-* Take advantage of Bun's faster install times
-* Use `bunfig.toml` for Bun-specific configuration
-* Consider Bun's native SQLite support for local development
+### Deployment Commands
 
-### Project Structure (Recommended)
+```bash
+# Deploy single app
+cd packages/infra
+./scripts/deploy.sh <app-name> <project-id> <region>
+
+# Example: Deploy web app
+./scripts/deploy.sh web my-gcp-project europe-west1
+
+# Deploy all apps
+./scripts/deploy-all.sh <project-id> <region>
+```
+
+### Adding shadcn/ui Components
+
+```bash
+# Add to shared UI package (recommended)
+cd packages/ui
+bunx shadcn@latest add button card dialog
+
+# Then export in packages/ui/src/index.ts
+
+# Or add to specific app
+cd apps/web
+bunx shadcn@latest add button
+```
+
+### Project Structure
+
 ```
 UI_platform/
-├── CLAUDE.md              # This file
-├── README.md              # User-facing documentation
-├── .gitignore
-├── package.json           # Bun-compatible
-├── bunfig.toml            # Bun configuration (optional)
-├── tsconfig.json          # TypeScript configuration
-├── src/
-│   ├── components/        # Reusable UI components
-│   ├── features/          # Feature-specific code
-│   ├── pages/             # Route components
-│   ├── services/          # API clients, data layer
-│   ├── hooks/             # Custom React hooks
-│   ├── utils/             # Pure utilities
-│   └── styles/            # Global styles, Tailwind config
-├── public/                # Static assets
-├── tests/                 # Test files
-└── cloudbuild.yaml        # Cloud Build configuration
+├── apps/                       # Independent applications
+│   └── web/                    # First app (Next.js)
+│       ├── app/                # Next.js App Router
+│       ├── components/         # App-specific components
+│       ├── features/           # App-specific features
+│       ├── package.json        # App dependencies
+│       ├── tsconfig.json       # Extends shared config
+│       └── tailwind.config.ts  # Extends shared config
+├── packages/                   # Shared code
+│   ├── ui/                     # Shared UI components
+│   │   ├── src/components/     # shadcn/ui components
+│   │   └── src/lib/utils.ts    # cn() helper
+│   ├── config/                 # Shared configurations
+│   │   ├── tsconfig/           # TypeScript configs
+│   │   └── tailwind/           # Tailwind base config
+│   ├── types/                  # Shared TypeScript types
+│   ├── utils/                  # Shared utilities
+│   └── infra/                  # Infrastructure code
+│       ├── Dockerfile          # Multi-stage build
+│       ├── cloudbuild.yaml     # Cloud Build config
+│       └── scripts/            # Deployment scripts
+├── package.json                # Workspace root
+├── CLAUDE.md                   # This file
+└── README.md                   # User documentation
+```
+
+### Shared Package Usage
+
+```typescript
+// In any app, import from shared packages
+import { Button } from "@ui-platform/ui/components/button";
+import { cn } from "@ui-platform/ui";
+import type { User, ApiResponse } from "@ui-platform/types";
+import { formatBytes, shouldUseLowDataMode } from "@ui-platform/utils";
+```
+
+### Adding New Apps
+
+```bash
+# 1. Create app directory
+mkdir apps/new-app
+
+# 2. Initialize Next.js (or other framework)
+cd apps/new-app
+bunx create-next-app@latest . --use-bun
+
+# 3. Update tsconfig.json to extend shared config
+# 4. Update tailwind.config.ts to use shared config
+# 5. Deploy with:
+#    packages/infra/scripts/deploy.sh new-app <project-id>
 ```
 
 ### Cost Monitoring
+
 * Use GCP Cost Management dashboard
-* Set up budget alerts
+* Set up budget alerts per service (ui-platform-web, ui-platform-admin, etc.)
 * Monitor Cloud Run request counts and execution time
 * Track egress data (major cost driver)
+* Each app deploys as separate Cloud Run service for cost attribution
 
 ---
 
