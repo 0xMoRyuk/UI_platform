@@ -273,9 +273,5 @@ gcloud builds log <BUILD_ID> | tail -50
 - **Cloud Build:** `packages/infra/cloudbuild-cicd.yaml`
 - **Trigger config:** `packages/infra/triggers/production.yaml`
 
-### Known Issues
-1. **Traffic routing in CI:** Uses wrong revision name format. Workaround: run `--to-latest` manually after deploy.
-2. **Smoke test step:** Uses curl image without gcloud. Needs fix to use cloud-sdk image.
-
 ---
 
