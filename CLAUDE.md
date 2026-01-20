@@ -230,3 +230,52 @@ A feature is **not done** unless:
 
 ---
 
+## 11. Deployment
+
+### GCP Project
+- **Project ID:** `digital-africa-ai4su`
+- **Region:** `europe-west1`
+
+### Service URLs
+- **Web App:** https://ui-platform-web-hs6gi2nj7a-ew.a.run.app
+
+### Quick Deploy (Manual)
+
+```bash
+# Ensure correct project
+gcloud config set project digital-africa-ai4su
+
+# Submit build from repo root
+cd /Users/mo/creative_home/UI_platform
+gcloud builds submit \
+  --config=packages/infra/cloudbuild-cicd.yaml \
+  --substitutions=SHORT_SHA=$(git rev-parse --short HEAD),_APP_NAME=web,_SERVICE_NAME=ui-platform-web
+
+# Route traffic to latest (if needed)
+gcloud run services update-traffic ui-platform-web \
+  --region=europe-west1 \
+  --to-latest
+```
+
+### Check Build Status
+
+```bash
+# List recent builds
+gcloud builds list --limit=5
+
+# Check specific build
+gcloud builds describe <BUILD_ID> --format="value(status)"
+gcloud builds log <BUILD_ID> | tail -50
+```
+
+### Infrastructure Files
+- **Dockerfile:** `packages/infra/Dockerfile`
+- **Cloud Build:** `packages/infra/cloudbuild-cicd.yaml`
+- **Trigger config:** `packages/infra/triggers/production.yaml`
+
+### Known Issues
+1. **Traffic routing in CI:** Uses wrong revision name format. Workaround: run `--to-latest` manually after deploy.
+2. **Smoke test step:** Uses curl image without gcloud. Needs fix to use cloud-sdk image.
+
+---
+
