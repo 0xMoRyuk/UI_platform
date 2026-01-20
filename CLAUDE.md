@@ -257,21 +257,51 @@ gcloud run services update-traffic ui-platform-web \
   --to-latest
 ```
 
-### Check Build Status
-
-```bash
-# List recent builds
-gcloud builds list --limit=5
-
-# Check specific build
-gcloud builds describe <BUILD_ID> --format="value(status)"
-gcloud builds log <BUILD_ID> | tail -50
-```
-
 ### Infrastructure Files
 - **Dockerfile:** `packages/infra/Dockerfile`
 - **Cloud Build:** `packages/infra/cloudbuild-cicd.yaml`
 - **Trigger config:** `packages/infra/triggers/production.yaml`
+
+### Automatic Deployment (CI/CD)
+
+Pushes to `main` branch automatically trigger deployment via Cloud Build.
+
+**Trigger Details:**
+- **Name:** `ui-platform-production-deploy`
+- **Region:** `europe-west1`
+- **ID:** `2e14e66c-41c4-412d-8725-58f4a7c15524`
+- **Repository:** `0xMoRyuk/UI_platform`
+- **Branch:** `^main$`
+
+```bash
+# Check trigger status
+gcloud builds triggers list --region=europe-west1
+
+# Manually run trigger
+gcloud builds triggers run ui-platform-production-deploy \
+  --region=europe-west1 \
+  --branch=main
+```
+
+### Check Build Status
+
+```bash
+# List recent builds (must specify region for triggered builds)
+gcloud builds list --region=europe-west1 --limit=5
+
+# Check specific build
+gcloud builds describe <BUILD_ID> --region=europe-west1 --format="value(status)"
+gcloud builds log <BUILD_ID> --region=europe-west1 | tail -50
+```
+
+### Smoke Test
+
+```bash
+SERVICE_URL="https://ui-platform-web-hs6gi2nj7a-ew.a.run.app"
+curl -s -o /dev/null -w "%{http_code}" $SERVICE_URL          # Homepage
+curl -s -o /dev/null -w "%{http_code}" $SERVICE_URL/form     # Form page
+curl -s -o /dev/null -w "%{http_code}" $SERVICE_URL/analytics # Analytics
+```
 
 ---
 
