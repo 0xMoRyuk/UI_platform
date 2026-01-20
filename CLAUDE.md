@@ -272,6 +272,45 @@ Pushes to `main` branch automatically trigger deployment via Cloud Build.
 - **ID:** `2e14e66c-41c4-412d-8725-58f4a7c15524`
 - **Repository:** `0xMoRyuk/UI_platform`
 - **Branch:** `^main$`
+- **Service Account:** `ai4su-aiplatform@digital-africa-ai4su.iam.gserviceaccount.com`
+
+**Required Service Account Permissions:**
+
+The trigger's service account needs these IAM roles:
+
+| Role | Purpose |
+|------|---------|
+| `roles/cloudbuild.builds.builder` | Run Cloud Build |
+| `roles/storage.admin` | Push to Container Registry (GCR) |
+| `roles/run.admin` | Deploy to Cloud Run |
+| `roles/iam.serviceAccountUser` | Act as service account |
+| `roles/logging.logWriter` | Write build logs |
+
+```bash
+# Grant permissions to service account (if needed)
+PROJECT_ID="digital-africa-ai4su"
+SA="ai4su-aiplatform@digital-africa-ai4su.iam.gserviceaccount.com"
+
+gcloud projects add-iam-policy-binding $PROJECT_ID \
+  --member="serviceAccount:$SA" \
+  --role="roles/cloudbuild.builds.builder" --condition=None --quiet
+
+gcloud projects add-iam-policy-binding $PROJECT_ID \
+  --member="serviceAccount:$SA" \
+  --role="roles/storage.admin" --condition=None --quiet
+
+gcloud projects add-iam-policy-binding $PROJECT_ID \
+  --member="serviceAccount:$SA" \
+  --role="roles/run.admin" --condition=None --quiet
+
+gcloud projects add-iam-policy-binding $PROJECT_ID \
+  --member="serviceAccount:$SA" \
+  --role="roles/iam.serviceAccountUser" --condition=None --quiet
+
+gcloud projects add-iam-policy-binding $PROJECT_ID \
+  --member="serviceAccount:$SA" \
+  --role="roles/logging.logWriter" --condition=None --quiet
+```
 
 ```bash
 # Check trigger status
