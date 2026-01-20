@@ -66,17 +66,23 @@ steps:
         echo "✅ All checks passed"
 
   # Step 2: Build Docker image with Kaniko (better caching)
-  - name: 'gcr.io/kaniko-project/executor:latest'
+  - name: 'gcr.io/cloud-builders/docker'
     id: 'build'
+    entrypoint: 'bash'
     args:
-      - --destination=gcr.io/$PROJECT_ID/${_SERVICE_NAME}:$(cat /workspace/VERSION)
-      - --destination=gcr.io/$PROJECT_ID/${_SERVICE_NAME}:${_ENV}
-      - --destination=gcr.io/$PROJECT_ID/${_SERVICE_NAME}:latest
-      - --cache=true
-      - --cache-ttl=24h
-      - --build-arg=APP_NAME=${_APP_NAME}
-      - --context=dir:///workspace
-      - --dockerfile=packages/infra/Dockerfile
+      - '-c'
+      - |
+        VERSION=$(cat /workspace/VERSION)
+        docker build \
+          -t gcr.io/$PROJECT_ID/${_SERVICE_NAME}:$$VERSION \
+          -t gcr.io/$PROJECT_ID/${_SERVICE_NAME}:${_ENV} \
+          -t gcr.io/$PROJECT_ID/${_SERVICE_NAME}:latest \
+          --build-arg APP_NAME=${_APP_NAME} \
+          -f packages/infra/Dockerfile \
+          .
+        docker push gcr.io/$PROJECT_ID/${_SERVICE_NAME}:$$VERSION
+        docker push gcr.io/$PROJECT_ID/${_SERVICE_NAME}:${_ENV}
+        docker push gcr.io/$PROJECT_ID/${_SERVICE_NAME}:latest
     waitFor: ['test']
 
   # Step 3: Deploy to Cloud Run (staging or production)
