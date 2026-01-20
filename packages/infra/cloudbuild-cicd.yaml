@@ -111,28 +111,13 @@ steps:
           --timeout=${_TIMEOUT} \
           --set-env-vars="NODE_ENV=production,APP_NAME=${_APP_NAME},DEPLOYED_AT=$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
           --tag=$$VERSION \
-          --no-traffic \
           --quiet
 
-        # Gradual traffic migration (canary deployment)
-        echo "📊 Starting gradual traffic migration..."
-
-        # Send 10% traffic to new version
+        # Route all traffic to latest revision
+        echo "📊 Routing traffic to latest revision..."
         gcloud run services update-traffic ${_SERVICE_NAME} \
           --region=${_REGION} \
-          --to-revisions=$$VERSION=10 \
-          --quiet
-
-        echo "✅ 10% traffic routed to $$VERSION"
-        echo "   Monitor for 2 minutes before full rollout"
-
-        # Wait and check error rates
-        sleep 120
-
-        # If no critical errors, route 100% traffic
-        gcloud run services update-traffic ${_SERVICE_NAME} \
-          --region=${_REGION} \
-          --to-revisions=$$VERSION=100 \
+          --to-latest \
           --quiet
 
         echo "✅ Deployment complete!"
@@ -149,7 +134,7 @@ steps:
     waitFor: ['build']
 
   # Step 4: Smoke tests
-  - name: 'gcr.io/cloud-builders/curl'
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     id: 'smoke-test'
     entrypoint: 'bash'
     args:
