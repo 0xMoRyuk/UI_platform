@@ -45,11 +45,38 @@ module.exports = {
           "4": "hsl(var(--chart-4))",
           "5": "hsl(var(--chart-5))",
         },
+        // Brand-agnostic colors (resolved via CSS variables)
+        brand: {
+          primary: {
+            DEFAULT: "hsl(var(--brand-primary))",
+            foreground: "hsl(var(--brand-primary-foreground))",
+          },
+          secondary: {
+            DEFAULT: "hsl(var(--brand-secondary))",
+            foreground: "hsl(var(--brand-secondary-foreground))",
+          },
+          accent: {
+            DEFAULT: "hsl(var(--brand-accent))",
+            foreground: "hsl(var(--brand-accent-foreground))",
+          },
+          neutral: {
+            DEFAULT: "hsl(var(--brand-neutral))",
+            foreground: "hsl(var(--brand-neutral-foreground))",
+          },
+          highlight: {
+            DEFAULT: "hsl(var(--brand-highlight))",
+            foreground: "hsl(var(--brand-highlight-foreground))",
+          },
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
+      },
+      fontFamily: {
+        // Brand font (resolved via CSS variable or system fallback)
+        brand: "var(--brand-font-family)",
       },
     },
   },
