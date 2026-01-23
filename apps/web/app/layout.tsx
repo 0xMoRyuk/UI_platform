@@ -4,8 +4,9 @@ import {
   activeBrand,
   getBrandHtmlProps,
   brandHasExternalFont,
-  BrandProvider,
 } from "@ui-platform/ui";
+import { Header } from "../components/header";
+import { Footer } from "../components/footer";
 
 export const metadata: Metadata = {
   title: "AI4Startups | Open-Source AI for Africa",
@@ -37,7 +38,11 @@ export default function RootLayout({
           </>
         )}
       </head>
-      <body className="antialiased font-brand">{children}</body>
+      <body className="antialiased font-brand min-h-screen flex flex-col">
+        <Header />
+        <main className="flex-1">{children}</main>
+        <Footer />
+      </body>
     </html>
   );
 }
