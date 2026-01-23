@@ -9,35 +9,35 @@ FROM oven/bun:1 AS base
 FROM base AS deps
 WORKDIR /app
 
-# Copy workspace configuration (without lockfile - let Bun generate it fresh)
+# Copy workspace configuration
 COPY package.json ./
 
-# Create directory structure first
-RUN mkdir -p packages apps
+# Copy all package.json files preserving directory structure
+COPY packages/ui/package.json ./packages/ui/
+COPY packages/config/package.json ./packages/config/
+COPY packages/types/package.json ./packages/types/
+COPY packages/utils/package.json ./packages/utils/
 
-# Copy all package.json files
-COPY packages/*/package.json ./packages/
 ARG APP_NAME
-RUN mkdir -p apps/${APP_NAME}
 COPY apps/${APP_NAME}/package.json ./apps/${APP_NAME}/
 
-# Install dependencies with Bun workspaces (generate fresh lockfile)
+# Install dependencies with Bun workspaces
 RUN bun install --production
 
 # Rebuild the source code only when needed
 FROM base AS builder
 WORKDIR /app
 
-# Copy workspace configuration (without lockfile)
+# Copy workspace configuration
 COPY package.json ./
 
-# Create directory structure
-RUN mkdir -p packages apps
+# Copy all package.json files preserving directory structure
+COPY packages/ui/package.json ./packages/ui/
+COPY packages/config/package.json ./packages/config/
+COPY packages/types/package.json ./packages/types/
+COPY packages/utils/package.json ./packages/utils/
 
-# Install all dependencies (including devDependencies)
-COPY packages/*/package.json ./packages/
 ARG APP_NAME
-RUN mkdir -p apps/${APP_NAME}
 COPY apps/${APP_NAME}/package.json ./apps/${APP_NAME}/
 
 RUN bun install
