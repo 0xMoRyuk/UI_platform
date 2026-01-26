@@ -43,7 +43,7 @@ steps:
         echo "$$VERSION" > /workspace/VERSION
         echo "Generated version: $$VERSION"
 
-  # Step 1: Install dependencies and run tests
+  # Step 1: Install dependencies and build only
   - name: 'oven/bun:1'
     id: 'test'
     entrypoint: 'bash'
@@ -53,17 +53,18 @@ steps:
         echo "Installing dependencies..."
         bun install
 
-        echo "Running type check..."
+        echo "Building app..."
         cd apps/${_APP_NAME}
-        bun run typecheck || true
 
-        echo "Running linter..."
-        bun run lint || true
+        if [ -f package.json ]; then
+          echo "Running build for ${_APP_NAME}..."
+          bun run build || exit 1
+        else
+          echo "No package.json found in apps/${_APP_NAME}"
+          exit 1
+        fi
 
-        # Add unit tests when available
-        # bun test || exit 1
-
-        echo "✅ All checks completed (warnings allowed)"
+        echo "✅ Build completed successfully"
 
   # Step 2: Build Docker image with Kaniko (better caching)
   - name: 'gcr.io/cloud-builders/docker'
