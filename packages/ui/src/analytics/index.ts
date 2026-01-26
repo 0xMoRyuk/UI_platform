@@ -23,9 +23,9 @@
  */
 
 // Types
+// Note: BrandId is exported from ./tokens to avoid duplicate export
 export type {
   AppId,
-  BrandId,
   ConsentCategory,
   ConsentState,
   AnalyticsConfig,

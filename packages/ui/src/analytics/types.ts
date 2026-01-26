@@ -75,7 +75,7 @@ export interface PageViewProperties {
 }
 
 /** Error event properties */
-export interface ErrorProperties {
+export interface ErrorProperties extends Record<string, unknown> {
   message: string;
   stack?: string;
   source?: string;
@@ -84,7 +84,7 @@ export interface ErrorProperties {
 }
 
 /** Performance event properties */
-export interface PerformanceProperties {
+export interface PerformanceProperties extends Record<string, unknown> {
   lcp?: number;
   fcp?: number;
   cls?: number;
@@ -94,7 +94,7 @@ export interface PerformanceProperties {
 }
 
 /** User interaction event properties */
-export interface UserInteractionProperties {
+export interface UserInteractionProperties extends Record<string, unknown> {
   element_type: string;
   element_id?: string;
   element_text?: string;

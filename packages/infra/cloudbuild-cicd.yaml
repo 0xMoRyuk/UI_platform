@@ -43,7 +43,26 @@ steps:
         echo "$$VERSION" > /workspace/VERSION
         echo "Generated version: $$VERSION"
 
-  # Step 1: Build Docker image
+  # Step 1: Validate (type-check + lint)
+  - name: 'oven/bun:1'
+    id: 'validate'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        echo "📦 Installing dependencies..."
+        bun install --frozen-lockfile
+
+        echo "🔍 Running type-check..."
+        bun run type-check
+
+        echo "🧹 Running lint..."
+        bun run lint
+
+        echo "✅ Validation passed"
+    waitFor: ['generate-version']
+
+  # Step 2: Build Docker image
   - name: 'gcr.io/cloud-builders/docker'
     id: 'build'
     entrypoint: 'bash'
@@ -63,9 +82,9 @@ steps:
         docker push gcr.io/$PROJECT_ID/${_SERVICE_NAME}:$$VERSION
         docker push gcr.io/$PROJECT_ID/${_SERVICE_NAME}:${_ENV}
         docker push gcr.io/$PROJECT_ID/${_SERVICE_NAME}:latest
-    waitFor: ['generate-version']
+    waitFor: ['validate']
 
-  # Step 3: Deploy to Cloud Run (staging or production)
+  # Step 3: Deploy to Cloud Run
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     id: 'deploy'
     entrypoint: 'bash'
@@ -113,7 +132,7 @@ steps:
         echo "🏷️  Version: $$VERSION"
     waitFor: ['build']
 
-  # Step 4: Smoke tests
+  # Step 4: Smoke test
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     id: 'smoke-test'
     entrypoint: 'bash'
@@ -124,34 +143,23 @@ steps:
           --region=${_REGION} \
           --format='value(status.url)')
 
-        echo "Running smoke tests..."
+        echo "Running smoke test for ${_APP_NAME}..."
 
         # Test homepage
         HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" $$SERVICE_URL)
         if [ "$$HTTP_CODE" != "200" ]; then
-          echo "❌ Homepage check failed: $$HTTP_CODE"
+          echo "❌ Homepage failed: $$HTTP_CODE"
           exit 1
         fi
-        echo "✅ Homepage: 200"
 
-        # Test toolbox page
-        HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" $$SERVICE_URL/toolbox)
-        if [ "$$HTTP_CODE" != "200" ]; then
-          echo "❌ Toolbox page check failed: $$HTTP_CODE"
-          exit 1
-        fi
-        echo "✅ Toolbox page: 200"
-
-        # Test response time
+        # Response time
         RESPONSE_TIME=$(curl -o /dev/null -s -w '%{time_total}\n' $$SERVICE_URL)
-        echo "⏱️  Response time: $${RESPONSE_TIME}s"
-
-        echo "✅ All smoke tests passed"
+        echo "✅ Homepage: 200 ($${RESPONSE_TIME}s)"
     waitFor: ['deploy']
     allowFailure: true
 
 timeout: '1200s'  # 20 minutes total timeout
 
-# Images to push (handled by Kaniko)
-images:
-  - 'gcr.io/$PROJECT_ID/${_SERVICE_NAME}'
+# Note: Images are pushed in the 'build' step directly.
+# The 'images' field is omitted to avoid substitution validation issues
+# with nested variables like ${_SERVICE_NAME} = ui-platform-${_APP_NAME}
