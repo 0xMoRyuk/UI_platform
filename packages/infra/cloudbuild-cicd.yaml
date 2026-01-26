@@ -134,13 +134,13 @@ steps:
         fi
         echo "✅ Homepage: 200"
 
-        # Test form page
-        HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" $$SERVICE_URL/form)
+        # Test toolbox page
+        HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" $$SERVICE_URL/toolbox)
         if [ "$$HTTP_CODE" != "200" ]; then
-          echo "❌ Form page check failed: $$HTTP_CODE"
+          echo "❌ Toolbox page check failed: $$HTTP_CODE"
           exit 1
         fi
-        echo "✅ Form page: 200"
+        echo "✅ Toolbox page: 200"
 
         # Test response time
         RESPONSE_TIME=$(curl -o /dev/null -s -w '%{time_total}\n' $$SERVICE_URL)
@@ -148,7 +148,7 @@ steps:
 
         echo "✅ All smoke tests passed"
     waitFor: ['deploy']
-    continueOnError: true
+    allowFailure: true
 
 timeout: '1200s'  # 20 minutes total timeout
 
