@@ -42,7 +42,7 @@ jobs:
         app: [web, ai4su, designOS_sandbox]
       fail-fast: false
     # Skip app if specific app requested and this isn't it
-    if: ${{ github.event.inputs.app == '' || github.event.inputs.app == matrix.app }}
+    if: ${{ github.event_name != 'workflow_dispatch' || github.event.inputs.app == '' || github.event.inputs.app == matrix.app }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4

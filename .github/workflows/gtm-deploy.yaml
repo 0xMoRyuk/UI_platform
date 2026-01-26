@@ -89,6 +89,7 @@ jobs:
 
             echo "apps=$APPS" >> $GITHUB_OUTPUT
             echo "Detected apps to deploy: $APPS"
+          fi
 
   validate:
     runs-on: ubuntu-latest
