@@ -57,7 +57,7 @@ steps:
           -t gcr.io/$PROJECT_ID/${_SERVICE_NAME}:${_ENV} \
           -t gcr.io/$PROJECT_ID/${_SERVICE_NAME}:latest \
           --build-arg APP_NAME=${_APP_NAME} \
-          -f packages/infra/Dockerfile \
+          -f packages/infra/Dockerfile.vite \
           .
         echo "Pushing images..."
         docker push gcr.io/$PROJECT_ID/${_SERVICE_NAME}:$$VERSION
