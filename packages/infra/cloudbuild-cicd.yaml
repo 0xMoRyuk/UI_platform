@@ -11,7 +11,7 @@
 # Branch patterns: main (production), staging/* (staging)
 
 substitutions:
-  _APP_NAME: 'web'
+  _APP_NAME: 'ai4su'
   _SERVICE_NAME: 'ui-platform-${_APP_NAME}'
   _REGION: 'europe-west1'
   _ENV: 'production'  # or 'staging'
