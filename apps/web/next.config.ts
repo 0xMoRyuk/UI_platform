@@ -1,7 +1,10 @@
 import type { NextConfig } from "next";
+import path from "path";
 
 const nextConfig: NextConfig = {
   output: "standalone",
+  // Required for monorepo: tell Next.js where the workspace root is
+  outputFileTracingRoot: path.join(__dirname, "../../"),
   compress: true,
   poweredByHeader: false,
   reactStrictMode: true,
