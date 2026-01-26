@@ -1,0 +1,240 @@
+# Cloud Build configuration for GTM config sync (Per-App)
+#
+# Syncs local GTM configuration to the remote container for a specific app.
+# Handles shared triggers/variables and app-specific tags/variables.
+#
+# Required substitutions:
+#   - _APP_ID: App identifier (web, ai4su, designOS_sandbox)
+#   - _GTM_ACCOUNT_ID: GTM account ID
+#   - _GTM_CONTAINER_ID: GTM container ID for the app
+#
+# Optional substitutions:
+#   - _VERSION_NAME: Custom version name (default: auto-generated)
+
+steps:
+  # Step 1: Install tagmanager2 CLI
+  - name: "rust:1.75-slim"
+    entrypoint: bash
+    args:
+      - "-c"
+      - |
+        apt-get update && apt-get install -y pkg-config libssl-dev
+        cargo install google-tagmanager2-cli
+        cp /usr/local/cargo/bin/tagmanager2 /workspace/tagmanager2
+    id: "install-cli"
+
+  # Step 2: Validate configuration
+  - name: "gcr.io/cloud-builders/gcloud"
+    entrypoint: bash
+    args:
+      - "-c"
+      - |
+        echo "Validating GTM configuration for ${_APP_ID}..."
+
+        # Check container.yaml exists
+        if [ ! -f ".claude/config/gtm/${_APP_ID}/container.yaml" ]; then
+          echo "Error: container.yaml not found for ${_APP_ID}"
+          exit 1
+        fi
+
+        # Validate JSON files
+        for file in .claude/config/gtm/${_APP_ID}/{tags,variables}/*.json .claude/config/gtm/shared/{triggers,variables}/*.json; do
+          if [ -f "$file" ]; then
+            if ! python3 -c "import json; json.load(open('$file'))" 2>/dev/null; then
+              echo "Error: Invalid JSON in $file"
+              exit 1
+            fi
+          fi
+        done
+
+        echo "Configuration validated for ${_APP_ID}"
+    id: "validate"
+    waitFor: ["-"]
+
+  # Step 3: Create workspace
+  - name: "gcr.io/cloud-builders/gcloud"
+    entrypoint: bash
+    args:
+      - "-c"
+      - |
+        WORKSPACE_NAME="Deploy-${_APP_ID}-$(date +%Y%m%d-%H%M%S)"
+
+        /workspace/tagmanager2 accounts containers-workspaces-create \
+          --account-id=${_GTM_ACCOUNT_ID} \
+          --container-id=${_GTM_CONTAINER_ID} \
+          -r "{\"name\":\"$WORKSPACE_NAME\"}" \
+          --output-format=json > /workspace/workspace.json
+
+        WORKSPACE_ID=$(cat /workspace/workspace.json | python3 -c "import sys,json; print(json.load(sys.stdin).get('workspaceId',''))")
+        echo "$WORKSPACE_ID" > /workspace/workspace_id.txt
+        echo "Created workspace: $WORKSPACE_NAME (ID: $WORKSPACE_ID)"
+    id: "create-workspace"
+    waitFor: ["install-cli", "validate"]
+
+  # Step 4: Sync shared triggers
+  - name: "gcr.io/cloud-builders/gcloud"
+    entrypoint: bash
+    args:
+      - "-c"
+      - |
+        WORKSPACE_ID=$(cat /workspace/workspace_id.txt)
+
+        for trigger_file in .claude/config/gtm/shared/triggers/*.json; do
+          if [ -f "$trigger_file" ]; then
+            TRIGGER_NAME=$(basename "$trigger_file" .json)
+            echo "Syncing trigger: $TRIGGER_NAME"
+
+            /workspace/tagmanager2 accounts containers-workspaces-triggers-create \
+              --account-id=${_GTM_ACCOUNT_ID} \
+              --container-id=${_GTM_CONTAINER_ID} \
+              --workspace-id=$WORKSPACE_ID \
+              -r "@$trigger_file" || echo "Trigger may already exist, continuing..."
+          fi
+        done
+    id: "sync-triggers"
+    waitFor: ["create-workspace"]
+
+  # Step 5: Sync shared variables
+  - name: "gcr.io/cloud-builders/gcloud"
+    entrypoint: bash
+    args:
+      - "-c"
+      - |
+        WORKSPACE_ID=$(cat /workspace/workspace_id.txt)
+
+        for var_file in .claude/config/gtm/shared/variables/*.json; do
+          if [ -f "$var_file" ]; then
+            echo "Syncing variables from: $var_file"
+
+            # Handle files with multiple variables in a "variables" array
+            python3 -c "
+        import json, sys
+        with open('$var_file') as f:
+            data = json.load(f)
+        if 'variables' in data:
+            for var in data['variables']:
+                print(json.dumps(var))
+        else:
+            print(json.dumps(data))
+        " | while read -r var; do
+              if [ -n "$var" ]; then
+                /workspace/tagmanager2 accounts containers-workspaces-variables-create \
+                  --account-id=${_GTM_ACCOUNT_ID} \
+                  --container-id=${_GTM_CONTAINER_ID} \
+                  --workspace-id=$WORKSPACE_ID \
+                  -r "$var" || echo "Variable may already exist, continuing..."
+              fi
+            done
+          fi
+        done
+    id: "sync-shared-vars"
+    waitFor: ["create-workspace"]
+
+  # Step 6: Sync app-specific tags
+  - name: "gcr.io/cloud-builders/gcloud"
+    entrypoint: bash
+    args:
+      - "-c"
+      - |
+        WORKSPACE_ID=$(cat /workspace/workspace_id.txt)
+
+        for tag_file in .claude/config/gtm/${_APP_ID}/tags/*.json; do
+          if [ -f "$tag_file" ]; then
+            TAG_NAME=$(basename "$tag_file" .json)
+            echo "Syncing tag: $TAG_NAME"
+
+            /workspace/tagmanager2 accounts containers-workspaces-tags-create \
+              --account-id=${_GTM_ACCOUNT_ID} \
+              --container-id=${_GTM_CONTAINER_ID} \
+              --workspace-id=$WORKSPACE_ID \
+              -r "@$tag_file" || echo "Tag may already exist, continuing..."
+          fi
+        done
+    id: "sync-tags"
+    waitFor: ["sync-triggers", "sync-shared-vars"]
+
+  # Step 7: Sync app-specific variables
+  - name: "gcr.io/cloud-builders/gcloud"
+    entrypoint: bash
+    args:
+      - "-c"
+      - |
+        WORKSPACE_ID=$(cat /workspace/workspace_id.txt)
+
+        for var_file in .claude/config/gtm/${_APP_ID}/variables/*.json; do
+          if [ -f "$var_file" ]; then
+            VAR_NAME=$(basename "$var_file" .json)
+            echo "Syncing variable: $VAR_NAME"
+
+            /workspace/tagmanager2 accounts containers-workspaces-variables-create \
+              --account-id=${_GTM_ACCOUNT_ID} \
+              --container-id=${_GTM_CONTAINER_ID} \
+              --workspace-id=$WORKSPACE_ID \
+              -r "@$var_file" || echo "Variable may already exist, continuing..."
+          fi
+        done
+    id: "sync-app-vars"
+    waitFor: ["create-workspace"]
+
+  # Step 8: Create version
+  - name: "gcr.io/cloud-builders/gcloud"
+    entrypoint: bash
+    args:
+      - "-c"
+      - |
+        WORKSPACE_ID=$(cat /workspace/workspace_id.txt)
+
+        VERSION_NAME="${_VERSION_NAME}"
+        if [ -z "$VERSION_NAME" ]; then
+          VERSION_NAME="v$(date +%Y.%m.%d)-${_APP_ID}-${SHORT_SHA}"
+        fi
+
+        /workspace/tagmanager2 accounts containers-workspaces-create-version \
+          --account-id=${_GTM_ACCOUNT_ID} \
+          --container-id=${_GTM_CONTAINER_ID} \
+          --workspace-id=$WORKSPACE_ID \
+          -r "{\"name\":\"$VERSION_NAME\",\"notes\":\"Deployed from Cloud Build for ${_APP_ID}\"}" \
+          --output-format=json > /workspace/version.json
+
+        VERSION_ID=$(cat /workspace/version.json | python3 -c "import sys,json; print(json.load(sys.stdin).get('containerVersionId',''))")
+        echo "$VERSION_ID" > /workspace/version_id.txt
+        echo "Created version: $VERSION_NAME (ID: $VERSION_ID)"
+    id: "create-version"
+    waitFor: ["sync-tags", "sync-app-vars"]
+
+  # Step 9: Publish version
+  - name: "gcr.io/cloud-builders/gcloud"
+    entrypoint: bash
+    args:
+      - "-c"
+      - |
+        VERSION_ID=$(cat /workspace/version_id.txt)
+
+        /workspace/tagmanager2 accounts containers-versions-publish \
+          --account-id=${_GTM_ACCOUNT_ID} \
+          --container-id=${_GTM_CONTAINER_ID} \
+          --container-version-id=$VERSION_ID
+
+        echo "==================================="
+        echo "GTM configuration published!"
+        echo "App: ${_APP_ID}"
+        echo "Container: ${_GTM_CONTAINER_ID}"
+        echo "Version: $VERSION_ID"
+        echo "==================================="
+    id: "publish"
+    waitFor: ["create-version"]
+
+substitutions:
+  _APP_ID: ""
+  _GTM_ACCOUNT_ID: ""
+  _GTM_CONTAINER_ID: ""
+  _VERSION_NAME: ""
+
+options:
+  logging: CLOUD_LOGGING_ONLY
+  machineType: "E2_HIGHCPU_8"
+
+tags:
+  - "gtm-sync"
+  - "analytics"
+  - "${_APP_ID}"

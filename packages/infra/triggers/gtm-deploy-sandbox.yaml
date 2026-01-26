@@ -1,0 +1,22 @@
+# Cloud Build Trigger for GTM configuration sync (designOS_sandbox)
+# Deploys GTM configuration when changes are pushed to main
+
+name: gtm-deploy-sandbox
+description: Sync GTM configuration for designOS_sandbox app on push to main
+
+github:
+  owner: 0xMoRyuk
+  name: UI_platform
+  push:
+    branch: ^main$
+
+includedFiles:
+  - '.claude/config/gtm/shared/**'
+  - '.claude/config/gtm/designOS_sandbox/**'
+
+filename: packages/infra/gtm/cloudbuild-gtm-sync.yaml
+
+substitutions:
+  _APP_ID: designOS_sandbox
+  _GTM_ACCOUNT_ID: ${_GTM_ACCOUNT_ID}
+  _GTM_CONTAINER_ID: ${_GTM_CONTAINER_ID_SANDBOX}

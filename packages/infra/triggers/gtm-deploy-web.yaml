@@ -1,0 +1,22 @@
+# Cloud Build Trigger for GTM configuration sync (web)
+# Deploys GTM configuration when changes are pushed to main
+
+name: gtm-deploy-web
+description: Sync GTM configuration for web app on push to main
+
+github:
+  owner: 0xMoRyuk
+  name: UI_platform
+  push:
+    branch: ^main$
+
+includedFiles:
+  - '.claude/config/gtm/shared/**'
+  - '.claude/config/gtm/web/**'
+
+filename: packages/infra/gtm/cloudbuild-gtm-sync.yaml
+
+substitutions:
+  _APP_ID: web
+  _GTM_ACCOUNT_ID: ${_GTM_ACCOUNT_ID}
+  _GTM_CONTAINER_ID: ${_GTM_CONTAINER_ID_WEB}

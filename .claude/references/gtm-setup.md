@@ -1,5 +1,5 @@
 ---
-version: "2.0.0"
+version: "2.1.0"
 last_updated: "2026-01-26"
 load_trigger: "GTM|Tag Manager|sGTM|analytics setup|tagmanager2"
 ---
@@ -410,6 +410,70 @@ tagmanager2 accounts containers-workspaces-get \
 2. Verify sGTM endpoint is receiving requests
 3. Check GA4 Real-Time report (filter by app)
 4. Verify measurement ID in `<app>/variables/measurement-id.json`
+
+---
+
+## CI/CD (Cloud Build)
+
+GTM configuration is managed via Cloud Build triggers (not GitHub Actions).
+
+### Configuration Files
+
+| File | Purpose |
+|------|---------|
+| `packages/infra/gtm/cloudbuild-gtm-sync.yaml` | Syncs GTM config to container |
+| `packages/infra/gtm/cloudbuild-gtm-drift.yaml` | Weekly drift detection |
+| `packages/infra/gtm/cloudbuild-sgtm.yaml` | Deploys sGTM to Cloud Run |
+| `packages/infra/gtm/setup-triggers.sh` | Creates all triggers |
+
+### Triggers
+
+| Trigger | Fires On |
+|---------|----------|
+| `gtm-deploy-web` | Changes to `shared/` or `web/` config |
+| `gtm-deploy-ai4su` | Changes to `shared/` or `ai4su/` config |
+| `gtm-deploy-sandbox` | Changes to `shared/` or `designOS_sandbox/` config |
+| `gtm-drift` | Weekly via Cloud Scheduler |
+| `sgtm-deploy-*` | Changes to `Dockerfile.sgtm` |
+
+### Setup Triggers
+
+```bash
+# Run setup script
+packages/infra/gtm/setup-triggers.sh
+
+# Or manually create a trigger
+gcloud builds triggers create github \
+  --name="gtm-deploy-web" \
+  --repo-owner=0xMoRyuk \
+  --repo-name=UI_platform \
+  --branch-pattern="^main$" \
+  --included-files=".claude/config/gtm/shared/**,.claude/config/gtm/web/**" \
+  --build-config="packages/infra/gtm/cloudbuild-gtm-sync.yaml" \
+  --substitutions="_APP_ID=web"
+```
+
+### Manual Trigger
+
+```bash
+# Sync GTM config for an app
+gcloud builds triggers run gtm-deploy-web --region=europe-west1
+
+# Run drift detection
+gcloud builds triggers run gtm-drift --region=europe-west1
+```
+
+### Required Substitutions
+
+Configure these in Cloud Build trigger settings or Secret Manager:
+
+| Substitution | Description |
+|--------------|-------------|
+| `_GTM_ACCOUNT_ID` | GTM Account ID |
+| `_GTM_CONTAINER_ID_WEB` | Container ID for web |
+| `_GTM_CONTAINER_ID_AI4SU` | Container ID for ai4su |
+| `_GTM_CONTAINER_ID_SANDBOX` | Container ID for sandbox |
+| `_GTM_CONTAINER_CONFIG_*` | Container config strings |
 
 ---
 

@@ -156,7 +156,7 @@ Creating app-specific resources...
 Updated .claude/config/gtm/web/container.yaml
 
 Next steps:
-1. Add secrets to GitHub:
+1. Add secrets to Secret Manager (or Cloud Build substitutions):
    - GTM_CONTAINER_ID_WEB=GTM-XXXXXX
    - GA4_MEASUREMENT_ID_WEB=G-XXXXXXXXXX
 
@@ -313,7 +313,7 @@ Deploy sGTM container to Cloud Run.
 ### What it does
 
 1. Read `<app>/container.yaml` for sGTM service name
-2. Trigger Cloud Build with app-specific substitutions
+2. Trigger Cloud Build: `gcloud builds triggers run sgtm-deploy-<app>`
 3. Deploy to Cloud Run as `sgtm-<app>`
 4. Output service URL
 
@@ -323,16 +323,17 @@ Deploy sGTM container to Cloud Run.
 Deploying sGTM for: web
 
 Triggering Cloud Build...
+  Trigger: sgtm-deploy-web
   Service: sgtm-web
   Region: europe-west1
 
-Building image... done
-Deploying to Cloud Run... done
+Build started: https://console.cloud.google.com/cloud-build/builds/...
+Waiting for build to complete...
 
 sGTM deployed successfully!
   URL: https://sgtm-web-xxxxx-ey.a.run.app
 
-Update SGTM_ENDPOINT_WEB in your secrets.
+Update SGTM_ENDPOINT_WEB in Secret Manager.
 ```
 
 ---

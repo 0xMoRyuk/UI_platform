@@ -1,0 +1,24 @@
+# Cloud Build Trigger for GTM drift detection
+# Runs weekly via Cloud Scheduler (manual trigger also supported)
+#
+# To set up Cloud Scheduler:
+#   gcloud scheduler jobs create http gtm-drift-check \
+#     --schedule="0 6 * * 1" \
+#     --uri="https://cloudbuild.googleapis.com/v1/projects/PROJECT_ID/triggers/gtm-drift:run" \
+#     --http-method=POST \
+#     --oauth-service-account-email=PROJECT_NUMBER@cloudbuild.gserviceaccount.com
+
+name: gtm-drift
+description: Weekly GTM configuration drift detection
+
+# No github trigger - invoked via Cloud Scheduler
+# For manual trigger via gcloud:
+#   gcloud builds triggers run gtm-drift
+
+filename: packages/infra/gtm/cloudbuild-gtm-drift.yaml
+
+substitutions:
+  _GTM_ACCOUNT_ID: ${_GTM_ACCOUNT_ID}
+  _GTM_CONTAINER_ID_WEB: ${_GTM_CONTAINER_ID_WEB}
+  _GTM_CONTAINER_ID_AI4SU: ${_GTM_CONTAINER_ID_AI4SU}
+  _GTM_CONTAINER_ID_SANDBOX: ${_GTM_CONTAINER_ID_SANDBOX}

@@ -1,0 +1,227 @@
+# Cloud Build configuration for GTM drift detection (Per-App)
+#
+# Compares local GTM configuration with remote container state.
+# Designed to run weekly via Cloud Scheduler.
+#
+# Required substitutions:
+#   - _GTM_ACCOUNT_ID: GTM account ID
+#   - _GTM_CONTAINER_ID_WEB: GTM container ID for web app
+#   - _GTM_CONTAINER_ID_AI4SU: GTM container ID for ai4su app
+#   - _GTM_CONTAINER_ID_SANDBOX: GTM container ID for designOS_sandbox app
+#
+# Optional substitutions:
+#   - _APP_ID: Check specific app only (default: all apps)
+#   - _SLACK_WEBHOOK_URL: Slack webhook for notifications
+
+steps:
+  # Step 1: Install tagmanager2 CLI
+  - name: "rust:1.75-slim"
+    entrypoint: bash
+    args:
+      - "-c"
+      - |
+        apt-get update && apt-get install -y pkg-config libssl-dev
+        cargo install google-tagmanager2-cli
+        cp /usr/local/cargo/bin/tagmanager2 /workspace/tagmanager2
+    id: "install-cli"
+
+  # Step 2: Check drift for each app
+  - name: "gcr.io/cloud-builders/gcloud"
+    entrypoint: bash
+    args:
+      - "-c"
+      - |
+        # Determine which apps to check
+        if [ -n "${_APP_ID}" ]; then
+          APPS="${_APP_ID}"
+        else
+          APPS="web ai4su designOS_sandbox"
+        fi
+
+        DRIFT_FOUND=false
+        DRIFT_REPORT=""
+
+        for APP in $APPS; do
+          echo "=== Checking drift for $APP ==="
+
+          # Get container ID
+          case "$APP" in
+            web)
+              CONTAINER_ID="${_GTM_CONTAINER_ID_WEB}"
+              ;;
+            ai4su)
+              CONTAINER_ID="${_GTM_CONTAINER_ID_AI4SU}"
+              ;;
+            designOS_sandbox)
+              CONTAINER_ID="${_GTM_CONTAINER_ID_SANDBOX}"
+              ;;
+          esac
+
+          if [ -z "$CONTAINER_ID" ]; then
+            echo "Container ID not configured for $APP, skipping..."
+            continue
+          fi
+
+          mkdir -p /workspace/remote/$APP
+
+          # Export remote state
+          /workspace/tagmanager2 accounts containers-workspaces-tags-list \
+            --account-id=${_GTM_ACCOUNT_ID} \
+            --container-id=$CONTAINER_ID \
+            --workspace-id=default \
+            --output-format=json > /workspace/remote/$APP/tags.json 2>/dev/null || echo "[]" > /workspace/remote/$APP/tags.json
+
+          /workspace/tagmanager2 accounts containers-workspaces-triggers-list \
+            --account-id=${_GTM_ACCOUNT_ID} \
+            --container-id=$CONTAINER_ID \
+            --workspace-id=default \
+            --output-format=json > /workspace/remote/$APP/triggers.json 2>/dev/null || echo "[]" > /workspace/remote/$APP/triggers.json
+
+          /workspace/tagmanager2 accounts containers-workspaces-variables-list \
+            --account-id=${_GTM_ACCOUNT_ID} \
+            --container-id=$CONTAINER_ID \
+            --workspace-id=default \
+            --output-format=json > /workspace/remote/$APP/variables.json 2>/dev/null || echo "[]" > /workspace/remote/$APP/variables.json
+
+          # Count local resources
+          LOCAL_TAGS=$(ls -1 .claude/config/gtm/$APP/tags/*.json 2>/dev/null | wc -l | tr -d ' ')
+          LOCAL_TRIGGERS=$(ls -1 .claude/config/gtm/shared/triggers/*.json 2>/dev/null | wc -l | tr -d ' ')
+
+          # Count shared variables (extract from JSON arrays)
+          LOCAL_VARS_SHARED=0
+          for vf in .claude/config/gtm/shared/variables/*.json; do
+            if [ -f "$vf" ]; then
+              COUNT=$(python3 -c "import json; d=json.load(open('$vf')); print(len(d.get('variables', [d])))" 2>/dev/null || echo "0")
+              LOCAL_VARS_SHARED=$((LOCAL_VARS_SHARED + COUNT))
+            fi
+          done
+
+          LOCAL_VARS_APP=$(ls -1 .claude/config/gtm/$APP/variables/*.json 2>/dev/null | wc -l | tr -d ' ')
+          LOCAL_VARS=$((LOCAL_VARS_SHARED + LOCAL_VARS_APP))
+
+          # Count remote resources
+          REMOTE_TAGS=$(python3 -c "import json; d=json.load(open('/workspace/remote/$APP/tags.json')); print(len(d) if isinstance(d, list) else 0)" 2>/dev/null || echo "0")
+          REMOTE_TRIGGERS=$(python3 -c "import json; d=json.load(open('/workspace/remote/$APP/triggers.json')); print(len(d) if isinstance(d, list) else 0)" 2>/dev/null || echo "0")
+          REMOTE_VARS=$(python3 -c "import json; d=json.load(open('/workspace/remote/$APP/variables.json')); print(len(d) if isinstance(d, list) else 0)" 2>/dev/null || echo "0")
+
+          echo "Local:  Tags=$LOCAL_TAGS, Triggers=$LOCAL_TRIGGERS, Variables=$LOCAL_VARS"
+          echo "Remote: Tags=$REMOTE_TAGS, Triggers=$REMOTE_TRIGGERS, Variables=$REMOTE_VARS"
+
+          # Check for drift
+          APP_DRIFT=false
+          APP_DRIFT_MSG=""
+
+          if [ "$LOCAL_TAGS" != "$REMOTE_TAGS" ]; then
+            APP_DRIFT=true
+            APP_DRIFT_MSG+="Tags: $LOCAL_TAGS local vs $REMOTE_TAGS remote. "
+          fi
+
+          if [ "$LOCAL_TRIGGERS" != "$REMOTE_TRIGGERS" ]; then
+            APP_DRIFT=true
+            APP_DRIFT_MSG+="Triggers: $LOCAL_TRIGGERS local vs $REMOTE_TRIGGERS remote. "
+          fi
+
+          if [ "$LOCAL_VARS" != "$REMOTE_VARS" ]; then
+            APP_DRIFT=true
+            APP_DRIFT_MSG+="Variables: $LOCAL_VARS local vs $REMOTE_VARS remote. "
+          fi
+
+          if [ "$APP_DRIFT" = true ]; then
+            DRIFT_FOUND=true
+            DRIFT_REPORT+="**$APP**: $APP_DRIFT_MSG\n"
+            echo "DRIFT DETECTED for $APP"
+          else
+            echo "No drift detected for $APP"
+          fi
+        done
+
+        # Save drift report
+        echo "$DRIFT_FOUND" > /workspace/drift_found.txt
+        echo -e "$DRIFT_REPORT" > /workspace/drift_report.txt
+
+        if [ "$DRIFT_FOUND" = true ]; then
+          echo ""
+          echo "==================================="
+          echo "DRIFT DETECTED"
+          echo "==================================="
+          echo -e "$DRIFT_REPORT"
+          echo ""
+          echo "Run '/gtm sync <app>' to synchronize configuration."
+        else
+          echo ""
+          echo "==================================="
+          echo "NO DRIFT DETECTED"
+          echo "==================================="
+          echo "All apps are in sync with local configuration."
+        fi
+    id: "check-drift"
+    waitFor: ["install-cli"]
+
+  # Step 3: Send Slack notification (optional)
+  - name: "gcr.io/cloud-builders/curl"
+    entrypoint: bash
+    args:
+      - "-c"
+      - |
+        DRIFT_FOUND=$(cat /workspace/drift_found.txt)
+
+        if [ -z "${_SLACK_WEBHOOK_URL}" ]; then
+          echo "No Slack webhook configured, skipping notification."
+          exit 0
+        fi
+
+        if [ "$DRIFT_FOUND" = "true" ]; then
+          DRIFT_REPORT=$(cat /workspace/drift_report.txt)
+          PAYLOAD=$(cat <<EOF
+        {
+          "text": ":warning: GTM Configuration Drift Detected",
+          "blocks": [
+            {
+              "type": "header",
+              "text": {
+                "type": "plain_text",
+                "text": "GTM Configuration Drift Detected"
+              }
+            },
+            {
+              "type": "section",
+              "text": {
+                "type": "mrkdwn",
+                "text": "$DRIFT_REPORT"
+              }
+            },
+            {
+              "type": "section",
+              "text": {
+                "type": "mrkdwn",
+                "text": "Run \`/gtm sync <app>\` to synchronize configuration."
+              }
+            }
+          ]
+        }
+        EOF
+        )
+          curl -X POST -H 'Content-type: application/json' \
+            --data "$PAYLOAD" \
+            "${_SLACK_WEBHOOK_URL}"
+        else
+          echo "No drift detected, no notification needed."
+        fi
+    id: "notify"
+    waitFor: ["check-drift"]
+
+substitutions:
+  _GTM_ACCOUNT_ID: ""
+  _GTM_CONTAINER_ID_WEB: ""
+  _GTM_CONTAINER_ID_AI4SU: ""
+  _GTM_CONTAINER_ID_SANDBOX: ""
+  _APP_ID: ""
+  _SLACK_WEBHOOK_URL: ""
+
+options:
+  logging: CLOUD_LOGGING_ONLY
+  machineType: "E2_HIGHCPU_8"
+
+tags:
+  - "gtm-drift"
+  - "analytics"

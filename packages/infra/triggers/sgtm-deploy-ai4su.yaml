@@ -1,0 +1,23 @@
+# Cloud Build Trigger for sGTM deployment (ai4su)
+# Deploys sGTM container to Cloud Run when Dockerfile changes
+
+name: sgtm-deploy-ai4su
+description: Deploy sGTM container for ai4su app to Cloud Run
+
+github:
+  owner: 0xMoRyuk
+  name: UI_platform
+  push:
+    branch: ^main$
+
+includedFiles:
+  - 'packages/infra/gtm/Dockerfile.sgtm'
+  - 'packages/infra/gtm/cloudbuild-sgtm.yaml'
+
+filename: packages/infra/gtm/cloudbuild-sgtm.yaml
+
+substitutions:
+  _APP_ID: ai4su
+  _SERVICE_NAME: sgtm-ai4su
+  _GTM_CONTAINER_CONFIG: ${_GTM_CONTAINER_CONFIG_AI4SU}
+  _REGION: europe-west1

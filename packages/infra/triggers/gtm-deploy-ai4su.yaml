@@ -1,0 +1,22 @@
+# Cloud Build Trigger for GTM configuration sync (ai4su)
+# Deploys GTM configuration when changes are pushed to main
+
+name: gtm-deploy-ai4su
+description: Sync GTM configuration for ai4su app on push to main
+
+github:
+  owner: 0xMoRyuk
+  name: UI_platform
+  push:
+    branch: ^main$
+
+includedFiles:
+  - '.claude/config/gtm/shared/**'
+  - '.claude/config/gtm/ai4su/**'
+
+filename: packages/infra/gtm/cloudbuild-gtm-sync.yaml
+
+substitutions:
+  _APP_ID: ai4su
+  _GTM_ACCOUNT_ID: ${_GTM_ACCOUNT_ID}
+  _GTM_CONTAINER_ID: ${_GTM_CONTAINER_ID_AI4SU}
