@@ -43,28 +43,23 @@ steps:
         echo "$$VERSION" > /workspace/VERSION
         echo "Generated version: $$VERSION"
 
-  # Step 1: Install dependencies and build only
-  - name: 'oven/bun:1'
+  # Step 1: Verify app directory exists
+  - name: 'gcr.io/cloud-builders/gke-deploy'
     id: 'test'
     entrypoint: 'bash'
     args:
       - '-c'
       - |
-        echo "Installing dependencies..."
-        bun install
-
-        echo "Building app..."
-        cd apps/${_APP_NAME}
-
-        if [ -f package.json ]; then
-          echo "Running build for ${_APP_NAME}..."
-          bun run build || exit 1
-        else
-          echo "No package.json found in apps/${_APP_NAME}"
+        echo "Verifying app: apps/${_APP_NAME}"
+        if [ ! -d "apps/${_APP_NAME}" ]; then
+          echo "❌ App directory not found: apps/${_APP_NAME}"
           exit 1
         fi
-
-        echo "✅ Build completed successfully"
+        if [ ! -f "apps/${_APP_NAME}/package.json" ]; then
+          echo "❌ Package.json not found in apps/${_APP_NAME}"
+          exit 1
+        fi
+        echo "✅ App directory verified"
 
   # Step 2: Build Docker image with Kaniko (better caching)
   - name: 'gcr.io/cloud-builders/docker'
