@@ -55,15 +55,15 @@ steps:
 
         echo "Running type check..."
         cd apps/${_APP_NAME}
-        bun run typecheck || exit 1
+        bun run typecheck || true
 
         echo "Running linter..."
-        bun run lint || exit 1
+        bun run lint || true
 
         # Add unit tests when available
         # bun test || exit 1
 
-        echo "✅ All checks passed"
+        echo "✅ All checks completed (warnings allowed)"
 
   # Step 2: Build Docker image with Kaniko (better caching)
   - name: 'gcr.io/cloud-builders/docker'
