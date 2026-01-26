@@ -1,74 +1,62 @@
 # Multi-stage Dockerfile for Vite/static apps on Cloud Run
-# Optimized for minimal size and fast cold starts
+ARG APP_NAME=ai4su
 
-ARG APP_NAME=designOS_sandbox
-
-# Build stage
 FROM oven/bun:1 AS builder
 WORKDIR /app
 
-ARG APP_NAME
+# Workspace setup for monorepo
+COPY package.json ./
+COPY bun.lock ./
+COPY packages ./packages
 
-# Copy only the app (standalone, not monorepo workspace)
-COPY apps/${APP_NAME}/package.json ./
-COPY apps/${APP_NAME}/package-lock.json* ./
-COPY apps/${APP_NAME}/bun.lock* ./
+# App-specific setup
+ARG APP_NAME
+COPY apps/${APP_NAME} ./apps/${APP_NAME}
 
 # Install dependencies
 RUN bun install
 
-# Copy source code
-COPY apps/${APP_NAME} ./
-
 # Build the app
+WORKDIR /app/apps/${APP_NAME}
 RUN bun run build
 
-# Production stage - nginx for static file serving
+# Production stage - nginx for static SPA
 FROM nginx:alpine AS runner
 
-ARG APP_NAME
-
-# Remove default nginx config
+# Setup nginx config
 RUN rm /etc/nginx/conf.d/default.conf
 
-# Add custom nginx config for SPA routing
-COPY <<'EOF' /etc/nginx/conf.d/default.conf
+RUN cat > /etc/nginx/conf.d/default.conf <<'NGINX_EOF'
 server {
     listen 8080;
     server_name _;
 
     root /usr/share/nginx/html;
-    index index.html;
+    index index.html index.htm;
 
-    # Enable gzip compression
     gzip on;
     gzip_types text/plain text/css application/json application/javascript text/xml application/xml text/javascript image/svg+xml;
-    gzip_min_length 1000;
 
-    # Cache static assets aggressively
     location ~* \.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2)$ {
         expires 1y;
         add_header Cache-Control "public, immutable";
     }
 
-    # SPA fallback - all routes serve index.html
     location / {
         try_files $uri $uri/ /index.html;
     }
 
-    # Health check endpoint
     location /health {
         return 200 'ok';
         add_header Content-Type text/plain;
     }
 }
-EOF
+NGINX_EOF
 
-# Copy built static files
-COPY --from=builder /app/dist /usr/share/nginx/html
+# Copy built files
+ARG APP_NAME
+COPY --from=builder /app/apps/${APP_NAME}/dist /usr/share/nginx/html
+COPY --from=builder /app/apps/${APP_NAME}/public /usr/share/nginx/html 2>/dev/null || true
 
-# Cloud Run expects port 8080
 EXPOSE 8080
-
-# Run nginx in foreground
 CMD ["nginx", "-g", "daemon off;"]
