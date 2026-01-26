@@ -1,0 +1,19 @@
+{
+  "primary": "blue-800",
+  "secondary": "blue-300",
+  "accent": "yellow-400",
+  "neutral": "stone-300",
+  "custom": {
+    "eu-dark-blue": "#003399",
+    "eu-light-blue": "#9BB1DC",
+    "eu-yellow": "#F5CE2A",
+    "eu-sand": "#DBD2CC"
+  },
+  "states": {
+    "primary-hover": "blue-900",
+    "primary-active": "blue-950",
+    "accent-hover": "yellow-500",
+    "accent-active": "yellow-600"
+  },
+  "notes": "EU visibility guidelines mandate exact hex values. Use custom colors for pixel-perfect compliance, Tailwind mappings for rapid prototyping."
+}

@@ -1,0 +1,23 @@
+# Cloud Build Trigger for designOS_sandbox
+# Creates a trigger that deploys on push to main with changes in the app
+
+name: ui-platform-designOS-sandbox-deploy
+description: Deploy Design OS Sandbox to Cloud Run on push to main
+
+github:
+  owner: YOUR_GITHUB_USERNAME  # Update with actual owner
+  name: UI_platform
+  push:
+    branch: ^main$
+
+includedFiles:
+  - 'apps/designOS_sandbox/**'
+  - 'packages/infra/Dockerfile.vite'
+  - 'packages/infra/cloudbuild-vite.yaml'
+
+filename: packages/infra/cloudbuild-vite.yaml
+
+substitutions:
+  _APP_NAME: designOS_sandbox
+  _REGION: europe-west1
+  _ENV: production

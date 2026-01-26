@@ -1,0 +1,447 @@
+{
+  "_meta": {
+    "models": {
+      "methodology": "The hackathon methodology steps explaining how events are structured.",
+      "hackathons": "Individual hackathon events with details, results, and resources.",
+      "winningTeams": "Teams that won or placed in hackathon competitions.",
+      "photos": "Event photos displayed in galleries."
+    },
+    "relationships": [
+      "Each Hackathon produces multiple AIModels (linked via hackathonId)",
+      "Each Hackathon has WinningTeams with their projects",
+      "Each Hackathon has a BestPractices report linked from Toolbox",
+      "Photos belong to a specific Hackathon"
+    ]
+  },
+  "methodology": [
+    {
+      "id": "step-1",
+      "title": "Challenge Design",
+      "description": "Local partners identify pressing challenges in agriculture, health, finance, and other sectors. Challenge briefs are crafted with input from domain experts.",
+      "icon": "lightbulb"
+    },
+    {
+      "id": "step-2",
+      "title": "Team Formation",
+      "description": "Data scientists, developers, and domain experts form cross-functional teams. Participants are selected through an open application process.",
+      "icon": "users"
+    },
+    {
+      "id": "step-3",
+      "title": "Development Sprint",
+      "description": "48-72 hours of intensive building with mentorship from AI experts. Teams develop working prototypes addressing the challenge.",
+      "icon": "code"
+    },
+    {
+      "id": "step-4",
+      "title": "Demo Day",
+      "description": "Teams pitch their solutions to a panel of judges. Winners receive prizes, mentorship, and support to open-source their models.",
+      "icon": "presentation"
+    }
+  ],
+  "hackathons": [
+    {
+      "id": "hack-nairobi-2025",
+      "slug": "nairobi-ai-agriculture-2025",
+      "name": "Nairobi AI for Agriculture",
+      "tagline": "Building AI solutions for smallholder farmers",
+      "theme": "Agriculture & Food Security",
+      "description": "The Nairobi hackathon brought together 85 participants to develop AI solutions addressing challenges faced by smallholder farmers in East Africa. Teams worked on crop yield prediction, disease detection, and market access.",
+      "startDate": "2025-03-15",
+      "endDate": "2025-03-17",
+      "location": {
+        "venue": "iHub Nairobi",
+        "city": "Nairobi",
+        "country": "Kenya",
+        "countryCode": "KE"
+      },
+      "participantCount": 85,
+      "teamCount": 17,
+      "modelsProduced": 4,
+      "modelIds": ["model-001", "model-007", "model-011", "model-021"],
+      "heroImage": "/images/hackathons/nairobi-2025-hero.jpg",
+      "challengeBrief": {
+        "title": "AI for Smallholder Agriculture",
+        "summary": "Develop AI tools that help smallholder farmers improve yields, detect crop diseases early, and access better market prices.",
+        "pdfUrl": "/documents/challenge-brief-nairobi-2025.pdf"
+      },
+      "bestPracticesId": "bp-001",
+      "partners": ["KALRO", "iHub", "Digital Africa"],
+      "winningTeams": [
+        {
+          "rank": 1,
+          "teamName": "AgriAI Kenya",
+          "projectName": "AgriYield Predictor",
+          "description": "Machine learning model predicting crop yields using weather and soil data.",
+          "modelId": "model-001",
+          "prize": "€5,000 + AWS Credits"
+        },
+        {
+          "rank": 2,
+          "teamName": "CropDoc Team",
+          "projectName": "CropDoc Vision",
+          "description": "Mobile app for plant disease detection using computer vision.",
+          "modelId": "model-007",
+          "prize": "€3,000 + Mentorship"
+        },
+        {
+          "rank": 3,
+          "teamName": "FarmLingo",
+          "projectName": "LanguageLearn NLP",
+          "description": "Agricultural advisory chatbot supporting Swahili language.",
+          "modelId": "model-011",
+          "prize": "€1,500"
+        }
+      ],
+      "outcomes": [
+        "4 open-source AI models published",
+        "2 startups formed post-hackathon",
+        "Partnership with KALRO for data access",
+        "15,000+ GitHub stars across models"
+      ],
+      "photos": [
+        { "id": "photo-n1", "url": "/images/hackathons/nairobi-2025/opening.jpg", "caption": "Opening ceremony at iHub", "featured": true },
+        { "id": "photo-n2", "url": "/images/hackathons/nairobi-2025/teams.jpg", "caption": "Teams collaborating during the sprint" },
+        { "id": "photo-n3", "url": "/images/hackathons/nairobi-2025/mentors.jpg", "caption": "Mentors providing guidance" },
+        { "id": "photo-n4", "url": "/images/hackathons/nairobi-2025/demo.jpg", "caption": "Demo day presentations" },
+        { "id": "photo-n5", "url": "/images/hackathons/nairobi-2025/winners.jpg", "caption": "Winning team celebration" }
+      ]
+    },
+    {
+      "id": "hack-lagos-2025",
+      "slug": "lagos-ai-health-logistics-2025",
+      "name": "Lagos AI for Health & Logistics",
+      "tagline": "AI solutions for healthcare access and urban mobility",
+      "theme": "Healthcare & Urban Logistics",
+      "description": "Lagos hosted a dual-track hackathon addressing healthcare access in underserved communities and last-mile delivery challenges in African megacities. 120 participants developed 6 innovative AI models.",
+      "startDate": "2025-05-10",
+      "endDate": "2025-05-12",
+      "location": {
+        "venue": "Co-Creation Hub (CcHUB)",
+        "city": "Lagos",
+        "country": "Nigeria",
+        "countryCode": "NG"
+      },
+      "participantCount": 120,
+      "teamCount": 24,
+      "modelsProduced": 6,
+      "modelIds": ["model-002", "model-006", "model-009", "model-014"],
+      "heroImage": "/images/hackathons/lagos-2025-hero.jpg",
+      "challengeBrief": {
+        "title": "AI for Health Access & Urban Logistics",
+        "summary": "Build AI tools for community health workers and optimize delivery routes in complex urban environments.",
+        "pdfUrl": "/documents/challenge-brief-lagos-2025.pdf"
+      },
+      "bestPracticesId": "bp-002",
+      "partners": ["CcHUB", "Lagos State Health Ministry", "GIZ"],
+      "winningTeams": [
+        {
+          "rank": 1,
+          "teamName": "HealthFirst AI",
+          "projectName": "HealthTriage AI",
+          "description": "NLP-based symptom checker for community health workers.",
+          "modelId": "model-002",
+          "prize": "€5,000 + AWS Credits"
+        },
+        {
+          "rank": 2,
+          "teamName": "LogiTech Lagos",
+          "projectName": "LogiRoute Optimizer",
+          "description": "Route optimization for last-mile delivery in Lagos traffic.",
+          "modelId": "model-006",
+          "prize": "€3,000 + Mentorship"
+        },
+        {
+          "rank": 3,
+          "teamName": "PriceWatch",
+          "projectName": "AgriPrice Forecast",
+          "description": "Market price prediction for agricultural commodities.",
+          "modelId": "model-009",
+          "prize": "€1,500"
+        }
+      ],
+      "outcomes": [
+        "6 open-source AI models published",
+        "Partnership with Lagos State Health Ministry",
+        "HealthTriage AI piloted in 5 primary health centers",
+        "LogiRoute adopted by 2 delivery startups"
+      ],
+      "photos": [
+        { "id": "photo-l1", "url": "/images/hackathons/lagos-2025/venue.jpg", "caption": "CcHUB venue setup", "featured": true },
+        { "id": "photo-l2", "url": "/images/hackathons/lagos-2025/coding.jpg", "caption": "Intensive coding session" },
+        { "id": "photo-l3", "url": "/images/hackathons/lagos-2025/health-track.jpg", "caption": "Healthcare track teams" },
+        { "id": "photo-l4", "url": "/images/hackathons/lagos-2025/logistics-track.jpg", "caption": "Logistics track demos" },
+        { "id": "photo-l5", "url": "/images/hackathons/lagos-2025/awards.jpg", "caption": "Award ceremony" }
+      ]
+    },
+    {
+      "id": "hack-accra-2025",
+      "slug": "accra-ai-fintech-2025",
+      "name": "Accra AI for Financial Inclusion",
+      "tagline": "Expanding financial access through AI",
+      "theme": "FinTech & Financial Inclusion",
+      "description": "The Accra hackathon focused on AI solutions for financial inclusion, targeting the unbanked and underbanked populations. 70 participants developed credit scoring, fraud detection, and market matching solutions.",
+      "startDate": "2025-07-20",
+      "endDate": "2025-07-22",
+      "location": {
+        "venue": "Impact Hub Accra",
+        "city": "Accra",
+        "country": "Ghana",
+        "countryCode": "GH"
+      },
+      "participantCount": 70,
+      "teamCount": 14,
+      "modelsProduced": 4,
+      "modelIds": ["model-003", "model-008", "model-024"],
+      "heroImage": "/images/hackathons/accra-2025-hero.jpg",
+      "challengeBrief": {
+        "title": "AI for the Unbanked",
+        "summary": "Create AI solutions that expand financial access for populations without traditional banking history.",
+        "pdfUrl": "/documents/challenge-brief-accra-2025.pdf"
+      },
+      "bestPracticesId": "bp-003",
+      "partners": ["Bank of Ghana Fintech Office", "Impact Hub Accra", "Expertise France"],
+      "winningTeams": [
+        {
+          "rank": 1,
+          "teamName": "FinInclusion",
+          "projectName": "FinCheck Credit Scorer",
+          "description": "Alternative credit scoring using mobile money transaction patterns.",
+          "modelId": "model-003",
+          "prize": "€5,000 + AWS Credits"
+        },
+        {
+          "rank": 2,
+          "teamName": "HealthScreen GH",
+          "projectName": "MalariaScreen AI",
+          "description": "Automated malaria detection from blood smear images.",
+          "modelId": "model-008",
+          "prize": "€3,000 + Mentorship"
+        },
+        {
+          "rank": 3,
+          "teamName": "AgriConnect",
+          "projectName": "MarketConnect Match",
+          "description": "Matching platform connecting farmers to buyers.",
+          "modelId": "model-024",
+          "prize": "€1,500"
+        }
+      ],
+      "outcomes": [
+        "4 open-source AI models published",
+        "Regulatory sandbox partnership with Bank of Ghana",
+        "FinCheck piloted with 3 microfinance institutions",
+        "€500K in follow-on funding for winning teams"
+      ],
+      "photos": [
+        { "id": "photo-a1", "url": "/images/hackathons/accra-2025/kickoff.jpg", "caption": "Hackathon kickoff", "featured": true },
+        { "id": "photo-a2", "url": "/images/hackathons/accra-2025/fintech-mentors.jpg", "caption": "FinTech mentors session" },
+        { "id": "photo-a3", "url": "/images/hackathons/accra-2025/late-night.jpg", "caption": "Late night coding" },
+        { "id": "photo-a4", "url": "/images/hackathons/accra-2025/pitch.jpg", "caption": "Final pitch session" },
+        { "id": "photo-a5", "url": "/images/hackathons/accra-2025/celebration.jpg", "caption": "Winners celebration" }
+      ]
+    },
+    {
+      "id": "hack-dakar-2025",
+      "slug": "dakar-ai-environment-2025",
+      "name": "Dakar AI for Environment",
+      "tagline": "Sustainable solutions for climate challenges",
+      "theme": "Environment & Climate",
+      "description": "Dakar's hackathon addressed environmental challenges including water quality monitoring, solar energy optimization, and livestock health in the Sahel region. 65 participants from Francophone Africa.",
+      "startDate": "2025-09-05",
+      "endDate": "2025-09-07",
+      "location": {
+        "venue": "CTIC Dakar",
+        "city": "Dakar",
+        "country": "Senegal",
+        "countryCode": "SN"
+      },
+      "participantCount": 65,
+      "teamCount": 13,
+      "modelsProduced": 4,
+      "modelIds": ["model-005", "model-012", "model-016", "model-020"],
+      "heroImage": "/images/hackathons/dakar-2025-hero.jpg",
+      "challengeBrief": {
+        "title": "AI pour l'Environnement au Sahel",
+        "summary": "Développer des solutions IA pour la gestion de l'eau, l'énergie solaire et la santé animale dans la région sahélienne.",
+        "pdfUrl": "/documents/challenge-brief-dakar-2025.pdf"
+      },
+      "bestPracticesId": null,
+      "partners": ["CTIC Dakar", "Ministère de l'Environnement du Sénégal", "GIZ"],
+      "winningTeams": [
+        {
+          "rank": 1,
+          "teamName": "EauSure Sénégal",
+          "projectName": "WaterSense Monitor",
+          "description": "IoT water quality prediction from sensor data.",
+          "modelId": "model-005",
+          "prize": "€5,000 + AWS Credits"
+        },
+        {
+          "rank": 2,
+          "teamName": "SolarTech Sahel",
+          "projectName": "SolarPredict Energy",
+          "description": "Solar energy forecasting for mini-grids.",
+          "modelId": "model-012",
+          "prize": "€3,000 + Mentorship"
+        },
+        {
+          "rank": 3,
+          "teamName": "Bétail Santé",
+          "projectName": "LivestockHealth Vision",
+          "description": "Computer vision for livestock disease detection.",
+          "modelId": "model-016",
+          "prize": "€1,500"
+        }
+      ],
+      "outcomes": [
+        "4 open-source AI models published",
+        "Partnership with Senegal Environment Ministry",
+        "WaterSense deployed in 10 rural communities",
+        "First Francophone AI hackathon in the program"
+      ],
+      "photos": [
+        { "id": "photo-d1", "url": "/images/hackathons/dakar-2025/opening-fr.jpg", "caption": "Cérémonie d'ouverture", "featured": true },
+        { "id": "photo-d2", "url": "/images/hackathons/dakar-2025/teams-dakar.jpg", "caption": "Équipes au travail" },
+        { "id": "photo-d3", "url": "/images/hackathons/dakar-2025/iot-demo.jpg", "caption": "Démonstration IoT" },
+        { "id": "photo-d4", "url": "/images/hackathons/dakar-2025/jury.jpg", "caption": "Délibération du jury" },
+        { "id": "photo-d5", "url": "/images/hackathons/dakar-2025/winners-dakar.jpg", "caption": "Les gagnants" }
+      ]
+    },
+    {
+      "id": "hack-kigali-2025",
+      "slug": "kigali-ai-education-2025",
+      "name": "Kigali AI for Education",
+      "tagline": "Transforming learning with AI",
+      "theme": "Education & Skills Development",
+      "description": "Rwanda's hackathon focused on educational technology, addressing adaptive learning, dropout prediction, and skills-based job matching. 55 participants developed solutions for the Rwandan education system.",
+      "startDate": "2025-10-18",
+      "endDate": "2025-10-20",
+      "location": {
+        "venue": "kLab Rwanda",
+        "city": "Kigali",
+        "country": "Rwanda",
+        "countryCode": "RW"
+      },
+      "participantCount": 55,
+      "teamCount": 11,
+      "modelsProduced": 3,
+      "modelIds": ["model-004", "model-010", "model-015"],
+      "heroImage": "/images/hackathons/kigali-2025-hero.jpg",
+      "challengeBrief": {
+        "title": "AI for Rwandan Education",
+        "summary": "Build AI tools that personalize learning, predict student challenges, and connect graduates with employment.",
+        "pdfUrl": "/documents/challenge-brief-kigali-2025.pdf"
+      },
+      "bestPracticesId": null,
+      "partners": ["kLab Rwanda", "Rwanda Ministry of Education", "Digital Africa"],
+      "winningTeams": [
+        {
+          "rank": 1,
+          "teamName": "LearnRwanda",
+          "projectName": "EduMatch Tutor",
+          "description": "Adaptive learning system matching students to content.",
+          "modelId": "model-004",
+          "prize": "€5,000 + AWS Credits"
+        },
+        {
+          "rank": 2,
+          "teamName": "InsureTech Rwanda",
+          "projectName": "InsureTech Risk",
+          "description": "Micro-insurance risk assessment for farmers.",
+          "modelId": "model-010",
+          "prize": "€3,000 + Mentorship"
+        },
+        {
+          "rank": 3,
+          "teamName": "MamaHealth",
+          "projectName": "MaternalHealth Monitor",
+          "description": "Risk prediction for maternal health complications.",
+          "modelId": "model-015",
+          "prize": "€1,500"
+        }
+      ],
+      "outcomes": [
+        "3 open-source AI models published",
+        "EduMatch piloted in 20 Rwandan schools",
+        "Partnership with Rwanda Ministry of Education",
+        "50% of participants were women developers"
+      ],
+      "photos": [
+        { "id": "photo-k1", "url": "/images/hackathons/kigali-2025/klab-venue.jpg", "caption": "kLab innovation space", "featured": true },
+        { "id": "photo-k2", "url": "/images/hackathons/kigali-2025/women-coders.jpg", "caption": "Women developers at work" },
+        { "id": "photo-k3", "url": "/images/hackathons/kigali-2025/edu-track.jpg", "caption": "Education track presentations" },
+        { "id": "photo-k4", "url": "/images/hackathons/kigali-2025/minister.jpg", "caption": "Education Minister visit" },
+        { "id": "photo-k5", "url": "/images/hackathons/kigali-2025/awards-kigali.jpg", "caption": "Award ceremony" }
+      ]
+    },
+    {
+      "id": "hack-johannesburg-2025",
+      "slug": "johannesburg-ai-health-education-2025",
+      "name": "Johannesburg AI Summit",
+      "tagline": "Africa's largest AI hackathon",
+      "theme": "Healthcare & Education",
+      "description": "The Johannesburg summit was the program's flagship event, bringing together 150 participants from across Africa. Dual tracks addressed TB screening, air quality prediction, and employment matching.",
+      "startDate": "2025-11-22",
+      "endDate": "2025-11-24",
+      "location": {
+        "venue": "Tshimologong Precinct",
+        "city": "Johannesburg",
+        "country": "South Africa",
+        "countryCode": "ZA"
+      },
+      "participantCount": 150,
+      "teamCount": 30,
+      "modelsProduced": 5,
+      "modelIds": ["model-017", "model-018", "model-022", "model-023"],
+      "heroImage": "/images/hackathons/johannesburg-2025-hero.jpg",
+      "challengeBrief": {
+        "title": "AI for African Development",
+        "summary": "Build AI solutions addressing healthcare access, education equity, and employment for African youth.",
+        "pdfUrl": "/documents/challenge-brief-johannesburg-2025.pdf"
+      },
+      "bestPracticesId": null,
+      "partners": ["Tshimologong", "University of the Witwatersrand", "Expertise France", "EU Delegation SA"],
+      "winningTeams": [
+        {
+          "rank": 1,
+          "teamName": "TBFree SA",
+          "projectName": "TBScreen Radiology",
+          "description": "Automated TB detection from chest X-rays.",
+          "modelId": "model-023",
+          "prize": "€7,500 + AWS Credits"
+        },
+        {
+          "rank": 2,
+          "teamName": "JobsForAfrica",
+          "projectName": "JobMatch Africa",
+          "description": "Skills-based job matching for informal workers.",
+          "modelId": "model-017",
+          "prize": "€5,000 + Mentorship"
+        },
+        {
+          "rank": 3,
+          "teamName": "AirWatch Gauteng",
+          "projectName": "AirQuality Predict",
+          "description": "Air quality forecasting for urban areas.",
+          "modelId": "model-018",
+          "prize": "€2,500"
+        }
+      ],
+      "outcomes": [
+        "5 open-source AI models published",
+        "TBScreen piloted in 3 Gauteng hospitals",
+        "€1M in follow-on funding for winning teams",
+        "Largest AI4Startups hackathon by participant count"
+      ],
+      "photos": [
+        { "id": "photo-j1", "url": "/images/hackathons/johannesburg-2025/summit-opening.jpg", "caption": "Summit opening ceremony", "featured": true },
+        { "id": "photo-j2", "url": "/images/hackathons/johannesburg-2025/pan-african.jpg", "caption": "Pan-African participants" },
+        { "id": "photo-j3", "url": "/images/hackathons/johannesburg-2025/health-ai.jpg", "caption": "Healthcare AI track" },
+        { "id": "photo-j4", "url": "/images/hackathons/johannesburg-2025/expo.jpg", "caption": "Solution expo" },
+        { "id": "photo-j5", "url": "/images/hackathons/johannesburg-2025/finale.jpg", "caption": "Grand finale" },
+        { "id": "photo-j6", "url": "/images/hackathons/johannesburg-2025/eu-ambassador.jpg", "caption": "EU Ambassador address" }
+      ]
+    }
+  ]
+}

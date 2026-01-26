@@ -6,3 +6,6 @@ export * from "./tokens";
 
 // Export components
 export * from "./components";
+
+// Export analytics
+export * from "./analytics";

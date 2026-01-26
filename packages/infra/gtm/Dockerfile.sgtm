@@ -1,0 +1,28 @@
+# GTM Server-Side Container
+#
+# Based on Google's official sGTM image.
+# Configured for scale-to-zero on Cloud Run.
+#
+# Build:
+#   docker build -t sgtm -f Dockerfile.sgtm .
+#
+# Run locally:
+#   docker run -p 8080:8080 -e CONTAINER_CONFIG=... sgtm
+
+FROM gcr.io/cloud-tagging-10302018/gtm-cloud-image:stable
+
+# Environment variables
+# CONTAINER_CONFIG is required - set via Cloud Run env vars
+ENV PORT=8080
+ENV GOOGLE_CLOUD_PROJECT=""
+ENV CONTAINER_CONFIG=""
+
+# Health check for Cloud Run
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+  CMD curl -f http://localhost:${PORT}/healthz || exit 1
+
+# Expose port
+EXPOSE 8080
+
+# Start sGTM server
+# The entrypoint is provided by the base image

@@ -1,0 +1,168 @@
+{
+  "_meta": {
+    "models": {
+      "funders": "EU and Team Europe funding partners with mandatory visibility requirements.",
+      "implementingPartners": "Organizations responsible for program implementation.",
+      "serviceProviders": "Technical and research partners providing specialized services.",
+      "datagovInitiative": "Information about the broader DataGov Initiative."
+    },
+    "relationships": [
+      "Funders provide financial support for the program",
+      "Implementing Partners manage and execute program activities",
+      "Service Providers deliver specific technical services (research, data analysis)",
+      "All partners link to the broader DataGov Initiative"
+    ]
+  },
+  "pageIntro": {
+    "title": "Our Partners",
+    "subtitle": "A collaborative initiative bringing together European and African expertise",
+    "description": "AI4Startups is made possible through the collaboration of funders, implementing organizations, and technical partners committed to building Africa's AI ecosystem. Together, we're supporting startups, developing open-source models, and fostering innovation across the continent."
+  },
+  "funders": {
+    "sectionTitle": "Funded by the European Union",
+    "sectionDescription": "AI4Startups is funded under the EU's Global Gateway initiative, part of Team Europe's commitment to digital transformation in Africa.",
+    "euAttribution": {
+      "text": "Funded by the European Union",
+      "flagUrl": "/logos/eu-flag.svg",
+      "globalGatewayLogo": "/logos/global-gateway.svg",
+      "disclaimer": "This website was created and maintained with the financial support of the European Union. Its contents are the sole responsibility of Digital Africa and do not necessarily reflect the views of the European Union."
+    },
+    "teamEurope": {
+      "title": "Team Europe",
+      "description": "Team Europe brings together the EU, its Member States, and European financial institutions to maximize impact through coordinated action.",
+      "members": [
+        {
+          "id": "eu",
+          "name": "European Union",
+          "logoUrl": "/logos/eu-logo.svg",
+          "websiteUrl": "https://european-union.europa.eu",
+          "isPrimary": true
+        },
+        {
+          "id": "france",
+          "name": "France",
+          "logoUrl": "/logos/france-flag.svg",
+          "websiteUrl": "https://www.diplomatie.gouv.fr",
+          "isPrimary": false
+        },
+        {
+          "id": "germany",
+          "name": "Germany",
+          "logoUrl": "/logos/germany-flag.svg",
+          "websiteUrl": "https://www.bmz.de",
+          "isPrimary": false
+        }
+      ]
+    },
+    "hashtags": ["#TeamEurope", "#GlobalGateway", "#D4DataGOV", "#DataGovernanceAfrica"]
+  },
+  "implementingPartners": {
+    "sectionTitle": "Implementing Partners",
+    "sectionDescription": "These organizations are responsible for designing, managing, and executing the AI4Startups program across Africa.",
+    "partners": [
+      {
+        "id": "digital-africa",
+        "name": "Digital Africa",
+        "role": "Lead Implementing Partner",
+        "logoUrl": "/logos/digital-africa.svg",
+        "websiteUrl": "https://digital-africa.co",
+        "shortDescription": "Digital Africa is a platform initiative that supports tech entrepreneurs across Africa.",
+        "fullDescription": "Digital Africa is a multi-donor platform initiative launched by France in 2018 to support the emergence and growth of African tech startups. As the lead implementing partner for AI4Startups, Digital Africa coordinates program activities, manages partnerships, and ensures alignment with the broader African tech ecosystem. With a network spanning 40+ African countries, Digital Africa brings deep expertise in startup support, ecosystem building, and cross-border collaboration.",
+        "contributions": [
+          "Program design and coordination",
+          "Hackathon organization",
+          "Startup support and mentorship",
+          "Ecosystem partnerships"
+        ],
+        "isLead": true
+      },
+      {
+        "id": "expertise-france",
+        "name": "Expertise France",
+        "role": "Implementation Partner",
+        "logoUrl": "/logos/expertise-france.svg",
+        "websiteUrl": "https://www.expertisefrance.fr",
+        "shortDescription": "Expertise France is France's public international cooperation agency.",
+        "fullDescription": "Expertise France designs and implements international cooperation projects. For AI4Startups, Expertise France provides technical expertise in program management, monitoring and evaluation, and ensures compliance with EU funding requirements.",
+        "contributions": [
+          "Program management support",
+          "Monitoring and evaluation",
+          "EU compliance and reporting",
+          "Capacity building"
+        ],
+        "isLead": false
+      },
+      {
+        "id": "giz",
+        "name": "GIZ",
+        "role": "Implementation Partner",
+        "logoUrl": "/logos/giz.svg",
+        "websiteUrl": "https://www.giz.de",
+        "shortDescription": "GIZ is Germany's international cooperation agency for sustainable development.",
+        "fullDescription": "Deutsche Gesellschaft für Internationale Zusammenarbeit (GIZ) supports the German Government in achieving its international cooperation objectives. GIZ contributes expertise in digital transformation, vocational training, and sustainable economic development to the AI4Startups program.",
+        "contributions": [
+          "Technical training programs",
+          "Digital transformation expertise",
+          "Regional coordination in East Africa",
+          "Sustainable development alignment"
+        ],
+        "isLead": false
+      }
+    ]
+  },
+  "serviceProviders": {
+    "sectionTitle": "Service Providers",
+    "sectionDescription": "Specialized partners delivering technical expertise, research, and operational support.",
+    "providers": [
+      {
+        "id": "data354",
+        "name": "Data354",
+        "logoUrl": "/logos/data354.svg",
+        "websiteUrl": "https://data354.com",
+        "description": "Data analytics and AI consulting firm specializing in African markets. Data354 provides technical support for hackathon organization, data partnerships, and ecosystem mapping.",
+        "services": ["Hackathon technical support", "Data partnerships", "Ecosystem mapping"]
+      },
+      {
+        "id": "briter",
+        "name": "Briter Intelligence",
+        "logoUrl": "/logos/briter.svg",
+        "websiteUrl": "https://briterintelligence.com",
+        "description": "Research and intelligence firm focused on African tech ecosystems. Briter conducts the AI readiness studies and provides data-driven insights for program design.",
+        "services": ["AI readiness research", "Ecosystem analysis", "Impact measurement"]
+      },
+      {
+        "id": "aws",
+        "name": "Amazon Web Services",
+        "logoUrl": "/logos/aws.svg",
+        "websiteUrl": "https://aws.amazon.com",
+        "description": "Cloud computing partner providing infrastructure credits and technical training for hackathon participants and winning teams.",
+        "services": ["Cloud credits", "Technical training", "Infrastructure support"]
+      },
+      {
+        "id": "google",
+        "name": "Google for Startups",
+        "logoUrl": "/logos/google-startups.svg",
+        "websiteUrl": "https://startup.google.com",
+        "description": "Startup support partner providing Google Cloud credits, mentorship, and access to Google's startup network.",
+        "services": ["Cloud credits", "Mentorship", "Network access"]
+      }
+    ]
+  },
+  "datagovInitiative": {
+    "title": "Part of the DataGov Initiative",
+    "description": "AI4Startups is part of the broader Data Governance in Africa initiative, supporting responsible data governance and AI development across the continent.",
+    "websiteUrl": "https://d4d.network",
+    "ctaText": "Learn More About DataGov",
+    "highlights": [
+      "Data governance policy support",
+      "Digital infrastructure development",
+      "AI ethics and regulation",
+      "Cross-border data frameworks"
+    ]
+  },
+  "socialLinks": {
+    "hashtags": ["#AI4Startups", "#D4DataGOV", "#DataGovernanceAfrica", "#TeamEurope", "#GlobalGateway"],
+    "twitter": "https://twitter.com/Digital_Africa",
+    "linkedin": "https://linkedin.com/company/digital-africa"
+  }
+}

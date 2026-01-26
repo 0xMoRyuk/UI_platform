@@ -1,0 +1,173 @@
+# Cloud Build CI/CD Configuration for Vite/Static Apps
+# Automated deployment pipeline for static single-page applications
+#
+# Features:
+# - Optimized nginx container for static serving
+# - Aggressive caching for assets
+# - SPA routing support
+# - Fast cold starts (~100ms)
+#
+# Trigger: git push to main branch with changes in apps/${_APP_NAME}
+
+substitutions:
+  _APP_NAME: 'designOS_sandbox'
+  _SERVICE_NAME: 'ui-platform-designos-sandbox'
+  _REGION: 'europe-west1'
+  _ENV: 'production'
+  _MIN_INSTANCES: '0'  # scale-to-zero for cost optimization
+  _MAX_INSTANCES: '10'
+  _MEMORY: '256Mi'  # Static serving needs minimal memory
+  _CPU: '1'
+  _TIMEOUT: '60s'  # Static sites respond quickly
+
+options:
+  machineType: 'N1_HIGHCPU_8'
+  diskSizeGb: 100
+  logging: CLOUD_LOGGING_ONLY
+  substitution_option: 'ALLOW_LOOSE'
+
+steps:
+  # Step 0: Generate semantic version tag
+  - name: 'gcr.io/cloud-builders/git'
+    id: 'generate-version'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        VERSION="v$(date +%Y%m%d)-${SHORT_SHA}"
+        echo "$$VERSION" > /workspace/VERSION
+        echo "Generated version: $$VERSION"
+
+  # Step 1: Install dependencies and run checks
+  - name: 'oven/bun:1'
+    id: 'test'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        cd apps/${_APP_NAME}
+
+        echo "Installing dependencies..."
+        bun install
+
+        echo "Running type check..."
+        bun run tsc -b 2>&1 || exit 1
+
+        echo "Running linter..."
+        bun run lint || exit 1
+
+        echo "✅ All checks passed"
+
+  # Step 2: Build Docker image with Kaniko
+  - name: 'gcr.io/kaniko-project/executor:latest'
+    id: 'build'
+    args:
+      - --destination=gcr.io/$PROJECT_ID/${_SERVICE_NAME}:$(cat /workspace/VERSION)
+      - --destination=gcr.io/$PROJECT_ID/${_SERVICE_NAME}:${_ENV}
+      - --destination=gcr.io/$PROJECT_ID/${_SERVICE_NAME}:latest
+      - --cache=true
+      - --cache-ttl=24h
+      - --build-arg=APP_NAME=${_APP_NAME}
+      - --context=dir:///workspace
+      - --dockerfile=packages/infra/Dockerfile.vite
+    waitFor: ['test']
+
+  # Step 3: Deploy to Cloud Run
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    id: 'deploy'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        VERSION=$(cat /workspace/VERSION)
+
+        echo "🚀 Deploying ${_APP_NAME} to ${_ENV}..."
+        echo "   Version: $$VERSION"
+        echo "   Service: ${_SERVICE_NAME}"
+        echo "   Region: ${_REGION}"
+
+        gcloud run deploy ${_SERVICE_NAME} \
+          --image=gcr.io/$PROJECT_ID/${_SERVICE_NAME}:$$VERSION \
+          --platform=managed \
+          --region=${_REGION} \
+          --allow-unauthenticated \
+          --min-instances=${_MIN_INSTANCES} \
+          --max-instances=${_MAX_INSTANCES} \
+          --memory=${_MEMORY} \
+          --cpu=${_CPU} \
+          --timeout=${_TIMEOUT} \
+          --set-env-vars="DEPLOYED_AT=$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
+          --tag=$$VERSION \
+          --no-traffic \
+          --quiet
+
+        # Canary deployment: 10% -> 100%
+        echo "📊 Starting gradual traffic migration..."
+
+        gcloud run services update-traffic ${_SERVICE_NAME} \
+          --region=${_REGION} \
+          --to-revisions=$$VERSION=10 \
+          --quiet
+
+        echo "✅ 10% traffic routed to $$VERSION"
+        echo "   Waiting 60 seconds before full rollout..."
+
+        sleep 60
+
+        gcloud run services update-traffic ${_SERVICE_NAME} \
+          --region=${_REGION} \
+          --to-revisions=$$VERSION=100 \
+          --quiet
+
+        echo "✅ Deployment complete!"
+
+        SERVICE_URL=$(gcloud run services describe ${_SERVICE_NAME} \
+          --region=${_REGION} \
+          --format='value(status.url)')
+
+        echo ""
+        echo "🌐 Service URL: $$SERVICE_URL"
+        echo "📦 Image: gcr.io/$PROJECT_ID/${_SERVICE_NAME}:$$VERSION"
+        echo "🏷️  Version: $$VERSION"
+    waitFor: ['build']
+
+  # Step 4: Smoke tests
+  - name: 'gcr.io/cloud-builders/curl'
+    id: 'smoke-test'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        SERVICE_URL=$(gcloud run services describe ${_SERVICE_NAME} \
+          --region=${_REGION} \
+          --format='value(status.url)')
+
+        echo "Running smoke tests..."
+
+        # Test homepage
+        HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" $$SERVICE_URL)
+        if [ "$$HTTP_CODE" != "200" ]; then
+          echo "❌ Homepage check failed: $$HTTP_CODE"
+          exit 1
+        fi
+        echo "✅ Homepage: 200"
+
+        # Test health endpoint
+        HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" $$SERVICE_URL/health)
+        if [ "$$HTTP_CODE" != "200" ]; then
+          echo "❌ Health check failed: $$HTTP_CODE"
+          exit 1
+        fi
+        echo "✅ Health: 200"
+
+        # Test response time
+        RESPONSE_TIME=$(curl -o /dev/null -s -w '%{time_total}\n' $$SERVICE_URL)
+        echo "⏱️  Response time: $${RESPONSE_TIME}s"
+
+        echo "✅ All smoke tests passed"
+    waitFor: ['deploy']
+
+timeout: '900s'  # 15 minutes total timeout
+
+images:
+  - 'gcr.io/$PROJECT_ID/${_SERVICE_NAME}'

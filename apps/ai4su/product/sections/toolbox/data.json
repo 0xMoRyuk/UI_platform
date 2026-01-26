@@ -1,0 +1,408 @@
+{
+  "_meta": {
+    "models": {
+      "kpiSummary": "Compact KPI metrics displayed at the top of the Toolbox page.",
+      "aiModels": "Open-source AI models developed during the program, each with GitHub repository.",
+      "studies": "Research documents and analyses produced by partners like Briter.",
+      "bestPractices": "Best practices reports from each hackathon event.",
+      "finalReport": "The comprehensive final program report from Digital Africa."
+    },
+    "relationships": [
+      "AI Models are linked to the Hackathon where they were developed",
+      "AI Models are tagged with Sector and Country for filtering",
+      "Best Practices reports are linked to their source Hackathon",
+      "Studies are produced by Partner organizations"
+    ]
+  },
+  "kpiSummary": [
+    { "label": "AI Models", "value": 24, "icon": "brain" },
+    { "label": "Hackathons", "value": 6, "icon": "trophy" },
+    { "label": "Countries", "value": 8, "icon": "globe" },
+    { "label": "Studies", "value": 4, "icon": "book" }
+  ],
+  "filterOptions": {
+    "sectors": [
+      { "id": "agriculture", "label": "Agriculture", "color": "#22c55e" },
+      { "id": "healthcare", "label": "Healthcare", "color": "#ef4444" },
+      { "id": "fintech", "label": "FinTech", "color": "#3b82f6" },
+      { "id": "education", "label": "Education", "color": "#a855f7" },
+      { "id": "environment", "label": "Environment", "color": "#14b8a6" },
+      { "id": "logistics", "label": "Logistics", "color": "#f97316" }
+    ],
+    "countries": [
+      { "code": "KE", "name": "Kenya" },
+      { "code": "NG", "name": "Nigeria" },
+      { "code": "GH", "name": "Ghana" },
+      { "code": "SN", "name": "Senegal" },
+      { "code": "RW", "name": "Rwanda" },
+      { "code": "ZA", "name": "South Africa" },
+      { "code": "EG", "name": "Egypt" },
+      { "code": "MA", "name": "Morocco" }
+    ]
+  },
+  "aiModels": [
+    {
+      "id": "model-001",
+      "name": "AgriYield Predictor",
+      "shortDescription": "ML model predicting crop yields from weather and soil data.",
+      "fullDescription": "Machine learning model for predicting crop yields based on weather patterns, soil composition, and historical harvest data across Sub-Saharan Africa. Trained on 5 years of agricultural data from Kenya and Nigeria.",
+      "useCase": "Helps farmers and agricultural cooperatives plan planting schedules and optimize resource allocation based on predicted yields.",
+      "technicalRequirements": "Python 3.9+, TensorFlow 2.x, 4GB RAM minimum",
+      "sector": "agriculture",
+      "country": "KE",
+      "githubUrl": "https://github.com/ai4startups/agri-yield-predictor",
+      "hackathonId": "hack-nairobi-2025"
+    },
+    {
+      "id": "model-002",
+      "name": "HealthTriage AI",
+      "shortDescription": "NLP symptom checker for community health workers.",
+      "fullDescription": "Natural Language Processing model trained on African health data to assist community health workers with patient triage. Supports English, Swahili, and French inputs.",
+      "useCase": "Enables community health workers in rural areas to perform preliminary patient assessments and prioritize cases for clinic referral.",
+      "technicalRequirements": "Python 3.8+, PyTorch, 8GB RAM recommended",
+      "sector": "healthcare",
+      "country": "NG",
+      "githubUrl": "https://github.com/ai4startups/health-triage-ai",
+      "hackathonId": "hack-lagos-2025"
+    },
+    {
+      "id": "model-003",
+      "name": "FinCheck Credit Scorer",
+      "shortDescription": "Alternative credit scoring using mobile money patterns.",
+      "fullDescription": "Credit scoring model that analyzes mobile money transaction patterns to provide credit scores for individuals without traditional banking history. Designed for financial inclusion.",
+      "useCase": "Microfinance institutions can assess creditworthiness of unbanked populations using mobile money data.",
+      "technicalRequirements": "Python 3.9+, scikit-learn, pandas",
+      "sector": "fintech",
+      "country": "GH",
+      "githubUrl": "https://github.com/ai4startups/fincheck-credit",
+      "hackathonId": "hack-accra-2025"
+    },
+    {
+      "id": "model-004",
+      "name": "EduMatch Tutor",
+      "shortDescription": "Adaptive learning system matching students to content.",
+      "fullDescription": "Recommendation engine that matches students to educational content based on learning style, pace, and knowledge gaps. Optimized for low-bandwidth environments.",
+      "useCase": "EdTech platforms can personalize learning paths for students in resource-constrained settings.",
+      "technicalRequirements": "Python 3.8+, TensorFlow Lite, works offline",
+      "sector": "education",
+      "country": "RW",
+      "githubUrl": "https://github.com/ai4startups/edumatch-tutor",
+      "hackathonId": "hack-kigali-2025"
+    },
+    {
+      "id": "model-005",
+      "name": "WaterSense Monitor",
+      "shortDescription": "IoT water quality prediction from sensor data.",
+      "fullDescription": "Predictive model for water quality assessment using IoT sensor data. Detects contamination risks and predicts maintenance needs for water infrastructure.",
+      "useCase": "Municipal water authorities can proactively address water quality issues before they affect communities.",
+      "technicalRequirements": "Python 3.9+, TensorFlow, compatible with Arduino sensors",
+      "sector": "environment",
+      "country": "SN",
+      "githubUrl": "https://github.com/ai4startups/watersense-monitor",
+      "hackathonId": "hack-dakar-2025"
+    },
+    {
+      "id": "model-006",
+      "name": "LogiRoute Optimizer",
+      "shortDescription": "Last-mile delivery route optimization for African cities.",
+      "fullDescription": "Route optimization algorithm designed for the unique challenges of African urban logistics: informal addresses, traffic patterns, and road conditions.",
+      "useCase": "Delivery companies can reduce fuel costs and delivery times in cities with complex road networks.",
+      "technicalRequirements": "Python 3.8+, OR-Tools, OpenStreetMap data",
+      "sector": "logistics",
+      "country": "NG",
+      "githubUrl": "https://github.com/ai4startups/logiroute-optimizer",
+      "hackathonId": "hack-lagos-2025"
+    },
+    {
+      "id": "model-007",
+      "name": "CropDoc Vision",
+      "shortDescription": "Computer vision for plant disease detection.",
+      "fullDescription": "Image classification model that identifies crop diseases from smartphone photos. Trained on African crop varieties including cassava, maize, and beans.",
+      "useCase": "Farmers can diagnose plant diseases early by taking photos with their smartphones.",
+      "technicalRequirements": "Python 3.8+, TensorFlow Lite, mobile-optimized",
+      "sector": "agriculture",
+      "country": "KE",
+      "githubUrl": "https://github.com/ai4startups/cropdoc-vision",
+      "hackathonId": "hack-nairobi-2025"
+    },
+    {
+      "id": "model-008",
+      "name": "MalariaScreen AI",
+      "shortDescription": "Automated malaria detection from blood smear images.",
+      "fullDescription": "Deep learning model for detecting malaria parasites in microscope blood smear images. Achieves 95% accuracy comparable to expert microscopists.",
+      "useCase": "Rural clinics can perform rapid malaria screening without specialist staff.",
+      "technicalRequirements": "Python 3.9+, PyTorch, GPU recommended for training",
+      "sector": "healthcare",
+      "country": "GH",
+      "githubUrl": "https://github.com/ai4startups/malariascreen-ai",
+      "hackathonId": "hack-accra-2025"
+    },
+    {
+      "id": "model-009",
+      "name": "AgriPrice Forecast",
+      "shortDescription": "Market price prediction for agricultural commodities.",
+      "fullDescription": "Time series forecasting model for agricultural commodity prices in African markets. Helps farmers decide optimal selling times.",
+      "useCase": "Farmers and traders can make informed decisions about when to sell crops based on price predictions.",
+      "technicalRequirements": "Python 3.8+, Prophet, pandas",
+      "sector": "agriculture",
+      "country": "NG",
+      "githubUrl": "https://github.com/ai4startups/agriprice-forecast",
+      "hackathonId": "hack-lagos-2025"
+    },
+    {
+      "id": "model-010",
+      "name": "InsureTech Risk",
+      "shortDescription": "Micro-insurance risk assessment for smallholder farmers.",
+      "fullDescription": "Risk assessment model for agricultural micro-insurance products. Uses satellite imagery and weather data to assess crop insurance risks.",
+      "useCase": "Insurance providers can offer affordable crop insurance to smallholder farmers.",
+      "technicalRequirements": "Python 3.9+, scikit-learn, satellite imagery APIs",
+      "sector": "fintech",
+      "country": "RW",
+      "githubUrl": "https://github.com/ai4startups/insuretech-risk",
+      "hackathonId": "hack-kigali-2025"
+    },
+    {
+      "id": "model-011",
+      "name": "LanguageLearn NLP",
+      "shortDescription": "Local language learning assistant with speech recognition.",
+      "fullDescription": "NLP model supporting African language learning with speech recognition for Swahili, Yoruba, and Amharic.",
+      "useCase": "Language learning apps can offer courses in African languages with pronunciation feedback.",
+      "technicalRequirements": "Python 3.8+, Whisper, supports offline mode",
+      "sector": "education",
+      "country": "KE",
+      "githubUrl": "https://github.com/ai4startups/languagelearn-nlp",
+      "hackathonId": "hack-nairobi-2025"
+    },
+    {
+      "id": "model-012",
+      "name": "SolarPredict Energy",
+      "shortDescription": "Solar energy output forecasting for mini-grids.",
+      "fullDescription": "Forecasting model for solar energy production in off-grid installations. Helps optimize battery storage and load management.",
+      "useCase": "Mini-grid operators can better manage energy distribution and storage.",
+      "technicalRequirements": "Python 3.9+, TensorFlow, weather API integration",
+      "sector": "environment",
+      "country": "SN",
+      "githubUrl": "https://github.com/ai4startups/solarpredict-energy",
+      "hackathonId": "hack-dakar-2025"
+    },
+    {
+      "id": "model-013",
+      "name": "TrafficFlow Predict",
+      "shortDescription": "Urban traffic prediction for African megacities.",
+      "fullDescription": "Traffic flow prediction model trained on data from Lagos, Nairobi, and Cairo. Accounts for informal transport and unpredictable patterns.",
+      "useCase": "City planners and navigation apps can provide better routing in African cities.",
+      "technicalRequirements": "Python 3.8+, PyTorch, real-time data feeds",
+      "sector": "logistics",
+      "country": "EG",
+      "githubUrl": "https://github.com/ai4startups/trafficflow-predict",
+      "hackathonId": "hack-cairo-2025"
+    },
+    {
+      "id": "model-014",
+      "name": "FraudGuard Mobile",
+      "shortDescription": "Mobile money fraud detection system.",
+      "fullDescription": "Real-time fraud detection for mobile money transactions. Identifies suspicious patterns while minimizing false positives.",
+      "useCase": "Mobile money operators can protect users from fraudulent transactions.",
+      "technicalRequirements": "Python 3.9+, scikit-learn, streaming data support",
+      "sector": "fintech",
+      "country": "KE",
+      "githubUrl": "https://github.com/ai4startups/fraudguard-mobile",
+      "hackathonId": "hack-nairobi-2025"
+    },
+    {
+      "id": "model-015",
+      "name": "MaternalHealth Monitor",
+      "shortDescription": "Risk prediction for maternal health complications.",
+      "fullDescription": "Predictive model for identifying high-risk pregnancies in low-resource settings. Uses basic health metrics available at rural clinics.",
+      "useCase": "Community health workers can identify high-risk pregnancies for specialist referral.",
+      "technicalRequirements": "Python 3.8+, scikit-learn, mobile-friendly",
+      "sector": "healthcare",
+      "country": "RW",
+      "githubUrl": "https://github.com/ai4startups/maternalhealth-monitor",
+      "hackathonId": "hack-kigali-2025"
+    },
+    {
+      "id": "model-016",
+      "name": "LivestockHealth Vision",
+      "shortDescription": "Computer vision for livestock disease detection.",
+      "fullDescription": "Image-based disease detection for cattle and poultry. Identifies common diseases from photos of animals.",
+      "useCase": "Pastoralists and farmers can get early warnings about livestock health issues.",
+      "technicalRequirements": "Python 3.8+, TensorFlow Lite, mobile-optimized",
+      "sector": "agriculture",
+      "country": "SN",
+      "githubUrl": "https://github.com/ai4startups/livestockhealth-vision",
+      "hackathonId": "hack-dakar-2025"
+    },
+    {
+      "id": "model-017",
+      "name": "JobMatch Africa",
+      "shortDescription": "Skills-based job matching for informal sector workers.",
+      "fullDescription": "Job recommendation system that matches workers to opportunities based on skills rather than formal credentials.",
+      "useCase": "Job platforms can better serve workers in the informal economy.",
+      "technicalRequirements": "Python 3.9+, sentence-transformers, PostgreSQL",
+      "sector": "education",
+      "country": "ZA",
+      "githubUrl": "https://github.com/ai4startups/jobmatch-africa",
+      "hackathonId": "hack-johannesburg-2025"
+    },
+    {
+      "id": "model-018",
+      "name": "AirQuality Predict",
+      "shortDescription": "Air quality forecasting for urban areas.",
+      "fullDescription": "Air quality prediction model for African cities. Forecasts pollution levels to help vulnerable populations plan outdoor activities.",
+      "useCase": "Health apps can warn users about poor air quality days.",
+      "technicalRequirements": "Python 3.8+, XGBoost, sensor data integration",
+      "sector": "environment",
+      "country": "EG",
+      "githubUrl": "https://github.com/ai4startups/airquality-predict",
+      "hackathonId": "hack-cairo-2025"
+    },
+    {
+      "id": "model-019",
+      "name": "InventoryAI Retail",
+      "shortDescription": "Inventory optimization for small retailers.",
+      "fullDescription": "Demand forecasting and inventory optimization for small retail shops. Works with limited historical data.",
+      "useCase": "Small shop owners can reduce stockouts and overstock situations.",
+      "technicalRequirements": "Python 3.8+, Prophet, minimal data requirements",
+      "sector": "logistics",
+      "country": "MA",
+      "githubUrl": "https://github.com/ai4startups/inventoryai-retail",
+      "hackathonId": "hack-casablanca-2025"
+    },
+    {
+      "id": "model-020",
+      "name": "RemitPredict Flow",
+      "shortDescription": "Remittance flow prediction for financial planning.",
+      "fullDescription": "Predicts remittance inflows at household and regional levels. Helps families and businesses plan for expected transfers.",
+      "useCase": "Financial service providers can offer products timed with remittance cycles.",
+      "technicalRequirements": "Python 3.9+, statsmodels, time series data",
+      "sector": "fintech",
+      "country": "SN",
+      "githubUrl": "https://github.com/ai4startups/remitpredict-flow",
+      "hackathonId": "hack-dakar-2025"
+    },
+    {
+      "id": "model-021",
+      "name": "DroughtEarly Warning",
+      "shortDescription": "Early warning system for drought conditions.",
+      "fullDescription": "Satellite-based drought prediction model. Provides 2-3 month advance warning for agricultural planning.",
+      "useCase": "Governments and NGOs can prepare drought response before conditions worsen.",
+      "technicalRequirements": "Python 3.9+, TensorFlow, satellite imagery APIs",
+      "sector": "environment",
+      "country": "KE",
+      "githubUrl": "https://github.com/ai4startups/droughtearly-warning",
+      "hackathonId": "hack-nairobi-2025"
+    },
+    {
+      "id": "model-022",
+      "name": "SchoolDrop Predictor",
+      "shortDescription": "Early warning for student dropout risk.",
+      "fullDescription": "Identifies students at risk of dropping out based on attendance patterns, grades, and socioeconomic indicators.",
+      "useCase": "Schools can intervene early with at-risk students.",
+      "technicalRequirements": "Python 3.8+, scikit-learn, privacy-preserving",
+      "sector": "education",
+      "country": "ZA",
+      "githubUrl": "https://github.com/ai4startups/schooldrop-predictor",
+      "hackathonId": "hack-johannesburg-2025"
+    },
+    {
+      "id": "model-023",
+      "name": "TBScreen Radiology",
+      "shortDescription": "Automated TB detection from chest X-rays.",
+      "fullDescription": "Deep learning model for tuberculosis screening from chest X-ray images. Designed for high-volume screening programs.",
+      "useCase": "TB screening programs can process more patients with limited radiologist availability.",
+      "technicalRequirements": "Python 3.9+, PyTorch, DICOM support",
+      "sector": "healthcare",
+      "country": "ZA",
+      "githubUrl": "https://github.com/ai4startups/tbscreen-radiology",
+      "hackathonId": "hack-johannesburg-2025"
+    },
+    {
+      "id": "model-024",
+      "name": "MarketConnect Match",
+      "shortDescription": "Connecting smallholder farmers to buyers.",
+      "fullDescription": "Matching algorithm connecting smallholder farmers with buyers based on produce type, quality, quantity, and location.",
+      "useCase": "Agricultural marketplaces can efficiently match supply with demand.",
+      "technicalRequirements": "Python 3.8+, geospatial libraries, real-time matching",
+      "sector": "agriculture",
+      "country": "GH",
+      "githubUrl": "https://github.com/ai4startups/marketconnect-match",
+      "hackathonId": "hack-accra-2025"
+    }
+  ],
+  "studies": [
+    {
+      "id": "study-001",
+      "title": "AI Readiness in African Startups",
+      "description": "Comprehensive survey of AI adoption barriers and opportunities across 8 African countries.",
+      "partner": "Briter",
+      "partnerLogo": "/logos/briter.svg",
+      "pdfUrl": "/documents/ai-readiness-africa-2025.pdf",
+      "publishedDate": "2025-06-15",
+      "keyFindings": ["72% of startups lack access to quality training data", "Cost of cloud computing is top barrier", "Healthcare and agriculture show highest AI potential"]
+    },
+    {
+      "id": "study-002",
+      "title": "Data Governance Frameworks for African AI",
+      "description": "Analysis of data protection regulations and their impact on AI development across the continent.",
+      "partner": "Briter",
+      "partnerLogo": "/logos/briter.svg",
+      "pdfUrl": "/documents/data-governance-africa-2025.pdf",
+      "publishedDate": "2025-08-20",
+      "keyFindings": ["Only 28 African countries have data protection laws", "Cross-border data flows remain challenging", "GDPR-style regulations emerging in key markets"]
+    },
+    {
+      "id": "study-003",
+      "title": "Women in African AI: Landscape Analysis",
+      "description": "Survey of women founders and practitioners in the African AI ecosystem.",
+      "partner": "Data354",
+      "partnerLogo": "/logos/data354.svg",
+      "pdfUrl": "/documents/women-african-ai-2025.pdf",
+      "publishedDate": "2025-10-05",
+      "keyFindings": ["Women represent 22% of AI practitioners in surveyed countries", "Funding gap persists for women-led AI startups", "Mentorship programs show positive impact"]
+    },
+    {
+      "id": "study-004",
+      "title": "Open Source AI Models: Impact Assessment",
+      "description": "Evaluation of the adoption and impact of open-source AI models released through the program.",
+      "partner": "Digital Africa",
+      "partnerLogo": "/logos/digital-africa.svg",
+      "pdfUrl": "/documents/opensource-impact-2026.pdf",
+      "publishedDate": "2026-01-10",
+      "keyFindings": ["24 models released with 15,000+ GitHub stars combined", "AgriYield Predictor most downloaded model", "Models adopted by 50+ African startups"]
+    }
+  ],
+  "bestPractices": [
+    {
+      "id": "bp-001",
+      "title": "Nairobi Hackathon Best Practices",
+      "hackathonId": "hack-nairobi-2025",
+      "hackathonName": "Nairobi AI for Agriculture",
+      "pdfUrl": "/documents/bp-nairobi-2025.pdf",
+      "highlights": ["Data collection partnerships with KALRO", "Mobile-first model deployment", "Farmer feedback integration"]
+    },
+    {
+      "id": "bp-002",
+      "title": "Lagos Hackathon Best Practices",
+      "hackathonId": "hack-lagos-2025",
+      "hackathonName": "Lagos AI for Health & Logistics",
+      "pdfUrl": "/documents/bp-lagos-2025.pdf",
+      "highlights": ["Hospital data anonymization protocols", "Low-bandwidth optimization techniques", "Cross-sector collaboration models"]
+    },
+    {
+      "id": "bp-003",
+      "title": "Accra Hackathon Best Practices",
+      "hackathonId": "hack-accra-2025",
+      "hackathonName": "Accra AI for Financial Inclusion",
+      "pdfUrl": "/documents/bp-accra-2025.pdf",
+      "highlights": ["Mobile money data partnerships", "Bias testing for credit models", "Regulatory sandbox approach"]
+    }
+  ],
+  "finalReport": {
+    "title": "AI4Startups Program Final Report",
+    "description": "Comprehensive report on the AI4Startups initiative outcomes, learnings, and recommendations for future programs.",
+    "pdfUrl": "/documents/ai4startups-final-report-2026.pdf",
+    "publishedDate": "2026-02-28",
+    "pages": 120
+  }
+}

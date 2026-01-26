@@ -1,0 +1,123 @@
+{
+  "_meta": {
+    "models": {
+      "hero": "The hero section content including title, subtitle, and call-to-action button.",
+      "kpis": "Key Performance Indicators showing program impact as animated counters.",
+      "featuredModels": "A selection of AI models highlighted in the Toolbox preview section.",
+      "sectionPreviews": "Preview cards for other sections of the site with thumbnails and descriptions."
+    },
+    "relationships": [
+      "KPIs link to relevant sections when clicked (e.g., AI Models KPI links to Toolbox)",
+      "Featured Models are a subset of all AIModel entities from the Toolbox",
+      "Section Previews link to their corresponding section pages"
+    ]
+  },
+  "hero": {
+    "title": "AI4Startups",
+    "subtitle": "Empowering African startups with open-source AI models, hackathons, and ecosystem support",
+    "ctaText": "Explore the Toolbox",
+    "ctaLink": "/toolbox",
+    "secondaryCtaText": "View Hackathons",
+    "secondaryCtaLink": "/hackathons"
+  },
+  "kpis": [
+    {
+      "id": "kpi-models",
+      "label": "AI Models",
+      "value": 24,
+      "suffix": "",
+      "description": "Open-source models developed",
+      "link": "/toolbox",
+      "icon": "brain"
+    },
+    {
+      "id": "kpi-hackathons",
+      "label": "Hackathons",
+      "value": 6,
+      "suffix": "",
+      "description": "Events organized across Africa",
+      "link": "/hackathons",
+      "icon": "trophy"
+    },
+    {
+      "id": "kpi-countries",
+      "label": "Countries",
+      "value": 8,
+      "suffix": "",
+      "description": "African nations participating",
+      "link": "/ecosystem",
+      "icon": "globe"
+    },
+    {
+      "id": "kpi-participants",
+      "label": "Participants",
+      "value": 500,
+      "suffix": "+",
+      "description": "Developers and entrepreneurs engaged",
+      "link": "/ecosystem",
+      "icon": "users"
+    }
+  ],
+  "featuredModels": [
+    {
+      "id": "model-agri-yield",
+      "name": "AgriYield Predictor",
+      "description": "Machine learning model for predicting crop yields based on weather patterns and soil data across Sub-Saharan Africa.",
+      "sector": "Agriculture",
+      "githubUrl": "https://github.com/ai4startups/agri-yield-predictor",
+      "hackathonId": "hack-nairobi-2025"
+    },
+    {
+      "id": "model-health-triage",
+      "name": "HealthTriage AI",
+      "description": "NLP-based symptom checker trained on African health data to assist community health workers with patient triage.",
+      "sector": "Healthcare",
+      "githubUrl": "https://github.com/ai4startups/health-triage-ai",
+      "hackathonId": "hack-lagos-2025"
+    },
+    {
+      "id": "model-fincheck",
+      "name": "FinCheck Credit Scorer",
+      "description": "Alternative credit scoring model using mobile money transaction patterns for financial inclusion.",
+      "sector": "FinTech",
+      "githubUrl": "https://github.com/ai4startups/fincheck-credit",
+      "hackathonId": "hack-accra-2025"
+    }
+  ],
+  "sectionPreviews": [
+    {
+      "id": "preview-hackathons",
+      "title": "Hackathons",
+      "description": "Discover our hackathon series across 8 African countries, challenge briefs, and winning solutions.",
+      "imageUrl": "/images/hackathon-preview.jpg",
+      "link": "/hackathons",
+      "stats": "6 events, 500+ participants"
+    },
+    {
+      "id": "preview-ecosystem",
+      "title": "Ecosystem Activities",
+      "description": "Explore networking events, research studies, and our Women Founders support program.",
+      "imageUrl": "/images/ecosystem-preview.jpg",
+      "link": "/ecosystem",
+      "stats": "15+ activities, 8 countries"
+    },
+    {
+      "id": "preview-partners",
+      "title": "Partners",
+      "description": "Meet the Team Europe partners and service providers making AI4Startups possible.",
+      "imageUrl": "/images/partners-preview.jpg",
+      "link": "/partners",
+      "stats": "EU funded, 5+ partners"
+    }
+  ],
+  "countries": [
+    { "name": "Kenya", "code": "KE", "coordinates": [-1.286389, 36.817223] },
+    { "name": "Nigeria", "code": "NG", "coordinates": [9.082, 8.6753] },
+    { "name": "Ghana", "code": "GH", "coordinates": [5.6037, -0.187] },
+    { "name": "Senegal", "code": "SN", "coordinates": [14.6928, -17.4467] },
+    { "name": "Rwanda", "code": "RW", "coordinates": [-1.9403, 29.8739] },
+    { "name": "South Africa", "code": "ZA", "coordinates": [-30.5595, 22.9375] },
+    { "name": "Egypt", "code": "EG", "coordinates": [26.8206, 30.8025] },
+    { "name": "Morocco", "code": "MA", "coordinates": [31.7917, -7.0926] }
+  ]
+}
