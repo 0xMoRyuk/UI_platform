@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ui-platform/gtm/event.schema.json",
+  "title": "Analytics Event",
+  "description": "Schema for analytics events following the event taxonomy",
+  "type": "object",
+  "required": ["name", "app_id", "brand_id", "low_data_mode"],
+  "properties": {
+    "name": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(_[a-z0-9]+)*$",
+      "maxLength": 40,
+      "description": "Event name following {category}_{action}_{qualifier} pattern. Lowercase snake_case only."
+    },
+    "app_id": {
+      "type": "string",
+      "enum": ["web", "ai4su", "designOS_sandbox"],
+      "description": "Application identifier"
+    },
+    "brand_id": {
+      "type": "string",
+      "enum": ["default", "eu-d4d"],
+      "default": "default",
+      "description": "Brand theme identifier"
+    },
+    "low_data_mode": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether Low Data Mode is active"
+    },
+    "session_id": {
+      "type": "string",
+      "description": "Session identifier"
+    },
+    "client_id": {
+      "type": "string",
+      "description": "Persistent client identifier"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Event timestamp in ISO 8601 format"
+    },
+    "page_path": {
+      "type": "string",
+      "description": "Current page path"
+    },
+    "page_title": {
+      "type": "string",
+      "description": "Current page title"
+    },
+    "properties": {
+      "type": "object",
+      "description": "Additional event-specific properties",
+      "additionalProperties": true
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "low_data_mode": { "const": true }
+        }
+      },
+      "then": {
+        "properties": {
+          "name": {
+            "enum": ["page_view", "error", "consent_update"],
+            "description": "In Low Data Mode, only core events are allowed"
+          }
+        }
+      }
+    }
+  ]
+}

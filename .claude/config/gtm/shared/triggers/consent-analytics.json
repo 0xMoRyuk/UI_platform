@@ -1,0 +1,39 @@
+{
+  "name": "Consent - Analytics Granted",
+  "type": "customEvent",
+  "customEventFilter": [
+    {
+      "type": "equals",
+      "parameter": [
+        {
+          "key": "arg0",
+          "type": "template",
+          "value": "{{_event}}"
+        },
+        {
+          "key": "arg1",
+          "type": "template",
+          "value": ".*"
+        }
+      ]
+    }
+  ],
+  "filter": [
+    {
+      "type": "equals",
+      "parameter": [
+        {
+          "key": "arg0",
+          "type": "template",
+          "value": "{{consent_state_analytics}}"
+        },
+        {
+          "key": "arg1",
+          "type": "template",
+          "value": "granted"
+        }
+      ]
+    }
+  ],
+  "notes": "Fires only when analytics consent has been granted. This is a required trigger for all GA4 event tags."
+}

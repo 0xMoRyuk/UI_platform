@@ -1,0 +1,39 @@
+{
+  "name": "Consent - Marketing Granted",
+  "type": "customEvent",
+  "customEventFilter": [
+    {
+      "type": "equals",
+      "parameter": [
+        {
+          "key": "arg0",
+          "type": "template",
+          "value": "{{_event}}"
+        },
+        {
+          "key": "arg1",
+          "type": "template",
+          "value": ".*"
+        }
+      ]
+    }
+  ],
+  "filter": [
+    {
+      "type": "equals",
+      "parameter": [
+        {
+          "key": "arg0",
+          "type": "template",
+          "value": "{{consent_state_marketing}}"
+        },
+        {
+          "key": "arg1",
+          "type": "template",
+          "value": "granted"
+        }
+      ]
+    }
+  ],
+  "notes": "Fires only when marketing consent has been granted. Reserved for future marketing tags."
+}

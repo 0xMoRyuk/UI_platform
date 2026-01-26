@@ -1,0 +1,48 @@
+{
+  "variables": [
+    {
+      "name": "consent_state_analytics",
+      "type": "v",
+      "parameter": [
+        {
+          "key": "name",
+          "type": "template",
+          "value": "consent.analytics"
+        },
+        {
+          "key": "dataLayerVersion",
+          "type": "integer",
+          "value": "2"
+        },
+        {
+          "key": "defaultValue",
+          "type": "template",
+          "value": "denied"
+        }
+      ],
+      "notes": "Analytics consent state. Default is denied (no tracking without consent)."
+    },
+    {
+      "name": "consent_state_marketing",
+      "type": "v",
+      "parameter": [
+        {
+          "key": "name",
+          "type": "template",
+          "value": "consent.marketing"
+        },
+        {
+          "key": "dataLayerVersion",
+          "type": "integer",
+          "value": "2"
+        },
+        {
+          "key": "defaultValue",
+          "type": "template",
+          "value": "denied"
+        }
+      ],
+      "notes": "Marketing consent state. Default is denied."
+    }
+  ]
+}

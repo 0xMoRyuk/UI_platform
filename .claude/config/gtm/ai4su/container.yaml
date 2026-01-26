@@ -1,0 +1,9 @@
+version: "1.0.0"
+app_id: ai4su
+container_id: "${GTM_CONTAINER_ID_AI4SU}"
+measurement_id: "${GA4_MEASUREMENT_ID_AI4SU}"
+last_synced: null
+
+sgtm:
+  service_name: sgtm-ai4su
+  endpoint: "${SGTM_ENDPOINT_AI4SU}"

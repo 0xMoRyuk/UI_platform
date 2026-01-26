@@ -1,0 +1,12 @@
+{
+  "name": "measurement_id",
+  "type": "c",
+  "parameter": [
+    {
+      "key": "value",
+      "type": "template",
+      "value": "${GA4_MEASUREMENT_ID_AI4SU}"
+    }
+  ],
+  "notes": "GA4 Measurement ID for AI4SU app. Environment variable substitution at deploy time."
+}

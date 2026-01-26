@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ui-platform/gtm/dimension.schema.json",
+  "title": "Custom Dimension",
+  "description": "Schema for custom dimensions sent with analytics events",
+  "type": "object",
+  "definitions": {
+    "requiredDimensions": {
+      "type": "object",
+      "required": ["app_id", "brand_id", "low_data_mode", "session_id", "client_id"],
+      "properties": {
+        "app_id": {
+          "type": "string",
+          "enum": ["web", "ai4su", "designOS_sandbox"],
+          "description": "Which app sent the event"
+        },
+        "brand_id": {
+          "type": "string",
+          "enum": ["default", "eu-d4d"],
+          "description": "Active brand theme"
+        },
+        "low_data_mode": {
+          "type": "boolean",
+          "description": "Whether Low Data Mode is active"
+        },
+        "session_id": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Session identifier"
+        },
+        "client_id": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Persistent client identifier"
+        }
+      }
+    },
+    "optionalDimensions": {
+      "type": "object",
+      "properties": {
+        "page_path": {
+          "type": "string",
+          "description": "Current page path"
+        },
+        "page_title": {
+          "type": "string",
+          "description": "Current page title"
+        },
+        "referrer": {
+          "type": "string",
+          "format": "uri",
+          "description": "Referrer URL"
+        },
+        "user_agent": {
+          "type": "string",
+          "description": "User agent string (for server-side enrichment)"
+        },
+        "ip_address": {
+          "type": "string",
+          "description": "IP address (for server-side geo lookup, not stored)"
+        }
+      }
+    }
+  },
+  "allOf": [
+    { "$ref": "#/definitions/requiredDimensions" },
+    { "$ref": "#/definitions/optionalDimensions" }
+  ],
+  "additionalProperties": false
+}

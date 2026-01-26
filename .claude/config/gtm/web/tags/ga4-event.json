@@ -1,0 +1,25 @@
+{
+  "name": "GA4 - Web App Events",
+  "type": "gaawc",
+  "parameter": [
+    {
+      "key": "measurementId",
+      "type": "template",
+      "value": "{{measurement_id}}"
+    },
+    {
+      "key": "sendPageView",
+      "type": "boolean",
+      "value": "false"
+    },
+    {
+      "key": "enableSendToServerContainer",
+      "type": "boolean",
+      "value": "true"
+    }
+  ],
+  "firingTriggerId": ["consent_analytics_granted"],
+  "blockingTriggerId": ["low_data_mode_extended_blocked"],
+  "tagFiringOption": "oncePerEvent",
+  "notes": "GA4 event tag for web app. Fires only with analytics consent and respects Low Data Mode."
+}

@@ -1,0 +1,99 @@
+{
+  "variables": [
+    {
+      "name": "app_id",
+      "type": "v",
+      "parameter": [
+        {
+          "key": "name",
+          "type": "template",
+          "value": "app_id"
+        },
+        {
+          "key": "dataLayerVersion",
+          "type": "integer",
+          "value": "2"
+        }
+      ],
+      "notes": "Identifies which app sent the event (web, ai4su, designOS_sandbox). Required dimension."
+    },
+    {
+      "name": "brand_id",
+      "type": "v",
+      "parameter": [
+        {
+          "key": "name",
+          "type": "template",
+          "value": "brand_id"
+        },
+        {
+          "key": "dataLayerVersion",
+          "type": "integer",
+          "value": "2"
+        },
+        {
+          "key": "defaultValue",
+          "type": "template",
+          "value": "default"
+        }
+      ],
+      "notes": "Active brand theme (default, eu-d4d). Required dimension."
+    },
+    {
+      "name": "low_data_mode",
+      "type": "v",
+      "parameter": [
+        {
+          "key": "name",
+          "type": "template",
+          "value": "low_data_mode"
+        },
+        {
+          "key": "dataLayerVersion",
+          "type": "integer",
+          "value": "2"
+        },
+        {
+          "key": "defaultValue",
+          "type": "template",
+          "value": "false"
+        }
+      ],
+      "notes": "Boolean indicating if Low Data Mode is active. Required dimension."
+    },
+    {
+      "name": "session_id",
+      "type": "v",
+      "parameter": [
+        {
+          "key": "name",
+          "type": "template",
+          "value": "session_id"
+        },
+        {
+          "key": "dataLayerVersion",
+          "type": "integer",
+          "value": "2"
+        }
+      ],
+      "notes": "Session identifier. Required dimension."
+    },
+    {
+      "name": "client_id",
+      "type": "v",
+      "parameter": [
+        {
+          "key": "name",
+          "type": "template",
+          "value": "client_id"
+        },
+        {
+          "key": "dataLayerVersion",
+          "type": "integer",
+          "value": "2"
+        }
+      ],
+      "notes": "Persistent client identifier. Required dimension."
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+version: "1.0.0"
+app_id: designOS_sandbox
+container_id: "${GTM_CONTAINER_ID_SANDBOX}"
+measurement_id: "${GA4_MEASUREMENT_ID_SANDBOX}"
+last_synced: null
+
+sgtm:
+  service_name: sgtm-sandbox
+  endpoint: "${SGTM_ENDPOINT_SANDBOX}"

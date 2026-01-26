@@ -1,0 +1,39 @@
+{
+  "name": "Low Data Mode - Block Extended Events",
+  "type": "customEvent",
+  "customEventFilter": [
+    {
+      "type": "matchRegex",
+      "parameter": [
+        {
+          "key": "arg0",
+          "type": "template",
+          "value": "{{_event}}"
+        },
+        {
+          "key": "arg1",
+          "type": "template",
+          "value": "^(performance|user_interaction|session_start)$"
+        }
+      ]
+    }
+  ],
+  "filter": [
+    {
+      "type": "equals",
+      "parameter": [
+        {
+          "key": "arg0",
+          "type": "template",
+          "value": "{{low_data_mode}}"
+        },
+        {
+          "key": "arg1",
+          "type": "template",
+          "value": "true"
+        }
+      ]
+    }
+  ],
+  "notes": "Blocking trigger for extended events when Low Data Mode is enabled. Core events (page_view, error, consent_update) are not affected."
+}
