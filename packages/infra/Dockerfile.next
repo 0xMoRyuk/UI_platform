@@ -1,0 +1,71 @@
+# Multi-stage Dockerfile for Next.js apps on Cloud Run
+ARG APP_NAME=web
+
+# Stage 1: Dependencies
+FROM node:20-alpine AS deps
+WORKDIR /app
+
+# Copy root config
+COPY package.json bun.lock* ./
+
+# Copy packages
+COPY packages/ui packages/ui
+COPY packages/config packages/config
+COPY packages/types packages/types
+COPY packages/utils packages/utils
+
+# Copy app
+ARG APP_NAME
+COPY apps/${APP_NAME} apps/${APP_NAME}
+
+# Install dependencies with npm (more reliable in Docker than bun for Next.js)
+RUN npm install --legacy-peer-deps
+
+# Stage 2: Builder
+FROM node:20-alpine AS builder
+WORKDIR /app
+
+COPY --from=deps /app/node_modules ./node_modules
+COPY --from=deps /app/packages ./packages
+COPY --from=deps /app/apps ./apps
+COPY package.json ./
+
+ARG APP_NAME
+WORKDIR /app/apps/${APP_NAME}
+
+# Set Next.js to output standalone
+ENV NEXT_TELEMETRY_DISABLED=1
+
+# Build the app
+RUN npm run build
+
+# Stage 3: Runner
+FROM node:20-alpine AS runner
+WORKDIR /app
+
+ENV NODE_ENV=production
+ENV NEXT_TELEMETRY_DISABLED=1
+
+# Create non-root user
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 nextjs
+
+ARG APP_NAME
+
+# Copy built assets from standalone output
+# Next.js standalone copies the entire monorepo structure
+COPY --from=builder /app/apps/${APP_NAME}/.next/standalone ./
+COPY --from=builder /app/apps/${APP_NAME}/.next/static ./apps/${APP_NAME}/.next/static
+COPY --from=builder /app/apps/${APP_NAME}/public ./apps/${APP_NAME}/public
+
+# Store app name for startup
+RUN echo "${APP_NAME}" > /app/APP_NAME
+
+USER nextjs
+
+EXPOSE 8080
+ENV PORT=8080
+ENV HOSTNAME="0.0.0.0"
+
+# Start the server using shell to read app name
+CMD sh -c "node apps/$(cat /app/APP_NAME)/server.js"

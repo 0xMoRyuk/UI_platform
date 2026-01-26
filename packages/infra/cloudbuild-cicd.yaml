@@ -72,13 +72,23 @@ steps:
         VERSION=$(cat /workspace/VERSION)
         # Lowercase the service name for Docker (required)
         SERVICE_LOWER=$(echo "${_SERVICE_NAME}" | tr '[:upper:]' '[:lower:]')
+
+        # Detect app type (Next.js or Vite) from package.json
+        if grep -q '"next"' apps/${_APP_NAME}/package.json 2>/dev/null; then
+          DOCKERFILE="packages/infra/Dockerfile.next"
+          echo "Detected Next.js app, using Dockerfile.next"
+        else
+          DOCKERFILE="packages/infra/Dockerfile.vite"
+          echo "Detected Vite app, using Dockerfile.vite"
+        fi
+
         echo "Building Docker image for ${_APP_NAME}..."
         docker build \
           -t gcr.io/$PROJECT_ID/$$SERVICE_LOWER:$$VERSION \
           -t gcr.io/$PROJECT_ID/$$SERVICE_LOWER:${_ENV} \
           -t gcr.io/$PROJECT_ID/$$SERVICE_LOWER:latest \
           --build-arg APP_NAME=${_APP_NAME} \
-          -f packages/infra/Dockerfile.vite \
+          -f $$DOCKERFILE \
           .
         echo "Pushing images..."
         docker push gcr.io/$PROJECT_ID/$$SERVICE_LOWER:$$VERSION
