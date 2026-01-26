@@ -51,7 +51,7 @@ steps:
       - '-c'
       - |
         echo "📦 Installing dependencies..."
-        bun install --frozen-lockfile
+        bun install
 
         echo "🔍 Running type-check..."
         bun run type-check
@@ -70,18 +70,22 @@ steps:
       - '-c'
       - |
         VERSION=$(cat /workspace/VERSION)
+        # Lowercase the service name for Docker (required)
+        SERVICE_LOWER=$(echo "${_SERVICE_NAME}" | tr '[:upper:]' '[:lower:]')
         echo "Building Docker image for ${_APP_NAME}..."
         docker build \
-          -t gcr.io/$PROJECT_ID/${_SERVICE_NAME}:$$VERSION \
-          -t gcr.io/$PROJECT_ID/${_SERVICE_NAME}:${_ENV} \
-          -t gcr.io/$PROJECT_ID/${_SERVICE_NAME}:latest \
+          -t gcr.io/$PROJECT_ID/$$SERVICE_LOWER:$$VERSION \
+          -t gcr.io/$PROJECT_ID/$$SERVICE_LOWER:${_ENV} \
+          -t gcr.io/$PROJECT_ID/$$SERVICE_LOWER:latest \
           --build-arg APP_NAME=${_APP_NAME} \
           -f packages/infra/Dockerfile.vite \
           .
         echo "Pushing images..."
-        docker push gcr.io/$PROJECT_ID/${_SERVICE_NAME}:$$VERSION
-        docker push gcr.io/$PROJECT_ID/${_SERVICE_NAME}:${_ENV}
-        docker push gcr.io/$PROJECT_ID/${_SERVICE_NAME}:latest
+        docker push gcr.io/$PROJECT_ID/$$SERVICE_LOWER:$$VERSION
+        docker push gcr.io/$PROJECT_ID/$$SERVICE_LOWER:${_ENV}
+        docker push gcr.io/$PROJECT_ID/$$SERVICE_LOWER:latest
+        # Store for deploy step
+        echo "$$SERVICE_LOWER" > /workspace/SERVICE_LOWER
     waitFor: ['validate']
 
   # Step 3: Deploy to Cloud Run
@@ -92,14 +96,15 @@ steps:
       - '-c'
       - |
         VERSION=$(cat /workspace/VERSION)
+        SERVICE_LOWER=$(cat /workspace/SERVICE_LOWER)
 
         echo "🚀 Deploying ${_APP_NAME} to ${_ENV}..."
         echo "   Version: $$VERSION"
-        echo "   Service: ${_SERVICE_NAME}"
+        echo "   Service: $$SERVICE_LOWER"
         echo "   Region: ${_REGION}"
 
-        gcloud run deploy ${_SERVICE_NAME} \
-          --image=gcr.io/$PROJECT_ID/${_SERVICE_NAME}:$$VERSION \
+        gcloud run deploy $$SERVICE_LOWER \
+          --image=gcr.io/$PROJECT_ID/$$SERVICE_LOWER:$$VERSION \
           --platform=managed \
           --region=${_REGION} \
           --allow-unauthenticated \
@@ -114,7 +119,7 @@ steps:
 
         # Route all traffic to latest revision
         echo "📊 Routing traffic to latest revision..."
-        gcloud run services update-traffic ${_SERVICE_NAME} \
+        gcloud run services update-traffic $$SERVICE_LOWER \
           --region=${_REGION} \
           --to-latest \
           --quiet
@@ -122,13 +127,13 @@ steps:
         echo "✅ Deployment complete!"
 
         # Get service URL
-        SERVICE_URL=$(gcloud run services describe ${_SERVICE_NAME} \
+        SERVICE_URL=$(gcloud run services describe $$SERVICE_LOWER \
           --region=${_REGION} \
           --format='value(status.url)')
 
         echo ""
         echo "🌐 Service URL: $$SERVICE_URL"
-        echo "📦 Image: gcr.io/$PROJECT_ID/${_SERVICE_NAME}:$$VERSION"
+        echo "📦 Image: gcr.io/$PROJECT_ID/$$SERVICE_LOWER:$$VERSION"
         echo "🏷️  Version: $$VERSION"
     waitFor: ['build']
 
@@ -139,7 +144,8 @@ steps:
     args:
       - '-c'
       - |
-        SERVICE_URL=$(gcloud run services describe ${_SERVICE_NAME} \
+        SERVICE_LOWER=$(cat /workspace/SERVICE_LOWER)
+        SERVICE_URL=$(gcloud run services describe $$SERVICE_LOWER \
           --region=${_REGION} \
           --format='value(status.url)')
 
