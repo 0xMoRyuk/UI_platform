@@ -53,13 +53,10 @@ RUN adduser --system --uid 1001 nextjs
 ARG APP_NAME
 
 # Copy built assets from standalone output
-# Next.js standalone copies the entire monorepo structure
+# Next.js standalone puts server.js at root, with monorepo structure inside
 COPY --from=builder /app/apps/${APP_NAME}/.next/standalone ./
 COPY --from=builder /app/apps/${APP_NAME}/.next/static ./apps/${APP_NAME}/.next/static
 COPY --from=builder /app/apps/${APP_NAME}/public ./apps/${APP_NAME}/public
-
-# Store app name for startup
-RUN echo "${APP_NAME}" > /app/APP_NAME
 
 USER nextjs
 
@@ -67,5 +64,5 @@ EXPOSE 8080
 ENV PORT=8080
 ENV HOSTNAME="0.0.0.0"
 
-# Start the server using shell to read app name
-CMD sh -c "node apps/$(cat /app/APP_NAME)/server.js"
+# Next.js standalone server.js is at root of standalone output
+CMD ["node", "server.js"]
