@@ -17,10 +17,12 @@ COPY packages/utils packages/utils
 ARG APP_NAME
 COPY apps/${APP_NAME} apps/${APP_NAME}
 
-# Install and build
+# Install dependencies
 RUN bun install 2>&1 || bun install --no-save
+
+# Build the app (run vite build directly to avoid workspace script resolution)
 WORKDIR /app/apps/${APP_NAME}
-RUN bun run build 2>&1 || echo "Build completed"
+RUN bunx vite build
 
 # Production stage - nginx for static SPA
 FROM nginx:alpine AS runner
