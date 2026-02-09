@@ -50,7 +50,7 @@ cd ../..
 # Build and deploy using Cloud Build
 gcloud builds submit \
   --project="$PROJECT_ID" \
-  --config=packages/infra/cloudbuild.yaml \
+  --config=packages/infra/cloudbuild-cicd.yaml \
   --substitutions=_APP_NAME="$APP_NAME",_SERVICE_NAME="$SERVICE_NAME",_REGION="$REGION",_TAG="$TAG"
 
 echo ""

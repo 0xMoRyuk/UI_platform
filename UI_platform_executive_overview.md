@@ -31,7 +31,7 @@ UI_platform/
 | Layer | Technology | Purpose |
 |-------|------------|---------|
 | **Monorepo** | Bun workspaces | Native dependency management |
-| **Framework** | Next.js 15 (App Router) | Server-side rendering, routing |
+| **Framework** | Next.js 15 / React 18 (web), Vite / React 19 (ai4su, designOS_sandbox) | SSR (web), SPA (ai4su, designOS_sandbox) |
 | **Language** | TypeScript | Type safety |
 | **Styling** | Tailwind CSS | Utility-first CSS |
 | **Components** | shadcn/ui | Accessible, customizable UI |
@@ -72,7 +72,7 @@ Push code to `main` branch → automatic deployment to production.
 flowchart LR
     A[Git Push<br/>main] --> B[Cloud Build<br/>Trigger]
     B --> C[Tests<br/>type/lint]
-    C --> D[Docker Build<br/>Kaniko]
+    C --> D[Docker Build]
     D --> E[Cloud Run<br/>Deploy]
     E --> F[Smoke Tests<br/>health]
 ```
@@ -81,7 +81,7 @@ flowchart LR
 
 | Step | Duration | What Happens |
 |------|----------|--------------|
-| **1. Tests** | ~1-2 min | TypeScript type checking, ESLint |
+| **1. Tests** | ~1-2 min | TypeScript type checking (lint disabled, TODO to re-enable) |
 | **2. Build** | ~3-5 min | Docker image with layer caching |
 | **3. Deploy** | ~1-2 min | Cloud Run deployment with version tag |
 | **4. Verify** | ~30 sec | Smoke tests confirm deployment |

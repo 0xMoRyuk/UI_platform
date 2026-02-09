@@ -10,7 +10,8 @@
 
 | File | Purpose |
 |------|---------|
-| `packages/infra/Dockerfile` | Container build |
+| `packages/infra/Dockerfile.next` | Next.js container build |
+| `packages/infra/Dockerfile.vite` | Vite container build |
 | `packages/infra/cloudbuild-cicd.yaml` | Cloud Build config |
 | `packages/infra/triggers/production.yaml` | Trigger config |
 

@@ -11,7 +11,7 @@
 # Branch patterns: main (production), staging/* (staging)
 
 substitutions:
-  _APP_NAME: 'ai4su'
+  _APP_NAME: 'ai4su'  # Default to ai4su (most actively developed); override with --substitutions=_APP_NAME=web
   _SERVICE_NAME: 'ui-platform-${_APP_NAME}'
   _REGION: 'europe-west1'
   _ENV: 'production'  # or 'staging'
@@ -27,7 +27,6 @@ options:
   diskSizeGb: 100
   logging: CLOUD_LOGGING_ONLY
 
-  # Use Kaniko for Docker builds (faster, cached)
   substitution_option: 'ALLOW_LOOSE'
 
 steps:

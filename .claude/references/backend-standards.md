@@ -96,3 +96,25 @@ Avoid verbose logging on high-traffic endpoints.
 - No hardcoded secrets
 - All secrets must come from **Secret Manager**
 - Public endpoints must be rate-limited and validated
+
+---
+
+# Design OS / Agent OS Integration
+
+## Agent OS
+
+If using Agent OS, follow the structure:
+
+- `standards/` — Non-negotiable rules (performance, UX, APIs). Standards override specs.
+- `product/` — Vision, constraints, priorities
+- `specs/` — Feature-level implementation details
+
+## Design OS
+
+Every screen must define:
+
+- Data budget
+- Loading/error/offline states
+- API contract
+
+Design decisions must be defensible in terms of cost and UX.

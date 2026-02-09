@@ -68,9 +68,8 @@ git push origin staging/feature   # → Staging deployment
 ```
 
 **Pipeline features:**
-- ✅ Automated testing (type check, lint) before deployment
-- 🐳 Optimized builds with Kaniko caching (24h TTL)
-- 🎯 Canary deployments (10% → 100% traffic)
+- ✅ Automated testing (type check) before deployment (lint disabled, TODO to re-enable)
+- 🐳 Docker builds via `gcr.io/cloud-builders/docker`
 - 🏷️ Version tagging with rollback capability
 - 🔍 Smoke tests after deployment
 - 💰 Cost-optimized (scale-to-zero, right-sized resources)
@@ -111,13 +110,9 @@ bunx shadcn@latest add button
 ```
 UI_platform/
 ├── apps/                       # Independent applications
-│   └── web/                    # First app (Next.js)
-│       ├── app/                # Next.js App Router
-│       ├── components/         # App-specific components
-│       ├── features/           # App-specific features
-│       ├── package.json        # App dependencies
-│       ├── tsconfig.json       # Extends shared config
-│       └── tailwind.config.ts  # Extends shared config
+│   ├── web/                    # Next.js 15 / React 18
+│   ├── ai4su/                  # Vite / React 19
+│   └── designOS_sandbox/       # Vite / React 19 sandbox
 ├── packages/                   # Shared code
 │   ├── ui/                     # Shared UI components
 │   │   ├── src/components/     # shadcn/ui components
@@ -128,8 +123,9 @@ UI_platform/
 │   ├── types/                  # Shared TypeScript types
 │   ├── utils/                  # Shared utilities
 │   └── infra/                  # Infrastructure code
-│       ├── Dockerfile          # Multi-stage build
-│       ├── cloudbuild.yaml     # Cloud Build config
+│       ├── Dockerfile.next      # Next.js multi-stage build
+│       ├── Dockerfile.vite      # Vite multi-stage build
+│       ├── cloudbuild-cicd.yaml # Cloud Build CI/CD config
 │       └── scripts/            # Deployment scripts
 ├── package.json                # Workspace root
 ├── CLAUDE.md                   # This file
