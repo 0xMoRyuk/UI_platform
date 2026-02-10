@@ -12,7 +12,7 @@ Generate a React component from a Figma frame selection, reusing existing shadcn
 
 1. **Read selection** — Call `get_design_context` on the current Figma selection to get the frame's structure, styles, and layout
 
-2. **Resolve existing components** — Call `get_code_connect_map` to check which Figma components in the frame already have code implementations. Reuse these instead of generating new code.
+2. **Resolve existing components** — Check `.figma/design-system-rules.md` for the component library inventory (Section 2). Match Figma layer names against the 14 shadcn/ui primitives and 6 app components listed there. Reuse existing components instead of generating new code.
 
 3. **Generate component** — Create a React + TypeScript component that:
    - Reuses existing shadcn/ui components from `@/components/ui/`
