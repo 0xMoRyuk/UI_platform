@@ -1,101 +1,68 @@
 /**
- * Design system loading utilities for colors and typography
+ * Design system loading utilities
+ * Sources tokens from @ui-platform/ui BrandConfig (single source of truth)
+ *
+ * Previously loaded from product/design-system/*.json files.
+ * Now reads directly from BrandConfig to enable Figma MCP sync pipeline.
  */
 
+import { euD4DBrand } from '@ui-platform/ui'
 import type { DesignSystem, ColorTokens, TypographyTokens } from '@/types/product'
 
-// Load JSON files from product/design-system at build time
-const designSystemFiles = import.meta.glob('/product/design-system/*.json', {
-  eager: true,
-}) as Record<string, { default: Record<string, string> }>
-
 /**
- * Load color tokens from colors.json
- *
- * Expected format:
- * {
- *   "primary": "lime",
- *   "secondary": "teal",
- *   "neutral": "stone"
- * }
+ * Load color tokens from BrandConfig
  */
-export function loadColorTokens(): ColorTokens | null {
-  const colorsModule = designSystemFiles['/product/design-system/colors.json']
-  if (!colorsModule?.default) return null
-
-  const colors = colorsModule.default
-  if (!colors.primary || !colors.secondary || !colors.neutral) {
-    return null
-  }
-
+export function loadColorTokens(): ColorTokens {
+  const { colors } = euD4DBrand
   return {
-    primary: colors.primary,
-    secondary: colors.secondary,
-    neutral: colors.neutral,
+    primary: { hex: colors.primary.hex, hsl: colors.primary.hsl },
+    secondary: { hex: colors.secondary.hex, hsl: colors.secondary.hsl },
+    accent: { hex: colors.accent.hex, hsl: colors.accent.hsl },
+    neutral: { hex: colors.neutral.hex, hsl: colors.neutral.hsl },
+    highlight: { hex: colors.highlight.hex, hsl: colors.highlight.hsl },
   }
 }
 
 /**
- * Load typography tokens from typography.json
- *
- * Expected format:
- * {
- *   "heading": "DM Sans",
- *   "body": "DM Sans",
- *   "mono": "IBM Plex Mono"
- * }
+ * Load typography tokens from BrandConfig
  */
-export function loadTypographyTokens(): TypographyTokens | null {
-  const typographyModule = designSystemFiles['/product/design-system/typography.json']
-  if (!typographyModule?.default) return null
-
-  const typography = typographyModule.default
-  if (!typography.heading || !typography.body) {
-    return null
-  }
-
+export function loadTypographyTokens(): TypographyTokens {
+  const { typography } = euD4DBrand
   return {
-    heading: typography.heading,
-    body: typography.body,
-    mono: typography.mono || 'IBM Plex Mono',
+    heading: typography.font.family[0],
+    body: typography.font.family[0],
+    mono: 'JetBrains Mono',
+    weights: typography.weights,
   }
 }
 
 /**
- * Load the complete design system
+ * Load the complete design system from BrandConfig
  */
-export function loadDesignSystem(): DesignSystem | null {
-  const colors = loadColorTokens()
-  const typography = loadTypographyTokens()
-
-  // Return null if neither colors nor typography are defined
-  if (!colors && !typography) {
-    return null
+export function loadDesignSystem(): DesignSystem {
+  return {
+    colors: loadColorTokens(),
+    typography: loadTypographyTokens(),
   }
-
-  return { colors, typography }
 }
 
 /**
- * Check if design system has been defined (at least colors or typography)
+ * Design system is always available via BrandConfig
  */
 export function hasDesignSystem(): boolean {
-  return (
-    '/product/design-system/colors.json' in designSystemFiles ||
-    '/product/design-system/typography.json' in designSystemFiles
-  )
+  return true
 }
 
 /**
- * Check if colors have been defined
+ * Colors are always available via BrandConfig
  */
 export function hasColors(): boolean {
-  return '/product/design-system/colors.json' in designSystemFiles
+  return true
 }
 
 /**
- * Check if typography has been defined
+ * Typography is always available via BrandConfig
  */
 export function hasTypography(): boolean {
-  return '/product/design-system/typography.json' in designSystemFiles
+  return true
 }

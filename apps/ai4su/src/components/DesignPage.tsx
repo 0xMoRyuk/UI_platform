@@ -8,32 +8,6 @@ import { NextPhaseButton } from '@/components/NextPhaseButton'
 import { loadProductData } from '@/lib/product-loader'
 import { ChevronRight, Layout } from 'lucide-react'
 
-// Map Tailwind color names to actual color values for preview
-const colorMap: Record<string, { light: string; base: string; dark: string }> = {
-  red: { light: '#fca5a5', base: '#ef4444', dark: '#dc2626' },
-  orange: { light: '#fdba74', base: '#f97316', dark: '#ea580c' },
-  amber: { light: '#fcd34d', base: '#f59e0b', dark: '#d97706' },
-  yellow: { light: '#fde047', base: '#eab308', dark: '#ca8a04' },
-  lime: { light: '#bef264', base: '#84cc16', dark: '#65a30d' },
-  green: { light: '#86efac', base: '#22c55e', dark: '#16a34a' },
-  emerald: { light: '#6ee7b7', base: '#10b981', dark: '#059669' },
-  teal: { light: '#5eead4', base: '#14b8a6', dark: '#0d9488' },
-  cyan: { light: '#67e8f9', base: '#06b6d4', dark: '#0891b2' },
-  sky: { light: '#7dd3fc', base: '#0ea5e9', dark: '#0284c7' },
-  blue: { light: '#93c5fd', base: '#3b82f6', dark: '#2563eb' },
-  indigo: { light: '#a5b4fc', base: '#6366f1', dark: '#4f46e5' },
-  violet: { light: '#c4b5fd', base: '#8b5cf6', dark: '#7c3aed' },
-  purple: { light: '#d8b4fe', base: '#a855f7', dark: '#9333ea' },
-  fuchsia: { light: '#f0abfc', base: '#d946ef', dark: '#c026d3' },
-  pink: { light: '#f9a8d4', base: '#ec4899', dark: '#db2777' },
-  rose: { light: '#fda4af', base: '#f43f5e', dark: '#e11d48' },
-  slate: { light: '#cbd5e1', base: '#64748b', dark: '#475569' },
-  gray: { light: '#d1d5db', base: '#6b7280', dark: '#4b5563' },
-  zinc: { light: '#d4d4d8', base: '#71717a', dark: '#52525b' },
-  neutral: { light: '#d4d4d4', base: '#737373', dark: '#525252' },
-  stone: { light: '#d6d3d1', base: '#78716c', dark: '#57534e' },
-}
-
 /**
  * Determine the status of each step on the Design page
  * Steps: 1. Design Tokens, 2. Shell Design
@@ -105,18 +79,26 @@ export function DesignPage() {
                     <h4 className="text-sm font-medium text-stone-500 dark:text-stone-400 uppercase tracking-wide mb-4">
                       Colors
                     </h4>
-                    <div className="grid grid-cols-3 gap-6">
+                    <div className="grid grid-cols-5 gap-4">
                       <ColorSwatch
                         label="Primary"
-                        colorName={designSystem.colors.primary}
+                        hex={designSystem.colors.primary.hex}
                       />
                       <ColorSwatch
                         label="Secondary"
-                        colorName={designSystem.colors.secondary}
+                        hex={designSystem.colors.secondary.hex}
+                      />
+                      <ColorSwatch
+                        label="Accent"
+                        hex={designSystem.colors.accent.hex}
                       />
                       <ColorSwatch
                         label="Neutral"
-                        colorName={designSystem.colors.neutral}
+                        hex={designSystem.colors.neutral.hex}
+                      />
+                      <ColorSwatch
+                        label="Highlight"
+                        hex={designSystem.colors.highlight.hex}
                       />
                     </div>
                   </div>
@@ -148,13 +130,23 @@ export function DesignPage() {
                         </p>
                       </div>
                     </div>
+                    <div className="mt-4 flex gap-6">
+                      {Object.entries(designSystem.typography.weights).map(([name, weight]) => (
+                        <div key={name}>
+                          <p className="text-xs text-stone-500 dark:text-stone-400 mb-1 capitalize">{name}</p>
+                          <p className="text-stone-900 dark:text-stone-100" style={{ fontWeight: weight }}>
+                            {weight}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 )}
 
                 {/* Edit hint */}
                 <div className="bg-stone-100 dark:bg-stone-800 rounded-md px-4 py-2.5">
                   <p className="text-xs text-stone-500 dark:text-stone-400">
-                    Run <code className="font-mono text-stone-700 dark:text-stone-300">/design-tokens</code> to update
+                    Run <code className="font-mono text-stone-700 dark:text-stone-300">/figma-sync-tokens</code> to sync from Figma
                   </p>
                 </div>
               </CardContent>
@@ -252,33 +244,19 @@ export function DesignPage() {
 
 interface ColorSwatchProps {
   label: string
-  colorName: string
+  hex: string
 }
 
-function ColorSwatch({ label, colorName }: ColorSwatchProps) {
-  const colors = colorMap[colorName] || colorMap.stone
-
+function ColorSwatch({ label, hex }: ColorSwatchProps) {
   return (
     <div>
-      <div className="flex gap-0.5 mb-2">
-        <div
-          className="flex-1 h-14 rounded-l-md"
-          style={{ backgroundColor: colors.light }}
-          title={`${colorName}-300`}
-        />
-        <div
-          className="flex-[2] h-14"
-          style={{ backgroundColor: colors.base }}
-          title={`${colorName}-500`}
-        />
-        <div
-          className="flex-1 h-14 rounded-r-md"
-          style={{ backgroundColor: colors.dark }}
-          title={`${colorName}-600`}
-        />
-      </div>
+      <div
+        className="h-14 rounded-md mb-2"
+        style={{ backgroundColor: hex }}
+        title={hex}
+      />
       <p className="text-sm font-medium text-stone-900 dark:text-stone-100">{label}</p>
-      <p className="text-xs text-stone-500 dark:text-stone-400">{colorName}</p>
+      <p className="text-xs text-stone-500 dark:text-stone-400 font-mono">{hex}</p>
     </div>
   )
 }

@@ -68,3 +68,4 @@
 | Backend standards | `.claude/references/backend-standards.md` |
 | Quick commands | `.claude/references/quick-reference.md` |
 | Analytics | `standards/analytics.md` |
+| Design system rules | `.figma/design-system-rules.md` |

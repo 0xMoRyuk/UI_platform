@@ -11,9 +11,11 @@
     "build": "bun --filter='./apps/*' run build",
     "lint": "bun --filter='./apps/*' run lint",
     "type-check": "bun --filter='./apps/*' run type-check",
-    "clean": "rm -rf node_modules apps/*/node_modules packages/*/node_modules apps/*/.next"
+    "clean": "rm -rf node_modules apps/*/node_modules packages/*/node_modules apps/*/.next",
+    "prepare": "husky"
   },
   "devDependencies": {
+    "husky": "^9.1.7",
     "typescript": "^5.7.2"
   }
 }

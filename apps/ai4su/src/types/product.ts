@@ -48,19 +48,32 @@ export interface DataModel {
 }
 
 // =============================================================================
-// Design System
+// Design System (sourced from @ui-platform/ui BrandConfig)
 // =============================================================================
 
+export interface ColorTokenEntry {
+  hex: string
+  hsl: string
+}
+
 export interface ColorTokens {
-  primary: string
-  secondary: string
-  neutral: string
+  primary: ColorTokenEntry
+  secondary: ColorTokenEntry
+  accent: ColorTokenEntry
+  neutral: ColorTokenEntry
+  highlight: ColorTokenEntry
 }
 
 export interface TypographyTokens {
   heading: string
   body: string
   mono: string
+  weights: {
+    regular: number
+    medium: number
+    semibold: number
+    bold: number
+  }
 }
 
 export interface DesignSystem {
