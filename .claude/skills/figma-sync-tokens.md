@@ -30,6 +30,8 @@ Sync design tokens from Figma variables to BrandConfig TypeScript files.
    | `Typography/Font URL` | `typography.font.url` | Google Fonts URL |
    | `Typography/Weights/*` | `typography.weights` | `{ regular, medium, semibold, bold }` |
 
+   **Collection scope**: Only the `Brand` collection is synced. `Semantic` variables are shadcn/ui tokens managed in CSS — skip them.
+
 3. **Update target file** — Write changes to `packages/ui/src/tokens/brands/eu-d4d.ts` (or the brand file matching the current Figma variable collection)
 
 4. **Report diff** — Show a summary of what changed:
@@ -60,6 +62,8 @@ After updating tokens:
 1. Run `bunx tsc --noEmit` in the affected app to verify type correctness
 2. Verify the `BrandConfig` interface is satisfied (all required fields present)
 3. Report any missing variable mappings (Figma variables that don't map to BrandConfig fields)
+4. Log info message for unmapped variables (spacing, radius) instead of errors
+5. Warn if `get_variable_defs` returns fewer than 20 Brand variables (expected: 20 color + 6 typography = 26 total)
 
 ## Example
 

@@ -33,6 +33,31 @@ Generate a React component from a Figma frame selection, reusing existing shadcn
 
 5. **Update exports** — If the component is a UI primitive, check if a barrel export exists and update it
 
+## Component Library
+
+| Component | File | Package |
+|-----------|------|---------|
+| Avatar | `components/ui/avatar.tsx` | shadcn/ui |
+| Badge | `components/ui/badge.tsx` | shadcn/ui |
+| Button | `components/ui/button.tsx` | shadcn/ui |
+| Card | `components/ui/card.tsx` | shadcn/ui |
+| Collapsible | `components/ui/collapsible.tsx` | shadcn/ui |
+| Dialog | `components/ui/dialog.tsx` | shadcn/ui |
+| DropdownMenu | `components/ui/dropdown-menu.tsx` | shadcn/ui |
+| Input | `components/ui/input.tsx` | shadcn/ui |
+| Label | `components/ui/label.tsx` | shadcn/ui |
+| Separator | `components/ui/separator.tsx` | shadcn/ui |
+| Sheet | `components/ui/sheet.tsx` | shadcn/ui |
+| Skeleton | `components/ui/skeleton.tsx` | shadcn/ui |
+| Table | `components/ui/table.tsx` | shadcn/ui |
+| Tabs | `components/ui/tabs.tsx` | shadcn/ui |
+| AppShell | `shell/components/AppShell.tsx` | App |
+| EmptyState | `components/EmptyState.tsx` | App |
+| Footer | `shell/components/Footer.tsx` | App |
+| Header | `shell/components/Header.tsx` | App |
+| HeroSection | `sections/home/components/HeroSection.tsx` | App |
+| StepIndicator | `components/StepIndicator.tsx` | App |
+
 ## Generation Rules
 
 - **Always** import from `@/components/ui/` for shadcn/ui primitives
@@ -91,7 +116,7 @@ If layout fidelity is important:
 User: /figma-gen-component
 Claude: Reading Figma selection...
   Frame: "UserProfileCard" (480x320)
-  Detected components: Avatar, Badge, Button (all mapped via Code Connect)
+  Detected components: Avatar, Badge, Button (from @/components/ui/)
 
   Generating apps/ai4su/src/components/UserProfileCard.tsx...
 
