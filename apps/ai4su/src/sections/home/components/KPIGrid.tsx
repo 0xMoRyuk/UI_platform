@@ -63,10 +63,10 @@ function KPICard({ kpi, index, isVisible, onClick }: KPICardProps) {
   const Icon = iconMap[kpi.icon]
 
   const colorVariants = [
-    { bg: 'bg-[#003399]', text: 'text-white', accent: 'text-[#F5CE2A]', border: 'border-[#003399]' },
-    { bg: 'bg-[#9BB1DC]', text: 'text-[#003399]', accent: 'text-[#003399]', border: 'border-[#9BB1DC]' },
-    { bg: 'bg-[#F5CE2A]', text: 'text-[#003399]', accent: 'text-[#003399]', border: 'border-[#F5CE2A]' },
-    { bg: 'bg-[#DBD2CC]', text: 'text-[#003399]', accent: 'text-[#003399]', border: 'border-[#DBD2CC]' },
+    { bg: 'bg-brand-primary', text: 'text-brand-primary-foreground', accent: 'text-brand-accent', border: 'border-brand-primary' },
+    { bg: 'bg-brand-secondary', text: 'text-brand-secondary-foreground', accent: 'text-brand-secondary-foreground', border: 'border-brand-secondary' },
+    { bg: 'bg-brand-accent', text: 'text-brand-accent-foreground', accent: 'text-brand-accent-foreground', border: 'border-brand-accent' },
+    { bg: 'bg-brand-neutral', text: 'text-brand-neutral-foreground', accent: 'text-brand-neutral-foreground', border: 'border-brand-neutral' },
   ]
 
   const colors = colorVariants[index % colorVariants.length]
@@ -149,7 +149,7 @@ export function KPIGrid({ kpis, onKpiClick }: KPIGridProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section header */}
         <div className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl font-bold text-[#003399] dark:text-white mb-4 font-[Barlow]">
+          <h2 className="text-3xl sm:text-4xl font-bold text-brand-primary dark:text-white mb-4 font-[Barlow]">
             Program Impact
           </h2>
           <p className="text-lg text-stone-600 dark:text-stone-400 max-w-2xl mx-auto">

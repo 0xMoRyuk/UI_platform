@@ -132,7 +132,7 @@ export function ActivityMap({
             >
               <Popup>
                 <div className="min-w-[200px]">
-                  <h3 className="font-bold text-[#003399] text-base mb-1">
+                  <h3 className="font-bold text-brand-primary text-base mb-1">
                     {location.city}, {location.country}
                   </h3>
                   <p className="text-sm text-stone-600 mb-2">

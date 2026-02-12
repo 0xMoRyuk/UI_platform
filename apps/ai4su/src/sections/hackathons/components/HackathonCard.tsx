@@ -1,4 +1,5 @@
 import { Calendar, Users, Brain, ArrowRight } from 'lucide-react'
+import { Badge } from '@ui-platform/ui/components/badge'
 import type { HackathonCardProps } from '@/../product/sections/hackathons/types'
 
 const countryFlags: Record<string, string> = {
@@ -26,45 +27,45 @@ export function HackathonCard({ hackathon, onClick }: HackathonCardProps) {
       onClick={onClick}
       className="group relative bg-white dark:bg-stone-900 rounded-2xl overflow-hidden text-left
                  border border-stone-200 dark:border-stone-800
-                 hover:border-[#003399] dark:hover:border-[#9BB1DC]
+                 hover:border-brand-primary dark:hover:border-brand-secondary
                  hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
     >
       {/* Hero image placeholder */}
-      <div className="relative h-48 bg-gradient-to-br from-[#003399] to-[#001133] overflow-hidden">
+      <div className="relative h-48 bg-gradient-to-br from-brand-primary to-brand-primary-darker overflow-hidden">
         {/* Decorative pattern */}
         <div className="absolute inset-0 opacity-20">
-          <div className="absolute top-0 right-0 w-32 h-32 rounded-full bg-[#F5CE2A] transform translate-x-8 -translate-y-8" />
-          <div className="absolute bottom-0 left-0 w-24 h-24 rounded-full bg-[#9BB1DC] transform -translate-x-6 translate-y-6" />
+          <div className="absolute top-0 right-0 w-32 h-32 rounded-full bg-brand-accent transform translate-x-8 -translate-y-8" />
+          <div className="absolute bottom-0 left-0 w-24 h-24 rounded-full bg-brand-secondary transform -translate-x-6 translate-y-6" />
         </div>
 
         {/* Country flag badge */}
-        <div className="absolute top-4 left-4 px-3 py-1.5 bg-white/90 dark:bg-stone-900/90 rounded-full flex items-center gap-2">
+        <Badge variant="secondary" className="absolute top-4 left-4 px-3 py-1.5 bg-white/90 dark:bg-stone-900/90 gap-2">
           <span className="text-lg">{countryFlags[hackathon.location.countryCode]}</span>
           <span className="text-xs font-medium text-stone-700 dark:text-stone-300">
             {hackathon.location.city}
           </span>
-        </div>
+        </Badge>
 
         {/* Models badge */}
-        <div className="absolute top-4 right-4 px-3 py-1.5 bg-[#F5CE2A] rounded-full flex items-center gap-1.5">
-          <Brain className="w-3.5 h-3.5 text-[#003399]" />
-          <span className="text-xs font-bold text-[#003399]">
+        <Badge className="absolute top-4 right-4 px-3 py-1.5 bg-brand-accent text-brand-accent-foreground gap-1.5">
+          <Brain className="w-3.5 h-3.5" />
+          <span className="text-xs font-bold">
             {hackathon.modelsProduced} models
           </span>
-        </div>
+        </Badge>
 
         {/* Theme badge */}
         <div className="absolute bottom-4 left-4 right-4">
-          <span className="inline-block px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-xs font-medium text-white">
+          <Badge variant="outline" className="bg-white/20 backdrop-blur-sm border-white/20 text-white">
             {hackathon.theme}
-          </span>
+          </Badge>
         </div>
       </div>
 
       {/* Content */}
       <div className="p-5">
         {/* Title */}
-        <h3 className="text-xl font-bold text-[#003399] dark:text-white font-[Barlow] mb-2 group-hover:text-[#F5CE2A] transition-colors">
+        <h3 className="text-xl font-bold text-brand-primary dark:text-white font-[Barlow] mb-2 group-hover:text-brand-accent transition-colors">
           {hackathon.name}
         </h3>
 
@@ -86,7 +87,7 @@ export function HackathonCard({ hackathon, onClick }: HackathonCardProps) {
         </div>
 
         {/* CTA */}
-        <div className="flex items-center gap-2 text-sm font-medium text-[#003399] dark:text-[#9BB1DC] group-hover:text-[#F5CE2A] transition-colors">
+        <div className="flex items-center gap-2 text-sm font-medium text-brand-primary dark:text-brand-secondary group-hover:text-brand-accent transition-colors">
           <span>View Details</span>
           <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
         </div>

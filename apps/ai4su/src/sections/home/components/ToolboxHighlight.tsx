@@ -23,7 +23,7 @@ function ModelCard({ model, onClick }: ModelCardProps) {
       onClick={onClick}
       className="group relative bg-white dark:bg-stone-900 rounded-2xl p-6 text-left
                  border border-stone-200 dark:border-stone-800
-                 hover:border-[#003399] dark:hover:border-[#9BB1DC]
+                 hover:border-brand-primary dark:hover:border-brand-secondary
                  hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
     >
       {/* Sector badge */}
@@ -32,7 +32,7 @@ function ModelCard({ model, onClick }: ModelCardProps) {
       </div>
 
       {/* Model name */}
-      <h3 className="text-lg font-bold text-[#003399] dark:text-white mb-2 font-[Barlow] group-hover:text-[#F5CE2A] transition-colors">
+      <h3 className="text-lg font-bold text-brand-primary dark:text-white mb-2 font-[Barlow] group-hover:text-brand-accent transition-colors">
         {model.name}
       </h3>
 
@@ -42,14 +42,14 @@ function ModelCard({ model, onClick }: ModelCardProps) {
       </p>
 
       {/* GitHub link indicator */}
-      <div className="flex items-center gap-2 text-sm text-stone-500 dark:text-stone-500 group-hover:text-[#003399] dark:group-hover:text-[#9BB1DC] transition-colors">
+      <div className="flex items-center gap-2 text-sm text-stone-500 dark:text-stone-500 group-hover:text-brand-primary dark:group-hover:text-brand-secondary transition-colors">
         <Github className="w-4 h-4" />
         <span>View on GitHub</span>
         <ArrowRight className="w-3 h-3 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
       </div>
 
       {/* Hover gradient overlay */}
-      <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-[#003399]/0 to-[#003399]/0 group-hover:from-[#003399]/5 group-hover:to-transparent transition-all duration-300 pointer-events-none" />
+      <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-brand-primary/0 to-brand-primary/0 group-hover:from-brand-primary/5 group-hover:to-transparent transition-all duration-300 pointer-events-none" />
     </button>
   )
 }
@@ -61,11 +61,11 @@ export function ToolboxHighlight({ featuredModels, onModelClick, onViewAllClick 
         {/* Section header */}
         <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-12">
           <div>
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#003399]/10 dark:bg-[#003399]/20 rounded-full text-sm font-medium text-[#003399] dark:text-[#9BB1DC] mb-4">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-brand-primary/10 dark:bg-brand-primary/20 rounded-full text-sm font-medium text-brand-primary dark:text-brand-secondary mb-4">
               <Boxes className="w-4 h-4" />
               <span>Open Source</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl font-bold text-[#003399] dark:text-white font-[Barlow]">
+            <h2 className="text-3xl sm:text-4xl font-bold text-brand-primary dark:text-white font-[Barlow]">
               AI Model Toolbox
             </h2>
             <p className="mt-4 text-lg text-stone-600 dark:text-stone-400 max-w-2xl">
@@ -75,8 +75,8 @@ export function ToolboxHighlight({ featuredModels, onModelClick, onViewAllClick 
 
           <button
             onClick={onViewAllClick}
-            className="group inline-flex items-center gap-2 px-6 py-3 bg-[#003399] text-white font-semibold rounded-lg
-                     hover:bg-[#002266] transition-colors shrink-0"
+            className="group inline-flex items-center gap-2 px-6 py-3 bg-brand-primary text-brand-primary-foreground font-semibold rounded-lg
+                     hover:bg-brand-primary-dark transition-colors shrink-0"
           >
             Explore Toolbox
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -103,7 +103,7 @@ export function ToolboxHighlight({ featuredModels, onModelClick, onViewAllClick 
             { value: '50+', label: 'Startups Using' },
           ].map((stat) => (
             <div key={stat.label} className="text-center">
-              <div className="text-2xl sm:text-3xl font-bold text-[#003399] dark:text-[#F5CE2A] font-[Barlow]">
+              <div className="text-2xl sm:text-3xl font-bold text-brand-primary dark:text-brand-accent font-[Barlow]">
                 {stat.value}
               </div>
               <div className="text-sm text-stone-500 dark:text-stone-400">

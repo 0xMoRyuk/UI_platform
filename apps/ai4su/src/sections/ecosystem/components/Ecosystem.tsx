@@ -92,7 +92,7 @@ export function Ecosystem({
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-8">
-            <h2 className="text-2xl font-bold text-[#003399] dark:text-white font-[Barlow] mb-2">
+            <h2 className="text-2xl font-bold text-brand-primary dark:text-white font-[Barlow] mb-2">
               All Activities
             </h2>
             <p className="text-stone-600 dark:text-stone-400">

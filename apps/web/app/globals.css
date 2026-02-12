@@ -92,6 +92,8 @@
     --brand-neutral-foreground: 0 0% 0%;     /* Black */
     --brand-highlight: 45 91% 56%;           /* #F5CE2A - Yellow (same as accent) */
     --brand-highlight-foreground: 0 0% 0%;
+    --brand-primary-dark: 220 100% 20%;    /* #002266 */
+    --brand-primary-darker: 220 100% 10%;  /* #001133 */
     --brand-font-family: "Barlow", Arial, system-ui, sans-serif;
   }
 

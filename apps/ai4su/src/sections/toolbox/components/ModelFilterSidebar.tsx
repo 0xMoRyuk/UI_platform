@@ -16,7 +16,7 @@ function FilterSection({ title, isOpen, onToggle, children }: FilterSectionProps
     <div className="border-b border-stone-200 dark:border-stone-700 last:border-b-0">
       <button
         onClick={onToggle}
-        className="w-full flex items-center justify-between py-4 text-left font-semibold text-[#003399] dark:text-white hover:text-[#002266] dark:hover:text-[#9BB1DC] transition-colors"
+        className="w-full flex items-center justify-between py-4 text-left font-semibold text-brand-primary dark:text-white hover:text-brand-primary-dark dark:hover:text-brand-secondary transition-colors"
       >
         <span>{title}</span>
         <ChevronDown className={`w-5 h-5 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} />
@@ -51,8 +51,8 @@ function Checkbox({ id, label, checked, onChange, color }: CheckboxProps) {
         <div className={`
           w-5 h-5 rounded border-2 transition-all duration-200
           ${checked
-            ? 'bg-[#003399] border-[#003399]'
-            : 'border-stone-300 dark:border-stone-600 group-hover:border-[#003399]'
+            ? 'bg-brand-primary border-brand-primary'
+            : 'border-stone-300 dark:border-stone-600 group-hover:border-brand-primary'
           }
         `}>
           {checked && (
@@ -69,7 +69,7 @@ function Checkbox({ id, label, checked, onChange, color }: CheckboxProps) {
             style={{ backgroundColor: color }}
           />
         )}
-        <span className="text-sm text-stone-700 dark:text-stone-300 group-hover:text-[#003399] dark:group-hover:text-white transition-colors">
+        <span className="text-sm text-stone-700 dark:text-stone-300 group-hover:text-brand-primary dark:group-hover:text-white transition-colors">
           {label}
         </span>
       </div>
@@ -111,14 +111,14 @@ export function ModelFilterSidebar({
       <div className="bg-white dark:bg-stone-900 rounded-xl border border-stone-200 dark:border-stone-800 p-4">
         {/* Header */}
         <div className="flex items-center justify-between mb-4 pb-4 border-b border-stone-200 dark:border-stone-700">
-          <div className="flex items-center gap-2 text-[#003399] dark:text-white font-semibold">
+          <div className="flex items-center gap-2 text-brand-primary dark:text-white font-semibold">
             <Filter className="w-5 h-5" />
             <span>Filters</span>
           </div>
           {hasActiveFilters && (
             <button
               onClick={onClearFilters}
-              className="text-xs text-stone-500 hover:text-[#003399] dark:hover:text-[#F5CE2A] transition-colors flex items-center gap-1"
+              className="text-xs text-stone-500 hover:text-brand-primary dark:hover:text-brand-accent transition-colors flex items-center gap-1"
             >
               <X className="w-3 h-3" />
               Clear all

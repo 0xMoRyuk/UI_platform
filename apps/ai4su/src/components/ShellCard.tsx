@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible'
+import { Card, CardContent, CardHeader, CardTitle } from '@ui-platform/ui/components/card'
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@ui-platform/ui/components/collapsible'
 import { ChevronDown, ChevronRight, PanelLeft, Layout } from 'lucide-react'
 import type { ShellInfo } from '@/types/product'
 

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardContent, CardHeader, CardTitle } from '@ui-platform/ui/components/card'
 import { ChevronRight, Layout } from 'lucide-react'
 import { EmptyState } from '@/components/EmptyState'
 import type { ScreenDesignInfo } from '@/types/section'

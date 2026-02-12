@@ -74,7 +74,7 @@ export function ModelDetailModal({ model, isOpen, onClose, onGitHubClick }: Mode
         className="bg-white dark:bg-stone-900 rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-hidden shadow-2xl"
       >
         {/* Header */}
-        <div className="relative bg-gradient-to-r from-[#003399] to-[#002266] text-white p-6">
+        <div className="relative bg-gradient-to-r from-brand-primary to-brand-primary-dark text-brand-primary-foreground p-6">
           <button
             onClick={onClose}
             className="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors"
@@ -99,7 +99,7 @@ export function ModelDetailModal({ model, isOpen, onClose, onGitHubClick }: Mode
         <div className="p-6 overflow-y-auto max-h-[calc(90vh-200px)]">
           {/* Description */}
           <div className="mb-6">
-            <div className="flex items-center gap-2 text-sm font-semibold text-[#003399] dark:text-[#9BB1DC] mb-2">
+            <div className="flex items-center gap-2 text-sm font-semibold text-brand-primary dark:text-brand-secondary mb-2">
               <FileText className="w-4 h-4" />
               <span>Description</span>
             </div>
@@ -110,7 +110,7 @@ export function ModelDetailModal({ model, isOpen, onClose, onGitHubClick }: Mode
 
           {/* Use Case */}
           <div className="mb-6">
-            <div className="flex items-center gap-2 text-sm font-semibold text-[#003399] dark:text-[#9BB1DC] mb-2">
+            <div className="flex items-center gap-2 text-sm font-semibold text-brand-primary dark:text-brand-secondary mb-2">
               <Target className="w-4 h-4" />
               <span>Use Case</span>
             </div>
@@ -121,7 +121,7 @@ export function ModelDetailModal({ model, isOpen, onClose, onGitHubClick }: Mode
 
           {/* Technical Requirements */}
           <div className="mb-6">
-            <div className="flex items-center gap-2 text-sm font-semibold text-[#003399] dark:text-[#9BB1DC] mb-2">
+            <div className="flex items-center gap-2 text-sm font-semibold text-brand-primary dark:text-brand-secondary mb-2">
               <Cpu className="w-4 h-4" />
               <span>Technical Requirements</span>
             </div>
@@ -133,13 +133,13 @@ export function ModelDetailModal({ model, isOpen, onClose, onGitHubClick }: Mode
           {/* Hackathon Link */}
           {model.hackathonId && (
             <div className="mb-6">
-              <div className="flex items-center gap-2 text-sm font-semibold text-[#003399] dark:text-[#9BB1DC] mb-2">
+              <div className="flex items-center gap-2 text-sm font-semibold text-brand-primary dark:text-brand-secondary mb-2">
                 <LinkIcon className="w-4 h-4" />
                 <span>Related Hackathon</span>
               </div>
               <a
                 href={`/hackathons/${model.hackathonId}`}
-                className="inline-flex items-center gap-2 text-[#003399] dark:text-[#9BB1DC] hover:underline"
+                className="inline-flex items-center gap-2 text-brand-primary dark:text-brand-secondary hover:underline"
               >
                 View hackathon details
                 <ExternalLink className="w-3 h-3" />
@@ -152,8 +152,8 @@ export function ModelDetailModal({ model, isOpen, onClose, onGitHubClick }: Mode
         <div className="border-t border-stone-200 dark:border-stone-700 p-6 bg-stone-50 dark:bg-stone-800/50">
           <button
             onClick={() => onGitHubClick(model.githubUrl)}
-            className="w-full inline-flex items-center justify-center gap-3 px-6 py-4 bg-[#003399] text-white font-semibold rounded-xl
-                     hover:bg-[#002266] transition-colors"
+            className="w-full inline-flex items-center justify-center gap-3 px-6 py-4 bg-brand-primary text-brand-primary-foreground font-semibold rounded-xl
+                     hover:bg-brand-primary-dark transition-colors"
           >
             <Github className="w-5 h-5" />
             <span>View on GitHub</span>

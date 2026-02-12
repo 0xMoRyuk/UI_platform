@@ -13,7 +13,7 @@ function StudyCard({ study, onDownload }: StudyCardProps) {
       <div className="bg-gradient-to-r from-stone-100 to-stone-50 dark:from-stone-800 dark:to-stone-850 p-4 flex items-center justify-between">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-lg bg-white dark:bg-stone-700 flex items-center justify-center shadow-sm">
-            <FileText className="w-5 h-5 text-[#003399]" />
+            <FileText className="w-5 h-5 text-brand-primary" />
           </div>
           <span className="text-sm font-medium text-stone-600 dark:text-stone-400">{study.partner}</span>
         </div>
@@ -24,7 +24,7 @@ function StudyCard({ study, onDownload }: StudyCardProps) {
 
       {/* Content */}
       <div className="p-5">
-        <h3 className="text-lg font-bold text-[#003399] dark:text-white mb-2 font-[Barlow] group-hover:text-[#F5CE2A] transition-colors">
+        <h3 className="text-lg font-bold text-brand-primary dark:text-white mb-2 font-[Barlow] group-hover:text-brand-accent transition-colors">
           {study.title}
         </h3>
         <p className="text-sm text-stone-600 dark:text-stone-400 mb-4 line-clamp-2">
@@ -49,8 +49,8 @@ function StudyCard({ study, onDownload }: StudyCardProps) {
         {/* Download button */}
         <button
           onClick={onDownload}
-          className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-[#003399]/10 dark:bg-[#003399]/20 text-[#003399] dark:text-[#9BB1DC] font-medium rounded-lg
-                   hover:bg-[#003399] hover:text-white transition-colors"
+          className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-brand-primary/10 dark:bg-brand-primary/20 text-brand-primary dark:text-brand-secondary font-medium rounded-lg
+                   hover:bg-brand-primary hover:text-brand-primary-foreground transition-colors"
         >
           <Download className="w-4 h-4" />
           Download PDF
@@ -64,7 +64,7 @@ export function StudiesSection({ studies, onDownload }: StudySectionProps) {
   return (
     <section className="py-12 border-t border-stone-200 dark:border-stone-800">
       <div className="mb-8">
-        <h2 className="text-2xl font-bold text-[#003399] dark:text-white font-[Barlow] mb-2">
+        <h2 className="text-2xl font-bold text-brand-primary dark:text-white font-[Barlow] mb-2">
           Research & Studies
         </h2>
         <p className="text-stone-600 dark:text-stone-400">

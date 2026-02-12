@@ -11,7 +11,7 @@ export function SocialLinksBar({ links, onSocialClick }: SocialLinksProps) {
             {links.hashtags.map((tag) => (
               <span
                 key={tag}
-                className="inline-flex items-center gap-1 px-3 py-1.5 bg-[#003399]/10 dark:bg-[#003399]/20 rounded-full text-sm font-medium text-[#003399] dark:text-[#9BB1DC]"
+                className="inline-flex items-center gap-1 px-3 py-1.5 bg-brand-primary/10 dark:bg-brand-primary/20 rounded-full text-sm font-medium text-brand-primary dark:text-brand-secondary"
               >
                 <Hash className="w-3 h-3" />
                 {tag.replace('#', '')}

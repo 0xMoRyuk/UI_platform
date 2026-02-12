@@ -1,9 +1,10 @@
 import { ExternalLink, CheckCircle, Building } from 'lucide-react'
+import { Badge } from '@ui-platform/ui/components/badge'
 import type { PartnerCardProps } from '@/../product/sections/partners/types'
 
 export function PartnerCard({ partner, onClick }: PartnerCardProps) {
   return (
-    <div className="bg-white dark:bg-stone-900 rounded-xl border border-stone-200 dark:border-stone-800 p-6 hover:shadow-lg hover:border-[#003399] transition-all duration-200">
+    <div className="bg-white dark:bg-stone-900 rounded-xl border border-stone-200 dark:border-stone-800 p-6 hover:shadow-lg hover:border-brand-primary transition-all duration-200">
       {/* Header */}
       <div className="flex items-start gap-4 mb-4">
         {/* Logo placeholder */}
@@ -11,10 +12,10 @@ export function PartnerCard({ partner, onClick }: PartnerCardProps) {
           <Building className="w-8 h-8 text-stone-400" />
         </div>
         <div>
-          <span className="inline-block px-2 py-0.5 bg-[#003399]/10 dark:bg-[#003399]/20 text-[#003399] dark:text-[#9BB1DC] text-xs font-medium rounded mb-1">
+          <Badge variant="outline" className="text-brand-primary dark:text-brand-secondary mb-1">
             {partner.role}
-          </span>
-          <h3 className="text-xl font-bold text-[#003399] dark:text-white font-[Barlow]">
+          </Badge>
+          <h3 className="text-xl font-bold text-brand-primary dark:text-white font-[Barlow]">
             {partner.name}
           </h3>
         </div>
@@ -43,7 +44,7 @@ export function PartnerCard({ partner, onClick }: PartnerCardProps) {
       {/* CTA */}
       <button
         onClick={onClick}
-        className="inline-flex items-center gap-2 text-sm font-medium text-[#003399] dark:text-[#9BB1DC] hover:text-[#F5CE2A] transition-colors"
+        className="inline-flex items-center gap-2 text-sm font-medium text-brand-primary dark:text-brand-secondary hover:text-brand-accent transition-colors"
       >
         Visit Website
         <ExternalLink className="w-3.5 h-3.5" />

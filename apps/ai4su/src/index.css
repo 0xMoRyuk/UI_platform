@@ -14,6 +14,18 @@
   --font-body: "DM Sans", system-ui, sans-serif;
   --font-sans: "DM Sans", system-ui, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+
+  /* Brand: EU D4D / AI4Startups palette */
+  --color-brand-primary: #003399;
+  --color-brand-primary-foreground: #ffffff;
+  --color-brand-primary-dark: #002266;
+  --color-brand-primary-darker: #001133;
+  --color-brand-accent: #F5CE2A;
+  --color-brand-accent-foreground: #003399;
+  --color-brand-secondary: #9BB1DC;
+  --color-brand-secondary-foreground: #003399;
+  --color-brand-neutral: #DBD2CC;
+  --color-brand-neutral-foreground: #003399;
 }
 
 /* Shadcn theme integration */
@@ -165,6 +177,8 @@
     font-family: var(--font-mono);
   }
 }
+
+/* Legacy data-brand attribute kept for backward compat; theme tokens above are canonical */
 
 /* Subtle page fade-in animation */
 @layer utilities {

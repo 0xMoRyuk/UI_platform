@@ -1,7 +1,7 @@
 import { Suspense, useMemo, useState, useRef, useCallback, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ArrowLeft, PanelLeft, Maximize2, GripVertical, Smartphone, Tablet, Monitor } from 'lucide-react'
-import { Button } from '@/components/ui/button'
+import { Button } from '@ui-platform/ui/components/button'
 import { ThemeToggle } from '@/components/ThemeToggle'
 import { loadShellPreview } from '@/lib/shell-loader'
 import React from 'react'

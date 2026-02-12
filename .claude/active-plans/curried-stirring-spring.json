@@ -1,0 +1,11 @@
+{
+  "plan": "curried-stirring-spring",
+  "plan_title": "Fix: Remove broken .mcp.json",
+  "todoist_id": null,
+  "component": "controller",
+  "domain": "UI_platform",
+  "project_name": "UI_platform",
+  "plan_file": "/Users/mo/creative_home/vaults/plans/curried-stirring-spring.md",
+  "started_at": "2026-02-10",
+  "harness_correlation_id": "9ec0058e-902f-499e-9262-f853a1bd7c7b"
+}

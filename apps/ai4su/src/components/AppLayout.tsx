@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { Layers, ArrowLeft } from 'lucide-react'
 import { PhaseNav } from './PhaseNav'
 import { ThemeToggle } from './ThemeToggle'
-import { Button } from '@/components/ui/button'
+import { Button } from '@ui-platform/ui/components/button'
 
 interface AppLayoutProps {
   children: ReactNode

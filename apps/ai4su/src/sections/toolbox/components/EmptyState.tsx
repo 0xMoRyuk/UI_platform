@@ -7,7 +7,7 @@ export function EmptyState({ title, description, onClearFilters }: EmptyStatePro
       <div className="w-16 h-16 rounded-full bg-stone-100 dark:bg-stone-800 flex items-center justify-center mb-6">
         <Search className="w-8 h-8 text-stone-400" />
       </div>
-      <h3 className="text-xl font-bold text-[#003399] dark:text-white mb-2 font-[Barlow]">
+      <h3 className="text-xl font-bold text-brand-primary dark:text-white mb-2 font-[Barlow]">
         {title}
       </h3>
       <p className="text-stone-600 dark:text-stone-400 mb-6 max-w-md">
@@ -16,8 +16,8 @@ export function EmptyState({ title, description, onClearFilters }: EmptyStatePro
       {onClearFilters && (
         <button
           onClick={onClearFilters}
-          className="inline-flex items-center gap-2 px-6 py-3 bg-[#003399] text-white font-semibold rounded-lg
-                   hover:bg-[#002266] transition-colors"
+          className="inline-flex items-center gap-2 px-6 py-3 bg-brand-primary text-brand-primary-foreground font-semibold rounded-lg
+                   hover:bg-brand-primary-dark transition-colors"
         >
           <RefreshCcw className="w-4 h-4" />
           Clear Filters

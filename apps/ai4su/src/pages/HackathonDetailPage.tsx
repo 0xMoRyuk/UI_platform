@@ -23,7 +23,7 @@ export function HackathonDetailPage() {
           </h1>
           <button
             onClick={() => navigate('/hackathons')}
-            className="text-[#003399] hover:underline"
+            className="text-brand-primary hover:underline"
           >
             ← Back to Hackathons
           </button>

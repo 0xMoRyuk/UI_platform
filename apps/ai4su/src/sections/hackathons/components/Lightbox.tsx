@@ -108,7 +108,7 @@ export function Lightbox({
               }
             }}
             className={`w-12 h-12 rounded-lg overflow-hidden shrink-0 bg-stone-700 flex items-center justify-center
-                       ${photo.id === currentPhotoId ? 'ring-2 ring-[#F5CE2A]' : 'opacity-50 hover:opacity-100'} transition-opacity`}
+                       ${photo.id === currentPhotoId ? 'ring-2 ring-brand-accent' : 'opacity-50 hover:opacity-100'} transition-opacity`}
           >
             <ImageIcon className="w-4 h-4 text-stone-500" />
           </button>

@@ -103,7 +103,7 @@ export function HackathonDetail({
         {/* Best Practices Download (if available) */}
         {hackathon.bestPracticesId && (
           <section className="py-12 border-t border-stone-200 dark:border-stone-800">
-            <div className="bg-[#003399] rounded-2xl p-8 text-white text-center">
+            <div className="bg-brand-primary rounded-2xl p-8 text-brand-primary-foreground text-center">
               <h3 className="text-2xl font-bold font-[Barlow] mb-3">
                 Best Practices Report
               </h3>
@@ -113,7 +113,7 @@ export function HackathonDetail({
               </p>
               <button
                 onClick={() => onBestPracticesDownload?.(hackathon.bestPracticesId!)}
-                className="inline-flex items-center gap-2 px-6 py-3 bg-[#F5CE2A] text-[#003399] font-bold rounded-lg
+                className="inline-flex items-center gap-2 px-6 py-3 bg-brand-accent text-brand-accent-foreground font-bold rounded-lg
                          hover:bg-[#FFE066] transition-colors"
               >
                 Download Best Practices (PDF)

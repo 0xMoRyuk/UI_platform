@@ -36,11 +36,11 @@ export function Hackathons({
   return (
     <main className="min-h-screen bg-stone-50 dark:bg-stone-950">
       {/* Hero section */}
-      <section className="bg-gradient-to-br from-[#003399] via-[#002266] to-[#001133] text-white py-16 sm:py-24">
+      <section className="bg-gradient-to-br from-brand-primary via-brand-primary-dark to-brand-primary-darker text-white py-16 sm:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center gap-3 mb-6">
-            <div className="w-14 h-14 rounded-xl bg-[#F5CE2A]/20 flex items-center justify-center">
-              <Trophy className="w-7 h-7 text-[#F5CE2A]" />
+            <div className="w-14 h-14 rounded-xl bg-brand-accent/20 flex items-center justify-center">
+              <Trophy className="w-7 h-7 text-brand-accent" />
             </div>
             <div>
               <h1 className="text-4xl sm:text-5xl font-bold font-[Barlow]">
@@ -66,7 +66,7 @@ export function Hackathons({
               { value: '8', label: 'Countries' },
             ].map((stat) => (
               <div key={stat.label} className="bg-white/10 backdrop-blur-sm rounded-lg px-4 py-3 border border-white/10">
-                <div className="text-2xl font-bold text-[#F5CE2A]">{stat.value}</div>
+                <div className="text-2xl font-bold text-brand-accent">{stat.value}</div>
                 <div className="text-sm text-white/60">{stat.label}</div>
               </div>
             ))}
@@ -83,7 +83,7 @@ export function Hackathons({
           {/* Header with filter */}
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
             <div>
-              <h2 className="text-2xl font-bold text-[#003399] dark:text-white font-[Barlow]">
+              <h2 className="text-2xl font-bold text-brand-primary dark:text-white font-[Barlow]">
                 All Hackathons
               </h2>
               <p className="text-stone-600 dark:text-stone-400">
@@ -111,7 +111,7 @@ export function Hackathons({
               </p>
               <button
                 onClick={() => handleCountryChange(null)}
-                className="mt-4 text-[#003399] dark:text-[#9BB1DC] font-medium hover:underline"
+                className="mt-4 text-brand-primary dark:text-brand-secondary font-medium hover:underline"
               >
                 View all hackathons
               </button>

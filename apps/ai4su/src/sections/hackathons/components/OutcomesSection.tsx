@@ -8,7 +8,7 @@ export function OutcomesSection({ outcomes }: OutcomesSectionProps) {
         <div className="w-10 h-10 rounded-lg bg-green-100 dark:bg-green-900/30 flex items-center justify-center">
           <TrendingUp className="w-5 h-5 text-green-600 dark:text-green-400" />
         </div>
-        <h2 className="text-2xl font-bold text-[#003399] dark:text-white font-[Barlow]">
+        <h2 className="text-2xl font-bold text-brand-primary dark:text-white font-[Barlow]">
           Key Outcomes
         </h2>
       </div>

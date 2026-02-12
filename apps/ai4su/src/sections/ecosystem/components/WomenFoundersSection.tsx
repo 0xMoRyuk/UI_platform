@@ -25,7 +25,7 @@ export function WomenFoundersSection({ program, onCtaClick }: WomenFoundersSecti
             <span>Women Founders Program</span>
           </div>
 
-          <h2 className="text-3xl sm:text-4xl font-bold text-[#003399] dark:text-white font-[Barlow] mb-4">
+          <h2 className="text-3xl sm:text-4xl font-bold text-brand-primary dark:text-white font-[Barlow] mb-4">
             {program.title}
           </h2>
 
@@ -67,7 +67,7 @@ export function WomenFoundersSection({ program, onCtaClick }: WomenFoundersSecti
                 <div className="w-10 h-10 rounded-lg bg-pink-100 dark:bg-pink-900/30 flex items-center justify-center mb-3">
                   <Icon className="w-5 h-5 text-pink-500" />
                 </div>
-                <h3 className="text-lg font-bold text-[#003399] dark:text-white font-[Barlow] mb-2">
+                <h3 className="text-lg font-bold text-brand-primary dark:text-white font-[Barlow] mb-2">
                   {element.title}
                 </h3>
                 <p className="text-sm text-stone-600 dark:text-stone-400">
@@ -80,7 +80,7 @@ export function WomenFoundersSection({ program, onCtaClick }: WomenFoundersSecti
 
         {/* Testimonials */}
         <div className="mb-12">
-          <h3 className="text-xl font-bold text-[#003399] dark:text-white font-[Barlow] text-center mb-8">
+          <h3 className="text-xl font-bold text-brand-primary dark:text-white font-[Barlow] text-center mb-8">
             Hear from Our Founders
           </h3>
           <TestimonialCarousel testimonials={program.testimonials} />
@@ -102,7 +102,7 @@ export function WomenFoundersSection({ program, onCtaClick }: WomenFoundersSecti
         <div className="mt-8">
           <button
             onClick={() => setIsExpanded(!isExpanded)}
-            className="flex items-center gap-2 mx-auto text-sm text-stone-500 dark:text-stone-400 hover:text-[#003399] dark:hover:text-white transition-colors"
+            className="flex items-center gap-2 mx-auto text-sm text-stone-500 dark:text-stone-400 hover:text-brand-primary dark:hover:text-white transition-colors"
           >
             <span>Learn more about the program</span>
             <ChevronDown className={`w-4 h-4 transition-transform ${isExpanded ? 'rotate-180' : ''}`} />
@@ -110,7 +110,7 @@ export function WomenFoundersSection({ program, onCtaClick }: WomenFoundersSecti
 
           {isExpanded && (
             <div className="mt-6 bg-white dark:bg-stone-900 rounded-xl p-6 max-w-2xl mx-auto shadow-sm">
-              <h4 className="font-bold text-[#003399] dark:text-white mb-3">
+              <h4 className="font-bold text-brand-primary dark:text-white mb-3">
                 About the Women Founders Program
               </h4>
               <div className="prose prose-sm dark:prose-invert text-stone-600 dark:text-stone-400">

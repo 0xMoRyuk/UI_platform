@@ -1,5 +1,12 @@
 import { useState } from 'react'
 import { Menu, Search, X, Globe } from 'lucide-react'
+import { Input } from '@ui-platform/ui/components/input'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@ui-platform/ui/components/dropdown-menu'
 import { MobileNav } from './MobileNav'
 import type { NavigationItem } from './AppShell'
 
@@ -31,7 +38,7 @@ export function Header({
 
   return (
     <>
-      <header className="sticky top-0 z-50 bg-[#003399] text-white shadow-lg">
+      <header className="sticky top-0 z-50 bg-brand-primary text-brand-primary-foreground shadow-lg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
@@ -54,8 +61,8 @@ export function Header({
                     px-4 py-2 text-sm font-medium font-[Barlow] rounded-md
                     transition-colors duration-200
                     ${item.isActive
-                      ? 'text-[#F5CE2A] border-b-2 border-[#F5CE2A]'
-                      : 'text-white/90 hover:text-white hover:bg-white/10'
+                      ? 'text-brand-accent border-b-2 border-brand-accent'
+                      : 'text-brand-primary-foreground/90 hover:text-brand-primary-foreground hover:bg-white/10'
                     }
                   `}
                 >
@@ -69,13 +76,13 @@ export function Header({
               {/* Search */}
               {isSearchOpen ? (
                 <form onSubmit={handleSearch} className="hidden sm:flex items-center">
-                  <input
+                  <Input
                     type="text"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     placeholder={currentLanguage === 'en' ? 'Search models...' : 'Rechercher...'}
-                    className="w-48 px-3 py-1.5 text-sm bg-white/10 border border-white/20 rounded-l-md
-                             text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-[#F5CE2A]"
+                    className="w-48 rounded-r-none bg-white/10 border-white/20
+                             text-brand-primary-foreground placeholder-white/60 focus-visible:ring-brand-accent"
                     autoFocus
                   />
                   <button
@@ -98,15 +105,26 @@ export function Header({
               )}
 
               {/* Language Switcher */}
-              <button
-                onClick={() => onLanguageChange?.(currentLanguage === 'en' ? 'fr' : 'en')}
-                className="hidden sm:flex items-center space-x-1 px-3 py-1.5 text-sm font-medium
-                         rounded-md hover:bg-white/10 transition-colors"
-                aria-label="Switch language"
-              >
-                <Globe className="w-4 h-4" />
-                <span className="uppercase">{currentLanguage}</span>
-              </button>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <button
+                    className="hidden sm:flex items-center space-x-1 px-3 py-1.5 text-sm font-medium
+                             rounded-md hover:bg-white/10 transition-colors"
+                    aria-label="Switch language"
+                  >
+                    <Globe className="w-4 h-4" />
+                    <span className="uppercase">{currentLanguage}</span>
+                  </button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuItem onClick={() => onLanguageChange?.('en')}>
+                    English
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => onLanguageChange?.('fr')}>
+                    Français
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
 
               {/* Mobile menu button */}
               <button

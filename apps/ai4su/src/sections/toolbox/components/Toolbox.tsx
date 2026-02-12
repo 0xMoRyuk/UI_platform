@@ -113,11 +113,11 @@ export function Toolbox({
       <div className="bg-white dark:bg-stone-900 border-b border-stone-200 dark:border-stone-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="flex items-center gap-3 mb-4">
-            <div className="w-12 h-12 rounded-xl bg-[#003399]/10 dark:bg-[#003399]/20 flex items-center justify-center">
-              <Boxes className="w-6 h-6 text-[#003399] dark:text-[#9BB1DC]" />
+            <div className="w-12 h-12 rounded-xl bg-brand-primary/10 dark:bg-brand-primary/20 flex items-center justify-center">
+              <Boxes className="w-6 h-6 text-brand-primary dark:text-brand-secondary" />
             </div>
             <div>
-              <h1 className="text-3xl font-bold text-[#003399] dark:text-white font-[Barlow]">
+              <h1 className="text-3xl font-bold text-brand-primary dark:text-white font-[Barlow]">
                 AI Model Toolbox
               </h1>
               <p className="text-stone-600 dark:text-stone-400">

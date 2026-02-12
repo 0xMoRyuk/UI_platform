@@ -16,7 +16,7 @@ export function ImplementingPartnersSection({ partners, onPartnerClick }: Implem
             <Users className="w-4 h-4" />
             <span>Tier 2 - Implementing Partners</span>
           </div>
-          <h2 className="text-3xl font-bold text-[#003399] dark:text-white font-[Barlow] mb-4">
+          <h2 className="text-3xl font-bold text-brand-primary dark:text-white font-[Barlow] mb-4">
             {partners.sectionTitle}
           </h2>
           <p className="text-lg text-stone-600 dark:text-stone-400 max-w-2xl mx-auto">

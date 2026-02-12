@@ -26,8 +26,8 @@ function PreviewCard({ preview, index, onClick }: PreviewCardProps) {
         group relative overflow-hidden rounded-2xl text-left
         transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl
         ${isAlternate
-          ? 'bg-[#003399] text-white'
-          : 'bg-white dark:bg-stone-900 text-[#003399] dark:text-white border border-stone-200 dark:border-stone-800'
+          ? 'bg-brand-primary text-brand-primary-foreground'
+          : 'bg-white dark:bg-stone-900 text-brand-primary dark:text-white border border-stone-200 dark:border-stone-800'
         }
       `}
     >
@@ -35,7 +35,7 @@ function PreviewCard({ preview, index, onClick }: PreviewCardProps) {
       <div className={`
         relative h-48 overflow-hidden
         ${isAlternate
-          ? 'bg-gradient-to-br from-[#003399] to-[#001133]'
+          ? 'bg-gradient-to-br from-brand-primary to-brand-primary-darker'
           : 'bg-gradient-to-br from-stone-100 to-stone-200 dark:from-stone-800 dark:to-stone-900'
         }
       `}>
@@ -49,8 +49,8 @@ function PreviewCard({ preview, index, onClick }: PreviewCardProps) {
         <div className={`
           absolute top-6 left-6 w-14 h-14 rounded-xl flex items-center justify-center
           ${isAlternate
-            ? 'bg-[#F5CE2A] text-[#003399]'
-            : 'bg-[#003399] text-white dark:bg-[#F5CE2A] dark:text-[#003399]'
+            ? 'bg-brand-accent text-brand-accent-foreground'
+            : 'bg-brand-primary text-brand-primary-foreground dark:bg-brand-accent dark:text-brand-accent-foreground'
           }
         `}>
           <Icon className="w-7 h-7" />
@@ -61,7 +61,7 @@ function PreviewCard({ preview, index, onClick }: PreviewCardProps) {
           absolute bottom-4 right-4 px-3 py-1.5 rounded-full text-xs font-medium
           ${isAlternate
             ? 'bg-white/20 text-white'
-            : 'bg-[#003399]/10 text-[#003399] dark:bg-white/10 dark:text-white'
+            : 'bg-brand-primary/10 text-brand-primary dark:bg-white/10 dark:text-white'
           }
         `}>
           {preview.stats}
@@ -72,7 +72,7 @@ function PreviewCard({ preview, index, onClick }: PreviewCardProps) {
       <div className="p-6">
         <h3 className={`
           text-xl font-bold mb-2 font-[Barlow]
-          ${isAlternate ? 'text-white' : 'text-[#003399] dark:text-white'}
+          ${isAlternate ? 'text-white' : 'text-brand-primary dark:text-white'}
         `}>
           {preview.title}
         </h3>
@@ -87,8 +87,8 @@ function PreviewCard({ preview, index, onClick }: PreviewCardProps) {
         <div className={`
           inline-flex items-center gap-2 text-sm font-medium
           ${isAlternate
-            ? 'text-[#F5CE2A]'
-            : 'text-[#003399] dark:text-[#F5CE2A]'
+            ? 'text-brand-accent'
+            : 'text-brand-primary dark:text-brand-accent'
           }
         `}>
           <span>Explore</span>
@@ -100,8 +100,8 @@ function PreviewCard({ preview, index, onClick }: PreviewCardProps) {
       <div className={`
         absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none
         ${isAlternate
-          ? 'bg-gradient-to-t from-[#F5CE2A]/10 to-transparent'
-          : 'bg-gradient-to-t from-[#003399]/5 to-transparent'
+          ? 'bg-gradient-to-t from-brand-accent/10 to-transparent'
+          : 'bg-gradient-to-t from-brand-primary/5 to-transparent'
         }
       `} />
     </button>
@@ -114,7 +114,7 @@ export function SectionPreviews({ previews, onSectionClick }: SectionPreviewsPro
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section header */}
         <div className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl font-bold text-[#003399] dark:text-white mb-4 font-[Barlow]">
+          <h2 className="text-3xl sm:text-4xl font-bold text-brand-primary dark:text-white mb-4 font-[Barlow]">
             Discover More
           </h2>
           <p className="text-lg text-stone-600 dark:text-stone-400 max-w-2xl mx-auto">

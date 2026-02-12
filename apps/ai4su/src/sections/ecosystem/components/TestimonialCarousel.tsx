@@ -69,7 +69,7 @@ export function TestimonialCarousel({
           </div>
 
           <div className="text-left">
-            <p className="font-bold text-[#003399] dark:text-white font-[Barlow]">
+            <p className="font-bold text-brand-primary dark:text-white font-[Barlow]">
               {currentTestimonial.name}
             </p>
             <p className="text-sm text-stone-600 dark:text-stone-400">

@@ -8,17 +8,17 @@ interface BestPracticesCardProps {
 
 function BestPracticesCard({ bp, onDownload }: BestPracticesCardProps) {
   return (
-    <div className="group bg-white dark:bg-stone-900 rounded-xl border border-stone-200 dark:border-stone-800 p-5 hover:shadow-lg hover:border-[#003399] dark:hover:border-[#9BB1DC] transition-all duration-300">
+    <div className="group bg-white dark:bg-stone-900 rounded-xl border border-stone-200 dark:border-stone-800 p-5 hover:shadow-lg hover:border-brand-primary dark:hover:border-brand-secondary transition-all duration-300">
       {/* Hackathon reference */}
       <div className="flex items-center gap-2 mb-3">
-        <Trophy className="w-4 h-4 text-[#F5CE2A]" />
+        <Trophy className="w-4 h-4 text-brand-accent" />
         <span className="text-xs font-medium text-stone-500 dark:text-stone-400">
           {bp.hackathonName}
         </span>
       </div>
 
       {/* Title */}
-      <h3 className="text-lg font-bold text-[#003399] dark:text-white mb-3 font-[Barlow] group-hover:text-[#F5CE2A] transition-colors">
+      <h3 className="text-lg font-bold text-brand-primary dark:text-white mb-3 font-[Barlow] group-hover:text-brand-accent transition-colors">
         {bp.title}
       </h3>
 
@@ -26,7 +26,7 @@ function BestPracticesCard({ bp, onDownload }: BestPracticesCardProps) {
       <ul className="space-y-2 mb-4">
         {bp.highlights.map((highlight, index) => (
           <li key={index} className="flex items-start gap-2 text-sm text-stone-600 dark:text-stone-400">
-            <Sparkles className="w-3.5 h-3.5 text-[#F5CE2A] shrink-0 mt-0.5" />
+            <Sparkles className="w-3.5 h-3.5 text-brand-accent shrink-0 mt-0.5" />
             <span>{highlight}</span>
           </li>
         ))}
@@ -35,7 +35,7 @@ function BestPracticesCard({ bp, onDownload }: BestPracticesCardProps) {
       {/* Download button */}
       <button
         onClick={onDownload}
-        className="inline-flex items-center gap-2 text-sm font-medium text-[#003399] dark:text-[#9BB1DC] hover:text-[#F5CE2A] transition-colors"
+        className="inline-flex items-center gap-2 text-sm font-medium text-brand-primary dark:text-brand-secondary hover:text-brand-accent transition-colors"
       >
         <Download className="w-4 h-4" />
         Download Report
@@ -48,7 +48,7 @@ export function BestPracticesSection({ bestPractices, onDownload }: BestPractice
   return (
     <section className="py-12 border-t border-stone-200 dark:border-stone-800">
       <div className="mb-8">
-        <h2 className="text-2xl font-bold text-[#003399] dark:text-white font-[Barlow] mb-2">
+        <h2 className="text-2xl font-bold text-brand-primary dark:text-white font-[Barlow] mb-2">
           Hackathon Best Practices
         </h2>
         <p className="text-stone-600 dark:text-stone-400">

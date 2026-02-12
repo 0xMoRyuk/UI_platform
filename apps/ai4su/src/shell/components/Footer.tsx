@@ -25,7 +25,7 @@ export function Footer({ currentLanguage }: FooterProps) {
   const t = content[currentLanguage]
 
   return (
-    <footer className="bg-[#003399] text-white">
+    <footer className="bg-brand-primary text-brand-primary-foreground">
       {/* Main Footer */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -33,7 +33,7 @@ export function Footer({ currentLanguage }: FooterProps) {
           <div className="space-y-4">
             <div className="flex items-center space-x-3">
               {/* EU Flag placeholder */}
-              <div className="w-12 h-8 bg-[#9BB1DC] rounded flex items-center justify-center text-xs font-bold">
+              <div className="w-12 h-8 bg-brand-secondary rounded flex items-center justify-center text-xs font-bold">
                 EU
               </div>
               <span className="text-sm font-medium font-[Barlow]">{t.fundedBy}</span>
@@ -45,7 +45,7 @@ export function Footer({ currentLanguage }: FooterProps) {
 
           {/* Partner Logos */}
           <div className="space-y-4">
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-[#F5CE2A]">
+            <h3 className="text-sm font-semibold uppercase tracking-wider text-brand-accent">
               Partners
             </h3>
             <div className="flex flex-wrap gap-4">
@@ -63,7 +63,7 @@ export function Footer({ currentLanguage }: FooterProps) {
 
           {/* Social & Hashtags */}
           <div className="space-y-4">
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-[#F5CE2A]">
+            <h3 className="text-sm font-semibold uppercase tracking-wider text-brand-accent">
               Follow
             </h3>
             <div className="flex flex-wrap gap-2 text-sm text-white/70">

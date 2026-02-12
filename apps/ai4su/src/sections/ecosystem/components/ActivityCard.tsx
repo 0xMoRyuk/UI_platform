@@ -1,6 +1,8 @@
 'use client'
 
 import { Calendar, MapPin, Users, ChevronDown, Download, ExternalLink, FileText, Video, Link as LinkIcon, Image as ImageIcon } from 'lucide-react'
+import { Badge } from '@ui-platform/ui/components/badge'
+import { Button } from '@ui-platform/ui/components/button'
 import type { ActivityCardProps } from '@/../product/sections/ecosystem/types'
 
 const countryFlags: Record<string, string> = {
@@ -47,8 +49,8 @@ export function ActivityCard({
       id={`activity-${activity.id}`}
       className={`bg-white dark:bg-stone-900 rounded-xl border-2 transition-all duration-300
         ${isHighlighted
-          ? 'border-[#003399] shadow-lg ring-2 ring-[#003399]/20'
-          : 'border-stone-200 dark:border-stone-800 hover:border-[#003399]/50'
+          ? 'border-brand-primary shadow-lg ring-2 ring-brand-primary/20'
+          : 'border-stone-200 dark:border-stone-800 hover:border-brand-primary/50'
         }`}
     >
       {/* Card header - always visible */}
@@ -71,15 +73,15 @@ export function ActivityCard({
           {/* Content */}
           <div className="flex-1 min-w-0">
             {/* Type badge */}
-            <span
-              className="inline-block px-2 py-0.5 rounded text-xs font-medium text-white mb-2"
+            <Badge
+              className="mb-2 text-white"
               style={{ backgroundColor: activityType.color }}
             >
               {activityType.label}
-            </span>
+            </Badge>
 
             {/* Title */}
-            <h3 className="text-lg font-bold text-[#003399] dark:text-white font-[Barlow] mb-2">
+            <h3 className="text-lg font-bold text-brand-primary dark:text-white font-[Barlow] mb-2">
               {activity.title}
             </h3>
 
@@ -124,17 +126,17 @@ export function ActivityCard({
           {/* Highlights */}
           {activity.highlights.length > 0 && (
             <div className="mb-4">
-              <p className="text-sm font-semibold text-[#003399] dark:text-[#9BB1DC] mb-2">
+              <p className="text-sm font-semibold text-brand-primary dark:text-brand-secondary mb-2">
                 Highlights
               </p>
               <div className="flex flex-wrap gap-2">
                 {activity.highlights.map((highlight, index) => (
-                  <span
+                  <Badge
                     key={index}
-                    className="px-3 py-1 bg-stone-100 dark:bg-stone-800 rounded-full text-xs text-stone-700 dark:text-stone-300"
+                    variant="secondary"
                   >
                     {highlight}
-                  </span>
+                  </Badge>
                 ))}
               </div>
             </div>
@@ -149,7 +151,7 @@ export function ActivityCard({
           {/* Photos */}
           {activity.photos.length > 0 && (
             <div className="mb-4">
-              <p className="text-sm font-semibold text-[#003399] dark:text-[#9BB1DC] mb-2">
+              <p className="text-sm font-semibold text-brand-primary dark:text-brand-secondary mb-2">
                 Photos
               </p>
               <div className="flex gap-2 overflow-x-auto">
@@ -168,25 +170,24 @@ export function ActivityCard({
           {/* Resources */}
           {activity.resources.length > 0 && (
             <div>
-              <p className="text-sm font-semibold text-[#003399] dark:text-[#9BB1DC] mb-2">
+              <p className="text-sm font-semibold text-brand-primary dark:text-brand-secondary mb-2">
                 Resources
               </p>
               <div className="flex flex-wrap gap-2">
                 {activity.resources.map((resource, index) => {
                   const Icon = resourceIcons[resource.type]
                   return (
-                    <button
+                    <Button
                       key={index}
+                      variant="secondary"
+                      size="sm"
                       onClick={() => onResourceDownload?.(resource.url)}
-                      className="inline-flex items-center gap-2 px-3 py-2 bg-[#003399]/10 dark:bg-[#003399]/20
-                               text-[#003399] dark:text-[#9BB1DC] rounded-lg text-sm font-medium
-                               hover:bg-[#003399] hover:text-white transition-colors"
                     >
                       <Icon className="w-4 h-4" />
                       <span>{resource.title}</span>
                       {resource.type === 'pdf' && <Download className="w-3 h-3" />}
                       {resource.type === 'link' && <ExternalLink className="w-3 h-3" />}
-                    </button>
+                    </Button>
                   )
                 })}
               </div>

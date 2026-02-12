@@ -26,7 +26,7 @@ export function ActivityFilter({
           onClick={() => onTypeChange(null)}
           className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors
             ${selectedType === null
-              ? 'bg-[#003399] text-white'
+              ? 'bg-brand-primary text-brand-primary-foreground'
               : 'bg-stone-100 dark:bg-stone-800 text-stone-700 dark:text-stone-300 hover:bg-stone-200 dark:hover:bg-stone-700'
             }`}
         >
@@ -60,8 +60,8 @@ export function ActivityFilter({
           onChange={(e) => onCountryChange(e.target.value as any || null)}
           className="appearance-none bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-700
                      rounded-lg px-4 py-2 pr-10 text-sm font-medium text-stone-700 dark:text-stone-300
-                     focus:outline-none focus:ring-2 focus:ring-[#003399] focus:border-transparent
-                     cursor-pointer hover:border-[#003399] transition-colors"
+                     focus:outline-none focus:ring-2 focus:ring-brand-primary focus:border-transparent
+                     cursor-pointer hover:border-brand-primary transition-colors"
         >
           <option value="">All Countries</option>
           {countries.map((country) => (

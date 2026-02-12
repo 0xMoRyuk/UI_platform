@@ -10,7 +10,7 @@ const iconMap = {
 
 export function KPISummaryBar({ items }: KPISummaryBarProps) {
   return (
-    <div className="bg-[#003399] text-white py-4">
+    <div className="bg-brand-primary text-brand-primary-foreground py-4">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-12">
           {items.map((item) => {
@@ -18,7 +18,7 @@ export function KPISummaryBar({ items }: KPISummaryBarProps) {
             return (
               <div key={item.label} className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center">
-                  <Icon className="w-5 h-5 text-[#F5CE2A]" />
+                  <Icon className="w-5 h-5 text-brand-accent" />
                 </div>
                 <div>
                   <div className="text-2xl font-bold font-[Barlow]">{item.value}</div>

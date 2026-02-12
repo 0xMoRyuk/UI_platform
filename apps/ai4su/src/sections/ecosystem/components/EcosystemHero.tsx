@@ -15,11 +15,11 @@ export function EcosystemHero({ totalActivities, totalParticipants, countriesCou
   ]
 
   return (
-    <section className="bg-gradient-to-br from-[#003399] via-[#002266] to-[#001133] text-white py-16 sm:py-24">
+    <section className="bg-gradient-to-br from-brand-primary via-brand-primary-dark to-brand-primary-darker text-brand-primary-foreground py-16 sm:py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center gap-4 mb-6">
-          <div className="w-14 h-14 rounded-xl bg-[#9BB1DC]/20 flex items-center justify-center">
-            <Globe className="w-7 h-7 text-[#9BB1DC]" />
+          <div className="w-14 h-14 rounded-xl bg-brand-secondary/20 flex items-center justify-center">
+            <Globe className="w-7 h-7 text-brand-secondary" />
           </div>
           <div>
             <h1 className="text-4xl sm:text-5xl font-bold font-[Barlow]">
@@ -43,7 +43,7 @@ export function EcosystemHero({ totalActivities, totalParticipants, countriesCou
               key={stat.label}
               className="bg-white/10 backdrop-blur-sm border border-white/10 rounded-xl p-4 text-center"
             >
-              <stat.icon className="w-6 h-6 text-[#F5CE2A] mx-auto mb-2" />
+              <stat.icon className="w-6 h-6 text-brand-accent mx-auto mb-2" />
               <div className="text-3xl font-bold font-[Barlow] text-white">
                 {stat.value}
               </div>

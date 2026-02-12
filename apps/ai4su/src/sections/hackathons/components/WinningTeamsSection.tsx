@@ -4,9 +4,9 @@ import type { WinningTeamsSectionProps, WinningTeam } from '@/../product/section
 const rankConfig = {
   1: {
     icon: Trophy,
-    bg: 'bg-gradient-to-br from-[#F5CE2A] to-[#FFB800]',
-    text: 'text-[#003399]',
-    border: 'border-[#F5CE2A]',
+    bg: 'bg-gradient-to-br from-brand-accent to-[#FFB800]',
+    text: 'text-brand-accent-foreground',
+    border: 'border-brand-accent',
     label: '1st Place',
   },
   2: {
@@ -47,7 +47,7 @@ function TeamCard({ team, onModelClick }: TeamCardProps) {
       <div className="p-5">
         <div className="mb-3">
           <p className="text-sm text-stone-500 dark:text-stone-400 mb-1">Team</p>
-          <h3 className="text-lg font-bold text-[#003399] dark:text-white font-[Barlow]">
+          <h3 className="text-lg font-bold text-brand-primary dark:text-white font-[Barlow]">
             {team.teamName}
           </h3>
         </div>
@@ -66,7 +66,7 @@ function TeamCard({ team, onModelClick }: TeamCardProps) {
         {team.modelId && (
           <button
             onClick={() => onModelClick?.(team.modelId!)}
-            className="inline-flex items-center gap-2 text-sm font-medium text-[#003399] dark:text-[#9BB1DC] hover:text-[#F5CE2A] transition-colors"
+            className="inline-flex items-center gap-2 text-sm font-medium text-brand-primary dark:text-brand-secondary hover:text-brand-accent transition-colors"
           >
             View AI Model
             <ExternalLink className="w-3.5 h-3.5" />
@@ -84,10 +84,10 @@ export function WinningTeamsSection({ teams, onModelClick }: WinningTeamsSection
   return (
     <section className="py-12 border-t border-stone-200 dark:border-stone-800">
       <div className="flex items-center gap-3 mb-8">
-        <div className="w-10 h-10 rounded-lg bg-[#F5CE2A]/20 flex items-center justify-center">
-          <Trophy className="w-5 h-5 text-[#F5CE2A]" />
+        <div className="w-10 h-10 rounded-lg bg-brand-accent/20 flex items-center justify-center">
+          <Trophy className="w-5 h-5 text-brand-accent" />
         </div>
-        <h2 className="text-2xl font-bold text-[#003399] dark:text-white font-[Barlow]">
+        <h2 className="text-2xl font-bold text-brand-primary dark:text-white font-[Barlow]">
           Winning Teams
         </h2>
       </div>

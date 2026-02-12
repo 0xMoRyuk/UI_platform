@@ -7,7 +7,7 @@ export function EUAttributionBanner({ attribution }: EUAttributionBannerProps) {
       <div className="flex flex-col md:flex-row items-center gap-8">
         {/* EU Flag */}
         <div className="shrink-0">
-          <div className="w-32 h-24 bg-[#003399] rounded-lg flex items-center justify-center relative overflow-hidden">
+          <div className="w-32 h-24 bg-brand-primary rounded-lg flex items-center justify-center relative overflow-hidden">
             {/* EU flag placeholder - stars circle */}
             <div className="relative w-20 h-20">
               {[...Array(12)].map((_, i) => {
@@ -17,7 +17,7 @@ export function EUAttributionBanner({ attribution }: EUAttributionBannerProps) {
                 return (
                   <div
                     key={i}
-                    className="absolute w-3 h-3 text-[#F5CE2A]"
+                    className="absolute w-3 h-3 text-brand-accent"
                     style={{
                       left: `${x}%`,
                       top: `${y}%`,
@@ -34,7 +34,7 @@ export function EUAttributionBanner({ attribution }: EUAttributionBannerProps) {
 
         {/* Text content */}
         <div className="flex-1 text-center md:text-left">
-          <h3 className="text-2xl font-bold text-[#003399] dark:text-white font-[Barlow] mb-2">
+          <h3 className="text-2xl font-bold text-brand-primary dark:text-white font-[Barlow] mb-2">
             {attribution.text}
           </h3>
           <div className="flex items-center justify-center md:justify-start gap-2 text-stone-500 dark:text-stone-400 mb-4">

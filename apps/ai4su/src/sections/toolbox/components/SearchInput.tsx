@@ -13,7 +13,7 @@ export function SearchInput({ value, onChange, placeholder = 'Search AI models..
         className="w-full pl-12 pr-10 py-3 rounded-xl border border-stone-200 dark:border-stone-700
                    bg-white dark:bg-stone-900 text-stone-900 dark:text-white
                    placeholder:text-stone-400 dark:placeholder:text-stone-500
-                   focus:outline-none focus:ring-2 focus:ring-[#003399] focus:border-transparent
+                   focus:outline-none focus:ring-2 focus:ring-brand-primary focus:border-transparent
                    transition-all duration-200"
       />
       {value && (

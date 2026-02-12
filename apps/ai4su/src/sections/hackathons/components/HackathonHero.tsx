@@ -24,11 +24,11 @@ export function HackathonHero({ hackathon }: HackathonHeroProps) {
   }
 
   return (
-    <section className="relative bg-gradient-to-br from-[#003399] via-[#002266] to-[#001133] text-white overflow-hidden">
+    <section className="relative bg-gradient-to-br from-brand-primary via-brand-primary-dark to-brand-primary-darker text-white overflow-hidden">
       {/* Decorative elements */}
       <div className="absolute inset-0">
-        <div className="absolute top-0 right-0 w-96 h-96 rounded-full bg-[#F5CE2A]/10 blur-3xl transform translate-x-1/2 -translate-y-1/2" />
-        <div className="absolute bottom-0 left-0 w-80 h-80 rounded-full bg-[#9BB1DC]/20 blur-3xl transform -translate-x-1/2 translate-y-1/2" />
+        <div className="absolute top-0 right-0 w-96 h-96 rounded-full bg-brand-accent/10 blur-3xl transform translate-x-1/2 -translate-y-1/2" />
+        <div className="absolute bottom-0 left-0 w-80 h-80 rounded-full bg-brand-secondary/20 blur-3xl transform -translate-x-1/2 translate-y-1/2" />
       </div>
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
@@ -62,8 +62,8 @@ export function HackathonHero({ hackathon }: HackathonHeroProps) {
             <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-6 space-y-4">
               {/* Date */}
               <div className="flex items-start gap-3">
-                <div className="w-10 h-10 rounded-lg bg-[#F5CE2A]/20 flex items-center justify-center shrink-0">
-                  <Calendar className="w-5 h-5 text-[#F5CE2A]" />
+                <div className="w-10 h-10 rounded-lg bg-brand-accent/20 flex items-center justify-center shrink-0">
+                  <Calendar className="w-5 h-5 text-brand-accent" />
                 </div>
                 <div>
                   <p className="text-xs text-white/60 uppercase tracking-wide">Date</p>
@@ -73,8 +73,8 @@ export function HackathonHero({ hackathon }: HackathonHeroProps) {
 
               {/* Location */}
               <div className="flex items-start gap-3">
-                <div className="w-10 h-10 rounded-lg bg-[#F5CE2A]/20 flex items-center justify-center shrink-0">
-                  <MapPin className="w-5 h-5 text-[#F5CE2A]" />
+                <div className="w-10 h-10 rounded-lg bg-brand-accent/20 flex items-center justify-center shrink-0">
+                  <MapPin className="w-5 h-5 text-brand-accent" />
                 </div>
                 <div>
                   <p className="text-xs text-white/60 uppercase tracking-wide">Location</p>
@@ -84,8 +84,8 @@ export function HackathonHero({ hackathon }: HackathonHeroProps) {
 
               {/* Venue */}
               <div className="flex items-start gap-3">
-                <div className="w-10 h-10 rounded-lg bg-[#F5CE2A]/20 flex items-center justify-center shrink-0">
-                  <Building2 className="w-5 h-5 text-[#F5CE2A]" />
+                <div className="w-10 h-10 rounded-lg bg-brand-accent/20 flex items-center justify-center shrink-0">
+                  <Building2 className="w-5 h-5 text-brand-accent" />
                 </div>
                 <div>
                   <p className="text-xs text-white/60 uppercase tracking-wide">Venue</p>
@@ -95,8 +95,8 @@ export function HackathonHero({ hackathon }: HackathonHeroProps) {
 
               {/* Participants */}
               <div className="flex items-start gap-3">
-                <div className="w-10 h-10 rounded-lg bg-[#F5CE2A]/20 flex items-center justify-center shrink-0">
-                  <Users className="w-5 h-5 text-[#F5CE2A]" />
+                <div className="w-10 h-10 rounded-lg bg-brand-accent/20 flex items-center justify-center shrink-0">
+                  <Users className="w-5 h-5 text-brand-accent" />
                 </div>
                 <div>
                   <p className="text-xs text-white/60 uppercase tracking-wide">Participants</p>
@@ -106,8 +106,8 @@ export function HackathonHero({ hackathon }: HackathonHeroProps) {
 
               {/* Models */}
               <div className="flex items-start gap-3">
-                <div className="w-10 h-10 rounded-lg bg-[#F5CE2A]/20 flex items-center justify-center shrink-0">
-                  <Brain className="w-5 h-5 text-[#F5CE2A]" />
+                <div className="w-10 h-10 rounded-lg bg-brand-accent/20 flex items-center justify-center shrink-0">
+                  <Brain className="w-5 h-5 text-brand-accent" />
                 </div>
                 <div>
                   <p className="text-xs text-white/60 uppercase tracking-wide">AI Models Produced</p>

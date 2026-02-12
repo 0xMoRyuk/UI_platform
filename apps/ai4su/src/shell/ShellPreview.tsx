@@ -31,8 +31,8 @@ export default function ShellPreview() {
       onSearch={handleSearch}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="bg-[#DBD2CC]/20 border-2 border-dashed border-[#9BB1DC] rounded-lg p-12 text-center">
-          <h1 className="text-3xl font-bold text-[#003399] mb-4 font-[Barlow]">
+        <div className="bg-brand-neutral/20 border-2 border-dashed border-brand-secondary rounded-lg p-12 text-center">
+          <h1 className="text-3xl font-bold text-brand-primary mb-4 font-[Barlow]">
             Content Area
           </h1>
           <p className="text-stone-600 dark:text-stone-400 mb-6">
@@ -46,18 +46,17 @@ export default function ShellPreview() {
         {/* Sample KPI Cards Preview */}
         <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {[
-            { label: 'AI Models', value: '24', color: '#003399' },
-            { label: 'Hackathons', value: '6', color: '#9BB1DC' },
-            { label: 'Countries', value: '8', color: '#F5CE2A' },
-            { label: 'Participants', value: '500+', color: '#DBD2CC' },
+            { label: 'AI Models', value: '24', borderClass: 'border-l-brand-primary' },
+            { label: 'Hackathons', value: '6', borderClass: 'border-l-brand-secondary' },
+            { label: 'Countries', value: '8', borderClass: 'border-l-brand-accent' },
+            { label: 'Participants', value: '500+', borderClass: 'border-l-brand-neutral' },
           ].map((kpi) => (
             <div
               key={kpi.label}
-              className="bg-white rounded-lg shadow-md p-6 border-l-4"
-              style={{ borderLeftColor: kpi.color }}
+              className={`bg-white rounded-lg shadow-md p-6 border-l-4 ${kpi.borderClass}`}
             >
               <p className="text-sm font-medium text-stone-500 font-[Barlow]">{kpi.label}</p>
-              <p className="text-3xl font-bold text-[#003399] mt-1">{kpi.value}</p>
+              <p className="text-3xl font-bold text-brand-primary mt-1">{kpi.value}</p>
             </div>
           ))}
         </div>
