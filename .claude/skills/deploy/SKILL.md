@@ -12,6 +12,8 @@ commands:
 
 # /deploy Skill
 
+> **Note**: This skill is also accessible via the unified `/deploy ui` command from any project.
+
 User-invocable skill for deploying apps to Google Cloud Run.
 
 ## Commands

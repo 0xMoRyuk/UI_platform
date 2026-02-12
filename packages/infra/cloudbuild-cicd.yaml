@@ -12,7 +12,6 @@
 
 substitutions:
   _APP_NAME: 'ai4su'  # Default to ai4su (most actively developed); override with --substitutions=_APP_NAME=web
-  _SERVICE_NAME: 'ui-platform-${_APP_NAME}'
   _REGION: 'europe-west1'
   _ENV: 'production'  # or 'staging'
   _MIN_INSTANCES: '0'  # scale-to-zero for cost optimization
@@ -38,7 +37,13 @@ steps:
       - '-c'
       - |
         # Generate version from git
-        VERSION="v$(date +%Y%m%d)-${SHORT_SHA}"
+        # Use SHORT_SHA if available (git push trigger), otherwise use git rev-parse (manual submit)
+        if [ -n "${SHORT_SHA:-}" ]; then
+          SHA="${SHORT_SHA}"
+        else
+          SHA=$(git rev-parse --short=7 HEAD 2>/dev/null || echo "manual")
+        fi
+        VERSION="v$(date +%Y%m%d)-$${SHA}"
         echo "$$VERSION" > /workspace/VERSION
         echo "Generated version: $$VERSION"
 
@@ -70,8 +75,8 @@ steps:
       - '-c'
       - |
         VERSION=$(cat /workspace/VERSION)
-        # Lowercase the service name for Docker (required)
-        SERVICE_LOWER=$(echo "${_SERVICE_NAME}" | tr '[:upper:]' '[:lower:]')
+        # Compute service name from app name (no nested substitution)
+        SERVICE_LOWER=$(echo "ui-platform-${_APP_NAME}" | tr '[:upper:]' '[:lower:]')
 
         # Detect app type (Next.js or Vite) from package.json
         if grep -q '"next"' apps/${_APP_NAME}/package.json 2>/dev/null; then
@@ -177,5 +182,4 @@ steps:
 timeout: '1200s'  # 20 minutes total timeout
 
 # Note: Images are pushed in the 'build' step directly.
-# The 'images' field is omitted to avoid substitution validation issues
-# with nested variables like ${_SERVICE_NAME} = ui-platform-${_APP_NAME}
+# The 'images' field is omitted to avoid substitution validation issues.
