@@ -11,8 +11,6 @@ import type {
   AnalyticsConfig,
   AnalyticsEvent,
   TrackedEvent,
-  AppId,
-  BrandId,
 } from "./types";
 import { CORE_EVENTS } from "./types";
 import { hasAnalyticsConsent } from "./consent";

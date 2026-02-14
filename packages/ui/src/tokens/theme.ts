@@ -13,7 +13,7 @@
  * const cssVars = getBrandCSSVars(activeBrand);
  */
 
-import type { BrandConfig, BrandColors } from "./types";
+import type { BrandConfig } from "./types";
 import { getBrand } from "./brands";
 
 /**

@@ -6,7 +6,7 @@
  */
 
 /** Application identifiers */
-export type AppId = "web" | "ai4su" | "designOS_sandbox";
+export type AppId = "ai4su";
 
 /** Brand identifiers */
 export type BrandId = "default" | "eu-d4d";

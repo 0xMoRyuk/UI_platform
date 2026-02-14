@@ -27,7 +27,6 @@ import {
   trackPageView,
   trackError,
   trackSessionStart,
-  isAnalyticsInitialized,
 } from "../index";
 import type { AppId, BrandId } from "../types";
 import { hasAnalyticsConsent } from "../consent";
