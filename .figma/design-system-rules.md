@@ -93,7 +93,7 @@ interface BrandTypography {
 ## 2. Component Library
 
 ### Base: shadcn/ui
-- **Style**: `new-york` (ai4su, designOS_sandbox), `default` (web)
+- **Style**: `new-york` (ai4su)
 - **Primitives**: Radix UI for all interactive elements
 - **Variants**: CVA (class-variance-authority)
 - **Class merging**: `cn()` from `@/lib/utils` (clsx + tailwind-merge)
@@ -178,9 +178,7 @@ export function cn(...inputs: ClassValue[]) {
 
 | App | Framework | Build | RSC |
 |-----|-----------|-------|-----|
-| web | Next.js 15 + React 19 | Next.js | Yes |
 | ai4su | React 19 | Vite | No |
-| designOS_sandbox | React 19 | Vite | No |
 
 - **Package manager**: Bun workspaces
 - **Monorepo**: `apps/*` + `packages/*`
@@ -255,7 +253,6 @@ experimental: {
 ### Global Styles Location
 | App | File |
 |-----|------|
-| web | `apps/web/app/globals.css` |
 | ai4su | `apps/ai4su/src/index.css` |
 
 ### CSS Variable Layers
@@ -338,7 +335,6 @@ UI_platform/
 │   │   ├── src/components/     # App components + ui/
 │   │   ├── src/shell/          # Shell (Header, Footer, etc.)
 │   │   └── src/features/       # Feature-based organization
-│   └── designOS_sandbox/       # Vite + React — sandbox
 ├── packages/
 │   ├── ui/                     # Shared: tokens, brand, analytics, cn()
 │   ├── config/                 # Tailwind base config, tsconfigs

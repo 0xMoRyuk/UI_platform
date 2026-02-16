@@ -34,7 +34,7 @@ NEXT_PUBLIC_BRAND_ID=eu-d4d
 The brand is applied via `data-brand` attribute on `<html>`:
 
 ```tsx
-// apps/web/app/layout.tsx
+// apps/ai4su/src/main.tsx
 import { getBrandHtmlProps } from "@ui-platform/ui";
 
 <html lang="en" {...getBrandHtmlProps()}>
@@ -137,7 +137,7 @@ export const brands = {
 } as const;
 ```
 
-3. **Add CSS variables** in `apps/web/app/globals.css`:
+3. **Add CSS variables** in `apps/ai4su/src/index.css`:
 
 ```css
 [data-brand="new-brand"] {

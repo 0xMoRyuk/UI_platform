@@ -5,9 +5,7 @@
 #
 # Required substitutions:
 #   - _GTM_ACCOUNT_ID: GTM account ID
-#   - _GTM_CONTAINER_ID_WEB: GTM container ID for web app
 #   - _GTM_CONTAINER_ID_AI4SU: GTM container ID for ai4su app
-#   - _GTM_CONTAINER_ID_SANDBOX: GTM container ID for designOS_sandbox app
 #
 # Optional substitutions:
 #   - _APP_ID: Check specific app only (default: all apps)
@@ -35,7 +33,7 @@ steps:
         if [ -n "${_APP_ID}" ]; then
           APPS="${_APP_ID}"
         else
-          APPS="web ai4su designOS_sandbox"
+          APPS="ai4su"
         fi
 
         DRIFT_FOUND=false
@@ -46,14 +44,8 @@ steps:
 
           # Get container ID
           case "$APP" in
-            web)
-              CONTAINER_ID="${_GTM_CONTAINER_ID_WEB}"
-              ;;
             ai4su)
               CONTAINER_ID="${_GTM_CONTAINER_ID_AI4SU}"
-              ;;
-            designOS_sandbox)
-              CONTAINER_ID="${_GTM_CONTAINER_ID_SANDBOX}"
               ;;
           esac
 
@@ -212,9 +204,7 @@ steps:
 
 substitutions:
   _GTM_ACCOUNT_ID: ""
-  _GTM_CONTAINER_ID_WEB: ""
   _GTM_CONTAINER_ID_AI4SU: ""
-  _GTM_CONTAINER_ID_SANDBOX: ""
   _APP_ID: ""
   _SLACK_WEBHOOK_URL: ""
 

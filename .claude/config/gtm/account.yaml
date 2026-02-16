@@ -4,9 +4,7 @@ account_id: "${GTM_ACCOUNT_ID}"
 # Apps map to apps/ directory
 # Each app gets its own GTM container for isolated deployment
 apps:
-  - web
   - ai4su
-  - designOS_sandbox
 
 # Shared settings applied to all containers
 defaults:

@@ -16,7 +16,7 @@ filename: packages/infra/cloudbuild-cicd.yaml
 
 # Production environment substitutions
 substitutions:
-  _APP_NAME: 'web'
+  _APP_NAME: 'ai4su'
   _ENV: 'production'
   _REGION: 'europe-west1'
   _MIN_INSTANCES: '0'  # Scale-to-zero for cost optimization
@@ -27,7 +27,7 @@ substitutions:
 
 # Include files - only trigger if these paths change
 includedFiles:
-  - 'apps/web/**'
+  - 'apps/ai4su/**'
   - 'packages/ui/**'
   - 'packages/config/**'
   - 'packages/types/**'

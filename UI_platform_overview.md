@@ -6,10 +6,8 @@
 
 **Bun workspace monorepo** with:
 
-### Apps (3)
-- **`web`** (37MB) - Next.js 15 / React 18 app using App Router
+### Apps (1)
 - **`ai4su`** - Vite / React 19 application
-- **`designOS_sandbox`** (24MB) - Vite / React 19 sandbox using React Router
 
 ### Shared Packages (5)
 - **`ui`** - shadcn/ui components, CVA utilities
@@ -21,7 +19,7 @@
 ## Tech Stack
 
 - **Runtime**: Bun
-- **Framework**: Next.js 15 / React 18 (web), Vite / React 19 (ai4su, designOS_sandbox)
+- **Framework**: Vite / React 19 (ai4su)
 - **Language**: TypeScript
 - **Styling**: Tailwind CSS 3.x/4.x
 - **Components**: shadcn/ui + Radix UI
@@ -59,7 +57,7 @@ Recent commits focus on:
 ```bash
 bun install          # Install all dependencies
 bun run dev          # Run all apps
-cd apps/web && bun run dev  # Run specific app
+cd apps/ai4su && bun run dev  # Run specific app
 ```
 
 ## Project Structure
@@ -69,7 +67,7 @@ UI_platform/
 ├── apps/
 │   ├── web/                    # Next.js 15 / React 18
 │   ├── ai4su/                  # Vite / React 19
-│   └── designOS_sandbox/       # Vite / React 19 sandbox
+│   └── ai4su/                  # Vite / React 19
 ├── packages/
 │   ├── ui/                     # Shared UI components
 │   ├── config/                 # Shared configurations

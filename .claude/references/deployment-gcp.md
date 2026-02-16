@@ -4,7 +4,7 @@
 
 - **Project ID:** `digital-africa-ai4su`
 - **Region:** `europe-west1`
-- **Service URL:** https://ui-platform-web-hs6gi2nj7a-ew.a.run.app
+- **Service URL:** https://ui-platform-ai4su-jvrtfyxamq-ew.a.run.app
 
 ## Infrastructure Files
 
@@ -25,10 +25,10 @@ gcloud config set project digital-africa-ai4su
 cd /Users/mo/creative_home/UI_platform
 gcloud builds submit \
   --config=packages/infra/cloudbuild-cicd.yaml \
-  --substitutions=SHORT_SHA=$(git rev-parse --short HEAD),_APP_NAME=web,_SERVICE_NAME=ui-platform-web
+  --substitutions=SHORT_SHA=$(git rev-parse --short HEAD),_APP_NAME=ai4su,_SERVICE_NAME=ui-platform-ai4su
 
 # Route traffic to latest (if needed)
-gcloud run services update-traffic ui-platform-web \
+gcloud run services update-traffic ui-platform-ai4su \
   --region=europe-west1 \
   --to-latest
 ```
@@ -109,7 +109,7 @@ gcloud builds log <BUILD_ID> --region=europe-west1 | tail -50
 ## Smoke Test
 
 ```bash
-SERVICE_URL="https://ui-platform-web-hs6gi2nj7a-ew.a.run.app"
+SERVICE_URL="https://ui-platform-ai4su-hs6gi2nj7a-ew.a.run.app"
 curl -s -o /dev/null -w "%{http_code}" $SERVICE_URL          # Homepage
 curl -s -o /dev/null -w "%{http_code}" $SERVICE_URL/form     # Form page
 curl -s -o /dev/null -w "%{http_code}" $SERVICE_URL/analytics # Analytics

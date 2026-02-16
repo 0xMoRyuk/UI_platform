@@ -4,7 +4,7 @@
 # Usage:
 #   ./scripts/deploy.sh ai4su           # Deploy ai4su
 #   ./scripts/deploy.sh web             # Deploy web
-#   ./scripts/deploy.sh designOS_sandbox
+#   ./scripts/deploy.sh ai4su
 
 set -euo pipefail
 

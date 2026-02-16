@@ -17,29 +17,29 @@ Reference documentation for Google Tag Manager Server-Side configuration with **
 │                    GTM Account (centralized)                     │
 ├─────────────────────────────────────────────────────────────────┤
 │                                                                  │
-│  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐  │
-│  │ GTM Container   │  │ GTM Container   │  │ GTM Container   │  │
-│  │ (web)           │  │ (ai4su)         │  │ (designOS_sbox) │  │
-│  │                 │  │                 │  │                 │  │
-│  │ ┌─────────────┐ │  │ ┌─────────────┐ │  │ ┌─────────────┐ │  │
-│  │ │ GA4 Tag     │ │  │ │ GA4 Tag     │ │  │ │ GA4 Tag     │ │  │
-│  │ │ Consent Trg │ │  │ │ Consent Trg │ │  │ │ Consent Trg │ │  │
-│  │ │ Variables   │ │  │ │ Variables   │ │  │ │ Variables   │ │  │
-│  │ └─────────────┘ │  │ └─────────────┘ │  │ └─────────────┘ │  │
-│  └────────┬────────┘  └────────┬────────┘  └────────┬────────┘  │
-│           │                    │                    │            │
-│           ▼                    ▼                    ▼            │
-│  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐  │
-│  │ Cloud Run       │  │ Cloud Run       │  │ Cloud Run       │  │
-│  │ sgtm-web        │  │ sgtm-ai4su      │  │ sgtm-sandbox    │  │
-│  └────────┬────────┘  └────────┬────────┘  └────────┬────────┘  │
-│           │                    │                    │            │
-│           ▼                    ▼                    ▼            │
-│  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐  │
-│  │ GA4 Property    │  │ GA4 Property    │  │ GA4 Property    │  │
-│  │ (web)           │  │ (ai4su)         │  │ (designOS_sbox) │  │
-│  │ G-XXXXXXXXXX    │  │ G-YYYYYYYYYY    │  │ G-ZZZZZZZZZZ    │  │
-│  └─────────────────┘  └─────────────────┘  └─────────────────┘  │
+│  ┌─────────────────┐  │
+│  │ GTM Container   │  │
+│  │ (ai4su)         │  │
+│  │                 │  │
+│  │ ┌─────────────┐ │  │
+│  │ │ GA4 Tag     │ │  │
+│  │ │ Consent Trg │ │  │
+│  │ │ Variables   │ │  │
+│  │ └─────────────┘ │  │
+│  └────────┬────────┘  │
+│           │           │
+│           ▼           │
+│  ┌─────────────────┐  │
+│  │ Cloud Run       │  │
+│  │ sgtm-ai4su      │  │
+│  └────────┬────────┘  │
+│           │           │
+│           ▼           │
+│  ┌─────────────────┐  │
+│  │ GA4 Property    │  │
+│  │ (ai4su)         │  │
+│  │ G-YYYYYYYYYY    │  │
+│  └─────────────────┘  │
 │                                                                  │
 └─────────────────────────────────────────────────────────────────┘
 ```
@@ -104,22 +104,12 @@ tagmanager2 accounts list
 │       ├── event.schema.json
 │       └── dimension.schema.json
 │
-├── web/                      # Per-app: web
-│   ├── container.yaml        # Container ID, measurement ID, sGTM endpoint
-│   ├── tags/
-│   │   └── ga4-event.json
-│   └── variables/
-│       └── measurement-id.json
-│
-├── ai4su/                    # Per-app: ai4su
-│   ├── container.yaml
-│   ├── tags/
-│   └── variables/
-│
-└── designOS_sandbox/         # Per-app: designOS_sandbox
+└── ai4su/                    # Per-app: ai4su
     ├── container.yaml
     ├── tags/
+    │   └── ga4-event.json
     └── variables/
+        └── measurement-id.json
 ```
 
 ### Account Config (account.yaml)
@@ -129,9 +119,7 @@ version: "1.0.0"
 account_id: "${GTM_ACCOUNT_ID}"
 
 apps:
-  - web
   - ai4su
-  - designOS_sandbox
 
 defaults:
   sgtm:
@@ -150,14 +138,14 @@ defaults:
 
 ```yaml
 version: "1.0.0"
-app_id: web
-container_id: "${GTM_CONTAINER_ID_WEB}"
-measurement_id: "${GA4_MEASUREMENT_ID_WEB}"
+app_id: ai4su
+container_id: "${GTM_CONTAINER_ID_AI4SU}"
+measurement_id: "${GA4_MEASUREMENT_ID_AI4SU}"
 last_synced: null
 
 sgtm:
-  service_name: sgtm-web
-  endpoint: "${SGTM_ENDPOINT_WEB}"
+  service_name: sgtm-ai4su
+  endpoint: "${SGTM_ENDPOINT_AI4SU}"
 ```
 
 ---
@@ -430,11 +418,9 @@ GTM configuration is managed via Cloud Build triggers (not GitHub Actions).
 
 | Trigger | Fires On |
 |---------|----------|
-| `gtm-deploy-web` | Changes to `shared/` or `web/` config |
 | `gtm-deploy-ai4su` | Changes to `shared/` or `ai4su/` config |
-| `gtm-deploy-sandbox` | Changes to `shared/` or `designOS_sandbox/` config |
 | `gtm-drift` | Weekly via Cloud Scheduler |
-| `sgtm-deploy-*` | Changes to `Dockerfile.sgtm` |
+| `sgtm-deploy-ai4su` | Changes to `Dockerfile.sgtm` |
 
 ### Setup Triggers
 
@@ -470,9 +456,7 @@ Configure these in Cloud Build trigger settings or Secret Manager:
 | Substitution | Description |
 |--------------|-------------|
 | `_GTM_ACCOUNT_ID` | GTM Account ID |
-| `_GTM_CONTAINER_ID_WEB` | Container ID for web |
 | `_GTM_CONTAINER_ID_AI4SU` | Container ID for ai4su |
-| `_GTM_CONTAINER_ID_SANDBOX` | Container ID for sandbox |
 | `_GTM_CONTAINER_CONFIG_*` | Container config strings |
 
 ---

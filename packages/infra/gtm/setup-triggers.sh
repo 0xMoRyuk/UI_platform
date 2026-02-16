@@ -8,12 +8,8 @@
 #
 # Required environment variables (or set via Secret Manager):
 #   - GTM_ACCOUNT_ID
-#   - GTM_CONTAINER_ID_WEB
 #   - GTM_CONTAINER_ID_AI4SU
-#   - GTM_CONTAINER_ID_SANDBOX
-#   - GTM_CONTAINER_CONFIG_WEB
 #   - GTM_CONTAINER_CONFIG_AI4SU
-#   - GTM_CONTAINER_CONFIG_SANDBOX
 
 set -euo pipefail
 
@@ -38,19 +34,8 @@ gcloud services enable cloudscheduler.googleapis.com
 echo ""
 echo "Creating GTM sync triggers..."
 
-for app in web ai4su designOS_sandbox; do
-  # Map app to container ID variable name
-  case "$app" in
-    web)
-      CONTAINER_ID_VAR="_GTM_CONTAINER_ID_WEB"
-      ;;
-    ai4su)
-      CONTAINER_ID_VAR="_GTM_CONTAINER_ID_AI4SU"
-      ;;
-    designOS_sandbox)
-      CONTAINER_ID_VAR="_GTM_CONTAINER_ID_SANDBOX"
-      ;;
-  esac
+for app in ai4su; do
+  CONTAINER_ID_VAR="_GTM_CONTAINER_ID_AI4SU"
 
   echo "Creating trigger: gtm-deploy-$app"
   gcloud builds triggers create github \
@@ -70,18 +55,8 @@ done
 echo ""
 echo "Creating sGTM deploy triggers..."
 
-for app in web ai4su designOS_sandbox; do
-  case "$app" in
-    web)
-      SERVICE_NAME="sgtm-web"
-      ;;
-    ai4su)
-      SERVICE_NAME="sgtm-ai4su"
-      ;;
-    designOS_sandbox)
-      SERVICE_NAME="sgtm-sandbox"
-      ;;
-  esac
+for app in ai4su; do
+  SERVICE_NAME="sgtm-ai4su"
 
   echo "Creating trigger: sgtm-deploy-$(echo $app | tr '_' '-')"
   gcloud builds triggers create github \
@@ -136,15 +111,11 @@ echo ""
 echo "Next steps:"
 echo "1. Configure substitution variables in Secret Manager or trigger settings:"
 echo "   - _GTM_ACCOUNT_ID"
-echo "   - _GTM_CONTAINER_ID_WEB"
 echo "   - _GTM_CONTAINER_ID_AI4SU"
-echo "   - _GTM_CONTAINER_ID_SANDBOX"
-echo "   - _GTM_CONTAINER_CONFIG_WEB"
 echo "   - _GTM_CONTAINER_CONFIG_AI4SU"
-echo "   - _GTM_CONTAINER_CONFIG_SANDBOX"
 echo ""
 echo "2. Test triggers:"
-echo "   gcloud builds triggers run gtm-deploy-web --region=$REGION"
+echo "   gcloud builds triggers run gtm-deploy-ai4su --region=$REGION"
 echo "   gcloud builds triggers run gtm-drift --region=$REGION"
 echo ""
 echo "3. View triggers in console:"

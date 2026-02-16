@@ -119,7 +119,7 @@ create_triggers() {
     --repo-owner="$GITHUB_OWNER" \
     --branch-pattern="^main$" \
     --build-config="packages/infra/cloudbuild-cicd.yaml" \
-    --substitutions="_APP_NAME=web,_ENV=production,_REGION=$REGION,_MIN_INSTANCES=0,_MAX_INSTANCES=10" \
+    --substitutions="_APP_NAME=ai4su,_ENV=production,_REGION=$REGION,_MIN_INSTANCES=0,_MAX_INSTANCES=10" \
     --project="$PROJECT_ID" 2>/dev/null; then
     log_success "Production trigger created"
   else
@@ -134,7 +134,7 @@ create_triggers() {
     --repo-owner="$GITHUB_OWNER" \
     --branch-pattern="^staging/.*$" \
     --build-config="packages/infra/cloudbuild-cicd.yaml" \
-    --substitutions="_APP_NAME=web,_ENV=staging,_REGION=$REGION,_MIN_INSTANCES=0,_MAX_INSTANCES=3" \
+    --substitutions="_APP_NAME=ai4su,_ENV=staging,_REGION=$REGION,_MIN_INSTANCES=0,_MAX_INSTANCES=3" \
     --project="$PROJECT_ID" 2>/dev/null; then
     log_success "Staging trigger created"
   else

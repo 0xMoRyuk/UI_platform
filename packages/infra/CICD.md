@@ -57,7 +57,7 @@ gcloud builds triggers create github \
   --repo-owner="YOUR_GITHUB_USERNAME" \
   --branch-pattern="^main$" \
   --build-config="packages/infra/cloudbuild-cicd.yaml" \
-  --substitutions="_APP_NAME=web,_ENV=production,_REGION=europe-west1" \
+  --substitutions="_APP_NAME=ai4su,_ENV=production,_REGION=europe-west1" \
   --project=digital-africa-ai4su
 
 # Or import from YAML
@@ -75,7 +75,7 @@ gcloud builds triggers create github \
   --repo-owner="YOUR_GITHUB_USERNAME" \
   --branch-pattern="^staging/.*$" \
   --build-config="packages/infra/cloudbuild-cicd.yaml" \
-  --substitutions="_APP_NAME=web,_ENV=staging,_REGION=europe-west1" \
+  --substitutions="_APP_NAME=ai4su,_ENV=staging,_REGION=europe-west1" \
   --project=digital-africa-ai4su
 
 # Or import from YAML
@@ -147,7 +147,7 @@ gcloud builds list --limit=10 --project=digital-africa-ai4su
 gcloud builds log BUILD_ID --project=digital-africa-ai4su --stream
 
 # Check Cloud Run service
-gcloud run services describe ui-platform-web \
+gcloud run services describe ui-platform-ai4su \
   --region=europe-west1 \
   --project=digital-africa-ai4su
 ```
@@ -159,18 +159,18 @@ If a deployment fails or causes issues, rollback to a previous version:
 ```bash
 # List revisions with traffic allocation
 gcloud run revisions list \
-  --service=ui-platform-web \
+  --service=ui-platform-ai4su \
   --region=europe-west1 \
   --project=digital-africa-ai4su
 
 # Route 100% traffic to previous revision
-gcloud run services update-traffic ui-platform-web \
+gcloud run services update-traffic ui-platform-ai4su \
   --region=europe-west1 \
   --to-revisions=PREVIOUS_REVISION=100 \
   --project=digital-africa-ai4su
 
 # Or use tagged version
-gcloud run services update-traffic ui-platform-web \
+gcloud run services update-traffic ui-platform-ai4su \
   --region=europe-west1 \
   --to-tags=v20260108-abc1234=100 \
   --project=digital-africa-ai4su
@@ -258,7 +258,7 @@ Based on our deployment experience, key issues resolved:
 ```bash
 # Run tests locally first
 bun install
-cd apps/web
+cd apps/ai4su
 bun run typecheck
 bun run lint
 ```
@@ -278,7 +278,7 @@ Check Cloud Run logs:
 
 ```bash
 gcloud logging read \
-  "resource.type=cloud_run_revision AND resource.labels.service_name=ui-platform-web" \
+  "resource.type=cloud_run_revision AND resource.labels.service_name=ui-platform-ai4su" \
   --limit=50 \
   --project=digital-africa-ai4su
 ```
@@ -288,7 +288,7 @@ gcloud logging read \
 Verify IAM policy allows public access:
 
 ```bash
-gcloud run services add-iam-policy-binding ui-platform-web \
+gcloud run services add-iam-policy-binding ui-platform-ai4su \
   --region=europe-west1 \
   --member=allUsers \
   --role=roles/run.invoker \
@@ -308,7 +308,7 @@ gcloud run services add-iam-policy-binding ui-platform-web \
 
 3. **Testing**:
    - Always run tests locally before pushing
-   - Add unit tests to `apps/web/tests/`
+   - Add unit tests to `apps/ai4su/tests/`
    - Smoke tests run automatically after deployment
 
 4. **Monitoring**:
@@ -323,7 +323,7 @@ gcloud run services add-iam-policy-binding ui-platform-web \
 
 ## Next Steps
 
-1. **Add more apps**: Duplicate trigger for each app in monorepo
+1. **Add more apps**: Create new trigger for each app in monorepo
 2. **Environment-specific configs**: Use Secret Manager for API keys
 3. **Monitoring**: Set up Cloud Monitoring alerts
 4. **Load testing**: Test scale-up behavior under load

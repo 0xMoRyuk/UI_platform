@@ -19,6 +19,4 @@ filename: packages/infra/gtm/cloudbuild-gtm-drift.yaml
 
 substitutions:
   _GTM_ACCOUNT_ID: ${_GTM_ACCOUNT_ID}
-  _GTM_CONTAINER_ID_WEB: ${_GTM_CONTAINER_ID_WEB}
   _GTM_CONTAINER_ID_AI4SU: ${_GTM_CONTAINER_ID_AI4SU}
-  _GTM_CONTAINER_ID_SANDBOX: ${_GTM_CONTAINER_ID_SANDBOX}

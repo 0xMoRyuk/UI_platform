@@ -16,8 +16,7 @@ The platform runs on **Google Cloud Run** (europe-west1 region) with a scale-to-
 UI_platform/
 ├── apps/           # Independent applications
 │   ├── web/        # AI4Startups showcase website
-│   ├── ai4su/      # Design OS application
-│   └── designOS_sandbox/
+│   └── ai4su/      # Design OS application
 ├── packages/       # Shared code
 │   ├── ui/         # Shared components (shadcn/ui)
 │   ├── config/     # TypeScript, Tailwind, ESLint configs
@@ -31,7 +30,7 @@ UI_platform/
 | Layer | Technology | Purpose |
 |-------|------------|---------|
 | **Monorepo** | Bun workspaces | Native dependency management |
-| **Framework** | Next.js 15 / React 18 (web), Vite / React 19 (ai4su, designOS_sandbox) | SSR (web), SPA (ai4su, designOS_sandbox) |
+| **Framework** | Vite / React 19 (ai4su) | SPA |
 | **Language** | TypeScript | Type safety |
 | **Styling** | Tailwind CSS | Utility-first CSS |
 | **Components** | shadcn/ui | Accessible, customizable UI |
@@ -44,7 +43,6 @@ UI_platform/
 |-----|-------------|--------|
 | `web` | AI4Startups showcase | Production |
 | `ai4su` | Design OS tool | Development |
-| `designOS_sandbox` | Design prototyping | Development |
 
 ---
 

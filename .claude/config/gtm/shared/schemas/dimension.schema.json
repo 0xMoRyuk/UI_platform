@@ -11,7 +11,7 @@
       "properties": {
         "app_id": {
           "type": "string",
-          "enum": ["web", "ai4su", "designOS_sandbox"],
+          "enum": ["ai4su"],
           "description": "Which app sent the event"
         },
         "brand_id": {

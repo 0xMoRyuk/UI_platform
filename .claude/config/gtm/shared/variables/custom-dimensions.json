@@ -15,7 +15,7 @@
           "value": "2"
         }
       ],
-      "notes": "Identifies which app sent the event (web, ai4su, designOS_sandbox). Required dimension."
+      "notes": "Identifies which app sent the event (ai4su). Required dimension."
     },
     {
       "name": "brand_id",

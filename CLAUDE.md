@@ -6,7 +6,7 @@
 
 **Structure:** `apps/*` (independent apps) + `packages/*` (shared: ui, config, types, utils, infra)
 
-**Stack:** Bun workspaces · Next.js 15 · TypeScript · Tailwind · shadcn/ui · Cloud Run
+**Stack:** Bun workspaces · Vite · React 19 · TypeScript · Tailwind · shadcn/ui · Cloud Run
 
 ---
 

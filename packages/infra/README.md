@@ -19,7 +19,7 @@ cd packages/infra
 ./scripts/deploy.sh <app-name> <project-id> <region>
 
 # Example
-./scripts/deploy.sh web my-gcp-project europe-west1
+./scripts/deploy.sh ai4su my-gcp-project europe-west1
 ```
 
 ### Deploy All Apps

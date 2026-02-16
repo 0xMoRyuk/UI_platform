@@ -4,7 +4,7 @@
 # Handles shared triggers/variables and app-specific tags/variables.
 #
 # Required substitutions:
-#   - _APP_ID: App identifier (web, ai4su, designOS_sandbox)
+#   - _APP_ID: App identifier (ai4su)
 #   - _GTM_ACCOUNT_ID: GTM account ID
 #   - _GTM_CONTAINER_ID: GTM container ID for the app
 #

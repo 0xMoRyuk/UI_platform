@@ -1,9 +1,0 @@
-version: "1.0.0"
-app_id: web
-container_id: "${GTM_CONTAINER_ID_WEB}"
-measurement_id: "${GA4_MEASUREMENT_ID_WEB}"
-last_synced: null
-
-sgtm:
-  service_name: sgtm-web
-  endpoint: "${SGTM_ENDPOINT_WEB}"

@@ -25,7 +25,7 @@ See [CLAUDE.md](./CLAUDE.md) for complete architectural guidelines.
 
 **Tech Stack:**
 - Monorepo: Bun workspaces
-- Framework: Next.js 15 / React 18 (web), Vite / React 19 (ai4su, designOS_sandbox)
+- Framework: Vite / React 19 (ai4su)
 - Language: TypeScript
 - Styling: Tailwind CSS
 - Components: shadcn/ui
@@ -53,23 +53,18 @@ bun install
 ### Development
 
 ```bash
-# Run all apps (from root)
-bun run dev
-
-# Run specific app
-cd apps/web
+# Run the app
+cd apps/ai4su
 bun run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) to see the web app.
-
 ## Working with Apps
 
-### Developing an App
+### Developing the App
 
 ```bash
 # Navigate to app
-cd apps/web
+cd apps/ai4su
 
 # Start development server
 bun run dev
@@ -112,10 +107,8 @@ bun run lint
 
 ### Using Shared Packages in Apps
 
-Only `web` imports `@ui-platform/*` shared packages. `ai4su` and `designOS_sandbox` use Radix UI directly.
-
 ```typescript
-// In web app — import from shared packages
+// Import from shared packages
 import { Button } from "@ui-platform/ui/components/button";
 import { cn } from "@ui-platform/ui";
 
@@ -168,7 +161,7 @@ cd packages/infra
 
 **Example:**
 ```bash
-./scripts/deploy.sh web my-gcp-project europe-west1
+./scripts/deploy.sh ai4su my-gcp-project europe-west1
 ```
 
 ### Deploy All Apps
@@ -181,7 +174,7 @@ cd packages/infra
 ### Deployment Details
 
 Each app deploys as a separate Cloud Run service:
-- Service name: `ui-platform-<app-name>` (e.g., `ui-platform-web`)
+- Service name: `ui-platform-<app-name>` (e.g., `ui-platform-ai4su`)
 - Scale-to-zero enabled (minInstances: 0)
 - Memory: 512Mi (configurable)
 - CPU: 1 vCPU
@@ -193,7 +186,7 @@ Each app deploys as a separate Cloud Run service:
 Set environment variables via Cloud Run:
 
 ```bash
-gcloud run services update ui-platform-web \
+gcloud run services update ui-platform-ai4su \
   --region=europe-west1 \
   --set-env-vars="NODE_ENV=production,NEXT_PUBLIC_API_URL=https://api.example.com"
 ```
@@ -203,15 +196,7 @@ gcloud run services update ui-platform-web \
 ```
 UI_platform/
 ├── apps/                       # Independent applications
-│   ├── web/                    # Next.js 15 / React 18
-│   │   ├── app/                # Next.js App Router
-│   │   ├── components/         # App-specific components
-│   │   ├── features/           # Feature-specific code
-│   │   ├── hooks/              # Custom React hooks
-│   │   ├── services/           # API clients
-│   │   └── utils/              # App-specific utilities
-│   ├── ai4su/                  # Vite / React 19
-│   └── designOS_sandbox/       # Vite / React 19 sandbox
+│   └── ai4su/                  # Vite / React 19
 ├── packages/                   # Shared code
 │   ├── ui/                     # Shared UI components
 │   │   ├── src/

@@ -3,8 +3,8 @@
 # Deploys GTM Server-Side container to Cloud Run for a specific app.
 #
 # Required substitutions:
-#   - _APP_ID: App identifier (web, ai4su, designOS_sandbox)
-#   - _SERVICE_NAME: Cloud Run service name (sgtm-web, sgtm-ai4su, sgtm-sandbox)
+#   - _APP_ID: App identifier (ai4su)
+#   - _SERVICE_NAME: Cloud Run service name (sgtm-ai4su)
 #   - _GTM_CONTAINER_CONFIG: GTM container configuration string
 #
 # Optional substitutions:

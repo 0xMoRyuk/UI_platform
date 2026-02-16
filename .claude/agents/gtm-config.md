@@ -17,9 +17,7 @@ Orchestrate GTM Server-Side container configuration using the `tagmanager2` CLI,
 
 ```
 GTM Account (centralized)
-├── GTM Container: web        → Cloud Run: sgtm-web        → GA4: G-XXX
-├── GTM Container: ai4su      → Cloud Run: sgtm-ai4su      → GA4: G-YYY
-└── GTM Container: designOS   → Cloud Run: sgtm-sandbox    → GA4: G-ZZZ
+└── GTM Container: ai4su      → Cloud Run: sgtm-ai4su      → GA4: G-YYY
 ```
 
 Each app has:
@@ -84,20 +82,12 @@ export GOOGLE_APPLICATION_CREDENTIALS=/path/to/service-account.json
 │   └── schemas/
 │       ├── event.schema.json
 │       └── dimension.schema.json
-├── web/                      # Per-app container
-│   ├── container.yaml        # Container ID, measurement ID
-│   ├── tags/
-│   │   └── ga4-event.json
-│   └── variables/
-│       └── measurement-id.json
-├── ai4su/
-│   ├── container.yaml
-│   ├── tags/
-│   └── variables/
-└── designOS_sandbox/
+└── ai4su/
     ├── container.yaml
     ├── tags/
+    │   └── ga4-event.json
     └── variables/
+        └── measurement-id.json
 ```
 
 ## CLI Reference
@@ -270,15 +260,9 @@ tagmanager2 accounts containers-workspaces-create \
 | Variable | Description | Scope |
 |----------|-------------|-------|
 | `GTM_ACCOUNT_ID` | GTM Account ID | Account |
-| `GTM_CONTAINER_ID_WEB` | Container ID for web | Per-app |
 | `GTM_CONTAINER_ID_AI4SU` | Container ID for ai4su | Per-app |
-| `GTM_CONTAINER_ID_SANDBOX` | Container ID for sandbox | Per-app |
-| `GA4_MEASUREMENT_ID_WEB` | GA4 ID for web | Per-app |
 | `GA4_MEASUREMENT_ID_AI4SU` | GA4 ID for ai4su | Per-app |
-| `GA4_MEASUREMENT_ID_SANDBOX` | GA4 ID for sandbox | Per-app |
-| `SGTM_ENDPOINT_WEB` | sGTM endpoint for web | Per-app |
 | `SGTM_ENDPOINT_AI4SU` | sGTM endpoint for ai4su | Per-app |
-| `SGTM_ENDPOINT_SANDBOX` | sGTM endpoint for sandbox | Per-app |
 
 ## Validation Rules
 

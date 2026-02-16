@@ -52,19 +52,17 @@ Show current Cloud Run service status.
 ```
 Cloud Run Status (europe-west1)
 ===============================
-  web:               ✓ https://ui-platform-web-xxx.run.app
   ai4su:             ✓ https://ui-platform-ai4su-xxx.run.app
-  designOS_sandbox:  ✗ not deployed
 ```
 
 ### Output (specific app)
 
 ```
-Status: web
-===========
-Service: ui-platform-web
-URL: https://ui-platform-web-xxx.run.app
-Revision: ui-platform-web-00042-abc (100%)
+Status: ai4su
+=============
+Service: ui-platform-ai4su
+URL: https://ui-platform-ai4su-xxx.run.app
+Revision: ui-platform-ai4su-00042-abc (100%)
 Last Deploy: 2026-01-26T10:30:00Z
 ```
 
@@ -90,7 +88,7 @@ Deploy an app via Cloud Build.
 ### Interactive flow
 
 ```
-Deploy: web
+Deploy: ai4su
 
 Git: main @ abc1234 "feat: add analytics"
 Uncommitted: none
@@ -100,7 +98,7 @@ Proceed? [y/N] y
 Building... (3-5 min)
 [stream build output]
 
-✓ Deployed: https://ui-platform-web-xxx.run.app
+✓ Deployed: https://ui-platform-ai4su-xxx.run.app
   Version: v20260126-abc1234
 ```
 
@@ -131,14 +129,14 @@ Rollback to previous revision.
 ### Interactive flow
 
 ```
-Rollback: web
+Rollback: ai4su
 
-Current:  ui-platform-web-00042-abc (100%)
-Previous: ui-platform-web-00041-def (0%)
+Current:  ui-platform-ai4su-00042-abc (100%)
+Previous: ui-platform-ai4su-00041-def (0%)
 
 Rollback to 00041-def? [y/N] y
 
-✓ Rolled back to ui-platform-web-00041-def
+✓ Rolled back to ui-platform-ai4su-00041-def
 ```
 
 ---
@@ -191,9 +189,7 @@ gcloud logging read \
 Error: App 'foo' not found
 
 Available apps:
-  - web
   - ai4su
-  - designOS_sandbox
 ```
 
 ### Build Failed
@@ -238,9 +234,7 @@ Services follow the pattern: `ui-platform-<app>`
 
 | App | Service Name |
 |-----|-------------|
-| web | ui-platform-web |
 | ai4su | ui-platform-ai4su |
-| designOS_sandbox | ui-platform-designos-sandbox |
 
 ### Scripts
 

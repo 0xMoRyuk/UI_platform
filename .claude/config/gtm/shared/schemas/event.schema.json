@@ -14,7 +14,7 @@
     },
     "app_id": {
       "type": "string",
-      "enum": ["web", "ai4su", "designOS_sandbox"],
+      "enum": ["ai4su"],
       "description": "Application identifier"
     },
     "brand_id": {

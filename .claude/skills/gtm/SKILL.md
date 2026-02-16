@@ -22,9 +22,7 @@ Each app gets its own GTM container for independent deployment:
 
 ```
 GTM Account
-├── Container: sgtm-web        → sgtm-web.run.app        → GA4 (web)
-├── Container: sgtm-ai4su      → sgtm-ai4su.run.app      → GA4 (ai4su)
-└── Container: sgtm-sandbox    → sgtm-sandbox.run.app    → GA4 (sandbox)
+└── Container: sgtm-ai4su      → sgtm-ai4su.run.app      → GA4 (ai4su)
 ```
 
 ## Commands
@@ -71,9 +69,7 @@ GTM Configuration Status
 Account: accounts/123456789
 
 Apps:
-  web:            GTM-XXXXX (synced 2026-01-26)
   ai4su:          GTM-YYYYY (synced 2026-01-25)
-  designOS_sandbox: not initialized
 
 Run /gtm init <app> to initialize missing containers.
 ```
@@ -81,12 +77,12 @@ Run /gtm init <app> to initialize missing containers.
 ### Output (specific app)
 
 ```
-GTM Status: web
-===============
-Container: GTM-XXXXX
-Measurement ID: G-XXXXXXXXXX
-sGTM Service: sgtm-web
-sGTM Endpoint: https://sgtm-web-xxxxx.run.app
+GTM Status: ai4su
+=================
+Container: GTM-YYYYY
+Measurement ID: G-YYYYYYYYYY
+sGTM Service: sgtm-ai4su
+sGTM Endpoint: https://sgtm-ai4su-xxxxx.run.app
 
 Last synced: 2026-01-26T10:30:00Z
 
@@ -134,12 +130,12 @@ Initialize a new GTM Server container for an app.
 ### Output
 
 ```
-Initializing GTM container for: web
+Initializing GTM container for: ai4su
 
 Enter GA4 Measurement ID: G-XXXXXXXXXX
 
 Creating container...
-  Container: sgtm-web
+  Container: sgtm-ai4su
   Container ID: GTM-XXXXXX
 
 Syncing shared resources...
@@ -153,15 +149,15 @@ Creating app-specific resources...
   ✓ measurement-id variable
   ✓ ga4-event tag
 
-Updated .claude/config/gtm/web/container.yaml
+Updated .claude/config/gtm/ai4su/container.yaml
 
 Next steps:
 1. Add secrets to Secret Manager (or Cloud Build substitutions):
-   - GTM_CONTAINER_ID_WEB=GTM-XXXXXX
-   - GA4_MEASUREMENT_ID_WEB=G-XXXXXXXXXX
+   - GTM_CONTAINER_ID_AI4SU=GTM-XXXXXX
+   - GA4_MEASUREMENT_ID_AI4SU=G-XXXXXXXXXX
 
 2. Deploy sGTM to Cloud Run:
-   /gtm deploy web
+   /gtm deploy ai4su
 ```
 
 ---
@@ -187,7 +183,7 @@ Sync local configuration files to app's GTM workspace.
 ### Output
 
 ```
-Syncing to GTM workspace: web
+Syncing to GTM workspace: ai4su
 
 Creating workspace: Sync-2026-01-26...
 
@@ -198,7 +194,7 @@ Changes detected:
     ~ triggers/low-data-mode.json (modified)
     = variables/* (unchanged)
 
-  App (web):
+  App (ai4su):
     = tags/ga4-event.json (unchanged)
     + variables/new-custom-var.json (new)
 
@@ -227,7 +223,7 @@ Validate app configuration against analytics.md principles.
 ### Output
 
 ```
-Validating GTM configuration: web
+Validating GTM configuration: ai4su
 
 ✓ Container config exists
 ✓ GA4 event tag has consent trigger
@@ -241,7 +237,7 @@ Validation passed!
 Or with issues:
 
 ```
-Validating GTM configuration: web
+Validating GTM configuration: ai4su
 
 ✓ Container config exists
 ✗ GA4 event tag missing consent trigger
@@ -280,7 +276,7 @@ Create version and publish to production.
 ### Output
 
 ```
-Publishing GTM configuration: web
+Publishing GTM configuration: ai4su
 
 Validation passed!
 
@@ -320,20 +316,20 @@ Deploy sGTM container to Cloud Run.
 ### Output
 
 ```
-Deploying sGTM for: web
+Deploying sGTM for: ai4su
 
 Triggering Cloud Build...
-  Trigger: sgtm-deploy-web
-  Service: sgtm-web
+  Trigger: sgtm-deploy-ai4su
+  Service: sgtm-ai4su
   Region: europe-west1
 
 Build started: https://console.cloud.google.com/cloud-build/builds/...
 Waiting for build to complete...
 
 sGTM deployed successfully!
-  URL: https://sgtm-web-xxxxx-ey.a.run.app
+  URL: https://sgtm-ai4su-xxxxx-ey.a.run.app
 
-Update SGTM_ENDPOINT_WEB in Secret Manager.
+Update SGTM_ENDPOINT_AI4SU in Secret Manager.
 ```
 
 ---
@@ -349,12 +345,10 @@ All configuration is stored in `.claude/config/gtm/`:
 │   ├── triggers/
 │   ├── variables/
 │   └── schemas/
-├── web/                      # Per-app config
-│   ├── container.yaml
-│   ├── tags/
-│   └── variables/
-├── ai4su/
-└── designOS_sandbox/
+└── ai4su/                    # Per-app config
+    ├── container.yaml
+    ├── tags/
+    └── variables/
 ```
 
 ---
@@ -368,10 +362,10 @@ All configuration is stored in `.claude/config/gtm/`:
 | `GA4_MEASUREMENT_ID_<APP>` | GA4 ID | Per-app |
 | `SGTM_ENDPOINT_<APP>` | sGTM URL | Per-app |
 
-Example for `web` app:
-- `GTM_CONTAINER_ID_WEB`
-- `GA4_MEASUREMENT_ID_WEB`
-- `SGTM_ENDPOINT_WEB`
+Example for `ai4su` app:
+- `GTM_CONTAINER_ID_AI4SU`
+- `GA4_MEASUREMENT_ID_AI4SU`
+- `SGTM_ENDPOINT_AI4SU`
 
 ---
 
@@ -401,9 +395,7 @@ This will create a new container for the app.
 Error: App 'unknown' not found
 
 Available apps:
-  - web
   - ai4su
-  - designOS_sandbox
 
 Apps must exist in apps/ directory.
 ```
@@ -411,10 +403,10 @@ Apps must exist in apps/ directory.
 ### Validation Failed
 
 ```
-Error: Validation failed for app: web
+Error: Validation failed for app: ai4su
 
 Fix the issues listed above, then re-run:
-  /gtm validate web
+  /gtm validate ai4su
 ```
 
 ---

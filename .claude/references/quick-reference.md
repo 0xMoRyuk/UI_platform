@@ -21,16 +21,16 @@ bun install
 bun run dev
 
 # Development - specific app
-cd apps/web && bun run dev
+cd apps/ai4su && bun run dev
 
 # Build all apps
 bun run build
 
 # Build specific app
-cd apps/web && bun run build
+cd apps/ai4su && bun run build
 
 # Add dependency to specific app
-cd apps/web && bun add <package>
+cd apps/ai4su && bun add <package>
 
 # Add dependency to shared package
 cd packages/ui && bun add <package>
@@ -46,8 +46,8 @@ bun run clean
 cd packages/infra
 ./scripts/deploy.sh <app-name> <project-id> <region>
 
-# Example: Deploy web app
-./scripts/deploy.sh web digital-africa-ai4su europe-west1
+# Example: Deploy ai4su app
+./scripts/deploy.sh ai4su digital-africa-ai4su europe-west1
 
 # Deploy all apps
 ./scripts/deploy-all.sh <project-id> <region>
@@ -84,7 +84,7 @@ gcloud builds list --limit=10
 gcloud builds log BUILD_ID --stream
 
 # Rollback if needed
-gcloud run services update-traffic ui-platform-web \
+gcloud run services update-traffic ui-platform-ai4su \
   --to-revisions=PREVIOUS_VERSION=100 \
   --region=europe-west1
 ```
@@ -101,7 +101,7 @@ bunx shadcn@latest add button card dialog
 # Then export in packages/ui/src/index.ts
 
 # Or add to specific app
-cd apps/web
+cd apps/ai4su
 bunx shadcn@latest add button
 ```
 
@@ -110,9 +110,7 @@ bunx shadcn@latest add button
 ```
 UI_platform/
 ├── apps/                       # Independent applications
-│   ├── web/                    # Next.js 15 / React 18
-│   ├── ai4su/                  # Vite / React 19
-│   └── designOS_sandbox/       # Vite / React 19 sandbox
+│   └── ai4su/                  # Vite / React 19
 ├── packages/                   # Shared code
 │   ├── ui/                     # Shared UI components
 │   │   ├── src/components/     # shadcn/ui components
@@ -161,7 +159,7 @@ bunx create-next-app@latest . --use-bun
 ### Cost Monitoring
 
 * Use GCP Cost Management dashboard
-* Set up budget alerts per service (ui-platform-web, ui-platform-admin, etc.)
+* Set up budget alerts per service (ui-platform-ai4su, ui-platform-admin, etc.)
 * Monitor Cloud Run request counts and execution time
 * Track egress data (major cost driver)
 * Each app deploys as separate Cloud Run service for cost attribution

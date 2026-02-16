@@ -42,7 +42,7 @@ Track metrics that matter for user experience and system health:
 
 ### 5. Per-App Isolation
 
-- Separate GA4 property per app (web, ai4su, designOS_sandbox)
+- Separate GA4 property per app (ai4su)
 - Separate sGTM container per app (independent deployment cycles)
 - Separate Cloud Run service per app (isolated scaling, failure isolation)
 - No cross-app user tracking without explicit business need
@@ -249,7 +249,7 @@ Per sGTM container (~30k requests/month):
 
 ```bash
 # Check analytics contribution to bundle
-cd apps/web && bun run build
+cd apps/ai4su && bun run build
 # Verify analytics code < 10KB
 ```
 
