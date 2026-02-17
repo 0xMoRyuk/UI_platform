@@ -14,10 +14,10 @@
   },
   "hero": {
     "title": "AI4Startups",
-    "subtitle": "Empowering African startups with open-source AI models, hackathons, and ecosystem support",
-    "ctaText": "Explore the Toolbox",
+    "subtitle": "Enabling African startups to innovate with trusted data and build scalable, responsible AI solutions",
+    "ctaText": "View our Hackathons",
     "ctaLink": "/toolbox",
-    "secondaryCtaText": "View Hackathons",
+    "secondaryCtaText": "Explore our Resources Hub",
     "secondaryCtaLink": "/hackathons"
   },
   "kpis": [
@@ -33,9 +33,9 @@
     {
       "id": "kpi-hackathons",
       "label": "Hackathons",
-      "value": 6,
+      "value": 8,
       "suffix": "",
-      "description": "Events organized across Africa",
+      "description": "Online and event competition organised",
       "link": "/hackathons",
       "icon": "trophy"
     },
@@ -44,16 +44,16 @@
       "label": "Countries",
       "value": 8,
       "suffix": "",
-      "description": "African nations participating",
+      "description": "Eligible to our program",
       "link": "/ecosystem",
       "icon": "globe"
     },
     {
       "id": "kpi-participants",
-      "label": "Participants",
-      "value": 500,
-      "suffix": "+",
-      "description": "Developers and entrepreneurs engaged",
+      "label": "Startups",
+      "value": 80,
+      "suffix": "",
+      "description": "reached by AI4startups program",
       "link": "/ecosystem",
       "icon": "users"
     }
@@ -87,27 +87,27 @@
   "sectionPreviews": [
     {
       "id": "preview-hackathons",
-      "title": "Hackathons",
-      "description": "Discover our hackathon series across 8 African countries, challenge briefs, and winning solutions.",
+      "title": "Data Governance in Africa Initiative",
+      "description": "AI4Startups is implemented under the Data Governance in Africa initiative, promoting ethical, interoperable and development-focused data ecosystems across the continent",
       "imageUrl": "/images/hackathon-preview.jpg",
       "link": "/hackathons",
-      "stats": "6 events, 500+ participants"
+      "stats": "€60M initiative, 6 implementing partners"
     },
     {
       "id": "preview-ecosystem",
-      "title": "Ecosystem Activities",
-      "description": "Explore networking events, research studies, and our Women Founders support program.",
+      "title": "From Data to Deployment",
+      "description": "Discover how AI4SU turns real datasets into deployable AI solutions through hackathons, data sharing agreements, applied research and ecosystem facilitation.",
       "imageUrl": "/images/ecosystem-preview.jpg",
       "link": "/ecosystem",
-      "stats": "15+ activities, 8 countries"
+      "stats": "8 data sharing agreements, 8 countries scope"
     },
     {
       "id": "preview-partners",
-      "title": "Partners",
-      "description": "Meet the Team Europe partners and service providers making AI4Startups possible.",
+      "title": "Partners & Data Collaborations",
+      "description": "Meet the stakeholders, public institutions, startups and data partners powering AI innovation and responsible data governance across Africa.",
       "imageUrl": "/images/partners-preview.jpg",
       "link": "/partners",
-      "stats": "EU funded, 5+ partners"
+      "stats": "Public & private data partnerships"
     }
   ],
   "countries": [

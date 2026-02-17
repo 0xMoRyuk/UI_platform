@@ -15,6 +15,7 @@
     "prepare": "husky"
   },
   "devDependencies": {
+    "@figma/code-connect": "^1.3.13",
     "husky": "^9.1.7",
     "typescript": "^5.7.2"
   }
