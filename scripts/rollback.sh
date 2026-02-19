@@ -18,6 +18,7 @@ echo "Rolling back $SERVICE in $REGION..."
 
 # Get the two most recent revisions
 REVISIONS=$(gcloud run revisions list \
+  --project=digital-africa-ai4su \
   --service="$SERVICE" \
   --region="$REGION" \
   --limit=2 \
@@ -45,6 +46,7 @@ if [[ ! $REPLY =~ ^[Yy]$ ]]; then
 fi
 
 gcloud run services update-traffic "$SERVICE" \
+  --project=digital-africa-ai4su \
   --to-revisions="$PREVIOUS=100" \
   --region="$REGION"
 

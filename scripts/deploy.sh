@@ -27,5 +27,7 @@ echo "Deploying $APP..."
 echo ""
 
 gcloud builds submit \
+  --project=digital-africa-ai4su \
+  --region=europe-west1 \
   --config=packages/infra/cloudbuild-cicd.yaml \
   --substitutions="_APP_NAME=$APP"

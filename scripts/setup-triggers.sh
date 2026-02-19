@@ -33,14 +33,14 @@ get_apps() {
 
 list_triggers() {
   echo "Current ui-platform triggers:"
-  gcloud builds triggers list --filter="name~^deploy-" --format="table(name,createTime)"
+  gcloud builds triggers list --project="$PROJECT_ID" --region="$REGION" --filter="name~^deploy-" --format="table(name,createTime)"
 }
 
 delete_triggers() {
   echo "Deleting ui-platform triggers..."
-  for trigger in $(gcloud builds triggers list --filter="name~^deploy-" --format="value(name)"); do
+  for trigger in $(gcloud builds triggers list --project="$PROJECT_ID" --region="$REGION" --filter="name~^deploy-" --format="value(name)"); do
     echo "  Deleting $trigger..."
-    gcloud builds triggers delete "$trigger" --quiet
+    gcloud builds triggers delete "$trigger" --project="$PROJECT_ID" --region="$REGION" --quiet
   done
   echo "Done"
 }
@@ -52,14 +52,15 @@ create_trigger() {
   echo "Creating trigger: $trigger_name"
 
   # Check if trigger exists
-  if gcloud builds triggers describe "$trigger_name" &>/dev/null; then
+  if gcloud builds triggers describe "$trigger_name" --project="$PROJECT_ID" --region="$REGION" &>/dev/null; then
     echo "  Trigger exists, updating..."
-    gcloud builds triggers delete "$trigger_name" --quiet
+    gcloud builds triggers delete "$trigger_name" --project="$PROJECT_ID" --region="$REGION" --quiet
   fi
 
   local repo_path="projects/$PROJECT_ID/locations/$REGION/connections/$CONNECTION_NAME/repositories/$REPO_NAME"
 
   gcloud builds triggers create github \
+    --project="$PROJECT_ID" \
     --name="$trigger_name" \
     --repository="$repo_path" \
     --branch-pattern="$BRANCH" \
