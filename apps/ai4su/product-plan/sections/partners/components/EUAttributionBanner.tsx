@@ -1,4 +1,4 @@
-import { Flag, Globe } from 'lucide-react'
+import { Globe } from 'lucide-react'
 import type { EUAttributionBannerProps } from '../types'
 
 export function EUAttributionBanner({ attribution }: EUAttributionBannerProps) {

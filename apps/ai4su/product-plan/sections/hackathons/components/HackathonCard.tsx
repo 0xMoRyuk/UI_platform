@@ -1,4 +1,4 @@
-import { Calendar, MapPin, Users, Brain, ArrowRight } from 'lucide-react'
+import { Calendar, Users, Brain, ArrowRight } from 'lucide-react'
 import type { HackathonCardProps } from '../types'
 
 const countryFlags: Record<string, string> = {

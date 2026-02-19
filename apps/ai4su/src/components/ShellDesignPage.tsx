@@ -1,10 +1,23 @@
-import { Suspense, useMemo, useState, useRef, useCallback, useEffect } from 'react'
+import { Suspense, useState, useRef, useCallback, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ArrowLeft, PanelLeft, Maximize2, GripVertical, Smartphone, Tablet, Monitor } from 'lucide-react'
 import { Button } from '@ui-platform/ui/components/button'
 import { ThemeToggle } from '@/components/ThemeToggle'
 import { loadShellPreview } from '@/lib/shell-loader'
 import React from 'react'
+
+// Module-level cache for lazy shell preview (stable identity across renders)
+let shellPreviewLazy: React.LazyExoticComponent<React.ComponentType> | null | undefined
+
+function getShellPreviewLazy(loader: (() => Promise<{ default: React.ComponentType }>) | null) {
+  if (shellPreviewLazy !== undefined) return shellPreviewLazy
+  if (!loader) {
+    shellPreviewLazy = null
+    return null
+  }
+  shellPreviewLazy = React.lazy(loader)
+  return shellPreviewLazy
+}
 
 const MIN_WIDTH = 320
 const DEFAULT_WIDTH_PERCENT = 100
@@ -178,13 +191,10 @@ export function ShellDesignPage() {
  * Fullscreen version of the shell preview (for screenshots)
  * Syncs theme with parent window via localStorage
  */
+/* eslint-disable react-hooks/static-components -- dynamic lazy loading */
 export function ShellDesignFullscreen() {
   const shellPreviewLoader = loadShellPreview()
-
-  const ShellPreviewComponent = useMemo(() => {
-    if (!shellPreviewLoader) return null
-    return React.lazy(shellPreviewLoader)
-  }, [shellPreviewLoader])
+  const ShellPreviewComponent = getShellPreviewLazy(shellPreviewLoader)
 
   // Sync theme with parent window
   useEffect(() => {
@@ -240,3 +250,4 @@ export function ShellDesignFullscreen() {
     </Suspense>
   )
 }
+/* eslint-enable react-hooks/static-components */

@@ -1,7 +1,7 @@
 import { Twitter, Linkedin, Share2 } from 'lucide-react'
 import type { ShareButtonsProps } from '../types'
 
-export function ShareButtons({ hackathon, onShare }: ShareButtonsProps) {
+export function ShareButtons({ onShare }: ShareButtonsProps) {
   return (
     <div className="flex items-center gap-3">
       <span className="text-sm text-stone-500 dark:text-stone-400 flex items-center gap-1.5">

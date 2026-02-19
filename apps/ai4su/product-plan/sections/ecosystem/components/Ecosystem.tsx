@@ -18,7 +18,6 @@ export function Ecosystem({
   onCountryFilter,
   onActivityClick,
   onMapMarkerClick,
-  onResourceDownload,
   onWomenFoundersCta,
 }: EcosystemPageProps) {
   const [selectedType, setSelectedType] = useState<ActivityTypeId | null>(null)

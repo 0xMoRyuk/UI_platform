@@ -1,7 +1,7 @@
 'use client'
 
 import { Users, BookOpen, GraduationCap, Heart, ChevronDown } from 'lucide-react'
-import type { ActivityFilterProps } from '@/../product/sections/ecosystem/types'
+import type { ActivityFilterProps, CountryCode } from '@/../product/sections/ecosystem/types'
 
 const iconMap = {
   users: Users,
@@ -57,7 +57,7 @@ export function ActivityFilter({
       <div className="relative sm:ml-auto">
         <select
           value={selectedCountry || ''}
-          onChange={(e) => onCountryChange(e.target.value as any || null)}
+          onChange={(e) => onCountryChange((e.target.value || null) as CountryCode | null)}
           className="appearance-none bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-700
                      rounded-lg px-4 py-2 pr-10 text-sm font-medium text-stone-700 dark:text-stone-300
                      focus:outline-none focus:ring-2 focus:ring-brand-primary focus:border-transparent

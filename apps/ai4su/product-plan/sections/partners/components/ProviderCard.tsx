@@ -1,4 +1,4 @@
-import { ExternalLink, Cloud, Building } from 'lucide-react'
+import { ExternalLink, Cloud } from 'lucide-react'
 import type { ServiceProvider } from '../types'
 
 interface ProviderCardProps {

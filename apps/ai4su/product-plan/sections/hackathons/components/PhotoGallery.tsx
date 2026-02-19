@@ -17,7 +17,7 @@ export function PhotoGallery({ photos, onPhotoClick }: PhotoGalleryProps) {
       </div>
 
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
-        {photos.map((photo, index) => (
+        {photos.map((photo) => (
           <button
             key={photo.id}
             onClick={() => onPhotoClick(photo.id)}

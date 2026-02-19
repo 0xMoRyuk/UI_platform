@@ -152,4 +152,4 @@ export function PhaseNav() {
   )
 }
 
-export { phases }
+// phases is used internally by usePhaseStatuses
