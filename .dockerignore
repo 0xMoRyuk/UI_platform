@@ -1,0 +1,28 @@
+# Docker build context ignore
+# Reduces context sent to Docker daemon during cloud build
+
+node_modules/
+.git/
+.claude/
+.gcloud/
+.figma/
+.vscode/
+.idea/
+docs/
+standards/
+coverage/
+.next/
+out/
+build/
+dist/
+.env
+.env*.local
+*.md
+!packages/infra/*.md
+*.log
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+*.tsbuildinfo

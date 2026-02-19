@@ -1,0 +1,47 @@
+# Cloud Build source upload ignore
+# Without this, gcloud builds submit uploads the entire working directory (648MB+)
+# Cloud Build runs bun install, so node_modules is never needed
+
+# Dependencies (591MB)
+node_modules/
+
+# Git
+.git/
+
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Local config (not needed in build)
+.claude/
+.gcloud/
+.env
+.env*.local
+.figma/
+
+# Build artifacts
+.next/
+out/
+build/
+dist/
+coverage/
+*.tsbuildinfo
+
+# Documentation (not needed in build)
+docs/
+standards/
+*.md
+!packages/infra/*.md
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
