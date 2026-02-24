@@ -1,0 +1,50 @@
+{
+  "_meta": {
+    "models": {
+      "header": "Global header content including logo, search, and language labels.",
+      "navigation": "Main navigation menu items.",
+      "footer": "Footer content including EU attribution, partners, legal links, and hashtags."
+    }
+  },
+  "header": {
+    "logoText": "AI4Startups",
+    "search": {
+      "en": "Search models...",
+      "fr": "Rechercher..."
+    },
+    "languages": [
+      { "code": "en", "label": "English" },
+      { "code": "fr", "label": "Français" }
+    ]
+  },
+  "navigation": [
+    { "label": "Home", "href": "/" },
+    { "label": "Our hackathons", "href": "/hackathons" },
+    { "label": "Resources Hub", "href": "/deliverables" },
+    { "label": "All Activities", "href": "/activities" },
+    { "label": "European Initiative", "href": "/datagov" },
+    { "label": "Partners", "href": "/partners" }
+  ],
+  "footer": {
+    "en": {
+      "fundedBy": "Funded by the European Union",
+      "implementedBy": "Implemented by",
+      "privacy": "Privacy Policy",
+      "legal": "Legal Notice",
+      "accessibility": "Accessibility",
+      "copyright": "© 2026 DataGov Initiative. All rights reserved."
+    },
+    "fr": {
+      "fundedBy": "Financé par l'Union européenne",
+      "implementedBy": "Mis en œuvre par",
+      "privacy": "Politique de confidentialité",
+      "legal": "Mentions légales",
+      "accessibility": "Accessibilité",
+      "copyright": "© 2026 Initiative DataGov. Tous droits réservés."
+    },
+    "partnersHeading": "Partners",
+    "partners": ["Digital Africa", "Expertise France", "GIZ"],
+    "followHeading": "Follow",
+    "hashtags": ["#D4DataGOV", "#DataGovernanceAfrica", "#TeamEurope", "#GlobalGateway"]
+  }
+}
