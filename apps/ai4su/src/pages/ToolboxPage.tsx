@@ -57,6 +57,10 @@ export function ToolboxPage() {
       studies={toolboxData.studies}
       bestPractices={toolboxData.bestPractices}
       finalReport={toolboxData.finalReport}
+      pageContent={toolboxData.pageContent}
+      studiesSection={toolboxData.studiesSection}
+      bestPracticesSection={toolboxData.bestPracticesSection}
+      finalReportSection={toolboxData.finalReportSection}
       onSearch={handleSearch}
       onFilterChange={handleFilterChange}
       onModelClick={handleModelClick}

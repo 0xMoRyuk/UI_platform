@@ -2,11 +2,11 @@
 
 import { useParams, useNavigate } from 'react-router-dom'
 import { HackathonDetail } from '@/sections/hackathons/components'
-import type { Hackathon } from '@/../product/sections/hackathons/types'
+import type { Hackathon, HackathonFieldLabels } from '@/../product/sections/hackathons/types'
 import hackathonsDataRaw from '@/../product/sections/hackathons/data.json'
 
 // Cast JSON data to proper types (JSON imports lose literal type information)
-const hackathonsData = hackathonsDataRaw as unknown as { methodology: unknown; hackathons: Hackathon[] }
+const hackathonsData = hackathonsDataRaw as unknown as { methodology: unknown; hackathons: Hackathon[]; fieldLabels: HackathonFieldLabels }
 
 export function HackathonDetailPage() {
   const { slug } = useParams<{ slug: string }>()
@@ -66,6 +66,7 @@ export function HackathonDetailPage() {
   return (
     <HackathonDetail
       hackathon={hackathon}
+      fieldLabels={hackathonsData.fieldLabels}
       onBackClick={handleBackClick}
       onChallengeBriefDownload={handleChallengeBriefDownload}
       onBestPracticesDownload={handleBestPracticesDownload}

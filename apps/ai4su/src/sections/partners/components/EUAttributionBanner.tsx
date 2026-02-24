@@ -39,7 +39,7 @@ export function EUAttributionBanner({ attribution }: EUAttributionBannerProps) {
           </h3>
           <div className="flex items-center justify-center md:justify-start gap-2 text-stone-500 dark:text-stone-400 mb-4">
             <Globe className="w-4 h-4" />
-            <span className="text-sm">Global Gateway Initiative</span>
+            <span className="text-sm">{attribution.initiative}</span>
           </div>
           <p className="text-sm text-stone-500 dark:text-stone-400 leading-relaxed">
             {attribution.disclaimer}

@@ -22,7 +22,7 @@ export function WomenFoundersSection({ program, onCtaClick }: WomenFoundersSecti
         <div className="text-center mb-12">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-pink-100 dark:bg-pink-900/30 rounded-full text-sm font-medium text-pink-700 dark:text-pink-300 mb-4">
             <Heart className="w-4 h-4" />
-            <span>Women Founders Program</span>
+            <span>{program.badge}</span>
           </div>
 
           <h2 className="text-3xl sm:text-4xl font-bold text-brand-primary dark:text-white font-[Barlow] mb-4">
@@ -81,7 +81,7 @@ export function WomenFoundersSection({ program, onCtaClick }: WomenFoundersSecti
         {/* Testimonials */}
         <div className="mb-12">
           <h3 className="text-xl font-bold text-brand-primary dark:text-white font-[Barlow] text-center mb-8">
-            Hear from Our Founders
+            {program.testimonialHeading}
           </h3>
           <TestimonialCarousel testimonials={program.testimonials} />
         </div>
@@ -104,27 +104,21 @@ export function WomenFoundersSection({ program, onCtaClick }: WomenFoundersSecti
             onClick={() => setIsExpanded(!isExpanded)}
             className="flex items-center gap-2 mx-auto text-sm text-stone-500 dark:text-stone-400 hover:text-brand-primary dark:hover:text-white transition-colors"
           >
-            <span>Learn more about the program</span>
+            <span>{program.expandLabel}</span>
             <ChevronDown className={`w-4 h-4 transition-transform ${isExpanded ? 'rotate-180' : ''}`} />
           </button>
 
           {isExpanded && (
             <div className="mt-6 bg-white dark:bg-stone-900 rounded-xl p-6 max-w-2xl mx-auto shadow-sm">
               <h4 className="font-bold text-brand-primary dark:text-white mb-3">
-                About the Women Founders Program
+                {program.expandHeading}
               </h4>
               <div className="prose prose-sm dark:prose-invert text-stone-600 dark:text-stone-400">
-                <p>
-                  The Women Founders Program is a dedicated initiative within AI4Startups designed to
-                  address the gender gap in African tech. Through intensive bootcamps, one-on-one mentorship,
-                  investor introductions, and community support, we're helping women entrepreneurs build
-                  and scale AI-powered startups.
-                </p>
-                <p className="mt-3">
-                  Program participants receive technical training, business development support, cloud credits,
-                  and access to our network of successful founders and investors. The program has supported
-                  over 120 women across 8 African countries, with 15 startups receiving follow-on funding.
-                </p>
+                {program.programDescription.map((paragraph, index) => (
+                  <p key={index} className={index > 0 ? 'mt-3' : undefined}>
+                    {paragraph}
+                  </p>
+                ))}
               </div>
             </div>
           )}

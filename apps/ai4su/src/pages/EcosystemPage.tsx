@@ -51,6 +51,7 @@ export function EcosystemPage() {
       activities={ecosystemData.activities}
       womenFounders={ecosystemData.womenFounders}
       countries={ecosystemData.countries}
+      pageContent={ecosystemData.pageContent}
       onTypeFilter={handleTypeFilter}
       onCountryFilter={handleCountryFilter}
       onActivityClick={handleActivityClick}

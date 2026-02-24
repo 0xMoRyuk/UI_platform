@@ -12,10 +12,11 @@ const sectorColors: Record<string, { bg: string; text: string; border: string }>
 
 interface ModelCardProps {
   model: FeaturedModel
+  githubLabel: string
   onClick?: () => void
 }
 
-function ModelCard({ model, onClick }: ModelCardProps) {
+function ModelCard({ model, githubLabel, onClick }: ModelCardProps) {
   const colors = sectorColors[model.sector] || sectorColors.Agriculture
 
   return (
@@ -44,7 +45,7 @@ function ModelCard({ model, onClick }: ModelCardProps) {
       {/* GitHub link indicator */}
       <div className="flex items-center gap-2 text-sm text-stone-500 dark:text-stone-500 group-hover:text-brand-primary dark:group-hover:text-brand-secondary transition-colors">
         <Github className="w-4 h-4" />
-        <span>View on GitHub</span>
+        <span>{githubLabel}</span>
         <ArrowRight className="w-3 h-3 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
       </div>
 
@@ -54,7 +55,7 @@ function ModelCard({ model, onClick }: ModelCardProps) {
   )
 }
 
-export function ToolboxHighlight({ featuredModels, onModelClick, onViewAllClick }: ToolboxHighlightProps) {
+export function ToolboxHighlight({ featuredModels, toolboxHighlight, onModelClick, onViewAllClick }: ToolboxHighlightProps) {
   return (
     <section className="py-16 sm:py-24 bg-gradient-to-b from-white to-stone-50 dark:from-stone-950 dark:to-stone-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -63,13 +64,13 @@ export function ToolboxHighlight({ featuredModels, onModelClick, onViewAllClick 
           <div>
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-brand-primary/10 dark:bg-brand-primary/20 rounded-full text-sm font-medium text-brand-primary dark:text-brand-secondary mb-4">
               <Boxes className="w-4 h-4" />
-              <span>Open Source</span>
+              <span>{toolboxHighlight.badge}</span>
             </div>
             <h2 className="text-3xl sm:text-4xl font-bold text-brand-primary dark:text-white font-[Barlow]">
-              AI Model Toolbox
+              {toolboxHighlight.title}
             </h2>
             <p className="mt-4 text-lg text-stone-600 dark:text-stone-400 max-w-2xl">
-              Explore 24 open-source AI models built for African contexts — from agriculture to healthcare, all freely available on GitHub.
+              {toolboxHighlight.description}
             </p>
           </div>
 
@@ -78,7 +79,7 @@ export function ToolboxHighlight({ featuredModels, onModelClick, onViewAllClick 
             className="group inline-flex items-center gap-2 px-6 py-3 bg-brand-primary text-brand-primary-foreground font-semibold rounded-lg
                      hover:bg-brand-primary-dark transition-colors shrink-0"
           >
-            Explore Toolbox
+            {toolboxHighlight.ctaText}
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </button>
         </div>
@@ -89,6 +90,7 @@ export function ToolboxHighlight({ featuredModels, onModelClick, onViewAllClick 
             <ModelCard
               key={model.id}
               model={model}
+              githubLabel={toolboxHighlight.githubLabel}
               onClick={() => onModelClick?.(model.id)}
             />
           ))}
@@ -96,12 +98,7 @@ export function ToolboxHighlight({ featuredModels, onModelClick, onViewAllClick 
 
         {/* Bottom stats bar */}
         <div className="mt-12 flex flex-wrap items-center justify-center gap-8 sm:gap-16 py-8 border-t border-stone-200 dark:border-stone-800">
-          {[
-            { value: '24', label: 'Models' },
-            { value: '6', label: 'Sectors' },
-            { value: '15K+', label: 'GitHub Stars' },
-            { value: '50+', label: 'Startups Using' },
-          ].map((stat) => (
+          {toolboxHighlight.stats.map((stat) => (
             <div key={stat.label} className="text-center">
               <div className="text-2xl sm:text-3xl font-bold text-brand-primary dark:text-brand-accent font-[Barlow]">
                 {stat.value}

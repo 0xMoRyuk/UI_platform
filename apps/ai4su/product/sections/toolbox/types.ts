@@ -69,6 +69,37 @@ export interface FinalReport {
   pages: number
 }
 
+export interface PageContent {
+  title: string
+  subtitle: string
+  searchPlaceholder: string
+  emptyState: {
+    title: string
+    description: string
+  }
+  resultsTemplate: string
+}
+
+export interface StudiesSectionContent {
+  title: string
+  description: string
+  keyFindingsLabel: string
+  downloadLabel: string
+}
+
+export interface BestPracticesSectionContent {
+  title: string
+  description: string
+  downloadLabel: string
+}
+
+export interface FinalReportSectionContent {
+  badge: string
+  downloadText: string
+  fundedByBadge: string
+  pagesLabel: string
+}
+
 // =============================================================================
 // Component Props
 // =============================================================================
@@ -86,6 +117,14 @@ export interface ToolboxProps {
   bestPractices: BestPractices[]
   /** Final program report */
   finalReport: FinalReport
+  /** Page-level text content */
+  pageContent: PageContent
+  /** Studies section text content */
+  studiesSection: StudiesSectionContent
+  /** Best practices section text content */
+  bestPracticesSection: BestPracticesSectionContent
+  /** Final report section text content */
+  finalReportSection: FinalReportSectionContent
   /** Called when user searches */
   onSearch?: (query: string) => void
   /** Called when user changes filters */
@@ -138,16 +177,19 @@ export interface ModelDetailModalProps {
 
 export interface StudySectionProps {
   studies: Study[]
+  content: StudiesSectionContent
   onDownload: (studyId: string, url: string) => void
 }
 
 export interface BestPracticesSectionProps {
   bestPractices: BestPractices[]
+  content: BestPracticesSectionContent
   onDownload: (bpId: string, url: string) => void
 }
 
 export interface FinalReportCardProps {
   report: FinalReport
+  content: FinalReportSectionContent
   onDownload: (url: string) => void
 }
 

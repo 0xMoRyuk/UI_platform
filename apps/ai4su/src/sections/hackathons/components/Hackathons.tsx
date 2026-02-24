@@ -10,6 +10,8 @@ import { HackathonGrid } from './HackathonGrid'
 export function Hackathons({
   methodology,
   hackathons,
+  pageContent,
+  methodologyContent,
   onHackathonClick,
   onCountryFilter,
 }: HackathonsPageProps) {
@@ -44,26 +46,27 @@ export function Hackathons({
             </div>
             <div>
               <h1 className="text-4xl sm:text-5xl font-bold font-[Barlow]">
-                Hackathons
+                {pageContent.title}
               </h1>
               <p className="text-white/70 text-lg">
-                {hackathons.length} events across Africa
+                {pageContent.subtitleTemplate.replace('{count}', String(hackathons.length))}
               </p>
             </div>
           </div>
 
           <p className="text-xl text-white/80 max-w-3xl mb-8">
-            Our hackathon series brought together {totalParticipants}+ developers, data scientists,
-            and domain experts to build {totalModels} open-source AI models addressing African challenges.
+            {pageContent.descriptionTemplate
+              .replace('{participants}', String(totalParticipants))
+              .replace('{models}', String(totalModels))}
           </p>
 
           {/* Quick stats */}
           <div className="flex flex-wrap gap-6">
             {[
-              { value: hackathons.length, label: 'Events' },
-              { value: `${totalParticipants}+`, label: 'Participants' },
-              { value: totalModels, label: 'AI Models' },
-              { value: '8', label: 'Countries' },
+              { value: hackathons.length, label: pageContent.statsLabels[0] },
+              { value: `${totalParticipants}+`, label: pageContent.statsLabels[1] },
+              { value: totalModels, label: pageContent.statsLabels[2] },
+              { value: pageContent.countriesValue, label: pageContent.statsLabels[3] },
             ].map((stat) => (
               <div key={stat.label} className="bg-white/10 backdrop-blur-sm rounded-lg px-4 py-3 border border-white/10">
                 <div className="text-2xl font-bold text-brand-accent">{stat.value}</div>
@@ -75,7 +78,7 @@ export function Hackathons({
       </section>
 
       {/* Methodology */}
-      <MethodologySection steps={methodology} />
+      <MethodologySection steps={methodology} content={methodologyContent} />
 
       {/* Hackathon grid section */}
       <section className="py-16 bg-stone-50 dark:bg-stone-950">
@@ -84,10 +87,10 @@ export function Hackathons({
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
             <div>
               <h2 className="text-2xl font-bold text-brand-primary dark:text-white font-[Barlow]">
-                All Hackathons
+                {pageContent.allHackathonsTitle}
               </h2>
               <p className="text-stone-600 dark:text-stone-400">
-                {filteredHackathons.length} event{filteredHackathons.length !== 1 ? 's' : ''}
+                {pageContent.filterResultTemplate.replace('{count}', String(filteredHackathons.length))}{filteredHackathons.length !== 1 ? 's' : ''}
                 {selectedCountry && ' in selected country'}
               </p>
             </div>
@@ -107,13 +110,13 @@ export function Hackathons({
           {filteredHackathons.length === 0 && (
             <div className="text-center py-12">
               <p className="text-stone-600 dark:text-stone-400">
-                No hackathons found for the selected country.
+                {pageContent.emptyState.title}
               </p>
               <button
                 onClick={() => handleCountryChange(null)}
                 className="mt-4 text-brand-primary dark:text-brand-secondary font-medium hover:underline"
               >
-                View all hackathons
+                {pageContent.emptyState.ctaText}
               </button>
             </div>
           )}

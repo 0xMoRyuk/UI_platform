@@ -13,6 +13,7 @@ import { Lightbox } from './Lightbox'
 
 export function HackathonDetail({
   hackathon,
+  fieldLabels,
   onBackClick,
   onChallengeBriefDownload,
   onBestPracticesDownload,
@@ -75,7 +76,7 @@ export function HackathonDetail({
       </div>
 
       {/* Hero */}
-      <HackathonHero hackathon={hackathon} />
+      <HackathonHero hackathon={hackathon} fieldLabels={fieldLabels} />
 
       {/* Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

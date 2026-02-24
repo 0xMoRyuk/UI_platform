@@ -1,17 +1,19 @@
 import { Globe, Users, BookOpen, Calendar } from 'lucide-react'
+import type { EcosystemPageContent } from '@/../product/sections/ecosystem/types'
 
 interface EcosystemHeroProps {
   totalActivities: number
   totalParticipants: number
   countriesCount: number
+  pageContent: EcosystemPageContent
 }
 
-export function EcosystemHero({ totalActivities, totalParticipants, countriesCount }: EcosystemHeroProps) {
+export function EcosystemHero({ totalActivities, totalParticipants, countriesCount, pageContent }: EcosystemHeroProps) {
   const stats = [
-    { icon: Calendar, value: totalActivities, label: 'Activities' },
-    { icon: Users, value: `${totalParticipants}+`, label: 'Participants' },
-    { icon: Globe, value: countriesCount, label: 'Countries' },
-    { icon: BookOpen, value: '4', label: 'Research Studies' },
+    { icon: Calendar, value: totalActivities, label: pageContent.statsLabels[0] },
+    { icon: Users, value: `${totalParticipants}+`, label: pageContent.statsLabels[1] },
+    { icon: Globe, value: countriesCount, label: pageContent.statsLabels[2] },
+    { icon: BookOpen, value: pageContent.researchStudiesValue, label: pageContent.statsLabels[3] },
   ]
 
   return (
@@ -23,17 +25,16 @@ export function EcosystemHero({ totalActivities, totalParticipants, countriesCou
           </div>
           <div>
             <h1 className="text-4xl sm:text-5xl font-bold font-[Barlow]">
-              Ecosystem
+              {pageContent.title}
             </h1>
             <p className="text-white/70 text-lg">
-              Building Africa's AI community
+              {pageContent.subtitle}
             </p>
           </div>
         </div>
 
         <p className="text-xl text-white/80 max-w-3xl mb-10">
-          Beyond hackathons, we're fostering a vibrant ecosystem through networking events,
-          research initiatives, training workshops, and dedicated support for women founders.
+          {pageContent.description}
         </p>
 
         {/* Stats grid */}

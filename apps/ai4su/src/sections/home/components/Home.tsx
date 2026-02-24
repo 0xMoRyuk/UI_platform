@@ -7,7 +7,9 @@ import { SectionPreviews } from './SectionPreviews'
 export function Home({
   hero,
   kpis,
+  kpiSection,
   featuredModels,
+  toolboxHighlight,
   sectionPreviews,
   onCtaClick,
   onKpiClick,
@@ -25,12 +27,14 @@ export function Home({
       {/* KPI Grid */}
       <KPIGrid
         kpis={kpis}
+        kpiSection={kpiSection}
         onKpiClick={onKpiClick}
       />
 
       {/* Toolbox Highlight */}
       <ToolboxHighlight
         featuredModels={featuredModels}
+        toolboxHighlight={toolboxHighlight}
         onModelClick={onModelClick}
         onViewAllClick={() => onCtaClick?.('/toolbox')}
       />

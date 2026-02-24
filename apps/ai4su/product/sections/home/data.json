@@ -18,7 +18,14 @@
     "ctaText": "View our Hackathons",
     "ctaLink": "/toolbox",
     "secondaryCtaText": "Explore our Resources Hub",
-    "secondaryCtaLink": "/hackathons"
+    "secondaryCtaLink": "/hackathons",
+    "badge": "Funded by the European Union",
+    "heading": "Africa's AI Future",
+    "stats": [
+      { "value": "24", "label": "AI Models" },
+      { "value": "8", "label": "Countries" },
+      { "value": "500+", "label": "Participants" }
+    ]
   },
   "kpis": [
     {
@@ -110,6 +117,23 @@
       "stats": "Public & private data partnerships"
     }
   ],
+  "kpiSection": {
+    "title": "Program Impact",
+    "description": "Building Africa's AI ecosystem through open-source innovation, hackathons, and community support."
+  },
+  "toolboxHighlight": {
+    "badge": "Open Source",
+    "title": "AI Model Toolbox",
+    "description": "Explore 24 open-source AI models built for African contexts — from agriculture to healthcare, all freely available on GitHub.",
+    "ctaText": "Explore Toolbox",
+    "githubLabel": "View on GitHub",
+    "stats": [
+      { "value": "24", "label": "Models" },
+      { "value": "6", "label": "Sectors" },
+      { "value": "15K+", "label": "GitHub Stars" },
+      { "value": "50+", "label": "Startups Using" }
+    ]
+  },
   "countries": [
     { "name": "Kenya", "code": "KE", "coordinates": [-1.286389, 36.817223] },
     { "name": "Nigeria", "code": "NG", "coordinates": [9.082, 8.6753] },

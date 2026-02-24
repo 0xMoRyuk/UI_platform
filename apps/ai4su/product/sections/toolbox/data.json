@@ -404,5 +404,32 @@
     "pdfUrl": "/documents/ai4startups-final-report-2026.pdf",
     "publishedDate": "2026-02-28",
     "pages": 120
+  },
+  "pageContent": {
+    "title": "AI Model Toolbox",
+    "subtitle": "Open-source AI models built for African contexts",
+    "searchPlaceholder": "Search models by name, description, or sector...",
+    "emptyState": {
+      "title": "No models found",
+      "description": "Try adjusting your search or filters to find what you're looking for."
+    },
+    "resultsTemplate": "Showing {filtered} of {total} models"
+  },
+  "studiesSection": {
+    "title": "Research & Studies",
+    "description": "In-depth analysis and research from our partner organizations.",
+    "keyFindingsLabel": "Key Findings",
+    "downloadLabel": "Download PDF"
+  },
+  "bestPracticesSection": {
+    "title": "Hackathon Best Practices",
+    "description": "Lessons learned and best practices from each hackathon event.",
+    "downloadLabel": "Download Report"
+  },
+  "finalReportSection": {
+    "badge": "Final Report",
+    "downloadText": "Download PDF",
+    "fundedByBadge": "Funded by the European Union",
+    "pagesLabel": "pages"
   }
 }

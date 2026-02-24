@@ -14,6 +14,7 @@ export function Ecosystem({
   activities,
   womenFounders,
   countries,
+  pageContent,
   onTypeFilter,
   onCountryFilter,
   onActivityClick,
@@ -80,6 +81,7 @@ export function Ecosystem({
         totalActivities={activities.length}
         totalParticipants={totalParticipants}
         countriesCount={countries.length}
+        pageContent={pageContent}
       />
 
       {/* Women Founders Section */}

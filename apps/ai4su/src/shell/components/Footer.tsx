@@ -1,28 +1,12 @@
+import shellData from '@/../product/shell/data.json'
+
 interface FooterProps {
   currentLanguage: 'en' | 'fr'
 }
 
-const content = {
-  en: {
-    fundedBy: 'Funded by the European Union',
-    implementedBy: 'Implemented by',
-    privacy: 'Privacy Policy',
-    legal: 'Legal Notice',
-    accessibility: 'Accessibility',
-    copyright: '© 2026 DataGov Initiative. All rights reserved.',
-  },
-  fr: {
-    fundedBy: 'Financé par l\'Union européenne',
-    implementedBy: 'Mis en œuvre par',
-    privacy: 'Politique de confidentialité',
-    legal: 'Mentions légales',
-    accessibility: 'Accessibilité',
-    copyright: '© 2026 Initiative DataGov. Tous droits réservés.',
-  },
-}
-
 export function Footer({ currentLanguage }: FooterProps) {
-  const t = content[currentLanguage]
+  const { footer } = shellData
+  const t = footer[currentLanguage]
 
   return (
     <footer className="bg-brand-primary text-brand-primary-foreground">
@@ -46,11 +30,11 @@ export function Footer({ currentLanguage }: FooterProps) {
           {/* Partner Logos */}
           <div className="space-y-4">
             <h3 className="text-sm font-semibold uppercase tracking-wider text-brand-accent">
-              Partners
+              {footer.partnersHeading}
             </h3>
             <div className="flex flex-wrap gap-4">
               {/* Partner logo placeholders */}
-              {['Digital Africa', 'Expertise France', 'GIZ'].map((partner) => (
+              {footer.partners.map((partner) => (
                 <div
                   key={partner}
                   className="px-3 py-2 bg-white/10 rounded text-xs font-medium"
@@ -64,13 +48,12 @@ export function Footer({ currentLanguage }: FooterProps) {
           {/* Social & Hashtags */}
           <div className="space-y-4">
             <h3 className="text-sm font-semibold uppercase tracking-wider text-brand-accent">
-              Follow
+              {footer.followHeading}
             </h3>
             <div className="flex flex-wrap gap-2 text-sm text-white/70">
-              <span>#D4DataGOV</span>
-              <span>#DataGovernanceAfrica</span>
-              <span>#TeamEurope</span>
-              <span>#GlobalGateway</span>
+              {footer.hashtags.map((tag) => (
+                <span key={tag}>{tag}</span>
+              ))}
             </div>
           </div>
         </div>

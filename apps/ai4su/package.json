@@ -8,7 +8,8 @@
     "build": "tsc -b && vite build",
     "type-check": "tsc -b --noEmit",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "generate-content-guide": "bun scripts/generate-content-guide.ts"
   },
   "dependencies": {
     "@ui-platform/ui": "workspace:*",

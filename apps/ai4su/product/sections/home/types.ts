@@ -2,6 +2,11 @@
 // Data Types
 // =============================================================================
 
+export interface StatItem {
+  value: string
+  label: string
+}
+
 export interface Hero {
   title: string
   subtitle: string
@@ -9,6 +14,9 @@ export interface Hero {
   ctaLink: string
   secondaryCtaText?: string
   secondaryCtaLink?: string
+  badge: string
+  heading: string
+  stats: StatItem[]
 }
 
 export interface KPI {
@@ -45,6 +53,20 @@ export interface Country {
   coordinates: [number, number]
 }
 
+export interface KPISectionContent {
+  title: string
+  description: string
+}
+
+export interface ToolboxHighlightContent {
+  badge: string
+  title: string
+  description: string
+  ctaText: string
+  githubLabel: string
+  stats: StatItem[]
+}
+
 // =============================================================================
 // Component Props
 // =============================================================================
@@ -54,8 +76,12 @@ export interface HomeProps {
   hero: Hero
   /** KPI counters to display */
   kpis: KPI[]
+  /** KPI section title and description */
+  kpiSection: KPISectionContent
   /** Featured AI models for Toolbox preview */
   featuredModels: FeaturedModel[]
+  /** Toolbox highlight section content */
+  toolboxHighlight: ToolboxHighlightContent
   /** Preview cards for other sections */
   sectionPreviews: SectionPreview[]
   /** Countries for optional map display */
@@ -83,11 +109,13 @@ export interface HeroSectionProps {
 
 export interface KPIGridProps {
   kpis: KPI[]
+  kpiSection: KPISectionContent
   onKpiClick?: (kpiId: string, link: string) => void
 }
 
 export interface ToolboxHighlightProps {
   featuredModels: FeaturedModel[]
+  toolboxHighlight: ToolboxHighlightContent
   onModelClick?: (modelId: string) => void
   onViewAllClick?: () => void
 }

@@ -37,6 +37,8 @@ export function HomePreview() {
       featuredModels={homeData.featuredModels}
       sectionPreviews={homeData.sectionPreviews}
       countries={homeData.countries}
+      kpiSection={homeData.kpiSection}
+      toolboxHighlight={homeData.toolboxHighlight}
       onCtaClick={handleCtaClick}
       onKpiClick={handleKpiClick}
       onModelClick={handleModelClick}

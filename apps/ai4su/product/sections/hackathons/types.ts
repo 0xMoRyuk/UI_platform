@@ -64,6 +64,40 @@ export interface Hackathon {
 }
 
 // =============================================================================
+// Content Types
+// =============================================================================
+
+export interface HackathonPageContent {
+  title: string
+  subtitleTemplate: string
+  descriptionTemplate: string
+  allHackathonsTitle: string
+  statsLabels: string[]
+  countriesValue: string
+  emptyState: {
+    title: string
+    ctaText: string
+  }
+  filterResultTemplate: string
+}
+
+export interface MethodologyContent {
+  title: string
+  description: string
+}
+
+export interface HackathonFieldLabels {
+  date: string
+  location: string
+  venue: string
+  participants: string
+  modelsProduced: string
+  partners: string
+  participantTemplate: string
+  modelsTemplate: string
+}
+
+// =============================================================================
 // Component Props
 // =============================================================================
 
@@ -72,6 +106,10 @@ export interface HackathonsPageProps {
   methodology: MethodologyStep[]
   /** All hackathon events */
   hackathons: Hackathon[]
+  /** Page-level text content */
+  pageContent: HackathonPageContent
+  /** Methodology section text content */
+  methodologyContent: MethodologyContent
   /** Called when user clicks a hackathon card */
   onHackathonClick?: (hackathonSlug: string) => void
   /** Called when user filters by country */
@@ -81,6 +119,8 @@ export interface HackathonsPageProps {
 export interface HackathonDetailPageProps {
   /** The hackathon to display */
   hackathon: Hackathon
+  /** Field labels for the hero sidebar */
+  fieldLabels: HackathonFieldLabels
   /** Called when user clicks back to all hackathons */
   onBackClick?: () => void
   /** Called when user downloads challenge brief */
@@ -101,6 +141,7 @@ export interface HackathonDetailPageProps {
 
 export interface MethodologySectionProps {
   steps: MethodologyStep[]
+  content: MethodologyContent
 }
 
 export interface HackathonCardProps {
@@ -120,6 +161,7 @@ export interface CountryFilterProps {
 
 export interface HackathonHeroProps {
   hackathon: Hackathon
+  fieldLabels: HackathonFieldLabels
 }
 
 export interface ChallengeBriefSectionProps {

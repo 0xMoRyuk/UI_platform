@@ -443,5 +443,32 @@
         { "id": "photo-j6", "url": "/images/hackathons/johannesburg-2025/eu-ambassador.jpg", "caption": "EU Ambassador address" }
       ]
     }
-  ]
+  ],
+  "pageContent": {
+    "title": "Hackathons",
+    "subtitleTemplate": "{count} events across Africa",
+    "descriptionTemplate": "Our hackathon series brought together {participants}+ developers, data scientists, and domain experts to build {models} open-source AI models addressing African challenges.",
+    "allHackathonsTitle": "All Hackathons",
+    "statsLabels": ["Events", "Participants", "AI Models", "Countries"],
+    "countriesValue": "8",
+    "emptyState": {
+      "title": "No hackathons found for the selected country.",
+      "ctaText": "View all hackathons"
+    },
+    "filterResultTemplate": "{count} event"
+  },
+  "methodologyContent": {
+    "title": "Our Hackathon Methodology",
+    "description": "A proven approach to building AI solutions that address real African challenges."
+  },
+  "fieldLabels": {
+    "date": "Date",
+    "location": "Location",
+    "venue": "Venue",
+    "participants": "Participants",
+    "modelsProduced": "AI Models Produced",
+    "partners": "Partners",
+    "participantTemplate": "{count} people, {teams} teams",
+    "modelsTemplate": "{count} open-source models"
+  }
 }

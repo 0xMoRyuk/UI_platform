@@ -34,7 +34,9 @@ export function HomePage() {
     <Home
       hero={homeData.hero}
       kpis={homeData.kpis}
+      kpiSection={homeData.kpiSection}
       featuredModels={homeData.featuredModels}
+      toolboxHighlight={homeData.toolboxHighlight}
       sectionPreviews={homeData.sectionPreviews}
       countries={homeData.countries}
       onCtaClick={handleCtaClick}

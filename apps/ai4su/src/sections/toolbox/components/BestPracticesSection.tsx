@@ -3,10 +3,11 @@ import type { BestPracticesSectionProps, BestPractices } from '@/../product/sect
 
 interface BestPracticesCardProps {
   bp: BestPractices
+  downloadLabel: string
   onDownload: () => void
 }
 
-function BestPracticesCard({ bp, onDownload }: BestPracticesCardProps) {
+function BestPracticesCard({ bp, downloadLabel, onDownload }: BestPracticesCardProps) {
   return (
     <div className="group bg-white dark:bg-stone-900 rounded-xl border border-stone-200 dark:border-stone-800 p-5 hover:shadow-lg hover:border-brand-primary dark:hover:border-brand-secondary transition-all duration-300">
       {/* Hackathon reference */}
@@ -38,21 +39,21 @@ function BestPracticesCard({ bp, onDownload }: BestPracticesCardProps) {
         className="inline-flex items-center gap-2 text-sm font-medium text-brand-primary dark:text-brand-secondary hover:text-brand-accent transition-colors"
       >
         <Download className="w-4 h-4" />
-        Download Report
+        {downloadLabel}
       </button>
     </div>
   )
 }
 
-export function BestPracticesSection({ bestPractices, onDownload }: BestPracticesSectionProps) {
+export function BestPracticesSection({ bestPractices, content, onDownload }: BestPracticesSectionProps) {
   return (
     <section className="py-12 border-t border-stone-200 dark:border-stone-800">
       <div className="mb-8">
         <h2 className="text-2xl font-bold text-brand-primary dark:text-white font-[Barlow] mb-2">
-          Hackathon Best Practices
+          {content.title}
         </h2>
         <p className="text-stone-600 dark:text-stone-400">
-          Lessons learned and best practices from each hackathon event.
+          {content.description}
         </p>
       </div>
 
@@ -61,6 +62,7 @@ export function BestPracticesSection({ bestPractices, onDownload }: BestPractice
           <BestPracticesCard
             key={bp.id}
             bp={bp}
+            downloadLabel={content.downloadLabel}
             onDownload={() => onDownload(bp.id, bp.pdfUrl)}
           />
         ))}

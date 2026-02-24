@@ -322,7 +322,15 @@
       }
     ],
     "ctaText": "Apply to Join",
-    "ctaLink": "/ecosystem/women-founders/apply"
+    "ctaLink": "/ecosystem/women-founders/apply",
+    "badge": "Women Founders Program",
+    "testimonialHeading": "Hear from Our Founders",
+    "expandLabel": "Learn more about the program",
+    "expandHeading": "About the Women Founders Program",
+    "programDescription": [
+      "The Women Founders Program is a dedicated initiative within AI4Startups designed to address the gender gap in African tech. Through intensive bootcamps, one-on-one mentorship, investor introductions, and community support, we're helping women entrepreneurs build and scale AI-powered startups.",
+      "Program participants receive technical training, business development support, cloud credits, and access to our network of successful founders and investors. The program has supported over 120 women across 8 African countries, with 15 startups receiving follow-on funding."
+    ]
   },
   "countries": [
     { "code": "KE", "name": "Kenya", "coordinates": [-1.2864, 36.8172], "activityCount": 2 },
@@ -333,5 +341,12 @@
     { "code": "ZA", "name": "South Africa", "coordinates": [-33.9575, 18.4612], "activityCount": 1 },
     { "code": "EG", "name": "Egypt", "coordinates": [30.0444, 31.2357], "activityCount": 1 },
     { "code": "MA", "name": "Morocco", "coordinates": [34.0209, -6.8416], "activityCount": 1 }
-  ]
+  ],
+  "pageContent": {
+    "title": "Ecosystem",
+    "subtitle": "Building Africa's AI community",
+    "description": "Beyond hackathons, we're fostering a vibrant ecosystem through networking events, research initiatives, training workshops, and dedicated support for women founders.",
+    "statsLabels": ["Activities", "Participants", "Countries", "Research Studies"],
+    "researchStudiesValue": "4"
+  }
 }

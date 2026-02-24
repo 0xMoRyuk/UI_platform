@@ -79,6 +79,11 @@ export interface WomenFoundersProgram {
   testimonials: Testimonial[]
   ctaText: string
   ctaLink: string
+  badge: string
+  testimonialHeading: string
+  expandLabel: string
+  expandHeading: string
+  programDescription: string[]
 }
 
 export interface CountryMapData {
@@ -86,6 +91,14 @@ export interface CountryMapData {
   name: string
   coordinates: [number, number]
   activityCount: number
+}
+
+export interface EcosystemPageContent {
+  title: string
+  subtitle: string
+  description: string
+  statsLabels: string[]
+  researchStudiesValue: string
 }
 
 // =============================================================================
@@ -101,6 +114,8 @@ export interface EcosystemPageProps {
   womenFounders: WomenFoundersProgram
   /** Countries with coordinates for map */
   countries: CountryMapData[]
+  /** Page-level text content */
+  pageContent: EcosystemPageContent
   /** Called when user filters by activity type */
   onTypeFilter?: (type: ActivityTypeId | null) => void
   /** Called when user filters by country */

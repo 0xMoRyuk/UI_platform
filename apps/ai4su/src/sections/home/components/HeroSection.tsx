@@ -32,14 +32,14 @@ export function HeroSection({ hero, onCtaClick }: HeroSectionProps) {
           {/* Badge */}
           <Badge className="gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm text-sm font-medium mb-8 border border-white/20 text-white">
             <Sparkles className="w-4 h-4 text-brand-accent" />
-            <span>Funded by the European Union</span>
+            <span>{hero.badge}</span>
           </Badge>
 
           {/* Title */}
           <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight mb-6 font-[Barlow]">
             <span className="block">{hero.title}</span>
             <span className="block mt-2 bg-gradient-to-r from-brand-accent to-[#FFE066] bg-clip-text text-transparent">
-              Africa's AI Future
+              {hero.heading}
             </span>
           </h1>
 
@@ -75,11 +75,7 @@ export function HeroSection({ hero, onCtaClick }: HeroSectionProps) {
         {/* Stats preview - floating on right side for large screens */}
         <div className="hidden lg:block absolute right-8 top-1/2 -translate-y-1/2">
           <div className="flex flex-col gap-4 text-right">
-            {[
-              { value: '24', label: 'AI Models' },
-              { value: '8', label: 'Countries' },
-              { value: '500+', label: 'Participants' },
-            ].map((stat, i) => (
+            {hero.stats.map((stat, i) => (
               <div
                 key={stat.label}
                 className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg px-6 py-3"

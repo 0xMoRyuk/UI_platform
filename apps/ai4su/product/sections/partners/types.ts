@@ -13,6 +13,7 @@ export interface EUAttribution {
   flagUrl: string
   globalGatewayLogo: string
   disclaimer: string
+  initiative: string
 }
 
 export interface TeamEuropeMember {

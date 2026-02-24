@@ -1,17 +1,23 @@
 import { useState } from 'react'
 import { AppShell } from './components/AppShell'
+import shellData from '@/../product/shell/data.json'
+import homeData from '@/../product/sections/home/data.json'
+
+const borderClasses = [
+  'border-l-brand-primary',
+  'border-l-brand-secondary',
+  'border-l-brand-accent',
+  'border-l-brand-neutral',
+]
 
 export default function ShellPreview() {
   const [currentLanguage, setCurrentLanguage] = useState<'en' | 'fr'>('en')
   const [activeSection, setActiveSection] = useState('/')
 
-  const navigationItems = [
-    { label: 'Home', href: '/', isActive: activeSection === '/' },
-    { label: 'Toolbox', href: '/toolbox', isActive: activeSection === '/toolbox' },
-    { label: 'Hackathons', href: '/hackathons', isActive: activeSection === '/hackathons' },
-    { label: 'Ecosystem', href: '/ecosystem', isActive: activeSection === '/ecosystem' },
-    { label: 'Partners', href: '/partners', isActive: activeSection === '/partners' },
-  ]
+  const navigationItems = shellData.navigation.map((item) => ({
+    ...item,
+    isActive: activeSection === item.href,
+  }))
 
   const handleNavigate = (href: string) => {
     setActiveSection(href)
@@ -45,18 +51,15 @@ export default function ShellPreview() {
 
         {/* Sample KPI Cards Preview */}
         <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {[
-            { label: 'AI Models', value: '24', borderClass: 'border-l-brand-primary' },
-            { label: 'Hackathons', value: '6', borderClass: 'border-l-brand-secondary' },
-            { label: 'Countries', value: '8', borderClass: 'border-l-brand-accent' },
-            { label: 'Participants', value: '500+', borderClass: 'border-l-brand-neutral' },
-          ].map((kpi) => (
+          {homeData.kpis.map((kpi, index) => (
             <div
-              key={kpi.label}
-              className={`bg-white rounded-lg shadow-md p-6 border-l-4 ${kpi.borderClass}`}
+              key={kpi.id}
+              className={`bg-white rounded-lg shadow-md p-6 border-l-4 ${borderClasses[index % borderClasses.length]}`}
             >
               <p className="text-sm font-medium text-stone-500 font-[Barlow]">{kpi.label}</p>
-              <p className="text-3xl font-bold text-brand-primary mt-1">{kpi.value}</p>
+              <p className="text-3xl font-bold text-brand-primary mt-1">
+                {kpi.value}{kpi.suffix}
+              </p>
             </div>
           ))}
         </div>

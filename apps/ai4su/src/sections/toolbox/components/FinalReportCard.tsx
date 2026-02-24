@@ -1,7 +1,7 @@
 import { Download, FileText, BookOpen, Calendar } from 'lucide-react'
 import type { FinalReportCardProps } from '@/../product/sections/toolbox/types'
 
-export function FinalReportCard({ report, onDownload }: FinalReportCardProps) {
+export function FinalReportCard({ report, content, onDownload }: FinalReportCardProps) {
   return (
     <section className="py-12 border-t border-stone-200 dark:border-stone-800">
       <div className="bg-gradient-to-br from-brand-primary to-brand-primary-darker rounded-2xl overflow-hidden">
@@ -18,7 +18,7 @@ export function FinalReportCard({ report, onDownload }: FinalReportCardProps) {
             <div className="flex-1">
               <div className="inline-flex items-center gap-2 px-3 py-1 bg-brand-accent rounded-full text-xs font-bold text-brand-accent-foreground mb-4">
                 <FileText className="w-3 h-3" />
-                <span>Final Report</span>
+                <span>{content.badge}</span>
               </div>
 
               <h2 className="text-2xl md:text-3xl font-bold text-white font-[Barlow] mb-3">
@@ -41,7 +41,7 @@ export function FinalReportCard({ report, onDownload }: FinalReportCardProps) {
                 </div>
                 <div className="flex items-center gap-1.5">
                   <FileText className="w-4 h-4" />
-                  <span>{report.pages} pages</span>
+                  <span>{report.pages} {content.pagesLabel}</span>
                 </div>
               </div>
             </div>
@@ -54,7 +54,7 @@ export function FinalReportCard({ report, onDownload }: FinalReportCardProps) {
                          hover:bg-white transition-colors shadow-lg shadow-black/20"
               >
                 <Download className="w-5 h-5" />
-                <span>Download PDF</span>
+                <span>{content.downloadText}</span>
               </button>
             </div>
           </div>
@@ -63,7 +63,7 @@ export function FinalReportCard({ report, onDownload }: FinalReportCardProps) {
         {/* EU Funding badge */}
         <div className="bg-white/5 border-t border-white/10 px-8 py-4">
           <p className="text-xs text-white/50 text-center">
-            Funded by the European Union
+            {content.fundedByBadge}
           </p>
         </div>
       </div>

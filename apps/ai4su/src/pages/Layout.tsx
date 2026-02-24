@@ -2,20 +2,13 @@
 
 import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { AppShell } from '@/shell/components'
-
-const navigationItems = [
-  { label: 'Home', href: '/' },
-  { label: 'Toolbox', href: '/toolbox' },
-  { label: 'Hackathons', href: '/hackathons' },
-  { label: 'Ecosystem', href: '/ecosystem' },
-  { label: 'Partners', href: '/partners' },
-]
+import shellData from '@/../product/shell/data.json'
 
 export function Layout() {
   const location = useLocation()
   const navigate = useNavigate()
 
-  const navItemsWithActive = navigationItems.map((item) => ({
+  const navItemsWithActive = shellData.navigation.map((item) => ({
     ...item,
     isActive: location.pathname === item.href ||
               (item.href !== '/' && location.pathname.startsWith(item.href)),

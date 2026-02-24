@@ -9,6 +9,7 @@ import {
 } from '@ui-platform/ui/components/dropdown-menu'
 import { MobileNav } from './MobileNav'
 import type { NavigationItem } from './AppShell'
+import shellData from '@/../product/shell/data.json'
 
 interface HeaderProps {
   navigationItems: NavigationItem[]
@@ -29,6 +30,8 @@ export function Header({
   const [isSearchOpen, setIsSearchOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
 
+  const { header } = shellData
+
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault()
     onSearch?.(searchQuery)
@@ -47,7 +50,7 @@ export function Header({
                 onClick={() => onNavigate?.('/')}
                 className="font-bold text-xl tracking-tight font-[Barlow]"
               >
-                AI4Startups
+                {header.logoText}
               </button>
             </div>
 
@@ -80,7 +83,7 @@ export function Header({
                     type="text"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    placeholder={currentLanguage === 'en' ? 'Search models...' : 'Rechercher...'}
+                    placeholder={header.search[currentLanguage]}
                     className="w-48 rounded-r-none bg-white/10 border-white/20
                              text-brand-primary-foreground placeholder-white/60 focus-visible:ring-brand-accent"
                     autoFocus
@@ -117,12 +120,14 @@ export function Header({
                   </button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
-                  <DropdownMenuItem onClick={() => onLanguageChange?.('en')}>
-                    English
-                  </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => onLanguageChange?.('fr')}>
-                    Français
-                  </DropdownMenuItem>
+                  {header.languages.map((lang) => (
+                    <DropdownMenuItem
+                      key={lang.code}
+                      onClick={() => onLanguageChange?.(lang.code as 'en' | 'fr')}
+                    >
+                      {lang.label}
+                    </DropdownMenuItem>
+                  ))}
                 </DropdownMenuContent>
               </DropdownMenu>
 

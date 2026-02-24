@@ -12,7 +12,7 @@ const countryFlags: Record<string, string> = {
   MA: '🇲🇦',
 }
 
-export function HackathonHero({ hackathon }: HackathonHeroProps) {
+export function HackathonHero({ hackathon, fieldLabels }: HackathonHeroProps) {
   const formatDateRange = (start: string, end: string) => {
     const startDate = new Date(start)
     const endDate = new Date(end)
@@ -66,7 +66,7 @@ export function HackathonHero({ hackathon }: HackathonHeroProps) {
                   <Calendar className="w-5 h-5 text-brand-accent" />
                 </div>
                 <div>
-                  <p className="text-xs text-white/60 uppercase tracking-wide">Date</p>
+                  <p className="text-xs text-white/60 uppercase tracking-wide">{fieldLabels.date}</p>
                   <p className="font-medium">{formatDateRange(hackathon.startDate, hackathon.endDate)}</p>
                 </div>
               </div>
@@ -77,7 +77,7 @@ export function HackathonHero({ hackathon }: HackathonHeroProps) {
                   <MapPin className="w-5 h-5 text-brand-accent" />
                 </div>
                 <div>
-                  <p className="text-xs text-white/60 uppercase tracking-wide">Location</p>
+                  <p className="text-xs text-white/60 uppercase tracking-wide">{fieldLabels.location}</p>
                   <p className="font-medium">{hackathon.location.city}, {hackathon.location.country}</p>
                 </div>
               </div>
@@ -88,7 +88,7 @@ export function HackathonHero({ hackathon }: HackathonHeroProps) {
                   <Building2 className="w-5 h-5 text-brand-accent" />
                 </div>
                 <div>
-                  <p className="text-xs text-white/60 uppercase tracking-wide">Venue</p>
+                  <p className="text-xs text-white/60 uppercase tracking-wide">{fieldLabels.venue}</p>
                   <p className="font-medium">{hackathon.location.venue}</p>
                 </div>
               </div>
@@ -99,8 +99,8 @@ export function HackathonHero({ hackathon }: HackathonHeroProps) {
                   <Users className="w-5 h-5 text-brand-accent" />
                 </div>
                 <div>
-                  <p className="text-xs text-white/60 uppercase tracking-wide">Participants</p>
-                  <p className="font-medium">{hackathon.participantCount} people, {hackathon.teamCount} teams</p>
+                  <p className="text-xs text-white/60 uppercase tracking-wide">{fieldLabels.participants}</p>
+                  <p className="font-medium">{fieldLabels.participantTemplate.replace('{count}', String(hackathon.participantCount)).replace('{teams}', String(hackathon.teamCount))}</p>
                 </div>
               </div>
 
@@ -110,14 +110,14 @@ export function HackathonHero({ hackathon }: HackathonHeroProps) {
                   <Brain className="w-5 h-5 text-brand-accent" />
                 </div>
                 <div>
-                  <p className="text-xs text-white/60 uppercase tracking-wide">AI Models Produced</p>
-                  <p className="font-medium">{hackathon.modelsProduced} open-source models</p>
+                  <p className="text-xs text-white/60 uppercase tracking-wide">{fieldLabels.modelsProduced}</p>
+                  <p className="font-medium">{fieldLabels.modelsTemplate.replace('{count}', String(hackathon.modelsProduced))}</p>
                 </div>
               </div>
 
               {/* Partners */}
               <div className="pt-4 border-t border-white/10">
-                <p className="text-xs text-white/60 uppercase tracking-wide mb-2">Partners</p>
+                <p className="text-xs text-white/60 uppercase tracking-wide mb-2">{fieldLabels.partners}</p>
                 <div className="flex flex-wrap gap-2">
                   {hackathon.partners.map((partner) => (
                     <span key={partner} className="px-2 py-1 bg-white/10 rounded text-xs">

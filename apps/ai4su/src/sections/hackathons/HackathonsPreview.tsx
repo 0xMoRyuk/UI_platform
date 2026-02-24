@@ -3,11 +3,11 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { Hackathons, HackathonDetail } from './components'
-import type { CountryCode, Hackathon, HackathonsPageProps } from '@/../product/sections/hackathons/types'
+import type { CountryCode, Hackathon, HackathonsPageProps, HackathonFieldLabels } from '@/../product/sections/hackathons/types'
 import hackathonsDataRaw from '@/../product/sections/hackathons/data.json'
 
 // Cast JSON data to proper types (JSON imports lose literal type information)
-const hackathonsData = hackathonsDataRaw as unknown as Omit<HackathonsPageProps, 'onHackathonClick' | 'onCountryFilter'> & { hackathons: Hackathon[] }
+const hackathonsData = hackathonsDataRaw as unknown as Omit<HackathonsPageProps, 'onHackathonClick' | 'onCountryFilter'> & { hackathons: Hackathon[]; fieldLabels: HackathonFieldLabels }
 
 export function HackathonsPreview() {
   const router = useRouter()
@@ -57,6 +57,7 @@ export function HackathonsPreview() {
     return (
       <HackathonDetail
         hackathon={hackathon}
+        fieldLabels={hackathonsData.fieldLabels}
         onBackClick={handleBackClick}
         onChallengeBriefDownload={handleChallengeBriefDownload}
         onBestPracticesDownload={handleBestPracticesDownload}
@@ -72,6 +73,8 @@ export function HackathonsPreview() {
     <Hackathons
       methodology={hackathonsData.methodology}
       hackathons={hackathonsData.hackathons}
+      pageContent={hackathonsData.pageContent}
+      methodologyContent={hackathonsData.methodologyContent}
       onHackathonClick={handleHackathonClick}
       onCountryFilter={handleCountryFilter}
     />

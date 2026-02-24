@@ -1,12 +1,13 @@
 import { Download, FileText, CheckCircle } from 'lucide-react'
-import type { StudySectionProps, Study } from '@/../product/sections/toolbox/types'
+import type { StudySectionProps, Study, StudiesSectionContent } from '@/../product/sections/toolbox/types'
 
 interface StudyCardProps {
   study: Study
+  content: Pick<StudiesSectionContent, 'keyFindingsLabel' | 'downloadLabel'>
   onDownload: () => void
 }
 
-function StudyCard({ study, onDownload }: StudyCardProps) {
+function StudyCard({ study, content, onDownload }: StudyCardProps) {
   return (
     <div className="group bg-white dark:bg-stone-900 rounded-xl border border-stone-200 dark:border-stone-800 overflow-hidden hover:shadow-lg transition-all duration-300">
       {/* Header with partner logo placeholder */}
@@ -34,7 +35,7 @@ function StudyCard({ study, onDownload }: StudyCardProps) {
         {/* Key findings */}
         <div className="mb-4">
           <p className="text-xs font-semibold text-stone-500 dark:text-stone-500 uppercase tracking-wide mb-2">
-            Key Findings
+            {content.keyFindingsLabel}
           </p>
           <ul className="space-y-1.5">
             {study.keyFindings.slice(0, 2).map((finding, index) => (
@@ -53,22 +54,22 @@ function StudyCard({ study, onDownload }: StudyCardProps) {
                    hover:bg-brand-primary hover:text-brand-primary-foreground transition-colors"
         >
           <Download className="w-4 h-4" />
-          Download PDF
+          {content.downloadLabel}
         </button>
       </div>
     </div>
   )
 }
 
-export function StudiesSection({ studies, onDownload }: StudySectionProps) {
+export function StudiesSection({ studies, content, onDownload }: StudySectionProps) {
   return (
     <section className="py-12 border-t border-stone-200 dark:border-stone-800">
       <div className="mb-8">
         <h2 className="text-2xl font-bold text-brand-primary dark:text-white font-[Barlow] mb-2">
-          Research & Studies
+          {content.title}
         </h2>
         <p className="text-stone-600 dark:text-stone-400">
-          In-depth analysis and research from our partner organizations.
+          {content.description}
         </p>
       </div>
 
@@ -77,6 +78,7 @@ export function StudiesSection({ studies, onDownload }: StudySectionProps) {
           <StudyCard
             key={study.id}
             study={study}
+            content={content}
             onDownload={() => onDownload(study.id, study.pdfUrl)}
           />
         ))}

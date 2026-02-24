@@ -22,6 +22,8 @@ export function HackathonsPage() {
     <Hackathons
       methodology={hackathonsData.methodology}
       hackathons={hackathonsData.hackathons}
+      pageContent={hackathonsData.pageContent}
+      methodologyContent={hackathonsData.methodologyContent}
       onHackathonClick={handleHackathonClick}
     />
   )

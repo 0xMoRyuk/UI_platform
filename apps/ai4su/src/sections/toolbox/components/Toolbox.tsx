@@ -20,6 +20,10 @@ export function Toolbox({
   studies,
   bestPractices,
   finalReport,
+  pageContent,
+  studiesSection,
+  bestPracticesSection,
+  finalReportSection,
   onSearch,
   onFilterChange,
   onModelClick,
@@ -118,10 +122,10 @@ export function Toolbox({
             </div>
             <div>
               <h1 className="text-3xl font-bold text-brand-primary dark:text-white font-[Barlow]">
-                AI Model Toolbox
+                {pageContent.title}
               </h1>
               <p className="text-stone-600 dark:text-stone-400">
-                Open-source AI models built for African contexts
+                {pageContent.subtitle}
               </p>
             </div>
           </div>
@@ -149,13 +153,15 @@ export function Toolbox({
               <SearchInput
                 value={searchQuery}
                 onChange={handleSearchChange}
-                placeholder="Search models by name, description, or sector..."
+                placeholder={pageContent.searchPlaceholder}
               />
             </div>
 
             {/* Results count */}
             <div className="mb-4 text-sm text-stone-500 dark:text-stone-400">
-              Showing {filteredModels.length} of {aiModels.length} models
+              {pageContent.resultsTemplate
+                .replace('{filtered}', String(filteredModels.length))
+                .replace('{total}', String(aiModels.length))}
             </div>
 
             {/* Model Grid or Empty State */}
@@ -163,24 +169,30 @@ export function Toolbox({
               <ModelGrid models={filteredModels} onModelClick={handleModelClick} />
             ) : (
               <EmptyState
-                title="No models found"
-                description="Try adjusting your search or filters to find what you're looking for."
+                title={pageContent.emptyState.title}
+                description={pageContent.emptyState.description}
                 onClearFilters={handleClearFilters}
               />
             )}
 
             {/* Studies Section */}
-            <StudiesSection studies={studies} onDownload={onStudyDownload || (() => {})} />
+            <StudiesSection
+              studies={studies}
+              content={studiesSection}
+              onDownload={onStudyDownload || (() => {})}
+            />
 
             {/* Best Practices Section */}
             <BestPracticesSection
               bestPractices={bestPractices}
+              content={bestPracticesSection}
               onDownload={onBestPracticesDownload || (() => {})}
             />
 
             {/* Final Report */}
             <FinalReportCard
               report={finalReport}
+              content={finalReportSection}
               onDownload={onFinalReportDownload || (() => {})}
             />
           </div>
