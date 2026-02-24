@@ -41,7 +41,7 @@ export function HackathonsPreview() {
 
   const handleModelClick = (modelId: string) => {
     console.log('Model clicked:', modelId)
-    router.push(`/toolbox/models/${modelId}`)
+    router.push(`/deliverables/models/${modelId}`)
   }
 
   const handlePhotoClick = (photoId: string) => {

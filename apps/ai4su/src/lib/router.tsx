@@ -6,6 +6,7 @@ import { HackathonsPage } from '@/pages/HackathonsPage'
 import { HackathonDetailPage } from '@/pages/HackathonDetailPage'
 import { EcosystemPage } from '@/pages/EcosystemPage'
 import { PartnersPage } from '@/pages/PartnersPage'
+import { DatagovPage } from '@/pages/DatagovPage'
 
 export const router = createBrowserRouter([
   {
@@ -17,7 +18,7 @@ export const router = createBrowserRouter([
         element: <HomePage />,
       },
       {
-        path: 'toolbox',
+        path: 'deliverables',
         element: <ToolboxPage />,
       },
       {
@@ -29,12 +30,16 @@ export const router = createBrowserRouter([
         element: <HackathonDetailPage />,
       },
       {
-        path: 'ecosystem',
+        path: 'activities',
         element: <EcosystemPage />,
       },
       {
         path: 'partners',
         element: <PartnersPage />,
+      },
+      {
+        path: 'datagov',
+        element: <DatagovPage />,
       },
     ],
   },

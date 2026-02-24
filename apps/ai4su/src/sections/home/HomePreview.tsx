@@ -22,7 +22,7 @@ export function HomePreview() {
 
   const handleModelClick = (modelId: string) => {
     console.log('Model clicked:', modelId)
-    router.push(`/toolbox/models/${modelId}`)
+    router.push(`/deliverables/models/${modelId}`)
   }
 
   const handleSectionClick = (sectionId: string, link: string) => {

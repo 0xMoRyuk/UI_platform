@@ -46,11 +46,11 @@ export function HackathonDetailPage() {
   const handleBestPracticesDownload = (bpId: string) => {
     console.log('[Hackathon] Best practices download:', bpId)
     // Navigate to toolbox with the best practices highlighted
-    navigate(`/toolbox?bp=${bpId}`)
+    navigate(`/deliverables?bp=${bpId}`)
   }
 
   const handleModelClick = (modelId: string) => {
-    navigate(`/toolbox?model=${modelId}`)
+    navigate(`/deliverables?model=${modelId}`)
   }
 
   const handlePhotoClick = (photoId: string) => {

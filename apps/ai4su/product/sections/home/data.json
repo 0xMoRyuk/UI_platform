@@ -16,7 +16,7 @@
     "title": "AI4Startups",
     "subtitle": "Enabling African startups to innovate with trusted data and build scalable, responsible AI solutions",
     "ctaText": "View our Hackathons",
-    "ctaLink": "/toolbox",
+    "ctaLink": "/deliverables",
     "secondaryCtaText": "Explore our Resources Hub",
     "secondaryCtaLink": "/hackathons",
     "badge": "Funded by the European Union",
@@ -34,7 +34,7 @@
       "value": 24,
       "suffix": "",
       "description": "Open-source models developed",
-      "link": "/toolbox",
+      "link": "/deliverables",
       "icon": "brain"
     },
     {
@@ -52,7 +52,7 @@
       "value": 8,
       "suffix": "",
       "description": "Eligible to our program",
-      "link": "/ecosystem",
+      "link": "/activities",
       "icon": "globe"
     },
     {
@@ -61,7 +61,7 @@
       "value": 80,
       "suffix": "",
       "description": "reached by AI4startups program",
-      "link": "/ecosystem",
+      "link": "/activities",
       "icon": "users"
     }
   ],
@@ -105,7 +105,7 @@
       "title": "From Data to Deployment",
       "description": "Discover how AI4SU turns real datasets into deployable AI solutions through hackathons, data sharing agreements, applied research and ecosystem facilitation.",
       "imageUrl": "/images/ecosystem-preview.jpg",
-      "link": "/ecosystem",
+      "link": "/activities",
       "stats": "8 data sharing agreements, 8 countries scope"
     },
     {

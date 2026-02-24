@@ -19,7 +19,7 @@ export function Layout() {
   }
 
   const handleSearch = (query: string) => {
-    navigate(`/toolbox?q=${encodeURIComponent(query)}`)
+    navigate(`/deliverables?q=${encodeURIComponent(query)}`)
   }
 
   return (
