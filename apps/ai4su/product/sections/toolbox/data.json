@@ -16,7 +16,7 @@
   },
   "kpiSummary": [
     { "label": "AI Models", "value": 24, "icon": "brain" },
-    { "label": "Hackathons", "value": 6, "icon": "trophy" },
+    { "label": "Hackathons", "value": 8, "icon": "trophy" },
     { "label": "Countries", "value": 8, "icon": "globe" },
     { "label": "Studies", "value": 4, "icon": "book" }
   ],
@@ -207,7 +207,7 @@
       "sector": "fintech",
       "country": "KE",
       "githubUrl": "https://github.com/ai4startups/fraudguard-mobile",
-      "hackathonId": "hack-nairobi-2025"
+      "hackathonId": "hack-cairo-2025"
     },
     {
       "id": "model-015",
@@ -253,9 +253,9 @@
       "useCase": "Health apps can warn users about poor air quality days.",
       "technicalRequirements": "Python 3.8+, XGBoost, sensor data integration",
       "sector": "environment",
-      "country": "EG",
+      "country": "ZA",
       "githubUrl": "https://github.com/ai4startups/airquality-predict",
-      "hackathonId": "hack-cairo-2025"
+      "hackathonId": "hack-johannesburg-2025"
     },
     {
       "id": "model-019",
@@ -277,9 +277,9 @@
       "useCase": "Financial service providers can offer products timed with remittance cycles.",
       "technicalRequirements": "Python 3.9+, statsmodels, time series data",
       "sector": "fintech",
-      "country": "SN",
+      "country": "MA",
       "githubUrl": "https://github.com/ai4startups/remitpredict-flow",
-      "hackathonId": "hack-dakar-2025"
+      "hackathonId": "hack-casablanca-2025"
     },
     {
       "id": "model-021",
@@ -289,9 +289,9 @@
       "useCase": "Governments and NGOs can prepare drought response before conditions worsen.",
       "technicalRequirements": "Python 3.9+, TensorFlow, satellite imagery APIs",
       "sector": "environment",
-      "country": "KE",
+      "country": "EG",
       "githubUrl": "https://github.com/ai4startups/droughtearly-warning",
-      "hackathonId": "hack-nairobi-2025"
+      "hackathonId": "hack-cairo-2025"
     },
     {
       "id": "model-022",
@@ -301,9 +301,9 @@
       "useCase": "Schools can intervene early with at-risk students.",
       "technicalRequirements": "Python 3.8+, scikit-learn, privacy-preserving",
       "sector": "education",
-      "country": "ZA",
+      "country": "MA",
       "githubUrl": "https://github.com/ai4startups/schooldrop-predictor",
-      "hackathonId": "hack-johannesburg-2025"
+      "hackathonId": "hack-casablanca-2025"
     },
     {
       "id": "model-023",

@@ -3,10 +3,13 @@
 import { useParams, useNavigate } from 'react-router-dom'
 import { HackathonDetail } from '@/sections/hackathons/components'
 import type { Hackathon, HackathonFieldLabels } from '@/../product/sections/hackathons/types'
+import type { AIModel } from '@/../product/sections/toolbox/types'
 import hackathonsDataRaw from '@/../product/sections/hackathons/data.json'
+import toolboxDataRaw from '@/../product/sections/toolbox/data.json'
 
 // Cast JSON data to proper types (JSON imports lose literal type information)
 const hackathonsData = hackathonsDataRaw as unknown as { methodology: unknown; hackathons: Hackathon[]; fieldLabels: HackathonFieldLabels }
+const toolboxData = toolboxDataRaw as unknown as { aiModels: AIModel[] }
 
 export function HackathonDetailPage() {
   const { slug } = useParams<{ slug: string }>()
@@ -32,6 +35,11 @@ export function HackathonDetailPage() {
     )
   }
 
+  // Resolve modelIds to full AIModel objects
+  const models = hackathon.modelIds
+    .map(id => toolboxData.aiModels.find(m => m.id === id))
+    .filter((m): m is AIModel => m != null)
+
   const handleBackClick = () => {
     navigate('/hackathons')
   }
@@ -46,11 +54,11 @@ export function HackathonDetailPage() {
   const handleBestPracticesDownload = (bpId: string) => {
     console.log('[Hackathon] Best practices download:', bpId)
     // Navigate to toolbox with the best practices highlighted
-    navigate(`/deliverables?bp=${bpId}`)
+    navigate(`/models?bp=${bpId}`)
   }
 
   const handleModelClick = (modelId: string) => {
-    navigate(`/deliverables?model=${modelId}`)
+    navigate(`/models/${modelId}`)
   }
 
   const handlePhotoClick = (photoId: string) => {
@@ -66,6 +74,7 @@ export function HackathonDetailPage() {
   return (
     <HackathonDetail
       hackathon={hackathon}
+      models={models}
       fieldLabels={hackathonsData.fieldLabels}
       onBackClick={handleBackClick}
       onChallengeBriefDownload={handleChallengeBriefDownload}

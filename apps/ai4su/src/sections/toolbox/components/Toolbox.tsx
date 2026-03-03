@@ -2,12 +2,11 @@
 
 import { useState, useMemo } from 'react'
 import { Boxes } from 'lucide-react'
-import type { ToolboxProps, Sector, CountryCode, AIModel } from '@/../product/sections/toolbox/types'
+import type { ToolboxProps, Sector, CountryCode } from '@/../product/sections/toolbox/types'
 import { KPISummaryBar } from './KPISummaryBar'
 import { SearchInput } from './SearchInput'
 import { ModelFilterSidebar } from './ModelFilterSidebar'
 import { ModelGrid } from './ModelGrid'
-import { ModelDetailModal } from './ModelDetailModal'
 import { EmptyState } from './EmptyState'
 import { StudiesSection } from './StudiesSection'
 import { BestPracticesSection } from './BestPracticesSection'
@@ -27,7 +26,6 @@ export function Toolbox({
   onSearch,
   onFilterChange,
   onModelClick,
-  onGitHubClick,
   onStudyDownload,
   onBestPracticesDownload,
   onFinalReportDownload,
@@ -35,8 +33,6 @@ export function Toolbox({
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedSectors, setSelectedSectors] = useState<Sector[]>([])
   const [selectedCountries, setSelectedCountries] = useState<CountryCode[]>([])
-  const [selectedModel, setSelectedModel] = useState<AIModel | null>(null)
-  const [isModalOpen, setIsModalOpen] = useState(false)
 
   // Filter models based on search and filters
   const filteredModels = useMemo(() => {
@@ -88,24 +84,7 @@ export function Toolbox({
   }
 
   const handleModelClick = (modelId: string) => {
-    const model = aiModels.find((m) => m.id === modelId)
-    if (model) {
-      setSelectedModel(model)
-      setIsModalOpen(true)
-      onModelClick?.(modelId)
-    }
-  }
-
-  const handleGitHubClick = (url: string) => {
-    if (selectedModel) {
-      onGitHubClick?.(selectedModel.id, url)
-    }
-    window.open(url, '_blank', 'noopener,noreferrer')
-  }
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false)
-    setSelectedModel(null)
+    onModelClick?.(modelId)
   }
 
   return (
@@ -199,13 +178,6 @@ export function Toolbox({
         </div>
       </div>
 
-      {/* Model Detail Modal */}
-      <ModelDetailModal
-        model={selectedModel}
-        isOpen={isModalOpen}
-        onClose={handleCloseModal}
-        onGitHubClick={handleGitHubClick}
-      />
     </main>
   )
 }

@@ -57,8 +57,8 @@
       },
       "participantCount": 85,
       "teamCount": 17,
-      "modelsProduced": 4,
-      "modelIds": ["model-001", "model-007", "model-011", "model-021"],
+      "modelsProduced": 3,
+      "modelIds": ["model-001", "model-007", "model-011"],
       "heroImage": "/images/hackathons/nairobi-2025-hero.jpg",
       "challengeBrief": {
         "title": "AI for Smallholder Agriculture",
@@ -94,7 +94,7 @@
         }
       ],
       "outcomes": [
-        "4 open-source AI models published",
+        "3 open-source AI models published",
         "2 startups formed post-hackathon",
         "Partnership with KALRO for data access",
         "15,000+ GitHub stars across models"
@@ -124,8 +124,8 @@
       },
       "participantCount": 120,
       "teamCount": 24,
-      "modelsProduced": 6,
-      "modelIds": ["model-002", "model-006", "model-009", "model-014"],
+      "modelsProduced": 3,
+      "modelIds": ["model-002", "model-006", "model-009"],
       "heroImage": "/images/hackathons/lagos-2025-hero.jpg",
       "challengeBrief": {
         "title": "AI for Health Access & Urban Logistics",
@@ -161,7 +161,7 @@
         }
       ],
       "outcomes": [
-        "6 open-source AI models published",
+        "3 open-source AI models published",
         "Partnership with Lagos State Health Ministry",
         "HealthTriage AI piloted in 5 primary health centers",
         "LogiRoute adopted by 2 delivery startups"
@@ -191,7 +191,7 @@
       },
       "participantCount": 70,
       "teamCount": 14,
-      "modelsProduced": 4,
+      "modelsProduced": 3,
       "modelIds": ["model-003", "model-008", "model-024"],
       "heroImage": "/images/hackathons/accra-2025-hero.jpg",
       "challengeBrief": {
@@ -228,7 +228,7 @@
         }
       ],
       "outcomes": [
-        "4 open-source AI models published",
+        "3 open-source AI models published",
         "Regulatory sandbox partnership with Bank of Ghana",
         "FinCheck piloted with 3 microfinance institutions",
         "€500K in follow-on funding for winning teams"
@@ -239,6 +239,73 @@
         { "id": "photo-a3", "url": "/images/hackathons/accra-2025/late-night.jpg", "caption": "Late night coding" },
         { "id": "photo-a4", "url": "/images/hackathons/accra-2025/pitch.jpg", "caption": "Final pitch session" },
         { "id": "photo-a5", "url": "/images/hackathons/accra-2025/celebration.jpg", "caption": "Winners celebration" }
+      ]
+    },
+    {
+      "id": "hack-cairo-2025",
+      "slug": "cairo-ai-smart-cities-2025",
+      "name": "Cairo AI for Smart Cities & Climate",
+      "tagline": "Building resilient cities with AI",
+      "theme": "Smart Cities & Climate Resilience",
+      "description": "The Cairo hackathon brought together 90 participants to develop AI solutions for smart city infrastructure and climate resilience. Teams worked on traffic optimization, financial security, and drought prediction for the Nile region.",
+      "startDate": "2025-08-16",
+      "endDate": "2025-08-18",
+      "location": {
+        "venue": "GrEEK Campus",
+        "city": "Cairo",
+        "country": "Egypt",
+        "countryCode": "EG"
+      },
+      "participantCount": 90,
+      "teamCount": 18,
+      "modelsProduced": 3,
+      "modelIds": ["model-013", "model-014", "model-021"],
+      "heroImage": "/images/hackathons/cairo-2025-hero.jpg",
+      "challengeBrief": {
+        "title": "AI for Smart Cities & Climate Resilience",
+        "summary": "Develop AI tools that improve urban infrastructure, enhance financial security, and build climate resilience in North African cities.",
+        "pdfUrl": "/documents/challenge-brief-cairo-2025.pdf"
+      },
+      "bestPracticesId": null,
+      "partners": ["GrEEK Campus", "Egypt Ministry of Communications & IT", "GIZ"],
+      "winningTeams": [
+        {
+          "rank": 1,
+          "teamName": "CairoFlow",
+          "projectName": "TrafficFlow Predict",
+          "description": "Urban traffic prediction model for African megacities.",
+          "modelId": "model-013",
+          "prize": "€5,000 + AWS Credits"
+        },
+        {
+          "rank": 2,
+          "teamName": "SecurePay Egypt",
+          "projectName": "FraudGuard Mobile",
+          "description": "Real-time fraud detection for mobile money transactions.",
+          "modelId": "model-014",
+          "prize": "€3,000 + Mentorship"
+        },
+        {
+          "rank": 3,
+          "teamName": "ClimateWatch Nile",
+          "projectName": "DroughtEarly Warning",
+          "description": "Satellite-based drought prediction for agricultural planning.",
+          "modelId": "model-021",
+          "prize": "€1,500"
+        }
+      ],
+      "outcomes": [
+        "3 open-source AI models published",
+        "Partnership with Egypt Ministry of Communications & IT",
+        "TrafficFlow Predict piloted in Cairo traffic management",
+        "First North African hackathon in the program"
+      ],
+      "photos": [
+        { "id": "photo-c1", "url": "/images/hackathons/cairo-2025/greek-campus.jpg", "caption": "GrEEK Campus venue", "featured": true },
+        { "id": "photo-c2", "url": "/images/hackathons/cairo-2025/teams-cairo.jpg", "caption": "Teams collaborating" },
+        { "id": "photo-c3", "url": "/images/hackathons/cairo-2025/smart-city.jpg", "caption": "Smart city track presentations" },
+        { "id": "photo-c4", "url": "/images/hackathons/cairo-2025/climate-demo.jpg", "caption": "Climate resilience demos" },
+        { "id": "photo-c5", "url": "/images/hackathons/cairo-2025/winners-cairo.jpg", "caption": "Winning teams celebration" }
       ]
     },
     {
@@ -258,8 +325,8 @@
       },
       "participantCount": 65,
       "teamCount": 13,
-      "modelsProduced": 4,
-      "modelIds": ["model-005", "model-012", "model-016", "model-020"],
+      "modelsProduced": 3,
+      "modelIds": ["model-005", "model-012", "model-016"],
       "heroImage": "/images/hackathons/dakar-2025-hero.jpg",
       "challengeBrief": {
         "title": "AI pour l'Environnement au Sahel",
@@ -295,7 +362,7 @@
         }
       ],
       "outcomes": [
-        "4 open-source AI models published",
+        "3 open-source AI models published",
         "Partnership with Senegal Environment Ministry",
         "WaterSense deployed in 10 rural communities",
         "First Francophone AI hackathon in the program"
@@ -392,8 +459,8 @@
       },
       "participantCount": 150,
       "teamCount": 30,
-      "modelsProduced": 5,
-      "modelIds": ["model-017", "model-018", "model-022", "model-023"],
+      "modelsProduced": 3,
+      "modelIds": ["model-023", "model-017", "model-018"],
       "heroImage": "/images/hackathons/johannesburg-2025-hero.jpg",
       "challengeBrief": {
         "title": "AI for African Development",
@@ -429,7 +496,7 @@
         }
       ],
       "outcomes": [
-        "5 open-source AI models published",
+        "3 open-source AI models published",
         "TBScreen piloted in 3 Gauteng hospitals",
         "€1M in follow-on funding for winning teams",
         "Largest AI4Startups hackathon by participant count"
@@ -441,6 +508,73 @@
         { "id": "photo-j4", "url": "/images/hackathons/johannesburg-2025/expo.jpg", "caption": "Solution expo" },
         { "id": "photo-j5", "url": "/images/hackathons/johannesburg-2025/finale.jpg", "caption": "Grand finale" },
         { "id": "photo-j6", "url": "/images/hackathons/johannesburg-2025/eu-ambassador.jpg", "caption": "EU Ambassador address" }
+      ]
+    },
+    {
+      "id": "hack-casablanca-2025",
+      "slug": "casablanca-ai-commerce-2025",
+      "name": "Casablanca AI for Commerce & Education",
+      "tagline": "AI solutions for commerce, finance, and education",
+      "theme": "Commerce, Finance & Education",
+      "description": "The Casablanca hackathon brought together 75 participants from Francophone North and West Africa to develop AI solutions for retail inventory management, remittance prediction, and student dropout prevention.",
+      "startDate": "2025-12-06",
+      "endDate": "2025-12-08",
+      "location": {
+        "venue": "Technopark Casablanca",
+        "city": "Casablanca",
+        "country": "Morocco",
+        "countryCode": "MA"
+      },
+      "participantCount": 75,
+      "teamCount": 15,
+      "modelsProduced": 3,
+      "modelIds": ["model-019", "model-020", "model-022"],
+      "heroImage": "/images/hackathons/casablanca-2025-hero.jpg",
+      "challengeBrief": {
+        "title": "IA pour le Commerce, la Finance et l'Éducation",
+        "summary": "Développer des solutions IA pour l'optimisation du commerce de détail, la prédiction des transferts de fonds et la prévention du décrochage scolaire.",
+        "pdfUrl": "/documents/challenge-brief-casablanca-2025.pdf"
+      },
+      "bestPracticesId": null,
+      "partners": ["Technopark", "Morocco Digital Development Agency", "Expertise France"],
+      "winningTeams": [
+        {
+          "rank": 1,
+          "teamName": "RetailAI Maroc",
+          "projectName": "InventoryAI Retail",
+          "description": "Inventory optimization for small retailers using demand forecasting.",
+          "modelId": "model-019",
+          "prize": "€5,000 + AWS Credits"
+        },
+        {
+          "rank": 2,
+          "teamName": "RemitTech Atlas",
+          "projectName": "RemitPredict Flow",
+          "description": "Remittance flow prediction for financial planning.",
+          "modelId": "model-020",
+          "prize": "€3,000 + Mentorship"
+        },
+        {
+          "rank": 3,
+          "teamName": "EduWatch Maghreb",
+          "projectName": "SchoolDrop Predictor",
+          "description": "Early warning system for student dropout risk.",
+          "modelId": "model-022",
+          "prize": "€1,500"
+        }
+      ],
+      "outcomes": [
+        "3 open-source AI models published",
+        "Partnership with Morocco Digital Development Agency",
+        "InventoryAI piloted with 20 small retailers in Casablanca",
+        "Second Francophone hackathon in the program"
+      ],
+      "photos": [
+        { "id": "photo-m1", "url": "/images/hackathons/casablanca-2025/technopark.jpg", "caption": "Technopark Casablanca venue", "featured": true },
+        { "id": "photo-m2", "url": "/images/hackathons/casablanca-2025/teams-casa.jpg", "caption": "Équipes au travail" },
+        { "id": "photo-m3", "url": "/images/hackathons/casablanca-2025/commerce-track.jpg", "caption": "Commerce track presentations" },
+        { "id": "photo-m4", "url": "/images/hackathons/casablanca-2025/pitch-day.jpg", "caption": "Journée de pitch" },
+        { "id": "photo-m5", "url": "/images/hackathons/casablanca-2025/winners-casa.jpg", "caption": "Les gagnants" }
       ]
     }
   ],

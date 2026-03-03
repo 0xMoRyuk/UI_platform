@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import type { HackathonDetailPageProps } from '@/../product/sections/hackathons/types'
+import { ModelCard } from '@/sections/toolbox/components'
 import { Breadcrumb } from './Breadcrumb'
 import { HackathonHero } from './HackathonHero'
 import { ShareButtons } from './ShareButtons'
@@ -13,6 +14,7 @@ import { Lightbox } from './Lightbox'
 
 export function HackathonDetail({
   hackathon,
+  models,
   fieldLabels,
   onBackClick,
   onChallengeBriefDownload,
@@ -85,6 +87,24 @@ export function HackathonDetail({
           challengeBrief={hackathon.challengeBrief}
           onDownload={onChallengeBriefDownload || (() => {})}
         />
+
+        {/* AI Models Produced */}
+        {models && models.length > 0 && (
+          <section className="py-12 border-t border-stone-200 dark:border-stone-800">
+            <h2 className="text-2xl font-bold text-brand-primary dark:text-white font-[Barlow] mb-6">
+              AI Models Produced
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {models.map((model) => (
+                <ModelCard
+                  key={model.id}
+                  model={model}
+                  onClick={() => onModelClick?.(model.id)}
+                />
+              ))}
+            </div>
+          </section>
+        )}
 
         {/* Winning Teams */}
         <WinningTeamsSection

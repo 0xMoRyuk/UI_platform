@@ -2,6 +2,8 @@
 // Data Types
 // =============================================================================
 
+import type { AIModel } from '../toolbox/types'
+
 export type CountryCode = 'KE' | 'NG' | 'GH' | 'SN' | 'RW' | 'ZA' | 'EG' | 'MA'
 
 export interface MethodologyStep {
@@ -119,6 +121,8 @@ export interface HackathonsPageProps {
 export interface HackathonDetailPageProps {
   /** The hackathon to display */
   hackathon: Hackathon
+  /** Resolved AI models for this hackathon */
+  models?: AIModel[]
   /** Field labels for the hero sidebar */
   fieldLabels: HackathonFieldLabels
   /** Called when user clicks back to all hackathons */

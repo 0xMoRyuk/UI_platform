@@ -22,7 +22,7 @@ export function HomePage() {
 
   const handleModelClick = (modelId: string) => {
     console.log('[Home] Model clicked:', modelId)
-    navigate(`/deliverables?model=${modelId}`)
+    navigate(`/models/${modelId}`)
   }
 
   const handleSectionClick = (sectionId: string, link: string) => {

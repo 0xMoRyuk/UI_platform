@@ -11,11 +11,8 @@ const hackathonsData = hackathonsDataRaw as unknown as Omit<HackathonsPageProps,
 export function HackathonsPage() {
   const navigate = useNavigate()
 
-  const handleHackathonClick = (hackathonId: string) => {
-    const hackathon = hackathonsData.hackathons.find(h => h.id === hackathonId)
-    if (hackathon) {
-      navigate(`/hackathons/${hackathon.slug}`)
-    }
+  const handleHackathonClick = (hackathonSlug: string) => {
+    navigate(`/hackathons/${hackathonSlug}`)
   }
 
   return (

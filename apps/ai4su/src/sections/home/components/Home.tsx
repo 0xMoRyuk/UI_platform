@@ -36,7 +36,7 @@ export function Home({
         featuredModels={featuredModels}
         toolboxHighlight={toolboxHighlight}
         onModelClick={onModelClick}
-        onViewAllClick={() => onCtaClick?.('/deliverables')}
+        onViewAllClick={() => onCtaClick?.('/models')}
       />
 
       {/* Section Previews */}

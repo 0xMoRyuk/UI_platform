@@ -1,7 +1,8 @@
-import { createBrowserRouter } from 'react-router-dom'
+import { createBrowserRouter, Navigate } from 'react-router-dom'
 import { Layout } from '@/pages/Layout'
 import { HomePage } from '@/pages/HomePage'
-import { ToolboxPage } from '@/pages/ToolboxPage'
+import { ModelsPage } from '@/pages/ModelsPage'
+import { ModelDetailPage } from '@/pages/ModelDetailPage'
 import { HackathonsPage } from '@/pages/HackathonsPage'
 import { HackathonDetailPage } from '@/pages/HackathonDetailPage'
 import { EcosystemPage } from '@/pages/EcosystemPage'
@@ -18,8 +19,16 @@ export const router = createBrowserRouter([
         element: <HomePage />,
       },
       {
+        path: 'models',
+        element: <ModelsPage />,
+      },
+      {
+        path: 'models/:id',
+        element: <ModelDetailPage />,
+      },
+      {
         path: 'deliverables',
-        element: <ToolboxPage />,
+        element: <Navigate to="/models" replace />,
       },
       {
         path: 'hackathons',

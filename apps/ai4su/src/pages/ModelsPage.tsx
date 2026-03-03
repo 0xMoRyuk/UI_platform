@@ -1,5 +1,6 @@
 'use client'
 
+import { useNavigate } from 'react-router-dom'
 import { Toolbox } from '@/sections/toolbox/components'
 import type { ToolboxProps } from '@/../product/sections/toolbox/types'
 import toolboxDataRaw from '@/../product/sections/toolbox/data.json'
@@ -7,29 +8,28 @@ import toolboxDataRaw from '@/../product/sections/toolbox/data.json'
 // Cast JSON data to proper types (JSON imports lose literal type information)
 const toolboxData = toolboxDataRaw as unknown as Omit<ToolboxProps, 'onSearch' | 'onFilterChange' | 'onModelClick' | 'onGitHubClick' | 'onStudyDownload' | 'onBestPracticesDownload' | 'onFinalReportDownload'>
 
-export function ToolboxPage() {
+export function ModelsPage() {
+  const navigate = useNavigate()
+
   const handleSearch = (query: string) => {
-    console.log('[Toolbox] Search:', query)
-    // Search is handled internally by Toolbox component
+    console.log('[Models] Search:', query)
   }
 
   const handleFilterChange = (filters: { sectors: string[]; countries: string[] }) => {
-    console.log('[Toolbox] Filter changed:', filters)
-    // Filtering is handled internally by Toolbox component
+    console.log('[Models] Filter changed:', filters)
   }
 
   const handleModelClick = (modelId: string) => {
-    console.log('[Toolbox] Model clicked:', modelId)
-    // Modal is handled internally by Toolbox component
+    navigate(`/models/${modelId}`)
   }
 
   const handleGitHubClick = (modelId: string, url: string) => {
-    console.log('[Toolbox] GitHub clicked for model:', modelId)
+    console.log('[Models] GitHub clicked for model:', modelId)
     window.open(url, '_blank', 'noopener,noreferrer')
   }
 
   const handleStudyDownload = (studyId: string) => {
-    console.log('[Toolbox] Study download:', studyId)
+    console.log('[Models] Study download:', studyId)
     const study = toolboxData.studies.find(s => s.id === studyId)
     if (study) {
       window.open(study.pdfUrl, '_blank')
@@ -37,7 +37,7 @@ export function ToolboxPage() {
   }
 
   const handleBestPracticesDownload = (bpId: string) => {
-    console.log('[Toolbox] Best practices download:', bpId)
+    console.log('[Models] Best practices download:', bpId)
     const bp = toolboxData.bestPractices.find(b => b.id === bpId)
     if (bp) {
       window.open(bp.pdfUrl, '_blank')
@@ -45,7 +45,7 @@ export function ToolboxPage() {
   }
 
   const handleFinalReportDownload = () => {
-    console.log('[Toolbox] Final report download')
+    console.log('[Models] Final report download')
     window.open(toolboxData.finalReport.pdfUrl, '_blank')
   }
 

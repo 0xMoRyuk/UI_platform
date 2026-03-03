@@ -1,6 +1,7 @@
 export { Layout } from './Layout'
 export { HomePage } from './HomePage'
-export { ToolboxPage } from './ToolboxPage'
+export { ModelsPage } from './ModelsPage'
+export { ModelDetailPage } from './ModelDetailPage'
 export { HackathonsPage } from './HackathonsPage'
 export { HackathonDetailPage } from './HackathonDetailPage'
 export { EcosystemPage } from './EcosystemPage'

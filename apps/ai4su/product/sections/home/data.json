@@ -16,7 +16,7 @@
     "title": "AI4Startups",
     "subtitle": "Enabling African startups to innovate with trusted data and build scalable, responsible AI solutions",
     "ctaText": "View our Hackathons",
-    "ctaLink": "/deliverables",
+    "ctaLink": "/models",
     "secondaryCtaText": "Explore our Resources Hub",
     "secondaryCtaLink": "/hackathons",
     "badge": "Funded by the European Union",
@@ -24,7 +24,7 @@
     "stats": [
       { "value": "24", "label": "AI Models" },
       { "value": "8", "label": "Countries" },
-      { "value": "500+", "label": "Participants" }
+      { "value": "700+", "label": "Participants" }
     ]
   },
   "kpis": [
@@ -34,7 +34,7 @@
       "value": 24,
       "suffix": "",
       "description": "Open-source models developed",
-      "link": "/deliverables",
+      "link": "/models",
       "icon": "brain"
     },
     {
