@@ -18,5 +18,5 @@ console.log(`Server running on port ${port}`)
 
 export default {
   port,
-  fetch: app.fetch,
+  fetch: app.fetch.bind(app),
 }
