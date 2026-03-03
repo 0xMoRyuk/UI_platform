@@ -2,12 +2,10 @@
 
 import { useParams, useNavigate, Link } from 'react-router-dom'
 import { ArrowLeft, Github, ExternalLink, Cpu, FileText, Target, Link as LinkIcon } from 'lucide-react'
-import type { AIModel } from '@/../product/sections/toolbox/types'
 import type { Hackathon } from '@/../product/sections/hackathons/types'
-import toolboxDataRaw from '@/../product/sections/toolbox/data.json'
+import { getModelById } from '@/lib/data-provider'
 import hackathonsDataRaw from '@/../product/sections/hackathons/data.json'
 
-const toolboxData = toolboxDataRaw as unknown as { aiModels: AIModel[] }
 const hackathonsData = hackathonsDataRaw as unknown as { hackathons: Hackathon[] }
 
 const sectorColors: Record<string, { bg: string; text: string }> = {
@@ -45,7 +43,7 @@ export function ModelDetailPage() {
   const { id } = useParams<{ id: string }>()
   const navigate = useNavigate()
 
-  const model = toolboxData.aiModels.find(m => m.id === id)
+  const model = id ? getModelById(id) : null
 
   if (!model) {
     return (

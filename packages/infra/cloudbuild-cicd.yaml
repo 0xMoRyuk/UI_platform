@@ -77,10 +77,13 @@ steps:
         # Compute service name from app name (no nested substitution)
         SERVICE_LOWER=$(echo "ui-platform-${_APP_NAME}" | tr '[:upper:]' '[:lower:]')
 
-        # Detect app type (Next.js or Vite) from package.json
+        # Detect app type from project files
         if grep -q '"next"' apps/${_APP_NAME}/package.json 2>/dev/null; then
           DOCKERFILE="packages/infra/Dockerfile.next"
           echo "Detected Next.js app, using Dockerfile.next"
+        elif [ -f "apps/${_APP_NAME}/server.ts" ]; then
+          DOCKERFILE="packages/infra/Dockerfile.hono"
+          echo "Detected Hono app (server.ts), using Dockerfile.hono"
         else
           DOCKERFILE="packages/infra/Dockerfile.vite"
           echo "Detected Vite app, using Dockerfile.vite"
@@ -175,6 +178,16 @@ steps:
         # Response time
         RESPONSE_TIME=$(curl -o /dev/null -s -w '%{time_total}\n' $$SERVICE_URL)
         echo "✅ Homepage: 200 ($${RESPONSE_TIME}s)"
+
+        # Test API endpoint if Hono app
+        if [ -f "apps/${_APP_NAME}/server.ts" ]; then
+          API_CODE=$(curl -s -o /dev/null -w "%{http_code}" $$SERVICE_URL/api/models)
+          if [ "$$API_CODE" != "200" ]; then
+            echo "❌ API /api/models failed: $$API_CODE"
+            exit 1
+          fi
+          echo "✅ API /api/models: 200"
+        fi
     waitFor: ['deploy']
     allowFailure: true
 

@@ -1,0 +1,45 @@
+# Multi-stage Dockerfile for Bun + Hono apps on Cloud Run
+# Serves API endpoints + static SPA files
+ARG APP_NAME=ai4su
+
+FROM oven/bun:1 AS builder
+WORKDIR /app
+
+# Copy root config
+COPY package.json package-lock.json* bun.lock* ./
+
+# Copy packages
+COPY packages/ui packages/ui
+COPY packages/config packages/config
+COPY packages/types packages/types
+COPY packages/utils packages/utils
+
+# Copy app
+ARG APP_NAME
+COPY apps/${APP_NAME} apps/${APP_NAME}
+
+# Install dependencies
+RUN bun install 2>&1 || bun install --no-save
+
+# Build the SPA (Vite)
+WORKDIR /app/apps/${APP_NAME}
+RUN bunx vite build
+
+# Production stage - Bun + Hono serves API + static
+FROM oven/bun:1-alpine AS runner
+WORKDIR /app
+
+# Copy only what's needed for runtime
+ARG APP_NAME
+COPY --from=builder /app/apps/${APP_NAME}/dist ./dist
+COPY --from=builder /app/apps/${APP_NAME}/server.ts ./server.ts
+COPY --from=builder /app/apps/${APP_NAME}/src/api ./src/api
+COPY --from=builder /app/apps/${APP_NAME}/src/domain ./src/domain
+COPY --from=builder /app/apps/${APP_NAME}/src/contract ./src/contract
+COPY --from=builder /app/apps/${APP_NAME}/src/agent ./src/agent
+COPY --from=builder /app/apps/${APP_NAME}/product ./product
+COPY --from=builder /app/apps/${APP_NAME}/node_modules ./node_modules
+COPY --from=builder /app/apps/${APP_NAME}/package.json ./package.json
+
+EXPOSE 8080
+CMD ["bun", "run", "server.ts"]

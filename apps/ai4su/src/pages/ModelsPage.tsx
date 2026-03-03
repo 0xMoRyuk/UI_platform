@@ -2,11 +2,25 @@
 
 import { useNavigate } from 'react-router-dom'
 import { Toolbox } from '@/sections/toolbox/components'
-import type { ToolboxProps } from '@/../product/sections/toolbox/types'
+import type { KPISummaryItem } from '@/../product/sections/toolbox/types'
+import { getAllModels, getAvailableFilters, getAllStudies, getAllBestPractices, getFinalReport, getStudyById, getBestPracticeById } from '@/lib/data-provider'
 import toolboxDataRaw from '@/../product/sections/toolbox/data.json'
 
-// Cast JSON data to proper types (JSON imports lose literal type information)
-const toolboxData = toolboxDataRaw as unknown as Omit<ToolboxProps, 'onSearch' | 'onFilterChange' | 'onModelClick' | 'onGitHubClick' | 'onStudyDownload' | 'onBestPracticesDownload' | 'onFinalReportDownload'>
+// Domain data from data-provider
+const aiModels = getAllModels()
+const filterOptions = getAvailableFilters()
+const studies = getAllStudies()
+const bestPractices = getAllBestPractices()
+const finalReport = getFinalReport()
+
+// Presentation content stays as direct JSON (not domain entities)
+const uiContent = toolboxDataRaw as unknown as {
+  kpiSummary: KPISummaryItem[]
+  pageContent: { title: string; subtitle: string; searchPlaceholder: string; emptyState: { title: string; description: string }; resultsTemplate: string }
+  studiesSection: { title: string; description: string; keyFindingsLabel: string; downloadLabel: string }
+  bestPracticesSection: { title: string; description: string; downloadLabel: string }
+  finalReportSection: { badge: string; downloadText: string; fundedByBadge: string; pagesLabel: string }
+}
 
 export function ModelsPage() {
   const navigate = useNavigate()
@@ -30,7 +44,7 @@ export function ModelsPage() {
 
   const handleStudyDownload = (studyId: string) => {
     console.log('[Models] Study download:', studyId)
-    const study = toolboxData.studies.find(s => s.id === studyId)
+    const study = getStudyById(studyId)
     if (study) {
       window.open(study.pdfUrl, '_blank')
     }
@@ -38,7 +52,7 @@ export function ModelsPage() {
 
   const handleBestPracticesDownload = (bpId: string) => {
     console.log('[Models] Best practices download:', bpId)
-    const bp = toolboxData.bestPractices.find(b => b.id === bpId)
+    const bp = getBestPracticeById(bpId)
     if (bp) {
       window.open(bp.pdfUrl, '_blank')
     }
@@ -46,21 +60,21 @@ export function ModelsPage() {
 
   const handleFinalReportDownload = () => {
     console.log('[Models] Final report download')
-    window.open(toolboxData.finalReport.pdfUrl, '_blank')
+    window.open(finalReport.pdfUrl, '_blank')
   }
 
   return (
     <Toolbox
-      kpiSummary={toolboxData.kpiSummary}
-      filterOptions={toolboxData.filterOptions}
-      aiModels={toolboxData.aiModels}
-      studies={toolboxData.studies}
-      bestPractices={toolboxData.bestPractices}
-      finalReport={toolboxData.finalReport}
-      pageContent={toolboxData.pageContent}
-      studiesSection={toolboxData.studiesSection}
-      bestPracticesSection={toolboxData.bestPracticesSection}
-      finalReportSection={toolboxData.finalReportSection}
+      kpiSummary={uiContent.kpiSummary}
+      filterOptions={filterOptions}
+      aiModels={aiModels}
+      studies={studies}
+      bestPractices={bestPractices}
+      finalReport={finalReport}
+      pageContent={uiContent.pageContent}
+      studiesSection={uiContent.studiesSection}
+      bestPracticesSection={uiContent.bestPracticesSection}
+      finalReportSection={uiContent.finalReportSection}
       onSearch={handleSearch}
       onFilterChange={handleFilterChange}
       onModelClick={handleModelClick}
