@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { api } from '@/api/server'
+import { seo } from '@/seo'
 
 /**
  * Thin-slice e2e: verifies the full chain from
@@ -25,6 +26,17 @@ describe('thin-slice: models API end-to-end', () => {
     const detailBody = await detailRes.json()
     expect(detailBody.data.id).toBe(firstModel.id)
     expect(detailBody.data.sector).toBe('crop-science')
+  })
+
+  it('SEO crawl path: sitemap -> /s/models -> model content', async () => {
+    const sitemap = await seo.request('http://localhost/sitemap.xml')
+    expect(sitemap.status).toBe(200)
+    expect(await sitemap.text()).toContain('/s/models')
+
+    const page = await seo.request('http://localhost/s/models')
+    expect(page.status).toBe(200)
+    const html = await page.text()
+    expect(html).toContain('application/ld+json')
   })
 
   it('manifest is discoverable', async () => {
