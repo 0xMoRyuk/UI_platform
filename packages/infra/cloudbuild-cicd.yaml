@@ -179,14 +179,51 @@ steps:
         RESPONSE_TIME=$(curl -o /dev/null -s -w '%{time_total}\n' $$SERVICE_URL)
         echo "✅ Homepage: 200 ($${RESPONSE_TIME}s)"
 
-        # Test API endpoint if Hono app
+        # Test API endpoints if Hono app (JSON purity checks)
         if [ -f "apps/${_APP_NAME}/server.ts" ]; then
+          # /api/models — must return JSON 200
+          API_BODY=$(curl -s $$SERVICE_URL/api/models)
           API_CODE=$(curl -s -o /dev/null -w "%{http_code}" $$SERVICE_URL/api/models)
+          API_CT=$(curl -s -o /dev/null -w "%{content_type}" $$SERVICE_URL/api/models)
           if [ "$$API_CODE" != "200" ]; then
-            echo "❌ API /api/models failed: $$API_CODE"
+            echo "❌ /api/models status: $$API_CODE"
             exit 1
           fi
-          echo "✅ API /api/models: 200"
+          if echo "$$API_CT" | grep -qv 'application/json'; then
+            echo "❌ /api/models Content-Type: $$API_CT (expected application/json)"
+            exit 1
+          fi
+          if echo "$$API_BODY" | grep -qi '<!DOCTYPE\|<html'; then
+            echo "❌ /api/models contains HTML"
+            exit 1
+          fi
+          echo "✅ /api/models: 200 JSON"
+
+          # /.well-known/agent-capabilities.json — must return JSON 200
+          MANIFEST_CODE=$(curl -s -o /dev/null -w "%{http_code}" $$SERVICE_URL/.well-known/agent-capabilities.json)
+          MANIFEST_CT=$(curl -s -o /dev/null -w "%{content_type}" $$SERVICE_URL/.well-known/agent-capabilities.json)
+          if [ "$$MANIFEST_CODE" != "200" ]; then
+            echo "❌ /.well-known/agent-capabilities.json status: $$MANIFEST_CODE"
+            exit 1
+          fi
+          if echo "$$MANIFEST_CT" | grep -qv 'application/json'; then
+            echo "❌ /.well-known/agent-capabilities.json Content-Type: $$MANIFEST_CT"
+            exit 1
+          fi
+          echo "✅ /.well-known/agent-capabilities.json: 200 JSON"
+
+          # /api/nonexistent — must return JSON 404 (not HTML)
+          NOTFOUND_CODE=$(curl -s -o /dev/null -w "%{http_code}" $$SERVICE_URL/api/nonexistent)
+          NOTFOUND_BODY=$(curl -s $$SERVICE_URL/api/nonexistent)
+          if [ "$$NOTFOUND_CODE" != "404" ]; then
+            echo "❌ /api/nonexistent status: $$NOTFOUND_CODE (expected 404)"
+            exit 1
+          fi
+          if echo "$$NOTFOUND_BODY" | grep -qi '<!DOCTYPE\|<html'; then
+            echo "❌ /api/nonexistent contains HTML (expected JSON 404)"
+            exit 1
+          fi
+          echo "✅ /api/nonexistent: 404 JSON"
         fi
     waitFor: ['deploy']
     allowFailure: true

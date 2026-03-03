@@ -28,12 +28,12 @@ describe('thin-slice: models API end-to-end', () => {
   })
 
   it('manifest is discoverable', async () => {
-    const res = await api.request('/.well-known/agent-capabilities.json')
+    const res = await api.request('http://localhost/.well-known/agent-capabilities.json')
     expect(res.status).toBe(200)
     const body = await res.json()
     expect(body.capabilities.length).toBeGreaterThanOrEqual(3)
 
-    // Verify each declared endpoint is reachable
+    // Verify each declared endpoint is reachable (endpoints are now absolute URLs)
     for (const cap of body.capabilities) {
       if (cap.endpoint.includes('{')) continue // skip parameterized endpoints
       const capRes = await api.request(cap.endpoint)

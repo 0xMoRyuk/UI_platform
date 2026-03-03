@@ -7,6 +7,12 @@ const app = new Hono()
 // Mount API routes
 app.route('', api)
 
+// JSON 404 guards — prevent SPA fallback for API/discovery paths
+app.all('/api/*', (c) =>
+  c.json({ success: false, error: { code: 'NOT_FOUND', message: 'Endpoint not found' } }, 404))
+app.all('/.well-known/*', (c) =>
+  c.json({ success: false, error: { code: 'NOT_FOUND', message: 'Resource not found' } }, 404))
+
 // Serve static files from Vite build output
 app.use('/*', serveStatic({ root: './dist' }))
 

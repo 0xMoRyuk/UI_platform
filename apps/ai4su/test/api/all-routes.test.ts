@@ -75,13 +75,13 @@ describe('GET /api/home/countries', () => {
 
 describe('manifest completeness', () => {
   it('has 15 capabilities', async () => {
-    const res = await api.request('/.well-known/agent-capabilities.json')
+    const res = await api.request('http://localhost/.well-known/agent-capabilities.json')
     const body = await res.json()
     expect(body.capabilities).toHaveLength(15)
   })
 
   it('all non-parameterized endpoints return 200', async () => {
-    const res = await api.request('/.well-known/agent-capabilities.json')
+    const res = await api.request('http://localhost/.well-known/agent-capabilities.json')
     const body = await res.json()
     for (const cap of body.capabilities) {
       if (cap.endpoint.includes('{')) continue

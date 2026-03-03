@@ -141,5 +141,13 @@ const manifest = {
 }
 
 manifestRoutes.get('/.well-known/agent-capabilities.json', (c) => {
-  return c.json(manifest)
+  const baseUrl = new URL(c.req.url).origin
+  return c.json({
+    ...manifest,
+    base_url: baseUrl,
+    capabilities: manifest.capabilities.map((cap) => ({
+      ...cap,
+      endpoint: `${baseUrl}${cap.endpoint}`,
+    })),
+  })
 })
