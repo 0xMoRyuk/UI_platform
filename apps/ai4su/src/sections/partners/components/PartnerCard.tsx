@@ -1,5 +1,7 @@
 import { ExternalLink, CheckCircle, Building } from 'lucide-react'
 import { Badge } from '@ui-platform/ui/components/badge'
+import { Button } from '@ui-platform/ui/components/button'
+import { Avatar, AvatarFallback } from '@ui-platform/ui/components/avatar'
 import type { PartnerCardProps } from '@/../product/sections/partners/types'
 
 export function PartnerCard({ partner, onClick }: PartnerCardProps) {
@@ -8,9 +10,11 @@ export function PartnerCard({ partner, onClick }: PartnerCardProps) {
       {/* Header */}
       <div className="flex items-start gap-4 mb-4">
         {/* Logo placeholder */}
-        <div className="w-16 h-16 rounded-lg bg-stone-100 dark:bg-stone-800 flex items-center justify-center shrink-0">
-          <Building className="w-8 h-8 text-stone-400" />
-        </div>
+        <Avatar className="w-16 h-16 rounded-lg shrink-0">
+          <AvatarFallback className="bg-stone-100 dark:bg-stone-800 rounded-lg">
+            <Building className="w-8 h-8 text-stone-400" />
+          </AvatarFallback>
+        </Avatar>
         <div>
           <Badge variant="outline" className="text-brand-primary dark:text-brand-secondary mb-1">
             {partner.role}
@@ -42,13 +46,14 @@ export function PartnerCard({ partner, onClick }: PartnerCardProps) {
       </div>
 
       {/* CTA */}
-      <button
+      <Button
+        variant="link"
         onClick={onClick}
-        className="inline-flex items-center gap-2 text-sm font-medium text-brand-primary dark:text-brand-secondary hover:text-brand-accent transition-colors"
+        className="gap-2 p-0 h-auto text-sm font-medium text-brand-primary dark:text-brand-secondary hover:text-brand-accent"
       >
         Visit Website
         <ExternalLink className="w-3.5 h-3.5" />
-      </button>
+      </Button>
     </div>
   )
 }

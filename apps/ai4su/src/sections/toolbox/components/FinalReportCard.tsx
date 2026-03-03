@@ -1,9 +1,13 @@
 import { Download, FileText, BookOpen, Calendar } from 'lucide-react'
+import { Separator } from '@ui-platform/ui/components/separator'
+import { Button } from '@ui-platform/ui/components/button'
 import type { FinalReportCardProps } from '@/../product/sections/toolbox/types'
 
 export function FinalReportCard({ report, content, onDownload }: FinalReportCardProps) {
   return (
-    <section className="py-12 border-t border-stone-200 dark:border-stone-800">
+    <>
+    <Separator />
+    <section className="py-12">
       <div className="bg-gradient-to-br from-brand-primary to-brand-primary-darker rounded-2xl overflow-hidden">
         <div className="p-8 md:p-12">
           <div className="flex flex-col md:flex-row md:items-center gap-8">
@@ -48,14 +52,14 @@ export function FinalReportCard({ report, content, onDownload }: FinalReportCard
 
             {/* Right: Download button */}
             <div className="shrink-0">
-              <button
+              <Button
                 onClick={() => onDownload(report.pdfUrl)}
-                className="group inline-flex items-center gap-3 px-8 py-4 bg-brand-accent text-brand-accent-foreground font-bold rounded-xl
-                         hover:bg-white transition-colors shadow-lg shadow-black/20"
+                className="gap-3 px-8 py-4 h-auto bg-brand-accent text-brand-accent-foreground font-bold rounded-xl
+                         hover:bg-white shadow-lg shadow-black/20"
               >
                 <Download className="w-5 h-5" />
                 <span>{content.downloadText}</span>
-              </button>
+              </Button>
             </div>
           </div>
         </div>
@@ -68,5 +72,6 @@ export function FinalReportCard({ report, content, onDownload }: FinalReportCard
         </div>
       </div>
     </section>
+    </>
   )
 }

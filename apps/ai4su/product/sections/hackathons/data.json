@@ -17,19 +17,19 @@
     {
       "id": "step-1",
       "title": "Challenge Design",
-      "description": "Local partners identify pressing challenges in agriculture, health, finance, and other sectors. Challenge briefs are crafted with input from domain experts.",
+      "description": "Local agricultural partners identify pressing challenges in crop production, livestock management, farm finance, and climate adaptation. Challenge briefs are crafted with input from agronomists and farmers.",
       "icon": "lightbulb"
     },
     {
       "id": "step-2",
       "title": "Team Formation",
-      "description": "Data scientists, developers, and domain experts form cross-functional teams. Participants are selected through an open application process.",
+      "description": "Data scientists, developers, and agricultural domain experts form cross-functional teams. Participants are selected through an open application process.",
       "icon": "users"
     },
     {
       "id": "step-3",
       "title": "Development Sprint",
-      "description": "48-72 hours of intensive building with mentorship from AI experts. Teams develop working prototypes addressing the challenge.",
+      "description": "48-72 hours of intensive building with mentorship from AI and agriculture experts. Teams develop working prototypes addressing the challenge.",
       "icon": "code"
     },
     {
@@ -42,11 +42,11 @@
   "hackathons": [
     {
       "id": "hack-nairobi-2025",
-      "slug": "nairobi-ai-agriculture-2025",
-      "name": "Nairobi AI for Agriculture",
-      "tagline": "Building AI solutions for smallholder farmers",
-      "theme": "Agriculture & Food Security",
-      "description": "The Nairobi hackathon brought together 85 participants to develop AI solutions addressing challenges faced by smallholder farmers in East Africa. Teams worked on crop yield prediction, disease detection, and market access.",
+      "slug": "nairobi-agritech-2025",
+      "name": "Nairobi AgriTech Hackathon",
+      "tagline": "AI solutions for crop science and precision farming in East Africa",
+      "theme": "Crop Science & Precision Farming",
+      "description": "The Nairobi hackathon brought together 85 participants to develop AI solutions for crop yield prediction, plant disease detection, and soil health management for smallholder farmers in East Africa.",
       "startDate": "2025-03-15",
       "endDate": "2025-03-17",
       "location": {
@@ -61,8 +61,8 @@
       "modelIds": ["model-001", "model-007", "model-011"],
       "heroImage": "/images/hackathons/nairobi-2025-hero.jpg",
       "challengeBrief": {
-        "title": "AI for Smallholder Agriculture",
-        "summary": "Develop AI tools that help smallholder farmers improve yields, detect crop diseases early, and access better market prices.",
+        "title": "AI for Smallholder Crop Science",
+        "summary": "Develop AI tools that help smallholder farmers predict yields, detect crop diseases early, and optimize soil fertility management.",
         "pdfUrl": "/documents/challenge-brief-nairobi-2025.pdf"
       },
       "bestPracticesId": "bp-001",
@@ -72,7 +72,7 @@
           "rank": 1,
           "teamName": "AgriAI Kenya",
           "projectName": "AgriYield Predictor",
-          "description": "Machine learning model predicting crop yields using weather and soil data.",
+          "description": "Machine learning model predicting crop yields using weather and soil data for maize, wheat, and sorghum.",
           "modelId": "model-001",
           "prize": "€5,000 + AWS Credits"
         },
@@ -80,23 +80,23 @@
           "rank": 2,
           "teamName": "CropDoc Team",
           "projectName": "CropDoc Vision",
-          "description": "Mobile app for plant disease detection using computer vision.",
+          "description": "Mobile app for plant disease detection across East African crop varieties using computer vision.",
           "modelId": "model-007",
           "prize": "€3,000 + Mentorship"
         },
         {
           "rank": 3,
-          "teamName": "FarmLingo",
-          "projectName": "LanguageLearn NLP",
-          "description": "Agricultural advisory chatbot supporting Swahili language.",
+          "teamName": "SoilTech Nairobi",
+          "projectName": "SoilSense Advisor",
+          "description": "Precision fertilizer recommendation system using soil sensor data and crop requirements.",
           "modelId": "model-011",
           "prize": "€1,500"
         }
       ],
       "outcomes": [
-        "3 open-source AI models published",
-        "2 startups formed post-hackathon",
-        "Partnership with KALRO for data access",
+        "3 open-source AI models published for crop science and precision farming",
+        "2 agri-tech startups formed post-hackathon",
+        "Partnership with KALRO for crop and soil data access",
         "15,000+ GitHub stars across models"
       ],
       "photos": [
@@ -109,11 +109,11 @@
     },
     {
       "id": "hack-lagos-2025",
-      "slug": "lagos-ai-health-logistics-2025",
-      "name": "Lagos AI for Health & Logistics",
-      "tagline": "AI solutions for healthcare access and urban mobility",
-      "theme": "Healthcare & Urban Logistics",
-      "description": "Lagos hosted a dual-track hackathon addressing healthcare access in underserved communities and last-mile delivery challenges in African megacities. 120 participants developed 6 innovative AI models.",
+      "slug": "lagos-foodsystems-2025",
+      "name": "Lagos FoodSystems Hackathon",
+      "tagline": "AI solutions for supply chain and market access in West Africa",
+      "theme": "Supply Chain & Market Access",
+      "description": "Lagos hosted a hackathon addressing post-harvest losses and market access challenges in Nigerian agriculture. 120 participants developed AI models for cassava disease detection, farm-to-market logistics, and commodity price forecasting.",
       "startDate": "2025-05-10",
       "endDate": "2025-05-12",
       "location": {
@@ -128,26 +128,26 @@
       "modelIds": ["model-002", "model-006", "model-009"],
       "heroImage": "/images/hackathons/lagos-2025-hero.jpg",
       "challengeBrief": {
-        "title": "AI for Health Access & Urban Logistics",
-        "summary": "Build AI tools for community health workers and optimize delivery routes in complex urban environments.",
+        "title": "AI for Food Systems & Market Access",
+        "summary": "Build AI tools that reduce post-harvest losses, optimize farm produce logistics, and improve market price transparency for Nigerian farmers.",
         "pdfUrl": "/documents/challenge-brief-lagos-2025.pdf"
       },
       "bestPracticesId": "bp-002",
-      "partners": ["CcHUB", "Lagos State Health Ministry", "GIZ"],
+      "partners": ["CcHUB", "Federal Ministry of Agriculture", "GIZ"],
       "winningTeams": [
         {
           "rank": 1,
-          "teamName": "HealthFirst AI",
-          "projectName": "HealthTriage AI",
-          "description": "NLP-based symptom checker for community health workers.",
+          "teamName": "CassavaGuard",
+          "projectName": "CassavaBlight Detector",
+          "description": "Deep learning model detecting cassava mosaic and brown streak disease from smartphone photos.",
           "modelId": "model-002",
           "prize": "€5,000 + AWS Credits"
         },
         {
           "rank": 2,
-          "teamName": "LogiTech Lagos",
-          "projectName": "LogiRoute Optimizer",
-          "description": "Route optimization for last-mile delivery in Lagos traffic.",
+          "teamName": "FarmLogistics NG",
+          "projectName": "FarmRoute Optimizer",
+          "description": "Route optimization for perishable farm produce delivery in Nigerian cities.",
           "modelId": "model-006",
           "prize": "€3,000 + Mentorship"
         },
@@ -155,32 +155,32 @@
           "rank": 3,
           "teamName": "PriceWatch",
           "projectName": "AgriPrice Forecast",
-          "description": "Market price prediction for agricultural commodities.",
+          "description": "Market price prediction for agricultural commodities across West African markets.",
           "modelId": "model-009",
           "prize": "€1,500"
         }
       ],
       "outcomes": [
-        "3 open-source AI models published",
-        "Partnership with Lagos State Health Ministry",
-        "HealthTriage AI piloted in 5 primary health centers",
-        "LogiRoute adopted by 2 delivery startups"
+        "3 open-source AI models published for food systems",
+        "Partnership with Federal Ministry of Agriculture for crop data",
+        "CassavaBlight Detector piloted in 5 cassava farming communities",
+        "FarmRoute adopted by 2 agricultural logistics startups"
       ],
       "photos": [
         { "id": "photo-l1", "url": "/images/hackathons/lagos-2025/venue.jpg", "caption": "CcHUB venue setup", "featured": true },
         { "id": "photo-l2", "url": "/images/hackathons/lagos-2025/coding.jpg", "caption": "Intensive coding session" },
-        { "id": "photo-l3", "url": "/images/hackathons/lagos-2025/health-track.jpg", "caption": "Healthcare track teams" },
-        { "id": "photo-l4", "url": "/images/hackathons/lagos-2025/logistics-track.jpg", "caption": "Logistics track demos" },
+        { "id": "photo-l3", "url": "/images/hackathons/lagos-2025/crop-track.jpg", "caption": "Crop science track teams" },
+        { "id": "photo-l4", "url": "/images/hackathons/lagos-2025/logistics-track.jpg", "caption": "Supply chain track demos" },
         { "id": "photo-l5", "url": "/images/hackathons/lagos-2025/awards.jpg", "caption": "Award ceremony" }
       ]
     },
     {
       "id": "hack-accra-2025",
-      "slug": "accra-ai-fintech-2025",
-      "name": "Accra AI for Financial Inclusion",
-      "tagline": "Expanding financial access through AI",
-      "theme": "FinTech & Financial Inclusion",
-      "description": "The Accra hackathon focused on AI solutions for financial inclusion, targeting the unbanked and underbanked populations. 70 participants developed credit scoring, fraud detection, and market matching solutions.",
+      "slug": "accra-agrifinance-2025",
+      "name": "Accra AgriFinance Hackathon",
+      "tagline": "Expanding agricultural financial access through AI",
+      "theme": "Agricultural Finance & Insurance",
+      "description": "The Accra hackathon focused on AI solutions for agricultural financial inclusion, targeting smallholder farmers without formal credit histories. 70 participants developed credit scoring, crop insurance, and market matching solutions.",
       "startDate": "2025-07-20",
       "endDate": "2025-07-22",
       "location": {
@@ -195,8 +195,8 @@
       "modelIds": ["model-003", "model-008", "model-024"],
       "heroImage": "/images/hackathons/accra-2025-hero.jpg",
       "challengeBrief": {
-        "title": "AI for the Unbanked",
-        "summary": "Create AI solutions that expand financial access for populations without traditional banking history.",
+        "title": "AI for Agricultural Finance",
+        "summary": "Create AI solutions that expand financial access for smallholder farmers using farm productivity data and mobile money patterns.",
         "pdfUrl": "/documents/challenge-brief-accra-2025.pdf"
       },
       "bestPracticesId": "bp-003",
@@ -204,17 +204,17 @@
       "winningTeams": [
         {
           "rank": 1,
-          "teamName": "FinInclusion",
-          "projectName": "FinCheck Credit Scorer",
-          "description": "Alternative credit scoring using mobile money transaction patterns.",
+          "teamName": "HarvestFinance",
+          "projectName": "HarvestCredit Scorer",
+          "description": "Alternative credit scoring combining satellite farm data with mobile money patterns.",
           "modelId": "model-003",
           "prize": "€5,000 + AWS Credits"
         },
         {
           "rank": 2,
-          "teamName": "HealthScreen GH",
-          "projectName": "MalariaScreen AI",
-          "description": "Automated malaria detection from blood smear images.",
+          "teamName": "CropShield GH",
+          "projectName": "CropInsure Risk",
+          "description": "Parametric crop insurance risk assessment using satellite and weather data.",
           "modelId": "model-008",
           "prize": "€3,000 + Mentorship"
         },
@@ -222,20 +222,20 @@
           "rank": 3,
           "teamName": "AgriConnect",
           "projectName": "MarketConnect Match",
-          "description": "Matching platform connecting farmers to buyers.",
+          "description": "Matching platform connecting farmers to buyers based on produce and location.",
           "modelId": "model-024",
           "prize": "€1,500"
         }
       ],
       "outcomes": [
-        "3 open-source AI models published",
-        "Regulatory sandbox partnership with Bank of Ghana",
-        "FinCheck piloted with 3 microfinance institutions",
+        "3 open-source AI models published for agricultural finance",
+        "Regulatory sandbox partnership with Bank of Ghana for agri-lending",
+        "HarvestCredit piloted with 3 agricultural microfinance institutions",
         "€500K in follow-on funding for winning teams"
       ],
       "photos": [
         { "id": "photo-a1", "url": "/images/hackathons/accra-2025/kickoff.jpg", "caption": "Hackathon kickoff", "featured": true },
-        { "id": "photo-a2", "url": "/images/hackathons/accra-2025/fintech-mentors.jpg", "caption": "FinTech mentors session" },
+        { "id": "photo-a2", "url": "/images/hackathons/accra-2025/agrifinance-mentors.jpg", "caption": "AgriFinance mentors session" },
         { "id": "photo-a3", "url": "/images/hackathons/accra-2025/late-night.jpg", "caption": "Late night coding" },
         { "id": "photo-a4", "url": "/images/hackathons/accra-2025/pitch.jpg", "caption": "Final pitch session" },
         { "id": "photo-a5", "url": "/images/hackathons/accra-2025/celebration.jpg", "caption": "Winners celebration" }
@@ -243,11 +243,11 @@
     },
     {
       "id": "hack-cairo-2025",
-      "slug": "cairo-ai-smart-cities-2025",
-      "name": "Cairo AI for Smart Cities & Climate",
-      "tagline": "Building resilient cities with AI",
-      "theme": "Smart Cities & Climate Resilience",
-      "description": "The Cairo hackathon brought together 90 participants to develop AI solutions for smart city infrastructure and climate resilience. Teams worked on traffic optimization, financial security, and drought prediction for the Nile region.",
+      "slug": "cairo-nile-agritech-2025",
+      "name": "Cairo Nile AgriTech Challenge",
+      "tagline": "AI for irrigation efficiency and climate resilience along the Nile",
+      "theme": "Irrigation & Climate Resilience",
+      "description": "The Cairo hackathon brought together 90 participants to develop AI solutions for Nile Basin irrigation management, agricultural drought prediction, and fraud detection in farm subsidy programs.",
       "startDate": "2025-08-16",
       "endDate": "2025-08-18",
       "location": {
@@ -262,59 +262,59 @@
       "modelIds": ["model-013", "model-014", "model-021"],
       "heroImage": "/images/hackathons/cairo-2025-hero.jpg",
       "challengeBrief": {
-        "title": "AI for Smart Cities & Climate Resilience",
-        "summary": "Develop AI tools that improve urban infrastructure, enhance financial security, and build climate resilience in North African cities.",
+        "title": "AI for Nile Basin Agriculture",
+        "summary": "Develop AI tools that optimize irrigation in the Nile Delta, predict agricultural drought, and protect farm subsidy programs from fraud.",
         "pdfUrl": "/documents/challenge-brief-cairo-2025.pdf"
       },
       "bestPracticesId": null,
-      "partners": ["GrEEK Campus", "Egypt Ministry of Communications & IT", "GIZ"],
+      "partners": ["GrEEK Campus", "Egypt Ministry of Agriculture", "GIZ"],
       "winningTeams": [
         {
           "rank": 1,
-          "teamName": "CairoFlow",
-          "projectName": "TrafficFlow Predict",
-          "description": "Urban traffic prediction model for African megacities.",
+          "teamName": "NileFlow Tech",
+          "projectName": "IrrigationFlow AI",
+          "description": "Smart irrigation scheduling for Nile Delta canal systems using real-time sensor data.",
           "modelId": "model-013",
           "prize": "€5,000 + AWS Credits"
         },
         {
           "rank": 2,
-          "teamName": "SecurePay Egypt",
-          "projectName": "FraudGuard Mobile",
-          "description": "Real-time fraud detection for mobile money transactions.",
+          "teamName": "AgriShield Egypt",
+          "projectName": "AgriGuard FraudShield",
+          "description": "Fraud detection for agricultural subsidy disbursement and mobile lending.",
           "modelId": "model-014",
           "prize": "€3,000 + Mentorship"
         },
         {
           "rank": 3,
           "teamName": "ClimateWatch Nile",
-          "projectName": "DroughtEarly Warning",
-          "description": "Satellite-based drought prediction for agricultural planning.",
+          "projectName": "NileDrought Warning",
+          "description": "Satellite-based drought prediction for agricultural planning in the Nile Basin.",
           "modelId": "model-021",
           "prize": "€1,500"
         }
       ],
       "outcomes": [
-        "3 open-source AI models published",
-        "Partnership with Egypt Ministry of Communications & IT",
-        "TrafficFlow Predict piloted in Cairo traffic management",
-        "First North African hackathon in the program"
+        "3 open-source AI models published for irrigation and climate resilience",
+        "Partnership with Egypt Ministry of Agriculture for canal sensor data",
+        "IrrigationFlow AI piloted in 3 Nile Delta irrigation districts",
+        "First North African agricultural AI hackathon in the program"
       ],
       "photos": [
         { "id": "photo-c1", "url": "/images/hackathons/cairo-2025/greek-campus.jpg", "caption": "GrEEK Campus venue", "featured": true },
         { "id": "photo-c2", "url": "/images/hackathons/cairo-2025/teams-cairo.jpg", "caption": "Teams collaborating" },
-        { "id": "photo-c3", "url": "/images/hackathons/cairo-2025/smart-city.jpg", "caption": "Smart city track presentations" },
+        { "id": "photo-c3", "url": "/images/hackathons/cairo-2025/irrigation-track.jpg", "caption": "Irrigation track presentations" },
         { "id": "photo-c4", "url": "/images/hackathons/cairo-2025/climate-demo.jpg", "caption": "Climate resilience demos" },
         { "id": "photo-c5", "url": "/images/hackathons/cairo-2025/winners-cairo.jpg", "caption": "Winning teams celebration" }
       ]
     },
     {
       "id": "hack-dakar-2025",
-      "slug": "dakar-ai-environment-2025",
-      "name": "Dakar AI for Environment",
-      "tagline": "Sustainable solutions for climate challenges",
-      "theme": "Environment & Climate",
-      "description": "Dakar's hackathon addressed environmental challenges including water quality monitoring, solar energy optimization, and livestock health in the Sahel region. 65 participants from Francophone Africa.",
+      "slug": "dakar-sahel-agrihack-2025",
+      "name": "Dakar Sahel AgriHack",
+      "tagline": "AI solutions for pastoralism and water management in the Sahel",
+      "theme": "Pastoralism & Water Management",
+      "description": "Dakar's hackathon addressed agricultural challenges in the Sahel region including soil moisture monitoring, solar-powered irrigation optimization, and livestock disease detection for pastoral communities. 65 participants from Francophone Africa.",
       "startDate": "2025-09-05",
       "endDate": "2025-09-07",
       "location": {
@@ -329,26 +329,26 @@
       "modelIds": ["model-005", "model-012", "model-016"],
       "heroImage": "/images/hackathons/dakar-2025-hero.jpg",
       "challengeBrief": {
-        "title": "AI pour l'Environnement au Sahel",
-        "summary": "Développer des solutions IA pour la gestion de l'eau, l'énergie solaire et la santé animale dans la région sahélienne.",
+        "title": "IA pour l'Agriculture au Sahel",
+        "summary": "Développer des solutions IA pour la gestion de l'eau agricole, l'irrigation solaire et la santé animale dans la région sahélienne.",
         "pdfUrl": "/documents/challenge-brief-dakar-2025.pdf"
       },
       "bestPracticesId": null,
-      "partners": ["CTIC Dakar", "Ministère de l'Environnement du Sénégal", "GIZ"],
+      "partners": ["CTIC Dakar", "Ministère de l'Agriculture du Sénégal", "GIZ"],
       "winningTeams": [
         {
           "rank": 1,
           "teamName": "EauSure Sénégal",
-          "projectName": "WaterSense Monitor",
-          "description": "IoT water quality prediction from sensor data.",
+          "projectName": "SahelWater Monitor",
+          "description": "IoT-driven soil moisture and groundwater prediction for Sahel irrigation planning.",
           "modelId": "model-005",
           "prize": "€5,000 + AWS Credits"
         },
         {
           "rank": 2,
-          "teamName": "SolarTech Sahel",
-          "projectName": "SolarPredict Energy",
-          "description": "Solar energy forecasting for mini-grids.",
+          "teamName": "SolarAgri Sahel",
+          "projectName": "SolarIrrigation Predict",
+          "description": "Solar pump output forecasting for off-grid irrigation systems.",
           "modelId": "model-012",
           "prize": "€3,000 + Mentorship"
         },
@@ -356,32 +356,32 @@
           "rank": 3,
           "teamName": "Bétail Santé",
           "projectName": "LivestockHealth Vision",
-          "description": "Computer vision for livestock disease detection.",
+          "description": "Computer vision for livestock disease detection in pastoral herds.",
           "modelId": "model-016",
           "prize": "€1,500"
         }
       ],
       "outcomes": [
-        "3 open-source AI models published",
-        "Partnership with Senegal Environment Ministry",
-        "WaterSense deployed in 10 rural communities",
-        "First Francophone AI hackathon in the program"
+        "3 open-source AI models published for Sahel agriculture",
+        "Partnership with Senegal Ministry of Agriculture for field data",
+        "SahelWater Monitor deployed in 10 rural farming communities",
+        "First Francophone agricultural AI hackathon in the program"
       ],
       "photos": [
         { "id": "photo-d1", "url": "/images/hackathons/dakar-2025/opening-fr.jpg", "caption": "Cérémonie d'ouverture", "featured": true },
         { "id": "photo-d2", "url": "/images/hackathons/dakar-2025/teams-dakar.jpg", "caption": "Équipes au travail" },
-        { "id": "photo-d3", "url": "/images/hackathons/dakar-2025/iot-demo.jpg", "caption": "Démonstration IoT" },
+        { "id": "photo-d3", "url": "/images/hackathons/dakar-2025/iot-demo.jpg", "caption": "Démonstration IoT agriculture" },
         { "id": "photo-d4", "url": "/images/hackathons/dakar-2025/jury.jpg", "caption": "Délibération du jury" },
         { "id": "photo-d5", "url": "/images/hackathons/dakar-2025/winners-dakar.jpg", "caption": "Les gagnants" }
       ]
     },
     {
       "id": "hack-kigali-2025",
-      "slug": "kigali-ai-education-2025",
-      "name": "Kigali AI for Education",
-      "tagline": "Transforming learning with AI",
-      "theme": "Education & Skills Development",
-      "description": "Rwanda's hackathon focused on educational technology, addressing adaptive learning, dropout prediction, and skills-based job matching. 55 participants developed solutions for the Rwandan education system.",
+      "slug": "kigali-agrilivestock-2025",
+      "name": "Kigali AgriLivestock Summit",
+      "tagline": "AI for cash crops and livestock health in the Great Lakes region",
+      "theme": "Cash Crops & Livestock Health",
+      "description": "Rwanda's hackathon focused on AI for tea optimization, dairy cattle health monitoring, and agricultural credit scoring within the country's organized cooperative system. 55 participants developed solutions for Rwandan agricultural value chains.",
       "startDate": "2025-10-18",
       "endDate": "2025-10-20",
       "location": {
@@ -396,59 +396,59 @@
       "modelIds": ["model-004", "model-010", "model-015"],
       "heroImage": "/images/hackathons/kigali-2025-hero.jpg",
       "challengeBrief": {
-        "title": "AI for Rwandan Education",
-        "summary": "Build AI tools that personalize learning, predict student challenges, and connect graduates with employment.",
+        "title": "AI for Rwandan Agriculture",
+        "summary": "Build AI tools that optimize cash crop harvesting, monitor livestock health, and improve farmer access to credit through cooperative data.",
         "pdfUrl": "/documents/challenge-brief-kigali-2025.pdf"
       },
       "bestPracticesId": null,
-      "partners": ["kLab Rwanda", "Rwanda Ministry of Education", "Digital Africa"],
+      "partners": ["kLab Rwanda", "Rwanda Agriculture Board (RAB)", "Digital Africa"],
       "winningTeams": [
         {
           "rank": 1,
-          "teamName": "LearnRwanda",
-          "projectName": "EduMatch Tutor",
-          "description": "Adaptive learning system matching students to content.",
+          "teamName": "TeaTech Rwanda",
+          "projectName": "TeaLeaf Optimizer",
+          "description": "Precision harvesting model for tea plantations using weather and growth patterns.",
           "modelId": "model-004",
           "prize": "€5,000 + AWS Credits"
         },
         {
           "rank": 2,
-          "teamName": "InsureTech Rwanda",
-          "projectName": "InsureTech Risk",
-          "description": "Micro-insurance risk assessment for farmers.",
+          "teamName": "AgriCredit Kigali",
+          "projectName": "FarmerCredit Score",
+          "description": "Digital credit scoring using cooperative transaction and harvest delivery data.",
           "modelId": "model-010",
           "prize": "€3,000 + Mentorship"
         },
         {
           "rank": 3,
-          "teamName": "MamaHealth",
-          "projectName": "MaternalHealth Monitor",
-          "description": "Risk prediction for maternal health complications.",
+          "teamName": "DairyWatch",
+          "projectName": "CattleHealth Monitor",
+          "description": "Wearable sensor analytics for early cattle disease detection in dairy herds.",
           "modelId": "model-015",
           "prize": "€1,500"
         }
       ],
       "outcomes": [
-        "3 open-source AI models published",
-        "EduMatch piloted in 20 Rwandan schools",
-        "Partnership with Rwanda Ministry of Education",
+        "3 open-source AI models published for cash crops and livestock",
+        "TeaLeaf Optimizer piloted in 10 Rwandan tea cooperatives",
+        "Partnership with Rwanda Agriculture Board for crop data",
         "50% of participants were women developers"
       ],
       "photos": [
         { "id": "photo-k1", "url": "/images/hackathons/kigali-2025/klab-venue.jpg", "caption": "kLab innovation space", "featured": true },
         { "id": "photo-k2", "url": "/images/hackathons/kigali-2025/women-coders.jpg", "caption": "Women developers at work" },
-        { "id": "photo-k3", "url": "/images/hackathons/kigali-2025/edu-track.jpg", "caption": "Education track presentations" },
-        { "id": "photo-k4", "url": "/images/hackathons/kigali-2025/minister.jpg", "caption": "Education Minister visit" },
+        { "id": "photo-k3", "url": "/images/hackathons/kigali-2025/agri-track.jpg", "caption": "Agriculture track presentations" },
+        { "id": "photo-k4", "url": "/images/hackathons/kigali-2025/minister.jpg", "caption": "Agriculture Minister visit" },
         { "id": "photo-k5", "url": "/images/hackathons/kigali-2025/awards-kigali.jpg", "caption": "Award ceremony" }
       ]
     },
     {
       "id": "hack-johannesburg-2025",
-      "slug": "johannesburg-ai-health-education-2025",
-      "name": "Johannesburg AI Summit",
-      "tagline": "Africa's largest AI hackathon",
-      "theme": "Healthcare & Education",
-      "description": "The Johannesburg summit was the program's flagship event, bringing together 150 participants from across Africa. Dual tracks addressed TB screening, air quality prediction, and employment matching.",
+      "slug": "johannesburg-agriai-2025",
+      "name": "Johannesburg AgriAI Summit",
+      "tagline": "Africa's largest agricultural AI hackathon",
+      "theme": "Grain Systems & Climate",
+      "description": "The Johannesburg summit was the program's flagship event, bringing together 150 participants from across Africa. Teams addressed grain market connectivity, frost prediction for vineyards, and poultry health monitoring for commercial farming.",
       "startDate": "2025-11-22",
       "endDate": "2025-11-24",
       "location": {
@@ -460,11 +460,11 @@
       "participantCount": 150,
       "teamCount": 30,
       "modelsProduced": 3,
-      "modelIds": ["model-023", "model-017", "model-018"],
+      "modelIds": ["model-017", "model-018", "model-023"],
       "heroImage": "/images/hackathons/johannesburg-2025-hero.jpg",
       "challengeBrief": {
-        "title": "AI for African Development",
-        "summary": "Build AI solutions addressing healthcare access, education equity, and employment for African youth.",
+        "title": "AI for African Agricultural Systems",
+        "summary": "Build AI solutions for grain market access, climate-smart farming, and livestock health monitoring across Southern Africa.",
         "pdfUrl": "/documents/challenge-brief-johannesburg-2025.pdf"
       },
       "bestPracticesId": null,
@@ -472,39 +472,39 @@
       "winningTeams": [
         {
           "rank": 1,
-          "teamName": "TBFree SA",
-          "projectName": "TBScreen Radiology",
-          "description": "Automated TB detection from chest X-rays.",
-          "modelId": "model-023",
+          "teamName": "GrainTech SA",
+          "projectName": "GrainMarket Connect",
+          "description": "Supply-demand matching platform for grain trading across Southern Africa.",
+          "modelId": "model-017",
           "prize": "€7,500 + AWS Credits"
         },
         {
           "rank": 2,
-          "teamName": "JobsForAfrica",
-          "projectName": "JobMatch Africa",
-          "description": "Skills-based job matching for informal workers.",
-          "modelId": "model-017",
+          "teamName": "FrostGuard Cape",
+          "projectName": "WineFrost Predictor",
+          "description": "Micro-climate frost early warning system for Western Cape vineyards.",
+          "modelId": "model-018",
           "prize": "€5,000 + Mentorship"
         },
         {
           "rank": 3,
-          "teamName": "AirWatch Gauteng",
-          "projectName": "AirQuality Predict",
-          "description": "Air quality forecasting for urban areas.",
-          "modelId": "model-018",
+          "teamName": "PoultryTech Gauteng",
+          "projectName": "PoultryHealth Screener",
+          "description": "Automated poultry flock health screening from audio and image analysis.",
+          "modelId": "model-023",
           "prize": "€2,500"
         }
       ],
       "outcomes": [
-        "3 open-source AI models published",
-        "TBScreen piloted in 3 Gauteng hospitals",
+        "3 open-source AI models published for grain, climate, and livestock",
+        "GrainMarket Connect piloted with 3 grain trading cooperatives",
         "€1M in follow-on funding for winning teams",
-        "Largest AI4Startups hackathon by participant count"
+        "Largest agricultural AI hackathon by participant count"
       ],
       "photos": [
         { "id": "photo-j1", "url": "/images/hackathons/johannesburg-2025/summit-opening.jpg", "caption": "Summit opening ceremony", "featured": true },
         { "id": "photo-j2", "url": "/images/hackathons/johannesburg-2025/pan-african.jpg", "caption": "Pan-African participants" },
-        { "id": "photo-j3", "url": "/images/hackathons/johannesburg-2025/health-ai.jpg", "caption": "Healthcare AI track" },
+        { "id": "photo-j3", "url": "/images/hackathons/johannesburg-2025/agri-ai.jpg", "caption": "Agricultural AI track" },
         { "id": "photo-j4", "url": "/images/hackathons/johannesburg-2025/expo.jpg", "caption": "Solution expo" },
         { "id": "photo-j5", "url": "/images/hackathons/johannesburg-2025/finale.jpg", "caption": "Grand finale" },
         { "id": "photo-j6", "url": "/images/hackathons/johannesburg-2025/eu-ambassador.jpg", "caption": "EU Ambassador address" }
@@ -512,11 +512,11 @@
     },
     {
       "id": "hack-casablanca-2025",
-      "slug": "casablanca-ai-commerce-2025",
-      "name": "Casablanca AI for Commerce & Education",
-      "tagline": "AI solutions for commerce, finance, and education",
-      "theme": "Commerce, Finance & Education",
-      "description": "The Casablanca hackathon brought together 75 participants from Francophone North and West Africa to develop AI solutions for retail inventory management, remittance prediction, and student dropout prevention.",
+      "slug": "casablanca-medagri-2025",
+      "name": "Casablanca MedAgri Hackathon",
+      "tagline": "AI solutions for tree crops and pest control in North Africa",
+      "theme": "Tree Crops & Pest Control",
+      "description": "The Casablanca hackathon brought together 75 participants from Francophone North and West Africa to develop AI solutions for olive yield forecasting, agricultural supply chain optimization, and desert locust swarm prediction.",
       "startDate": "2025-12-06",
       "endDate": "2025-12-08",
       "location": {
@@ -531,48 +531,48 @@
       "modelIds": ["model-019", "model-020", "model-022"],
       "heroImage": "/images/hackathons/casablanca-2025-hero.jpg",
       "challengeBrief": {
-        "title": "IA pour le Commerce, la Finance et l'Éducation",
-        "summary": "Développer des solutions IA pour l'optimisation du commerce de détail, la prédiction des transferts de fonds et la prévention du décrochage scolaire.",
+        "title": "IA pour l'Agriculture Méditerranéenne",
+        "summary": "Développer des solutions IA pour l'optimisation des cultures arboricoles, la prédiction des invasions acridiennes et la logistique agricole.",
         "pdfUrl": "/documents/challenge-brief-casablanca-2025.pdf"
       },
       "bestPracticesId": null,
-      "partners": ["Technopark", "Morocco Digital Development Agency", "Expertise France"],
+      "partners": ["Technopark", "Morocco Ministry of Agriculture", "Expertise France"],
       "winningTeams": [
         {
           "rank": 1,
-          "teamName": "RetailAI Maroc",
-          "projectName": "InventoryAI Retail",
-          "description": "Inventory optimization for small retailers using demand forecasting.",
+          "teamName": "OliveAI Maroc",
+          "projectName": "OliveYield Forecast",
+          "description": "Olive tree yield prediction using climate and phenological data.",
           "modelId": "model-019",
           "prize": "€5,000 + AWS Credits"
         },
         {
           "rank": 2,
-          "teamName": "RemitTech Atlas",
-          "projectName": "RemitPredict Flow",
-          "description": "Remittance flow prediction for financial planning.",
+          "teamName": "AgriChain Atlas",
+          "projectName": "AgriRemit Predictor",
+          "description": "Predicting agricultural input purchase timing from diaspora remittance flows.",
           "modelId": "model-020",
           "prize": "€3,000 + Mentorship"
         },
         {
           "rank": 3,
-          "teamName": "EduWatch Maghreb",
-          "projectName": "SchoolDrop Predictor",
-          "description": "Early warning system for student dropout risk.",
+          "teamName": "LocustWatch Maghreb",
+          "projectName": "LocustSwarm Alert",
+          "description": "Desert locust swarm trajectory prediction and early alert system.",
           "modelId": "model-022",
           "prize": "€1,500"
         }
       ],
       "outcomes": [
-        "3 open-source AI models published",
-        "Partnership with Morocco Digital Development Agency",
-        "InventoryAI piloted with 20 small retailers in Casablanca",
-        "Second Francophone hackathon in the program"
+        "3 open-source AI models published for tree crops and pest control",
+        "Partnership with Morocco Ministry of Agriculture for crop data",
+        "OliveYield Forecast piloted with 20 olive cooperatives",
+        "Second Francophone agricultural hackathon in the program"
       ],
       "photos": [
         { "id": "photo-m1", "url": "/images/hackathons/casablanca-2025/technopark.jpg", "caption": "Technopark Casablanca venue", "featured": true },
         { "id": "photo-m2", "url": "/images/hackathons/casablanca-2025/teams-casa.jpg", "caption": "Équipes au travail" },
-        { "id": "photo-m3", "url": "/images/hackathons/casablanca-2025/commerce-track.jpg", "caption": "Commerce track presentations" },
+        { "id": "photo-m3", "url": "/images/hackathons/casablanca-2025/agri-track.jpg", "caption": "Agriculture track presentations" },
         { "id": "photo-m4", "url": "/images/hackathons/casablanca-2025/pitch-day.jpg", "caption": "Journée de pitch" },
         { "id": "photo-m5", "url": "/images/hackathons/casablanca-2025/winners-casa.jpg", "caption": "Les gagnants" }
       ]
@@ -581,7 +581,7 @@
   "pageContent": {
     "title": "Hackathons",
     "subtitleTemplate": "{count} events across Africa",
-    "descriptionTemplate": "Our hackathon series brought together {participants}+ developers, data scientists, and domain experts to build {models} open-source AI models addressing African challenges.",
+    "descriptionTemplate": "Our hackathon series brought together {participants}+ developers, data scientists, and agricultural experts to build {models} open-source AI models addressing African farming challenges.",
     "allHackathonsTitle": "All Hackathons",
     "statsLabels": ["Events", "Participants", "AI Models", "Countries"],
     "countriesValue": "8",
@@ -593,7 +593,7 @@
   },
   "methodologyContent": {
     "title": "Our Hackathon Methodology",
-    "description": "A proven approach to building AI solutions that address real African challenges."
+    "description": "A proven approach to building AI solutions that address real African agricultural challenges."
   },
   "fieldLabels": {
     "date": "Date",

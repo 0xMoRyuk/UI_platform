@@ -1,9 +1,13 @@
 import { Twitter, Linkedin, Hash } from 'lucide-react'
+import { Separator } from '@ui-platform/ui/components/separator'
+import { Button } from '@ui-platform/ui/components/button'
 import type { SocialLinksProps } from '@/../product/sections/partners/types'
 
 export function SocialLinksBar({ links, onSocialClick }: SocialLinksProps) {
   return (
-    <section className="py-12 bg-white dark:bg-stone-950 border-t border-stone-200 dark:border-stone-800">
+    <>
+    <Separator />
+    <section className="py-12 bg-white dark:bg-stone-950">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
           {/* Hashtags */}
@@ -22,25 +26,26 @@ export function SocialLinksBar({ links, onSocialClick }: SocialLinksProps) {
           {/* Social buttons */}
           <div className="flex items-center gap-3">
             <span className="text-sm text-stone-500 dark:text-stone-400">Follow us:</span>
-            <button
+            <Button
               onClick={() => onSocialClick?.('twitter')}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-[#1DA1F2] text-white font-medium rounded-lg
-                       hover:bg-[#1DA1F2]/90 transition-colors"
+              className="gap-2 px-4 py-2 h-auto bg-[#1DA1F2] text-white font-medium rounded-lg
+                       hover:bg-[#1DA1F2]/90"
             >
               <Twitter className="w-4 h-4" />
               <span className="hidden sm:inline">Twitter</span>
-            </button>
-            <button
+            </Button>
+            <Button
               onClick={() => onSocialClick?.('linkedin')}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-[#0A66C2] text-white font-medium rounded-lg
-                       hover:bg-[#0A66C2]/90 transition-colors"
+              className="gap-2 px-4 py-2 h-auto bg-[#0A66C2] text-white font-medium rounded-lg
+                       hover:bg-[#0A66C2]/90"
             >
               <Linkedin className="w-4 h-4" />
               <span className="hidden sm:inline">LinkedIn</span>
-            </button>
+            </Button>
           </div>
         </div>
       </div>
     </section>
+    </>
   )
 }

@@ -1,4 +1,5 @@
 import { Download, FileText, CheckCircle } from 'lucide-react'
+import { Separator } from '@ui-platform/ui/components/separator'
 import type { StudySectionProps, Study, StudiesSectionContent } from '@/../product/sections/toolbox/types'
 
 interface StudyCardProps {
@@ -63,7 +64,9 @@ function StudyCard({ study, content, onDownload }: StudyCardProps) {
 
 export function StudiesSection({ studies, content, onDownload }: StudySectionProps) {
   return (
-    <section className="py-12 border-t border-stone-200 dark:border-stone-800">
+    <>
+    <Separator />
+    <section className="py-12">
       <div className="mb-8">
         <h2 className="text-2xl font-bold text-brand-primary dark:text-white font-[Barlow] mb-2">
           {content.title}
@@ -84,5 +87,6 @@ export function StudiesSection({ studies, content, onDownload }: StudySectionPro
         ))}
       </div>
     </section>
+    </>
   )
 }

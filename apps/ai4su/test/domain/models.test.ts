@@ -46,20 +46,20 @@ describe('searchModels', () => {
   })
 
   it('filters by text query case-insensitively', () => {
-    const result = searchModels({ q: 'agriculture' })
+    const result = searchModels({ q: 'agri' })
     expect(result.total).toBeGreaterThanOrEqual(1)
   })
 
   it('filters by single sector', () => {
-    const result = searchModels({ sector: 'agriculture' })
+    const result = searchModels({ sector: 'crop-science' })
     expect(result.total).toBeGreaterThanOrEqual(1)
-    expect(result.data.every((m) => m.sector === 'agriculture')).toBe(true)
+    expect(result.data.every((m) => m.sector === 'crop-science')).toBe(true)
   })
 
   it('filters by multiple sectors (OR)', () => {
-    const result = searchModels({ sector: ['agriculture', 'healthcare'] })
+    const result = searchModels({ sector: ['crop-science', 'livestock'] })
     expect(result.total).toBeGreaterThanOrEqual(2)
-    expect(result.data.every((m) => ['agriculture', 'healthcare'].includes(m.sector))).toBe(true)
+    expect(result.data.every((m) => ['crop-science', 'livestock'].includes(m.sector))).toBe(true)
   })
 
   it('filters by single country', () => {
@@ -74,13 +74,13 @@ describe('searchModels', () => {
   })
 
   it('combines sector + country filters (AND)', () => {
-    const result = searchModels({ sector: 'agriculture', country: 'KE' })
-    expect(result.data.every((m) => m.sector === 'agriculture' && m.country === 'KE')).toBe(true)
+    const result = searchModels({ sector: 'crop-science', country: 'KE' })
+    expect(result.data.every((m) => m.sector === 'crop-science' && m.country === 'KE')).toBe(true)
   })
 
   it('combines text + sector filters (AND)', () => {
-    const result = searchModels({ q: 'agriculture', sector: 'agriculture' })
-    expect(result.data.every((m) => m.sector === 'agriculture')).toBe(true)
+    const result = searchModels({ q: 'crop', sector: 'crop-science' })
+    expect(result.data.every((m) => m.sector === 'crop-science')).toBe(true)
   })
 
   it('returns empty for no matches', () => {

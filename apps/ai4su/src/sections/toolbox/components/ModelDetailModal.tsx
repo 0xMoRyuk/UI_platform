@@ -1,16 +1,18 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
 import { X, Github, ExternalLink, Cpu, FileText, Target, Link as LinkIcon } from 'lucide-react'
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@ui-platform/ui/components/dialog'
+import { Button } from '@ui-platform/ui/components/button'
+import { Separator } from '@ui-platform/ui/components/separator'
 import type { ModelDetailModalProps } from '@/../product/sections/toolbox/types'
 
 const sectorColors: Record<string, { bg: string; text: string }> = {
-  agriculture: { bg: 'bg-green-100 dark:bg-green-900/30', text: 'text-green-700 dark:text-green-300' },
-  healthcare: { bg: 'bg-red-100 dark:bg-red-900/30', text: 'text-red-700 dark:text-red-300' },
-  fintech: { bg: 'bg-blue-100 dark:bg-blue-900/30', text: 'text-blue-700 dark:text-blue-300' },
-  education: { bg: 'bg-purple-100 dark:bg-purple-900/30', text: 'text-purple-700 dark:text-purple-300' },
-  environment: { bg: 'bg-teal-100 dark:bg-teal-900/30', text: 'text-teal-700 dark:text-teal-300' },
-  logistics: { bg: 'bg-orange-100 dark:bg-orange-900/30', text: 'text-orange-700 dark:text-orange-300' },
+  'crop-science': { bg: 'bg-green-100 dark:bg-green-900/30', text: 'text-green-700 dark:text-green-300' },
+  'livestock': { bg: 'bg-lime-100 dark:bg-lime-900/30', text: 'text-lime-700 dark:text-lime-300' },
+  'precision-farming': { bg: 'bg-blue-100 dark:bg-blue-900/30', text: 'text-blue-700 dark:text-blue-300' },
+  'agri-finance': { bg: 'bg-amber-100 dark:bg-amber-900/30', text: 'text-amber-700 dark:text-amber-300' },
+  'supply-chain': { bg: 'bg-orange-100 dark:bg-orange-900/30', text: 'text-orange-700 dark:text-orange-300' },
+  'climate-resilience': { bg: 'bg-teal-100 dark:bg-teal-900/30', text: 'text-teal-700 dark:text-teal-300' },
 }
 
 const countryNames: Record<string, string> = {
@@ -36,51 +38,26 @@ const countryFlags: Record<string, string> = {
 }
 
 export function ModelDetailModal({ model, isOpen, onClose, onGitHubClick }: ModelDetailModalProps) {
-  const modalRef = useRef<HTMLDivElement>(null)
+  if (!model) return null
 
-  useEffect(() => {
-    const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose()
-    }
-
-    if (isOpen) {
-      document.addEventListener('keydown', handleEscape)
-      document.body.style.overflow = 'hidden'
-    }
-
-    return () => {
-      document.removeEventListener('keydown', handleEscape)
-      document.body.style.overflow = ''
-    }
-  }, [isOpen, onClose])
-
-  const handleBackdropClick = (e: React.MouseEvent) => {
-    if (modalRef.current && !modalRef.current.contains(e.target as Node)) {
-      onClose()
-    }
-  }
-
-  if (!isOpen || !model) return null
-
-  const colors = sectorColors[model.sector] || sectorColors.agriculture
+  const colors = sectorColors[model.sector] || sectorColors['crop-science']
 
   return (
-    <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm"
-      onClick={handleBackdropClick}
-    >
-      <div
-        ref={modalRef}
-        className="bg-white dark:bg-stone-900 rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-hidden shadow-2xl"
+    <Dialog open={isOpen} onOpenChange={(open) => { if (!open) onClose() }}>
+      <DialogContent
+        className="bg-white dark:bg-stone-900 rounded-2xl max-w-2xl p-0 overflow-hidden gap-0 border-0"
+        showCloseButton={false}
       >
         {/* Header */}
-        <div className="relative bg-gradient-to-r from-brand-primary to-brand-primary-dark text-brand-primary-foreground p-6">
-          <button
+        <DialogHeader className="relative bg-gradient-to-r from-brand-primary to-brand-primary-dark text-brand-primary-foreground p-6 space-y-0">
+          <Button
+            variant="ghost"
+            size="icon"
             onClick={onClose}
-            className="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors"
+            className="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white"
           >
             <X className="w-5 h-5" />
-          </button>
+          </Button>
 
           <div className="flex items-center gap-3 mb-3">
             <span className={`px-2.5 py-1 rounded-full text-xs font-medium ${colors.bg} ${colors.text}`}>
@@ -92,8 +69,13 @@ export function ModelDetailModal({ model, isOpen, onClose, onGitHubClick }: Mode
             </span>
           </div>
 
-          <h2 className="text-2xl font-bold font-[Barlow]">{model.name}</h2>
-        </div>
+          <DialogTitle className="text-2xl font-bold font-[Barlow] text-white">
+            {model.name}
+          </DialogTitle>
+          <DialogDescription className="sr-only">
+            Details for {model.name} AI model
+          </DialogDescription>
+        </DialogHeader>
 
         {/* Content */}
         <div className="p-6 overflow-y-auto max-h-[calc(90vh-200px)]">
@@ -149,18 +131,19 @@ export function ModelDetailModal({ model, isOpen, onClose, onGitHubClick }: Mode
         </div>
 
         {/* Footer */}
-        <div className="border-t border-stone-200 dark:border-stone-700 p-6 bg-stone-50 dark:bg-stone-800/50">
-          <button
+        <Separator />
+        <div className="p-6 bg-stone-50 dark:bg-stone-800/50">
+          <Button
             onClick={() => onGitHubClick(model.githubUrl)}
-            className="w-full inline-flex items-center justify-center gap-3 px-6 py-4 bg-brand-primary text-brand-primary-foreground font-semibold rounded-xl
-                     hover:bg-brand-primary-dark transition-colors"
+            className="w-full gap-3 px-6 py-4 h-auto bg-brand-primary text-brand-primary-foreground font-semibold rounded-xl
+                     hover:bg-brand-primary-dark"
           >
             <Github className="w-5 h-5" />
             <span>View on GitHub</span>
             <ExternalLink className="w-4 h-4" />
-          </button>
+          </Button>
         </div>
-      </div>
-    </div>
+      </DialogContent>
+    </Dialog>
   )
 }

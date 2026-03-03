@@ -3,6 +3,7 @@
 import { Calendar, MapPin, Users, ChevronDown, Download, ExternalLink, FileText, Video, Link as LinkIcon, Image as ImageIcon } from 'lucide-react'
 import { Badge } from '@ui-platform/ui/components/badge'
 import { Button } from '@ui-platform/ui/components/button'
+import { Separator } from '@ui-platform/ui/components/separator'
 import type { ActivityCardProps } from '@/../product/sections/ecosystem/types'
 
 const countryFlags: Record<string, string> = {
@@ -117,7 +118,8 @@ export function ActivityCard({
 
       {/* Expanded content */}
       {isExpanded && (
-        <div className="px-5 pb-5 border-t border-stone-100 dark:border-stone-800 pt-4">
+        <div className="px-5 pb-5">
+          <Separator className="mb-4" />
           {/* Full description */}
           <p className="text-stone-600 dark:text-stone-400 mb-4 leading-relaxed">
             {activity.fullDescription}

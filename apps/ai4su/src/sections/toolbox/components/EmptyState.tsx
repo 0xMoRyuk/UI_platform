@@ -1,4 +1,5 @@
 import { Search, RefreshCcw } from 'lucide-react'
+import { Button } from '@ui-platform/ui/components/button'
 import type { EmptyStateProps } from '@/../product/sections/toolbox/types'
 
 export function EmptyState({ title, description, onClearFilters }: EmptyStateProps) {
@@ -14,14 +15,14 @@ export function EmptyState({ title, description, onClearFilters }: EmptyStatePro
         {description}
       </p>
       {onClearFilters && (
-        <button
+        <Button
           onClick={onClearFilters}
-          className="inline-flex items-center gap-2 px-6 py-3 bg-brand-primary text-brand-primary-foreground font-semibold rounded-lg
-                   hover:bg-brand-primary-dark transition-colors"
+          className="gap-2 px-6 py-3 h-auto bg-brand-primary text-brand-primary-foreground font-semibold rounded-lg
+                   hover:bg-brand-primary-dark"
         >
           <RefreshCcw className="w-4 h-4" />
           Clear Filters
-        </button>
+        </Button>
       )}
     </div>
   )

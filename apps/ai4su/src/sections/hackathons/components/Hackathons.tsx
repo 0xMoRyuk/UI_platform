@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import { Trophy } from 'lucide-react'
+import { Button } from '@ui-platform/ui/components/button'
 import type { HackathonsPageProps, CountryCode } from '@/../product/sections/hackathons/types'
 import { MethodologySection } from './MethodologySection'
 import { CountryFilter } from './CountryFilter'
@@ -112,12 +113,13 @@ export function Hackathons({
               <p className="text-stone-600 dark:text-stone-400">
                 {pageContent.emptyState.title}
               </p>
-              <button
+              <Button
+                variant="link"
                 onClick={() => handleCountryChange(null)}
-                className="mt-4 text-brand-primary dark:text-brand-secondary font-medium hover:underline"
+                className="mt-4 text-brand-primary dark:text-brand-secondary font-medium"
               >
                 {pageContent.emptyState.ctaText}
-              </button>
+              </Button>
             </div>
           )}
         </div>

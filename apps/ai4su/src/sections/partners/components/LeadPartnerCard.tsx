@@ -1,4 +1,6 @@
 import { ExternalLink, CheckCircle, Building2 } from 'lucide-react'
+import { Button } from '@ui-platform/ui/components/button'
+import { Avatar, AvatarFallback } from '@ui-platform/ui/components/avatar'
 import type { LeadPartnerCardProps } from '@/../product/sections/partners/types'
 
 export function LeadPartnerCard({ partner, onClick }: LeadPartnerCardProps) {
@@ -8,9 +10,11 @@ export function LeadPartnerCard({ partner, onClick }: LeadPartnerCardProps) {
       <div className="bg-brand-primary text-brand-primary-foreground p-6">
         <div className="flex items-center gap-4">
           {/* Logo placeholder */}
-          <div className="w-20 h-20 rounded-xl bg-white flex items-center justify-center">
-            <Building2 className="w-10 h-10 text-brand-primary" />
-          </div>
+          <Avatar className="w-20 h-20 rounded-xl">
+            <AvatarFallback className="bg-white rounded-xl">
+              <Building2 className="w-10 h-10 text-brand-primary" />
+            </AvatarFallback>
+          </Avatar>
           <div>
             <span className="inline-block px-3 py-1 bg-brand-accent text-brand-accent-foreground text-xs font-bold rounded-full mb-2">
               {partner.role}
@@ -44,14 +48,14 @@ export function LeadPartnerCard({ partner, onClick }: LeadPartnerCardProps) {
         </div>
 
         {/* CTA */}
-        <button
+        <Button
           onClick={onClick}
-          className="inline-flex items-center gap-2 px-6 py-3 bg-brand-primary text-brand-primary-foreground font-semibold rounded-lg
-                   hover:bg-brand-primary-dark transition-colors"
+          className="gap-2 px-6 py-3 h-auto bg-brand-primary text-brand-primary-foreground font-semibold rounded-lg
+                   hover:bg-brand-primary-dark"
         >
           Visit Website
           <ExternalLink className="w-4 h-4" />
-        </button>
+        </Button>
       </div>
     </div>
   )

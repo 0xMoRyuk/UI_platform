@@ -2,7 +2,7 @@
 // Data Types
 // =============================================================================
 
-export type Sector = 'agriculture' | 'healthcare' | 'fintech' | 'education' | 'environment' | 'logistics'
+export type Sector = 'crop-science' | 'livestock' | 'precision-farming' | 'agri-finance' | 'supply-chain' | 'climate-resilience'
 
 export type CountryCode = 'KE' | 'NG' | 'GH' | 'SN' | 'RW' | 'ZA' | 'EG' | 'MA'
 

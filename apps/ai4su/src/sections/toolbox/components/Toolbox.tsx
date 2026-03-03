@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import { Boxes } from 'lucide-react'
+import { Separator } from '@ui-platform/ui/components/separator'
 import type { ToolboxProps, Sector, CountryCode } from '@/../product/sections/toolbox/types'
 import { KPISummaryBar } from './KPISummaryBar'
 import { SearchInput } from './SearchInput'
@@ -93,7 +94,7 @@ export function Toolbox({
       <KPISummaryBar items={kpiSummary} />
 
       {/* Page Header */}
-      <div className="bg-white dark:bg-stone-900 border-b border-stone-200 dark:border-stone-800">
+      <div className="bg-white dark:bg-stone-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="flex items-center gap-3 mb-4">
             <div className="w-12 h-12 rounded-xl bg-brand-primary/10 dark:bg-brand-primary/20 flex items-center justify-center">
@@ -110,6 +111,7 @@ export function Toolbox({
           </div>
         </div>
       </div>
+      <Separator />
 
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">

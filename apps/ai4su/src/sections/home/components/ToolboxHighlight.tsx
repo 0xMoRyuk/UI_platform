@@ -1,13 +1,16 @@
 import { ArrowRight, Github, Boxes } from 'lucide-react'
+import { Separator } from '@ui-platform/ui/components/separator'
+import { Button } from '@ui-platform/ui/components/button'
+import { Badge } from '@ui-platform/ui/components/badge'
 import type { ToolboxHighlightProps, FeaturedModel } from '@/../product/sections/home/types'
 
 const sectorColors: Record<string, { bg: string; text: string; border: string }> = {
-  Agriculture: { bg: 'bg-green-100 dark:bg-green-900/30', text: 'text-green-700 dark:text-green-300', border: 'border-green-200 dark:border-green-800' },
-  Healthcare: { bg: 'bg-red-100 dark:bg-red-900/30', text: 'text-red-700 dark:text-red-300', border: 'border-red-200 dark:border-red-800' },
-  FinTech: { bg: 'bg-blue-100 dark:bg-blue-900/30', text: 'text-blue-700 dark:text-blue-300', border: 'border-blue-200 dark:border-blue-800' },
-  Education: { bg: 'bg-purple-100 dark:bg-purple-900/30', text: 'text-purple-700 dark:text-purple-300', border: 'border-purple-200 dark:border-purple-800' },
-  Environment: { bg: 'bg-teal-100 dark:bg-teal-900/30', text: 'text-teal-700 dark:text-teal-300', border: 'border-teal-200 dark:border-teal-800' },
-  Logistics: { bg: 'bg-orange-100 dark:bg-orange-900/30', text: 'text-orange-700 dark:text-orange-300', border: 'border-orange-200 dark:border-orange-800' },
+  'Crop Science': { bg: 'bg-green-100 dark:bg-green-900/30', text: 'text-green-700 dark:text-green-300', border: 'border-green-200 dark:border-green-800' },
+  Livestock: { bg: 'bg-lime-100 dark:bg-lime-900/30', text: 'text-lime-700 dark:text-lime-300', border: 'border-lime-200 dark:border-lime-800' },
+  'Precision Farming': { bg: 'bg-blue-100 dark:bg-blue-900/30', text: 'text-blue-700 dark:text-blue-300', border: 'border-blue-200 dark:border-blue-800' },
+  'Agri-Finance': { bg: 'bg-amber-100 dark:bg-amber-900/30', text: 'text-amber-700 dark:text-amber-300', border: 'border-amber-200 dark:border-amber-800' },
+  'Supply Chain': { bg: 'bg-orange-100 dark:bg-orange-900/30', text: 'text-orange-700 dark:text-orange-300', border: 'border-orange-200 dark:border-orange-800' },
+  'Climate Resilience': { bg: 'bg-teal-100 dark:bg-teal-900/30', text: 'text-teal-700 dark:text-teal-300', border: 'border-teal-200 dark:border-teal-800' },
 }
 
 interface ModelCardProps {
@@ -17,7 +20,7 @@ interface ModelCardProps {
 }
 
 function ModelCard({ model, githubLabel, onClick }: ModelCardProps) {
-  const colors = sectorColors[model.sector] || sectorColors.Agriculture
+  const colors = sectorColors[model.sector] || sectorColors['Crop Science']
 
   return (
     <button
@@ -28,9 +31,9 @@ function ModelCard({ model, githubLabel, onClick }: ModelCardProps) {
                  hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
     >
       {/* Sector badge */}
-      <div className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium mb-4 ${colors.bg} ${colors.text} border ${colors.border}`}>
+      <Badge className={`mb-4 ${colors.bg} ${colors.text} border ${colors.border}`}>
         {model.sector}
-      </div>
+      </Badge>
 
       {/* Model name */}
       <h3 className="text-lg font-bold text-brand-primary dark:text-white mb-2 font-[Barlow] group-hover:text-brand-accent transition-colors">
@@ -74,14 +77,14 @@ export function ToolboxHighlight({ featuredModels, toolboxHighlight, onModelClic
             </p>
           </div>
 
-          <button
+          <Button
             onClick={onViewAllClick}
-            className="group inline-flex items-center gap-2 px-6 py-3 bg-brand-primary text-brand-primary-foreground font-semibold rounded-lg
-                     hover:bg-brand-primary-dark transition-colors shrink-0"
+            className="group gap-2 px-6 py-3 h-auto bg-brand-primary text-brand-primary-foreground font-semibold rounded-lg
+                     hover:bg-brand-primary-dark shrink-0"
           >
             {toolboxHighlight.ctaText}
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </button>
+          </Button>
         </div>
 
         {/* Model cards grid */}
@@ -97,7 +100,8 @@ export function ToolboxHighlight({ featuredModels, toolboxHighlight, onModelClic
         </div>
 
         {/* Bottom stats bar */}
-        <div className="mt-12 flex flex-wrap items-center justify-center gap-8 sm:gap-16 py-8 border-t border-stone-200 dark:border-stone-800">
+        <Separator className="mt-12" />
+        <div className="flex flex-wrap items-center justify-center gap-8 sm:gap-16 py-8">
           {toolboxHighlight.stats.map((stat) => (
             <div key={stat.label} className="text-center">
               <div className="text-2xl sm:text-3xl font-bold text-brand-primary dark:text-brand-accent font-[Barlow]">

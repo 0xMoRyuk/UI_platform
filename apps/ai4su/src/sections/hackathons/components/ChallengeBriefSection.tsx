@@ -1,4 +1,5 @@
 import { Download, FileText, Target } from 'lucide-react'
+import { Button } from '@ui-platform/ui/components/button'
 import type { ChallengeBriefSectionProps } from '@/../product/sections/hackathons/types'
 
 export function ChallengeBriefSection({ challengeBrief, onDownload }: ChallengeBriefSectionProps) {
@@ -22,15 +23,15 @@ export function ChallengeBriefSection({ challengeBrief, onDownload }: ChallengeB
           {challengeBrief.summary}
         </p>
 
-        <button
+        <Button
           onClick={() => onDownload(challengeBrief.pdfUrl)}
-          className="inline-flex items-center gap-3 px-6 py-3 bg-brand-accent text-brand-accent-foreground font-bold rounded-lg
-                   hover:bg-[#FFE066] transition-colors shadow-lg shadow-brand-accent/25"
+          className="gap-3 px-6 py-3 h-auto bg-brand-accent text-brand-accent-foreground font-bold rounded-lg
+                   hover:bg-[#FFE066] shadow-lg shadow-brand-accent/25"
         >
           <FileText className="w-5 h-5" />
           <span>Download Challenge Brief (PDF)</span>
           <Download className="w-4 h-4" />
-        </button>
+        </Button>
       </div>
     </section>
   )

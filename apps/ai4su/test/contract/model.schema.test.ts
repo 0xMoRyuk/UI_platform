@@ -9,12 +9,12 @@ import {
 
 describe('SectorEnum', () => {
   it('accepts valid sectors', () => {
-    expect(SectorEnum.parse('agriculture')).toBe('agriculture')
-    expect(SectorEnum.parse('healthcare')).toBe('healthcare')
-    expect(SectorEnum.parse('fintech')).toBe('fintech')
-    expect(SectorEnum.parse('education')).toBe('education')
-    expect(SectorEnum.parse('environment')).toBe('environment')
-    expect(SectorEnum.parse('logistics')).toBe('logistics')
+    expect(SectorEnum.parse('crop-science')).toBe('crop-science')
+    expect(SectorEnum.parse('livestock')).toBe('livestock')
+    expect(SectorEnum.parse('precision-farming')).toBe('precision-farming')
+    expect(SectorEnum.parse('agri-finance')).toBe('agri-finance')
+    expect(SectorEnum.parse('supply-chain')).toBe('supply-chain')
+    expect(SectorEnum.parse('climate-resilience')).toBe('climate-resilience')
   })
 
   it('rejects invalid sector', () => {
@@ -44,13 +44,13 @@ describe('SearchModelsInputSchema', () => {
   })
 
   it('accepts single sector string', () => {
-    const result = SearchModelsInputSchema.parse({ sector: 'agriculture' })
-    expect(result.sector).toBe('agriculture')
+    const result = SearchModelsInputSchema.parse({ sector: 'crop-science' })
+    expect(result.sector).toBe('crop-science')
   })
 
   it('accepts sector array', () => {
-    const result = SearchModelsInputSchema.parse({ sector: ['agriculture', 'healthcare'] })
-    expect(result.sector).toEqual(['agriculture', 'healthcare'])
+    const result = SearchModelsInputSchema.parse({ sector: ['crop-science', 'livestock'] })
+    expect(result.sector).toEqual(['crop-science', 'livestock'])
   })
 
   it('accepts single country string', () => {
@@ -68,8 +68,8 @@ describe('SearchModelsInputSchema', () => {
   })
 
   it('accepts text query', () => {
-    const result = SearchModelsInputSchema.parse({ q: 'agriculture' })
-    expect(result.q).toBe('agriculture')
+    const result = SearchModelsInputSchema.parse({ q: 'crop' })
+    expect(result.q).toBe('crop')
   })
 })
 
@@ -93,7 +93,7 @@ describe('AIModelOutputSchema', () => {
       fullDescription: 'Full description here',
       useCase: 'Farming optimization',
       technicalRequirements: 'Python 3.9+',
-      sector: 'agriculture',
+      sector: 'crop-science',
       country: 'KE',
       githubUrl: 'https://github.com/example',
       hackathonId: 'hack-001',
@@ -110,7 +110,7 @@ describe('AIModelOutputSchema', () => {
       fullDescription: 'Full',
       useCase: 'Use',
       technicalRequirements: 'Reqs',
-      sector: 'agriculture',
+      sector: 'crop-science',
       country: 'KE',
       githubUrl: 'https://github.com/example',
     }

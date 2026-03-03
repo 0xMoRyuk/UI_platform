@@ -25,15 +25,15 @@ describe('GET /api/models', () => {
   })
 
   it('filters by text query', async () => {
-    const res = await req('/api/models?q=agriculture')
+    const res = await req('/api/models?q=crop')
     const body = await res.json()
     expect(body.data.total).toBeGreaterThanOrEqual(1)
   })
 
   it('filters by sector', async () => {
-    const res = await req('/api/models?sector=healthcare')
+    const res = await req('/api/models?sector=livestock')
     const body = await res.json()
-    expect(body.data.data.every((m: { sector: string }) => m.sector === 'healthcare')).toBe(true)
+    expect(body.data.data.every((m: { sector: string }) => m.sector === 'livestock')).toBe(true)
   })
 
   it('filters by country', async () => {

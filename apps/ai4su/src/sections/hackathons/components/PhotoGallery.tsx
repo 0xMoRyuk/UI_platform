@@ -1,9 +1,12 @@
 import { Camera, Image as ImageIcon } from 'lucide-react'
+import { Separator } from '@ui-platform/ui/components/separator'
 import type { PhotoGalleryProps } from '@/../product/sections/hackathons/types'
 
 export function PhotoGallery({ photos, onPhotoClick }: PhotoGalleryProps) {
   return (
-    <section className="py-12 border-t border-stone-200 dark:border-stone-800">
+    <>
+    <Separator />
+    <section className="py-12">
       <div className="flex items-center gap-3 mb-8">
         <div className="w-10 h-10 rounded-lg bg-brand-primary/10 dark:bg-brand-primary/20 flex items-center justify-center">
           <Camera className="w-5 h-5 text-brand-primary dark:text-brand-secondary" />
@@ -49,5 +52,6 @@ export function PhotoGallery({ photos, onPhotoClick }: PhotoGalleryProps) {
         ))}
       </div>
     </section>
+    </>
   )
 }

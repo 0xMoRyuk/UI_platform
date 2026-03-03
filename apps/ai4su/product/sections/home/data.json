@@ -70,25 +70,25 @@
       "id": "model-agri-yield",
       "name": "AgriYield Predictor",
       "description": "Machine learning model for predicting crop yields based on weather patterns and soil data across Sub-Saharan Africa.",
-      "sector": "Agriculture",
+      "sector": "Crop Science",
       "githubUrl": "https://github.com/ai4startups/agri-yield-predictor",
       "hackathonId": "hack-nairobi-2025"
     },
     {
-      "id": "model-health-triage",
-      "name": "HealthTriage AI",
-      "description": "NLP-based symptom checker trained on African health data to assist community health workers with patient triage.",
-      "sector": "Healthcare",
-      "githubUrl": "https://github.com/ai4startups/health-triage-ai",
-      "hackathonId": "hack-lagos-2025"
+      "id": "model-livestock-health",
+      "name": "LivestockHealth Vision",
+      "description": "Image-based disease detection for cattle, sheep, and goats in Sahel pastoral systems using smartphone photos.",
+      "sector": "Livestock",
+      "githubUrl": "https://github.com/ai4startups/livestockhealth-vision",
+      "hackathonId": "hack-dakar-2025"
     },
     {
-      "id": "model-fincheck",
-      "name": "FinCheck Credit Scorer",
-      "description": "Alternative credit scoring model using mobile money transaction patterns for financial inclusion.",
-      "sector": "FinTech",
-      "githubUrl": "https://github.com/ai4startups/fincheck-credit",
-      "hackathonId": "hack-accra-2025"
+      "id": "model-soilsense",
+      "name": "SoilSense Advisor",
+      "description": "Precision agriculture model interpreting soil sensor data to generate field-specific fertilizer recommendations.",
+      "sector": "Precision Farming",
+      "githubUrl": "https://github.com/ai4startups/soilsense-advisor",
+      "hackathonId": "hack-nairobi-2025"
     }
   ],
   "sectionPreviews": [
@@ -124,12 +124,12 @@
   "toolboxHighlight": {
     "badge": "Open Source",
     "title": "AI Model Toolbox",
-    "description": "Explore 24 open-source AI models built for African contexts — from agriculture to healthcare, all freely available on GitHub.",
+    "description": "Explore 24 open-source AI models built for African agriculture — from crop disease detection to climate resilience, all freely available on GitHub.",
     "ctaText": "Explore Toolbox",
     "githubLabel": "View on GitHub",
     "stats": [
       { "value": "24", "label": "Models" },
-      { "value": "6", "label": "Sectors" },
+      { "value": "6", "label": "Sub-categories" },
       { "value": "15K+", "label": "GitHub Stars" },
       { "value": "50+", "label": "Startups Using" }
     ]

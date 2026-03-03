@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { Heart, ArrowRight, ChevronDown, Sparkles, Users, DollarSign, MessageCircle } from 'lucide-react'
+import { Button } from '@ui-platform/ui/components/button'
 import { TestimonialCarousel } from './TestimonialCarousel'
 import type { WomenFoundersSectionProps } from '@/../product/sections/ecosystem/types'
 
@@ -88,14 +89,14 @@ export function WomenFoundersSection({ program, onCtaClick }: WomenFoundersSecti
 
         {/* CTA */}
         <div className="text-center">
-          <button
+          <Button
             onClick={onCtaClick}
-            className="inline-flex items-center gap-2 px-8 py-4 bg-pink-500 text-white font-bold rounded-xl
-                     hover:bg-pink-600 transition-colors shadow-lg shadow-pink-500/25"
+            className="gap-2 px-8 py-4 h-auto bg-pink-500 text-white font-bold rounded-xl
+                     hover:bg-pink-600 shadow-lg shadow-pink-500/25"
           >
             {program.ctaText}
             <ArrowRight className="w-5 h-5" />
-          </button>
+          </Button>
         </div>
 
         {/* Learn more expandable */}

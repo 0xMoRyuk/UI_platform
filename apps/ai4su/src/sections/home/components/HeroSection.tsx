@@ -1,5 +1,6 @@
 import { ArrowRight, Sparkles } from 'lucide-react'
 import { Badge } from '@ui-platform/ui/components/badge'
+import { Button } from '@ui-platform/ui/components/button'
 import type { HeroSectionProps } from '@/../product/sections/home/types'
 
 export function HeroSection({ hero, onCtaClick }: HeroSectionProps) {
@@ -50,24 +51,25 @@ export function HeroSection({ hero, onCtaClick }: HeroSectionProps) {
 
           {/* CTAs */}
           <div className="flex flex-col sm:flex-row gap-4">
-            <button
+            <Button
               onClick={() => onCtaClick?.(hero.ctaLink)}
-              className="group inline-flex items-center justify-center gap-2 px-8 py-4 bg-brand-accent text-brand-accent-foreground font-semibold rounded-lg
-                       hover:bg-[#FFE066] transition-all duration-300 shadow-lg shadow-brand-accent/25
+              className="group gap-2 px-8 py-4 h-auto bg-brand-accent text-brand-accent-foreground font-semibold rounded-lg
+                       hover:bg-[#FFE066] shadow-lg shadow-brand-accent/25
                        hover:shadow-xl hover:shadow-brand-accent/30 hover:-translate-y-0.5"
             >
               {hero.ctaText}
               <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
-            </button>
+            </Button>
 
             {hero.secondaryCtaText && (
-              <button
+              <Button
+                variant="outline"
                 onClick={() => onCtaClick?.(hero.secondaryCtaLink || '')}
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white/10 backdrop-blur-sm text-white font-semibold rounded-lg
-                         border border-white/20 hover:bg-white/20 hover:border-white/30 transition-all duration-300"
+                className="gap-2 px-8 py-4 h-auto bg-white/10 backdrop-blur-sm text-white font-semibold rounded-lg
+                         border-white/20 hover:bg-white/20 hover:border-white/30 hover:text-white"
               >
                 {hero.secondaryCtaText}
-              </button>
+              </Button>
             )}
           </div>
         </div>

@@ -2,12 +2,12 @@ import { z } from 'zod'
 import { PaginationParamsSchema } from './common.schema'
 
 export const SectorEnum = z.enum([
-  'agriculture',
-  'healthcare',
-  'fintech',
-  'education',
-  'environment',
-  'logistics',
+  'crop-science',
+  'livestock',
+  'precision-farming',
+  'agri-finance',
+  'supply-chain',
+  'climate-resilience',
 ])
 
 export const CountryCodeEnum = z.enum([

@@ -1,9 +1,12 @@
 import { CheckCircle, TrendingUp } from 'lucide-react'
+import { Separator } from '@ui-platform/ui/components/separator'
 import type { OutcomesSectionProps } from '@/../product/sections/hackathons/types'
 
 export function OutcomesSection({ outcomes }: OutcomesSectionProps) {
   return (
-    <section className="py-12 border-t border-stone-200 dark:border-stone-800">
+    <>
+    <Separator />
+    <section className="py-12">
       <div className="flex items-center gap-3 mb-8">
         <div className="w-10 h-10 rounded-lg bg-green-100 dark:bg-green-900/30 flex items-center justify-center">
           <TrendingUp className="w-5 h-5 text-green-600 dark:text-green-400" />
@@ -25,5 +28,6 @@ export function OutcomesSection({ outcomes }: OutcomesSectionProps) {
         ))}
       </div>
     </section>
+    </>
   )
 }

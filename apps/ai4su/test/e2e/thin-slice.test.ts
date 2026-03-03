@@ -14,7 +14,7 @@ describe('thin-slice: models API end-to-end', () => {
     expect(listBody.data.total).toBe(24)
 
     // 2. Filter by a sector
-    const filterRes = await api.request('/api/models?sector=agriculture')
+    const filterRes = await api.request('/api/models?sector=crop-science')
     const filterBody = await filterRes.json()
     expect(filterBody.data.total).toBeGreaterThanOrEqual(1)
     const firstModel = filterBody.data.data[0]
@@ -24,7 +24,7 @@ describe('thin-slice: models API end-to-end', () => {
     expect(detailRes.status).toBe(200)
     const detailBody = await detailRes.json()
     expect(detailBody.data.id).toBe(firstModel.id)
-    expect(detailBody.data.sector).toBe('agriculture')
+    expect(detailBody.data.sector).toBe('crop-science')
   })
 
   it('manifest is discoverable', async () => {

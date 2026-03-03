@@ -1,6 +1,8 @@
 'use client'
 
 import { useState } from 'react'
+import { Separator } from '@ui-platform/ui/components/separator'
+import { Button } from '@ui-platform/ui/components/button'
 import type { HackathonDetailPageProps } from '@/../product/sections/hackathons/types'
 import { ModelCard } from '@/sections/toolbox/components'
 import { Breadcrumb } from './Breadcrumb'
@@ -90,7 +92,9 @@ export function HackathonDetail({
 
         {/* AI Models Produced */}
         {models && models.length > 0 && (
-          <section className="py-12 border-t border-stone-200 dark:border-stone-800">
+          <>
+          <Separator />
+          <section className="py-12">
             <h2 className="text-2xl font-bold text-brand-primary dark:text-white font-[Barlow] mb-6">
               AI Models Produced
             </h2>
@@ -104,6 +108,7 @@ export function HackathonDetail({
               ))}
             </div>
           </section>
+          </>
         )}
 
         {/* Winning Teams */}
@@ -123,7 +128,9 @@ export function HackathonDetail({
 
         {/* Best Practices Download (if available) */}
         {hackathon.bestPracticesId && (
-          <section className="py-12 border-t border-stone-200 dark:border-stone-800">
+          <>
+          <Separator />
+          <section className="py-12">
             <div className="bg-brand-primary rounded-2xl p-8 text-brand-primary-foreground text-center">
               <h3 className="text-2xl font-bold font-[Barlow] mb-3">
                 Best Practices Report
@@ -132,15 +139,16 @@ export function HackathonDetail({
                 Download our comprehensive best practices report from this hackathon to learn
                 what worked and how to replicate success.
               </p>
-              <button
+              <Button
                 onClick={() => onBestPracticesDownload?.(hackathon.bestPracticesId!)}
-                className="inline-flex items-center gap-2 px-6 py-3 bg-brand-accent text-brand-accent-foreground font-bold rounded-lg
-                         hover:bg-[#FFE066] transition-colors"
+                className="gap-2 px-6 py-3 h-auto bg-brand-accent text-brand-accent-foreground font-bold rounded-lg
+                         hover:bg-[#FFE066]"
               >
                 Download Best Practices (PDF)
-              </button>
+              </Button>
             </div>
           </section>
+          </>
         )}
       </div>
 

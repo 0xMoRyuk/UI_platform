@@ -1,4 +1,5 @@
 import { Globe, ArrowRight, CheckCircle } from 'lucide-react'
+import { Button } from '@ui-platform/ui/components/button'
 import type { DatagovCalloutProps } from '@/../product/sections/partners/types'
 
 export function DatagovCallout({ datagov, onCtaClick }: DatagovCalloutProps) {
@@ -32,14 +33,14 @@ export function DatagovCallout({ datagov, onCtaClick }: DatagovCalloutProps) {
             </ul>
 
             {/* CTA */}
-            <button
+            <Button
               onClick={() => onCtaClick?.(datagov.websiteUrl)}
-              className="inline-flex items-center gap-2 px-6 py-3 bg-brand-accent text-brand-accent-foreground font-bold rounded-lg
-                       hover:bg-brand-accent/90 transition-colors"
+              className="gap-2 px-6 py-3 h-auto bg-brand-accent text-brand-accent-foreground font-bold rounded-lg
+                       hover:bg-brand-accent/90"
             >
               {datagov.ctaText}
               <ArrowRight className="w-4 h-4" />
-            </button>
+            </Button>
           </div>
 
           {/* Visual element */}

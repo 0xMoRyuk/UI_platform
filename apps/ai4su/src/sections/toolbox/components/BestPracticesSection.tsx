@@ -1,4 +1,6 @@
 import { Download, Trophy, Sparkles } from 'lucide-react'
+import { Separator } from '@ui-platform/ui/components/separator'
+import { Button } from '@ui-platform/ui/components/button'
 import type { BestPracticesSectionProps, BestPractices } from '@/../product/sections/toolbox/types'
 
 interface BestPracticesCardProps {
@@ -34,20 +36,23 @@ function BestPracticesCard({ bp, downloadLabel, onDownload }: BestPracticesCardP
       </ul>
 
       {/* Download button */}
-      <button
+      <Button
+        variant="link"
         onClick={onDownload}
-        className="inline-flex items-center gap-2 text-sm font-medium text-brand-primary dark:text-brand-secondary hover:text-brand-accent transition-colors"
+        className="gap-2 p-0 h-auto text-sm font-medium text-brand-primary dark:text-brand-secondary hover:text-brand-accent"
       >
         <Download className="w-4 h-4" />
         {downloadLabel}
-      </button>
+      </Button>
     </div>
   )
 }
 
 export function BestPracticesSection({ bestPractices, content, onDownload }: BestPracticesSectionProps) {
   return (
-    <section className="py-12 border-t border-stone-200 dark:border-stone-800">
+    <>
+    <Separator />
+    <section className="py-12">
       <div className="mb-8">
         <h2 className="text-2xl font-bold text-brand-primary dark:text-white font-[Barlow] mb-2">
           {content.title}
@@ -68,5 +73,6 @@ export function BestPracticesSection({ bestPractices, content, onDownload }: Bes
         ))}
       </div>
     </section>
+    </>
   )
 }

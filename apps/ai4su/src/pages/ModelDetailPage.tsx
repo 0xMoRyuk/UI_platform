@@ -2,6 +2,8 @@
 
 import { useParams, useNavigate, Link } from 'react-router-dom'
 import { ArrowLeft, Github, ExternalLink, Cpu, FileText, Target, Link as LinkIcon } from 'lucide-react'
+import { Separator } from '@ui-platform/ui/components/separator'
+import { Button } from '@ui-platform/ui/components/button'
 import type { Hackathon } from '@/../product/sections/hackathons/types'
 import { getModelById } from '@/lib/data-provider'
 import hackathonsDataRaw from '@/../product/sections/hackathons/data.json'
@@ -9,12 +11,12 @@ import hackathonsDataRaw from '@/../product/sections/hackathons/data.json'
 const hackathonsData = hackathonsDataRaw as unknown as { hackathons: Hackathon[] }
 
 const sectorColors: Record<string, { bg: string; text: string }> = {
-  agriculture: { bg: 'bg-green-100 dark:bg-green-900/30', text: 'text-green-700 dark:text-green-300' },
-  healthcare: { bg: 'bg-red-100 dark:bg-red-900/30', text: 'text-red-700 dark:text-red-300' },
-  fintech: { bg: 'bg-blue-100 dark:bg-blue-900/30', text: 'text-blue-700 dark:text-blue-300' },
-  education: { bg: 'bg-purple-100 dark:bg-purple-900/30', text: 'text-purple-700 dark:text-purple-300' },
-  environment: { bg: 'bg-teal-100 dark:bg-teal-900/30', text: 'text-teal-700 dark:text-teal-300' },
-  logistics: { bg: 'bg-orange-100 dark:bg-orange-900/30', text: 'text-orange-700 dark:text-orange-300' },
+  'crop-science': { bg: 'bg-green-100 dark:bg-green-900/30', text: 'text-green-700 dark:text-green-300' },
+  'livestock': { bg: 'bg-lime-100 dark:bg-lime-900/30', text: 'text-lime-700 dark:text-lime-300' },
+  'precision-farming': { bg: 'bg-blue-100 dark:bg-blue-900/30', text: 'text-blue-700 dark:text-blue-300' },
+  'agri-finance': { bg: 'bg-amber-100 dark:bg-amber-900/30', text: 'text-amber-700 dark:text-amber-300' },
+  'supply-chain': { bg: 'bg-orange-100 dark:bg-orange-900/30', text: 'text-orange-700 dark:text-orange-300' },
+  'climate-resilience': { bg: 'bg-teal-100 dark:bg-teal-900/30', text: 'text-teal-700 dark:text-teal-300' },
 }
 
 const countryNames: Record<string, string> = {
@@ -52,12 +54,13 @@ export function ModelDetailPage() {
           <h1 className="text-2xl font-bold text-stone-900 dark:text-white mb-4">
             Model not found
           </h1>
-          <button
+          <Button
+            variant="link"
             onClick={() => navigate('/models')}
-            className="text-brand-primary hover:underline"
+            className="text-brand-primary"
           >
             &larr; Back to AI Models
-          </button>
+          </Button>
         </div>
       </div>
     )
@@ -67,7 +70,7 @@ export function ModelDetailPage() {
     ? hackathonsData.hackathons.find(h => h.id === model.hackathonId)
     : null
 
-  const colors = sectorColors[model.sector] || sectorColors.agriculture
+  const colors = sectorColors[model.sector] || sectorColors['crop-science']
 
   return (
     <main className="min-h-screen bg-stone-50 dark:bg-stone-950">
@@ -75,13 +78,14 @@ export function ModelDetailPage() {
       <div className="bg-gradient-to-r from-brand-primary to-brand-primary-dark text-brand-primary-foreground">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           {/* Breadcrumb */}
-          <button
+          <Button
+            variant="ghost"
             onClick={() => navigate('/models')}
-            className="inline-flex items-center gap-2 text-white/80 hover:text-white transition-colors mb-6"
+            className="gap-2 text-white/80 hover:text-white hover:bg-white/10 mb-6"
           >
             <ArrowLeft className="w-4 h-4" />
             <span>Back to AI Models</span>
-          </button>
+          </Button>
 
           <div className="flex items-center gap-3 mb-3">
             <span className={`px-2.5 py-1 rounded-full text-xs font-medium ${colors.bg} ${colors.text}`}>
@@ -151,18 +155,19 @@ export function ModelDetailPage() {
           )}
 
           {/* GitHub Button */}
-          <div className="pt-6 border-t border-stone-200 dark:border-stone-700">
-            <a
-              href={model.githubUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-3 px-6 py-4 bg-brand-primary text-brand-primary-foreground font-semibold rounded-xl
-                       hover:bg-brand-primary-dark transition-colors w-full sm:w-auto"
+          <Separator className="mb-6" />
+          <div>
+            <Button
+              asChild
+              className="gap-3 px-6 py-4 h-auto bg-brand-primary text-brand-primary-foreground font-semibold rounded-xl
+                       hover:bg-brand-primary-dark w-full sm:w-auto"
             >
-              <Github className="w-5 h-5" />
-              <span>View on GitHub</span>
-              <ExternalLink className="w-4 h-4" />
-            </a>
+              <a href={model.githubUrl} target="_blank" rel="noopener noreferrer">
+                <Github className="w-5 h-5" />
+                <span>View on GitHub</span>
+                <ExternalLink className="w-4 h-4" />
+              </a>
+            </Button>
           </div>
         </div>
       </div>

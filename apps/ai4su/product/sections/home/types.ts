@@ -33,7 +33,7 @@ export interface FeaturedModel {
   id: string
   name: string
   description: string
-  sector: 'Agriculture' | 'Healthcare' | 'FinTech' | 'Education' | 'Environment' | 'Logistics'
+  sector: 'Crop Science' | 'Livestock' | 'Precision Farming' | 'Agri-Finance' | 'Supply Chain' | 'Climate Resilience'
   githubUrl: string
   hackathonId?: string
 }

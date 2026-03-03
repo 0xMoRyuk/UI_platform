@@ -17,7 +17,7 @@ const manifest = {
       method: 'GET',
       parameters: {
         q: { type: 'string', description: 'Text search on name, description, sector' },
-        sector: { type: 'string', description: 'Filter by sector (agriculture, healthcare, fintech, education, environment, logistics)' },
+        sector: { type: 'string', description: 'Filter by sub-category (crop-science, livestock, precision-farming, agri-finance, supply-chain, climate-resilience)' },
         country: { type: 'string', description: 'Filter by country code (KE, NG, GH, SN, RW, ZA, EG, MA)' },
         page: { type: 'integer', description: 'Page number (default: 1)' },
         limit: { type: 'integer', description: 'Items per page (default: 20, max: 100)' },

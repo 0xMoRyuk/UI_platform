@@ -2,6 +2,9 @@
 
 import { useState } from 'react'
 import { ChevronDown, X, Filter } from 'lucide-react'
+import { Separator } from '@ui-platform/ui/components/separator'
+import { Button } from '@ui-platform/ui/components/button'
+import { Collapsible, CollapsibleTrigger, CollapsibleContent } from '@ui-platform/ui/components/collapsible'
 import type { ModelFilterSidebarProps, Sector, CountryCode } from '@/../product/sections/toolbox/types'
 
 interface FilterSectionProps {
@@ -13,16 +16,21 @@ interface FilterSectionProps {
 
 function FilterSection({ title, isOpen, onToggle, children }: FilterSectionProps) {
   return (
-    <div className="border-b border-stone-200 dark:border-stone-700 last:border-b-0">
-      <button
-        onClick={onToggle}
+    <Collapsible
+      open={isOpen}
+      onOpenChange={onToggle}
+      className="border-b border-stone-200 dark:border-stone-700 last:border-b-0"
+    >
+      <CollapsibleTrigger
         className="w-full flex items-center justify-between py-4 text-left font-semibold text-brand-primary dark:text-white hover:text-brand-primary-dark dark:hover:text-brand-secondary transition-colors"
       >
         <span>{title}</span>
         <ChevronDown className={`w-5 h-5 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} />
-      </button>
-      {isOpen && <div className="pb-4 space-y-2">{children}</div>}
-    </div>
+      </CollapsibleTrigger>
+      <CollapsibleContent>
+        <div className="pb-4 space-y-2">{children}</div>
+      </CollapsibleContent>
+    </Collapsible>
   )
 }
 
@@ -110,21 +118,24 @@ export function ModelFilterSidebar({
     <aside className="w-full lg:w-64 shrink-0">
       <div className="bg-white dark:bg-stone-900 rounded-xl border border-stone-200 dark:border-stone-800 p-4">
         {/* Header */}
-        <div className="flex items-center justify-between mb-4 pb-4 border-b border-stone-200 dark:border-stone-700">
+        <div className="flex items-center justify-between mb-4 pb-4">
           <div className="flex items-center gap-2 text-brand-primary dark:text-white font-semibold">
             <Filter className="w-5 h-5" />
             <span>Filters</span>
           </div>
           {hasActiveFilters && (
-            <button
+            <Button
+              variant="ghost"
+              size="sm"
               onClick={onClearFilters}
-              className="text-xs text-stone-500 hover:text-brand-primary dark:hover:text-brand-accent transition-colors flex items-center gap-1"
+              className="text-xs text-stone-500 hover:text-brand-primary dark:hover:text-brand-accent h-auto px-2 py-1 gap-1"
             >
               <X className="w-3 h-3" />
               Clear all
-            </button>
+            </Button>
           )}
         </div>
+        <Separator className="mb-4" />
 
         {/* Sectors */}
         <FilterSection
@@ -163,11 +174,14 @@ export function ModelFilterSidebar({
 
         {/* Active filters count */}
         {hasActiveFilters && (
-          <div className="mt-4 pt-4 border-t border-stone-200 dark:border-stone-700">
+          <>
+          <Separator className="mt-4" />
+          <div className="pt-4">
             <p className="text-xs text-stone-500 dark:text-stone-400">
               {selectedSectors.length + selectedCountries.length} filter{selectedSectors.length + selectedCountries.length !== 1 ? 's' : ''} applied
             </p>
           </div>
+          </>
         )}
       </div>
     </aside>
