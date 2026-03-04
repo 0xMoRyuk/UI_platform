@@ -5,18 +5,10 @@ import { Badge } from '@ui-platform/ui/components/badge'
 import { Button } from '@ui-platform/ui/components/button'
 import { Separator } from '@ui-platform/ui/components/separator'
 import type { ActivityCardProps } from '@/../product/sections/ecosystem/types'
+import { countryFlags } from '../../../shared/lookups'
+import ecosystemDataRaw from '../../../../product/sections/ecosystem/data.json'
 
-const countryFlags: Record<string, string> = {
-  KE: '🇰🇪',
-  NG: '🇳🇬',
-  GH: '🇬🇭',
-  SN: '🇸🇳',
-  RW: '🇷🇼',
-  ZA: '🇿🇦',
-  EG: '🇪🇬',
-  MA: '🇲🇦',
-  ET: '🇪🇹',
-}
+const ui = (ecosystemDataRaw as Record<string, unknown>).ui as Record<string, string>
 
 const resourceIcons = {
   pdf: FileText,
@@ -129,7 +121,7 @@ export function ActivityCard({
           {activity.highlights.length > 0 && (
             <div className="mb-4">
               <p className="text-sm font-semibold text-brand-primary dark:text-brand-secondary mb-2">
-                Highlights
+                {ui.highlights}
               </p>
               <div className="flex flex-wrap gap-2">
                 {activity.highlights.map((highlight, index) => (
@@ -154,7 +146,7 @@ export function ActivityCard({
           {activity.photos.length > 0 && (
             <div className="mb-4">
               <p className="text-sm font-semibold text-brand-primary dark:text-brand-secondary mb-2">
-                Photos
+                {ui.photos}
               </p>
               <div className="flex gap-2 overflow-x-auto">
                 {activity.photos.map((photo) => (
@@ -173,7 +165,7 @@ export function ActivityCard({
           {activity.resources.length > 0 && (
             <div>
               <p className="text-sm font-semibold text-brand-primary dark:text-brand-secondary mb-2">
-                Resources
+                {ui.resources}
               </p>
               <div className="flex flex-wrap gap-2">
                 {activity.resources.map((resource, index) => {

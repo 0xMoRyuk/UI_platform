@@ -2,6 +2,7 @@ import { Hono } from 'hono'
 import { searchModels } from '../../domain/models'
 import { searchHackathons } from '../../domain/hackathons'
 import { COUNTRY_NAMES, SECTOR_LABELS } from '../html'
+import siteConfig from '../../../product/site.json'
 
 export const llmTxtSeo = new Hono()
 
@@ -27,14 +28,14 @@ llmTxtSeo.get('/llm.txt', (c) => {
   const sectors = [...new Set(models.map((m) => SECTOR_LABELS[m.sector] ?? m.sector))].join(', ')
   const countries = [...new Set(models.map((m) => COUNTRY_NAMES[m.country] ?? m.country))].join(', ')
 
-  const body = `# AI4Startups (AI4SU)
+  const body = `# ${siteConfig.name} (${siteConfig.shortName})
 
-> Enabling African startups to build scalable, responsible AI solutions.
+> ${siteConfig.tagline}
 
 ## API
-- Agent Capabilities: ${baseUrl}/.well-known/agent-capabilities.json
-- Models API: ${baseUrl}/api/models
-- Hackathons API: ${baseUrl}/api/hackathons
+- Agent Capabilities: ${baseUrl}${siteConfig.links.agentManifest}
+- Models API: ${baseUrl}${siteConfig.links.modelsApi}
+- Hackathons API: ${baseUrl}${siteConfig.links.hackathonsApi}
 
 ## Models (${models.length})
 ${modelLines}

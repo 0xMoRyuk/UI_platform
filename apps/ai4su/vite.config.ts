@@ -12,8 +12,12 @@ export default defineConfig({
     devServer({
       entry: './server.dev.ts',
       exclude: [
+        // Vite internals and static assets
         /^\/(src|node_modules|@.+)\/.*/,
         /\.(ts|tsx|css|html|svg|png|jpg|jpeg|gif|ico|woff|woff2)$/,
+        // SPA routes — bypass Hono, let Vite serve index.html
+        // Matches anything that is NOT a known Hono route prefix
+        /^(?!\/(?:api|s|\.well-known)(?:\/|$))(?!\/(?:robots\.txt|sitemap\.xml|llm\.txt)$)/,
       ],
       injectClientScript: false,
     }),

@@ -10,6 +10,7 @@ import toolboxDataRaw from '@/../product/sections/toolbox/data.json'
 // Cast JSON data to proper types (JSON imports lose literal type information)
 const hackathonsData = hackathonsDataRaw as unknown as { methodology: unknown; hackathons: Hackathon[]; fieldLabels: HackathonFieldLabels }
 const toolboxData = toolboxDataRaw as unknown as { aiModels: AIModel[] }
+const ui = (hackathonsDataRaw as Record<string, unknown>).ui as Record<string, string>
 
 export function HackathonDetailPage() {
   const { slug } = useParams<{ slug: string }>()
@@ -22,13 +23,13 @@ export function HackathonDetailPage() {
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-stone-900 dark:text-white mb-4">
-            Hackathon not found
+            {ui.hackathonNotFound}
           </h1>
           <button
             onClick={() => navigate('/hackathons')}
             className="text-brand-primary hover:underline"
           >
-            ← Back to Hackathons
+            {ui.backToHackathons}
           </button>
         </div>
       </div>

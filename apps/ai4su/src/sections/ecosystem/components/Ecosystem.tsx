@@ -2,6 +2,9 @@
 
 import { useState, useMemo } from 'react'
 import type { EcosystemPageProps, ActivityTypeId, CountryCode } from '@/../product/sections/ecosystem/types'
+import ecosystemDataRaw from '../../../../product/sections/ecosystem/data.json'
+
+const ui = (ecosystemDataRaw as Record<string, unknown>).ui as Record<string, string>
 import { EcosystemHero } from './EcosystemHero'
 import { WomenFoundersSection } from './WomenFoundersSection'
 import { ActivityFilter } from './ActivityFilter'
@@ -95,7 +98,7 @@ export function Ecosystem({
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-8">
             <h2 className="text-2xl font-bold text-brand-primary dark:text-white font-[Barlow] mb-2">
-              All Activities
+              {ui.allActivities}
             </h2>
             <p className="text-stone-600 dark:text-stone-400">
               {filteredActivities.length} activit{filteredActivities.length !== 1 ? 'ies' : 'y'}

@@ -1,6 +1,7 @@
 import { Hono } from 'hono'
 import { searchModels, getAvailableFilters } from '../../domain/models'
 import { seoPage, escapeHtml, COUNTRY_NAMES, SECTOR_LABELS } from '../html'
+import siteConfig from '../../../product/site.json'
 
 export const modelsSeo = new Hono()
 
@@ -40,7 +41,7 @@ modelsSeo.get('/s/models', (c) => {
     {
       '@context': 'https://schema.org',
       '@type': 'ItemList',
-      name: 'AI4SU Open-Source AI Models',
+      name: `${siteConfig.shortName} Open-Source AI Models`,
       numberOfItems: total,
       itemListElement: models.map((m, i) => ({
         '@type': 'ListItem',
@@ -58,13 +59,13 @@ modelsSeo.get('/s/models', (c) => {
     {
       '@context': 'https://schema.org',
       '@type': 'Organization',
-      name: 'AI4Startups',
-      url: 'https://ai4su.app',
+      name: siteConfig.name,
+      url: siteConfig.url,
     },
   ]
 
   const html = seoPage({
-    title: `Open-Source AI Models for Africa — AI4Startups`,
+    title: `Open-Source AI Models for Africa${siteConfig.seo.titleSuffix}`,
     description: `Browse ${total} open-source AI models across ${filters.sectors.length} sectors and ${filters.countries.length} African countries. Crop science, livestock, precision farming, and more.`,
     canonicalPath: '/models',
     jsonLd,

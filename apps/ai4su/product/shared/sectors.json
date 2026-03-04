@@ -1,0 +1,8 @@
+[
+  { "id": "crop-science", "label": "Crop Science", "color": "#22c55e" },
+  { "id": "livestock", "label": "Livestock", "color": "#84cc16" },
+  { "id": "precision-farming", "label": "Precision Farming", "color": "#3b82f6" },
+  { "id": "agri-finance", "label": "Agri-Finance", "color": "#f59e0b" },
+  { "id": "supply-chain", "label": "Supply Chain", "color": "#f97316" },
+  { "id": "climate-resilience", "label": "Climate Resilience", "color": "#14b8a6" }
+]

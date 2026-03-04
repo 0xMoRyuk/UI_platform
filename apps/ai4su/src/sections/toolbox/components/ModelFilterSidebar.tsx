@@ -6,6 +6,9 @@ import { Separator } from '@ui-platform/ui/components/separator'
 import { Button } from '@ui-platform/ui/components/button'
 import { Collapsible, CollapsibleTrigger, CollapsibleContent } from '@ui-platform/ui/components/collapsible'
 import type { ModelFilterSidebarProps, Sector, CountryCode } from '@/../product/sections/toolbox/types'
+import toolboxDataRaw from '../../../../product/sections/toolbox/data.json'
+
+const ui = (toolboxDataRaw as Record<string, unknown>).ui as Record<string, string>
 
 interface FilterSectionProps {
   title: string
@@ -121,7 +124,7 @@ export function ModelFilterSidebar({
         <div className="flex items-center justify-between mb-4 pb-4">
           <div className="flex items-center gap-2 text-brand-primary dark:text-white font-semibold">
             <Filter className="w-5 h-5" />
-            <span>Filters</span>
+            <span>{ui.filters}</span>
           </div>
           {hasActiveFilters && (
             <Button
@@ -131,7 +134,7 @@ export function ModelFilterSidebar({
               className="text-xs text-stone-500 hover:text-brand-primary dark:hover:text-brand-accent h-auto px-2 py-1 gap-1"
             >
               <X className="w-3 h-3" />
-              Clear all
+              {ui.clearAll}
             </Button>
           )}
         </div>
@@ -139,7 +142,7 @@ export function ModelFilterSidebar({
 
         {/* Sectors */}
         <FilterSection
-          title="Sector"
+          title={ui.sectorLabel}
           isOpen={sectorsOpen}
           onToggle={() => setSectorsOpen(!sectorsOpen)}
         >
@@ -157,7 +160,7 @@ export function ModelFilterSidebar({
 
         {/* Countries */}
         <FilterSection
-          title="Country"
+          title={ui.countryLabel}
           isOpen={countriesOpen}
           onToggle={() => setCountriesOpen(!countriesOpen)}
         >
@@ -178,7 +181,7 @@ export function ModelFilterSidebar({
           <Separator className="mt-4" />
           <div className="pt-4">
             <p className="text-xs text-stone-500 dark:text-stone-400">
-              {selectedSectors.length + selectedCountries.length} filter{selectedSectors.length + selectedCountries.length !== 1 ? 's' : ''} applied
+              {selectedSectors.length + selectedCountries.length} {ui.filtersApplied}
             </p>
           </div>
           </>

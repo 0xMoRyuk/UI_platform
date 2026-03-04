@@ -2,6 +2,9 @@ import { Users } from 'lucide-react'
 import { LeadPartnerCard } from './LeadPartnerCard'
 import { PartnerCard } from './PartnerCard'
 import type { ImplementingPartnersSectionProps } from '@/../product/sections/partners/types'
+import partnersDataRaw from '../../../../product/sections/partners/data.json'
+
+const ui = (partnersDataRaw as Record<string, unknown>).ui as Record<string, string>
 
 export function ImplementingPartnersSection({ partners, onPartnerClick }: ImplementingPartnersSectionProps) {
   const leadPartner = partners.partners.find((p) => p.isLead)
@@ -14,7 +17,7 @@ export function ImplementingPartnersSection({ partners, onPartnerClick }: Implem
         <div className="text-center mb-10">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-stone-100 dark:bg-stone-800 rounded-full text-sm font-medium text-stone-600 dark:text-stone-400 mb-4">
             <Users className="w-4 h-4" />
-            <span>Tier 2 - Implementing Partners</span>
+            <span>{ui.tierImplementing}</span>
           </div>
           <h2 className="text-3xl font-bold text-brand-primary dark:text-white font-[Barlow] mb-4">
             {partners.sectionTitle}

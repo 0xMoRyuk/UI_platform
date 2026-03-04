@@ -1,16 +1,6 @@
 import { Calendar, MapPin, Users, Brain, Building2 } from 'lucide-react'
 import type { HackathonHeroProps } from '@/../product/sections/hackathons/types'
-
-const countryFlags: Record<string, string> = {
-  KE: '🇰🇪',
-  NG: '🇳🇬',
-  GH: '🇬🇭',
-  SN: '🇸🇳',
-  RW: '🇷🇼',
-  ZA: '🇿🇦',
-  EG: '🇪🇬',
-  MA: '🇲🇦',
-}
+import { countryFlags } from '../../../shared/lookups'
 
 export function HackathonHero({ hackathon, fieldLabels }: HackathonHeroProps) {
   const formatDateRange = (start: string, end: string) => {

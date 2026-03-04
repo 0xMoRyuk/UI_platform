@@ -1,6 +1,9 @@
 import { Search, RefreshCcw } from 'lucide-react'
 import { Button } from '@ui-platform/ui/components/button'
 import type { EmptyStateProps } from '@/../product/sections/toolbox/types'
+import toolboxDataRaw from '../../../../product/sections/toolbox/data.json'
+
+const ui = (toolboxDataRaw as Record<string, unknown>).ui as Record<string, string>
 
 export function EmptyState({ title, description, onClearFilters }: EmptyStateProps) {
   return (
@@ -21,7 +24,7 @@ export function EmptyState({ title, description, onClearFilters }: EmptyStatePro
                    hover:bg-brand-primary-dark"
         >
           <RefreshCcw className="w-4 h-4" />
-          Clear Filters
+          {ui.clearFilters}
         </Button>
       )}
     </div>

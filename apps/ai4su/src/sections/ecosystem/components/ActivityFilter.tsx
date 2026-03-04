@@ -2,6 +2,9 @@
 
 import { Users, BookOpen, GraduationCap, Heart, ChevronDown } from 'lucide-react'
 import type { ActivityFilterProps, CountryCode } from '@/../product/sections/ecosystem/types'
+import ecosystemDataRaw from '../../../../product/sections/ecosystem/data.json'
+
+const ui = (ecosystemDataRaw as Record<string, unknown>).ui as Record<string, string>
 
 const iconMap = {
   users: Users,
@@ -30,7 +33,7 @@ export function ActivityFilter({
               : 'bg-stone-100 dark:bg-stone-800 text-stone-700 dark:text-stone-300 hover:bg-stone-200 dark:hover:bg-stone-700'
             }`}
         >
-          All
+          {ui.allFilter}
         </button>
         {activityTypes.map((type) => {
           const Icon = iconMap[type.icon]
@@ -63,7 +66,7 @@ export function ActivityFilter({
                      focus:outline-none focus:ring-2 focus:ring-brand-primary focus:border-transparent
                      cursor-pointer hover:border-brand-primary transition-colors"
         >
-          <option value="">All Countries</option>
+          <option value="">{ui.allCountries}</option>
           {countries.map((country) => (
             <option key={country.code} value={country.code}>
               {country.name} ({country.activityCount})

@@ -21,24 +21,23 @@
     { "label": "Studies", "value": 4, "icon": "book" }
   ],
   "filterOptions": {
-    "sectors": [
-      { "id": "crop-science", "label": "Crop Science", "color": "#22c55e" },
-      { "id": "livestock", "label": "Livestock", "color": "#84cc16" },
-      { "id": "precision-farming", "label": "Precision Farming", "color": "#3b82f6" },
-      { "id": "agri-finance", "label": "Agri-Finance", "color": "#f59e0b" },
-      { "id": "supply-chain", "label": "Supply Chain", "color": "#f97316" },
-      { "id": "climate-resilience", "label": "Climate Resilience", "color": "#14b8a6" }
-    ],
-    "countries": [
-      { "code": "KE", "name": "Kenya" },
-      { "code": "NG", "name": "Nigeria" },
-      { "code": "GH", "name": "Ghana" },
-      { "code": "SN", "name": "Senegal" },
-      { "code": "RW", "name": "Rwanda" },
-      { "code": "ZA", "name": "South Africa" },
-      { "code": "EG", "name": "Egypt" },
-      { "code": "MA", "name": "Morocco" }
-    ]
+    "_note": "Sectors and countries are now in product/shared/sectors.json and product/shared/countries.json"
+  },
+  "ui": {
+    "description": "Description",
+    "useCase": "Use Case",
+    "technicalRequirements": "Technical Requirements",
+    "relatedHackathon": "Related Hackathon",
+    "viewOnGithub": "View on GitHub",
+    "viewHackathonDetails": "View hackathon details",
+    "backToModels": "\u2190 Back to AI Models",
+    "modelNotFound": "Model not found",
+    "filters": "Filters",
+    "clearAll": "Clear all",
+    "sectorLabel": "Sector",
+    "countryLabel": "Country",
+    "filtersApplied": "filter(s) applied",
+    "clearFilters": "Clear Filters"
   },
   "aiModels": [
     {

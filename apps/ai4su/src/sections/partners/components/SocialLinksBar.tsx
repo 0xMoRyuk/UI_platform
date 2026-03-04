@@ -2,6 +2,9 @@ import { Twitter, Linkedin, Hash } from 'lucide-react'
 import { Separator } from '@ui-platform/ui/components/separator'
 import { Button } from '@ui-platform/ui/components/button'
 import type { SocialLinksProps } from '@/../product/sections/partners/types'
+import partnersDataRaw from '../../../../product/sections/partners/data.json'
+
+const ui = (partnersDataRaw as Record<string, unknown>).ui as Record<string, string>
 
 export function SocialLinksBar({ links, onSocialClick }: SocialLinksProps) {
   return (
@@ -25,7 +28,7 @@ export function SocialLinksBar({ links, onSocialClick }: SocialLinksProps) {
 
           {/* Social buttons */}
           <div className="flex items-center gap-3">
-            <span className="text-sm text-stone-500 dark:text-stone-400">Follow us:</span>
+            <span className="text-sm text-stone-500 dark:text-stone-400">{ui.followUs}</span>
             <Button
               onClick={() => onSocialClick?.('twitter')}
               className="gap-2 px-4 py-2 h-auto bg-[#1DA1F2] text-white font-medium rounded-lg

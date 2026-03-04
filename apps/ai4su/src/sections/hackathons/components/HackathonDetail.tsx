@@ -4,6 +4,9 @@ import { useState } from 'react'
 import { Separator } from '@ui-platform/ui/components/separator'
 import { Button } from '@ui-platform/ui/components/button'
 import type { HackathonDetailPageProps } from '@/../product/sections/hackathons/types'
+import hackathonsDataRaw from '../../../../product/sections/hackathons/data.json'
+
+const ui = (hackathonsDataRaw as Record<string, unknown>).ui as Record<string, string>
 import { ModelCard } from '@/sections/toolbox/components'
 import { Breadcrumb } from './Breadcrumb'
 import { HackathonHero } from './HackathonHero'
@@ -96,7 +99,7 @@ export function HackathonDetail({
           <Separator />
           <section className="py-12">
             <h2 className="text-2xl font-bold text-brand-primary dark:text-white font-[Barlow] mb-6">
-              AI Models Produced
+              {ui.modelsProduced}
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {models.map((model) => (
@@ -133,18 +136,17 @@ export function HackathonDetail({
           <section className="py-12">
             <div className="bg-brand-primary rounded-2xl p-8 text-brand-primary-foreground text-center">
               <h3 className="text-2xl font-bold font-[Barlow] mb-3">
-                Best Practices Report
+                {ui.bestPracticesReport}
               </h3>
               <p className="text-white/80 mb-6 max-w-xl mx-auto">
-                Download our comprehensive best practices report from this hackathon to learn
-                what worked and how to replicate success.
+                {ui.bestPracticesDescription}
               </p>
               <Button
                 onClick={() => onBestPracticesDownload?.(hackathon.bestPracticesId!)}
                 className="gap-2 px-6 py-3 h-auto bg-brand-accent text-brand-accent-foreground font-bold rounded-lg
                          hover:bg-[#FFE066]"
               >
-                Download Best Practices (PDF)
+                {ui.downloadBestPractices}
               </Button>
             </div>
           </section>

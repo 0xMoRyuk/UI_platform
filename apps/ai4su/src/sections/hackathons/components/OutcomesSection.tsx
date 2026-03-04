@@ -1,6 +1,9 @@
 import { CheckCircle, TrendingUp } from 'lucide-react'
 import { Separator } from '@ui-platform/ui/components/separator'
 import type { OutcomesSectionProps } from '@/../product/sections/hackathons/types'
+import hackathonsDataRaw from '../../../../product/sections/hackathons/data.json'
+
+const ui = (hackathonsDataRaw as Record<string, unknown>).ui as Record<string, string>
 
 export function OutcomesSection({ outcomes }: OutcomesSectionProps) {
   return (
@@ -12,7 +15,7 @@ export function OutcomesSection({ outcomes }: OutcomesSectionProps) {
           <TrendingUp className="w-5 h-5 text-green-600 dark:text-green-400" />
         </div>
         <h2 className="text-2xl font-bold text-brand-primary dark:text-white font-[Barlow]">
-          Key Outcomes
+          {ui.keyOutcomes}
         </h2>
       </div>
 

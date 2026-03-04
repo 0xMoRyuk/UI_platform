@@ -1,6 +1,9 @@
 import { Download, FileText, Target } from 'lucide-react'
 import { Button } from '@ui-platform/ui/components/button'
 import type { ChallengeBriefSectionProps } from '@/../product/sections/hackathons/types'
+import hackathonsDataRaw from '../../../../product/sections/hackathons/data.json'
+
+const ui = (hackathonsDataRaw as Record<string, unknown>).ui as Record<string, string>
 
 export function ChallengeBriefSection({ challengeBrief, onDownload }: ChallengeBriefSectionProps) {
   return (
@@ -10,7 +13,7 @@ export function ChallengeBriefSection({ challengeBrief, onDownload }: ChallengeB
           <Target className="w-5 h-5 text-brand-primary dark:text-brand-secondary" />
         </div>
         <h2 className="text-2xl font-bold text-brand-primary dark:text-white font-[Barlow]">
-          Challenge Brief
+          {ui.challengeBrief}
         </h2>
       </div>
 
@@ -29,7 +32,7 @@ export function ChallengeBriefSection({ challengeBrief, onDownload }: ChallengeB
                    hover:bg-[#FFE066] shadow-lg shadow-brand-accent/25"
         >
           <FileText className="w-5 h-5" />
-          <span>Download Challenge Brief (PDF)</span>
+          <span>{ui.downloadChallengeBrief}</span>
           <Download className="w-4 h-4" />
         </Button>
       </div>

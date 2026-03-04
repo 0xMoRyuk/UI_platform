@@ -1,11 +1,14 @@
-import type { AIModel, ModelSearchParams, PaginatedResult, FilterOptions, Study, BestPractices, FinalReport } from './types'
+import type { AIModel, ModelSearchParams, PaginatedResult, FilterOptions, Study, BestPractices, FinalReport, Country, SectorEntry } from './types'
 import toolboxData from '../../product/sections/toolbox/data.json'
+import countriesData from '../../product/shared/countries.json'
+import sectorsData from '../../product/shared/sectors.json'
 
 const allModels = toolboxData.aiModels as AIModel[]
 const allStudies = toolboxData.studies as Study[]
 const allBestPractices = toolboxData.bestPractices as BestPractices[]
 const finalReport = toolboxData.finalReport as FinalReport
-const filterOptions = toolboxData.filterOptions as FilterOptions
+const sharedCountries = countriesData as Country[]
+const sharedSectors = sectorsData as SectorEntry[]
 
 function paginate<T>(items: T[], page: number, limit: number): PaginatedResult<T> {
   const total = items.length
@@ -63,7 +66,12 @@ export function getModelById(id: string): AIModel | null {
 }
 
 export function getAvailableFilters(): FilterOptions {
-  return filterOptions
+  return {
+    sectors: sharedSectors.map((s) => ({ id: s.id, label: s.label, color: s.color })),
+    countries: sharedCountries
+      .filter((c) => allModels.some((m) => m.country === c.code))
+      .map((c) => ({ code: c.code as FilterOptions['countries'][number]['code'], name: c.name })),
+  }
 }
 
 export function getAllStudies(): Study[] {

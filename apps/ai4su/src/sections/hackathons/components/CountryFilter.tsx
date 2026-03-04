@@ -2,17 +2,10 @@
 
 import { ChevronDown } from 'lucide-react'
 import type { CountryFilterProps, CountryCode } from '@/../product/sections/hackathons/types'
+import { countries } from '../../../shared/lookups'
+import hackathonsDataRaw from '../../../../product/sections/hackathons/data.json'
 
-const countries: { code: CountryCode; name: string; flag: string }[] = [
-  { code: 'KE', name: 'Kenya', flag: '🇰🇪' },
-  { code: 'NG', name: 'Nigeria', flag: '🇳🇬' },
-  { code: 'GH', name: 'Ghana', flag: '🇬🇭' },
-  { code: 'SN', name: 'Senegal', flag: '🇸🇳' },
-  { code: 'RW', name: 'Rwanda', flag: '🇷🇼' },
-  { code: 'ZA', name: 'South Africa', flag: '🇿🇦' },
-  { code: 'EG', name: 'Egypt', flag: '🇪🇬' },
-  { code: 'MA', name: 'Morocco', flag: '🇲🇦' },
-]
+const ui = (hackathonsDataRaw as Record<string, unknown>).ui as Record<string, string>
 
 export function CountryFilter({ selectedCountry, onCountryChange }: CountryFilterProps) {
   return (
@@ -25,7 +18,7 @@ export function CountryFilter({ selectedCountry, onCountryChange }: CountryFilte
                    focus:outline-none focus:ring-2 focus:ring-brand-primary focus:border-transparent
                    cursor-pointer hover:border-brand-primary transition-colors"
       >
-        <option value="">All Countries</option>
+        <option value="">{ui.allCountries}</option>
         {countries.map((country) => (
           <option key={country.code} value={country.code}>
             {country.flag} {country.name}

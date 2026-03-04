@@ -3,17 +3,7 @@
 import { useState, useEffect } from 'react'
 import { ChevronLeft, ChevronRight, Quote, User } from 'lucide-react'
 import type { TestimonialCarouselProps } from '@/../product/sections/ecosystem/types'
-
-const countryFlags: Record<string, string> = {
-  KE: '🇰🇪',
-  NG: '🇳🇬',
-  GH: '🇬🇭',
-  SN: '🇸🇳',
-  RW: '🇷🇼',
-  ZA: '🇿🇦',
-  EG: '🇪🇬',
-  MA: '🇲🇦',
-}
+import { countryFlags } from '../../../shared/lookups'
 
 export function TestimonialCarousel({
   testimonials,

@@ -1,5 +1,9 @@
 /** Shared HTML layout and utilities for server-rendered SEO pages. */
 
+import siteConfig from '../../product/site.json'
+import countriesData from '../../product/shared/countries.json'
+import sectorsData from '../../product/shared/sectors.json'
+
 export interface SEOPageOptions {
   title: string
   description: string
@@ -45,8 +49,8 @@ export function seoPage(opts: SEOPageOptions): string {
 <meta property="og:description" content="${escapeAttr(description)}">
 <meta property="og:type" content="${escapeAttr(ogType)}">
 <meta property="og:url" content="${escapeAttr(canonicalUrl)}">
-<meta property="og:site_name" content="AI4Startups">
-<meta name="theme-color" content="#003366">
+<meta property="og:site_name" content="${escapeAttr(siteConfig.name)}">
+<meta name="theme-color" content="${escapeAttr(siteConfig.themeColor)}">
 <link rel="alternate" type="application/json" href="${escapeAttr(agentManifestUrl)}" title="Agent Capabilities">
 ${jsonLdBlocks}
 <style>${INLINE_CSS}</style>
@@ -76,24 +80,12 @@ function escapeAttr(s: string): string {
   return s.replace(/&/g, '&amp;').replace(/"/g, '&quot;')
 }
 
-/** Map country codes to display names. */
-export const COUNTRY_NAMES: Record<string, string> = {
-  KE: 'Kenya',
-  NG: 'Nigeria',
-  GH: 'Ghana',
-  SN: 'Senegal',
-  RW: 'Rwanda',
-  ZA: 'South Africa',
-  EG: 'Egypt',
-  MA: 'Morocco',
-}
+/** Map country codes to display names (derived from shared JSON). */
+export const COUNTRY_NAMES: Record<string, string> = Object.fromEntries(
+  (countriesData as Array<{ code: string; name: string }>).map((c) => [c.code, c.name])
+)
 
-/** Map sector slugs to display labels. */
-export const SECTOR_LABELS: Record<string, string> = {
-  'crop-science': 'Crop Science',
-  'livestock': 'Livestock',
-  'precision-farming': 'Precision Farming',
-  'agri-finance': 'Agri-Finance',
-  'supply-chain': 'Supply Chain',
-  'climate-resilience': 'Climate Resilience',
-}
+/** Map sector slugs to display labels (derived from shared JSON). */
+export const SECTOR_LABELS: Record<string, string> = Object.fromEntries(
+  (sectorsData as Array<{ id: string; label: string }>).map((s) => [s.id, s.label])
+)

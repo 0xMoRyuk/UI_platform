@@ -1,5 +1,8 @@
 import { ArrowRight, Calendar, Globe, Users } from 'lucide-react'
 import type { SectionPreviewsProps, SectionPreview } from '@/../product/sections/home/types'
+import homeDataRaw from '../../../../product/sections/home/data.json'
+
+const ui = (homeDataRaw as Record<string, unknown>).ui as Record<string, string>
 
 const sectionIcons: Record<string, typeof Calendar> = {
   Hackathons: Calendar,
@@ -91,7 +94,7 @@ function PreviewCard({ preview, index, onClick }: PreviewCardProps) {
             : 'text-brand-primary dark:text-brand-accent'
           }
         `}>
-          <span>Explore</span>
+          <span>{ui.explore}</span>
           <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
         </div>
       </div>
@@ -115,10 +118,10 @@ export function SectionPreviews({ previews, onSectionClick }: SectionPreviewsPro
         {/* Section header */}
         <div className="text-center mb-12">
           <h2 className="text-3xl sm:text-4xl font-bold text-brand-primary dark:text-white mb-4 font-[Barlow]">
-            Discover More
+            {ui.discoverMore}
           </h2>
           <p className="text-lg text-stone-600 dark:text-stone-400 max-w-2xl mx-auto">
-            Explore hackathons, ecosystem activities, and the partners making AI4Startups possible.
+            {ui.discoverMoreSubtitle}
           </p>
         </div>
 

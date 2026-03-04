@@ -1,17 +1,10 @@
 import { Calendar, Users, Brain, ArrowRight } from 'lucide-react'
 import { Badge } from '@ui-platform/ui/components/badge'
 import type { HackathonCardProps } from '@/../product/sections/hackathons/types'
+import { countryFlags } from '../../../shared/lookups'
+import hackathonsDataRaw from '../../../../product/sections/hackathons/data.json'
 
-const countryFlags: Record<string, string> = {
-  KE: '🇰🇪',
-  NG: '🇳🇬',
-  GH: '🇬🇭',
-  SN: '🇸🇳',
-  RW: '🇷🇼',
-  ZA: '🇿🇦',
-  EG: '🇪🇬',
-  MA: '🇲🇦',
-}
+const ui = (hackathonsDataRaw as Record<string, unknown>).ui as Record<string, string>
 
 export function HackathonCard({ hackathon, onClick }: HackathonCardProps) {
   const formatDateRange = (start: string, end: string) => {
@@ -50,7 +43,7 @@ export function HackathonCard({ hackathon, onClick }: HackathonCardProps) {
         <Badge className="absolute top-4 right-4 px-3 py-1.5 bg-brand-accent text-brand-accent-foreground gap-1.5">
           <Brain className="w-3.5 h-3.5" />
           <span className="text-xs font-bold">
-            {hackathon.modelsProduced} models
+            {hackathon.modelsProduced} {ui.modelsSuffix}
           </span>
         </Badge>
 
@@ -82,13 +75,13 @@ export function HackathonCard({ hackathon, onClick }: HackathonCardProps) {
           </div>
           <div className="flex items-center gap-1.5">
             <Users className="w-3.5 h-3.5" />
-            <span>{hackathon.participantCount} participants</span>
+            <span>{hackathon.participantCount} {ui.participantsSuffix}</span>
           </div>
         </div>
 
         {/* CTA */}
         <div className="flex items-center gap-2 text-sm font-medium text-brand-primary dark:text-brand-secondary group-hover:text-brand-accent transition-colors">
-          <span>View Details</span>
+          <span>{ui.viewDetails}</span>
           <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
         </div>
       </div>

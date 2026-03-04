@@ -2,6 +2,9 @@ import { ExternalLink, CheckCircle, Building2 } from 'lucide-react'
 import { Button } from '@ui-platform/ui/components/button'
 import { Avatar, AvatarFallback } from '@ui-platform/ui/components/avatar'
 import type { LeadPartnerCardProps } from '@/../product/sections/partners/types'
+import partnersDataRaw from '../../../../product/sections/partners/data.json'
+
+const ui = (partnersDataRaw as Record<string, unknown>).ui as Record<string, string>
 
 export function LeadPartnerCard({ partner, onClick }: LeadPartnerCardProps) {
   return (
@@ -35,7 +38,7 @@ export function LeadPartnerCard({ partner, onClick }: LeadPartnerCardProps) {
         {/* Contributions */}
         <div className="mb-6">
           <h4 className="text-sm font-semibold text-brand-primary dark:text-brand-secondary uppercase tracking-wide mb-3">
-            Key Contributions
+            {ui.keyContributions}
           </h4>
           <ul className="space-y-2">
             {partner.contributions.map((contribution, index) => (
@@ -53,7 +56,7 @@ export function LeadPartnerCard({ partner, onClick }: LeadPartnerCardProps) {
           className="gap-2 px-6 py-3 h-auto bg-brand-primary text-brand-primary-foreground font-semibold rounded-lg
                    hover:bg-brand-primary-dark"
         >
-          Visit Website
+          {ui.visitWebsite}
           <ExternalLink className="w-4 h-4" />
         </Button>
       </div>

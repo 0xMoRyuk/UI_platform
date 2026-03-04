@@ -3,6 +3,9 @@
 import { useState } from 'react'
 import { ActivityCard } from './ActivityCard'
 import type { ActivityListProps } from '@/../product/sections/ecosystem/types'
+import ecosystemDataRaw from '../../../../product/sections/ecosystem/data.json'
+
+const ui = (ecosystemDataRaw as Record<string, unknown>).ui as Record<string, string>
 
 export function ActivityList({
   activities,
@@ -25,7 +28,7 @@ export function ActivityList({
     return (
       <div className="text-center py-12">
         <p className="text-stone-500 dark:text-stone-400">
-          No activities match the selected filters.
+          {ui.noActivities}
         </p>
       </div>
     )

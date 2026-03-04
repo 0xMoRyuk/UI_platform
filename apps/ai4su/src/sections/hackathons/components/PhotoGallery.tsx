@@ -1,6 +1,9 @@
 import { Camera, Image as ImageIcon } from 'lucide-react'
 import { Separator } from '@ui-platform/ui/components/separator'
 import type { PhotoGalleryProps } from '@/../product/sections/hackathons/types'
+import hackathonsDataRaw from '../../../../product/sections/hackathons/data.json'
+
+const ui = (hackathonsDataRaw as Record<string, unknown>).ui as Record<string, string>
 
 export function PhotoGallery({ photos, onPhotoClick }: PhotoGalleryProps) {
   return (
@@ -12,7 +15,7 @@ export function PhotoGallery({ photos, onPhotoClick }: PhotoGalleryProps) {
           <Camera className="w-5 h-5 text-brand-primary dark:text-brand-secondary" />
         </div>
         <h2 className="text-2xl font-bold text-brand-primary dark:text-white font-[Barlow]">
-          Photo Gallery
+          {ui.photoGallery}
         </h2>
         <span className="text-sm text-stone-500 dark:text-stone-400">
           {photos.length} photos
@@ -45,7 +48,7 @@ export function PhotoGallery({ photos, onPhotoClick }: PhotoGalleryProps) {
             {/* Featured badge */}
             {photo.featured && (
               <div className="absolute top-2 left-2 px-2 py-1 bg-brand-accent rounded text-xs font-bold text-brand-accent-foreground">
-                Featured
+                {ui.featured}
               </div>
             )}
           </button>

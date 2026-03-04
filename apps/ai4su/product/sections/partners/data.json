@@ -161,6 +161,18 @@
       "Cross-border data frameworks"
     ]
   },
+  "ui": {
+    "tierFunders": "Tier 1 - Funders",
+    "tierImplementing": "Tier 2 - Implementing Partners",
+    "tierServiceProviders": "Tier 3 - Service Providers",
+    "broaderInitiative": "Broader Initiative",
+    "keyContributions": "Key Contributions",
+    "contributions": "Contributions",
+    "visitWebsite": "Visit Website",
+    "learnMore": "Learn More",
+    "followUs": "Follow us:",
+    "primary": "Primary"
+  },
   "socialLinks": {
     "hashtags": ["#AI4Startups", "#D4DataGOV", "#DataGovernanceAfrica", "#TeamEurope", "#GlobalGateway"],
     "twitter": "https://twitter.com/Digital_Africa",

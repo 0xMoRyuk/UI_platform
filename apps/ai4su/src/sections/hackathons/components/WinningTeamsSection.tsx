@@ -2,6 +2,16 @@ import { Trophy, Medal, Award, ExternalLink } from 'lucide-react'
 import { Separator } from '@ui-platform/ui/components/separator'
 import { Button } from '@ui-platform/ui/components/button'
 import type { WinningTeamsSectionProps, WinningTeam } from '@/../product/sections/hackathons/types'
+import hackathonsDataRaw from '../../../../product/sections/hackathons/data.json'
+
+const hackathonsUi = (hackathonsDataRaw as Record<string, unknown>).ui as {
+  ranks: Record<string, string>
+  team: string
+  project: string
+  viewModel: string
+  winningTeams: string
+  [key: string]: unknown
+}
 
 const rankConfig = {
   1: {
@@ -9,21 +19,21 @@ const rankConfig = {
     bg: 'bg-gradient-to-br from-brand-accent to-[#FFB800]',
     text: 'text-brand-accent-foreground',
     border: 'border-brand-accent',
-    label: '1st Place',
+    label: hackathonsUi.ranks['1'],
   },
   2: {
     icon: Medal,
     bg: 'bg-gradient-to-br from-stone-300 to-stone-400',
     text: 'text-stone-800',
     border: 'border-stone-300',
-    label: '2nd Place',
+    label: hackathonsUi.ranks['2'],
   },
   3: {
     icon: Award,
     bg: 'bg-gradient-to-br from-amber-600 to-amber-700',
     text: 'text-white',
     border: 'border-amber-600',
-    label: '3rd Place',
+    label: hackathonsUi.ranks['3'],
   },
 }
 
@@ -48,14 +58,14 @@ function TeamCard({ team, onModelClick }: TeamCardProps) {
       {/* Content */}
       <div className="p-5">
         <div className="mb-3">
-          <p className="text-sm text-stone-500 dark:text-stone-400 mb-1">Team</p>
+          <p className="text-sm text-stone-500 dark:text-stone-400 mb-1">{hackathonsUi.team}</p>
           <h3 className="text-lg font-bold text-brand-primary dark:text-white font-[Barlow]">
             {team.teamName}
           </h3>
         </div>
 
         <div className="mb-4">
-          <p className="text-sm text-stone-500 dark:text-stone-400 mb-1">Project</p>
+          <p className="text-sm text-stone-500 dark:text-stone-400 mb-1">{hackathonsUi.project}</p>
           <h4 className="text-base font-semibold text-stone-800 dark:text-stone-200">
             {team.projectName}
           </h4>
@@ -71,7 +81,7 @@ function TeamCard({ team, onModelClick }: TeamCardProps) {
             onClick={() => onModelClick?.(team.modelId!)}
             className="gap-2 p-0 h-auto text-sm font-medium text-brand-primary dark:text-brand-secondary hover:text-brand-accent"
           >
-            View AI Model
+            {hackathonsUi.viewModel}
             <ExternalLink className="w-3.5 h-3.5" />
           </Button>
         )}
@@ -93,7 +103,7 @@ export function WinningTeamsSection({ teams, onModelClick }: WinningTeamsSection
           <Trophy className="w-5 h-5 text-brand-accent" />
         </div>
         <h2 className="text-2xl font-bold text-brand-primary dark:text-white font-[Barlow]">
-          Winning Teams
+          {hackathonsUi.winningTeams}
         </h2>
       </div>
 

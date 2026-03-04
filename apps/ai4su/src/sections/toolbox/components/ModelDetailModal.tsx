@@ -5,37 +5,10 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } f
 import { Button } from '@ui-platform/ui/components/button'
 import { Separator } from '@ui-platform/ui/components/separator'
 import type { ModelDetailModalProps } from '@/../product/sections/toolbox/types'
+import { sectorColors, countryNames, countryFlags } from '../../../shared/lookups'
+import toolboxDataRaw from '../../../../product/sections/toolbox/data.json'
 
-const sectorColors: Record<string, { bg: string; text: string }> = {
-  'crop-science': { bg: 'bg-green-100 dark:bg-green-900/30', text: 'text-green-700 dark:text-green-300' },
-  'livestock': { bg: 'bg-lime-100 dark:bg-lime-900/30', text: 'text-lime-700 dark:text-lime-300' },
-  'precision-farming': { bg: 'bg-blue-100 dark:bg-blue-900/30', text: 'text-blue-700 dark:text-blue-300' },
-  'agri-finance': { bg: 'bg-amber-100 dark:bg-amber-900/30', text: 'text-amber-700 dark:text-amber-300' },
-  'supply-chain': { bg: 'bg-orange-100 dark:bg-orange-900/30', text: 'text-orange-700 dark:text-orange-300' },
-  'climate-resilience': { bg: 'bg-teal-100 dark:bg-teal-900/30', text: 'text-teal-700 dark:text-teal-300' },
-}
-
-const countryNames: Record<string, string> = {
-  KE: 'Kenya',
-  NG: 'Nigeria',
-  GH: 'Ghana',
-  SN: 'Senegal',
-  RW: 'Rwanda',
-  ZA: 'South Africa',
-  EG: 'Egypt',
-  MA: 'Morocco',
-}
-
-const countryFlags: Record<string, string> = {
-  KE: '🇰🇪',
-  NG: '🇳🇬',
-  GH: '🇬🇭',
-  SN: '🇸🇳',
-  RW: '🇷🇼',
-  ZA: '🇿🇦',
-  EG: '🇪🇬',
-  MA: '🇲🇦',
-}
+const ui = (toolboxDataRaw as Record<string, unknown>).ui as Record<string, string>
 
 export function ModelDetailModal({ model, isOpen, onClose, onGitHubClick }: ModelDetailModalProps) {
   if (!model) return null
@@ -60,7 +33,7 @@ export function ModelDetailModal({ model, isOpen, onClose, onGitHubClick }: Mode
           </Button>
 
           <div className="flex items-center gap-3 mb-3">
-            <span className={`px-2.5 py-1 rounded-full text-xs font-medium ${colors.bg} ${colors.text}`}>
+            <span className="px-2.5 py-1 rounded-full text-xs font-medium" style={{ backgroundColor: colors.bg, color: colors.text }}>
               {model.sector.charAt(0).toUpperCase() + model.sector.slice(1)}
             </span>
             <span className="flex items-center gap-1.5 text-sm text-white/80">
@@ -83,7 +56,7 @@ export function ModelDetailModal({ model, isOpen, onClose, onGitHubClick }: Mode
           <div className="mb-6">
             <div className="flex items-center gap-2 text-sm font-semibold text-brand-primary dark:text-brand-secondary mb-2">
               <FileText className="w-4 h-4" />
-              <span>Description</span>
+              <span>{ui.description}</span>
             </div>
             <p className="text-stone-700 dark:text-stone-300 leading-relaxed">
               {model.fullDescription}
@@ -94,7 +67,7 @@ export function ModelDetailModal({ model, isOpen, onClose, onGitHubClick }: Mode
           <div className="mb-6">
             <div className="flex items-center gap-2 text-sm font-semibold text-brand-primary dark:text-brand-secondary mb-2">
               <Target className="w-4 h-4" />
-              <span>Use Case</span>
+              <span>{ui.useCase}</span>
             </div>
             <p className="text-stone-700 dark:text-stone-300 leading-relaxed">
               {model.useCase}
@@ -105,7 +78,7 @@ export function ModelDetailModal({ model, isOpen, onClose, onGitHubClick }: Mode
           <div className="mb-6">
             <div className="flex items-center gap-2 text-sm font-semibold text-brand-primary dark:text-brand-secondary mb-2">
               <Cpu className="w-4 h-4" />
-              <span>Technical Requirements</span>
+              <span>{ui.technicalRequirements}</span>
             </div>
             <p className="text-stone-700 dark:text-stone-300 font-mono text-sm bg-stone-50 dark:bg-stone-800 rounded-lg px-4 py-3">
               {model.technicalRequirements}
@@ -117,13 +90,13 @@ export function ModelDetailModal({ model, isOpen, onClose, onGitHubClick }: Mode
             <div className="mb-6">
               <div className="flex items-center gap-2 text-sm font-semibold text-brand-primary dark:text-brand-secondary mb-2">
                 <LinkIcon className="w-4 h-4" />
-                <span>Related Hackathon</span>
+                <span>{ui.relatedHackathon}</span>
               </div>
               <a
                 href={`/hackathons/${model.hackathonId}`}
                 className="inline-flex items-center gap-2 text-brand-primary dark:text-brand-secondary hover:underline"
               >
-                View hackathon details
+                {ui.viewHackathonDetails}
                 <ExternalLink className="w-3 h-3" />
               </a>
             </div>
@@ -139,7 +112,7 @@ export function ModelDetailModal({ model, isOpen, onClose, onGitHubClick }: Mode
                      hover:bg-brand-primary-dark"
           >
             <Github className="w-5 h-5" />
-            <span>View on GitHub</span>
+            <span>{ui.viewOnGithub}</span>
             <ExternalLink className="w-4 h-4" />
           </Button>
         </div>

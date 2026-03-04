@@ -4,6 +4,9 @@ import { useState, useMemo } from 'react'
 import { Trophy } from 'lucide-react'
 import { Button } from '@ui-platform/ui/components/button'
 import type { HackathonsPageProps, CountryCode } from '@/../product/sections/hackathons/types'
+import hackathonsDataRaw from '../../../../product/sections/hackathons/data.json'
+
+const ui = (hackathonsDataRaw as Record<string, unknown>).ui as Record<string, string>
 import { MethodologySection } from './MethodologySection'
 import { CountryFilter } from './CountryFilter'
 import { HackathonGrid } from './HackathonGrid'
@@ -92,7 +95,7 @@ export function Hackathons({
               </h2>
               <p className="text-stone-600 dark:text-stone-400">
                 {pageContent.filterResultTemplate.replace('{count}', String(filteredHackathons.length))}{filteredHackathons.length !== 1 ? 's' : ''}
-                {selectedCountry && ' in selected country'}
+                {selectedCountry && ` ${ui.inSelectedCountry}`}
               </p>
             </div>
             <CountryFilter

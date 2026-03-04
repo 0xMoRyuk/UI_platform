@@ -3,6 +3,9 @@ import { Badge } from '@ui-platform/ui/components/badge'
 import { Button } from '@ui-platform/ui/components/button'
 import { Avatar, AvatarFallback } from '@ui-platform/ui/components/avatar'
 import type { PartnerCardProps } from '@/../product/sections/partners/types'
+import partnersDataRaw from '../../../../product/sections/partners/data.json'
+
+const ui = (partnersDataRaw as Record<string, unknown>).ui as Record<string, string>
 
 export function PartnerCard({ partner, onClick }: PartnerCardProps) {
   return (
@@ -33,7 +36,7 @@ export function PartnerCard({ partner, onClick }: PartnerCardProps) {
       {/* Contributions */}
       <div className="mb-4">
         <h4 className="text-xs font-semibold text-stone-500 dark:text-stone-500 uppercase tracking-wide mb-2">
-          Contributions
+          {ui.contributions}
         </h4>
         <ul className="space-y-1">
           {partner.contributions.slice(0, 3).map((contribution, index) => (
@@ -51,7 +54,7 @@ export function PartnerCard({ partner, onClick }: PartnerCardProps) {
         onClick={onClick}
         className="gap-2 p-0 h-auto text-sm font-medium text-brand-primary dark:text-brand-secondary hover:text-brand-accent"
       >
-        Visit Website
+        {ui.visitWebsite}
         <ExternalLink className="w-3.5 h-3.5" />
       </Button>
     </div>

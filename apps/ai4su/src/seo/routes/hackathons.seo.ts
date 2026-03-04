@@ -1,6 +1,7 @@
 import { Hono } from 'hono'
 import { searchHackathons } from '../../domain/hackathons'
 import { seoPage, escapeHtml, COUNTRY_NAMES } from '../html'
+import siteConfig from '../../../product/site.json'
 
 export const hackathonsSeo = new Hono()
 
@@ -26,7 +27,7 @@ ${h.outcomes.length > 0 ? `<p><strong>Outcomes:</strong> ${h.outcomes.map((o) =>
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
-    name: 'AI4Startups Hackathon Series',
+    name: `${siteConfig.name} Hackathon Series`,
     numberOfItems: total,
     itemListElement: hackathons.map((h, i) => ({
       '@type': 'ListItem',
@@ -46,13 +47,13 @@ ${h.outcomes.length > 0 ? `<p><strong>Outcomes:</strong> ${h.outcomes.map((o) =>
             addressCountry: h.location.countryCode,
           },
         },
-        organizer: { '@type': 'Organization', name: 'AI4Startups' },
+        organizer: { '@type': 'Organization', name: siteConfig.name },
       },
     })),
   }
 
   const html = seoPage({
-    title: `AI Hackathons Across Africa — AI4Startups`,
+    title: `AI Hackathons Across Africa${siteConfig.seo.titleSuffix}`,
     description: `${total} hackathons, ${totalParticipants} participants, ${totalModels} AI models produced across Africa. Building open-source AI solutions for agriculture and sustainability.`,
     canonicalPath: '/hackathons',
     jsonLd,

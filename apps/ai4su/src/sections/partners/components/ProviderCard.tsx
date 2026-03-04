@@ -3,6 +3,9 @@ import { Button } from '@ui-platform/ui/components/button'
 import { Avatar, AvatarFallback } from '@ui-platform/ui/components/avatar'
 import { Badge } from '@ui-platform/ui/components/badge'
 import type { ServiceProvider } from '@/../product/sections/partners/types'
+import partnersDataRaw from '../../../../product/sections/partners/data.json'
+
+const ui = (partnersDataRaw as Record<string, unknown>).ui as Record<string, string>
 
 interface ProviderCardProps {
   provider: ServiceProvider
@@ -48,7 +51,7 @@ export function ProviderCard({ provider, onClick }: ProviderCardProps) {
         onClick={onClick}
         className="gap-1.5 p-0 h-auto text-sm font-medium text-brand-primary dark:text-brand-secondary hover:text-brand-accent"
       >
-        Learn More
+        {ui.learnMore}
         <ExternalLink className="w-3.5 h-3.5" />
       </Button>
     </div>

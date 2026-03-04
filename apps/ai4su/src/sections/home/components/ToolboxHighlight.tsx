@@ -3,15 +3,7 @@ import { Separator } from '@ui-platform/ui/components/separator'
 import { Button } from '@ui-platform/ui/components/button'
 import { Badge } from '@ui-platform/ui/components/badge'
 import type { ToolboxHighlightProps, FeaturedModel } from '@/../product/sections/home/types'
-
-const sectorColors: Record<string, { bg: string; text: string; border: string }> = {
-  'Crop Science': { bg: 'bg-green-100 dark:bg-green-900/30', text: 'text-green-700 dark:text-green-300', border: 'border-green-200 dark:border-green-800' },
-  Livestock: { bg: 'bg-lime-100 dark:bg-lime-900/30', text: 'text-lime-700 dark:text-lime-300', border: 'border-lime-200 dark:border-lime-800' },
-  'Precision Farming': { bg: 'bg-blue-100 dark:bg-blue-900/30', text: 'text-blue-700 dark:text-blue-300', border: 'border-blue-200 dark:border-blue-800' },
-  'Agri-Finance': { bg: 'bg-amber-100 dark:bg-amber-900/30', text: 'text-amber-700 dark:text-amber-300', border: 'border-amber-200 dark:border-amber-800' },
-  'Supply Chain': { bg: 'bg-orange-100 dark:bg-orange-900/30', text: 'text-orange-700 dark:text-orange-300', border: 'border-orange-200 dark:border-orange-800' },
-  'Climate Resilience': { bg: 'bg-teal-100 dark:bg-teal-900/30', text: 'text-teal-700 dark:text-teal-300', border: 'border-teal-200 dark:border-teal-800' },
-}
+import { sectorColorsByLabel } from '../../../shared/lookups'
 
 interface ModelCardProps {
   model: FeaturedModel
@@ -20,7 +12,7 @@ interface ModelCardProps {
 }
 
 function ModelCard({ model, githubLabel, onClick }: ModelCardProps) {
-  const colors = sectorColors[model.sector] || sectorColors['Crop Science']
+  const colors = sectorColorsByLabel[model.sector] || sectorColorsByLabel['Crop Science']
 
   return (
     <button
@@ -31,7 +23,7 @@ function ModelCard({ model, githubLabel, onClick }: ModelCardProps) {
                  hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
     >
       {/* Sector badge */}
-      <Badge className={`mb-4 ${colors.bg} ${colors.text} border ${colors.border}`}>
+      <Badge className="mb-4 border" style={{ backgroundColor: colors.bg, color: colors.text, borderColor: colors.border }}>
         {model.sector}
       </Badge>
 

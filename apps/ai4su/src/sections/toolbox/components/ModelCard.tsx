@@ -1,17 +1,10 @@
 import { Github, ExternalLink } from 'lucide-react'
 import { Badge } from '@ui-platform/ui/components/badge'
 import type { ModelCardProps } from '@/../product/sections/toolbox/types'
+import { countryFlags } from '../../../shared/lookups'
+import toolboxDataRaw from '../../../../product/sections/toolbox/data.json'
 
-const countryFlags: Record<string, string> = {
-  KE: '🇰🇪',
-  NG: '🇳🇬',
-  GH: '🇬🇭',
-  SN: '🇸🇳',
-  RW: '🇷🇼',
-  ZA: '🇿🇦',
-  EG: '🇪🇬',
-  MA: '🇲🇦',
-}
+const ui = (toolboxDataRaw as Record<string, unknown>).ui as Record<string, string>
 
 export function ModelCard({ model, onClick }: ModelCardProps) {
   return (
@@ -45,7 +38,7 @@ export function ModelCard({ model, onClick }: ModelCardProps) {
       {/* GitHub link indicator */}
       <div className="flex items-center gap-2 text-sm text-stone-500 dark:text-stone-500 group-hover:text-brand-primary dark:group-hover:text-brand-secondary transition-colors">
         <Github className="w-4 h-4" />
-        <span>View on GitHub</span>
+        <span>{ui.viewOnGithub}</span>
         <ExternalLink className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
       </div>
 

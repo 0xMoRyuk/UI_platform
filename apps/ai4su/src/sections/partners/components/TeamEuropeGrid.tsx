@@ -1,5 +1,8 @@
 import { ExternalLink, Flag } from 'lucide-react'
 import type { TeamEuropeGridProps } from '@/../product/sections/partners/types'
+import partnersDataRaw from '../../../../product/sections/partners/data.json'
+
+const ui = (partnersDataRaw as Record<string, unknown>).ui as Record<string, string>
 
 export function TeamEuropeGrid({ teamEurope, onMemberClick }: TeamEuropeGridProps) {
   return (
@@ -35,7 +38,7 @@ export function TeamEuropeGrid({ teamEurope, onMemberClick }: TeamEuropeGridProp
 
             {member.isPrimary && (
               <span className="absolute top-2 right-2 px-2 py-0.5 bg-brand-accent rounded text-[10px] font-bold text-brand-accent-foreground">
-                Primary
+                {ui.primary}
               </span>
             )}
 

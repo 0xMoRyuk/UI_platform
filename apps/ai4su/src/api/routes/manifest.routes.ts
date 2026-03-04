@@ -1,12 +1,18 @@
 import { Hono } from 'hono'
+import siteConfig from '../../../product/site.json'
+import countriesData from '../../../product/shared/countries.json'
+import sectorsData from '../../../product/shared/sectors.json'
 
 export const manifestRoutes = new Hono()
 
+const countryCodes = (countriesData as Array<{ code: string }>).map((c) => c.code).join(', ')
+const sectorIds = (sectorsData as Array<{ id: string }>).map((s) => s.id).join(', ')
+
 const manifest = {
   schema_version: '1.0',
-  name: 'AI4SU — AI for Scaled-Up Impact',
-  description: 'Open-source AI models, hackathons, studies, and ecosystem data from the AI4SU programme across Africa.',
-  url: 'https://ai4su.app',
+  name: `${siteConfig.shortName} — AI for Scaled-Up Impact`,
+  description: `${siteConfig.og.description} from the ${siteConfig.shortName} programme across Africa.`,
+  url: siteConfig.url,
   capabilities: [
     // Models
     {
@@ -17,8 +23,8 @@ const manifest = {
       method: 'GET',
       parameters: {
         q: { type: 'string', description: 'Text search on name, description, sector' },
-        sector: { type: 'string', description: 'Filter by sub-category (crop-science, livestock, precision-farming, agri-finance, supply-chain, climate-resilience)' },
-        country: { type: 'string', description: 'Filter by country code (KE, NG, GH, SN, RW, ZA, EG, MA)' },
+        sector: { type: 'string', description: `Filter by sub-category (${sectorIds})` },
+        country: { type: 'string', description: `Filter by country code (${countryCodes})` },
         page: { type: 'integer', description: 'Page number (default: 1)' },
         limit: { type: 'integer', description: 'Items per page (default: 20, max: 100)' },
       },
@@ -45,7 +51,7 @@ const manifest = {
       endpoint: '/api/hackathons',
       method: 'GET',
       parameters: {
-        country: { type: 'string', description: 'Country code filter (KE, NG, GH, SN, RW, ZA, EG, MA)' },
+        country: { type: 'string', description: `Country code filter (${countryCodes})` },
         page: { type: 'integer', description: 'Page number (default: 1)' },
         limit: { type: 'integer', description: 'Items per page (default: 20)' },
       },

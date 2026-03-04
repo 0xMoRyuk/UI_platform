@@ -134,6 +134,11 @@
       { "value": "50+", "label": "Startups Using" }
     ]
   },
+  "ui": {
+    "discoverMore": "Discover More",
+    "discoverMoreSubtitle": "Explore hackathons, ecosystem activities, and the partners making AI4Startups possible.",
+    "explore": "Explore"
+  },
   "countries": [
     { "name": "Kenya", "code": "KE", "coordinates": [-1.286389, 36.817223] },
     { "name": "Nigeria", "code": "NG", "coordinates": [9.082, 8.6753] },

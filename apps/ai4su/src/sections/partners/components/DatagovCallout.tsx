@@ -1,6 +1,9 @@
 import { Globe, ArrowRight, CheckCircle } from 'lucide-react'
 import { Button } from '@ui-platform/ui/components/button'
 import type { DatagovCalloutProps } from '@/../product/sections/partners/types'
+import partnersDataRaw from '../../../../product/sections/partners/data.json'
+
+const ui = (partnersDataRaw as Record<string, unknown>).ui as Record<string, string>
 
 export function DatagovCallout({ datagov, onCtaClick }: DatagovCalloutProps) {
   return (
@@ -11,7 +14,7 @@ export function DatagovCallout({ datagov, onCtaClick }: DatagovCalloutProps) {
           <div className="flex-1 text-center lg:text-left">
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 rounded-full text-sm font-medium text-brand-accent mb-4">
               <Globe className="w-4 h-4" />
-              <span>Broader Initiative</span>
+              <span>{ui.broaderInitiative}</span>
             </div>
 
             <h2 className="text-3xl sm:text-4xl font-bold text-brand-primary-foreground font-[Barlow] mb-4">

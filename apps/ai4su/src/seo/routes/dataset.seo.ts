@@ -2,6 +2,7 @@ import { Hono } from 'hono'
 import { searchModels } from '../../domain/models'
 import { searchHackathons } from '../../domain/hackathons'
 import { seoPage, escapeHtml, COUNTRY_NAMES, SECTOR_LABELS } from '../html'
+import siteConfig from '../../../product/site.json'
 
 export const datasetSeo = new Hono()
 
@@ -42,8 +43,8 @@ datasetSeo.get('/s/datasets/agriculture-ai-africa', (c) => {
     license: 'https://opensource.org/licenses',
     creator: {
       '@type': 'Organization',
-      name: 'AI4Startups',
-      url: 'https://ai4su.app',
+      name: siteConfig.name,
+      url: siteConfig.url,
     },
     spatialCoverage: countries.map((code) => COUNTRY_NAMES[code] ?? code),
     keywords: [

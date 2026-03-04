@@ -342,6 +342,15 @@
     { "code": "EG", "name": "Egypt", "coordinates": [30.0444, 31.2357], "activityCount": 1 },
     { "code": "MA", "name": "Morocco", "coordinates": [34.0209, -6.8416], "activityCount": 1 }
   ],
+  "ui": {
+    "allActivities": "All Activities",
+    "noActivities": "No activities match the selected filters.",
+    "allFilter": "All",
+    "allCountries": "All Countries",
+    "highlights": "Highlights",
+    "photos": "Photos",
+    "resources": "Resources"
+  },
   "pageContent": {
     "title": "Ecosystem",
     "subtitle": "Building Africa's AI community",

@@ -1,0 +1,22 @@
+{
+  "name": "AI4Startups",
+  "shortName": "AI4SU",
+  "tagline": "Enabling African startups to build scalable, responsible AI solutions",
+  "url": "https://ai4su.app",
+  "themeColor": "#003366",
+  "og": {
+    "title": "AI4Startups - Empowering African Tech Innovation",
+    "description": "Open-source AI models, hackathons, and ecosystem support for African startups",
+    "type": "website"
+  },
+  "seo": {
+    "titleSuffix": " \u2014 AI4Startups"
+  },
+  "links": {
+    "agentManifest": "/.well-known/agent-capabilities.json",
+    "modelsApi": "/api/models",
+    "hackathonsApi": "/api/hackathons",
+    "sitemap": "/sitemap.xml",
+    "llmTxt": "/llm.txt"
+  }
+}
