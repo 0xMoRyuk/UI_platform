@@ -1,0 +1,35 @@
+{
+  "header": {
+    "logo": {
+      "text": "Jobs Board",
+      "icon": "briefcase"
+    },
+    "searchPlaceholder": "Search jobs, companies..."
+  },
+  "navigation": [
+    { "label": "Home", "href": "/" },
+    { "label": "Browse Jobs", "href": "/jobs" },
+    { "label": "Companies", "href": "/companies" }
+  ],
+  "footer": {
+    "tagline": "Connecting talent with opportunity across Africa's tech ecosystem.",
+    "columns": [
+      {
+        "title": "Platform",
+        "links": [
+          { "label": "Browse Jobs", "href": "/jobs" },
+          { "label": "Companies", "href": "/companies" },
+          { "label": "API", "href": "/api/jobs" }
+        ]
+      },
+      {
+        "title": "Resources",
+        "links": [
+          { "label": "Sitemap", "href": "/sitemap.xml" },
+          { "label": "Agent Manifest", "href": "/.well-known/agent-capabilities.json" }
+        ]
+      }
+    ],
+    "copyright": "Jobs Board"
+  }
+}

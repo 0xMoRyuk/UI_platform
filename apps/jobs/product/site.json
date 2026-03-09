@@ -1,0 +1,17 @@
+{
+  "name": "Jobs Board",
+  "shortName": "Jobs",
+  "tagline": "Tech careers across Africa's growing ecosystem",
+  "description": "Find opportunities across Africa's growing tech ecosystem — engineering, data science, product, and more.",
+  "themeColor": "#1c1917",
+  "links": {
+    "agentManifest": "/.well-known/agent-capabilities.json",
+    "jobsApi": "/api/jobs",
+    "companiesApi": "/api/companies"
+  },
+  "og": {
+    "title": "Jobs Board - Tech Careers in Africa",
+    "description": "Find opportunities across Africa's growing tech ecosystem",
+    "type": "website"
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "pageContent": {
+    "title": "Companies",
+    "subtitle": "Discover the companies shaping Africa's tech landscape",
+    "searchPlaceholder": "Search companies..."
+  },
+  "companies": [
+    {
+      "id": "paystack",
+      "name": "Paystack",
+      "tagline": "Payments infrastructure for Africa",
+      "description": "Paystack helps businesses in Africa get paid by anyone, anywhere in the world. Acquired by Stripe in 2020, Paystack processes millions of transactions across the continent.",
+      "sector": "Fintech",
+      "location": "Lagos, Nigeria",
+      "size": "200-500",
+      "founded": "2015",
+      "website": "https://paystack.com",
+      "openPositions": 12
+    },
+    {
+      "id": "instadeep",
+      "name": "InstaDeep",
+      "tagline": "AI-first technology company",
+      "description": "InstaDeep provides enterprise AI solutions using cutting-edge research in deep learning, reinforcement learning, and optimization. Acquired by BioNTech in 2023.",
+      "sector": "AI / ML",
+      "location": "Cape Town, South Africa",
+      "size": "200-500",
+      "founded": "2014",
+      "website": "https://instadeep.com",
+      "openPositions": 8
+    },
+    {
+      "id": "flutterwave",
+      "name": "Flutterwave",
+      "tagline": "Endless possibilities for every business",
+      "description": "Flutterwave provides a payment infrastructure that allows businesses to make and accept payments from customers anywhere in the world.",
+      "sector": "Fintech",
+      "location": "Nairobi, Kenya",
+      "size": "500-1000",
+      "founded": "2016",
+      "website": "https://flutterwave.com",
+      "openPositions": 15
+    },
+    {
+      "id": "andela",
+      "name": "Andela",
+      "tagline": "Brilliance is evenly distributed",
+      "description": "Andela connects companies with vetted remote engineers from across Africa and around the world. Building distributed engineering teams since 2014.",
+      "sector": "Talent Platform",
+      "location": "Remote",
+      "size": "500-1000",
+      "founded": "2014",
+      "website": "https://andela.com",
+      "openPositions": 20
+    },
+    {
+      "id": "safaricom",
+      "name": "Safaricom",
+      "tagline": "Transforming lives through technology",
+      "description": "East Africa's largest telecommunications company and home of M-Pesa, the world's most successful mobile money platform serving over 50 million users.",
+      "sector": "Telecom",
+      "location": "Nairobi, Kenya",
+      "size": "5000+",
+      "founded": "1997",
+      "website": "https://safaricom.co.ke",
+      "openPositions": 25
+    },
+    {
+      "id": "chipper",
+      "name": "Chipper Cash",
+      "tagline": "Free cross-border payments in Africa",
+      "description": "Chipper Cash enables free peer-to-peer cross-border payments across Africa, serving millions of users with instant money transfers.",
+      "sector": "Fintech",
+      "location": "San Francisco / Africa",
+      "size": "200-500",
+      "founded": "2018",
+      "website": "https://chippercash.com",
+      "openPositions": 6
+    }
+  ]
+}

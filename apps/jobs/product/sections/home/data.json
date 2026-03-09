@@ -1,0 +1,49 @@
+{
+  "hero": {
+    "badge": "Now Hiring",
+    "title": "Find Your Next",
+    "heading": "Tech Career in Africa",
+    "subtitle": "Browse hundreds of opportunities from top companies building across the continent.",
+    "ctaText": "Browse Jobs",
+    "ctaLink": "/jobs",
+    "secondaryCtaText": "For Employers",
+    "secondaryCtaLink": "/companies",
+    "stats": [
+      { "value": "250+", "label": "Open Positions" },
+      { "value": "40+", "label": "Companies" },
+      { "value": "12", "label": "Countries" }
+    ]
+  },
+  "stats": [
+    { "id": "jobs", "value": "250+", "label": "Open Positions", "link": "/jobs" },
+    { "id": "companies", "value": "40+", "label": "Companies Hiring", "link": "/companies" },
+    { "id": "countries", "value": "12", "label": "Countries", "link": "/jobs" },
+    { "id": "remote", "value": "60%", "label": "Remote Friendly", "link": "/jobs?type=remote" }
+  ],
+  "sectionPreviews": [
+    {
+      "id": "jobs",
+      "title": "Latest Jobs",
+      "description": "Engineering, data science, product, and design roles from top African tech companies.",
+      "link": "/jobs",
+      "ctaText": "Browse All Jobs",
+      "icon": "briefcase"
+    },
+    {
+      "id": "companies",
+      "title": "Top Companies",
+      "description": "Discover the companies shaping Africa's tech landscape and their open positions.",
+      "link": "/companies",
+      "ctaText": "View Companies",
+      "icon": "building"
+    },
+    {
+      "id": "remote",
+      "title": "Remote Positions",
+      "description": "Work from anywhere — remote-friendly roles across the continent and beyond.",
+      "link": "/jobs?type=remote",
+      "ctaText": "Find Remote Jobs",
+      "icon": "globe"
+    }
+  ]
+}

@@ -1,0 +1,255 @@
+{
+  "pageContent": {
+    "title": "Browse Jobs",
+    "subtitle": "Find your next opportunity in Africa's tech ecosystem",
+    "emptyState": "No jobs match your search criteria. Try adjusting your filters.",
+    "searchPlaceholder": "Search by title, company, or keyword..."
+  },
+  "filters": {
+    "types": ["Full-time", "Part-time", "Contract", "Internship", "Remote"],
+    "sectors": ["Engineering", "Data Science", "Product", "Design", "Marketing", "Operations", "Finance"],
+    "locations": ["Nairobi", "Lagos", "Cape Town", "Accra", "Cairo", "Remote"]
+  },
+  "jobs": [
+    {
+      "id": "senior-backend-engineer-paystack",
+      "slug": "senior-backend-engineer-paystack",
+      "title": "Senior Backend Engineer",
+      "company": {
+        "id": "paystack",
+        "name": "Paystack",
+        "logo": null
+      },
+      "location": "Lagos, Nigeria",
+      "type": "Full-time",
+      "sector": "Engineering",
+      "salary": {
+        "min": 80000,
+        "max": 120000,
+        "currency": "USD",
+        "period": "year"
+      },
+      "description": "Join Paystack's core payments team to build and scale Africa's leading payment infrastructure. You'll work on high-throughput transaction processing systems serving millions of businesses.",
+      "requirements": [
+        "5+ years backend development experience",
+        "Strong proficiency in Go or Python",
+        "Experience with distributed systems and microservices",
+        "Understanding of payment systems and financial regulations",
+        "Experience with PostgreSQL and Redis at scale"
+      ],
+      "tags": ["Go", "Python", "PostgreSQL", "Payments", "Distributed Systems"],
+      "postedAt": "2026-03-01",
+      "featured": true
+    },
+    {
+      "id": "ml-engineer-instadeep",
+      "slug": "ml-engineer-instadeep",
+      "title": "Machine Learning Engineer",
+      "company": {
+        "id": "instadeep",
+        "name": "InstaDeep",
+        "logo": null
+      },
+      "location": "Cape Town, South Africa",
+      "type": "Full-time",
+      "sector": "Data Science",
+      "salary": {
+        "min": 70000,
+        "max": 110000,
+        "currency": "USD",
+        "period": "year"
+      },
+      "description": "Work on cutting-edge AI research and deployment at InstaDeep. Build ML models for drug discovery, logistics optimization, and climate modeling.",
+      "requirements": [
+        "3+ years ML engineering experience",
+        "Strong Python and PyTorch/JAX skills",
+        "Experience deploying models to production",
+        "Published research is a plus",
+        "MSc or PhD in CS, ML, or related field"
+      ],
+      "tags": ["Python", "PyTorch", "JAX", "MLOps", "Research"],
+      "postedAt": "2026-03-05",
+      "featured": true
+    },
+    {
+      "id": "product-designer-flutterwave",
+      "slug": "product-designer-flutterwave",
+      "title": "Senior Product Designer",
+      "company": {
+        "id": "flutterwave",
+        "name": "Flutterwave",
+        "logo": null
+      },
+      "location": "Nairobi, Kenya",
+      "type": "Full-time",
+      "sector": "Design",
+      "salary": {
+        "min": 60000,
+        "max": 90000,
+        "currency": "USD",
+        "period": "year"
+      },
+      "description": "Design intuitive payment experiences for millions of users across Africa. Lead design for merchant dashboard and consumer-facing products.",
+      "requirements": [
+        "4+ years product design experience",
+        "Strong Figma skills and design systems knowledge",
+        "Experience with fintech or payments products",
+        "Portfolio demonstrating user-centered design process",
+        "Ability to work with cross-functional teams"
+      ],
+      "tags": ["Figma", "Design Systems", "Fintech", "UX Research", "Prototyping"],
+      "postedAt": "2026-03-03",
+      "featured": true
+    },
+    {
+      "id": "frontend-engineer-andela",
+      "slug": "frontend-engineer-andela",
+      "title": "Frontend Engineer",
+      "company": {
+        "id": "andela",
+        "name": "Andela",
+        "logo": null
+      },
+      "location": "Remote",
+      "type": "Remote",
+      "sector": "Engineering",
+      "salary": {
+        "min": 50000,
+        "max": 80000,
+        "currency": "USD",
+        "period": "year"
+      },
+      "description": "Build world-class web applications as part of Andela's distributed engineering team. Work with React, TypeScript, and modern web technologies.",
+      "requirements": [
+        "3+ years frontend development experience",
+        "Expert-level React and TypeScript",
+        "Experience with state management and testing",
+        "Strong understanding of web performance",
+        "Excellent communication skills for remote work"
+      ],
+      "tags": ["React", "TypeScript", "Next.js", "Testing", "Performance"],
+      "postedAt": "2026-03-07",
+      "featured": false
+    },
+    {
+      "id": "data-analyst-mtn",
+      "slug": "data-analyst-mtn",
+      "title": "Senior Data Analyst",
+      "company": {
+        "id": "mtn",
+        "name": "MTN Group",
+        "logo": null
+      },
+      "location": "Accra, Ghana",
+      "type": "Full-time",
+      "sector": "Data Science",
+      "salary": {
+        "min": 45000,
+        "max": 70000,
+        "currency": "USD",
+        "period": "year"
+      },
+      "description": "Analyze telecommunications data to drive business decisions at Africa's largest mobile network. Work with massive datasets covering 280M+ subscribers.",
+      "requirements": [
+        "3+ years data analysis experience",
+        "Strong SQL and Python skills",
+        "Experience with BI tools (Tableau, Power BI)",
+        "Telecom industry knowledge is a plus",
+        "Ability to translate data into business insights"
+      ],
+      "tags": ["SQL", "Python", "Tableau", "Telecom", "Analytics"],
+      "postedAt": "2026-02-28",
+      "featured": false
+    },
+    {
+      "id": "devops-engineer-safaricom",
+      "slug": "devops-engineer-safaricom",
+      "title": "DevOps Engineer",
+      "company": {
+        "id": "safaricom",
+        "name": "Safaricom",
+        "logo": null
+      },
+      "location": "Nairobi, Kenya",
+      "type": "Full-time",
+      "sector": "Engineering",
+      "salary": {
+        "min": 55000,
+        "max": 85000,
+        "currency": "USD",
+        "period": "year"
+      },
+      "description": "Maintain and scale the infrastructure behind M-Pesa and Safaricom's digital services. Build CI/CD pipelines and cloud infrastructure for Africa's most used financial platform.",
+      "requirements": [
+        "4+ years DevOps/SRE experience",
+        "Strong Kubernetes and Docker skills",
+        "Experience with AWS or GCP",
+        "Infrastructure as Code (Terraform, Pulumi)",
+        "On-call experience with distributed systems"
+      ],
+      "tags": ["Kubernetes", "Terraform", "GCP", "CI/CD", "M-Pesa"],
+      "postedAt": "2026-03-04",
+      "featured": false
+    },
+    {
+      "id": "product-manager-chipper",
+      "slug": "product-manager-chipper",
+      "title": "Product Manager",
+      "company": {
+        "id": "chipper",
+        "name": "Chipper Cash",
+        "logo": null
+      },
+      "location": "Remote",
+      "type": "Remote",
+      "sector": "Product",
+      "salary": {
+        "min": 65000,
+        "max": 100000,
+        "currency": "USD",
+        "period": "year"
+      },
+      "description": "Own the product roadmap for cross-border payments at Chipper Cash. Drive strategy for a platform enabling free money transfers across Africa.",
+      "requirements": [
+        "4+ years product management experience",
+        "Fintech or payments experience required",
+        "Data-driven decision making skills",
+        "Experience with agile methodologies",
+        "Understanding of African financial landscapes"
+      ],
+      "tags": ["Fintech", "Payments", "Strategy", "Agile", "Cross-border"],
+      "postedAt": "2026-03-06",
+      "featured": false
+    },
+    {
+      "id": "marketing-lead-moniepoint",
+      "slug": "marketing-lead-moniepoint",
+      "title": "Growth Marketing Lead",
+      "company": {
+        "id": "moniepoint",
+        "name": "Moniepoint",
+        "logo": null
+      },
+      "location": "Lagos, Nigeria",
+      "type": "Full-time",
+      "sector": "Marketing",
+      "salary": {
+        "min": 50000,
+        "max": 75000,
+        "currency": "USD",
+        "period": "year"
+      },
+      "description": "Lead growth marketing for Moniepoint's business banking platform. Scale merchant acquisition and drive brand awareness across Nigeria and beyond.",
+      "requirements": [
+        "5+ years growth marketing experience",
+        "Experience in fintech or B2B SaaS",
+        "Strong analytical and data skills",
+        "Experience with performance marketing channels",
+        "Understanding of the Nigerian market"
+      ],
+      "tags": ["Growth", "B2B", "Performance Marketing", "Fintech", "Nigeria"],
+      "postedAt": "2026-03-02",
+      "featured": false
+    }
+  ]
+}
