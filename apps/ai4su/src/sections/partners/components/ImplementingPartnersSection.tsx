@@ -1,10 +1,6 @@
-import { Users } from 'lucide-react'
 import { LeadPartnerCard } from './LeadPartnerCard'
 import { PartnerCard } from './PartnerCard'
 import type { ImplementingPartnersSectionProps } from '@/../product/sections/partners/types'
-import partnersDataRaw from '../../../../product/sections/partners/data.json'
-
-const ui = (partnersDataRaw as Record<string, unknown>).ui as Record<string, string>
 
 export function ImplementingPartnersSection({ partners, onPartnerClick }: ImplementingPartnersSectionProps) {
   const leadPartner = partners.partners.find((p) => p.isLead)
@@ -13,20 +9,6 @@ export function ImplementingPartnersSection({ partners, onPartnerClick }: Implem
   return (
     <section className="py-16 bg-white dark:bg-stone-950">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section header */}
-        <div className="text-center mb-10">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-stone-100 dark:bg-stone-800 rounded-full text-sm font-medium text-stone-600 dark:text-stone-400 mb-4">
-            <Users className="w-4 h-4" />
-            <span>{ui.tierImplementing}</span>
-          </div>
-          <h2 className="text-3xl font-bold text-brand-primary dark:text-white font-[Barlow] mb-4">
-            {partners.sectionTitle}
-          </h2>
-          <p className="text-lg text-stone-600 dark:text-stone-400 max-w-2xl mx-auto">
-            {partners.sectionDescription}
-          </p>
-        </div>
-
         {/* Lead partner (full width) */}
         {leadPartner && (
           <div className="mb-8">

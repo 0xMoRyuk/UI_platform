@@ -151,9 +151,7 @@ export interface KPISummaryBarProps {
 
 export interface ModelFilterSidebarProps {
   filterOptions: FilterOptions
-  selectedSectors: Sector[]
   selectedCountries: CountryCode[]
-  onSectorChange: (sectors: Sector[]) => void
   onCountryChange: (countries: CountryCode[]) => void
   onClearFilters: () => void
 }

@@ -1,8 +1,27 @@
+'use client'
+
+import { Datagov } from '@/sections/datagov/components'
+import type { DatagovPageProps } from '@/../product/sections/datagov/types'
+import datagovDataRaw from '@/../product/sections/datagov/data.json'
+
+const datagovData = datagovDataRaw as unknown as Omit<DatagovPageProps, 'onPartnerClick'>
+
 export function DatagovPage() {
+  const handlePartnerClick = (partnerId: string, websiteUrl: string) => {
+    console.log('[Datagov] Partner clicked:', partnerId)
+    if (websiteUrl) {
+      window.open(websiteUrl, '_blank', 'noopener,noreferrer')
+    }
+  }
+
   return (
-    <div className="container mx-auto px-4 py-16 text-center">
-      <h1 className="text-3xl font-bold mb-4">European Initiative</h1>
-      <p className="text-muted-foreground">Coming soon.</p>
-    </div>
+    <Datagov
+      hero={datagovData.hero}
+      about={datagovData.about}
+      strategy={datagovData.strategy}
+      activities={datagovData.activities}
+      partners={datagovData.partners}
+      onPartnerClick={handlePartnerClick}
+    />
   )
 }

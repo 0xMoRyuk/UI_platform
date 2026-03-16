@@ -5,7 +5,7 @@ import { ChevronDown, X, Filter } from 'lucide-react'
 import { Separator } from '@ui-platform/ui/components/separator'
 import { Button } from '@ui-platform/ui/components/button'
 import { Collapsible, CollapsibleTrigger, CollapsibleContent } from '@ui-platform/ui/components/collapsible'
-import type { ModelFilterSidebarProps, Sector, CountryCode } from '@/../product/sections/toolbox/types'
+import type { ModelFilterSidebarProps, CountryCode } from '@/../product/sections/toolbox/types'
 import toolboxDataRaw from '../../../../product/sections/toolbox/data.json'
 
 const ui = (toolboxDataRaw as Record<string, unknown>).ui as Record<string, string>
@@ -90,24 +90,13 @@ function Checkbox({ id, label, checked, onChange, color }: CheckboxProps) {
 
 export function ModelFilterSidebar({
   filterOptions,
-  selectedSectors,
   selectedCountries,
-  onSectorChange,
   onCountryChange,
   onClearFilters,
 }: ModelFilterSidebarProps) {
-  const [sectorsOpen, setSectorsOpen] = useState(true)
   const [countriesOpen, setCountriesOpen] = useState(true)
 
-  const hasActiveFilters = selectedSectors.length > 0 || selectedCountries.length > 0
-
-  const handleSectorToggle = (sectorId: Sector, checked: boolean) => {
-    if (checked) {
-      onSectorChange([...selectedSectors, sectorId])
-    } else {
-      onSectorChange(selectedSectors.filter((s) => s !== sectorId))
-    }
-  }
+  const hasActiveFilters = selectedCountries.length > 0
 
   const handleCountryToggle = (countryCode: CountryCode, checked: boolean) => {
     if (checked) {
@@ -140,24 +129,6 @@ export function ModelFilterSidebar({
         </div>
         <Separator className="mb-4" />
 
-        {/* Sectors */}
-        <FilterSection
-          title={ui.sectorLabel}
-          isOpen={sectorsOpen}
-          onToggle={() => setSectorsOpen(!sectorsOpen)}
-        >
-          {filterOptions.sectors.map((sector) => (
-            <Checkbox
-              key={sector.id}
-              id={`sector-${sector.id}`}
-              label={sector.label}
-              checked={selectedSectors.includes(sector.id)}
-              onChange={(checked) => handleSectorToggle(sector.id, checked)}
-              color={sector.color}
-            />
-          ))}
-        </FilterSection>
-
         {/* Countries */}
         <FilterSection
           title={ui.countryLabel}
@@ -181,7 +152,7 @@ export function ModelFilterSidebar({
           <Separator className="mt-4" />
           <div className="pt-4">
             <p className="text-xs text-stone-500 dark:text-stone-400">
-              {selectedSectors.length + selectedCountries.length} {ui.filtersApplied}
+              {selectedCountries.length} {ui.filtersApplied}
             </p>
           </div>
           </>

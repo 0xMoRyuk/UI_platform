@@ -8,6 +8,9 @@ import { HackathonDetailPage } from '@/pages/HackathonDetailPage'
 import { EcosystemPage } from '@/pages/EcosystemPage'
 import { PartnersPage } from '@/pages/PartnersPage'
 import { DatagovPage } from '@/pages/DatagovPage'
+import { PrivacyPage } from '@/pages/PrivacyPage'
+import { LegalPage } from '@/pages/LegalPage'
+import { AccessibilityPage } from '@/pages/AccessibilityPage'
 
 export const router = createBrowserRouter([
   {
@@ -49,6 +52,18 @@ export const router = createBrowserRouter([
       {
         path: 'datagov',
         element: <DatagovPage />,
+      },
+      {
+        path: 'privacy',
+        element: <PrivacyPage />,
+      },
+      {
+        path: 'legal',
+        element: <LegalPage />,
+      },
+      {
+        path: 'accessibility',
+        element: <AccessibilityPage />,
       },
     ],
   },

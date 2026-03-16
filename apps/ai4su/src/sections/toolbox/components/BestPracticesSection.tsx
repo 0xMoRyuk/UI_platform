@@ -1,5 +1,4 @@
 import { Download, Trophy, Sparkles } from 'lucide-react'
-import { Separator } from '@ui-platform/ui/components/separator'
 import { Button } from '@ui-platform/ui/components/button'
 import type { BestPracticesSectionProps, BestPractices } from '@/../product/sections/toolbox/types'
 
@@ -51,17 +50,7 @@ function BestPracticesCard({ bp, downloadLabel, onDownload }: BestPracticesCardP
 export function BestPracticesSection({ bestPractices, content, onDownload }: BestPracticesSectionProps) {
   return (
     <>
-    <Separator />
-    <section className="py-12">
-      <div className="mb-8">
-        <h2 className="text-2xl font-bold text-brand-primary dark:text-white font-[Barlow] mb-2">
-          {content.title}
-        </h2>
-        <p className="text-stone-600 dark:text-stone-400">
-          {content.description}
-        </p>
-      </div>
-
+    <section className="py-8">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {bestPractices.map((bp) => (
           <BestPracticesCard

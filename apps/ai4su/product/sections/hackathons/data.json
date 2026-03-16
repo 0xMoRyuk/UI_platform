@@ -16,27 +16,27 @@
   "methodology": [
     {
       "id": "step-1",
-      "title": "Challenge Design",
-      "description": "Local agricultural partners identify pressing challenges in crop production, livestock management, farm finance, and climate adaptation. Challenge briefs are crafted with input from agronomists and farmers.",
+      "title": "Challenge Co-design",
+      "description": "Challenges are identified through a bottom-up, co-design process with ag-tech startups and ecosystem partners. Through surveys, workshops, and interviews, needs and opportunities are identified, and the relevant datasets are prepared for the hackathon.",
       "icon": "lightbulb"
     },
     {
       "id": "step-2",
-      "title": "Team Formation",
-      "description": "Data scientists, developers, and agricultural domain experts form cross-functional teams. Participants are selected through an open application process.",
-      "icon": "users"
+      "title": "Online Hackathons",
+      "description": "Online hackathons where data scientists from across eligible African countries compete online to solve startup challenges using their data. The scale of experimentation gathered during the challenge can equal more than two years of continuous data science work.",
+      "icon": "globe"
     },
     {
       "id": "step-3",
-      "title": "Development Sprint",
-      "description": "48-72 hours of intensive building with mentorship from AI and agriculture experts. Teams develop working prototypes addressing the challenge.",
-      "icon": "code"
+      "title": "Hackathons Events",
+      "description": "In-person hackathons mobilize local ecosystems and collective intelligence. Over 48 to 72 hours, participants collaborate around startup challenges to explore new AI use cases, test ideas, and identify promising innovation opportunities.",
+      "icon": "users"
     },
     {
       "id": "step-4",
-      "title": "Demo Day",
-      "description": "Teams pitch their solutions to a panel of judges. Winners receive prizes, mentorship, and support to open-source their models.",
-      "icon": "presentation"
+      "title": "Open-Source Sharing",
+      "description": "The three winning models are shared open source together with the challenge materials and technical documentation, enabling others to reuse and build upon these solutions across the agritech ecosystem.",
+      "icon": "share"
     }
   ],
   "hackathons": [
@@ -612,8 +612,8 @@
     "shareOnLinkedin": "Share on LinkedIn",
     "featured": "Featured",
     "ranks": { "1": "1st Place", "2": "2nd Place", "3": "3rd Place" },
-    "team": "Team",
-    "project": "Project",
+    "team": "Winners",
+    "project": "Prize",
     "viewModel": "View AI Model",
     "allCountries": "All Countries",
     "inSelectedCountry": "in selected country",

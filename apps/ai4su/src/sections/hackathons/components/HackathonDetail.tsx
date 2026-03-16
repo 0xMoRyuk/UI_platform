@@ -13,7 +13,6 @@ import { HackathonHero } from './HackathonHero'
 import { ShareButtons } from './ShareButtons'
 import { ChallengeBriefSection } from './ChallengeBriefSection'
 import { WinningTeamsSection } from './WinningTeamsSection'
-import { OutcomesSection } from './OutcomesSection'
 import { PhotoGallery } from './PhotoGallery'
 import { Lightbox } from './Lightbox'
 
@@ -119,9 +118,6 @@ export function HackathonDetail({
           teams={hackathon.winningTeams}
           onModelClick={onModelClick}
         />
-
-        {/* Outcomes */}
-        <OutcomesSection outcomes={hackathon.outcomes} />
 
         {/* Photo Gallery */}
         <PhotoGallery

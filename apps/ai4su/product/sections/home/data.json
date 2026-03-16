@@ -16,9 +16,9 @@
     "title": "AI4Startups",
     "subtitle": "Enabling African startups to innovate with trusted data and build scalable, responsible AI solutions",
     "ctaText": "View our Hackathons",
-    "ctaLink": "/models",
+    "ctaLink": "/hackathons",
     "secondaryCtaText": "Explore our Resources Hub",
-    "secondaryCtaLink": "/hackathons",
+    "secondaryCtaLink": "/models",
     "badge": "Funded by the European Union",
     "heading": "Africa's AI Future",
     "stats": [
@@ -93,11 +93,11 @@
   ],
   "sectionPreviews": [
     {
-      "id": "preview-hackathons",
+      "id": "preview-datagov",
       "title": "Data Governance in Africa Initiative",
       "description": "AI4Startups is implemented under the Data Governance in Africa initiative, promoting ethical, interoperable and development-focused data ecosystems across the continent",
       "imageUrl": "/images/hackathon-preview.jpg",
-      "link": "/hackathons",
+      "link": "/datagov",
       "stats": "€60M initiative, 6 implementing partners"
     },
     {
@@ -121,17 +121,20 @@
     "title": "Program Impact",
     "description": "Building Africa's AI ecosystem through open-source innovation, hackathons, and community support."
   },
-  "toolboxHighlight": {
-    "badge": "Open Source",
-    "title": "AI Model Toolbox",
-    "description": "Explore 24 open-source AI models built for African agriculture — from crop disease detection to climate resilience, all freely available on GitHub.",
-    "ctaText": "Explore Toolbox",
-    "githubLabel": "View on GitHub",
-    "stats": [
-      { "value": "24", "label": "Models" },
-      { "value": "6", "label": "Sub-categories" },
-      { "value": "15K+", "label": "GitHub Stars" },
-      { "value": "50+", "label": "Startups Using" }
+  "about": {
+    "title": "What is AI4Startups?",
+    "paragraphs": [
+      "AI4Startups is a programme led by Digital Africa in collaboration with Expertise France that supports African agritech startups in unlocking the value of their data and turning it into open-source AI solutions.",
+      "Across eight African countries, the programme identifies real data challenges faced by agritech startups and transforms them into AI innovation opportunities. Through a series of hackathons, startups share datasets and concrete business problems, while data scientists compete to develop machine learning models using the startups' data to address these challenges.",
+      "Beyond the hackathons, AI4Startups also contributes to strengthening the foundations for data-driven innovation in the agritech sector. The programme explores practical approaches to responsible data sharing, and private agritech data ecosystems across participating countries, and works to ensure broader and more inclusive access to AI innovation."
+    ],
+    "datagovLink": "AI4Startups is part of the Data Governance in Africa Initiative, funded by the European Union.",
+    "datagovLinkText": "Data Governance in Africa Initiative",
+    "countriesFootnote": "Participating countries: Ghana, Senegal, Côte d'Ivoire, Tanzania, Rwanda, Kenya, Botswana and South Africa.",
+    "photos": [
+      { "id": "about-1", "url": "/photos/hackathon-workshop.jpg", "caption": "Hackathon workshop in Nairobi", "featured": true },
+      { "id": "about-2", "url": "/photos/data-challenge.jpg", "caption": "Data challenge presentation" },
+      { "id": "about-3", "url": "/photos/startup-pitch.jpg", "caption": "Startup pitch session" }
     ]
   },
   "ui": {

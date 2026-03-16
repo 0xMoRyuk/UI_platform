@@ -10,6 +10,7 @@ import { partnersRoutes } from './routes/partners.routes'
 import { studiesRoutes } from './routes/studies.routes'
 import { bestPracticesRoutes } from './routes/best-practices.routes'
 import { homeRoutes } from './routes/home.routes'
+import { datagovRoutes } from './routes/datagov.routes'
 import { manifestRoutes } from './routes/manifest.routes'
 
 export const api = new Hono()
@@ -26,4 +27,5 @@ api.route('/api', partnersRoutes)
 api.route('/api', studiesRoutes)
 api.route('/api', bestPracticesRoutes)
 api.route('/api', homeRoutes)
+api.route('/api', datagovRoutes)
 api.route('', manifestRoutes)

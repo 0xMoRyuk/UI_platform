@@ -52,7 +52,7 @@ function TeamCard({ team, onModelClick }: TeamCardProps) {
       <div className={`${config.bg} ${config.text} py-3 px-4 flex items-center gap-3`}>
         <Icon className="w-6 h-6" />
         <span className="font-bold">{config.label}</span>
-        <span className="ml-auto text-sm opacity-80">{team.prize}</span>
+        <span className="ml-auto text-sm opacity-80">{team.projectName}</span>
       </div>
 
       {/* Content */}
@@ -67,7 +67,7 @@ function TeamCard({ team, onModelClick }: TeamCardProps) {
         <div className="mb-4">
           <p className="text-sm text-stone-500 dark:text-stone-400 mb-1">{hackathonsUi.project}</p>
           <h4 className="text-base font-semibold text-stone-800 dark:text-stone-200">
-            {team.projectName}
+            {team.prize}
           </h4>
         </div>
 

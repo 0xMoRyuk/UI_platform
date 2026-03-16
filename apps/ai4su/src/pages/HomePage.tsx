@@ -6,7 +6,7 @@ import type { HomeProps } from '@/../product/sections/home/types'
 import homeDataRaw from '@/../product/sections/home/data.json'
 
 // Cast JSON data to proper types (JSON imports lose literal type information)
-const homeData = homeDataRaw as unknown as Omit<HomeProps, 'onCtaClick' | 'onKpiClick' | 'onModelClick' | 'onSectionClick'>
+const homeData = homeDataRaw as unknown as Omit<HomeProps, 'onCtaClick' | 'onKpiClick' | 'onSectionClick'>
 
 export function HomePage() {
   const navigate = useNavigate()
@@ -20,11 +20,6 @@ export function HomePage() {
     navigate(link)
   }
 
-  const handleModelClick = (modelId: string) => {
-    console.log('[Home] Model clicked:', modelId)
-    navigate(`/models/${modelId}`)
-  }
-
   const handleSectionClick = (sectionId: string, link: string) => {
     console.log('[Home] Section clicked:', sectionId)
     navigate(link)
@@ -35,13 +30,11 @@ export function HomePage() {
       hero={homeData.hero}
       kpis={homeData.kpis}
       kpiSection={homeData.kpiSection}
-      featuredModels={homeData.featuredModels}
-      toolboxHighlight={homeData.toolboxHighlight}
+      about={homeData.about}
       sectionPreviews={homeData.sectionPreviews}
       countries={homeData.countries}
       onCtaClick={handleCtaClick}
       onKpiClick={handleKpiClick}
-      onModelClick={handleModelClick}
       onSectionClick={handleSectionClick}
     />
   )

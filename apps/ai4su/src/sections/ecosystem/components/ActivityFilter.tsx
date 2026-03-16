@@ -1,16 +1,16 @@
 'use client'
 
-import { Users, BookOpen, GraduationCap, Heart, ChevronDown } from 'lucide-react'
+import { Users, BookOpen, GraduationCap, Trophy, ChevronDown } from 'lucide-react'
 import type { ActivityFilterProps, CountryCode } from '@/../product/sections/ecosystem/types'
 import ecosystemDataRaw from '../../../../product/sections/ecosystem/data.json'
 
 const ui = (ecosystemDataRaw as Record<string, unknown>).ui as Record<string, string>
 
-const iconMap = {
+const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
+  trophy: Trophy,
   users: Users,
   book: BookOpen,
   'graduation-cap': GraduationCap,
-  heart: Heart,
 }
 
 export function ActivityFilter({

@@ -4,32 +4,25 @@ import { useState, useMemo } from 'react'
 import { Boxes } from 'lucide-react'
 import { Separator } from '@ui-platform/ui/components/separator'
 import type { ToolboxProps, Sector, CountryCode } from '@/../product/sections/toolbox/types'
-import { KPISummaryBar } from './KPISummaryBar'
 import { SearchInput } from './SearchInput'
 import { ModelFilterSidebar } from './ModelFilterSidebar'
 import { ModelGrid } from './ModelGrid'
 import { EmptyState } from './EmptyState'
 import { StudiesSection } from './StudiesSection'
-import { BestPracticesSection } from './BestPracticesSection'
-import { FinalReportCard } from './FinalReportCard'
 
 export function Toolbox({
-  kpiSummary,
   filterOptions,
   aiModels,
   studies,
   bestPractices,
-  finalReport,
   pageContent,
   studiesSection,
   bestPracticesSection,
-  finalReportSection,
   onSearch,
   onFilterChange,
   onModelClick,
   onStudyDownload,
   onBestPracticesDownload,
-  onFinalReportDownload,
 }: ToolboxProps) {
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedSectors, setSelectedSectors] = useState<Sector[]>([])
@@ -67,11 +60,6 @@ export function Toolbox({
     onSearch?.(query)
   }
 
-  const handleSectorChange = (sectors: Sector[]) => {
-    setSelectedSectors(sectors)
-    onFilterChange?.({ sectors, countries: selectedCountries })
-  }
-
   const handleCountryChange = (countries: CountryCode[]) => {
     setSelectedCountries(countries)
     onFilterChange?.({ sectors: selectedSectors, countries })
@@ -90,9 +78,6 @@ export function Toolbox({
 
   return (
     <main className="min-h-screen bg-stone-50 dark:bg-stone-950">
-      {/* KPI Summary Bar */}
-      <KPISummaryBar items={kpiSummary} />
-
       {/* Page Header */}
       <div className="bg-white dark:bg-stone-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -118,25 +103,27 @@ export function Toolbox({
         {/* Search and Filters Layout */}
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Sidebar */}
-          <ModelFilterSidebar
-            filterOptions={filterOptions}
-            selectedSectors={selectedSectors}
-            selectedCountries={selectedCountries}
-            onSectorChange={handleSectorChange}
-            onCountryChange={handleCountryChange}
-            onClearFilters={handleClearFilters}
-          />
+          <div className="w-full lg:w-64 shrink-0 space-y-4">
+            <SearchInput
+              value={searchQuery}
+              onChange={handleSearchChange}
+              placeholder={pageContent.searchPlaceholder}
+            />
+            <ModelFilterSidebar
+              filterOptions={filterOptions}
+              selectedCountries={selectedCountries}
+              onCountryChange={handleCountryChange}
+              onClearFilters={handleClearFilters}
+            />
+          </div>
 
           {/* Main Content Area */}
           <div className="flex-1">
-            {/* Search Input */}
-            <div className="mb-6">
-              <SearchInput
-                value={searchQuery}
-                onChange={handleSearchChange}
-                placeholder={pageContent.searchPlaceholder}
-              />
-            </div>
+
+            {/* Open-source AI Models heading */}
+            <h2 className="text-2xl font-bold text-brand-primary dark:text-white font-[Barlow] mb-4">
+              Open-source AI Models
+            </h2>
 
             {/* Results count */}
             <div className="mb-4 text-sm text-stone-500 dark:text-stone-400">
@@ -156,26 +143,22 @@ export function Toolbox({
               />
             )}
 
-            {/* Studies Section */}
+            {/* Research & Studies heading */}
+            <Separator className="my-8" />
+            <h2 className="text-2xl font-bold text-brand-primary dark:text-white font-[Barlow] mb-6">
+              Research &amp; Studies
+            </h2>
+
+            {/* Studies & Best Practices (merged) */}
             <StudiesSection
               studies={studies}
               content={studiesSection}
               onDownload={onStudyDownload || (() => {})}
-            />
-
-            {/* Best Practices Section */}
-            <BestPracticesSection
               bestPractices={bestPractices}
-              content={bestPracticesSection}
-              onDownload={onBestPracticesDownload || (() => {})}
+              bestPracticesContent={bestPracticesSection}
+              onBestPracticesDownload={onBestPracticesDownload || (() => {})}
             />
 
-            {/* Final Report */}
-            <FinalReportCard
-              report={finalReport}
-              content={finalReportSection}
-              onDownload={onFinalReportDownload || (() => {})}
-            />
           </div>
         </div>
       </div>

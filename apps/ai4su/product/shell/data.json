@@ -20,27 +20,27 @@
   "navigation": [
     { "label": "Home", "href": "/" },
     { "label": "Our hackathons", "href": "/hackathons" },
-    { "label": "AI Models", "href": "/models" },
+    { "label": "Resources Hub", "href": "/models" },
     { "label": "All Activities", "href": "/activities" },
-    { "label": "European Initiative", "href": "/datagov" },
+    { "label": "Data Governance Initiative", "href": "/datagov" },
     { "label": "Partners", "href": "/partners" }
   ],
   "footer": {
     "en": {
       "fundedBy": "Funded by the European Union",
-      "implementedBy": "Implemented by",
+      "implementedBy": "by Digital Africa in collaboration with Expertise France",
       "privacy": "Privacy Policy",
       "legal": "Legal Notice",
       "accessibility": "Accessibility",
-      "copyright": "© 2026 DataGov Initiative. All rights reserved."
+      "copyright": "© 2026 AI4Startups. All rights reserved."
     },
     "fr": {
       "fundedBy": "Financé par l'Union européenne",
-      "implementedBy": "Mis en œuvre par",
+      "implementedBy": "par Digital Africa en collaboration avec Expertise France",
       "privacy": "Politique de confidentialité",
       "legal": "Mentions légales",
       "accessibility": "Accessibilité",
-      "copyright": "© 2026 Initiative DataGov. Tous droits réservés."
+      "copyright": "© 2026 AI4Startups. Tous droits réservés."
     },
     "partnersHeading": "Partners",
     "partners": ["Digital Africa", "Expertise France", "GIZ"],

@@ -2,7 +2,7 @@
 // Data Types
 // =============================================================================
 
-export type ActivityTypeId = 'event' | 'research' | 'workshop' | 'women-founders'
+export type ActivityTypeId = 'event' | 'research' | 'workshop' | 'hackathon'
 
 export type CountryCode = 'KE' | 'NG' | 'GH' | 'SN' | 'RW' | 'ZA' | 'EG' | 'MA' | 'ET'
 
@@ -10,7 +10,7 @@ export interface ActivityType {
   id: ActivityTypeId
   label: string
   color: string
-  icon: 'users' | 'book' | 'graduation-cap' | 'heart'
+  icon: 'users' | 'book' | 'graduation-cap' | 'trophy'
 }
 
 export interface ActivityLocation {
@@ -110,8 +110,6 @@ export interface EcosystemPageProps {
   activityTypes: ActivityType[]
   /** All ecosystem activities */
   activities: Activity[]
-  /** Women Founders program details */
-  womenFounders: WomenFoundersProgram
   /** Countries with coordinates for map */
   countries: CountryMapData[]
   /** Page-level text content */
@@ -126,8 +124,6 @@ export interface EcosystemPageProps {
   onMapMarkerClick?: (activityId: string) => void
   /** Called when user downloads a resource */
   onResourceDownload?: (activityId: string, resourceUrl: string) => void
-  /** Called when user clicks Women Founders CTA */
-  onWomenFoundersCta?: () => void
 }
 
 // =============================================================================

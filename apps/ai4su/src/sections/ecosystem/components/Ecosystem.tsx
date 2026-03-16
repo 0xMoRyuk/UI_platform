@@ -6,7 +6,6 @@ import ecosystemDataRaw from '../../../../product/sections/ecosystem/data.json'
 
 const ui = (ecosystemDataRaw as Record<string, unknown>).ui as Record<string, string>
 import { EcosystemHero } from './EcosystemHero'
-import { WomenFoundersSection } from './WomenFoundersSection'
 import { ActivityFilter } from './ActivityFilter'
 import { ActivityList } from './ActivityList'
 import { ActivityMap } from './ActivityMap'
@@ -15,7 +14,6 @@ import { MobileMapToggle } from './MobileMapToggle'
 export function Ecosystem({
   activityTypes,
   activities,
-  womenFounders,
   countries,
   pageContent,
   onTypeFilter,
@@ -23,7 +21,6 @@ export function Ecosystem({
   onActivityClick,
   onMapMarkerClick,
   onResourceDownload: _onResourceDownload,
-  onWomenFoundersCta,
 }: EcosystemPageProps) {
   // Note: onResourceDownload is available for future use via _onResourceDownload
   void _onResourceDownload
@@ -85,12 +82,6 @@ export function Ecosystem({
         totalParticipants={totalParticipants}
         countriesCount={countries.length}
         pageContent={pageContent}
-      />
-
-      {/* Women Founders Section */}
-      <WomenFoundersSection
-        program={womenFounders}
-        onCtaClick={onWomenFoundersCta || (() => {})}
       />
 
       {/* Activities Section */}

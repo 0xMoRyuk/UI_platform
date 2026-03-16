@@ -14,10 +14,10 @@
     ]
   },
   "activityTypes": [
+    { "id": "hackathon", "label": "Hackathons", "color": "#f59e0b", "icon": "trophy" },
     { "id": "event", "label": "Networking Events", "color": "#3b82f6", "icon": "users" },
     { "id": "research", "label": "Research & Analysis", "color": "#8b5cf6", "icon": "book" },
-    { "id": "workshop", "label": "Workshops & Training", "color": "#22c55e", "icon": "graduation-cap" },
-    { "id": "women-founders", "label": "Women Founders", "color": "#ec4899", "icon": "heart" }
+    { "id": "workshop", "label": "Workshops & Training", "color": "#22c55e", "icon": "graduation-cap" }
   ],
   "activities": [
     {
@@ -73,7 +73,7 @@
     {
       "id": "act-003",
       "title": "Women in AI Bootcamp - Accra",
-      "type": "women-founders",
+      "type": "workshop",
       "description": "Intensive 5-day bootcamp for women entrepreneurs building AI-powered solutions, featuring technical training and business mentorship.",
       "fullDescription": "This bootcamp supported 30 women founders with hands-on AI/ML training, product development workshops, and one-on-one mentorship sessions. Participants received cloud credits and ongoing support through the Women Founders network.",
       "startDate": "2025-05-20",
@@ -142,7 +142,7 @@
     {
       "id": "act-006",
       "title": "Women Founders Pitch Day - Lagos",
-      "type": "women-founders",
+      "type": "workshop",
       "description": "Pitch competition for women-led AI startups with €30,000 in prizes and investor introductions.",
       "fullDescription": "Fifteen women founders pitched their AI startups to a panel of investors and industry experts. The event included pitch coaching, investor networking, and follow-up mentorship for all participants.",
       "startDate": "2025-09-18",
@@ -189,7 +189,7 @@
     {
       "id": "act-008",
       "title": "Women in AI Conference - Kigali",
-      "type": "women-founders",
+      "type": "workshop",
       "description": "Two-day conference celebrating women in AI across Africa with keynotes, workshops, and networking.",
       "fullDescription": "The inaugural Women in AI Conference brought together 200 women technologists, entrepreneurs, and researchers. The event featured keynotes from leading African women in tech, technical workshops, and a career fair with partner companies.",
       "startDate": "2025-11-14",

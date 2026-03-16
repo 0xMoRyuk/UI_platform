@@ -1,6 +1,5 @@
 'use client'
 
-import { useRouter } from 'next/navigation'
 import { Ecosystem } from './components'
 import type { ActivityTypeId, CountryCode, EcosystemPageProps } from '@/../product/sections/ecosystem/types'
 import ecosystemDataRaw from '@/../product/sections/ecosystem/data.json'
@@ -9,8 +8,6 @@ import ecosystemDataRaw from '@/../product/sections/ecosystem/data.json'
 const ecosystemData = ecosystemDataRaw as unknown as Omit<EcosystemPageProps, 'onTypeFilter' | 'onCountryFilter' | 'onActivityClick' | 'onMapMarkerClick' | 'onResourceDownload' | 'onWomenFoundersCta'>
 
 export function EcosystemPreview() {
-  const router = useRouter()
-
   const handleTypeFilter = (type: ActivityTypeId | null) => {
     console.log('Type filter:', type)
   }
@@ -32,16 +29,10 @@ export function EcosystemPreview() {
     window.open(resourceUrl, '_blank', 'noopener,noreferrer')
   }
 
-  const handleWomenFoundersCta = () => {
-    console.log('Women Founders CTA clicked')
-    router.push(ecosystemData.womenFounders.ctaLink)
-  }
-
   return (
     <Ecosystem
       activityTypes={ecosystemData.activityTypes}
       activities={ecosystemData.activities}
-      womenFounders={ecosystemData.womenFounders}
       countries={ecosystemData.countries}
       pageContent={ecosystemData.pageContent}
       onTypeFilter={handleTypeFilter}
@@ -49,7 +40,6 @@ export function EcosystemPreview() {
       onActivityClick={handleActivityClick}
       onMapMarkerClick={handleMapMarkerClick}
       onResourceDownload={handleResourceDownload}
-      onWomenFoundersCta={handleWomenFoundersCta}
     />
   )
 }

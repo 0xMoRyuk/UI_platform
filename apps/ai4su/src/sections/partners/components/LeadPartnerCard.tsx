@@ -1,4 +1,4 @@
-import { ExternalLink, CheckCircle, Building2 } from 'lucide-react'
+import { ExternalLink, Building2 } from 'lucide-react'
 import { Button } from '@ui-platform/ui/components/button'
 import { Avatar, AvatarFallback } from '@ui-platform/ui/components/avatar'
 import type { LeadPartnerCardProps } from '@/../product/sections/partners/types'
@@ -34,21 +34,6 @@ export function LeadPartnerCard({ partner, onClick }: LeadPartnerCardProps) {
         <p className="text-stone-600 dark:text-stone-400 leading-relaxed mb-6">
           {partner.fullDescription}
         </p>
-
-        {/* Contributions */}
-        <div className="mb-6">
-          <h4 className="text-sm font-semibold text-brand-primary dark:text-brand-secondary uppercase tracking-wide mb-3">
-            {ui.keyContributions}
-          </h4>
-          <ul className="space-y-2">
-            {partner.contributions.map((contribution, index) => (
-              <li key={index} className="flex items-center gap-2 text-stone-700 dark:text-stone-300">
-                <CheckCircle className="w-4 h-4 text-green-500 shrink-0" />
-                <span>{contribution}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
 
         {/* CTA */}
         <Button

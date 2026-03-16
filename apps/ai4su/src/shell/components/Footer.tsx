@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import shellData from '@/../product/shell/data.json'
 
 interface FooterProps {
@@ -16,33 +17,12 @@ export function Footer({ currentLanguage }: FooterProps) {
           {/* EU Attribution - Mandatory */}
           <div className="space-y-4">
             <div className="flex items-center space-x-3">
-              {/* EU Flag placeholder */}
-              <div className="w-12 h-8 bg-brand-secondary rounded flex items-center justify-center text-xs font-bold">
-                EU
-              </div>
+              <span className="text-3xl" role="img" aria-label="European Union flag">🇪🇺</span>
               <span className="text-sm font-medium font-[Barlow]">{t.fundedBy}</span>
             </div>
             <p className="text-sm text-white/70">
               {t.implementedBy}
             </p>
-          </div>
-
-          {/* Partner Logos */}
-          <div className="space-y-4">
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-brand-accent">
-              {footer.partnersHeading}
-            </h3>
-            <div className="flex flex-wrap gap-4">
-              {/* Partner logo placeholders */}
-              {footer.partners.map((partner) => (
-                <div
-                  key={partner}
-                  className="px-3 py-2 bg-white/10 rounded text-xs font-medium"
-                >
-                  {partner}
-                </div>
-              ))}
-            </div>
           </div>
 
           {/* Social & Hashtags */}
@@ -64,16 +44,10 @@ export function Footer({ currentLanguage }: FooterProps) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <p className="text-sm text-white/60">{t.copyright}</p>
-            <div className="flex items-center space-x-6 text-sm">
-              <a href="/privacy" className="text-white/60 hover:text-white transition-colors">
-                {t.privacy}
-              </a>
-              <a href="/legal" className="text-white/60 hover:text-white transition-colors">
-                {t.legal}
-              </a>
-              <a href="/accessibility" className="text-white/60 hover:text-white transition-colors">
-                {t.accessibility}
-              </a>
+            <div className="flex items-center space-x-6 text-sm text-white/60">
+              <Link to="/privacy" className="hover:text-white transition-colors">{t.privacy}</Link>
+              <Link to="/legal" className="hover:text-white transition-colors">{t.legal}</Link>
+              <Link to="/accessibility" className="hover:text-white transition-colors">{t.accessibility}</Link>
             </div>
           </div>
         </div>

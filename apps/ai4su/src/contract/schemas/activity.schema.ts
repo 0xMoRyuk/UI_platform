@@ -1,7 +1,7 @@
 import { z } from 'zod'
 import { PaginationParamsSchema } from './common.schema'
 
-export const ActivityTypeEnum = z.enum(['event', 'research', 'workshop', 'women-founders'])
+export const ActivityTypeEnum = z.enum(['event', 'research', 'workshop', 'hackathon'])
 
 export const SearchActivitiesInputSchema = PaginationParamsSchema.extend({
   type: ActivityTypeEnum.optional(),

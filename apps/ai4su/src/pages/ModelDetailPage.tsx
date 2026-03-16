@@ -1,7 +1,7 @@
 'use client'
 
 import { useParams, useNavigate, Link } from 'react-router-dom'
-import { ArrowLeft, Github, ExternalLink, Cpu, FileText, Target, Link as LinkIcon } from 'lucide-react'
+import { ArrowLeft, Github, ExternalLink, FileText, Target, Link as LinkIcon } from 'lucide-react'
 import { Separator } from '@ui-platform/ui/components/separator'
 import { Button } from '@ui-platform/ui/components/button'
 import type { Hackathon } from '@/../product/sections/hackathons/types'
@@ -98,17 +98,6 @@ export function ModelDetailPage() {
             </p>
           </div>
 
-          {/* Technical Requirements */}
-          <div className="mb-8">
-            <div className="flex items-center gap-2 text-sm font-semibold text-brand-primary dark:text-brand-secondary mb-2">
-              <Cpu className="w-4 h-4" />
-              <span>{ui.technicalRequirements}</span>
-            </div>
-            <p className="text-stone-700 dark:text-stone-300 font-mono text-sm bg-stone-50 dark:bg-stone-800 rounded-lg px-4 py-3">
-              {model.technicalRequirements}
-            </p>
-          </div>
-
           {/* Hackathon Link */}
           {hackathon && (
             <div className="mb-8">
@@ -136,7 +125,7 @@ export function ModelDetailPage() {
             >
               <a href={model.githubUrl} target="_blank" rel="noopener noreferrer">
                 <Github className="w-5 h-5" />
-                <span>{ui.viewOnGithub}</span>
+                <span>{ui.viewOnGithubFull}</span>
                 <ExternalLink className="w-4 h-4" />
               </a>
             </Button>

@@ -1,0 +1,120 @@
+{
+  "_meta": {
+    "source": "https://d4dhub.eu/initiatives/data-governance-in-africa",
+    "lastUpdated": "2026-03-12",
+    "description": "D4D Hub Data Governance in Africa initiative content"
+  },
+  "hero": {
+    "badge": "European Initiative • Ongoing",
+    "title": "Data Governance in Africa",
+    "subtitle": "A €60 million initiative by the EU and Team Europe members to support African countries in developing inclusive, rights-based data governance frameworks that unlock the value of data for sustainable development.",
+    "investment": "€60M",
+    "stats": [
+      { "value": "€60M", "label": "Total Investment" },
+      { "value": "6", "label": "EU Funders" },
+      { "value": "6", "label": "Implementing Partners" },
+      { "value": "2023", "label": "Launched" }
+    ]
+  },
+  "about": {
+    "title": "About the Initiative",
+    "description": "Data Governance in Africa is a Team Europe Initiative under the EU's Global Gateway strategy. It aims to support African Union member states in establishing harmonized, inclusive, and rights-based data governance frameworks — unlocking the power of data for social and economic development across the continent.",
+    "background": [
+      "Africa generates vast amounts of data, but much of it flows to servers outside the continent, limiting local value creation.",
+      "Fragmented national regulations create barriers to cross-border data sharing and digital trade within Africa.",
+      "The African Union's Digital Transformation Strategy calls for a continental data policy framework to address these challenges.",
+      "Strong data governance is essential for trust in digital services, AI development, and evidence-based policymaking."
+    ]
+  },
+  "strategy": {
+    "title": "Three-Level Strategy",
+    "description": "The initiative operates across macro, meso, and micro levels to ensure comprehensive and sustainable impact.",
+    "levels": [
+      {
+        "id": "macro",
+        "name": "Macro Level",
+        "icon": "Globe",
+        "description": "Harmonized continental and regional data policies aligned with the African Union's Digital Transformation Strategy and Data Policy Framework.",
+        "color": "brand-primary"
+      },
+      {
+        "id": "meso",
+        "name": "Meso Level",
+        "icon": "Building2",
+        "description": "National data infrastructure frameworks, institutional capacity building, and interoperability standards for cross-border data flows.",
+        "color": "brand-secondary"
+      },
+      {
+        "id": "micro",
+        "name": "Micro Level",
+        "icon": "Users",
+        "description": "Digital innovation ecosystems, data-driven startups, and community-level data literacy to ensure inclusive participation.",
+        "color": "brand-accent"
+      }
+    ]
+  },
+  "activities": {
+    "title": "Key Activity Areas",
+    "description": "Three interconnected activity streams drive the initiative's impact across the continent.",
+    "items": [
+      {
+        "id": "data-policy",
+        "title": "Data Policy",
+        "icon": "FileText",
+        "description": "Supporting the development and harmonization of data governance policies at continental, regional, and national levels — including data protection, open data, and cross-border data flow frameworks."
+      },
+      {
+        "id": "data-use-cases",
+        "title": "Data Use Cases",
+        "icon": "BarChart3",
+        "description": "Piloting data-driven solutions in priority sectors such as agriculture, health, and climate — demonstrating how strong data governance creates tangible value for citizens and businesses."
+      },
+      {
+        "id": "digital-investment",
+        "title": "Digital Investment Facility",
+        "icon": "Landmark",
+        "description": "Providing financial instruments and technical assistance to support digital infrastructure, data platforms, and innovative enterprises that strengthen Africa's data ecosystem."
+      }
+    ]
+  },
+  "partners": {
+    "sectionTitle": "Initiative Partners",
+    "funders": {
+      "title": "Funded By",
+      "members": [
+        { "id": "eu", "name": "European Union", "flag": "🇪🇺" },
+        { "id": "germany", "name": "Germany", "flag": "🇩🇪" },
+        { "id": "finland", "name": "Finland", "flag": "🇫🇮" },
+        { "id": "belgium", "name": "Belgium", "flag": "🇧🇪" },
+        { "id": "france", "name": "France", "flag": "🇫🇷" },
+        { "id": "estonia", "name": "Estonia", "flag": "🇪🇪" }
+      ]
+    },
+    "implementingPartners": {
+      "title": "Implementing Partners",
+      "members": [
+        { "id": "enabel", "name": "Enabel", "websiteUrl": "https://www.enabel.be" },
+        { "id": "digital-africa", "name": "Digital Africa", "websiteUrl": "https://digital-africa.co" },
+        { "id": "giz", "name": "GIZ", "websiteUrl": "https://www.giz.de" },
+        { "id": "estdev", "name": "ESTDEV", "websiteUrl": "https://estdev.ee" },
+        { "id": "expertise-france", "name": "Expertise France", "websiteUrl": "https://www.expertisefrance.fr" },
+        { "id": "haus", "name": "HAUS", "websiteUrl": "https://haus.fi" }
+      ]
+    }
+  },
+  "resources": {
+    "title": "Resources",
+    "factsheet": {
+      "title": "Initiative Factsheet",
+      "description": "Download the official D4D Hub factsheet for a comprehensive overview of the Data Governance in Africa initiative.",
+      "url": "https://d4dhub.eu/initiatives/data-governance-in-africa",
+      "ctaText": "View on D4D Hub"
+    }
+  },
+  "ui": {
+    "learnMore": "Learn More",
+    "viewPartners": "View All Partners",
+    "downloadFactsheet": "View on D4D Hub",
+    "backToPartners": "Back to Partners"
+  }
+}

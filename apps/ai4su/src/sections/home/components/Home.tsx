@@ -1,19 +1,17 @@
 import type { HomeProps } from '@/../product/sections/home/types'
 import { HeroSection } from './HeroSection'
 import { KPIGrid } from './KPIGrid'
-import { ToolboxHighlight } from './ToolboxHighlight'
+import { AboutSection } from './AboutSection'
 import { SectionPreviews } from './SectionPreviews'
 
 export function Home({
   hero,
   kpis,
   kpiSection,
-  featuredModels,
-  toolboxHighlight,
+  about,
   sectionPreviews,
   onCtaClick,
   onKpiClick,
-  onModelClick,
   onSectionClick,
 }: HomeProps) {
   return (
@@ -31,13 +29,8 @@ export function Home({
         onKpiClick={onKpiClick}
       />
 
-      {/* Toolbox Highlight */}
-      <ToolboxHighlight
-        featuredModels={featuredModels}
-        toolboxHighlight={toolboxHighlight}
-        onModelClick={onModelClick}
-        onViewAllClick={() => onCtaClick?.('/models')}
-      />
+      {/* About AI4Startups */}
+      <AboutSection about={about} />
 
       {/* Section Previews */}
       <SectionPreviews

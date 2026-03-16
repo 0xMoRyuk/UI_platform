@@ -15,7 +15,7 @@ export function TeamEuropeGrid({ teamEurope, onMemberClick }: TeamEuropeGridProp
       </p>
 
       <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-        {teamEurope.members.map((member) => (
+        {teamEurope.members.filter((m) => m.id !== 'eu').map((member) => (
           <button
             key={member.id}
             onClick={() => onMemberClick?.(member.id, member.websiteUrl)}

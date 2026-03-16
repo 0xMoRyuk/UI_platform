@@ -2,6 +2,22 @@
 // Data Types
 // =============================================================================
 
+export interface AboutPhoto {
+  id: string
+  url: string
+  caption: string
+  featured?: boolean
+}
+
+export interface HomeAbout {
+  title: string
+  paragraphs: string[]
+  datagovLink: string
+  datagovLinkText: string
+  countriesFootnote: string
+  photos: AboutPhoto[]
+}
+
 export interface StatItem {
   value: string
   label: string
@@ -78,10 +94,12 @@ export interface HomeProps {
   kpis: KPI[]
   /** KPI section title and description */
   kpiSection: KPISectionContent
+  /** About section content */
+  about: HomeAbout
   /** Featured AI models for Toolbox preview */
-  featuredModels: FeaturedModel[]
+  featuredModels?: FeaturedModel[]
   /** Toolbox highlight section content */
-  toolboxHighlight: ToolboxHighlightContent
+  toolboxHighlight?: ToolboxHighlightContent
   /** Preview cards for other sections */
   sectionPreviews: SectionPreview[]
   /** Countries for optional map display */

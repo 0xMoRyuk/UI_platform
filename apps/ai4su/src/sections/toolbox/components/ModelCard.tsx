@@ -1,10 +1,16 @@
-import { Github, ExternalLink } from 'lucide-react'
+import { ArrowRight, Trophy } from 'lucide-react'
 import { Badge } from '@ui-platform/ui/components/badge'
 import type { ModelCardProps } from '@/../product/sections/toolbox/types'
 import { countryFlags } from '../../../shared/lookups'
 import toolboxDataRaw from '../../../../product/sections/toolbox/data.json'
+import hackathonsDataRaw from '../../../../product/sections/hackathons/data.json'
 
 const ui = (toolboxDataRaw as Record<string, unknown>).ui as Record<string, string>
+
+const hackathonNames: Record<string, string> = Object.fromEntries(
+  ((hackathonsDataRaw as Record<string, unknown>).hackathons as { id: string; name: string }[])
+    .map((h) => [h.id, h.name])
+)
 
 export function ModelCard({ model, onClick }: ModelCardProps) {
   return (
@@ -35,11 +41,18 @@ export function ModelCard({ model, onClick }: ModelCardProps) {
         {model.shortDescription}
       </p>
 
-      {/* GitHub link indicator */}
+      {/* Hackathon origin */}
+      {model.hackathonId && hackathonNames[model.hackathonId] && (
+        <div className="flex items-center gap-1.5 text-xs text-stone-400 dark:text-stone-500 mb-3">
+          <Trophy className="w-3 h-3" />
+          <span>{hackathonNames[model.hackathonId]}</span>
+        </div>
+      )}
+
+      {/* Detail link indicator */}
       <div className="flex items-center gap-2 text-sm text-stone-500 dark:text-stone-500 group-hover:text-brand-primary dark:group-hover:text-brand-secondary transition-colors">
-        <Github className="w-4 h-4" />
+        <ArrowRight className="w-4 h-4" />
         <span>{ui.viewOnGithub}</span>
-        <ExternalLink className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
       </div>
 
       {/* Hover gradient overlay */}

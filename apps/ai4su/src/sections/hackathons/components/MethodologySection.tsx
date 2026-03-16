@@ -1,11 +1,11 @@
-import { Lightbulb, Users, Code, Presentation } from 'lucide-react'
+import { Lightbulb, Globe, Users, Share2 } from 'lucide-react'
 import type { MethodologySectionProps } from '@/../product/sections/hackathons/types'
 
-const iconMap = {
+const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   lightbulb: Lightbulb,
+  globe: Globe,
   users: Users,
-  code: Code,
-  presentation: Presentation,
+  share: Share2,
 }
 
 export function MethodologySection({ steps, content }: MethodologySectionProps) {

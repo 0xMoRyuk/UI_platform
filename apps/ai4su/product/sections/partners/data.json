@@ -92,22 +92,6 @@
           "Capacity building"
         ],
         "isLead": false
-      },
-      {
-        "id": "giz",
-        "name": "GIZ",
-        "role": "Implementation Partner",
-        "logoUrl": "/logos/giz.svg",
-        "websiteUrl": "https://www.giz.de",
-        "shortDescription": "GIZ is Germany's international cooperation agency for sustainable development.",
-        "fullDescription": "Deutsche Gesellschaft für Internationale Zusammenarbeit (GIZ) supports the German Government in achieving its international cooperation objectives. GIZ contributes expertise in digital transformation, vocational training, and sustainable economic development to the AI4Startups program.",
-        "contributions": [
-          "Technical training programs",
-          "Digital transformation expertise",
-          "Regional coordination in East Africa",
-          "Sustainable development alignment"
-        ],
-        "isLead": false
       }
     ]
   },
