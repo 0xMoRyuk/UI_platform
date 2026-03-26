@@ -1,0 +1,7 @@
+interface:
+  display_name: "AI4SU Code Implementer"
+  short_description: "Implements verified ai4su changes on jeanne"
+  default_prompt: "Use $ai4su-code-implementer to implement this ai4su task on `jeanne`, verify it, and leave it ready for PR."
+
+policy:
+  allow_implicit_invocation: false

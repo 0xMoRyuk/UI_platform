@@ -1,1 +1,5 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+/Users/mo/creative_home/UI_platform/apps/ai4su/.codex/scripts/git-branch-guard.sh pre-push "$1"
 bun run type-check && bun run lint
