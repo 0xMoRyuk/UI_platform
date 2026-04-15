@@ -7,8 +7,10 @@ import type { PartnersPageProps } from '@/../product/sections/partners/types'
 export function Partners({
   pageIntro,
   funders,
+  europeanPartners,
   implementingPartners,
   serviceProviders,
+  challengeProviders,
   onPartnerClick,
 }: PartnersPageProps) {
   return (
@@ -28,11 +30,25 @@ export function Partners({
         onPartnerClick={onPartnerClick}
       />
 
+      {challengeProviders && (
+        <ServiceProvidersSection
+          providers={challengeProviders}
+          onProviderClick={onPartnerClick}
+        />
+      )}
+
       {/* Service Providers */}
       <ServiceProvidersSection
         providers={serviceProviders}
         onProviderClick={onPartnerClick}
       />
+
+      {europeanPartners && (
+        <ServiceProvidersSection
+          providers={europeanPartners}
+          onProviderClick={onPartnerClick}
+        />
+      )}
     </div>
   )
 }

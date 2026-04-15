@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+"$(git rev-parse --show-toplevel)/apps/ai4su/.codex/scripts/git-branch-guard.sh" pre-commit

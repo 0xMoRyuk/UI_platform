@@ -40,9 +40,9 @@ describe('searchModels', () => {
   })
 
   it('filters by text query on name', () => {
-    const result = searchModels({ q: 'AgriYield' })
+    const result = searchModels({ q: 'soil nutrient' })
     expect(result.total).toBeGreaterThanOrEqual(1)
-    expect(result.data.every((m) => m.name.toLowerCase().includes('agriyield'))).toBe(true)
+    expect(result.data.every((m) => m.name.toLowerCase().includes('soil nutrient'))).toBe(true)
   })
 
   it('filters by text query case-insensitively', () => {
@@ -108,7 +108,7 @@ describe('getAvailableFilters', () => {
   it('returns sectors and countries', () => {
     const filters = getAvailableFilters()
     expect(filters.sectors).toHaveLength(6)
-    expect(filters.countries).toHaveLength(8)
+    expect(filters.countries).toHaveLength(3)
     expect(filters.sectors[0]).toHaveProperty('id')
     expect(filters.sectors[0]).toHaveProperty('label')
     expect(filters.countries[0]).toHaveProperty('code')
@@ -141,7 +141,7 @@ describe('getStudyById', () => {
 describe('getAllBestPractices', () => {
   it('returns all best practices', () => {
     const bps = getAllBestPractices()
-    expect(bps).toHaveLength(3)
+    expect(bps).toHaveLength(1)
     expect(bps[0]).toHaveProperty('id')
     expect(bps[0]).toHaveProperty('title')
   })

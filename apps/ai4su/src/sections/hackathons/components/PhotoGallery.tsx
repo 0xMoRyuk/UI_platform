@@ -2,6 +2,7 @@ import { Camera, Image as ImageIcon } from 'lucide-react'
 import { Separator } from '@ui-platform/ui/components/separator'
 import type { PhotoGalleryProps } from '@/../product/sections/hackathons/types'
 import hackathonsDataRaw from '../../../../product/sections/hackathons/data.json'
+import { isRenderableImageUrl } from '@/shared/media'
 
 const ui = (hackathonsDataRaw as Record<string, unknown>).ui as Record<string, string>
 
@@ -31,10 +32,18 @@ export function PhotoGallery({ photos, onPhotoClick }: PhotoGalleryProps) {
                        hover:ring-2 hover:ring-brand-primary hover:ring-offset-2 dark:hover:ring-offset-stone-950
                        transition-all duration-200 ${photo.featured ? 'md:col-span-2 md:row-span-2' : ''}`}
           >
-            {/* Placeholder for image */}
-            <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-stone-200 to-stone-300 dark:from-stone-700 dark:to-stone-800">
-              <ImageIcon className="w-8 h-8 text-stone-400 dark:text-stone-500" />
-            </div>
+            {isRenderableImageUrl(photo.url) ? (
+              <img
+                src={photo.url}
+                alt={photo.caption}
+                className="absolute inset-0 h-full w-full object-cover"
+                loading="lazy"
+              />
+            ) : (
+              <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-stone-200 to-stone-300 dark:from-stone-700 dark:to-stone-800">
+                <ImageIcon className="w-8 h-8 text-stone-400 dark:text-stone-500" />
+              </div>
+            )}
 
             {/* Hover overlay */}
             <div className="absolute inset-0 bg-brand-primary/0 group-hover:bg-brand-primary/60 transition-colors duration-200 flex items-end">

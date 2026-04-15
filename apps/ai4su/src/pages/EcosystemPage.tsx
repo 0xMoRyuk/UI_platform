@@ -46,7 +46,7 @@ function hackathonToActivity(h: Hackathon): Activity {
       h.theme,
     ],
     photos: h.photos.slice(0, 3).map((p) => ({ id: p.id, url: p.url, caption: p.caption })),
-    resources: h.challengeBrief
+    resources: h.challengeBrief?.pdfUrl
       ? [{ title: 'Challenge Brief', type: 'pdf' as const, url: h.challengeBrief.pdfUrl }]
       : [],
   }

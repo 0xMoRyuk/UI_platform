@@ -23,8 +23,9 @@
     "sectionDescription": "AI4Startups is funded under the EU's Global Gateway initiative, part of Team Europe's commitment to digital transformation in Africa.",
     "euAttribution": {
       "text": "Funded by the European Union",
-      "flagUrl": "/logos/eu-flag.svg",
-      "globalGatewayLogo": "/logos/global-gateway.svg",
+      "flagUrl": "/logos/funders/eu-flag.jpg",
+      "globalGatewayLogo": "/logos/funders/global-gateway-logo.png",
+      "dataGovLogo": "/logos/funders/data-gov-logo.png",
       "disclaimer": "This website was created and maintained with the financial support of the European Union. Its contents are the sole responsibility of Digital Africa and do not necessarily reflect the views of the European Union.",
       "initiative": "Global Gateway Initiative"
     },
@@ -55,7 +56,58 @@
         }
       ]
     },
-    "hashtags": ["#TeamEurope", "#GlobalGateway", "#D4DataGOV", "#DataGovernanceAfrica"]
+    "hashtags": [
+      "#TeamEurope",
+      "#GlobalGateway",
+      "#D4DataGOV",
+      "#DataGovernanceAfrica"
+    ]
+  },
+  "europeanPartners": {
+    "sectionTitle": "European Partners",
+    "sectionDescription": "European partners contributing to the wider Data Governance in Africa initiative without directly implementing AI4Startups.",
+    "providers": [
+      {
+        "id": "giz",
+        "name": "GIZ",
+        "logoUrl": "/logos/partners/giz.png",
+        "websiteUrl": "https://www.giz.de/",
+        "description": "Deutsche Gesellschaft fur Internationale Zusammenarbeit (GIZ) GmbH. Implementing partner for Data Governance in Africa.",
+        "services": [
+          "Germany"
+        ]
+      },
+      {
+        "id": "estdev",
+        "name": "ESTDEV",
+        "logoUrl": "/logos/partners/estdev.png",
+        "websiteUrl": "https://estdev.ee/",
+        "description": "Estonian Centre for International Development (ESTDEV). Implementing partner for Data Governance in Africa.",
+        "services": [
+          "Estonia"
+        ]
+      },
+      {
+        "id": "haus",
+        "name": "HAUS",
+        "logoUrl": "/logos/partners/haus.png",
+        "websiteUrl": "https://www.haus.fi/",
+        "description": "HAUS Finnish Institute of Public Management. Implementing partner for Data Governance in Africa.",
+        "services": [
+          "Finland"
+        ]
+      },
+      {
+        "id": "enabel",
+        "name": "Enabel",
+        "logoUrl": "/logos/partners/enabel.png",
+        "websiteUrl": "https://www.enabel.be/",
+        "description": "Belgian development agency (Enabel). Implementing partner for Data Governance in Africa.",
+        "services": [
+          "Belgium"
+        ]
+      }
+    ]
   },
   "implementingPartners": {
     "sectionTitle": "Implementing Partners",
@@ -64,32 +116,26 @@
       {
         "id": "digital-africa",
         "name": "Digital Africa",
-        "role": "Lead Implementing Partner",
-        "logoUrl": "/logos/digital-africa.svg",
-        "websiteUrl": "https://digital-africa.co",
-        "shortDescription": "Digital Africa is a platform initiative that supports tech entrepreneurs across Africa.",
-        "fullDescription": "Digital Africa is a multi-donor platform initiative launched by France in 2018 to support the emergence and growth of African tech startups. As the lead implementing partner for AI4Startups, Digital Africa coordinates program activities, manages partnerships, and ensures alignment with the broader African tech ecosystem. With a network spanning 40+ African countries, Digital Africa brings deep expertise in startup support, ecosystem building, and cross-border collaboration.",
+        "role": "Main implementer (AI4Startups / AI4SU): programme design, coordination, partner management, content + platform delivery",
+        "logoUrl": "/logos/partners/digital-africa.png",
+        "websiteUrl": "https://digital-africa.co/",
+        "shortDescription": "Lead implementer of AI4SU within Data Governance in Africa. Coordinates legal/data-sharing workstream, hackathons (online + event), ecosystem analysis, and dissemination of open-source models & resources.",
+        "fullDescription": "Lead implementer of AI4SU within Data Governance in Africa. Coordinates legal/data-sharing workstream, hackathons (online + event), ecosystem analysis, and dissemination of open-source models & resources.",
         "contributions": [
-          "Program design and coordination",
-          "Hackathon organization",
-          "Startup support and mentorship",
-          "Ecosystem partnerships"
+          "Main implementer (AI4Startups / AI4SU): programme design, coordination, partner management, content + platform delivery"
         ],
         "isLead": true
       },
       {
         "id": "expertise-france",
         "name": "Expertise France",
-        "role": "Implementation Partner",
-        "logoUrl": "/logos/expertise-france.svg",
-        "websiteUrl": "https://www.expertisefrance.fr",
-        "shortDescription": "Expertise France is France's public international cooperation agency.",
-        "fullDescription": "Expertise France designs and implements international cooperation projects. For AI4Startups, Expertise France provides technical expertise in program management, monitoring and evaluation, and ensures compliance with EU funding requirements.",
+        "role": "Co-implementation / donor-side partner (Data Governance in Africa)",
+        "logoUrl": "/logos/partners/expertise-france.png",
+        "websiteUrl": "https://www.expertisefrance.fr/",
+        "shortDescription": "France's public international technical cooperation agency. Co-implements Data Governance in Africa / AI4Startups with Digital Africa, supporting programme management, monitoring & evaluation, and EU compliance/reporting.",
+        "fullDescription": "France's public international technical cooperation agency. Co-implements Data Governance in Africa / AI4Startups with Digital Africa, supporting programme management, monitoring & evaluation, and EU compliance/reporting.",
         "contributions": [
-          "Program management support",
-          "Monitoring and evaluation",
-          "EU compliance and reporting",
-          "Capacity building"
+          "Co-implementation / donor-side partner (Data Governance in Africa)"
         ],
         "isLead": false
       }
@@ -100,36 +146,174 @@
     "sectionDescription": "Specialized partners delivering technical expertise, research, and operational support.",
     "providers": [
       {
+        "id": "daniel-kingston-andrew",
+        "name": "Daniel Kingston Andrew",
+        "logoUrl": null,
+        "websiteUrl": "https://dribbble.com/Techymunched",
+        "description": "Web design support for the AI4SU platform (UI/UX and website implementation support).",
+        "services": [
+          "Web design platform"
+        ]
+      },
+      {
+        "id": "blossom-academy",
+        "name": "Blossom Academy",
+        "logoUrl": "/logos/partners/blossom-academy.png",
+        "websiteUrl": "https://blossom.africa/",
+        "description": "Local delivery partner for Ghana in-person hackathons: mobilisation, venue/logistics, mentors/jury coordination, event execution.",
+        "services": [
+          "Event hackathon delivery partner"
+        ]
+      },
+      {
+        "id": "impact-hub-nairobi",
+        "name": "Impact Hub Nairobi",
+        "logoUrl": "/logos/partners/impact-hub-nairobi.png",
+        "websiteUrl": "https://nairobi.impacthub.net/",
+        "description": "Local delivery partner for Kenya in-person hackathons: mobilisation, venue/logistics, mentors/jury coordination, event execution.",
+        "services": [
+          "Event hackathon delivery partner"
+        ]
+      },
+      {
+        "id": "women-who-build-africa-wwba",
+        "name": "Women Who Build Africa (WWBA)",
+        "logoUrl": "/logos/partners/wwba.jpeg",
+        "websiteUrl": "https://www.womenwhobuild.africa/",
+        "description": "Women founders support: community mobilisation, sessions/events, and pipeline support for women-led startups within AI4SU.",
+        "services": [
+          "Women founders support"
+        ]
+      },
+      {
+        "id": "cage-patrick-company-advocates",
+        "name": "Cage Patrick & Company Advocates",
+        "logoUrl": "/logos/partners/cage.jpeg",
+        "websiteUrl": "https://cagepatrick.com/",
+        "description": "Provided legal support and templates (incl. data sharing agreement) to enable trusted startup data sharing during AI4SU.",
+        "services": [
+          "Legal support / data sharing agreement template"
+        ]
+      },
+      {
+        "id": "abze",
+        "name": "Abze",
+        "logoUrl": "/logos/partners/abze.png",
+        "websiteUrl": "https://www.abzeafrica.com/",
+        "description": "Co-delivered women founders support activities and events (with WWBA) for AI4SU.",
+        "services": [
+          "Women founders support / events"
+        ]
+      },
+      {
         "id": "data354",
-        "name": "Data354",
-        "logoUrl": "/logos/data354.svg",
-        "websiteUrl": "https://data354.com",
-        "description": "Data analytics and AI consulting firm specializing in African markets. Data354 provides technical support for hackathon organization, data partnerships, and ecosystem mapping.",
-        "services": ["Hackathon technical support", "Data partnerships", "Ecosystem mapping"]
+        "name": "data354",
+        "logoUrl": "/logos/partners/data354.png",
+        "websiteUrl": "https://data354.com/",
+        "description": "Partner for the 'Data without Borders' regulatory workshop/event and production of the associated policy brief.",
+        "services": [
+          "Regulatory event / policy brief partner"
+        ]
       },
       {
         "id": "briter",
-        "name": "Briter Intelligence",
-        "logoUrl": "/logos/briter.svg",
-        "websiteUrl": "https://briterintelligence.com",
-        "description": "Research and intelligence firm focused on African tech ecosystems. Briter conducts the AI readiness studies and provides data-driven insights for program design.",
-        "services": ["AI readiness research", "Ecosystem analysis", "Impact measurement"]
+        "name": "Briter",
+        "logoUrl": "/logos/partners/briter.jpg",
+        "websiteUrl": "https://www.briter.co/",
+        "description": "Delivered the ecosystem mapping & analysis study (insights, interviews, and report) supporting AI4SU ecosystem understanding.",
+        "services": [
+          "Ecosystem mapping study"
+        ]
       },
       {
-        "id": "aws",
-        "name": "Amazon Web Services",
-        "logoUrl": "/logos/aws.svg",
-        "websiteUrl": "https://aws.amazon.com",
-        "description": "Cloud computing partner providing infrastructure credits and technical training for hackathon participants and winning teams.",
-        "services": ["Cloud credits", "Technical training", "Infrastructure support"]
+        "id": "zindi",
+        "name": "Zindi",
+        "logoUrl": "/logos/partners/zindi.png",
+        "websiteUrl": "https://zindi.africa/",
+        "description": "Platform hosting online AI4SU hackathons; competition setup, participant management, leaderboard/scoring, and publication of open resources.",
+        "services": [
+          "Online hackathon platform"
+        ]
+      }
+    ]
+  },
+  "challengeProviders": {
+    "sectionTitle": "Challenge Providers",
+    "sectionDescription": "Startups that provided the datasets and problem statements behind the AI4SU hackathons and online challenges.",
+    "providers": [
+      {
+        "id": "farmsawa",
+        "name": "FarmSAWA",
+        "logoUrl": "/logos/partners/farmsawa.png",
+        "websiteUrl": "https://www.farmsawa.org/",
+        "description": "Kenyan AI-powered agronomic advisory platform (WhatsApp). Provided dataset/challenge for AI4SU in-person hackathon(s) focused on inclusive credit scoring / climate & market resilience.",
+        "services": [
+          "Climate & market resilience",
+          "Inclusive credit scoring"
+        ]
       },
       {
-        "id": "google",
-        "name": "Google for Startups",
-        "logoUrl": "/logos/google-startups.svg",
-        "websiteUrl": "https://startup.google.com",
-        "description": "Startup support partner providing Google Cloud credits, mentorship, and access to Google's startup network.",
-        "services": ["Cloud credits", "Mentorship", "Network access"]
+        "id": "agribora",
+        "name": "AgriBORA",
+        "logoUrl": "/logos/partners/agribora.png",
+        "websiteUrl": "https://agribora.com/",
+        "description": "Kenyan agri-fintech/digital agriculture platform. Provided dataset/challenge for AI4SU online hackathon on weekly maize price forecasting.",
+        "services": [
+          "Maize price intelligence"
+        ]
+      },
+      {
+        "id": "farm-to-feed",
+        "name": "Farm to Feed",
+        "logoUrl": "/logos/partners/farm-to-feed.png",
+        "websiteUrl": "https://farmtofeedkenya.com/",
+        "description": "Kenyan food supply chain / produce distribution startup. Provided dataset/challenge for AI4SU online hackathon on produce recommendation systems to reduce food waste.",
+        "services": [
+          "Produce recommendations",
+          "Food waste reduction"
+        ]
+      },
+      {
+        "id": "afrimash",
+        "name": "Afrimash",
+        "logoUrl": "/logos/partners/afrimash.png",
+        "websiteUrl": "https://afrimash.com/",
+        "description": "Agri-ecommerce startup (Ghana). Provided customer/transaction data for AI4SU in-person hackathon challenge on segmentation, retention, and lifetime value intelligence.",
+        "services": [
+          "Customer retention",
+          "Agri-ecommerce intelligence"
+        ]
+      },
+      {
+        "id": "digicow",
+        "name": "DigiCow",
+        "logoUrl": "/logos/partners/digicow.png",
+        "websiteUrl": "https://digicow.co.ke/",
+        "description": "Kenyan agritech app supporting farmers (training/extension & farm management). Provided dataset/challenge for AI4SU online hackathon on predicting practice adoption.",
+        "services": [
+          "Practice adoption prediction"
+        ]
+      },
+      {
+        "id": "rhea",
+        "name": "Rhea",
+        "logoUrl": "/logos/partners/rhea.png",
+        "websiteUrl": "https://www.rhea.africa/",
+        "description": "Kenyan soil health management company. Provided dataset/challenge for AI4SU online hackathon on soil nutrient prediction.",
+        "services": [
+          "Soil nutrient prediction"
+        ]
+      },
+      {
+        "id": "tolbi",
+        "name": "Tolbi",
+        "logoUrl": "/logos/partners/tolbi.png",
+        "websiteUrl": "https://tolbi.ai/",
+        "description": "Climate-Agtech using satellite imagery and AI for precision agriculture. Provided dataset/challenge for AI4SU online hackathon on crop classification (satellite).",
+        "services": [
+          "Crop classification",
+          "Satellite imagery"
+        ]
       }
     ]
   },
@@ -158,7 +342,13 @@
     "primary": "Primary"
   },
   "socialLinks": {
-    "hashtags": ["#AI4Startups", "#D4DataGOV", "#DataGovernanceAfrica", "#TeamEurope", "#GlobalGateway"],
+    "hashtags": [
+      "#AI4Startups",
+      "#D4DataGOV",
+      "#DataGovernanceAfrica",
+      "#TeamEurope",
+      "#GlobalGateway"
+    ],
     "twitter": "https://twitter.com/Digital_Africa",
     "linkedin": "https://linkedin.com/company/digital-africa"
   }

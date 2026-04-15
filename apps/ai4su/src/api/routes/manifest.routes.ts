@@ -67,11 +67,14 @@ const manifest = {
     {
       id: 'search-activities',
       name: 'Search Activities',
-      description: 'Search ecosystem activities (events, research, workshops, women-founders programs).',
+      description: 'Search ecosystem activities (events, research, workshops, networking, and capacity-building sessions).',
       endpoint: '/api/activities',
       method: 'GET',
       parameters: {
-        type: { type: 'string', description: 'Activity type (event, research, workshop, women-founders)' },
+        type: {
+          type: 'string',
+          description: 'Activity type (event, research, workshop, hackathon, networking, capacity building)',
+        },
         country: { type: 'string', description: 'Country code filter' },
         page: { type: 'integer', description: 'Page number (default: 1)' },
         limit: { type: 'integer', description: 'Items per page (default: 20)' },

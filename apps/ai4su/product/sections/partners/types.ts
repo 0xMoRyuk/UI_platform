@@ -12,6 +12,7 @@ export interface EUAttribution {
   text: string
   flagUrl: string
   globalGatewayLogo: string
+  dataGovLogo: string
   disclaimer: string
   initiative: string
 }
@@ -59,13 +60,19 @@ export interface ImplementingPartners {
 export interface ServiceProvider {
   id: string
   name: string
-  logoUrl: string
+  logoUrl: string | null
   websiteUrl: string
   description: string
   services: string[]
 }
 
 export interface ServiceProviders {
+  sectionTitle: string
+  sectionDescription: string
+  providers: ServiceProvider[]
+}
+
+export interface ChallengeProviders {
   sectionTitle: string
   sectionDescription: string
   providers: ServiceProvider[]
@@ -94,10 +101,14 @@ export interface PartnersPageProps {
   pageIntro: PageIntro
   /** EU/Team Europe funding section */
   funders: Funders
+  /** European partners section */
+  europeanPartners?: ServiceProviders
   /** Implementing partners section */
   implementingPartners: ImplementingPartners
   /** Service providers section */
   serviceProviders: ServiceProviders
+  /** Startup challenge providers section */
+  challengeProviders?: ChallengeProviders
   /** DataGov Initiative callout */
   datagovInitiative: DatagovInitiative
   /** Social media links */
@@ -137,6 +148,11 @@ export interface ImplementingPartnersSectionProps {
   onPartnerClick?: (partnerId: string, url: string) => void
 }
 
+export interface EuropeanPartnersSectionProps {
+  providers: ServiceProviders
+  onProviderClick?: (providerId: string, url: string) => void
+}
+
 export interface LeadPartnerCardProps {
   partner: ImplementingPartner
   onClick?: () => void
@@ -148,7 +164,7 @@ export interface PartnerCardProps {
 }
 
 export interface ServiceProvidersSectionProps {
-  providers: ServiceProviders
+  providers: ServiceProviders | ChallengeProviders
   onProviderClick?: (providerId: string, url: string) => void
 }
 

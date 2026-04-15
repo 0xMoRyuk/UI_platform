@@ -26,15 +26,17 @@ export function ChallengeBriefSection({ challengeBrief, onDownload }: ChallengeB
           {challengeBrief.summary}
         </p>
 
-        <Button
-          onClick={() => onDownload(challengeBrief.pdfUrl)}
-          className="gap-3 px-6 py-3 h-auto bg-brand-accent text-brand-accent-foreground font-bold rounded-lg
-                   hover:bg-[#FFE066] shadow-lg shadow-brand-accent/25"
-        >
-          <FileText className="w-5 h-5" />
-          <span>{ui.downloadChallengeBrief}</span>
-          <Download className="w-4 h-4" />
-        </Button>
+        {challengeBrief.pdfUrl && (
+          <Button
+            onClick={() => onDownload(challengeBrief.pdfUrl!)}
+            className="gap-3 px-6 py-3 h-auto bg-brand-accent text-brand-accent-foreground font-bold rounded-lg
+                     hover:bg-[#FFE066] shadow-lg shadow-brand-accent/25"
+          >
+            <FileText className="w-5 h-5" />
+            <span>{ui.downloadChallengeBrief}</span>
+            <Download className="w-4 h-4" />
+          </Button>
+        )}
       </div>
     </section>
   )

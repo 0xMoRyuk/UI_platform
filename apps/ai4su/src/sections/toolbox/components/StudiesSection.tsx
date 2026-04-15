@@ -1,4 +1,5 @@
 import { Download, FileText, CheckCircle, Trophy } from 'lucide-react'
+import { Badge } from '@ui-platform/ui/components/badge'
 import type { StudySectionProps, Study, StudiesSectionContent } from '@/../product/sections/toolbox/types'
 import type { BestPractices } from '@/../product/sections/toolbox/types'
 
@@ -12,6 +13,13 @@ interface StudyCardProps {
   onDownload: () => void
 }
 
+function formatMonthYear(date: string | null | undefined) {
+  if (!date) return null
+  const parsed = new Date(date)
+  if (Number.isNaN(parsed.getTime())) return null
+  return parsed.toLocaleDateString('en-US', { month: 'short', year: 'numeric' })
+}
+
 function StudyCard({ study, content, onDownload }: StudyCardProps) {
   return (
     <div className="group bg-white dark:bg-stone-900 rounded-xl border border-stone-200 dark:border-stone-800 overflow-hidden hover:shadow-lg transition-all duration-300">
@@ -21,11 +29,16 @@ function StudyCard({ study, content, onDownload }: StudyCardProps) {
           <div className="w-10 h-10 rounded-lg bg-white dark:bg-stone-700 flex items-center justify-center shadow-sm">
             <FileText className="w-5 h-5 text-brand-primary" />
           </div>
-          <span className="text-sm font-medium text-stone-600 dark:text-stone-400">{study.partner}</span>
+          <div className="flex flex-col gap-1">
+            <span className="text-sm font-medium text-stone-600 dark:text-stone-400">{study.partner}</span>
+            {study.type && (
+              <Badge variant="secondary" className="w-fit bg-brand-primary/10 text-brand-primary">
+                {study.type}
+              </Badge>
+            )}
+          </div>
         </div>
-        <span className="text-xs text-stone-500 dark:text-stone-500">
-          {new Date(study.publishedDate).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}
-        </span>
+        <span className="text-xs text-stone-500 dark:text-stone-500">{formatMonthYear(study.publishedDate)}</span>
       </div>
 
       {/* Content */}
@@ -85,7 +98,14 @@ function BPCard({ bp, downloadLabel, onDownload }: BPCardProps) {
           <div className="w-10 h-10 rounded-lg bg-white dark:bg-stone-700 flex items-center justify-center shadow-sm">
             <Trophy className="w-5 h-5 text-brand-accent" />
           </div>
-          <span className="text-sm font-medium text-stone-600 dark:text-stone-400">{bp.hackathonName}</span>
+          <div className="flex flex-col gap-1">
+            <span className="text-sm font-medium text-stone-600 dark:text-stone-400">{bp.hackathonName}</span>
+            {bp.type && (
+              <Badge variant="secondary" className="w-fit bg-brand-accent/15 text-brand-primary">
+                {bp.type}
+              </Badge>
+            )}
+          </div>
         </div>
       </div>
 
@@ -126,7 +146,7 @@ function BPCard({ bp, downloadLabel, onDownload }: BPCardProps) {
 interface ResearchSectionProps extends StudySectionProps {
   bestPractices: BestPractices[]
   bestPracticesContent: { downloadLabel: string }
-  onBestPracticesDownload: (id: string, pdfUrl: string) => void
+  onBestPracticesDownload: (id: string, pdfUrl: string | null) => void
 }
 
 export function StudiesSection({

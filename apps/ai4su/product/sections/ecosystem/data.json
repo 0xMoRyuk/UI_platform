@@ -14,244 +14,392 @@
     ]
   },
   "activityTypes": [
-    { "id": "hackathon", "label": "Hackathons", "color": "#f59e0b", "icon": "trophy" },
-    { "id": "event", "label": "Networking Events", "color": "#3b82f6", "icon": "users" },
-    { "id": "research", "label": "Research & Analysis", "color": "#8b5cf6", "icon": "book" },
-    { "id": "workshop", "label": "Workshops & Training", "color": "#22c55e", "icon": "graduation-cap" }
+    {
+      "id": "hackathon",
+      "label": "Hackathons",
+      "color": "#f59e0b",
+      "icon": "trophy"
+    },
+    {
+      "id": "event",
+      "label": "Events",
+      "color": "#3b82f6",
+      "icon": "users"
+    },
+    {
+      "id": "research",
+      "label": "Research",
+      "color": "#8b5cf6",
+      "icon": "book"
+    },
+    {
+      "id": "workshop",
+      "label": "Workshops",
+      "color": "#22c55e",
+      "icon": "graduation-cap"
+    },
+    {
+      "id": "networking",
+      "label": "Networking",
+      "color": "#0f766e",
+      "icon": "users"
+    },
+    {
+      "id": "capacity building",
+      "label": "Capacity Building",
+      "color": "#16a34a",
+      "icon": "graduation-cap"
+    }
   ],
   "activities": [
     {
       "id": "act-001",
-      "title": "Pan-African AI Summit",
+      "title": "Breakfast Roundtable (Africa Tech Summit)",
       "type": "event",
-      "description": "Flagship networking event bringing together AI practitioners, investors, and policymakers from across Africa to discuss the future of AI on the continent.",
-      "fullDescription": "The Pan-African AI Summit convened 300+ participants from 15 African countries for two days of keynotes, panel discussions, and networking. Topics included AI ethics, funding landscape, and cross-border collaboration. The event featured a startup pitch competition with €50,000 in prizes.",
-      "startDate": "2025-04-10",
-      "endDate": "2025-04-11",
+      "description": "Breakfast roundtable at Africa Tech Summit focused on AI in agriculture, food, and climate; market intelligence + discussion.",
+      "fullDescription": "Held during Africa Tech Summit in Nairobi, this roundtable brought together founders and ecosystem stakeholders to discuss where AI can deliver real value in agriculture, food, and climate.\n\nConversations emphasized that data may exist but is often not ready for AI, and that founders benefit from support to clearly frame problems, define use cases, and move from ideas to implementation.",
+      "startDate": "2026-02-13",
+      "endDate": "2026-02-13",
       "location": {
-        "venue": "Kenyatta International Convention Centre",
+        "venue": "To be confirmed",
         "city": "Nairobi",
         "country": "Kenya",
         "countryCode": "KE",
-        "coordinates": [-1.2864, 36.8172]
+        "coordinates": [
+          -1.2864,
+          36.8172
+        ]
       },
-      "participantCount": 320,
-      "highlights": ["15 countries represented", "€50K startup pitch competition", "30+ speakers", "Partnership announcements"],
-      "photos": [
-        { "id": "p1", "url": "/images/ecosystem/summit-keynote.jpg", "caption": "Opening keynote" },
-        { "id": "p2", "url": "/images/ecosystem/summit-networking.jpg", "caption": "Networking session" },
-        { "id": "p3", "url": "/images/ecosystem/summit-panel.jpg", "caption": "AI Ethics panel" }
+      "participantCount": 12,
+      "highlights": [
+        "A breakfast roundtable at Africa Tech Summit in Nairobi, focused on practical AI use cases and the foundations needed for adoption."
       ],
+      "photos": [],
       "resources": []
     },
     {
       "id": "act-002",
-      "title": "AI Readiness Study Launch",
-      "type": "research",
-      "description": "Launch event for the comprehensive AI Readiness study conducted across 8 African countries with partner Briter Intelligence.",
-      "fullDescription": "This research initiative surveyed 500+ startups across 8 countries to assess AI adoption barriers, infrastructure readiness, and skill gaps. The findings inform policy recommendations and program design for AI4Startups initiatives.",
-      "startDate": "2025-06-15",
-      "endDate": "2025-06-15",
+      "title": "Webinar — Founders’ Circle: AI in AgTech",
+      "type": "capacity building",
+      "description": "Founders’ Circle webinar featuring founders from Rhea Soil (Priscilla Wakarera) and Farm2Feed (Anouk Boertien) sharing AI learnings and hackathon experience.",
+      "fullDescription": "This Founders’ Circle brought together entrepreneurs to share practical lessons on implementing AI and navigating product, data, and execution challenges.\n\nFounders exchanged concrete takeaways from their own journeys and discussed what it means to build AI solutions that work across diverse African contexts.",
+      "startDate": "2026-02-27",
+      "endDate": "2026-02-27",
       "location": {
-        "venue": "Virtual + CcHUB Lagos",
-        "city": "Lagos",
-        "country": "Nigeria",
-        "countryCode": "NG",
-        "coordinates": [6.5244, 3.3792]
+        "venue": "Online",
+        "city": "Online",
+        "country": "Online",
+        "countryCode": "ON",
+        "coordinates": [
+          0,
+          0
+        ]
       },
-      "participantCount": 150,
-      "highlights": ["500+ startups surveyed", "8 countries covered", "Policy recommendations", "Open data release"],
-      "photos": [
-        { "id": "p4", "url": "/images/ecosystem/research-launch.jpg", "caption": "Study launch presentation" }
+      "participantCount": 8,
+      "highlights": [
+        "A founders-led conversation sharing practical lessons on building with AI—across different African markets."
       ],
-      "resources": [
-        { "title": "AI Readiness Full Report", "type": "pdf", "url": "/documents/ai-readiness-africa-2025.pdf" },
-        { "title": "Executive Summary", "type": "pdf", "url": "/documents/ai-readiness-summary.pdf" }
-      ],
-      "studyId": "study-001"
+      "photos": [],
+      "resources": []
     },
     {
       "id": "act-003",
-      "title": "Women in AI Bootcamp - Accra",
-      "type": "workshop",
-      "description": "Intensive 5-day bootcamp for women entrepreneurs building AI-powered solutions, featuring technical training and business mentorship.",
-      "fullDescription": "This bootcamp supported 30 women founders with hands-on AI/ML training, product development workshops, and one-on-one mentorship sessions. Participants received cloud credits and ongoing support through the Women Founders network.",
-      "startDate": "2025-05-20",
-      "endDate": "2025-05-24",
+      "title": "Webinar — Agentic AI Strategies",
+      "type": "capacity building",
+      "description": "Capacity-building webinar on Agentic AI strategies in AgTech and Climate Tech, featuring Willy Bogonko (Mastercard).",
+      "fullDescription": "This online session explored Agentic AI strategies and how they can support founders in building more autonomous, efficient processes.\n\nDesigned for a non-technical audience, the webinar focused on translating concepts into concrete business use cases and helped participants identify where agent-like systems could create value in their operations.",
+      "startDate": "2026-01-29",
+      "endDate": "2026-01-29",
       "location": {
-        "venue": "Impact Hub Accra",
-        "city": "Accra",
-        "country": "Ghana",
-        "countryCode": "GH",
-        "coordinates": [5.6037, -0.187]
+        "venue": "Online",
+        "city": "Online",
+        "country": "Online",
+        "countryCode": "ON",
+        "coordinates": [
+          0,
+          0
+        ]
       },
-      "participantCount": 30,
-      "highlights": ["30 women founders", "5-day intensive", "$10K cloud credits per participant", "Ongoing mentorship"],
-      "photos": [
-        { "id": "p5", "url": "/images/ecosystem/women-bootcamp-accra.jpg", "caption": "Bootcamp session" },
-        { "id": "p6", "url": "/images/ecosystem/women-graduation.jpg", "caption": "Graduation ceremony" }
+      "participantCount": 18,
+      "highlights": [
+        "A practical webinar exploring Agentic AI—what it is, why it matters, and how founders can apply it in real workflows."
       ],
+      "photos": [],
       "resources": []
     },
     {
       "id": "act-004",
-      "title": "Data Governance Workshop",
-      "type": "workshop",
-      "description": "Two-day workshop on data governance best practices for AI development, co-hosted with the African Union.",
-      "fullDescription": "Legal experts, technologists, and policymakers gathered to discuss data protection frameworks, cross-border data flows, and ethical AI guidelines. The workshop produced a set of recommendations for harmonizing data governance across African nations.",
-      "startDate": "2025-07-08",
-      "endDate": "2025-07-09",
+      "title": "Webinar — Ag + Climate AI",
+      "type": "capacity building",
+      "description": "Capacity-building webinar introducing AI in AgTech and Climate Tech, led by Leonida Mutuku (Local Development Research Institute).",
+      "fullDescription": "This online session introduced real-world AI use cases in AgTech and Climate Tech, with an emphasis on how founders can move from experimentation to impact.\n\nThe discussion also addressed common barriers—such as limited access to structured data, talent, and resources—and shared practical ways to start building AI-enabled products.",
+      "startDate": "2025-11-04",
+      "endDate": "2025-11-04",
       "location": {
-        "venue": "African Union Headquarters",
-        "city": "Addis Ababa",
-        "country": "Ethiopia",
-        "countryCode": "ET",
-        "coordinates": [9.0054, 38.7636]
+        "venue": "Online",
+        "city": "Online",
+        "country": "Online",
+        "countryCode": "ON",
+        "coordinates": [
+          0,
+          0
+        ]
       },
-      "participantCount": 80,
-      "highlights": ["AU partnership", "Policy recommendations", "15 countries represented", "Draft guidelines produced"],
-      "photos": [
-        { "id": "p7", "url": "/images/ecosystem/governance-workshop.jpg", "caption": "Workshop session" }
+      "participantCount": 17,
+      "highlights": [
+        "An introductory webinar showcasing practical AI applications in AgTech and Climate Tech—and what it takes to get started."
       ],
-      "resources": [
-        { "title": "Data Governance Recommendations", "type": "pdf", "url": "/documents/data-governance-recommendations.pdf" }
-      ]
+      "photos": [],
+      "resources": []
     },
     {
       "id": "act-005",
-      "title": "Francophone AI Meetup",
-      "type": "event",
-      "description": "Quarterly meetup series for French-speaking AI practitioners in West Africa.",
-      "fullDescription": "The Francophone AI Meetup brings together developers, researchers, and entrepreneurs from Senegal, Côte d'Ivoire, and neighboring countries. This edition featured demos of locally-developed AI models and discussions on NLP for African languages.",
-      "startDate": "2025-08-22",
-      "endDate": "2025-08-22",
+      "title": "Johannesburg Founders Day — Capacity Building",
+      "type": "capacity building",
+      "description": "Capacity-building sessions during WWBA Founders Day in Johannesburg with AI-focused breakouts for ag & climate founders.",
+      "fullDescription": "These Johannesburg capacity-building sessions supported women founders with practical guidance on applying AI in agtech and climate tech.\n\nParticipants explored how to translate business challenges into AI opportunities, what “AI-ready” data looks like, and how to think about responsible AI—while connecting with peers and practitioners.",
+      "startDate": "2025-10-23",
+      "endDate": "2025-10-23",
       "location": {
-        "venue": "CTIC Dakar",
-        "city": "Dakar",
-        "country": "Senegal",
-        "countryCode": "SN",
-        "coordinates": [14.6928, -17.4467]
+        "venue": "To be confirmed",
+        "city": "Johannesburg",
+        "country": "South Africa",
+        "countryCode": "ZA",
+        "coordinates": [
+          -26.2041,
+          28.0473
+        ]
       },
-      "participantCount": 60,
-      "highlights": ["Francophone focus", "Local AI demos", "NLP discussions", "Community building"],
-      "photos": [
-        { "id": "p8", "url": "/images/ecosystem/francophone-meetup.jpg", "caption": "Meetup presentations" }
+      "participantCount": 54,
+      "highlights": [
+        "Interactive sessions in Johannesburg helping women founders build the skills and confidence to move from AI ideas to real implementation."
       ],
+      "photos": [],
       "resources": []
     },
     {
       "id": "act-006",
-      "title": "Women Founders Pitch Day - Lagos",
-      "type": "workshop",
-      "description": "Pitch competition for women-led AI startups with €30,000 in prizes and investor introductions.",
-      "fullDescription": "Fifteen women founders pitched their AI startups to a panel of investors and industry experts. The event included pitch coaching, investor networking, and follow-up mentorship for all participants.",
-      "startDate": "2025-09-18",
-      "endDate": "2025-09-18",
+      "title": "Accra Networking Dinner",
+      "type": "networking",
+      "description": "Networking dinner in Accra for women founders, investors, and ecosystem partners across food/ag, climate, and energy; discussion on localization and culture shaping AI adoption.",
+      "fullDescription": "This Accra dinner convened women founders, investors, and ecosystem partners across food/ag, climate, and energy to exchange experiences and build trust-based connections.\n\nDiscussions highlighted the importance of tailoring AI solutions to local realities and the value of cross-market networks to help founders learn, partner, and scale.",
+      "startDate": "2025-11-06",
+      "endDate": "2025-11-06",
       "location": {
-        "venue": "Landmark Event Centre",
-        "city": "Lagos",
-        "country": "Nigeria",
-        "countryCode": "NG",
-        "coordinates": [6.4281, 3.4219]
+        "venue": "To be confirmed",
+        "city": "Accra",
+        "country": "Ghana",
+        "countryCode": "GH",
+        "coordinates": [
+          5.6037,
+          -0.187
+        ]
       },
-      "participantCount": 15,
-      "highlights": ["€30K prize pool", "15 startups pitched", "10 investors present", "3 follow-on investments"],
-      "photos": [
-        { "id": "p9", "url": "/images/ecosystem/women-pitch-lagos.jpg", "caption": "Pitch presentations" },
-        { "id": "p10", "url": "/images/ecosystem/women-winner.jpg", "caption": "Winner announcement" }
+      "participantCount": 22,
+      "highlights": [
+        "A curated dinner in Accra bringing together women founders and ecosystem leaders to discuss AI adoption, local context, and cross-market collaboration."
       ],
+      "photos": [],
       "resources": []
     },
     {
       "id": "act-007",
-      "title": "AI Ethics Roundtable",
-      "type": "workshop",
-      "description": "Expert roundtable on ethical considerations for AI deployment in African contexts.",
-      "fullDescription": "Ethicists, technologists, civil society representatives, and government officials discussed bias in AI systems, algorithmic accountability, and culturally-appropriate AI design. The roundtable produced an ethics checklist for African AI developers.",
-      "startDate": "2025-10-05",
-      "endDate": "2025-10-05",
+      "title": "Nairobi Founders Day — Capacity Building",
+      "type": "capacity building",
+      "description": "Capacity-building sessions delivered during WWBA Founders Day focused on AI + data for ag & climate founders.",
+      "fullDescription": "These capacity-building sessions supported women founders working in agtech and climate tech to better understand how AI can create value for their businesses.\n\nThe program covered how to identify relevant use cases, prepare data for AI projects, and approach responsible AI and investment readiness—through interactive discussions and applied examples.",
+      "startDate": "2025-10-23",
+      "endDate": "2025-10-23",
       "location": {
-        "venue": "University of Cape Town",
-        "city": "Cape Town",
-        "country": "South Africa",
-        "countryCode": "ZA",
-        "coordinates": [-33.9575, 18.4612]
+        "venue": "To be confirmed",
+        "city": "Nairobi",
+        "country": "Kenya",
+        "countryCode": "KE",
+        "coordinates": [
+          -1.2864,
+          36.8172
+        ]
       },
-      "participantCount": 45,
-      "highlights": ["Ethics checklist produced", "Multi-stakeholder dialogue", "Academic partnership", "Open publication"],
-      "photos": [
-        { "id": "p11", "url": "/images/ecosystem/ethics-roundtable.jpg", "caption": "Roundtable discussion" }
+      "participantCount": 75,
+      "highlights": [
+        "Hands-on learning sessions in Nairobi designed to help women founders turn AI curiosity into practical, business-ready projects."
       ],
-      "resources": [
-        { "title": "AI Ethics Checklist for Africa", "type": "pdf", "url": "/documents/ai-ethics-checklist.pdf" }
-      ]
+      "photos": [],
+      "resources": []
     },
     {
       "id": "act-008",
-      "title": "Women in AI Conference - Kigali",
-      "type": "workshop",
-      "description": "Two-day conference celebrating women in AI across Africa with keynotes, workshops, and networking.",
-      "fullDescription": "The inaugural Women in AI Conference brought together 200 women technologists, entrepreneurs, and researchers. The event featured keynotes from leading African women in tech, technical workshops, and a career fair with partner companies.",
-      "startDate": "2025-11-14",
-      "endDate": "2025-11-15",
+      "title": "Nairobi Founders Day — Networking Cocktail",
+      "type": "networking",
+      "description": "Networking cocktail following WWBA Founders Day in Nairobi, connecting founders with investors and ecosystem partners.",
+      "fullDescription": "This networking cocktail offered a dedicated space for women founders, investors, and ecosystem partners to meet, connect, and continue conversations started during the Founders Day sessions.\n\nThe goal was to foster new relationships and spark follow-up opportunities for collaboration within the AI4Startups community.",
+      "startDate": "2025-10-23",
+      "endDate": "2025-10-23",
       "location": {
-        "venue": "Kigali Convention Centre",
-        "city": "Kigali",
-        "country": "Rwanda",
-        "countryCode": "RW",
-        "coordinates": [-1.9403, 29.8739]
+        "venue": "Ikigai Nairobi",
+        "city": "Nairobi",
+        "country": "Kenya",
+        "countryCode": "KE",
+        "coordinates": [
+          -1.2864,
+          36.8172
+        ]
       },
-      "participantCount": 200,
-      "highlights": ["200 attendees", "50% students", "Career fair", "Mentorship matching"],
-      "photos": [
-        { "id": "p12", "url": "/images/ecosystem/women-conf-kigali.jpg", "caption": "Conference opening" },
-        { "id": "p13", "url": "/images/ecosystem/women-workshop.jpg", "caption": "Technical workshop" },
-        { "id": "p14", "url": "/images/ecosystem/women-networking.jpg", "caption": "Networking session" }
+      "participantCount": 95,
+      "highlights": [
+        "A networking moment in Nairobi to help women founders connect with investors and ecosystem partners after a full day of learning."
       ],
+      "photos": [],
       "resources": []
     },
     {
       "id": "act-009",
-      "title": "AI for Climate Research Launch",
-      "type": "research",
-      "description": "Launch of research initiative on AI applications for climate adaptation in Africa.",
-      "fullDescription": "Partnership with climate scientists to explore how AI can support drought prediction, flood early warning, and agricultural adaptation. The research covers Kenya, Senegal, and Morocco with findings to be published in 2026.",
-      "startDate": "2025-12-01",
-      "endDate": "2025-12-01",
+      "title": "Johannesburg Founders Day — Networking Cocktail",
+      "type": "networking",
+      "description": "Networking cocktail following WWBA Founders Day in Johannesburg.",
+      "fullDescription": "This networking cocktail created an informal setting for women founders, investors, and ecosystem actors to connect and build relationships.\n\nIt helped extend the Founders Day experience beyond the sessions, encouraging peer exchange and follow-up conversations within the AI4Startups community.",
+      "startDate": "2025-10-23",
+      "endDate": "2025-10-23",
       "location": {
-        "venue": "Mohammed VI Polytechnic University",
-        "city": "Rabat",
-        "country": "Morocco",
-        "countryCode": "MA",
-        "coordinates": [34.0209, -6.8416]
+        "venue": "Proud Mary Johannesburg",
+        "city": "Johannesburg",
+        "country": "South Africa",
+        "countryCode": "ZA",
+        "coordinates": [
+          -26.2041,
+          28.0473
+        ]
       },
-      "participantCount": 50,
-      "highlights": ["3-country research", "Climate focus", "Academic partnership", "2026 publication planned"],
-      "photos": [
-        { "id": "p15", "url": "/images/ecosystem/climate-research.jpg", "caption": "Research kickoff" }
+      "participantCount": 34,
+      "highlights": [
+        "An evening networking cocktail in Johannesburg to connect women founders with investors and ecosystem partners."
       ],
+      "photos": [],
       "resources": []
     },
     {
       "id": "act-010",
-      "title": "Developer Bootcamp - Cairo",
-      "type": "workshop",
-      "description": "Week-long intensive bootcamp training developers on machine learning fundamentals.",
-      "fullDescription": "Fifty developers participated in hands-on training covering Python, TensorFlow, and practical ML applications. The bootcamp prepared participants for AI4Startups hackathons and provided certificates recognized by partner companies.",
-      "startDate": "2025-08-10",
-      "endDate": "2025-08-16",
+      "title": "Nairobi Networking Event",
+      "type": "networking",
+      "description": "Networking event to introduce AI4Startups and connect women founders, investors, and ecosystem partners in ag & climate.",
+      "fullDescription": "This Nairobi networking evening connected women founders, investors, and ecosystem partners to discuss practical opportunities for AI in agriculture and climate-focused innovation.\n\nThrough informal conversations and peer exchange, participants shared current challenges, emerging use cases, and collaboration opportunities—helping strengthen the AI4Startups community locally.",
+      "startDate": "2025-09-11",
+      "endDate": "2025-09-11",
       "location": {
-        "venue": "Greek Campus Cairo",
-        "city": "Cairo",
-        "country": "Egypt",
-        "countryCode": "EG",
-        "coordinates": [30.0444, 31.2357]
+        "venue": "Crafty Chameleon Brewhouse and Restaurant (159 James Gichuru Road)",
+        "city": "Nairobi",
+        "country": "Kenya",
+        "countryCode": "KE",
+        "coordinates": [
+          -1.2864,
+          36.8172
+        ]
       },
-      "participantCount": 50,
-      "highlights": ["50 developers trained", "Industry certificates", "Job placement support", "Alumni network"],
-      "photos": [
-        { "id": "p16", "url": "/images/ecosystem/bootcamp-cairo.jpg", "caption": "Bootcamp in session" }
+      "participantCount": 32,
+      "highlights": [
+        "An in-person networking evening in Nairobi bringing together women founders, investors, and ecosystem leaders to explore how AI can support agriculture innovation."
       ],
+      "photos": [],
+      "resources": []
+    },
+    {
+      "id": "act-011",
+      "title": "Data Without Borders — Abidjan (Event)",
+      "type": "event",
+      "description": "Data Without Borders day in Abidjan: dialogue between startups, regulators, and experts on barriers to data sharing and actionable solutions.",
+      "fullDescription": "Data Without Borders in Abidjan convened startups, regulators, and ecosystem leaders to discuss how better data access and data sharing can accelerate AI innovation.\n\nBuilding on insights from a startup workshop held in advance, the day focused on practical dialogue: clarifying challenges, sharing perspectives, and identifying actionable pathways—grounded in trust, standards, and governance.",
+      "startDate": "2026-02-05",
+      "endDate": "2026-02-05",
+      "location": {
+        "venue": "Tour postel 2000",
+        "city": "Abidjan",
+        "country": "Ivory Coast",
+        "countryCode": "CI",
+        "coordinates": [
+          5.359952,
+          -4.008256
+        ]
+      },
+      "participantCount": 80,
+      "highlights": [
+        "A multi-stakeholder day in Abidjan bringing together startups, regulators, and experts to unlock data as a growth lever for AI innovation."
+      ],
+      "photos": [],
+      "resources": []
+    },
+    {
+      "id": "act-012",
+      "title": "Data Without Borders — Online Workshop (Startups)",
+      "type": "workshop",
+      "description": "Online workshop (startups) ahead of the Data Without Borders event to identify barriers to data sharing/usage and co-design solution pathways.",
+      "fullDescription": "Ahead of Data Without Borders, this online workshop brought together a small group of startups to discuss the day-to-day challenges of accessing, using, and sharing data.\n\nThrough a participatory format, founders shared concrete examples and explored solution pathways—highlighting the importance of trust, clearer frameworks, and stronger collaboration across the data ecosystem.",
+      "startDate": "2026-02-03",
+      "endDate": "2026-02-03",
+      "location": {
+        "venue": "Online",
+        "city": "Online",
+        "country": "Online",
+        "countryCode": "ON",
+        "coordinates": [
+          0,
+          0
+        ]
+      },
+      "participantCount": 7,
+      "highlights": [
+        "A focused online workshop with startups to surface real barriers to data access and sharing—and explore practical ways forward."
+      ],
+      "photos": [],
+      "resources": []
+    },
+    {
+      "id": "act-013",
+      "title": "Data & Regulatory Landscape study (Patrick Cage)",
+      "type": "research",
+      "description": "Study on data & regulatory landscape for data sharing across AI4SU scope countries, including survey + qualitative interviews and country-by-country legal mapping.",
+      "fullDescription": "Patrick Cage delivered a Data & Regulatory Landscape study for AI4SU to support safer, more consistent data sharing practices across the programme’s scope countries.\n\nThe study combined:\n- A structured survey with startups and ecosystem actors.\n- Qualitative interviews to deepen understanding of constraints, incentives, and real-world practices.\n- A country-by-country mapping of the legal and regulatory frameworks relevant to data access, data sharing, privacy, and compliance.\n\nThe work aimed to:\n- Identify practical regulatory and compliance considerations for startups and data providers.\n- Highlight key differences across countries and what they imply for cross-border data use.\n- Provide recommendations and usable insights for programme activities (including hackathons and open-source outputs).\n\nMain deliverables:\n- Survey instrument + consolidated dataset of responses (for annex use).\n- Interview insights.\n- Final report including per-country legal mapping and recommendations.\n\nFormat: Online / remote research and analysis over the reporting period.",
+      "startDate": "2025-09-25",
+      "endDate": "2026-03-27",
+      "location": {
+        "venue": "Online",
+        "city": "Online",
+        "country": "Online",
+        "countryCode": "ON",
+        "coordinates": [
+          0,
+          0
+        ]
+      },
+      "participantCount": 0,
+      "highlights": [
+        "Survey + interviews + country mapping delivered as a final study/report."
+      ],
+      "photos": [],
+      "resources": []
+    },
+    {
+      "id": "act-014",
+      "title": "Ecosystem mapping Study (Briter)",
+      "type": "research",
+      "description": "Ecosystem mapping study (survey + qualitative interviews) to document the data/AI ecosystem and produce actionable insights.",
+      "fullDescription": "Briter delivered an ecosystem mapping study for AI4SU, combining (i) a survey and (ii) qualitative interviews to document the data/AI ecosystem and extract actionable insights for the programme.\n\nThe work focused on:\n- Building a clear picture of the ecosystem (key actors, dynamics, constraints).\n- Surfacing concrete barriers and enablers for African startups to access and use data.\n- Producing a written report synthesizing findings and recommendations.\n\nMain deliverables:\n- Survey instrument + dataset of responses.\n- Interview guide + qualitative insights.\n- Final report (ecosystem mapping study) with key learnings and recommendations.\n\nFormat: Online / remote research and analysis over the reporting period.",
+      "startDate": "2025-09-25",
+      "endDate": "2026-03-13",
+      "location": {
+        "venue": "Online",
+        "city": "Online",
+        "country": "Online",
+        "countryCode": "ON",
+        "coordinates": [
+          0,
+          0
+        ]
+      },
+      "participantCount": 0,
+      "highlights": [
+        "Ecosystem mapping study delivered (survey + interviews + report)."
+      ],
+      "photos": [],
       "resources": []
     }
   ],
@@ -260,10 +408,26 @@
     "tagline": "Empowering women entrepreneurs to lead Africa's AI revolution",
     "description": "The Women Founders Program provides targeted support for women building AI-powered startups across Africa. Through bootcamps, mentorship, funding access, and community, we're closing the gender gap in African tech.",
     "stats": [
-      { "value": 120, "label": "Women Supported", "suffix": "+" },
-      { "value": 8, "label": "Countries", "suffix": "" },
-      { "value": 15, "label": "Startups Funded", "suffix": "" },
-      { "value": 500, "label": "Mentorship Hours", "suffix": "K+" }
+      {
+        "value": 120,
+        "label": "Women Supported",
+        "suffix": "+"
+      },
+      {
+        "value": 8,
+        "label": "Countries",
+        "suffix": ""
+      },
+      {
+        "value": 15,
+        "label": "Startups Funded",
+        "suffix": ""
+      },
+      {
+        "value": 500,
+        "label": "Mentorship Hours",
+        "suffix": "K+"
+      }
     ],
     "programElements": [
       {
@@ -333,14 +497,51 @@
     ]
   },
   "countries": [
-    { "code": "KE", "name": "Kenya", "coordinates": [-1.2864, 36.8172], "activityCount": 2 },
-    { "code": "NG", "name": "Nigeria", "coordinates": [6.5244, 3.3792], "activityCount": 2 },
-    { "code": "GH", "name": "Ghana", "coordinates": [5.6037, -0.187], "activityCount": 1 },
-    { "code": "SN", "name": "Senegal", "coordinates": [14.6928, -17.4467], "activityCount": 1 },
-    { "code": "RW", "name": "Rwanda", "coordinates": [-1.9403, 29.8739], "activityCount": 1 },
-    { "code": "ZA", "name": "South Africa", "coordinates": [-33.9575, 18.4612], "activityCount": 1 },
-    { "code": "EG", "name": "Egypt", "coordinates": [30.0444, 31.2357], "activityCount": 1 },
-    { "code": "MA", "name": "Morocco", "coordinates": [34.0209, -6.8416], "activityCount": 1 }
+    {
+      "code": "KE",
+      "name": "Kenya",
+      "coordinates": [
+        -1.2864,
+        36.8172
+      ],
+      "activityCount": 4
+    },
+    {
+      "code": "ZA",
+      "name": "South Africa",
+      "coordinates": [
+        -26.2041,
+        28.0473
+      ],
+      "activityCount": 2
+    },
+    {
+      "code": "GH",
+      "name": "Ghana",
+      "coordinates": [
+        5.6037,
+        -0.187
+      ],
+      "activityCount": 1
+    },
+    {
+      "code": "CI",
+      "name": "Ivory Coast",
+      "coordinates": [
+        5.359952,
+        -4.008256
+      ],
+      "activityCount": 1
+    },
+    {
+      "code": "ON",
+      "name": "Online",
+      "coordinates": [
+        0,
+        0
+      ],
+      "activityCount": 6
+    }
   ],
   "ui": {
     "allActivities": "All Activities",
@@ -355,7 +556,12 @@
     "title": "Ecosystem",
     "subtitle": "Building Africa's AI community",
     "description": "Beyond hackathons, we're fostering a vibrant ecosystem through networking events, research initiatives, training workshops, and dedicated support for women founders.",
-    "statsLabels": ["Activities", "Participants", "Countries", "Research Studies"],
-    "researchStudiesValue": "4"
+    "statsLabels": [
+      "Activities",
+      "Participants",
+      "Countries",
+      "Research Studies"
+    ],
+    "researchStudiesValue": "2"
   }
 }

@@ -26,6 +26,7 @@ describe('CountryCodeEnum', () => {
   it('accepts valid country codes', () => {
     expect(CountryCodeEnum.parse('KE')).toBe('KE')
     expect(CountryCodeEnum.parse('NG')).toBe('NG')
+    expect(CountryCodeEnum.parse('CI')).toBe('CI')
   })
 
   it('rejects invalid country code', () => {

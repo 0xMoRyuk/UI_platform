@@ -7,7 +7,7 @@ export const searchModelsTool = {
   parameters: {
     q: { type: 'string' as const, description: 'Text search on name, description, sector' },
     sector: { type: 'string' as const, description: 'Sector filter (agriculture, healthcare, fintech, education, environment, logistics)' },
-    country: { type: 'string' as const, description: 'Country code filter (KE, NG, GH, SN, RW, ZA, EG, MA)' },
+    country: { type: 'string' as const, description: 'Country code filter (KE, NG, GH, SN, RW, ZA, EG, MA, CI)' },
     page: { type: 'number' as const, description: 'Page number (default: 1)' },
     limit: { type: 'number' as const, description: 'Items per page (default: 20, max: 100)' },
   },

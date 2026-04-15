@@ -3,6 +3,7 @@
 import { Link } from 'react-router-dom'
 import { Image as ImageIcon } from 'lucide-react'
 import type { HomeAbout } from '@/../product/sections/home/types'
+import { isRenderableImageUrl } from '@/shared/media'
 
 interface AboutSectionProps {
   about: HomeAbout
@@ -54,10 +55,18 @@ export function AboutSection({ about }: AboutSectionProps) {
                   className={`group relative rounded-xl overflow-hidden bg-stone-200 dark:bg-stone-800 aspect-square
                     ${photo.featured ? 'col-span-2 row-span-2' : ''}`}
                 >
-                  {/* Placeholder gradient */}
-                  <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-stone-200 to-stone-300 dark:from-stone-700 dark:to-stone-800">
-                    <ImageIcon className="w-8 h-8 text-stone-400 dark:text-stone-500" />
-                  </div>
+                  {isRenderableImageUrl(photo.url) ? (
+                    <img
+                      src={photo.url}
+                      alt={photo.caption}
+                      className="absolute inset-0 h-full w-full object-cover"
+                      loading="lazy"
+                    />
+                  ) : (
+                    <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-stone-200 to-stone-300 dark:from-stone-700 dark:to-stone-800">
+                      <ImageIcon className="w-8 h-8 text-stone-400 dark:text-stone-500" />
+                    </div>
+                  )}
 
                   {/* Hover overlay with caption */}
                   <div className="absolute inset-0 bg-brand-primary/0 group-hover:bg-brand-primary/60 transition-colors duration-200 flex items-end">

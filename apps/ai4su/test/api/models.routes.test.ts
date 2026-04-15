@@ -63,7 +63,7 @@ describe('GET /api/models/filters', () => {
     const body = await res.json()
     expect(body.success).toBe(true)
     expect(body.data.sectors).toHaveLength(6)
-    expect(body.data.countries).toHaveLength(8)
+    expect(body.data.countries).toHaveLength(3)
   })
 })
 

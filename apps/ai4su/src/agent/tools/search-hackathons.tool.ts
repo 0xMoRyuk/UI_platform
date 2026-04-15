@@ -5,7 +5,7 @@ export const searchHackathonsTool = {
   name: 'search-hackathons',
   description: 'Search hackathon events, optionally filter by country.',
   parameters: {
-    country: { type: 'string' as const, description: 'Country code filter (KE, NG, GH, SN, RW, ZA, EG, MA)' },
+    country: { type: 'string' as const, description: 'Country code filter (KE, NG, GH, SN, RW, ZA, EG, MA, CI)' },
     page: { type: 'number' as const, description: 'Page number (default: 1)' },
     limit: { type: 'number' as const, description: 'Items per page (default: 20)' },
   },
