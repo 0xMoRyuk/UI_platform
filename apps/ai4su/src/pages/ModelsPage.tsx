@@ -25,14 +25,14 @@ const uiContent = toolboxDataRaw as unknown as {
 export function ModelsPage() {
   const navigate = useNavigate()
 
-  const resolveDocumentUrl = (pdfUrl: string, notionUrl?: string) => {
-    if (pdfUrl && pdfUrl !== 'Information missing' && !pdfUrl.startsWith('file://')) {
+  const resolveDocumentUrl = (pdfUrl: string | null | undefined, notionUrl?: string) => {
+    if (pdfUrl && !pdfUrl.startsWith('file://')) {
       return pdfUrl
     }
     return notionUrl ?? null
   }
 
-  const openDocument = (pdfUrl: string, notionUrl?: string) => {
+  const openDocument = (pdfUrl: string | null | undefined, notionUrl?: string) => {
     const url = resolveDocumentUrl(pdfUrl, notionUrl)
     if (!url) return
     window.open(url, '_blank', 'noopener,noreferrer')

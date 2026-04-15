@@ -23,7 +23,7 @@ export interface HackathonLocation {
 export interface ChallengeBrief {
   title: string
   summary: string
-  pdfUrl: string
+  pdfUrl: string | null
 }
 
 export interface WinningTeam {
@@ -56,7 +56,7 @@ export interface Hackathon {
   teamCount: number
   modelsProduced: number
   modelIds: string[]
-  heroImage: string
+  heroImage: string | null
   challengeBrief: ChallengeBrief
   bestPracticesId: string | null
   partners: string[]

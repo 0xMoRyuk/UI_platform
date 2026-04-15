@@ -20,7 +20,7 @@ export function ProviderCard({ provider, onClick }: ProviderCardProps) {
         <Avatar className="w-12 h-12 rounded-lg shrink-0">
           {isRenderableImageUrl(provider.logoUrl) ? (
             <img
-              src={provider.logoUrl}
+              src={provider.logoUrl!}
               alt={`${provider.name} logo`}
               className="h-full w-full rounded-lg object-contain bg-white p-1.5"
             />

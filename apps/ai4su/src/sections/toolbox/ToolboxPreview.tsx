@@ -24,19 +24,19 @@ export function ToolboxPreview() {
     console.log('GitHub clicked:', modelId, url)
   }
 
-  const handleStudyDownload = (studyId: string, url: string) => {
+  const handleStudyDownload = (studyId: string, url: string | null) => {
     console.log('Study download:', studyId)
-    window.open(url, '_blank', 'noopener,noreferrer')
+    if (url) window.open(url, '_blank', 'noopener,noreferrer')
   }
 
-  const handleBestPracticesDownload = (bpId: string, url: string) => {
+  const handleBestPracticesDownload = (bpId: string, url: string | null) => {
     console.log('Best practices download:', bpId)
-    window.open(url, '_blank', 'noopener,noreferrer')
+    if (url) window.open(url, '_blank', 'noopener,noreferrer')
   }
 
-  const handleFinalReportDownload = (url: string) => {
+  const handleFinalReportDownload = (url: string | null) => {
     console.log('Final report download')
-    window.open(url, '_blank', 'noopener,noreferrer')
+    if (url) window.open(url, '_blank', 'noopener,noreferrer')
   }
 
   return (

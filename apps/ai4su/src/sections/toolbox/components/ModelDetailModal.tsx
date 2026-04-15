@@ -93,18 +93,22 @@ export function ModelDetailModal({ model, isOpen, onClose, onGitHubClick }: Mode
         </div>
 
         {/* Footer */}
-        <Separator />
-        <div className="p-6 bg-stone-50 dark:bg-stone-800/50">
-          <Button
-            onClick={() => onGitHubClick(model.githubUrl)}
-            className="w-full gap-3 px-6 py-4 h-auto bg-brand-primary text-brand-primary-foreground font-semibold rounded-xl
-                     hover:bg-brand-primary-dark"
-          >
-            <Github className="w-5 h-5" />
-            <span>{ui.viewOnGithubFull}</span>
-            <ExternalLink className="w-4 h-4" />
-          </Button>
-        </div>
+        {model.githubUrl && (
+          <>
+            <Separator />
+            <div className="p-6 bg-stone-50 dark:bg-stone-800/50">
+              <Button
+                onClick={() => onGitHubClick(model.githubUrl!)}
+                className="w-full gap-3 px-6 py-4 h-auto bg-brand-primary text-brand-primary-foreground font-semibold rounded-xl
+                         hover:bg-brand-primary-dark"
+              >
+                <Github className="w-5 h-5" />
+                <span>{ui.viewOnGithubFull}</span>
+                <ExternalLink className="w-4 h-4" />
+              </Button>
+            </div>
+          </>
+        )}
       </DialogContent>
     </Dialog>
   )

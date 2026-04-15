@@ -4,9 +4,10 @@ import { Button } from '@ui-platform/ui/components/button'
 import { Badge } from '@ui-platform/ui/components/badge'
 import type { FinalReportCardProps } from '@/../product/sections/toolbox/types'
 
-function formatMonthYear(date: string) {
+function formatMonthYear(date: string | null | undefined) {
+  if (!date) return null
   const parsed = new Date(date)
-  if (Number.isNaN(parsed.getTime())) return 'Information missing'
+  if (Number.isNaN(parsed.getTime())) return null
   return parsed.toLocaleDateString('en-US', {
     month: 'long',
     year: 'numeric',
@@ -44,10 +45,12 @@ export function FinalReportCard({ report, content, onDownload }: FinalReportCard
               </p>
 
               <div className="flex flex-wrap items-center gap-4 text-sm text-white/60">
-                <div className="flex items-center gap-1.5">
-                  <Calendar className="w-4 h-4" />
-                  <span>{formatMonthYear(report.publishedDate)}</span>
-                </div>
+                {formatMonthYear(report.publishedDate) && (
+                  <div className="flex items-center gap-1.5">
+                    <Calendar className="w-4 h-4" />
+                    <span>{formatMonthYear(report.publishedDate)}</span>
+                  </div>
+                )}
                 <div className="flex items-center gap-1.5">
                   <FileText className="w-4 h-4" />
                   <span>{report.pages} {content.pagesLabel}</span>

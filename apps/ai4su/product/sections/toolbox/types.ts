@@ -37,7 +37,7 @@ export interface AIModel {
   technicalRequirements: string
   sector: Sector
   country: CountryCode
-  githubUrl: string
+  githubUrl: string | null
   hackathonId?: string
 }
 
@@ -48,9 +48,9 @@ export interface Study {
   description: string
   partner: string
   partnerLogo: string
-  pdfUrl: string
+  pdfUrl: string | null
   notionUrl?: string
-  publishedDate: string
+  publishedDate: string | null
   keyFindings: string[]
 }
 
@@ -58,9 +58,9 @@ export interface BestPractices {
   id: string
   type?: string
   title: string
-  hackathonId: string
-  hackathonName: string
-  pdfUrl: string
+  hackathonId: string | null
+  hackathonName: string | null
+  pdfUrl: string | null
   notionUrl?: string
   highlights: string[]
 }
@@ -69,9 +69,9 @@ export interface FinalReport {
   type?: string
   title: string
   description: string
-  pdfUrl: string
+  pdfUrl: string | null
   notionUrl?: string
-  publishedDate: string
+  publishedDate: string | null
   pages: number
 }
 
@@ -140,11 +140,11 @@ export interface ToolboxProps {
   /** Called when user clicks GitHub link */
   onGitHubClick?: (modelId: string, url: string) => void
   /** Called when user downloads a study */
-  onStudyDownload?: (studyId: string, url: string) => void
+  onStudyDownload?: (studyId: string, url: string | null) => void
   /** Called when user downloads best practices */
-  onBestPracticesDownload?: (bpId: string, url: string) => void
+  onBestPracticesDownload?: (bpId: string, url: string | null) => void
   /** Called when user downloads final report */
-  onFinalReportDownload?: (url: string) => void
+  onFinalReportDownload?: (url: string | null) => void
 }
 
 // =============================================================================
@@ -182,19 +182,19 @@ export interface ModelDetailModalProps {
 export interface StudySectionProps {
   studies: Study[]
   content: StudiesSectionContent
-  onDownload: (studyId: string, url: string) => void
+  onDownload: (studyId: string, url: string | null) => void
 }
 
 export interface BestPracticesSectionProps {
   bestPractices: BestPractices[]
   content: BestPracticesSectionContent
-  onDownload: (bpId: string, url: string) => void
+  onDownload: (bpId: string, url: string | null) => void
 }
 
 export interface FinalReportCardProps {
   report: FinalReport
   content: FinalReportSectionContent
-  onDownload: (url: string) => void
+  onDownload: (url: string | null) => void
 }
 
 export interface SearchInputProps {

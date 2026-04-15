@@ -13,9 +13,10 @@ interface StudyCardProps {
   onDownload: () => void
 }
 
-function formatMonthYear(date: string) {
+function formatMonthYear(date: string | null | undefined) {
+  if (!date) return null
   const parsed = new Date(date)
-  if (Number.isNaN(parsed.getTime())) return 'Information missing'
+  if (Number.isNaN(parsed.getTime())) return null
   return parsed.toLocaleDateString('en-US', { month: 'short', year: 'numeric' })
 }
 
@@ -145,7 +146,7 @@ function BPCard({ bp, downloadLabel, onDownload }: BPCardProps) {
 interface ResearchSectionProps extends StudySectionProps {
   bestPractices: BestPractices[]
   bestPracticesContent: { downloadLabel: string }
-  onBestPracticesDownload: (id: string, pdfUrl: string) => void
+  onBestPracticesDownload: (id: string, pdfUrl: string | null) => void
 }
 
 export function StudiesSection({

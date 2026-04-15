@@ -63,20 +63,18 @@
         "model-010",
         "model-012"
       ],
-      "heroImage": "file://%7B%22source%22%3A%22attachment%3A78cee2da-dcd7-4776-80c8-6c73627199f4%3A25.jpg%22%2C%22permissionRecord%22%3A%7B%22table%22%3A%22block%22%2C%22id%22%3A%22b7cfed8d-66b4-45ee-b24c-03dc6b940e2b%22%2C%22spaceId%22%3A%22d2f76950-01d8-4d20-882e-48ca2a9c06f0%22%7D%7D",
+      "heroImage": null,
       "challengeBrief": {
         "title": "Climate & Market Resilience",
         "summary": "Can you anticipate climate shocks and market volatility to protect smallholder farmers’ incomes?",
-        "pdfUrl": "Information missing"
+        "pdfUrl": null
       },
       "bestPracticesId": null,
       "partners": [
         "FarmSawa"
       ],
       "winningTeams": [],
-      "outcomes": [
-        "Information missing"
-      ],
+      "outcomes": [],
       "photos": []
     },
     {
@@ -102,20 +100,18 @@
         "model-011",
         "model-013"
       ],
-      "heroImage": "file://%7B%22source%22%3A%22attachment%3A1c4a001e-6309-491a-8514-de20e8d217e2%3A44_(1).jpg%22%2C%22permissionRecord%22%3A%7B%22table%22%3A%22block%22%2C%22id%22%3A%2246cdaf13-98ca-43e9-8711-8c63782472f1%22%2C%22spaceId%22%3A%22d2f76950-01d8-4d20-882e-48ca2a9c06f0%22%7D%7D",
+      "heroImage": null,
       "challengeBrief": {
         "title": "Inclusive Credit Scoring for Smallholder Farmers",
         "summary": "Can you unlock access to agricultural finance for farmers without formal credit histories?",
-        "pdfUrl": "Information missing"
+        "pdfUrl": null
       },
       "bestPracticesId": null,
       "partners": [
         "FarmSawa"
       ],
       "winningTeams": [],
-      "outcomes": [
-        "Information missing"
-      ],
+      "outcomes": [],
       "photos": [
         {
           "id": "hack-lagos-2025-photo-1",
@@ -193,20 +189,18 @@
         "model-005",
         "model-006"
       ],
-      "heroImage": "Information missing",
+      "heroImage": null,
       "challengeBrief": {
         "title": "Customer Segmentation & Retention Intelligence for Agri-Ecommerce",
         "summary": "Can you use customer data to improve retention and increase lifetime value in agri-ecommerce?",
-        "pdfUrl": "Information missing"
+        "pdfUrl": null
       },
       "bestPracticesId": null,
       "partners": [
         "AfriMash"
       ],
       "winningTeams": [],
-      "outcomes": [
-        "Information missing"
-      ],
+      "outcomes": [],
       "photos": [
         {
           "id": "hack-accra-2025-photo-1",
@@ -222,12 +216,12 @@
         {
           "id": "hack-accra-2025-photo-3",
           "url": "/photos/hackathons/accra-2.jpg",
-          "caption": "Information missing"
+          "caption": ""
         },
         {
           "id": "hack-accra-2025-photo-4",
           "url": "/photos/hackathons/accra-3.jpg",
-          "caption": "Information missing"
+          "caption": ""
         },
         {
           "id": "hack-accra-2025-photo-5",
@@ -274,20 +268,18 @@
         "model-002",
         "model-003"
       ],
-      "heroImage": "file://%7B%22source%22%3A%22attachment%3Ac2644886-04ed-444b-9684-ef6ee3ffbcc1%3ACapture_decran_2026-04-01_a_14.42.12.png%22%2C%22permissionRecord%22%3A%7B%22table%22%3A%22block%22%2C%22id%22%3A%227081c124-cd77-4840-8fa3-a775b87ce04e%22%2C%22spaceId%22%3A%22d2f76950-01d8-4d20-882e-48ca2a9c06f0%22%7D%7D",
+      "heroImage": null,
       "challengeBrief": {
         "title": "Soil Nutrient Prediction for Sustainable Farming",
         "summary": "Predict soil nutrients from data and satellite signals to guide better soil-health decisions when lab tests aren’t available.",
-        "pdfUrl": "Information missing"
+        "pdfUrl": null
       },
       "bestPracticesId": null,
       "partners": [
         "Rhea"
       ],
       "winningTeams": [],
-      "outcomes": [
-        "Information missing"
-      ],
+      "outcomes": [],
       "photos": [
         {
           "id": "hack-kigali-2025-photo-1",
@@ -320,20 +312,18 @@
         "model-016",
         "model-017"
       ],
-      "heroImage": "file://%7B%22source%22%3A%22attachment%3Afaa5be9f-4130-49b9-8730-7ed31a31a2b3%3ACapture_decran_2026-04-01_a_14.41.59.png%22%2C%22permissionRecord%22%3A%7B%22table%22%3A%22block%22%2C%22id%22%3A%2263087df9-5d3d-4214-8dbe-3d8eabf0fdb3%22%2C%22spaceId%22%3A%22d2f76950-01d8-4d20-882e-48ca2a9c06f0%22%7D%7D",
+      "heroImage": null,
       "challengeBrief": {
         "title": "Predicting Practice Adoption in Smallholder Farming",
         "summary": "Predict which farmers will turn training into action—so support can be targeted where it’s needed most.",
-        "pdfUrl": "Information missing"
+        "pdfUrl": null
       },
       "bestPracticesId": null,
       "partners": [
         "DigiCow"
       ],
       "winningTeams": [],
-      "outcomes": [
-        "Information missing"
-      ],
+      "outcomes": [],
       "photos": [
         {
           "id": "hack-dakar-2025-photo-1",
@@ -366,20 +356,18 @@
         "model-014",
         "model-018"
       ],
-      "heroImage": "file://%7B%22source%22%3A%22attachment%3Add58f980-7bb7-4a90-8de6-17f30253e62b%3ACapture_decran_2026-04-01_a_14.41.38.png%22%2C%22permissionRecord%22%3A%7B%22table%22%3A%22block%22%2C%22id%22%3A%22e051a405-902c-431f-96ef-133962184db3%22%2C%22spaceId%22%3A%22d2f76950-01d8-4d20-882e-48ca2a9c06f0%22%7D%7D",
+      "heroImage": null,
       "challengeBrief": {
         "title": "Produce Recommendation Systems for Food Waste Reduction",
         "summary": "Predict future shopping baskets to recommend the right fresh produce at the right time—and reduce food waste.",
-        "pdfUrl": "Information missing"
+        "pdfUrl": null
       },
       "bestPracticesId": null,
       "partners": [
         "Farm to Feed"
       ],
       "winningTeams": [],
-      "outcomes": [
-        "Information missing"
-      ],
+      "outcomes": [],
       "photos": [
         {
           "id": "hack-cairo-2025-photo-1",
@@ -412,20 +400,18 @@
         "model-021",
         "model-023"
       ],
-      "heroImage": "file://%7B%22source%22%3A%22attachment%3A8c381414-81ea-49f0-b5f6-ccd1abe4b546%3ACapture_decran_2026-04-01_a_14.41.23.png%22%2C%22permissionRecord%22%3A%7B%22table%22%3A%22block%22%2C%22id%22%3A%22dc83ea5e-de43-4d22-bbbf-08fc452b5f1f%22%2C%22spaceId%22%3A%22d2f76950-01d8-4d20-882e-48ca2a9c06f0%22%7D%7D",
+      "heroImage": null,
       "challengeBrief": {
         "title": "Maize Price Intelligence for Smarter Selling",
         "summary": "Forecast weekly maize prices in Kenya to support smarter selling and more resilient farmer incomes.",
-        "pdfUrl": "Information missing"
+        "pdfUrl": null
       },
       "bestPracticesId": null,
       "partners": [
         "agriBORA"
       ],
       "winningTeams": [],
-      "outcomes": [
-        "Information missing"
-      ],
+      "outcomes": [],
       "photos": [
         {
           "id": "hack-johannesburg-2025-photo-1",
@@ -458,20 +444,18 @@
         "model-022",
         "model-024"
       ],
-      "heroImage": "file://%7B%22source%22%3A%22attachment%3Af7304f75-70a8-4409-9573-a35808c4dc51%3ACapture_decran_2026-04-01_a_14.41.03_1.png%22%2C%22permissionRecord%22%3A%7B%22table%22%3A%22block%22%2C%22id%22%3A%220a99ee30-4c0f-4315-a132-bd3013397ccf%22%2C%22spaceId%22%3A%22d2f76950-01d8-4d20-882e-48ca2a9c06f0%22%7D%7D",
+      "heroImage": null,
       "challengeBrief": {
         "title": "Pixel-Level Crop Classification for Precision Agriculture",
         "summary": "Build a pixel-level satellite imagery model to map cocoa, rubber, and oil palm plantations in Côte d’Ivoire.",
-        "pdfUrl": "Information missing"
+        "pdfUrl": null
       },
       "bestPracticesId": null,
       "partners": [
         "Tolbi"
       ],
       "winningTeams": [],
-      "outcomes": [
-        "Information missing"
-      ],
+      "outcomes": [],
       "photos": [
         {
           "id": "hack-casablanca-2025-photo-1",

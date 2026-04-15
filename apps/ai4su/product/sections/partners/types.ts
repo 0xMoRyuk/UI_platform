@@ -60,7 +60,7 @@ export interface ImplementingPartners {
 export interface ServiceProvider {
   id: string
   name: string
-  logoUrl: string
+  logoUrl: string | null
   websiteUrl: string
   description: string
   services: string[]

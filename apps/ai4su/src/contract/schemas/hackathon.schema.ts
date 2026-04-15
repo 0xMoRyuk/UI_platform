@@ -31,7 +31,7 @@ export const HackathonOutputSchema = z.object({
   teamCount: z.number(),
   modelsProduced: z.number(),
   modelIds: z.array(z.string()),
-  heroImage: z.string(),
+  heroImage: z.string().nullable(),
 })
 
 export type SearchHackathonsInput = z.infer<typeof SearchHackathonsInputSchema>

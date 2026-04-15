@@ -116,20 +116,24 @@ export function ModelDetailPage() {
           )}
 
           {/* GitHub Button */}
-          <Separator className="mb-6" />
-          <div>
-            <Button
-              asChild
-              className="gap-3 px-6 py-4 h-auto bg-brand-primary text-brand-primary-foreground font-semibold rounded-xl
-                       hover:bg-brand-primary-dark w-full sm:w-auto"
-            >
-              <a href={model.githubUrl} target="_blank" rel="noopener noreferrer">
-                <Github className="w-5 h-5" />
-                <span>{ui.viewOnGithubFull}</span>
-                <ExternalLink className="w-4 h-4" />
-              </a>
-            </Button>
-          </div>
+          {model.githubUrl && (
+            <>
+              <Separator className="mb-6" />
+              <div>
+                <Button
+                  asChild
+                  className="gap-3 px-6 py-4 h-auto bg-brand-primary text-brand-primary-foreground font-semibold rounded-xl
+                           hover:bg-brand-primary-dark w-full sm:w-auto"
+                >
+                  <a href={model.githubUrl} target="_blank" rel="noopener noreferrer">
+                    <Github className="w-5 h-5" />
+                    <span>{ui.viewOnGithubFull}</span>
+                    <ExternalLink className="w-4 h-4" />
+                  </a>
+                </Button>
+              </div>
+            </>
+          )}
         </div>
       </div>
     </main>
