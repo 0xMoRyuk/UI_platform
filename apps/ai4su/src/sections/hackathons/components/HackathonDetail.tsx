@@ -1,10 +1,12 @@
 'use client'
 
 import { useState } from 'react'
+import { ExternalLink } from 'lucide-react'
 import { Separator } from '@ui-platform/ui/components/separator'
 import { Button } from '@ui-platform/ui/components/button'
 import type { HackathonDetailPageProps } from '@/../product/sections/hackathons/types'
 import hackathonsDataRaw from '../../../../product/sections/hackathons/data.json'
+import { isOpenableExternalUrl, isRenderableImageUrl } from '@/shared/media'
 
 const ui = (hackathonsDataRaw as Record<string, unknown>).ui as Record<string, string>
 import { ModelCard } from '@/sections/toolbox/components'
@@ -31,6 +33,14 @@ export function HackathonDetail({
   const [currentPhotoId, setCurrentPhotoId] = useState<string | null>(null)
 
   const handlePhotoClick = (photoId: string) => {
+    const photo = hackathon.photos.find((item) => item.id === photoId)
+
+    if (photo && !isRenderableImageUrl(photo.url) && isOpenableExternalUrl(photo.url)) {
+      window.open(photo.url, '_blank', 'noopener,noreferrer')
+      onPhotoClick?.(photoId)
+      return
+    }
+
     setCurrentPhotoId(photoId)
     setLightboxOpen(true)
     onPhotoClick?.(photoId)
@@ -124,6 +134,18 @@ export function HackathonDetail({
           photos={hackathon.photos}
           onPhotoClick={handlePhotoClick}
         />
+
+        {hackathon.photos.length > 0 && !hackathon.photos.some((photo) => isRenderableImageUrl(photo.url)) && (
+          <div className="pb-12">
+            <div className="rounded-xl border border-stone-200 bg-stone-50 p-4 text-sm text-stone-600 dark:border-stone-800 dark:bg-stone-900 dark:text-stone-400">
+              Gallery assets are linked from Notion. Click a photo tile to open the source asset page.
+              <span className="ml-2 inline-flex items-center gap-1 text-brand-primary dark:text-brand-secondary">
+                <ExternalLink className="h-4 w-4" />
+                External source
+              </span>
+            </div>
+          </div>
+        )}
 
         {/* Best Practices Download (if available) */}
         {hackathon.bestPracticesId && (

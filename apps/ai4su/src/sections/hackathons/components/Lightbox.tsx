@@ -5,6 +5,7 @@ import { X, ChevronLeft, ChevronRight, Image as ImageIcon } from 'lucide-react'
 import { Dialog, DialogContent, DialogTitle } from '@ui-platform/ui/components/dialog'
 import { Button } from '@ui-platform/ui/components/button'
 import type { LightboxProps } from '@/../product/sections/hackathons/types'
+import { isRenderableImageUrl } from '@/shared/media'
 
 export function Lightbox({
   photos,
@@ -80,10 +81,17 @@ export function Lightbox({
         {/* Image container */}
         <div className="flex items-center justify-center h-full">
           <div className="max-w-5xl max-h-[80vh] mx-4">
-            {/* Placeholder for image */}
-            <div className="w-full aspect-video bg-stone-800 rounded-lg flex items-center justify-center min-w-[300px] min-h-[200px]">
-              <ImageIcon className="w-16 h-16 text-stone-600" />
-            </div>
+            {isRenderableImageUrl(currentPhoto.url) ? (
+              <img
+                src={currentPhoto.url}
+                alt={currentPhoto.caption}
+                className="max-h-[80vh] max-w-full rounded-lg object-contain"
+              />
+            ) : (
+              <div className="w-full aspect-video bg-stone-800 rounded-lg flex items-center justify-center min-w-[300px] min-h-[200px]">
+                <ImageIcon className="w-16 h-16 text-stone-600" />
+              </div>
+            )}
           </div>
         </div>
 
@@ -111,7 +119,15 @@ export function Lightbox({
               className={`w-12 h-12 rounded-lg overflow-hidden shrink-0 bg-stone-700 flex items-center justify-center
                          ${photo.id === currentPhotoId ? 'ring-2 ring-brand-accent' : 'opacity-50 hover:opacity-100'} transition-opacity`}
             >
-              <ImageIcon className="w-4 h-4 text-stone-500" />
+              {isRenderableImageUrl(photo.url) ? (
+                <img
+                  src={photo.url}
+                  alt={photo.caption}
+                  className="h-full w-full object-cover"
+                />
+              ) : (
+                <ImageIcon className="w-4 h-4 text-stone-500" />
+              )}
             </button>
           ))}
         </div>

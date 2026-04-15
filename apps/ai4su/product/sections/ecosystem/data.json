@@ -351,6 +351,77 @@
       ],
       "photos": [],
       "resources": []
+    },
+    {
+      "id": "act-013",
+      "title": "Data & Regulatory Landscape study (Patrick Cage)",
+      "type": "research",
+      "description": "Study on data & regulatory landscape for data sharing across AI4SU scope countries, including survey + qualitative interviews and country-by-country legal mapping.",
+      "fullDescription": "Patrick Cage delivered a Data & Regulatory Landscape study for AI4SU to support safer, more consistent data sharing practices across the programme’s scope countries.\n\nThe study combined:\n- A structured survey with startups and ecosystem actors.\n- Qualitative interviews to deepen understanding of constraints, incentives, and real-world practices.\n- A country-by-country mapping of the legal and regulatory frameworks relevant to data access, data sharing, privacy, and compliance.\n\nThe work aimed to:\n- Identify practical regulatory and compliance considerations for startups and data providers.\n- Highlight key differences across countries and what they imply for cross-border data use.\n- Provide recommendations and usable insights for programme activities (including hackathons and open-source outputs).\n\nMain deliverables:\n- Survey instrument + consolidated dataset of responses (for annex use).\n- Interview insights.\n- Final report including per-country legal mapping and recommendations.\n\nFormat: Online / remote research and analysis over the reporting period.",
+      "startDate": "2025-09-25",
+      "endDate": "2026-03-27",
+      "location": {
+        "venue": "Online",
+        "city": "Online",
+        "country": "Online",
+        "countryCode": "ON",
+        "coordinates": [
+          0,
+          0
+        ]
+      },
+      "participantCount": 0,
+      "highlights": [
+        "Survey + interviews + country mapping delivered as a final study/report."
+      ],
+      "photos": [],
+      "resources": []
+    },
+    {
+      "id": "act-014",
+      "title": "Ecosystem mapping Study (Briter)",
+      "type": "research",
+      "description": "Ecosystem mapping study (survey + qualitative interviews) to document the data/AI ecosystem and produce actionable insights.",
+      "fullDescription": "Briter delivered an ecosystem mapping study for AI4SU, combining (i) a survey and (ii) qualitative interviews to document the data/AI ecosystem and extract actionable insights for the programme.\n\nThe work focused on:\n- Building a clear picture of the ecosystem (key actors, dynamics, constraints).\n- Surfacing concrete barriers and enablers for African startups to access and use data.\n- Producing a written report synthesizing findings and recommendations.\n\nMain deliverables:\n- Survey instrument + dataset of responses.\n- Interview guide + qualitative insights.\n- Final report (ecosystem mapping study) with key learnings and recommendations.\n\nFormat: Online / remote research and analysis over the reporting period.",
+      "startDate": "2025-09-25",
+      "endDate": "2026-03-13",
+      "location": {
+        "venue": "Online",
+        "city": "Online",
+        "country": "Online",
+        "countryCode": "ON",
+        "coordinates": [
+          0,
+          0
+        ]
+      },
+      "participantCount": 0,
+      "highlights": [
+        "Ecosystem mapping study delivered (survey + interviews + report)."
+      ],
+      "photos": [
+        {
+          "id": "act-014-photo-1",
+          "url": "https://www.notion.so/3430fcf3849480f38f81d2ed2582a9c0",
+          "caption": "Briter image 1"
+        },
+        {
+          "id": "act-014-photo-2",
+          "url": "https://www.notion.so/3430fcf384948059b793f2634ddc2f44",
+          "caption": "Briter image 2"
+        },
+        {
+          "id": "act-014-photo-3",
+          "url": "https://www.notion.so/3430fcf38494803a99a1d0d36f338958",
+          "caption": "Briter image 3"
+        },
+        {
+          "id": "act-014-photo-4",
+          "url": "https://www.notion.so/3430fcf384948056a260daa8f2ed2574",
+          "caption": "Briter image 4"
+        }
+      ],
+      "resources": []
     }
   ],
   "womenFounders": {
@@ -490,7 +561,7 @@
         0,
         0
       ],
-      "activityCount": 4
+      "activityCount": 6
     }
   ],
   "ui": {
@@ -512,6 +583,6 @@
       "Countries",
       "Research Studies"
     ],
-    "researchStudiesValue": "4"
+    "researchStudiesValue": "2"
   }
 }

@@ -25,6 +25,19 @@ const uiContent = toolboxDataRaw as unknown as {
 export function ModelsPage() {
   const navigate = useNavigate()
 
+  const resolveDocumentUrl = (pdfUrl: string, notionUrl?: string) => {
+    if (pdfUrl && pdfUrl !== 'Information missing' && !pdfUrl.startsWith('file://')) {
+      return pdfUrl
+    }
+    return notionUrl ?? null
+  }
+
+  const openDocument = (pdfUrl: string, notionUrl?: string) => {
+    const url = resolveDocumentUrl(pdfUrl, notionUrl)
+    if (!url) return
+    window.open(url, '_blank', 'noopener,noreferrer')
+  }
+
   const handleSearch = (query: string) => {
     console.log('[Models] Search:', query)
   }
@@ -46,7 +59,7 @@ export function ModelsPage() {
     console.log('[Models] Study download:', studyId)
     const study = getStudyById(studyId)
     if (study) {
-      window.open(study.pdfUrl, '_blank')
+      openDocument(study.pdfUrl, study.notionUrl)
     }
   }
 
@@ -54,13 +67,13 @@ export function ModelsPage() {
     console.log('[Models] Best practices download:', bpId)
     const bp = getBestPracticeById(bpId)
     if (bp) {
-      window.open(bp.pdfUrl, '_blank')
+      openDocument(bp.pdfUrl, bp.notionUrl)
     }
   }
 
   const handleFinalReportDownload = () => {
     console.log('[Models] Final report download')
-    window.open(finalReport.pdfUrl, '_blank')
+    openDocument(finalReport.pdfUrl, finalReport.notionUrl)
   }
 
   return (

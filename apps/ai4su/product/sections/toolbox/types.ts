@@ -49,6 +49,7 @@ export interface Study {
   partner: string
   partnerLogo: string
   pdfUrl: string
+  notionUrl?: string
   publishedDate: string
   keyFindings: string[]
 }
@@ -60,6 +61,7 @@ export interface BestPractices {
   hackathonId: string
   hackathonName: string
   pdfUrl: string
+  notionUrl?: string
   highlights: string[]
 }
 
@@ -68,6 +70,7 @@ export interface FinalReport {
   title: string
   description: string
   pdfUrl: string
+  notionUrl?: string
   publishedDate: string
   pages: number
 }

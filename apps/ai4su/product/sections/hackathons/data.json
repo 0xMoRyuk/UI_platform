@@ -116,7 +116,59 @@
       "outcomes": [
         "Information missing"
       ],
-      "photos": []
+      "photos": [
+        {
+          "id": "hack-lagos-2025-photo-1",
+          "url": "/photos/hackathons/lagos-oct-1.jpg",
+          "caption": "Hackathon Impact Hub Farm Sawa oct 1",
+          "featured": true
+        },
+        {
+          "id": "hack-lagos-2025-photo-2",
+          "url": "/photos/hackathons/lagos-oct-2.jpg",
+          "caption": "Hackathon Impact Hub Farm Sawa oct 2"
+        },
+        {
+          "id": "hack-lagos-2025-photo-3",
+          "url": "/photos/hackathons/lagos-oct-3.jpg",
+          "caption": "Hackathon Impact Hub Farm Sawa oct 3"
+        },
+        {
+          "id": "hack-lagos-2025-photo-4",
+          "url": "/photos/hackathons/lagos-oct-4.jpg",
+          "caption": "Hackathon Impact Hub Farm Sawa oct 4"
+        },
+        {
+          "id": "hack-lagos-2025-photo-5",
+          "url": "/photos/hackathons/lagos-oct-5.jpg",
+          "caption": "Hackathon Impact Hub Farm Sawa oct 5"
+        },
+        {
+          "id": "hack-lagos-2025-photo-6",
+          "url": "/photos/hackathons/lagos-dec-1.jpg",
+          "caption": "Hackathon Impact Hub Farm Sawa dec 1"
+        },
+        {
+          "id": "hack-lagos-2025-photo-7",
+          "url": "/photos/hackathons/lagos-dec-2.jpg",
+          "caption": "Hackathon Impact Hub Farm Sawa dec 2"
+        },
+        {
+          "id": "hack-lagos-2025-photo-8",
+          "url": "/photos/hackathons/lagos-dec-3.jpg",
+          "caption": "Hackathon Impact Hub Farm Sawa dec 3"
+        },
+        {
+          "id": "hack-lagos-2025-photo-9",
+          "url": "/photos/hackathons/lagos-dec-4.jpg",
+          "caption": "Hackathon Impact Hub Farm Sawa dec 4"
+        },
+        {
+          "id": "hack-lagos-2025-photo-10",
+          "url": "/photos/hackathons/lagos-dec-5.jpg",
+          "caption": "Hackathon Impact Hub Farm Sawa dec 5"
+        }
+      ]
     },
     {
       "id": "hack-accra-2025",
@@ -155,7 +207,49 @@
       "outcomes": [
         "Information missing"
       ],
-      "photos": []
+      "photos": [
+        {
+          "id": "hack-accra-2025-photo-1",
+          "url": "/photos/hackathons/accra-group.jpg",
+          "caption": "Hackathon Ghana group",
+          "featured": true
+        },
+        {
+          "id": "hack-accra-2025-photo-2",
+          "url": "/photos/hackathons/accra-1.jpg",
+          "caption": "Datathon Accra"
+        },
+        {
+          "id": "hack-accra-2025-photo-3",
+          "url": "/photos/hackathons/accra-2.jpg",
+          "caption": "Information missing"
+        },
+        {
+          "id": "hack-accra-2025-photo-4",
+          "url": "/photos/hackathons/accra-3.jpg",
+          "caption": "Information missing"
+        },
+        {
+          "id": "hack-accra-2025-photo-5",
+          "url": "/photos/hackathons/accra-4.jpg",
+          "caption": "Datathon Accra 4"
+        },
+        {
+          "id": "hack-accra-2025-photo-6",
+          "url": "/photos/hackathons/accra-5.jpg",
+          "caption": "Datathon Accra 7"
+        },
+        {
+          "id": "hack-accra-2025-photo-7",
+          "url": "/photos/hackathons/accra-6.jpg",
+          "caption": "Datathon Accra 5"
+        },
+        {
+          "id": "hack-accra-2025-photo-8",
+          "url": "/photos/hackathons/accra-7.jpg",
+          "caption": "Datathon Accra 6"
+        }
+      ]
     },
     {
       "id": "hack-kigali-2025",
@@ -194,7 +288,14 @@
       "outcomes": [
         "Information missing"
       ],
-      "photos": []
+      "photos": [
+        {
+          "id": "hack-kigali-2025-photo-1",
+          "url": "/photos/hackathons/rhea.png",
+          "caption": "Hackathon Rhea",
+          "featured": true
+        }
+      ]
     },
     {
       "id": "hack-dakar-2025",
@@ -233,7 +334,14 @@
       "outcomes": [
         "Information missing"
       ],
-      "photos": []
+      "photos": [
+        {
+          "id": "hack-dakar-2025-photo-1",
+          "url": "/photos/hackathons/digicow.png",
+          "caption": "Hackathon DigiCow",
+          "featured": true
+        }
+      ]
     },
     {
       "id": "hack-cairo-2025",
@@ -272,7 +380,14 @@
       "outcomes": [
         "Information missing"
       ],
-      "photos": []
+      "photos": [
+        {
+          "id": "hack-cairo-2025-photo-1",
+          "url": "/photos/hackathons/farm-to-feed.png",
+          "caption": "Hackathon Farm to Feed",
+          "featured": true
+        }
+      ]
     },
     {
       "id": "hack-johannesburg-2025",
@@ -311,7 +426,14 @@
       "outcomes": [
         "Information missing"
       ],
-      "photos": []
+      "photos": [
+        {
+          "id": "hack-johannesburg-2025-photo-1",
+          "url": "/photos/hackathons/agribora.png",
+          "caption": "Hackathon Agribora",
+          "featured": true
+        }
+      ]
     },
     {
       "id": "hack-casablanca-2025",
@@ -350,7 +472,14 @@
       "outcomes": [
         "Information missing"
       ],
-      "photos": []
+      "photos": [
+        {
+          "id": "hack-casablanca-2025-photo-1",
+          "url": "/photos/hackathons/tolbi-hackathon.png",
+          "caption": "Hackathon Tolbi",
+          "featured": true
+        }
+      ]
     }
   ],
   "pageContent": {

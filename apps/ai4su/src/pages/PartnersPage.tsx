@@ -27,6 +27,7 @@ export function PartnersPage() {
     <Partners
       pageIntro={partnersData.pageIntro}
       funders={partnersData.funders}
+      europeanPartners={partnersData.europeanPartners}
       implementingPartners={partnersData.implementingPartners}
       serviceProviders={partnersData.serviceProviders}
       challengeProviders={partnersData.challengeProviders}

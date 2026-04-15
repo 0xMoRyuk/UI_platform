@@ -355,6 +355,7 @@
       "partner": "Briter Bridges",
       "partnerLogo": "file://%7B%22source%22%3A%22attachment%3A50001c1f-c36d-4131-b052-22cef1361e2a%3Ariter.svg%22%2C%22permissionRecord%22%3A%7B%22table%22%3A%22block%22%2C%22id%22%3A%223350fcf3-8494-802e-a71e-fd11c08f29e5%22%2C%22spaceId%22%3A%22d2f76950-01d8-4d20-882e-48ca2a9c06f0%22%7D%7D",
       "pdfUrl": "file://%7B%22source%22%3A%22attachment%3A6bd74ec0-9a98-4b36-92fd-80eba5303ac8%3AAI4SU_Unlocking_Data_Ecosystem_African_Startup_FINAL.pdf%22%2C%22permissionRecord%22%3A%7B%22table%22%3A%22block%22%2C%22id%22%3A%223350fcf3-8494-802e-a71e-fd11c08f29e5%22%2C%22spaceId%22%3A%22d2f76950-01d8-4d20-882e-48ca2a9c06f0%22%7D%7D",
+      "notionUrl": "https://www.notion.so/3350fcf38494802ea71efd11c08f29e5",
       "publishedDate": "2026-03-09",
       "keyFindings": [
         "Agritech innovation is growing, but relies on small, fragmented, and localised datasets that limit scalability",
@@ -372,6 +373,7 @@
       "partner": "Cage Patrick & Company Advocates",
       "partnerLogo": "file://%7B%22source%22%3A%22attachment%3A969b8317-f93e-48b6-9203-43428dfd3981%3Acage.jpeg%22%2C%22permissionRecord%22%3A%7B%22table%22%3A%22block%22%2C%22id%22%3A%223350fcf3-8494-80f8-9e26-ce5d23bf4218%22%2C%22spaceId%22%3A%22d2f76950-01d8-4d20-882e-48ca2a9c06f0%22%7D%7D",
       "pdfUrl": "file://%7B%22source%22%3A%22attachment%3A5d91b853-d9a0-41d2-847b-2707e00c1445%3AAI4Startups_-_Data_Landscape_Report_(2026)_(2).pdf%22%2C%22permissionRecord%22%3A%7B%22table%22%3A%22block%22%2C%22id%22%3A%223350fcf3-8494-80f8-9e26-ce5d23bf4218%22%2C%22spaceId%22%3A%22d2f76950-01d8-4d20-882e-48ca2a9c06f0%22%7D%7D",
+      "notionUrl": "https://www.notion.so/3350fcf3849480f89e26ce5d23bf4218",
       "publishedDate": "2026-03-26",
       "keyFindings": [
         "Data is mission-critical for startups, yet access remains severely constrained due to poor data quality and unclear licensing",
@@ -389,6 +391,7 @@
       "partner": "Digital Africa & Data 354",
       "partnerLogo": "file://%7B%22source%22%3A%22attachment%3A5ae267f4-a4d9-453e-b1be-227bd55a5624%3Alogo-data354_CL.png%22%2C%22permissionRecord%22%3A%7B%22table%22%3A%22block%22%2C%22id%22%3A%223350fcf3-8494-80d7-a295-e0946ce30e26%22%2C%22spaceId%22%3A%22d2f76950-01d8-4d20-882e-48ca2a9c06f0%22%7D%7D",
       "pdfUrl": "file://%7B%22source%22%3A%22attachment%3Afb66070b-51ae-42e8-9208-151c074d4d91%3AAI4SU_-_Policy_Brief-2_(1).pdf%22%2C%22permissionRecord%22%3A%7B%22table%22%3A%22block%22%2C%22id%22%3A%223350fcf3-8494-80d7-a295-e0946ce30e26%22%2C%22spaceId%22%3A%22d2f76950-01d8-4d20-882e-48ca2a9c06f0%22%7D%7D",
+      "notionUrl": "https://www.notion.so/3350fcf3849480d7a295e0946ce30e26",
       "publishedDate": "2026-02-05",
       "keyFindings": [
         "Lack of access to high-quality, structured data is the main barrier to AI startup growth",
@@ -406,6 +409,7 @@
       "partner": "Digital Africa",
       "partnerLogo": "file://%7B%22source%22%3A%22attachment%3A7c15a4a1-2b1e-49a4-9ec1-4f6feab52191%3Acropped-cropped-DA_Logo_HG-1-2.png%22%2C%22permissionRecord%22%3A%7B%22table%22%3A%22block%22%2C%22id%22%3A%223350fcf3-8494-801a-ad74-e91bafa2a6f6%22%2C%22spaceId%22%3A%22d2f76950-01d8-4d20-882e-48ca2a9c06f0%22%7D%7D",
       "pdfUrl": "Information missing",
+      "notionUrl": "https://www.notion.so/3350fcf38494801aad74e91bafa2a6f6",
       "publishedDate": "Information missing",
       "keyFindings": [
         "Coming soon"
@@ -420,6 +424,7 @@
       "hackathonId": "Information missing",
       "hackathonName": "Information missing",
       "pdfUrl": "Information missing",
+      "notionUrl": "https://www.notion.so/3350fcf384948040890bf4b16fff4258",
       "highlights": [
         "Coming soon"
       ]
@@ -430,6 +435,7 @@
     "title": "AI4Startups – Hackathon Report: Challenges & Solutions",
     "description": "This report presents the challenges addressed during the AI4Startups hackathons and showcases the solutions developed by participating startups. It highlights key insights from the experimentation phase and illustrates how data-driven innovation can address real-world problems.",
     "pdfUrl": "Information missing",
+    "notionUrl": "https://www.notion.so/3350fcf38494801ba468c737d596ffde",
     "publishedDate": "Information missing",
     "pages": 0
   },

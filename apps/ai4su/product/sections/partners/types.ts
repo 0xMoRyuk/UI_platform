@@ -12,6 +12,7 @@ export interface EUAttribution {
   text: string
   flagUrl: string
   globalGatewayLogo: string
+  dataGovLogo: string
   disclaimer: string
   initiative: string
 }
@@ -100,6 +101,8 @@ export interface PartnersPageProps {
   pageIntro: PageIntro
   /** EU/Team Europe funding section */
   funders: Funders
+  /** European partners section */
+  europeanPartners?: ServiceProviders
   /** Implementing partners section */
   implementingPartners: ImplementingPartners
   /** Service providers section */
@@ -143,6 +146,11 @@ export interface TeamEuropeGridProps {
 export interface ImplementingPartnersSectionProps {
   partners: ImplementingPartners
   onPartnerClick?: (partnerId: string, url: string) => void
+}
+
+export interface EuropeanPartnersSectionProps {
+  providers: ServiceProviders
+  onProviderClick?: (providerId: string, url: string) => void
 }
 
 export interface LeadPartnerCardProps {
