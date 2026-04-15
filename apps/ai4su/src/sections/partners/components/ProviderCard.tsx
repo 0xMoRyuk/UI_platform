@@ -8,9 +8,13 @@ interface ProviderCardProps {
   onClick?: () => void
 }
 
-export function ProviderCard({ provider }: ProviderCardProps) {
+export function ProviderCard({ provider, onClick }: ProviderCardProps) {
   return (
-    <div className="bg-white dark:bg-stone-900 rounded-xl border border-stone-200 dark:border-stone-800 p-5">
+    <button
+      type="button"
+      onClick={onClick}
+      className="w-full text-left bg-white dark:bg-stone-900 rounded-xl border border-stone-200 dark:border-stone-800 p-5 hover:border-brand-primary/30 transition-colors"
+    >
       {/* Header with logo */}
       <div className="flex items-center gap-3 mb-3">
         <Avatar className="w-12 h-12 rounded-lg shrink-0">
@@ -35,6 +39,6 @@ export function ProviderCard({ provider }: ProviderCardProps) {
           </Badge>
         ))}
       </div>
-    </div>
+    </button>
   )
 }

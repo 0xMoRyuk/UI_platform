@@ -9,20 +9,24 @@ import { ModelFilterSidebar } from './ModelFilterSidebar'
 import { ModelGrid } from './ModelGrid'
 import { EmptyState } from './EmptyState'
 import { StudiesSection } from './StudiesSection'
+import { FinalReportCard } from './FinalReportCard'
 
 export function Toolbox({
   filterOptions,
   aiModels,
   studies,
   bestPractices,
+  finalReport,
   pageContent,
   studiesSection,
   bestPracticesSection,
+  finalReportSection,
   onSearch,
   onFilterChange,
   onModelClick,
   onStudyDownload,
   onBestPracticesDownload,
+  onFinalReportDownload,
 }: ToolboxProps) {
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedSectors, setSelectedSectors] = useState<Sector[]>([])
@@ -157,6 +161,12 @@ export function Toolbox({
               bestPractices={bestPractices}
               bestPracticesContent={bestPracticesSection}
               onBestPracticesDownload={onBestPracticesDownload || (() => {})}
+            />
+
+            <FinalReportCard
+              report={finalReport}
+              content={finalReportSection}
+              onDownload={onFinalReportDownload || (() => {})}
             />
 
           </div>

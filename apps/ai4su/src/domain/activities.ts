@@ -2,7 +2,7 @@ import type { Activity, ActivityTypeId } from '../../product/sections/ecosystem/
 import type { PaginatedResult, PaginationParams } from './types'
 import ecosystemData from '../../product/sections/ecosystem/data.json'
 
-const allActivities = ecosystemData.activities as Activity[]
+const allActivities = ecosystemData.activities as unknown as Activity[]
 
 function paginate<T>(items: T[], page: number, limit: number): PaginatedResult<T> {
   const total = items.length

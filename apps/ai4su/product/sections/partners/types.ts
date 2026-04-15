@@ -71,6 +71,12 @@ export interface ServiceProviders {
   providers: ServiceProvider[]
 }
 
+export interface ChallengeProviders {
+  sectionTitle: string
+  sectionDescription: string
+  providers: ServiceProvider[]
+}
+
 export interface DatagovInitiative {
   title: string
   description: string
@@ -98,6 +104,8 @@ export interface PartnersPageProps {
   implementingPartners: ImplementingPartners
   /** Service providers section */
   serviceProviders: ServiceProviders
+  /** Startup challenge providers section */
+  challengeProviders?: ChallengeProviders
   /** DataGov Initiative callout */
   datagovInitiative: DatagovInitiative
   /** Social media links */
@@ -148,7 +156,7 @@ export interface PartnerCardProps {
 }
 
 export interface ServiceProvidersSectionProps {
-  providers: ServiceProviders
+  providers: ServiceProviders | ChallengeProviders
   onProviderClick?: (providerId: string, url: string) => void
 }
 

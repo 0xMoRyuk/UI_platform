@@ -2,9 +2,15 @@
 // Data Types
 // =============================================================================
 
-export type ActivityTypeId = 'event' | 'research' | 'workshop' | 'hackathon'
+export type ActivityTypeId =
+  | 'event'
+  | 'research'
+  | 'workshop'
+  | 'hackathon'
+  | 'networking'
+  | 'capacity building'
 
-export type CountryCode = 'KE' | 'NG' | 'GH' | 'SN' | 'RW' | 'ZA' | 'EG' | 'MA' | 'ET'
+export type CountryCode = 'KE' | 'NG' | 'GH' | 'SN' | 'RW' | 'ZA' | 'EG' | 'MA' | 'CI' | 'ET' | 'ON'
 
 export interface ActivityType {
   id: ActivityTypeId

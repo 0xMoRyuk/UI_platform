@@ -29,6 +29,7 @@ export function PartnersPage() {
       funders={partnersData.funders}
       implementingPartners={partnersData.implementingPartners}
       serviceProviders={partnersData.serviceProviders}
+      challengeProviders={partnersData.challengeProviders}
       datagovInitiative={partnersData.datagovInitiative}
       socialLinks={partnersData.socialLinks}
       onPartnerClick={handlePartnerClick}

@@ -51,7 +51,7 @@ describe('GET /api/best-practices', () => {
     const res = await api.request('/api/best-practices')
     expect(res.status).toBe(200)
     const body = await res.json()
-    expect(body.data).toHaveLength(3)
+    expect(body.data).toHaveLength(1)
   })
 })
 

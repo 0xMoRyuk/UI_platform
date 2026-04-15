@@ -4,7 +4,7 @@
 
 import type { AIModel } from '../toolbox/types'
 
-export type CountryCode = 'KE' | 'NG' | 'GH' | 'SN' | 'RW' | 'ZA' | 'EG' | 'MA'
+export type CountryCode = 'KE' | 'NG' | 'GH' | 'SN' | 'RW' | 'ZA' | 'EG' | 'MA' | 'CI'
 
 export interface MethodologyStep {
   id: string

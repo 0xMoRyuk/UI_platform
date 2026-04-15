@@ -4,7 +4,7 @@
 
 export type Sector = 'crop-science' | 'livestock' | 'precision-farming' | 'agri-finance' | 'supply-chain' | 'climate-resilience'
 
-export type CountryCode = 'KE' | 'NG' | 'GH' | 'SN' | 'RW' | 'ZA' | 'EG' | 'MA'
+export type CountryCode = 'KE' | 'NG' | 'GH' | 'SN' | 'RW' | 'ZA' | 'EG' | 'MA' | 'CI'
 
 export interface KPISummaryItem {
   label: string
@@ -43,6 +43,7 @@ export interface AIModel {
 
 export interface Study {
   id: string
+  type?: string
   title: string
   description: string
   partner: string
@@ -54,6 +55,7 @@ export interface Study {
 
 export interface BestPractices {
   id: string
+  type?: string
   title: string
   hackathonId: string
   hackathonName: string
@@ -62,6 +64,7 @@ export interface BestPractices {
 }
 
 export interface FinalReport {
+  type?: string
   title: string
   description: string
   pdfUrl: string

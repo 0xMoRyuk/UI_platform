@@ -9,6 +9,7 @@ export function Partners({
   funders,
   implementingPartners,
   serviceProviders,
+  challengeProviders,
   onPartnerClick,
 }: PartnersPageProps) {
   return (
@@ -33,6 +34,13 @@ export function Partners({
         providers={serviceProviders}
         onProviderClick={onPartnerClick}
       />
+
+      {challengeProviders && (
+        <ServiceProvidersSection
+          providers={challengeProviders}
+          onProviderClick={onPartnerClick}
+        />
+      )}
     </div>
   )
 }

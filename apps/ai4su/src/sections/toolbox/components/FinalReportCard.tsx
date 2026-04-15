@@ -1,7 +1,17 @@
 import { Download, FileText, BookOpen, Calendar } from 'lucide-react'
 import { Separator } from '@ui-platform/ui/components/separator'
 import { Button } from '@ui-platform/ui/components/button'
+import { Badge } from '@ui-platform/ui/components/badge'
 import type { FinalReportCardProps } from '@/../product/sections/toolbox/types'
+
+function formatMonthYear(date: string) {
+  const parsed = new Date(date)
+  if (Number.isNaN(parsed.getTime())) return 'Information missing'
+  return parsed.toLocaleDateString('en-US', {
+    month: 'long',
+    year: 'numeric',
+  })
+}
 
 export function FinalReportCard({ report, content, onDownload }: FinalReportCardProps) {
   return (
@@ -20,10 +30,10 @@ export function FinalReportCard({ report, content, onDownload }: FinalReportCard
 
             {/* Middle: Content */}
             <div className="flex-1">
-              <div className="inline-flex items-center gap-2 px-3 py-1 bg-brand-accent rounded-full text-xs font-bold text-brand-accent-foreground mb-4">
+              <Badge className="inline-flex items-center gap-2 px-3 py-1 bg-brand-accent rounded-full text-xs font-bold text-brand-accent-foreground mb-4">
                 <FileText className="w-3 h-3" />
-                <span>{content.badge}</span>
-              </div>
+                <span>{report.type || content.badge}</span>
+              </Badge>
 
               <h2 className="text-2xl md:text-3xl font-bold text-white font-[Barlow] mb-3">
                 {report.title}
@@ -36,12 +46,7 @@ export function FinalReportCard({ report, content, onDownload }: FinalReportCard
               <div className="flex flex-wrap items-center gap-4 text-sm text-white/60">
                 <div className="flex items-center gap-1.5">
                   <Calendar className="w-4 h-4" />
-                  <span>
-                    {new Date(report.publishedDate).toLocaleDateString('en-US', {
-                      month: 'long',
-                      year: 'numeric',
-                    })}
-                  </span>
+                  <span>{formatMonthYear(report.publishedDate)}</span>
                 </div>
                 <div className="flex items-center gap-1.5">
                   <FileText className="w-4 h-4" />

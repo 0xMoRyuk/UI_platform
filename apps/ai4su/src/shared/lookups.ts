@@ -15,6 +15,9 @@ export const countryNames: Record<string, string> = Object.fromEntries(
   countries.map((c) => [c.code, c.name])
 )
 
+countryFlags.ON = '🌐'
+countryNames.ON = 'Online'
+
 export const sectorLabels: Record<string, string> = Object.fromEntries(
   sectors.map((s) => [s.id, s.label])
 )

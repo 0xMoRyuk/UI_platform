@@ -11,7 +11,7 @@ export const SectorEnum = z.enum([
 ])
 
 export const CountryCodeEnum = z.enum([
-  'KE', 'NG', 'GH', 'SN', 'RW', 'ZA', 'EG', 'MA',
+  'KE', 'NG', 'GH', 'SN', 'RW', 'ZA', 'EG', 'MA', 'CI',
 ])
 
 export const SearchModelsInputSchema = PaginationParamsSchema.extend({
