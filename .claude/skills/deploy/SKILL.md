@@ -247,5 +247,5 @@ This skill uses existing scripts:
 
 ## Related
 
-- Cloud Build config: `packages/infra/cloudbuild-cicd.yaml`
+- Cloud Build config: `cloudbuild.yaml`
 - GCP deployment guide: `.claude/references/deployment-gcp.md`

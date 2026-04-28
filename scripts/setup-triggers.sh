@@ -20,8 +20,8 @@ REPO_NAME="0xMoRyuk-UI_platform"  # As shown in gcloud builds repositories list
 CONNECTION_NAME="ui_platform"      # As shown in gcloud builds connections list
 REGION="europe-west1"
 BRANCH="^main$"
-BUILD_CONFIG="packages/infra/cloudbuild-cicd.yaml"
-PROJECT_ID="digital-africa-ai4su"
+BUILD_CONFIG="cloudbuild.yaml"
+PROJECT_ID="digital-africa-rainbow"
 PROJECT_NUMBER="609932720471"
 SERVICE_ACCOUNT="projects/$PROJECT_ID/serviceAccounts/$PROJECT_NUMBER-compute@developer.gserviceaccount.com"
 # =======================================

@@ -12,7 +12,7 @@ github:
     branch: '^main$'
 
 # Use the CI/CD configuration
-filename: packages/infra/cloudbuild-cicd.yaml
+filename: cloudbuild.yaml
 
 # Production environment substitutions
 substitutions:
