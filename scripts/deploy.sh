@@ -45,7 +45,7 @@ echo "Deploying $APP ($(git rev-parse --short HEAD))..."
 echo ""
 
 gcloud builds submit \
-  --project=digital-africa-ai4su \
+  --project=digital-africa-rainbow \
   --region=europe-west1 \
-  --config=packages/infra/cloudbuild-cicd.yaml \
+  --config=cloudbuild.yaml \
   --substitutions="_APP_NAME=$APP"
