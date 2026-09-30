@@ -102,7 +102,8 @@ h2{font-size:clamp(32px,4.6vw,68px);line-height:1.02;max-width:18ch}
 
 /* 5 — herald */
 #s5{grid-template-rows:auto 1fr}
-#flow{width:100%;height:min(56vh,520px);margin-top:26px;display:block;overflow:visible}
+.flowwrap{overflow-x:auto;margin-top:26px;-webkit-overflow-scrolling:touch}
+#flow{width:100%;min-width:900px;height:min(56vh,520px);display:block;overflow:visible}
 #flow .lane{fill:none;stroke:var(--line);stroke-width:1.2}
 #flow .lane.live{stroke:rgba(198,241,53,.35)}
 #flow .node rect{fill:var(--panel);stroke:var(--line);stroke-width:1.2}
@@ -292,7 +293,7 @@ h2{font-size:clamp(32px,4.6vw,68px);line-height:1.02;max-width:18ch}
     <p class="lede rv d2">Chaque modification d'une base écoutée, chaque candidature Typeform devient un <b>événement typé</b>, validé, puis publié aux services qui en ont besoin. Sans ressaisie.</p>
     <div class="hstats rv d3" id="hstats"></div>
   </div>
-  <svg id="flow" role="img" aria-label="Flux Herald : sources, passerelle, intents, services consommateurs"></svg>
+  <div class="flowwrap"><svg id="flow" role="img" aria-label="Flux Herald : sources, passerelle, intents, services consommateurs"></svg></div>
 </section>
 
 <!-- 6 -->
@@ -518,7 +519,7 @@ function buildFlow(){
   ints.forEach(i=>h+=lane(gw,i,i.live,i.weight));
   ints.forEach(i=>(i.to||[]).forEach(c=>{ const t=cons.find(x=>x.name===c); if(t) h+=lane(i,t,i.live,i.weight); }));
   const node = (d,cls="") => `<g class="node ${cls}${d.live===false?" dim":""}" transform="translate(${d.x},${d.y-26})"><rect width="${nodeW}" height="52" rx="10"/>
-    <text x="14" y="22">${esc(d.name)}</text><text class="s" x="14" y="40">${esc(d.sub||"")}</text>${d.count!=null?`<text class="c" x="${nodeW-12}" y="22" text-anchor="end">${nf(d.count)}</text>`:""}</g>`;
+    <text x="14" y="22">${esc(d.name)}</text><text class="s" x="14" y="40">${esc(d.sub||"")}</text>${d.count!=null?`<text class="c" x="${nodeW-4}" y="-8" text-anchor="end">${nf(d.count)}</text>`:""}</g>`;
   h += srcs.map(d=>node(d)).join("") + node(gw,"core") + ints.map(d=>node(d)).join("") + cons.map(d=>node(d)).join("");
   h += `<g id="dots"></g>`;
   svg.innerHTML = h;
@@ -536,7 +537,7 @@ function buildFlow(){
   let last = 0;
   (function f(t){
     const rp = (t - rt0)/REPLAY; let interval = 90, cap = 60;
-    if (rp < 1){ const di = Math.min(D.length-1, Math.floor(rp*D.length)), v = D[di][1];
+    if (rp < 1){ const di = Math.max(0, Math.min(D.length-1, Math.floor(rp*D.length))), v = D[di][1];
       if (di !== lastDay){ lastDay = di; cum += v; $("#rpDate").textContent = fmtDay(D[di][0]); $("#rpDay").textContent = nf(v); $("#rpTot").textContent = nf(cum);
         bars.forEach((b,i)=>{ b.classList.toggle("on", i<di); b.classList.toggle("now", i===di); }); }
       interval = 18 + 620*Math.pow(1 - v/maxD, 2.2); cap = 180; }
@@ -544,7 +545,7 @@ function buildFlow(){
     if (t-last > interval && P.length < cap){ spawn(); last = t; }
     for (let i=P.length-1;i>=0;i--){ const o=P[i]; o.t+=o.v; if (o.t>=1){ o.c.remove(); P.splice(i,1); continue; }
       const pt=o.p.getPointAtLength(o.t*o.L); o.c.setAttribute("cx",pt.x.toFixed(1)); o.c.setAttribute("cy",pt.y.toFixed(1)); o.c.setAttribute("opacity",(Math.sin(Math.PI*o.t)).toFixed(2)); }
-    requestAnimationFrame(f); })(0);
+    requestAnimationFrame(f); })(performance.now());
 }
 
 // 6 — findings + terminal
