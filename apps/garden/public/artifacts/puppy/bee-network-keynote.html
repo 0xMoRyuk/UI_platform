@@ -166,6 +166,23 @@ h2{font-size:clamp(32px,4.6vw,68px);line-height:1.02;max-width:18ch}
 .isokey{margin-top:18px;display:flex;flex-direction:column;gap:6px;font:12px var(--mono);color:var(--faint)}
 .isokey span::before{content:"";display:inline-block;width:10px;height:10px;margin-right:8px;vertical-align:-1px;border-radius:2px;background:var(--c)}
 
+
+/* motion polish */
+.w{display:inline-block;opacity:0;filter:blur(8px);translate:0 .28em;transition:opacity .7s ease,filter .8s ease,translate .9s cubic-bezier(.2,.7,.2,1);transition-delay:calc(var(--i)*55ms + .08s)}
+.scene.on .w{opacity:1;filter:blur(0);translate:0 0}
+.od{display:inline-block;height:1em;overflow:hidden;line-height:1em;vertical-align:-.12em}
+.odr{display:block;transition:transform 1.7s cubic-bezier(.16,.84,.24,1)}
+.odr i{display:block;height:1em;font-style:normal}
+#black{position:fixed;inset:0;background:#000;z-index:60;opacity:0;pointer-events:none;transition:opacity .5s}
+#black.on{opacity:1;pointer-events:auto}
+.replay{margin-top:22px;display:flex;align-items:flex-end;gap:18px;flex-wrap:wrap}
+.replay .date{font:500 clamp(24px,2.4vw,34px) var(--sans);letter-spacing:-.02em;min-width:7.5ch;font-variant-numeric:tabular-nums}
+.replay .date small{display:block;font:11px var(--mono);color:var(--faint);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px}
+.replay svg rect{fill:var(--off);transition:fill .25s}
+.replay svg rect.on{fill:var(--lime)}
+.replay svg rect.now{fill:#fff}
+#loop .ex{fill:var(--lime);font:12.5px var(--mono);text-anchor:middle;transition:opacity .4s}
+#iso .spark{fill:#fff}
 @media (max-width: 900px){
   #s0,#s2,#s2b,#s3{grid-template-columns:1fr}
   #s0 canvas{width:70vw}
@@ -181,6 +198,7 @@ h2{font-size:clamp(32px,4.6vw,68px);line-height:1.02;max-width:18ch}
 </head>
 <body class="nojs">
 <div class="progress" id="progress"></div>
+<div id="black" aria-hidden="true"></div>
 <div class="brand">BEE NETWORK <i>·</i> garden</div>
 <nav class="hud" aria-label="Navigation des scènes">
   <span><b id="cur">01</b> / <span id="tot">08</span></span>
@@ -246,6 +264,7 @@ h2{font-size:clamp(32px,4.6vw,68px);line-height:1.02;max-width:18ch}
   </div>
   <svg id="iso" role="img" aria-label="Vue en relief : les bases de startups en tours, les référentiels en dalles, reliés par leurs relations, et le mât Herald"></svg>
 </section>
+
 <!-- 3 -->
 <section class="scene" id="s3" aria-label="Gouvernance">
   <div>
@@ -298,7 +317,7 @@ h2{font-size:clamp(32px,4.6vw,68px);line-height:1.02;max-width:18ch}
 </main>
 
 <script>
-const K = /*KEYNOTE_DATA*/{"bases": 34, "rows": 20443, "startups": 4417, "iso": {"layout": {"Startups Pool": {"x": -1.3, "y": -1.3, "w": 2.6, "d": 2.6}, "Zone Investment": {"x": 2.4, "y": -1.0, "w": 2.0, "d": 2.0}, "Memo": {"x": -1.0, "y": 2.4, "w": 2.0, "d": 2.0}, "Founders": {"x": -4.4, "y": -1.0, "w": 2.0, "d": 2.0}, "Zone Platform": {"x": -1.0, "y": -4.4, "w": 2.0, "d": 2.0}, "ACTIVATION ROADMAPS": {"x": 3.6, "y": 3.6, "w": 1.3, "d": 1.3}, "Contracts": {"x": 5.8, "y": -4.4, "w": 1.3, "d": 1.3}, "Valorisation": {"x": 5.8, "y": 1.2, "w": 1.3, "d": 1.3}, "Our Terms": {"x": 5.8, "y": -1.6, "w": 1.3, "d": 1.3}, "Zone - Communication": {"x": -4.4, "y": 4.2, "w": 1.3, "d": 1.3}, "CoInvest": {"x": 1.2, "y": 5.8, "w": 1.3, "d": 1.3}, "Fundraise rounds": {"x": -1.6, "y": 5.8, "w": 1.3, "d": 1.3}, "STOCKS": {"x": 11.2, "y": -7.0, "w": 2.6, "d": 1.8}, "Mapverse": {"x": 14.299999999999999, "y": -7.0, "w": 2.6, "d": 1.8}, "Programmes": {"x": 11.2, "y": -3.4, "w": 2.6, "d": 1.8}, "Protocols": {"x": 14.299999999999999, "y": -3.4, "w": 2.6, "d": 1.8}, "Annuaire des experts": {"x": 11.2, "y": 0.20000000000000018, "w": 2.6, "d": 1.8}, "Scenari": {"x": 14.299999999999999, "y": 0.20000000000000018, "w": 2.6, "d": 1.8}, "Labels": {"x": 11.2, "y": 3.8000000000000007, "w": 2.6, "d": 1.8}, "Outcome": {"x": 14.299999999999999, "y": 3.8000000000000007, "w": 2.6, "d": 1.8}}, "byName": {"Startups Pool": {"label": "Startups Pool", "f": "main", "rows": 4417, "herald": true}, "Zone Investment": {"label": "Zone Investment", "f": "main", "rows": 4420, "herald": true}, "Memo": {"label": "Memo", "f": "main", "rows": 6406, "herald": true}, "Founders": {"label": "Founders", "f": "main", "rows": 2422, "herald": true}, "Zone Platform": {"label": "Zone Platform", "f": "main", "rows": 81, "herald": false}, "ACTIVATION ROADMAPS": {"label": "ACTIVATION ROADMAPS", "f": "dos", "rows": 487, "herald": false}, "Contracts": {"label": "Contracts", "f": "dos", "rows": 422, "herald": false}, "Valorisation": {"label": "Valorisation", "f": "dos", "rows": 233, "herald": false}, "Our Terms": {"label": "Our Terms", "f": "dos", "rows": 86, "herald": false}, "Zone - Communication": {"label": "Zone - Communication", "f": "dos", "rows": 53, "herald": false}, "CoInvest": {"label": "CoInvest", "f": "dos", "rows": 36, "herald": false}, "Fundraise rounds": {"label": "Fundraise rounds", "f": "dos", "rows": 14, "herald": false}, "STOCKS": {"label": "STOCKS", "f": "ref", "rows": 186, "herald": false}, "Mapverse": {"label": "Mapverse", "f": "ref", "rows": 260, "herald": false}, "Programmes": {"label": "Programmes", "f": "ref", "rows": 29, "herald": false}, "Protocols": {"label": "Protocols", "f": "ref", "rows": 31, "herald": false}, "Annuaire des experts": {"label": "Annuaire experts", "f": "ref", "rows": 58, "herald": false}, "Scenari": {"label": "Scenari", "f": "ref", "rows": 5, "herald": false}, "Labels": {"label": "Labels", "f": "ref", "rows": 184, "herald": false}, "Outcome": {"label": "Outcome", "f": "ref", "rows": 9, "herald": false}}, "bridges": [["ACTIVATION ROADMAPS", "Annuaire des experts"], ["ACTIVATION ROADMAPS", "STOCKS"], ["Contracts", "Mapverse"], ["Contracts", "Programmes"], ["Contracts", "STOCKS"], ["Founders", "Mapverse"], ["Labels", "Startups Pool"], ["Labels", "Zone Investment"], ["Mapverse", "Startups Pool"], ["Outcome", "Startups Pool"], ["Protocols", "Startups Pool"]], "heraldBases": ["Startups Pool", "Zone Investment", "Memo", "Founders"], "mast": [-6.6, -6.6], "maxRows": 6406, "captions": [{"t": "Les startups au centre", "d": "Cinq bases principales portent <b>17 746 fiches</b>, soit <b>87 %</b> du contenu. Autour, les dossiers qui suivent chaque startup : contrats, valorisations, termes, appuis."}, {"t": "Des référentiels partagés", "d": "<b>14 listes de référence</b> (pays, étiquettes, étapes, catalogues d'experts), dont les 8 plus citées ici, reliées aux dossiers par des ponts. Une seule vérité, utilisée par toutes les équipes."}, {"t": "Herald écoute", "d": "Quatre bases principales sont écoutées en continu : <b>21 463 événements</b> publiés en 30 jours vers la plateforme, sans ressaisie."}]}, "adoption": {"label": "26", "measured_members": 27}, "scale": [{"v": 26, "k": "membres actifs, 6 équipes"}, {"v": 48, "k": "personnes passées par l'équipe depuis 2020"}, {"v": 17, "k": "arrivées depuis janvier 2025"}, {"v": 34, "k": "bases Notion suivies"}, {"v": 20443, "k": "fiches au total"}], "families": [{"id": "principales", "name": "Bases principales", "bases": 5, "rows": 17746}, {"id": "dossiers", "name": "Dossiers startup", "bases": 7, "rows": 1331}, {"id": "referentiels", "name": "Référentiels", "bases": 14, "rows": 833}, {"id": "ops", "name": "Hors cycle", "bases": 8, "rows": 533}], "ghosts": 15, "governance": {"center_k": "propriétés sous contrat", "center_v": "877", "stations": [{"n": "26", "t": "Relevé", "s": "agent, lecture seule"}, {"n": "20", "t": "Écart", "s": "détecté, qualifié"}, {"n": "55", "t": "Opération", "s": "typée, justifiée"}, {"n": "38", "t": "Exécutée", "s": "après approbation"}, {"n": "53", "t": "Registre", "s": "décision par base"}], "rules": ["<b>814 propriétés sur 877</b> sont conformes à leur contrat de schéma.", "<b>Aucune propriété</b> d'une base Bee Network ne change sans Opération approuvée.", "<b>53 bases</b> ont une décision écrite : 24 à garder, 10 à investiguer, 19 élaguées.", "<b>16 incidents</b> suivis, 13 résolus."]}, "roles": [{"al": "Exécute", "col": "var(--lime)", "name": "Form Owner", "epi": "le capitaine du formulaire", "verbs": 6, "limit": "Demande une publication, ne l'approuve jamais."}, {"al": "Exécute", "col": "var(--lime)", "name": "Reliability Operator", "epi": "le gardien du tuyau", "verbs": 6, "limit": "Peut suspendre un flux, jamais modifier le schéma."}, {"al": "Autorise", "col": "var(--amber)", "name": "Release Approver", "epi": "le gardien de la clé", "verbs": 7, "limit": "N'approuve jamais ce qu'il a demandé lui-même."}, {"al": "Autorise", "col": "var(--amber)", "name": "Sponsor", "epi": "le gardien de la promesse", "verbs": 5, "limit": "Arbitre et clôt, ne touche jamais au formulaire."}, {"al": "Audite", "col": "var(--blue)", "name": "Data Steward", "epi": "le gardien des réponses", "verbs": 7, "limit": "Propose d'élaguer, ne supprime jamais lui-même."}], "herald": {"stats": [{"v": 46849, "k": "webhooks reçus en 30 jours"}, {"v": 21463, "k": "événements typés publiés"}, {"v": 14, "k": "types d'événements"}, {"raw": "299 ms", "k": "temps de réponse médian"}, {"v": 74, "k": "versions déployées depuis mai"}], "flow": {"gateway_sub": "décode · valide · publie", "sources": [{"name": "Notion", "sub": "bases écoutées", "count": 46780, "live": true}, {"name": "Typeform", "sub": "candidatures", "count": 16, "live": true}, {"name": "Todoist", "sub": "prévu", "count": null, "live": false}], "intents": [{"name": "startup.updated", "sub": "Startups Pool", "count": 8222, "live": true, "to": ["À brancher"]}, {"name": "memo.updated", "sub": "Memo", "count": 7974, "live": true, "to": ["À brancher"]}, {"name": "founder.updated", "sub": "Founders", "count": 3650, "live": true, "to": ["À brancher"]}, {"name": "zone_investment.updated", "sub": "Zone Investment", "count": 1459, "live": true, "to": ["À brancher"]}, {"name": "operation.approved", "sub": "Forms Control Center", "count": 135, "live": true, "to": ["forms-operator"]}, {"name": "application.submitted", "sub": "Typeform", "count": 12, "live": true, "to": ["bee_network_intake"]}], "consumers": [{"name": "bee_network_intake", "sub": "candidatures → Notion", "live": true}, {"name": "forms-operator", "sub": "exécute les Opérations", "live": true}, {"name": "À brancher", "sub": "analytics, alertes, sync", "live": false}]}}, "findings": [{"v": 15, "t": "bases non inventoriées", "d": "Citées par une relation vivante, absentes du registre. Détectées automatiquement."}, {"v": 137, "t": "relations cartographiées", "d": "Relues sur 26 bases, comparées au relevé d'août : ce qui a bougé est signalé."}, {"v": 6, "t": "événements déclarés, jamais émis", "d": "Repérés en croisant la configuration de Herald et Pub/Sub sur 30 jours : une dette mesurée, pas supposée."}], "terminal": ["$ /bee survey — relations, 26 bases", "26 of 26 bases read · 137 relations · 211 rollups", "15 scope-inconsistency : relation vers une base absente du registre", "$ /bee records — fiches, 34 bases", "34 bases · 20 443 fiches · 0 illisible", "PII : 7 bases en comptes seulement, aucun nom relevé"], "roadmap": [{"w": "PROCHAIN MOIS", "t": "Faire travailler les événements", "d": "16 000 changements de startups et de mémos publiés par mois attendent leurs premiers consommateurs : tableaux de bord, alertes, synchronisation."}, {"w": "TRIMESTRE", "t": "Attribuer les rôles", "d": "Les 9 rôles sont définis mais vacants : les confier nommément, activer la règle des quatre yeux dans les Opérations."}, {"w": "EN CONTINU", "t": "Inventaire automatique", "d": "Intégrer les 15 bases hors registre, relevé bee-navigator hebdomadaire, dérives traitées par Opération."}]}/*KEYNOTE_DATA_END*/;
+const K = /*KEYNOTE_DATA*/{"bases": 34, "rows": 20443, "startups": 4417, "iso": {"layout": {"Startups Pool": {"x": -1.3, "y": -1.3, "w": 2.6, "d": 2.6}, "Zone Investment": {"x": 2.4, "y": -1.0, "w": 2.0, "d": 2.0}, "Memo": {"x": -1.0, "y": 2.4, "w": 2.0, "d": 2.0}, "Founders": {"x": -4.4, "y": -1.0, "w": 2.0, "d": 2.0}, "Zone Platform": {"x": -1.0, "y": -4.4, "w": 2.0, "d": 2.0}, "ACTIVATION ROADMAPS": {"x": 3.6, "y": 3.6, "w": 1.3, "d": 1.3}, "Contracts": {"x": 5.8, "y": -4.4, "w": 1.3, "d": 1.3}, "Valorisation": {"x": 5.8, "y": 1.2, "w": 1.3, "d": 1.3}, "Our Terms": {"x": 5.8, "y": -1.6, "w": 1.3, "d": 1.3}, "Zone - Communication": {"x": -4.4, "y": 4.2, "w": 1.3, "d": 1.3}, "CoInvest": {"x": 1.2, "y": 5.8, "w": 1.3, "d": 1.3}, "Fundraise rounds": {"x": -1.6, "y": 5.8, "w": 1.3, "d": 1.3}, "STOCKS": {"x": 11.2, "y": -7.0, "w": 2.6, "d": 1.8}, "Mapverse": {"x": 14.299999999999999, "y": -7.0, "w": 2.6, "d": 1.8}, "Programmes": {"x": 11.2, "y": -3.4, "w": 2.6, "d": 1.8}, "Protocols": {"x": 14.299999999999999, "y": -3.4, "w": 2.6, "d": 1.8}, "Annuaire des experts": {"x": 11.2, "y": 0.20000000000000018, "w": 2.6, "d": 1.8}, "Scenari": {"x": 14.299999999999999, "y": 0.20000000000000018, "w": 2.6, "d": 1.8}, "Labels": {"x": 11.2, "y": 3.8000000000000007, "w": 2.6, "d": 1.8}, "Outcome": {"x": 14.299999999999999, "y": 3.8000000000000007, "w": 2.6, "d": 1.8}}, "byName": {"Startups Pool": {"label": "Startups Pool", "f": "main", "rows": 4417, "herald": true}, "Zone Investment": {"label": "Zone Investment", "f": "main", "rows": 4420, "herald": true}, "Memo": {"label": "Memo", "f": "main", "rows": 6406, "herald": true}, "Founders": {"label": "Founders", "f": "main", "rows": 2422, "herald": true}, "Zone Platform": {"label": "Zone Platform", "f": "main", "rows": 81, "herald": false}, "ACTIVATION ROADMAPS": {"label": "ACTIVATION ROADMAPS", "f": "dos", "rows": 487, "herald": false}, "Contracts": {"label": "Contracts", "f": "dos", "rows": 422, "herald": false}, "Valorisation": {"label": "Valorisation", "f": "dos", "rows": 233, "herald": false}, "Our Terms": {"label": "Our Terms", "f": "dos", "rows": 86, "herald": false}, "Zone - Communication": {"label": "Zone - Communication", "f": "dos", "rows": 53, "herald": false}, "CoInvest": {"label": "CoInvest", "f": "dos", "rows": 36, "herald": false}, "Fundraise rounds": {"label": "Fundraise rounds", "f": "dos", "rows": 14, "herald": false}, "STOCKS": {"label": "STOCKS", "f": "ref", "rows": 186, "herald": false}, "Mapverse": {"label": "Mapverse", "f": "ref", "rows": 260, "herald": false}, "Programmes": {"label": "Programmes", "f": "ref", "rows": 29, "herald": false}, "Protocols": {"label": "Protocols", "f": "ref", "rows": 31, "herald": false}, "Annuaire des experts": {"label": "Annuaire experts", "f": "ref", "rows": 58, "herald": false}, "Scenari": {"label": "Scenari", "f": "ref", "rows": 5, "herald": false}, "Labels": {"label": "Labels", "f": "ref", "rows": 184, "herald": false}, "Outcome": {"label": "Outcome", "f": "ref", "rows": 9, "herald": false}}, "bridges": [["ACTIVATION ROADMAPS", "Annuaire des experts"], ["ACTIVATION ROADMAPS", "STOCKS"], ["Contracts", "Mapverse"], ["Contracts", "Programmes"], ["Contracts", "STOCKS"], ["Founders", "Mapverse"], ["Labels", "Startups Pool"], ["Labels", "Zone Investment"], ["Mapverse", "Startups Pool"], ["Outcome", "Startups Pool"], ["Protocols", "Startups Pool"]], "heraldBases": ["Startups Pool", "Zone Investment", "Memo", "Founders"], "mast": [-6.6, -6.6], "maxRows": 6406, "captions": [{"t": "Les startups au centre", "d": "Cinq bases principales portent <b>17 746 fiches</b>, soit <b>87 %</b> du contenu. Autour, les dossiers qui suivent chaque startup : contrats, valorisations, termes, appuis."}, {"t": "Des référentiels partagés", "d": "<b>14 listes de référence</b> (pays, étiquettes, étapes, catalogues d'experts), dont les 8 plus citées ici, reliées aux dossiers par des ponts. Une seule vérité, utilisée par toutes les équipes."}, {"t": "Herald écoute", "d": "Quatre bases principales sont écoutées en continu : <b>21 463 événements</b> publiés en 30 jours vers la plateforme, sans ressaisie."}]}, "adoption": {"label": "26", "measured_members": 27}, "scale": [{"v": 26, "k": "membres actifs, 6 équipes"}, {"v": 48, "k": "personnes passées par l'équipe depuis 2020"}, {"v": 17, "k": "arrivées depuis janvier 2025"}, {"v": 34, "k": "bases Notion suivies"}, {"v": 20443, "k": "fiches au total"}], "families": [{"id": "principales", "name": "Bases principales", "bases": 5, "rows": 17746}, {"id": "dossiers", "name": "Dossiers startup", "bases": 7, "rows": 1331}, {"id": "referentiels", "name": "Référentiels", "bases": 14, "rows": 833}, {"id": "ops", "name": "Hors cycle", "bases": 8, "rows": 533}], "ghosts": 15, "governance": {"center_k": "propriétés sous contrat", "center_v": "877", "stations": [{"n": "26", "t": "Relevé", "s": "agent, lecture seule"}, {"n": "20", "t": "Écart", "s": "détecté, qualifié"}, {"n": "55", "t": "Opération", "s": "typée, justifiée"}, {"n": "38", "t": "Exécutée", "s": "après approbation"}, {"n": "53", "t": "Registre", "s": "décision par base"}], "examples": ["25/09 · 26 bases relues, 137 relations", "Dérive : Members.relation → base élaguée", "Rotate webhook · 28 fois en production", "38 réussies · 6 échecs tracés", "53 décisions écrites dans le registre"], "rules": ["<b>814 propriétés sur 877</b> sont conformes à leur contrat de schéma.", "<b>Aucune propriété</b> d'une base Bee Network ne change sans Opération approuvée.", "<b>53 bases</b> ont une décision écrite : 24 à garder, 10 à investiguer, 19 élaguées.", "<b>16 incidents</b> suivis, 13 résolus."]}, "roles": [{"al": "Exécute", "col": "var(--lime)", "name": "Form Owner", "epi": "le capitaine du formulaire", "verbs": 6, "limit": "Demande une publication, ne l'approuve jamais."}, {"al": "Exécute", "col": "var(--lime)", "name": "Reliability Operator", "epi": "le gardien du tuyau", "verbs": 6, "limit": "Peut suspendre un flux, jamais modifier le schéma."}, {"al": "Autorise", "col": "var(--amber)", "name": "Release Approver", "epi": "le gardien de la clé", "verbs": 7, "limit": "N'approuve jamais ce qu'il a demandé lui-même."}, {"al": "Autorise", "col": "var(--amber)", "name": "Sponsor", "epi": "le gardien de la promesse", "verbs": 5, "limit": "Arbitre et clôt, ne touche jamais au formulaire."}, {"al": "Audite", "col": "var(--blue)", "name": "Data Steward", "epi": "le gardien des réponses", "verbs": 7, "limit": "Propose d'élaguer, ne supprime jamais lui-même."}], "herald": {"stats": [{"v": 46849, "k": "webhooks reçus en 30 jours"}, {"v": 21463, "k": "événements typés publiés"}, {"v": 14, "k": "types d'événements"}, {"raw": "299 ms", "k": "temps de réponse médian"}, {"v": 74, "k": "versions déployées depuis mai"}], "daily": [["2026-09-01", 153], ["2026-09-02", 101], ["2026-09-03", 1410], ["2026-09-04", 14744], ["2026-09-05", 51], ["2026-09-06", 294], ["2026-09-07", 497], ["2026-09-08", 4988], ["2026-09-09", 702], ["2026-09-10", 679], ["2026-09-11", 1122], ["2026-09-12", 94], ["2026-09-13", 3], ["2026-09-14", 241], ["2026-09-15", 6786], ["2026-09-16", 673], ["2026-09-17", 830], ["2026-09-18", 33], ["2026-09-19", 5], ["2026-09-20", 5], ["2026-09-21", 96], ["2026-09-22", 5594], ["2026-09-23", 2041], ["2026-09-24", 432], ["2026-09-25", 2866], ["2026-09-26", 5], ["2026-09-27", 5], ["2026-09-28", 448], ["2026-09-29", 1224], ["2026-09-30", 727]], "flow": {"gateway_sub": "décode · valide · publie", "sources": [{"name": "Notion", "sub": "bases écoutées", "count": 46780, "live": true}, {"name": "Typeform", "sub": "candidatures", "count": 16, "live": true}, {"name": "Todoist", "sub": "prévu", "count": null, "live": false}], "intents": [{"name": "startup.updated", "sub": "Startups Pool", "count": 8222, "live": true, "to": ["À brancher"]}, {"name": "memo.updated", "sub": "Memo", "count": 7974, "live": true, "to": ["À brancher"]}, {"name": "founder.updated", "sub": "Founders", "count": 3650, "live": true, "to": ["À brancher"]}, {"name": "zone_investment.updated", "sub": "Zone Investment", "count": 1459, "live": true, "to": ["À brancher"]}, {"name": "operation.approved", "sub": "Forms Control Center", "count": 135, "live": true, "to": ["forms-operator"]}, {"name": "application.submitted", "sub": "Typeform", "count": 12, "live": true, "to": ["bee_network_intake"]}], "consumers": [{"name": "bee_network_intake", "sub": "candidatures → Notion", "live": true}, {"name": "forms-operator", "sub": "exécute les Opérations", "live": true}, {"name": "À brancher", "sub": "analytics, alertes, sync", "live": false}]}}, "findings": [{"v": 15, "t": "bases non inventoriées", "d": "Citées par une relation vivante, absentes du registre. Détectées automatiquement."}, {"v": 137, "t": "relations cartographiées", "d": "Relues sur 26 bases, comparées au relevé d'août : ce qui a bougé est signalé."}, {"v": 6, "t": "événements déclarés, jamais émis", "d": "Repérés en croisant la configuration de Herald et Pub/Sub sur 30 jours : une dette mesurée, pas supposée."}], "terminal": ["$ /bee survey — relations, 26 bases", "26 of 26 bases read · 137 relations · 211 rollups", "15 scope-inconsistency : relation vers une base absente du registre", "$ /bee records — fiches, 34 bases", "34 bases · 20 443 fiches · 0 illisible", "PII : 7 bases en comptes seulement, aucun nom relevé"], "roadmap": [{"w": "PROCHAIN MOIS", "t": "Faire travailler les événements", "d": "16 000 changements de startups et de mémos publiés par mois attendent leurs premiers consommateurs : tableaux de bord, alertes, synchronisation."}, {"w": "TRIMESTRE", "t": "Attribuer les rôles", "d": "Les 9 rôles sont définis mais vacants : les confier nommément, activer la règle des quatre yeux dans les Opérations."}, {"w": "EN CONTINU", "t": "Inventaire automatique", "d": "Intégrer les 15 bases hors registre, relevé bee-navigator hebdomadaire, dérives traitées par Opération."}]}/*KEYNOTE_DATA_END*/;
 document.body.classList.remove("nojs");
 const $ = s => document.querySelector(s);
 const REDUCE = matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -314,9 +333,13 @@ $("#t-bases").textContent = nf(K.bases); $("#t-rows").textContent = nf(K.rows); 
 // count-up on reveal
 function countUp(el){
   const to = +el.dataset.to; if (!isFinite(to)) return;
-  if (REDUCE){ el.textContent = nf(to); return; }
-  const t0 = performance.now(), d = 1300;
-  (function f(t){ const p = Math.min(1,(t-t0)/d), e = 1-Math.pow(1-p,4); el.textContent = nf(Math.round(to*e)); if (p<1) requestAnimationFrame(f); })(t0);
+  const txt = nf(to);
+  if (REDUCE){ el.textContent = txt; return; }
+  let k = 0;
+  el.innerHTML = [...txt].map(ch => /\d/.test(ch)
+    ? `<span class="od"><span class="odr" data-d="${ch}" style="transition-delay:${(k++)*70}ms">${"0123456789".split("").map(x=>`<i>${x}</i>`).join("")}</span></span>`
+    : `<span>${ch === " " || ch === "\u202f" ? "&thinsp;" : ch}</span>`).join("");
+  requestAnimationFrame(()=>requestAnimationFrame(()=>el.querySelectorAll(".odr").forEach(r=>r.style.transform=`translateY(-${r.dataset.d}em)`)));
 }
 const cu = (v, suffix="") => `<span class="cu" data-to="${v}">${REDUCE?nf(v):"0"}</span>${suffix}`;
 
@@ -352,7 +375,8 @@ $("#fams").innerHTML = K.families.map(f=>`<div class="fam"><i style="background:
 
 // 2b — relief view
 const ISO = K.iso;
-const isoState = { step: 1, grow: 0, auto: true, timer: null, started: false };
+const isoState = { step: 1, grow: 0, auto: true, timer: null, started: false, vb: null, full: null, cams: null };
+const backOut = t => { const c1=1.4, c3=c1+1; return 1 + c3*Math.pow(t-1,3) + c1*Math.pow(t-1,2); };
 function isoCaption(){
   const c = ISO.captions[isoState.step-1];
   $("#isocap").innerHTML = `<div class="t">${esc(c.t)}</div><div class="d">${c.d}</div>`;
@@ -383,9 +407,11 @@ function isoDraw(){
   ISO.bridges.forEach(([a,b])=>{ if(!L[a]||!L[b]) return; const [x1,y1]=ctr(a),[x2,y2]=ctr(b); out += `<polyline class="bridge" points="${pts([P(x1,y1,0),P(x2,y2,0)])}"/>`; });
   // blocks, far to near
   const names = Object.keys(L).sort((a,b)=>(L[a].x+L[a].y)-(L[b].x+L[b].y));
+  const byH = Object.keys(L).sort((a,b)=>hOf(ISO.byName[a])-hOf(ISO.byName[b])), N = byH.length;
+  const gOf = n => { const r = byH.indexOf(n), s0 = r/N*0.62, q = Math.max(0, Math.min(1, (isoState.grow - s0)/0.38)); return q<=0 ? 0 : backOut(q); };
   const tops = {}, labels = [];
   names.forEach(n=>{
-    const b = ISO.byName[n], l = L[n], h = hOf(b)*isoState.grow, c = col[b.f];
+    const b = ISO.byName[n], l = L[n], h = Math.max(0.02, hOf(b)*gOf(n)), c = col[b.f];
     const x=l.x, y=l.y, w=l.w, d=l.d;
     const top = [[x,y],[x+w,y],[x+w,y+d],[x,y+d]].map(([a,bb])=>P(a,bb,h));
     const right = [P(x+w,y,0),P(x+w,y+d,0),P(x+w,y+d,h),P(x+w,y,h)];
@@ -405,32 +431,58 @@ function isoDraw(){
     <text class="lb" x="${m1[0]}" y="${m1[1]-16}">Herald</text></g>`;
   ISO.heraldBases.forEach(n=>{ const t=tops[n]; if(!t) return; const cx=(m1[0]+t[0])/2, cy=Math.min(m1[1],t[1])-50;
     mast += `<path class="pipe" d="M${m1[0].toFixed(1)},${m1[1].toFixed(1)} Q${cx.toFixed(1)},${cy.toFixed(1)} ${t[0].toFixed(1)},${(t[1]-3).toFixed(1)}"/>`; });
-  svg.innerHTML = out + mast + labels.join("");
-  const b = svg.getBBox(); svg.setAttribute("viewBox", `${(b.x-20).toFixed(0)} ${(b.y-30).toFixed(0)} ${(b.width+40).toFixed(0)} ${(b.height+50).toFixed(0)}`);
+  svg.innerHTML = out + mast + labels.join("") + `<g id="sparks"></g>`;
+  if (!isoState.full){ const b = svg.getBBox(); isoState.full = [b.x-20, b.y-30, b.width+40, b.height+50]; }
+  svg.setAttribute("viewBox", (isoState.vb || isoState.full).map(v=>v.toFixed(1)).join(" "));
   isoCaption();
+}
+function isoCams(){
+  const svg = $("#iso"), un = els => { let x0=1e9,y0=1e9,x1=-1e9,y1=-1e9; els.forEach(e=>{ const b=e.getBBox(); x0=Math.min(x0,b.x); y0=Math.min(y0,b.y); x1=Math.max(x1,b.x+b.width); y1=Math.max(y1,b.y+b.height); }); return [x0-40,y0-40,x1-x0+80,y1-y0+80]; };
+  const fitAspect = (v) => { const F = isoState.full, a = F[2]/F[3]; let [x,y,w,hh] = v; if (w/hh < a){ const nw = hh*a; x -= (nw-w)/2; w = nw; } else { const nh = w/a; y -= (nh-hh)/2; hh = nh; } return [x,y,w,hh]; };
+  isoState.cams = {
+    1: fitAspect(un([...svg.querySelectorAll('.blk[data-f="main"], .blk[data-f="dos"], .lb[data-f="main"]')])),
+    2: isoState.full,
+    3: fitAspect(un([...svg.querySelectorAll('.mast, .blk[data-h="1"], .lb[data-h="1"]')])),
+  };
+}
+function isoCamTo(step){
+  if (!isoState.cams) return; const from = (isoState.vb || isoState.full).slice(), to = isoState.cams[step];
+  if (REDUCE){ isoState.vb = to; $("#iso").setAttribute("viewBox", to.join(" ")); return; }
+  const t0 = performance.now();
+  (function f(t){ const p = Math.min(1,(t-t0)/1100), e = p<.5 ? 4*p*p*p : 1-Math.pow(-2*p+2,3)/2;
+    isoState.vb = from.map((v,i)=>v+(to[i]-v)*e); $("#iso").setAttribute("viewBox", isoState.vb.map(v=>v.toFixed(1)).join(" ")); if (p<1) requestAnimationFrame(f); })(t0);
+}
+function isoSparks(){
+  const svg = $("#iso"), g = $("#sparks"), live = [];
+  const pick = () => { const sel = isoState.step===2 ? "polyline.bridge" : isoState.step===3 ? "path.pipe" : null; if (!sel) return null; const a = svg.querySelectorAll(sel); return a.length ? a[Math.floor(Math.random()*a.length)] : null; };
+  let last = 0;
+  (function f(t){
+    if (t - last > (isoState.step===3 ? 120 : 160) && live.length < 40){ const p = pick(); if (p){ const c = document.createElementNS("http://www.w3.org/2000/svg","circle"); c.setAttribute("r","2.4"); c.setAttribute("class","spark"); g.appendChild(c); live.push({p,c,t:0,L:p.getTotalLength(),v:.012+Math.random()*.01}); } last = t; }
+    for (let i=live.length-1;i>=0;i--){ const o=live[i]; o.t+=o.v; if (o.t>=1 || (isoState.step===1)){ o.c.remove(); live.splice(i,1); continue; }
+      const pt=o.p.getPointAtLength(o.t*o.L); o.c.setAttribute("cx",pt.x.toFixed(1)); o.c.setAttribute("cy",pt.y.toFixed(1)); o.c.setAttribute("opacity",Math.sin(Math.PI*o.t).toFixed(2)); }
+    requestAnimationFrame(f); })(0);
 }
 function isoGo(s, manual){
   isoState.step = s; if (manual){ isoState.auto = false; clearInterval(isoState.timer); }
-  isoCaption();
+  isoCaption(); isoCamTo(s);
 }
 [1,2,3].forEach(i=>$("#is"+i).addEventListener("click",()=>isoGo(i,true)));
 function isoStart(){
   if (isoState.started) return; isoState.started = true;
-  isoDraw(); // lay out once at zero height to fix the viewBox, then grow
-  const vb = $("#iso").getAttribute("viewBox");
-  isoState.grow = 1; isoDraw(); const full = $("#iso").getAttribute("viewBox"); isoState.grow = 0;
-  const fix = () => $("#iso").setAttribute("viewBox", full);
-  if (REDUCE){ isoState.grow = 1; isoDraw(); fix(); }
-  else { const t0 = performance.now(); (function f(t){ const p=Math.min(1,(t-t0)/1400); isoState.grow = 1-Math.pow(1-p,3); isoDraw(); fix(); if(p<1) requestAnimationFrame(f); })(t0); }
-  isoState.timer = setInterval(()=>{ if (isoState.auto) isoGo(isoState.step%3+1); }, 5200);
+  isoState.grow = 1; isoDraw(); isoCams(); isoState.grow = 0;       // measure the full scene and the three camera frames once
+  isoState.vb = isoState.cams[1].slice();
+  const done = () => { if (!REDUCE) isoSparks(); isoState.timer = setInterval(()=>{ if (isoState.auto) isoGo(isoState.step%3+1); }, 6000); };
+  if (REDUCE){ isoState.grow = 1; isoDraw(); done(); }
+  else { const t0 = performance.now(); (function f(t){ const p=Math.min(1,(t-t0)/2600); isoState.grow = p; isoDraw(); if(p<1) requestAnimationFrame(f); else done(); })(t0); }
 }
+
 
 // 3 — governance loop
 $("#rules").innerHTML = K.governance.rules.map(r=>`<div class="rule"><span>${r}</span></div>`).join("");
 (function(){
   const S = K.governance.stations, R = 250, svg = $("#loop"); const n = S.length;
   let h = `<circle class="ring" r="${R}"/><circle class="arc" id="arc" r="${R}" transform="rotate(-90)"/>`;
-  h += `<text class="center" y="-14">${esc(K.governance.center_k)}</text><text class="centerb num" y="22">${esc(K.governance.center_v)}</text>`;
+  h += `<text class="center" y="-24">${esc(K.governance.center_k)}</text><text class="centerb num" y="10">${esc(K.governance.center_v)}</text><text class="ex" id="loopEx" y="46"></text>`;
   S.forEach((s,i)=>{ const a = -Math.PI/2 + i*2*Math.PI/n, x = R*Math.cos(a), y = R*Math.sin(a);
     h += `<g class="st" id="st${i}" transform="translate(${x.toFixed(1)},${y.toFixed(1)})"><circle r="62"/>
       <text class="n num" y="-6">${esc(s.n)}</text><text y="16">${esc(s.t)}</text><text class="sub" y="34">${esc(s.s)}</text></g>`; });
@@ -442,6 +494,7 @@ function runLoop(){
   const arc = $("#arc"), n = K.governance.stations.length, C = 2*Math.PI*250; let t0 = performance.now();
   (function f(t){ const p = ((t-t0)/7000)%1; arc.style.strokeDashoffset = (-C*p).toFixed(1);
     const k = Math.floor((p*n + .15)%n); document.querySelectorAll("#loop .st").forEach((g,i)=>g.classList.toggle("hot", i===k));
+    const ex = $("#loopEx"); if (ex.dataset.k != k){ ex.dataset.k = k; ex.textContent = K.governance.examples[k] || ""; }
     if (!REDUCE) requestAnimationFrame(f); })(t0);
 }
 
@@ -472,10 +525,23 @@ function buildFlow(){
   const paths = [...svg.querySelectorAll("path.lane.live")];
   if (REDUCE || !paths.length) return;
   const dots = $("#dots"), P = [];
+  const D = K.herald.daily, maxD = Math.max(...D.map(x=>x[1])), bw = 9, gap = 3;
+  $("#hstats").insertAdjacentHTML("afterend", `<div class="replay"><div class="date"><small>rejeu · 30 derniers jours</small><span id="rpDate">—</span></div>
+    <div><svg width="${D.length*(bw+gap)}" height="56" aria-hidden="true">${D.map((x,i)=>{ const hh=Math.max(2,Math.round(52*Math.sqrt(x[1]/maxD))); return `<rect x="${i*(bw+gap)}" y="${56-hh}" width="${bw}" height="${hh}" rx="2"/>`; }).join("")}</svg>
+    <div class="mono" style="font-size:12px;color:var(--muted);margin-top:6px"><b id="rpDay" style="color:var(--text);font-weight:500">0</b> webhooks ce jour · <b id="rpTot" style="color:var(--lime);font-weight:500">0</b> cumulés</div></div></div>`);
+  const bars = [...document.querySelectorAll(".replay rect")], REPLAY = 13000, rt0 = performance.now(); let cum = 0, lastDay = -1;
+  const fmtDay = s => new Date(s+"T12:00:00").toLocaleDateString("fr-FR",{weekday:"short",day:"numeric",month:"short"});
   const spawn = () => { const p = paths[Math.floor(Math.random()*paths.length)], c = document.createElementNS("http://www.w3.org/2000/svg","circle");
     c.setAttribute("r","2.6"); c.setAttribute("fill","#c6f135"); dots.appendChild(c); P.push({p,c,t:0,L:p.getTotalLength(),v:0.004+Math.random()*0.004}); };
   let last = 0;
-  (function f(t){ if (t-last > 90 && P.length < 60){ spawn(); last = t; }
+  (function f(t){
+    const rp = (t - rt0)/REPLAY; let interval = 90, cap = 60;
+    if (rp < 1){ const di = Math.min(D.length-1, Math.floor(rp*D.length)), v = D[di][1];
+      if (di !== lastDay){ lastDay = di; cum += v; $("#rpDate").textContent = fmtDay(D[di][0]); $("#rpDay").textContent = nf(v); $("#rpTot").textContent = nf(cum);
+        bars.forEach((b,i)=>{ b.classList.toggle("on", i<di); b.classList.toggle("now", i===di); }); }
+      interval = 18 + 620*Math.pow(1 - v/maxD, 2.2); cap = 180; }
+    else if (lastDay !== D.length){ lastDay = D.length; $("#rpDate").textContent = "30 jours"; bars.forEach(b=>{ b.classList.add("on"); b.classList.remove("now"); }); }
+    if (t-last > interval && P.length < cap){ spawn(); last = t; }
     for (let i=P.length-1;i>=0;i--){ const o=P[i]; o.t+=o.v; if (o.t>=1){ o.c.remove(); P.splice(i,1); continue; }
       const pt=o.p.getPointAtLength(o.t*o.L); o.c.setAttribute("cx",pt.x.toFixed(1)); o.c.setAttribute("cy",pt.y.toFixed(1)); o.c.setAttribute("opacity",(Math.sin(Math.PI*o.t)).toFixed(2)); }
     requestAnimationFrame(f); })(0);
@@ -511,6 +577,10 @@ $("#road").innerHTML = K.roadmap.map((r,i)=>`<div class="step rv d${i+2}"><div c
 })();
 
 // scene engine
+document.querySelectorAll(".scene h1, .scene h2").forEach(el=>{
+  if (REDUCE) return; let i = 0;
+  el.innerHTML = el.textContent.trim().split(/\s+/).map(w=>`<span class="w" style="--i:${i++}">${esc(w)}</span>`).join(" ");
+});
 const scenes = [...document.querySelectorAll(".scene")]; $("#tot").textContent = String(scenes.length).padStart(2,"0");
 let current = 0;
 function enter(i){
@@ -533,6 +603,8 @@ addEventListener("keydown",e=>{
   if (e.target.closest && e.target.closest("iframe")) return;
   if (["ArrowDown","ArrowRight","PageDown"," "].includes(e.key)){ e.preventDefault(); go(1); }
   if (["ArrowUp","ArrowLeft","PageUp"].includes(e.key)){ e.preventDefault(); go(-1); }
+  if (e.key==="b" || e.key==="B"){ $("#black").classList.toggle("on"); return; }
+  if (e.key==="f" || e.key==="F"){ const d=document; (d.fullscreenElement ? d.exitFullscreen() : d.documentElement.requestFullscreen()).catch(()=>{}); return; }
   if (e.key==="Home"){ e.preventDefault(); scenes[0].scrollIntoView(); }
   if (e.key==="End"){ e.preventDefault(); scenes[scenes.length-1].scrollIntoView(); }
 });
