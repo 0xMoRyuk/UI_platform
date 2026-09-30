@@ -58,11 +58,12 @@ steps:
         echo "📦 Installing dependencies..."
         bun install
 
-        echo "🔍 Running type-check..."
-        bun run type-check
+        # Validate only the app being deployed: one app's type errors must not block another app's deploy.
+        echo "🔍 Running type-check for ${_APP_NAME}..."
+        (cd "apps/${_APP_NAME}" && bun run type-check)
 
-        echo "🧹 Running lint..."
-        bun run lint
+        echo "🧹 Running lint for ${_APP_NAME}..."
+        (cd "apps/${_APP_NAME}" && bun run lint)
 
         echo "✅ Validation passed"
     waitFor: ['generate-version']
