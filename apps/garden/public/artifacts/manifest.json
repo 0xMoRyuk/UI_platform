@@ -1,0 +1,64 @@
+{
+  "synced_at": "2026-09-30T18:53:47.399Z",
+  "domains": [
+    {
+      "id": "puppy",
+      "title": "Puppy",
+      "summary": "Bee Network : les joueurs de la loi de partie et le contenu des bases Notion."
+    }
+  ],
+  "artifacts": [
+    {
+      "id": "bee-network-bases",
+      "domain": "puppy",
+      "title": "Bee Network Index",
+      "description": "Les bases du Bee Network en cinq familles (principales, dossiers startup, référentiels, hors registre, hors cycle), avec fiches, états, routage Herald et relations.",
+      "date": "2026-09-30",
+      "source": "assets/viz/bee-network-bases.html",
+      "file": "bee-network-bases.html",
+      "generator": "Claude Code · bee-navigator 2.1.0 records + survey",
+      "sensitivity": "internal",
+      "bytes": 54845,
+      "sha256": "863b13d54060"
+    },
+    {
+      "id": "bee-network-index",
+      "domain": "puppy",
+      "title": "Joueurs du Bee Network",
+      "description": "Les cinq joueurs de « Pilotage des formulaires de candidature », leurs 31 verbes et les primitives LEUCHTTURM qu'ils mobilisent.",
+      "date": "2026-09-24",
+      "source": "assets/viz/bee-network-index.html",
+      "file": "bee-network-index.html",
+      "generator": "Claude Code · scripts/bee_network_index_gen.py",
+      "sensitivity": "internal",
+      "bytes": 37303,
+      "sha256": "587fbb72af4c"
+    },
+    {
+      "id": "bee-network-rives",
+      "domain": "puppy",
+      "title": "Les deux rives du Bee Network",
+      "description": "Vue isométrique : bases de startups en tours, référentiels en dalles, ponts = relations Notion, mât Herald.",
+      "date": "2026-09-25",
+      "source": "assets/viz/bee-network-rives.html",
+      "file": "bee-network-rives.html",
+      "generator": "Claude Code · bee-navigator 2.1.0 records + survey",
+      "sensitivity": "internal",
+      "bytes": 60546,
+      "sha256": "910b2c541cb1"
+    },
+    {
+      "id": "bee-network-city",
+      "domain": "puppy",
+      "title": "La ville des bases",
+      "description": "Vue isométrique : une tour par base (hauteur = fiches, strates = état), un quartier par branche de rattachement.",
+      "date": "2026-09-24",
+      "source": "assets/viz/bee-network-city.html",
+      "file": "bee-network-city.html",
+      "generator": "Claude Code · bee-navigator 2.1.0 records",
+      "sensitivity": "internal",
+      "bytes": 39035,
+      "sha256": "af2d2bc3dcdf"
+    }
+  ]
+}

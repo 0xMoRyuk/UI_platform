@@ -1,0 +1,393 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<meta charset="utf-8">
+<title>Bee Network City</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  color-scheme: dark;
+  --ground:#100e0b; --panel:#17140f; --card:#1d1913; --card-hi:#241f17;
+  --line:#2f291f; --line-soft:#231e16;
+  --text:#efe8da; --muted:#9b917f; --faint:#6a6152;
+  --honey:#f2b441; --honey-soft:rgba(242,180,65,.14);
+  --exec:#f2b441; --auth:#7cc9a6; --audit:#a3b4ff; --consult:#c9b99a;
+  --special:#ff7a59; --pivot:#e8d36b;
+  --curve:rgba(242,180,65,.42); --curve-dim:rgba(239,232,218,.07);
+  --display:"Schibsted Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: light){
+  :root:not([data-theme="dark"]){
+    color-scheme: light;
+    --ground:#eceef0; --panel:#f6f7f8; --card:#ffffff; --card-hi:#fffaf0;
+    --line:#d6d9dc; --line-soft:#e3e5e8;
+    --text:#1b1a17; --muted:#5f5a50; --faint:#8c877c;
+    --honey:#a86a00; --honey-soft:rgba(168,106,0,.10);
+    --exec:#a86a00; --auth:#1f7d57; --audit:#3a55c9; --consult:#7a6a48;
+    --special:#c8452a; --pivot:#8a7400;
+    --curve:rgba(168,106,0,.5); --curve-dim:rgba(27,26,23,.08);
+  }
+}
+:root[data-theme="light"]{
+  color-scheme: light;
+  --ground:#eceef0; --panel:#f6f7f8; --card:#ffffff; --card-hi:#fffaf0;
+  --line:#d6d9dc; --line-soft:#e3e5e8;
+  --text:#1b1a17; --muted:#5f5a50; --faint:#8c877c;
+  --honey:#a86a00; --honey-soft:rgba(168,106,0,.10);
+  --exec:#a86a00; --auth:#1f7d57; --audit:#3a55c9; --consult:#7a6a48;
+  --special:#c8452a; --pivot:#8a7400;
+  --curve:rgba(168,106,0,.5); --curve-dim:rgba(27,26,23,.08);
+}
+:root[data-theme="dark"]{ color-scheme: dark; }
+
+*{box-sizing:border-box}
+body{background:var(--ground);color:var(--text);font-family:var(--display);font-size:14px;line-height:1.5;padding-inline:16px;padding-block:20px 40px}
+.wrap{max-width:1320px;margin:0 auto;display:flex;flex-direction:column;gap:18px}
+
+header.top{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:8px 24px}
+.crumb{font-family:var(--mono);font-size:12px;color:var(--faint);letter-spacing:.02em}
+.crumb b{color:var(--muted);font-weight:500}
+h1{margin:4px 0 0;font-size:clamp(20px,2.4vw,28px);font-weight:600;letter-spacing:-.01em;text-wrap:balance}
+.anchors{display:flex;gap:8px;flex-wrap:wrap}
+.anchors a{font-family:var(--mono);font-size:12px;color:var(--muted);text-decoration:none;border:1px solid var(--line);padding:5px 10px;border-radius:999px}
+.anchors a:hover,.anchors a:focus-visible{color:var(--honey);border-color:var(--honey);outline:none}
+
+.stage{position:relative;background:var(--panel);border:1px solid var(--line-soft);border-radius:18px;padding:28px;display:grid;grid-template-columns:230px 270px 1fr;gap:40px;min-height:640px;overflow:hidden}
+svg.wires{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+svg.wires path{fill:none;stroke-width:1.1}
+svg.wires path.lead{stroke:var(--curve)}
+svg.wires path.dim{stroke:var(--curve-dim)}
+svg.wires path.draw{stroke-dasharray:1;stroke-dashoffset:1;animation:draw .7s cubic-bezier(.3,.7,.2,1) forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+
+/* root column */
+.root{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center;position:relative;z-index:1}
+.root h2{margin:0;font-size:19px;font-weight:600}
+.root .sub{font-size:12.5px;color:var(--muted);max-width:26ch;text-wrap:balance}
+.root .sub em{font-style:normal;color:var(--honey)}
+#sphere{width:170px;height:170px;max-width:100%}
+.gauge{display:flex;align-items:center;gap:10px;text-align:left}
+.gauge .num{font-size:22px;font-weight:600;font-variant-numeric:tabular-nums;line-height:1}
+.gauge .num small{font-size:13px;color:var(--muted);font-weight:500}
+.gauge .lbl{font-size:11.5px;color:var(--muted);line-height:1.3}
+.facts{display:flex;gap:14px;font-family:var(--mono);font-size:11px;color:var(--faint)}
+.facts b{color:var(--text);font-weight:500}
+
+/* cards column */
+.cards{display:flex;flex-direction:column;gap:10px;justify-content:center;position:relative;z-index:1}
+.card{all:unset;box-sizing:border-box;cursor:pointer;display:grid;grid-template-columns:1fr auto;gap:2px 10px;align-items:center;background:var(--card);border:1px solid var(--line-soft);border-radius:14px;padding:12px 14px;transition:border-color .2s,background .2s,transform .2s}
+.card:hover{border-color:var(--line)}
+.card:focus-visible{outline:2px solid var(--honey);outline-offset:2px}
+.card[aria-pressed="true"]{background:var(--card-hi);border-color:var(--honey);box-shadow:0 0 0 4px var(--honey-soft)}
+.card .head{display:flex;align-items:center;gap:9px;min-width:0}
+.ico{width:26px;height:26px;border-radius:7px;display:grid;place-items:center;background:var(--line-soft);color:var(--muted);flex:none}
+.card[aria-pressed="true"] .ico{background:var(--honey);color:var(--ground)}
+.ico svg{width:15px;height:15px}
+.card .name{font-weight:600;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.card .epi{grid-column:1;font-size:11.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.card .count{grid-column:1;display:flex;align-items:baseline;gap:6px;margin-top:4px}
+.card .count b{font-size:24px;font-weight:600;font-variant-numeric:tabular-nums;line-height:1}
+.card .count span{font-size:11.5px;color:var(--muted)}
+.card .ring{grid-column:2;grid-row:1 / span 3;width:46px;height:46px}
+.chip{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border-radius:999px;border:1px solid currentColor;white-space:nowrap}
+.al-exec{color:var(--exec)} .al-auth{color:var(--auth)} .al-audit{color:var(--audit)} .al-consult{color:var(--consult)}
+
+/* fan column */
+.fan{position:relative;z-index:1;min-height:560px}
+.leaf{all:unset;box-sizing:border-box;position:absolute;left:0;display:flex;align-items:center;gap:10px;cursor:pointer;padding:5px 8px 5px 0;border-radius:8px;transform:translateY(-50%);white-space:nowrap;max-width:calc(100% - 4px)}
+.leaf .dot{width:7px;height:7px;border-radius:50%;background:var(--text);flex:none;box-shadow:0 0 0 3px var(--panel)}
+.leaf[data-al="exec"] .dot{background:var(--exec)} .leaf[data-al="auth"] .dot{background:var(--auth)} .leaf[data-al="audit"] .dot{background:var(--audit)} .leaf[data-al="consult"] .dot{background:var(--consult)}
+.leaf .t{font-size:14.5px;font-weight:500;overflow:hidden;text-overflow:ellipsis}
+.leaf .n{font-family:var(--mono);font-size:11px;color:var(--faint);font-variant-numeric:tabular-nums}
+.badge{font-family:var(--mono);font-size:10.5px;color:var(--muted);background:var(--line-soft);border:1px solid var(--line);padding:1px 7px;border-radius:5px;white-space:nowrap}
+.badge b{color:var(--honey);font-weight:500}
+.mark{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.06em;white-space:nowrap}
+.mark.special{color:var(--special)} .mark.pivot{color:var(--pivot)}
+.leaf:hover .t,.leaf:focus-visible .t{color:var(--honey)}
+.leaf:focus-visible{outline:2px solid var(--honey);outline-offset:2px}
+.leaf[aria-current="true"] .t{color:var(--honey)}
+.leaf[aria-current="true"] .dot{box-shadow:0 0 0 3px var(--panel),0 0 0 5px var(--honey)}
+.leaf.in{animation:leafIn .45s cubic-bezier(.3,.7,.2,1) both}
+@keyframes leafIn{from{opacity:0;translate:-14px 0}to{opacity:1;translate:0 0}}
+.leaf.hl .t{color:var(--honey)}
+
+/* detail */
+.detail{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:16px 32px;background:var(--panel);border:1px solid var(--line-soft);border-radius:18px;padding:22px 26px}
+.detail .kicker{font-family:var(--mono);font-size:11px;color:var(--faint);letter-spacing:.04em;text-transform:uppercase;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.detail h3{margin:6px 0 8px;font-size:20px;font-weight:600;text-wrap:balance}
+.detail p{margin:0;max-width:66ch;color:var(--text);line-height:1.6}
+.detail .side{display:flex;flex-direction:column;gap:12px;font-size:13px}
+.detail .side dt{font-family:var(--mono);font-size:10.5px;color:var(--faint);text-transform:uppercase;letter-spacing:.06em}
+.detail .side dd{margin:2px 0 0;color:var(--muted)}
+.detail .side dd code{font-family:var(--mono);font-size:12px;color:var(--text);word-break:break-all}
+.limit{border-left:2px solid var(--special);padding-left:12px;color:var(--text)}
+.also a{color:var(--honey);text-decoration:none;cursor:pointer}
+.also a:hover{text-decoration:underline}
+
+.legend{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:12px;color:var(--muted);align-items:center}
+.legend i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;vertical-align:1px}
+
+@media (max-width: 980px){
+  .stage{grid-template-columns:1fr;padding:18px;gap:22px;min-height:0}
+  svg.wires{display:none}
+  .root{flex-direction:row;flex-wrap:wrap;justify-content:flex-start;text-align:left}
+  #sphere{width:96px;height:96px}
+  .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
+  .fan{min-height:0;display:flex;flex-direction:column;gap:4px}
+  .leaf{position:static;transform:none;white-space:normal;flex-wrap:wrap;left:auto!important;top:auto!important}
+  .detail{grid-template-columns:1fr;padding:18px}
+}
+@media (prefers-reduced-motion: reduce){
+  .leaf.in{animation:none} svg.wires path.draw{animation:none;stroke-dashoffset:0}
+}
+</style>
+<style>
+.isostage{position:relative;background:var(--panel);border:1px solid var(--line-soft);border-radius:18px;display:grid;grid-template-columns:minmax(0,1fr) 340px;overflow:hidden}
+.iso-wrap{position:relative;min-width:0;padding:10px}
+svg.iso{width:100%;height:auto;display:block;user-select:none}
+svg.iso .plot{fill:var(--card);stroke:var(--line);stroke-width:1}
+svg.iso .plot.root{fill:var(--card-hi);stroke:var(--honey);stroke-opacity:.5}
+svg.iso .street{fill:none;stroke:var(--honey);stroke-opacity:.35;stroke-width:1.4;stroke-dasharray:4 4}
+svg.iso .street.hot{stroke-opacity:.95;stroke-dasharray:none;stroke-width:2}
+svg.iso .shade-r{fill:#000;fill-opacity:.28}
+svg.iso .shade-l{fill:#000;fill-opacity:.12}
+svg.iso .shade-t{fill:#fff;fill-opacity:.16}
+svg.iso .tower{cursor:pointer;transition:opacity .2s}
+svg.iso .tower .edge{fill:none;stroke:var(--ground);stroke-opacity:.55;stroke-width:.8}
+svg.iso .tower.inv .body{fill-opacity:.38}
+svg.iso .tower.inv .edge{stroke:var(--auth);stroke-opacity:.9;stroke-dasharray:3 2}
+svg.iso .tower.sel .edge{stroke:var(--text);stroke-opacity:1;stroke-width:1.6;stroke-dasharray:none}
+svg.iso.dim .tower:not(.inbranch){opacity:.28}
+svg.iso .tower:focus-visible{outline:none}
+svg.iso .tower:focus-visible .edge{stroke:var(--honey);stroke-width:2;stroke-opacity:1}
+svg.iso .lbl{font-family:var(--display);font-size:11px;fill:var(--text);paint-order:stroke;stroke:var(--panel);stroke-width:3px;stroke-linejoin:round;pointer-events:none}
+svg.iso .lbl.small{font-size:10px;fill:var(--muted)}
+svg.iso .lbl .n{font-family:var(--mono);font-size:9.5px;fill:var(--muted)}
+svg.iso .dlbl{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;fill:var(--faint);pointer-events:none}
+.tools{position:absolute;top:14px;left:14px;display:flex;gap:6px;flex-wrap:wrap;z-index:2}
+.tools button{all:unset;cursor:pointer;font-family:var(--mono);font-size:11.5px;color:var(--muted);border:1px solid var(--line);background:var(--panel);padding:4px 10px;border-radius:999px}
+.tools button:hover,.tools button:focus-visible{color:var(--honey);border-color:var(--honey)}
+.tools button[aria-pressed="true"]{color:var(--ground);background:var(--honey);border-color:var(--honey)}
+.tip{position:absolute;pointer-events:none;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:6px 9px;font-size:12px;white-space:nowrap;box-shadow:0 6px 18px rgba(0,0,0,.25);z-index:3}
+.tip b{font-weight:600} .tip span{font-family:var(--mono);color:var(--muted);font-size:11px;margin-left:6px}
+aside.panel{border-left:1px solid var(--line-soft);padding:20px 20px 22px;display:flex;flex-direction:column;gap:14px;min-width:0}
+aside.panel .kicker{font-family:var(--mono);font-size:10.5px;color:var(--faint);letter-spacing:.04em;text-transform:uppercase;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+aside.panel h3{margin:0;font-size:19px;font-weight:600;text-wrap:balance}
+aside.panel dt{font-family:var(--mono);font-size:10.5px;color:var(--faint);text-transform:uppercase;letter-spacing:.06em}
+aside.panel dd{margin:3px 0 0;color:var(--muted);font-size:13px}
+aside.panel dd code{font-family:var(--mono);font-size:11.5px;color:var(--text);word-break:break-all}
+aside.panel dl{margin:0;display:flex;flex-direction:column;gap:12px}
+.bignum{font-size:32px;font-weight:600;font-variant-numeric:tabular-nums;line-height:1}
+.bignum small{font-size:13px;color:var(--muted);font-weight:500;margin-left:6px}
+.statebar{display:flex;height:10px;border-radius:5px;overflow:hidden;background:var(--line-soft);margin:8px 0 6px}
+.statebar i{display:block;height:100%}
+.statelegend{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:12px;color:var(--muted)}
+.statelegend b{color:var(--text);font-weight:500;font-variant-numeric:tabular-nums}
+.statelegend span::before{content:"";display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:6px;background:var(--c)}
+.titles{margin:4px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:3px}
+.titles li{font-size:13px;color:var(--text);padding-left:12px;position:relative}
+.titles li::before{content:"";position:absolute;left:0;top:.6em;width:5px;height:1px;background:var(--faint)}
+.chip.inv{color:var(--auth);border-style:dashed}
+.chip.pii{color:var(--faint)}
+.districts{display:flex;flex-wrap:wrap;gap:6px}
+.districts button{all:unset;cursor:pointer;font-size:12px;color:var(--muted);border:1px solid var(--line);border-radius:6px;padding:3px 8px}
+.districts button:hover,.districts button:focus-visible{border-color:var(--honey);color:var(--honey)}
+.switch{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;font-family:var(--mono);font-size:12px}
+.switch a,.switch span{padding:5px 12px;text-decoration:none;color:var(--muted)}
+.switch span{background:var(--honey);color:var(--ground)}
+.switch a:hover{color:var(--honey)}
+@media (max-width: 980px){
+  .isostage{grid-template-columns:1fr}
+  aside.panel{border-left:0;border-top:1px solid var(--line-soft)}
+  .iso-wrap{overflow-x:auto}
+  svg.iso{min-width:640px}
+}
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div>
+      <div class="crumb">notebook / puppy / <b>bee-network</b> · relevé bee-navigator <span id="ver"></span> du <span id="gen"></span></div>
+      <h1>La ville des bases</h1>
+    </div>
+    <nav class="anchors" aria-label="Navigation">
+      <span class="switch"><a href="bee-network-index.html">Joueurs</a><a href="bee-network-bases.html">Bases</a><span>Ville</span></span>
+    </nav>
+  </header>
+
+  <section class="isostage">
+    <div class="iso-wrap" id="isoWrap">
+      <div class="tools">
+        <button id="rotL" aria-label="Pivoter à gauche">⟲ pivoter</button>
+        <button id="rotR" aria-label="Pivoter à droite">⟳</button>
+        <button id="lbls" aria-pressed="false">toutes les étiquettes</button>
+      </div>
+      <svg class="iso" id="iso" role="img" aria-label="Vue isométrique des bases : une tour par base, hauteur selon le nombre de fiches"></svg>
+      <div class="tip" id="tip" hidden></div>
+    </div>
+    <aside class="panel" id="panel" aria-live="polite"></aside>
+  </section>
+
+  <div class="legend">
+    <span><i style="background:var(--honey)"></i>À garder</span>
+    <span><i style="background:transparent;border:1.5px dashed var(--auth)"></i>À investiguer (tour translucide)</span>
+    <span>hauteur = fiches, échelle log · strates = répartition de l'état</span>
+    <span>pointillés au sol = rattachement</span>
+  </div>
+</div>
+
+<script>
+const FALLBACK_DATA = /*FALLBACK_START*/{"generated": "2026-09-24", "agent_version": "2.1.0", "registry_counts": {"À garder": 24, "À investiguer": 10, "pruned": 19}, "unreadable": [], "bases": [{"base": "Labels", "data_source_id": "04007b1f-a34d-4ffa-92ac-c4adabd3f9ab", "decision": "À garder", "rattachement": "Startups Pool", "row_count": 184, "state": null, "sample_titles": ["VC/finance", "Valuation: < 1 M€", "Valuation: 3 M€ à 4,99 M€", "Valuation: > 20 M€", "Valuation: 5 M€ à 9,99 M€"], "pii_excluded": false}, {"base": "TeamOwner", "data_source_id": "2fb0fcf3-8494-801c-aaf2-000b351289cb", "decision": "À garder", "rattachement": "Labels", "row_count": 9, "state": null, "sample_titles": [], "pii_excluded": true}, {"base": "Founders", "data_source_id": "ad5be62b-de5a-4d9b-ba83-180c9be66a88", "decision": "À garder", "rattachement": "Startups Pool", "row_count": 2422, "state": null, "sample_titles": [], "pii_excluded": true}, {"base": "Zone Investment", "data_source_id": "105d8a30-0a28-407f-9464-5ee0dd46b596", "decision": "À garder", "rattachement": "Startups Pool", "row_count": 4420, "state": null, "sample_titles": ["JEMELA Fiche Investment", "BODER TECH LIMITED Fiche Investmento", "Sendplus Fiche Investment", "CleanUp MDC Fiche Investment", "EcoGuadex LTD Fiche Investment"], "pii_excluded": false}, {"base": "CoInvest", "data_source_id": "2e00fcf3-8494-800a-806a-000b27f85e56", "decision": "À garder", "rattachement": "Fundraise rounds", "row_count": 36, "state": null, "sample_titles": [], "pii_excluded": true}, {"base": "Startups Pool", "data_source_id": "4abdd163-a737-4df1-9e0d-55b899ea5e29", "decision": "À garder", "rattachement": "—", "row_count": 4417, "state": null, "sample_titles": ["JEMELA Fiche Startup", "Vumah Labs Fiche Startup", "Kalmos Fiche Startup", "BIOVELL COMPANY LIMITED Fiche Startup", "Qraftiq Ltd Fiche Startup"], "pii_excluded": false}, {"base": "Programmes", "data_source_id": "89609995-05fd-42eb-9d47-717ebcd9f23b", "decision": "À garder", "rattachement": "Mapverse", "row_count": 29, "state": null, "sample_titles": ["AEDIB 2", "Fuzé", "Legacy - AEDIB | NET", "Choose Africa", "Tech 4 Non Tech"], "pii_excluded": false}, {"base": "ACTIVATION ROADMAPS", "data_source_id": "20f0fcf3-8494-80da-97b9-000b0d5de334", "decision": "À garder", "rattachement": "Zone Platform", "row_count": 487, "state": null, "sample_titles": ["Accompagnement en investment readiness", "Protéger le statut de Ileycom en France (en tant que Marketplace)", "Travailler sur le BP", "Compta et gouvernance financière", "Structuration de la levée de fonds"], "pii_excluded": false}, {"base": "Mapverse", "data_source_id": "4fe3e28c-8286-4e17-80e4-c4ebe5a0dff9", "decision": "À garder", "rattachement": "Startups Pool", "row_count": 260, "state": null, "sample_titles": ["Congo -Democratic Republic", "Kenya", "Ghana", "Namibia", "Zambia"], "pii_excluded": false}, {"base": "Memo", "data_source_id": "dc676689-f48d-4151-a134-14fe37321609", "decision": "À garder", "rattachement": "Startups Pool", "row_count": 6406, "state": {"property": "Status", "counts": {"Done": 181, "Not started": 6225}}, "sample_titles": ["Vote - JEMELA", "Vote - CleanUp MDC", "Vote - Vumah Labs", "Vote - Kalmos", "Vote - BIOVELL COMPANY LIMITED"], "pii_excluded": false}, {"base": "Scenari", "data_source_id": "86ae24f8-35df-4ba9-b1b3-12d0d1a2a92c", "decision": "À garder", "rattachement": "Protocols", "row_count": 5, "state": null, "sample_titles": ["Fuzé - Failed", "Fuzé - Rejected", "Fuzé - Investment decision", "Fuzé - Conversion funnel", "Platform"], "pii_excluded": false}, {"base": "Protocols", "data_source_id": "7ab0e8d9-6370-4f45-94f9-fc3d4594c158", "decision": "À garder", "rattachement": "Startups Pool", "row_count": 31, "state": {"property": "Implementation", "counts": {"Implementation: Live": 4, "Implementation: Not started": 27}}, "sample_titles": ["Platform - Lifecycle", "Platform — Offboarded", "Platform — Pré-onboarding", "Platform — RIP", "Platform — On hold"], "pii_excluded": false}, {"base": "Our Terms", "data_source_id": "2840fcf3-8494-8155-bfe8-000b57c714d1", "decision": "À garder", "rattachement": "Startups Pool", "row_count": 86, "state": null, "sample_titles": ["1MoreThing - Ticket 1", "Manza (ex-Zazu)", "Aya Data", "Mighty Finance", "Kernel"], "pii_excluded": false}, {"base": "STOCKS", "data_source_id": "20f0fcf3-8494-8030-9969-000b0c940393", "decision": "À garder", "rattachement": "Zone Platform", "row_count": 186, "state": {"property": "Statut", "counts": {"Prio 1": 181, "Prio 2": 5}}, "sample_titles": [], "pii_excluded": true}, {"base": "Zone - Communication", "data_source_id": "1c70fcf3-8494-803b-a345-000bf9ddf515", "decision": "À garder", "rattachement": "Startups Pool", "row_count": 53, "state": null, "sample_titles": ["Fiche Communication Swyft", "Fiche communicaction Puppy.xyz - [Sandbox]", "Fiche communicaction Amaya Ag", "Fiche communicaction Financarbon", "Fiche communicaction WafR"], "pii_excluded": false}, {"base": "Zone Platform", "data_source_id": "c3305c87-0a8b-410c-bf7c-d0717bf54742", "decision": "À garder", "rattachement": "Startups Pool", "row_count": 81, "state": null, "sample_titles": ["REasy - Fiche Platform -", "Magnus Data Fiche Platform", "VERZ Fiche Platform", "BioLife Tech Fiche Platform", "Flowteller - Fiche Platform"], "pii_excluded": false}, {"base": "Persona", "data_source_id": "6a358c72-7f67-4b09-9bfc-e322d82e88e1", "decision": "À garder", "rattachement": "Founders", "row_count": 15, "state": null, "sample_titles": [], "pii_excluded": true}, {"base": "Valorisation", "data_source_id": "2840fcf3-8494-8070-bc55-000b8cce88ee", "decision": "À garder", "rattachement": "Startups Pool", "row_count": 233, "state": {"property": "Status", "counts": {"🔄 En cours": 161, "🟢 Validé": 72}}, "sample_titles": ["1MoreThing — 2025-S2", "1MoreThing — 2025-S1", "1MoreThing — 2026-S1", "Fiche Valo Wantotrip - 2024-S2", "Fiche Valo Waanda - 2025-S1"], "pii_excluded": false}, {"base": "Agent docs", "data_source_id": "1ad0fcf3-8494-8045-b1d3-000bd2d29050", "decision": "À garder", "rattachement": "Scenari", "row_count": 73, "state": {"property": "Status", "counts": {"Draft": 64, "active": 6, "Closed": 3}}, "sample_titles": ["Gouvernance des Outils", "Dérive — Base Registry : Secteurs — référentiel et Registre des mémo non inventoriés", "Dérive — Taskforce Members.relation pointe vers Team Digital Africa (pruned)", "Cartographie des process — journal et arbitrages", "Manifest d'opération — import startups : alignement schéma + réparation Startups Pool"], "pii_excluded": false}, {"base": "Outcome", "data_source_id": "2ac8c71d-ea63-409a-ae0d-5bc1c5e865cf", "decision": "À garder", "rattachement": "Startups Pool", "row_count": 9, "state": null, "sample_titles": ["Platform - Offboarded", "Platform - On hold", "Choose Africa", "Dropped - Post IC", "Under review - Post IC"], "pii_excluded": false}, {"base": "Action", "data_source_id": "f38b7cc6-caa2-4448-9d42-741c859f9552", "decision": "À garder", "rattachement": "Protocols", "row_count": 24, "state": null, "sample_titles": ["Notify", "Assess", "Vote", "Role-Play", "Modify"], "pii_excluded": false}, {"base": "Fundraise rounds", "data_source_id": "2cb0fcf3-8494-8050-b959-000bd7ae359c", "decision": "À garder", "rattachement": "Zone Investment", "row_count": 14, "state": {"property": "Etat de la levée", "counts": {"Terminé": 10, "En cours": 1, "(vide)": 3}}, "sample_titles": ["Pre-seed", "Pre-seed"], "pii_excluded": false}, {"base": "Pirate Metrics Framework", "data_source_id": "e5454f52-b75c-46a5-8020-ab4f4f90f4b4", "decision": "À garder", "rattachement": "Scenari", "row_count": 7, "state": null, "sample_titles": ["Audit", "04 - Revenue", "02 - Acquisition", "01 - Awareness", "03 - Activation"], "pii_excluded": false}, {"base": "Contracts", "data_source_id": "2080fcf3-8494-8159-b4ab-000bb51327fc", "decision": "À garder", "rattachement": "Zone Platform", "row_count": 422, "state": {"property": "Status", "counts": {"Signé": 180, "Clôturé": 165, "Expiré": 55, "Draft": 17, "A corriger / A compléter": 4, "En cours de signature": 1}}, "sample_titles": ["AEDIB-CONC-BCO-0478", "STAR-VAVA-ACB-0027", "STAR-GROW-ACB-0220", "PROJ-TIER-CONT", "PROJ-TIER-CONT"], "pii_excluded": false}, {"base": "Patch", "data_source_id": "d73b2d68-875b-4fac-9633-f7c6c738e358", "decision": "À investiguer", "rattachement": "Protocols", "row_count": 24, "state": null, "sample_titles": ["Adapter le 100 day plan (et son placement dans les touch points)", "Mise à jour régulière du profil de la startup selon accompagnement", "Appels de suivi du programme d’accompagnement par l’équipe Platform avec association de l’analyste", "Créer un système de notification par ticket (ticketing) entre Platform et Invest pour les alertes liée à la SU (needs, caution, red flags, etc.)", "Valider la classification Sendemo et déduire des besoins"], "pii_excluded": false}, {"base": "Milestones plateform", "data_source_id": "392ea617-5db3-45c6-8e1b-028096b90a82", "decision": "À investiguer", "rattachement": "Zone Platform", "row_count": 11, "state": null, "sample_titles": ["Offboarded", "RIP", "Sleeping", "On hold", "Pré-onboarding"], "pii_excluded": false}, {"base": "Event - Missions DA", "data_source_id": "7b6d276b-87ad-4d7a-99d5-b34645f8ba53", "decision": "À investiguer", "rattachement": "Mapverse", "row_count": 299, "state": null, "sample_titles": ["Tunis 13 octobre", "AI4SU Event Hackathon 1", "AI4SU Datathon", "Verre de rentrée", "Visite CDC Tunisienne / DER/JF Sénégalaise"], "pii_excluded": false}, {"base": "Tips voyage", "data_source_id": "2ee0fcf3-8494-8042-a270-000bb28b3867", "decision": "À investiguer", "rattachement": "Mapverse", "row_count": 5, "state": null, "sample_titles": ["Transfert Aéroport", "Hôtel Onomo", "Visa", "Incident - Tabac Ouganda", "Big Sky Hotel"], "pii_excluded": false}, {"base": "Sendemo", "data_source_id": "0b7a1e89-a5e0-4ecb-8307-a17e4658c12f", "decision": "À investiguer", "rattachement": "Mapverse", "row_count": 5, "state": null, "sample_titles": ["Unknown", "Tier 4", "Tier 3", "Tier 1", "Tier 2"], "pii_excluded": false}, {"base": "Calls Expert", "data_source_id": "7615efe3-f948-4cd0-8dc1-a09e8d00826d", "decision": "À investiguer", "rattachement": "Zone Platform", "row_count": 4, "state": null, "sample_titles": [], "pii_excluded": true}, {"base": "Annuaire des experts", "data_source_id": "3140fcf3-8494-809d-94c3-000b4115d26e", "decision": "À investiguer", "rattachement": "Zone Platform", "row_count": 58, "state": null, "sample_titles": ["Data Monetization and Strategy", "AI Integration", "Fractional CTO", "Tech Due Diligence", "AWS Credit Management"], "pii_excluded": false}, {"base": "Dépenses Perk/Spendesk AEDIB", "data_source_id": "d602dfef-81d1-4f47-9ffd-c063f2fc6aab", "decision": "À investiguer", "rattachement": "Zone Platform", "row_count": 71, "state": {"property": "Statut", "counts": {"Terminé": 70, "(vide)": 1}}, "sample_titles": ["Kampala, Uganda", "Marrakech, Marrakech - Safi, Morocco"], "pii_excluded": false}, {"base": "Plan d'action - communication experts", "data_source_id": "3910fcf3-8494-80a5-b2ee-000be7fed5ef", "decision": "À investiguer", "rattachement": "Zone Platform", "row_count": 50, "state": null, "sample_titles": [], "pii_excluded": true}, {"base": "Activités AEDIB", "data_source_id": "37d0fcf3-8494-803a-aeb9-000b2efb72ad", "decision": "À investiguer", "rattachement": "Zone Platform", "row_count": 7, "state": null, "sample_titles": ["Challenge Maputo/Gaborone", "Africa Forward Summit", "GITEX", "Challenge Kampala", "Challenge Abidjan"], "pii_excluded": false}]}/*FALLBACK_END*/;
+const $ = s => document.querySelector(s);
+const esc = s => String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const nf = n => (n ?? 0).toLocaleString("fr-FR");
+const BASES = FALLBACK_DATA.bases;
+const byName = Object.fromEntries(BASES.map(b=>[b.base,b]));
+const kids = {}; BASES.forEach(b=>{ if(byName[b.rattachement]) (kids[b.rattachement] ||= []).push(b); });
+const ROOT = BASES.find(b=>!byName[b.rattachement]) || BASES[0];
+const isInv = b => /investiguer/i.test(b.decision||"");
+const rowsDesc = (a,b)=>(b.row_count||0)-(a.row_count||0);
+function sub(b,out){ out.push(b); (kids[b.base]||[]).slice().sort(rowsDesc).forEach(k=>sub(k,out)); return out; }
+function chain(b){ const c=[]; let x=b; while(x && c.length<9){ c.unshift(x.base); x=byName[x.rattachement]; } return c; }
+
+// districts
+const direct=(kids[ROOT.base]||[]).slice().sort(rowsDesc), D=[], sats=[];
+direct.forEach(b=> (kids[b.base]||[]).length ? D.push({name:b.base, head:b, items:sub(b,[])}) : sats.push(b));
+D.sort((a,b)=>b.items.length-a.items.length);
+if(sats.length) D.push({name:"Satellites directs", head:null, items:sats});
+
+// grid placement: root plaza at centre, districts on the ring of a 3×3 plot grid
+const SLOT=10, PLOT=8, PITCH=1.9, FOOT=1.25;
+const RING=[[0,-1],[1,0],[0,1],[-1,0],[1,-1],[1,1],[-1,1],[-1,-1]];
+const towers=[];
+towers.push({b:ROOT, x:-1.4, y:-1.4, w:2.8, d:-1});
+D.forEach((dist,di)=>{
+  const [i,j]=RING[di%RING.length], ox=i*SLOT-PLOT/2, oy=j*SLOT-PLOT/2;
+  dist.plot={x:ox,y:oy,w:PLOT};
+  const cols=Math.ceil(Math.sqrt(dist.items.length)), start=(PLOT-(cols-1)*PITCH-FOOT)/2;
+  dist.items.forEach((b,k)=>{
+    const big = b===dist.head;
+    towers.push({b, d:di, x:ox+start+(k%cols)*PITCH, y:oy+start+Math.floor(k/cols)*PITCH, w: big?FOOT*1.25:FOOT});
+  });
+});
+const tByName=Object.fromEntries(towers.map(t=>[t.b.base,t]));
+
+const maxLog=Math.log10(Math.max(...BASES.map(b=>b.row_count||1))+1);
+const height = b => .4 + 6.8*Math.log10((b.row_count||0)+1)/maxLog;
+const PAL=["#f2b441","#7cc9a6","#a3b4ff","#ff7a59","#e8d36b","#c9b99a","#8a8174"];
+const keepCol = () => getComputedStyle(document.documentElement).getPropertyValue("--honey").trim()||"#f2b441";
+const invCol  = () => getComputedStyle(document.documentElement).getPropertyValue("--auth").trim()||"#7cc9a6";
+
+let rot=0, sel=null, allLabels=false, hotDistrict=null;
+const U=22, H=22;
+function rotXY(x,y){ for(let r=0;r<rot;r++){ const t=x; x=-y; y=t; } return [x,y]; }
+function P(x,y,z){ const [a,b]=rotXY(x,y); return [(a-b)*U*0.866, (a+b)*U*0.5 - z*H]; }
+const pts = arr => arr.map(p=>p.map(v=>v.toFixed(1)).join(",")).join(" ");
+function box(x,y,w,z0,z1){
+  // corners in world space; pick visible faces after rotation by comparing projected depth
+  const c=[[x,y],[x+w,y],[x+w,y+w],[x,y+w]];
+  const top=c.map(([a,b])=>P(a,b,z1));
+  const faces=[];
+  for(let k=0;k<4;k++){
+    const [a1,b1]=c[k],[a2,b2]=c[(k+1)%4];
+    const m=rotXY((a1+a2)/2-(x+w/2),(b1+b2)/2-(y+w/2)); // outward normal after rotation
+    if(m[0]>0.01 || m[1]>0.01){ faces.push({side: m[0]>0.01?"r":"l", poly:[P(a1,b1,z0),P(a2,b2,z0),P(a2,b2,z1),P(a1,b1,z1)]}); }
+  }
+  return {top,faces};
+}
+
+function draw(){
+  const svg=$("#iso"); let out="";
+  const all=[]; towers.forEach(t=>{ const c=[[t.x,t.y],[t.x+t.w,t.y+t.w]]; all.push(...c.map(([a,b])=>P(a,b,0)), P(t.x,t.y,height(t.b))); });
+  D.forEach(d=>{ const p=d.plot; [[p.x,p.y],[p.x+p.w,p.y],[p.x+p.w,p.y+p.w],[p.x,p.y+p.w]].forEach(([a,b])=>all.push(P(a,b,0))); });
+  const xs=all.map(p=>p[0]), ys=all.map(p=>p[1]), pad=40;
+  const vb=[Math.min(...xs)-pad, Math.min(...ys)-pad-10, Math.max(...xs)-Math.min(...xs)+pad*2, Math.max(...ys)-Math.min(...ys)+pad*2+10];
+  svg.setAttribute("viewBox", vb.map(v=>v.toFixed(0)).join(" "));
+
+  // ground: plots + plaza
+  const plaza=2.4; out+=`<polygon class="plot root" points="${pts([[-plaza,-plaza],[plaza,-plaza],[plaza,plaza],[-plaza,plaza]].map(([a,b])=>P(a,b,0)))}"/>`;
+  D.forEach((d,di)=>{ const p=d.plot; out+=`<polygon class="plot" data-d="${di}" points="${pts([[p.x,p.y],[p.x+p.w,p.y],[p.x+p.w,p.y+p.w],[p.x,p.y+p.w]].map(([a,b])=>P(a,b,0)))}"/>`; });
+  // streets: child → parent, L-shaped on the ground
+  towers.forEach(t=>{ const par=tByName[t.b.rattachement]; if(!par) return;
+    const a=[t.x+t.w/2,t.y+t.w/2], b=[par.x+par.w/2,par.y+par.w/2];
+    const hot = sel && (sel===t.b || sel===par.b);
+    out+=`<polyline class="street${hot?" hot":""}" points="${pts([P(a[0],a[1],0),P(b[0],a[1],0),P(b[0],b[1],0)])}"/>`; });
+  // district labels at each plot's front corner
+  D.forEach(d=>{ const p=d.plot; const corners=[[p.x,p.y+p.w],[p.x+p.w,p.y+p.w],[p.x+p.w,p.y],[p.x,p.y]].map(([a,b])=>P(a,b,0));
+    const front=corners.reduce((m,c)=>c[1]>m[1]?c:m); out+=`<text class="dlbl" x="${front[0].toFixed(0)}" y="${(front[1]+16).toFixed(0)}" text-anchor="middle">${esc(d.name)} · ${d.items.length}</text>`; });
+
+  // towers, painter's order (far to near)
+  const order=towers.slice().sort((a,b)=>{ const pa=P(a.x+a.w/2,a.y+a.w/2,0)[1], pb=P(b.x+b.w/2,b.y+b.w/2,0)[1]; return pa-pb; });
+  const labels=[];
+  order.forEach(t=>{
+    const b=t.b, h=height(b), inv=isInv(b);
+    const e=b.state? Object.entries(b.state.counts||{}).filter(x=>x[1]>0).sort((a,c)=>c[1]-a[1]) : [];
+    const tot=e.reduce((a,x)=>a+x[1],0);
+    const bands = tot ? e.map(([k,v],i)=>({k,v,c:PAL[i%PAL.length]})) : [{c: inv?invCol():keepCol(), v:1}];
+    const sum=bands.reduce((a,x)=>a+x.v,0);
+    let z=0, g="";
+    bands.forEach(bd=>{ const z1=z+h*bd.v/sum; const bx=box(t.x,t.y,t.w,z,z1);
+      bx.faces.forEach(f=>{ g+=`<polygon class="body" fill="${bd.c}" points="${pts(f.poly)}"/><polygon class="shade-${f.side}" points="${pts(f.poly)}"/>`; });
+      z=z1; });
+    const bx=box(t.x,t.y,t.w,0,h), topc=bands[bands.length-1].c;
+    g+=`<polygon class="body" fill="${topc}" points="${pts(bx.top)}"/><polygon class="shade-t" points="${pts(bx.top)}"/>`;
+    g+=`<polygon class="edge" points="${pts(bx.top)}"/>`; bx.faces.forEach(f=>g+=`<polygon class="edge" points="${pts(f.poly)}"/>`);
+    const inb = hotDistrict!==null && (t.d===hotDistrict);
+    out+=`<g class="tower${inv?" inv":""}${sel===b?" sel":""}${inb?" inbranch":""}" tabindex="0" role="button" aria-label="${esc(b.base)}, ${nf(b.row_count)} fiches" data-n="${esc(b.base)}">${g}</g>`;
+    const tc=bx.top.reduce((m,p)=>[m[0]+p[0]/4,m[1]+p[1]/4],[0,0]);
+    const show = allLabels || t.d===-1 || (t.d>=0 && D[t.d].head===b) || sel===b || (b.row_count||0)>=1000;
+    if(show) labels.push(`<text class="lbl${(t.d>=0 && D[t.d].head===b)||t.d===-1?"":" small"}" x="${tc[0].toFixed(0)}" y="${(tc[1]-9).toFixed(0)}" text-anchor="middle">${esc(b.base)} <tspan class="n">${nf(b.row_count)}</tspan></text>`);
+  });
+  svg.innerHTML = out + labels.join("");
+  svg.classList.toggle("dim", hotDistrict!==null);
+  svg.querySelectorAll(".tower").forEach(g=>{
+    const b=byName[g.dataset.n];
+    g.addEventListener("click",()=>select(b));
+    g.addEventListener("keydown",e=>{ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); select(b); } });
+    g.addEventListener("mousemove",ev=>tipShow(ev,b));
+    g.addEventListener("mouseleave",()=>{ $("#tip").hidden=true; });
+  });
+}
+function tipShow(ev,b){
+  const tip=$("#tip"), r=$("#isoWrap").getBoundingClientRect();
+  tip.innerHTML=`<b>${esc(b.base)}</b><span>${nf(b.row_count)} fiches</span>`; tip.hidden=false;
+  tip.style.left=(ev.clientX-r.left+14)+"px"; tip.style.top=(ev.clientY-r.top+12)+"px";
+}
+
+function stateBlock(b){
+  if(!b.state) return `<dd>Aucune propriété d'état retenue par le relevé : la tour est d'une seule couleur.</dd>`;
+  const e=Object.entries(b.state.counts||{}).filter(x=>x[1]>0).sort((a,c)=>c[1]-a[1]), tot=e.reduce((a,x)=>a+x[1],0)||1;
+  return `<dd><span class="badge">${esc(b.state.property)}</span><div class="statebar">${e.map(([k,v],i)=>`<i style="width:${100*v/tot}%;background:${PAL[i%PAL.length]}"></i>`).join("")}</div>
+    <div class="statelegend">${e.map(([k,v],i)=>`<span style="--c:${PAL[i%PAL.length]}">${esc(k)||"vide"} <b>${nf(v)}</b></span>`).join("")}</div></dd>`;
+}
+function panelOverview(){
+  const total=BASES.reduce((a,b)=>a+(b.row_count||0),0), rc=FALLBACK_DATA.registry_counts||{};
+  $("#panel").innerHTML=`<div class="kicker"><span>vue d'ensemble</span></div>
+    <h3>${BASES.length} bases, ${nf(total)} fiches</h3>
+    <dl><div><dt>Registre</dt><dd>${rc["À garder"]??"—"} à garder · ${rc["À investiguer"]??"—"} à investiguer · ${rc["pruned"]??"—"} pruned (non dessinées)</dd></div>
+    <div><dt>Quartiers</dt><dd class="districts">${D.map((d,i)=>`<button data-d="${i}">${esc(d.name)} · ${d.items.length}</button>`).join("")}</dd></div>
+    <div><dt>Lecture</dt><dd>Survole une tour pour son nom, clique pour son détail. Un quartier cliqué éteint les autres.</dd></div></dl>`;
+  $("#panel").querySelectorAll("[data-d]").forEach(b=>b.addEventListener("click",()=>{ hotDistrict=+b.dataset.d; sel=D[hotDistrict].head||null; if(sel) panelBase(sel); draw(); }));
+}
+function panelBase(b){
+  const titles = b.pii_excluded ? `<dd>Exclus : la base porte des personnes. Comptes seulement.</dd>` :
+    (b.sample_titles||[]).length ? `<dd><ul class="titles">${b.sample_titles.map(t=>`<li>${esc(t)}</li>`).join("")}</ul></dd>` : `<dd>Aucun titre relevé.</dd>`;
+  $("#panel").innerHTML=`<div class="kicker">${isInv(b)?`<span class="chip inv">à investiguer</span>`:`<span class="chip al-exec">à garder</span>`}<span>${chain(b).map(esc).join(" › ")}</span></div>
+    <h3>${esc(b.base)}</h3><div class="bignum">${nf(b.row_count)}<small>fiches</small></div>
+    <dl><div><dt>État</dt>${stateBlock(b)}</div><div><dt>Dernières fiches</dt>${titles}</div>
+    ${(kids[b.base]||[]).length?`<div><dt>Sous-bases</dt><dd>${kids[b.base].map(x=>esc(x.base)).join(" · ")}</dd></div>`:""}
+    <div><dt>data_source_id</dt><dd><code>${esc(b.data_source_id||"—")}</code></dd></div>
+    <div><dd><a href="#" id="back" style="color:var(--honey)">← vue d'ensemble</a></dd></div></dl>`;
+  $("#back").addEventListener("click",e=>{ e.preventDefault(); sel=null; hotDistrict=null; panelOverview(); draw(); });
+}
+function select(b){ sel=b; const t=tByName[b.base]; hotDistrict = t && t.d>=0 ? t.d : null; panelBase(b); draw(); }
+
+$("#rotL").addEventListener("click",()=>{ rot=(rot+3)%4; draw(); });
+$("#rotR").addEventListener("click",()=>{ rot=(rot+1)%4; draw(); });
+$("#lbls").addEventListener("click",e=>{ allLabels=!allLabels; e.currentTarget.setAttribute("aria-pressed",allLabels); draw(); });
+$("#gen").textContent=FALLBACK_DATA.generated; $("#ver").textContent=FALLBACK_DATA.agent_version;
+panelOverview(); draw();
+</script>
+
+</body></html>

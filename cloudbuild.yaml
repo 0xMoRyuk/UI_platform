@@ -19,6 +19,7 @@ substitutions:
   _MEMORY: '512Mi'
   _CPU: '1'
   _TIMEOUT: '300s'
+  _AUTH: 'public'  # 'public' (allUsers invoker) or 'iap' (private: Google sign-in via Cloud Run IAP)
 
 options:
   # Build optimizations
@@ -120,11 +121,18 @@ steps:
         echo "   Service: $$SERVICE_LOWER"
         echo "   Region: ${_REGION}"
 
+        if [ "${_AUTH}" = "iap" ]; then
+          AUTH_FLAGS="--no-allow-unauthenticated"
+        else
+          AUTH_FLAGS="--allow-unauthenticated"
+        fi
+        echo "   Auth: ${_AUTH} ($$AUTH_FLAGS)"
+
         gcloud run deploy $$SERVICE_LOWER \
           --image=gcr.io/$PROJECT_ID/$$SERVICE_LOWER:$$VERSION \
           --platform=managed \
           --region=${_REGION} \
-          --allow-unauthenticated \
+          $$AUTH_FLAGS \
           --min-instances=${_MIN_INSTANCES} \
           --max-instances=${_MAX_INSTANCES} \
           --memory=${_MEMORY} \
@@ -133,6 +141,14 @@ steps:
           --set-env-vars="NODE_ENV=production,APP_NAME=${_APP_NAME},DEPLOYED_AT=$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
           --tag=$$VERSION \
           --quiet
+
+        if [ "${_AUTH}" = "iap" ]; then
+          echo "🔒 Enabling IAP on $$SERVICE_LOWER..."
+          gcloud beta run services update $$SERVICE_LOWER \
+            --region=${_REGION} \
+            --iap \
+            --quiet
+        fi
 
         # Route all traffic to latest revision
         echo "📊 Routing traffic to latest revision..."
@@ -170,6 +186,13 @@ steps:
 
         # Test homepage
         HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" $$SERVICE_URL)
+        if [ "${_AUTH}" = "iap" ]; then
+          # Private service: an anonymous request must be refused or sent to Google sign-in.
+          case "$$HTTP_CODE" in
+            302|401|403) echo "✅ Homepage refuses anonymous access: $$HTTP_CODE"; exit 0 ;;
+            *) echo "❌ Private service answered anonymous request with $$HTTP_CODE"; exit 1 ;;
+          esac
+        fi
         if [ "$$HTTP_CODE" != "200" ]; then
           echo "❌ Homepage failed: $$HTTP_CODE"
           exit 1
