@@ -10,6 +10,17 @@
   ],
   "artifacts": [
     {
+      "id": "bee-network-keynote",
+      "domain": "puppy",
+      "title": "Bee Network — un système gouverné",
+      "description": "Support de présentation en 8 scènes : échelle, structure, gouvernance, rôles, Herald, agents, feuille de route. Chiffres réels relevés le 30/09.",
+      "date": "2026-09-30",
+      "source": "assets/viz/bee-network-keynote.html",
+      "file": "bee-network-keynote.html",
+      "generator": "Claude Code · bee-navigator 2.1.0 + mesures GCP Herald (30 j)",
+      "sensitivity": "internal"
+    },
+    {
       "id": "bee-network-bases",
       "domain": "puppy",
       "title": "Bee Network Index",

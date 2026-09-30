@@ -1,0 +1,415 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Bee Network — un système gouverné</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  color-scheme: dark;
+  --page:#060706; --panel:#0e100f; --card:#131513; --line:#232623; --text:#f1f2ee; --muted:#8d928b; --faint:#5a5f59;
+  --lime:#c6f135; --amber:#f5a524; --red:#ef4444; --blue:#8fa8ff; --grey:#6b7069; --off:#2a2e2a;
+  --sans:"Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono:"Geist Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+*{box-sizing:border-box}
+html{scroll-snap-type:y mandatory;scroll-behavior:smooth;background:var(--page)}
+body{margin:0;background:var(--page);color:var(--text);font-family:var(--sans);-webkit-font-smoothing:antialiased}
+.scene{min-height:100dvh;scroll-snap-align:start;position:relative;display:grid;align-content:center;padding:72px max(16px,6vw) 88px;overflow:hidden}
+.eyebrow{font:500 12px var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--lime);margin:0 0 18px}
+h1,h2{margin:0;font-weight:500;letter-spacing:-.025em;text-wrap:balance}
+h1{font-size:clamp(46px,8.4vw,128px);line-height:.95}
+h2{font-size:clamp(32px,4.6vw,68px);line-height:1.02;max-width:18ch}
+.lede{margin:22px 0 0;font-size:clamp(17px,1.6vw,22px);line-height:1.45;color:var(--muted);max-width:52ch;font-weight:300}
+.lede b{color:var(--text);font-weight:500}
+.mono{font-family:var(--mono)}
+.num{font-variant-numeric:tabular-nums}
+
+/* chrome */
+.progress{position:fixed;top:0;left:0;height:2px;background:var(--lime);width:0;z-index:20;transition:width .5s cubic-bezier(.2,.7,.2,1)}
+.hud{position:fixed;right:max(16px,2.4vw);bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:20;display:flex;gap:14px;align-items:center;font:12px var(--mono);color:var(--faint)}
+.hud b{color:var(--text);font-weight:500}
+.hud button{all:unset;cursor:pointer;width:34px;height:34px;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;color:var(--muted);background:rgba(14,16,15,.7);backdrop-filter:blur(6px)}
+.hud button:hover,.hud button:focus-visible{color:var(--lime);border-color:var(--lime)}
+.brand{position:fixed;left:max(16px,2.4vw);bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:20;font:12px var(--mono);color:var(--faint);letter-spacing:.06em}
+.brand i{color:var(--lime);font-style:normal}
+
+/* reveal */
+.rv{opacity:0;translate:0 18px;transition:opacity .8s cubic-bezier(.2,.7,.2,1),translate .9s cubic-bezier(.2,.7,.2,1)}
+.scene.on .rv{opacity:1;translate:0 0}
+.scene.on .rv.d1{transition-delay:.12s}.scene.on .rv.d2{transition-delay:.24s}.scene.on .rv.d3{transition-delay:.36s}.scene.on .rv.d4{transition-delay:.48s}.scene.on .rv.d5{transition-delay:.6s}
+.nojs .rv{opacity:1;translate:none}
+
+/* 0 — title */
+#s0{grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:4vw;align-items:center}
+#s0 canvas{width:min(44vw,560px);aspect-ratio:1;justify-self:center;max-width:100%}
+.tagline{margin-top:26px;display:flex;gap:10px;flex-wrap:wrap}
+.tag{font:12px var(--mono);border:1px solid var(--line);border-radius:999px;padding:6px 12px;color:var(--muted)}
+.tag b{color:var(--lime);font-weight:500}
+
+/* 1 — scale */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:2px;margin-top:44px;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--line)}
+.stat{background:var(--panel);padding:22px 22px 20px}
+.stat .v{font-size:clamp(40px,4.6vw,72px);font-weight:500;letter-spacing:-.03em;line-height:1;font-variant-numeric:tabular-nums}
+.stat .v small{font-size:.42em;color:var(--muted);font-weight:400;margin-left:4px;letter-spacing:0}
+.stat .k{margin-top:10px;font-size:13px;color:var(--muted)}
+.stat.hl .v{color:var(--lime)}
+#hive{width:100%;height:min(26vh,230px);margin-top:28px;display:block}
+.hivekey{display:flex;gap:18px;flex-wrap:wrap;margin-top:10px;font:12px var(--mono);color:var(--faint)}
+.hivekey i{display:inline-block;width:9px;height:9px;margin-right:7px;clip-path:polygon(25% 5%,75% 5%,100% 50%,75% 95%,25% 95%,0 50%)}
+
+/* 2 — live index */
+#s2{grid-template-columns:minmax(0,.62fr) minmax(0,1.38fr);gap:3.2vw;align-items:center}
+.frame{position:relative;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--panel);aspect-ratio:16/10;box-shadow:0 30px 80px rgba(0,0,0,.55),0 0 0 1px rgba(198,241,53,.05)}
+.frame iframe{position:absolute;inset:0;width:166.66%;height:166.66%;border:0;transform:scale(.6);transform-origin:0 0;background:var(--page)}
+.frame .live{position:absolute;top:12px;right:12px;z-index:2;font:11px var(--mono);color:var(--page);background:var(--lime);border-radius:999px;padding:3px 9px;letter-spacing:.06em}
+.fams{margin-top:26px;display:flex;flex-direction:column;gap:8px}
+.fam{display:grid;grid-template-columns:12px 1fr auto;gap:12px;align-items:center;font-size:15px;color:var(--muted)}
+.fam i{width:10px;height:10px;border-radius:3px}
+.fam b{font:500 14px var(--mono);color:var(--text);font-variant-numeric:tabular-nums}
+.open{display:inline-flex;margin-top:22px;font:12px var(--mono);color:var(--lime);text-decoration:none;border:1px solid rgba(198,241,53,.4);border-radius:999px;padding:7px 14px}
+.open:hover,.open:focus-visible{background:var(--lime);color:var(--page);outline:none}
+
+/* 3 — governance loop */
+#s3{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:4vw;align-items:center}
+#loop{width:100%;max-width:640px;justify-self:center;aspect-ratio:1;overflow:visible}
+#loop .ring{fill:none;stroke:var(--line);stroke-width:1.5}
+#loop .arc{fill:none;stroke:var(--lime);stroke-width:2;stroke-linecap:round;stroke-dasharray:60 1200}
+#loop .st circle{fill:var(--panel);stroke:var(--line);stroke-width:1.5;transition:stroke .3s,fill .3s}
+#loop .st.hot circle{stroke:var(--lime);fill:#161a10}
+#loop .st text{fill:var(--text);font:500 15px var(--sans);text-anchor:middle}
+#loop .st .sub{fill:var(--muted);font:12px var(--mono)}
+#loop .st .n{fill:var(--lime);font:500 22px var(--sans)}
+#loop .center{fill:var(--muted);font:12px var(--mono);text-anchor:middle;letter-spacing:.12em;text-transform:uppercase}
+#loop .centerb{fill:var(--text);font:500 26px var(--sans);text-anchor:middle}
+.rules{margin-top:26px;display:flex;flex-direction:column;gap:12px;max-width:52ch}
+.rule{display:grid;grid-template-columns:22px 1fr;gap:10px;font-size:15px;color:var(--muted);line-height:1.45}
+.rule::before{content:"";width:8px;height:8px;margin-top:7px;border-radius:2px;background:var(--lime)}
+.rule b{color:var(--text);font-weight:500}
+
+/* 4 — roles */
+.roles{margin-top:40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}
+.role{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 18px 16px;display:flex;flex-direction:column;gap:10px;min-height:210px}
+.role .al{font:11px var(--mono);letter-spacing:.1em;text-transform:uppercase}
+.role .nm{font-size:19px;font-weight:500}
+.role .ep{font-size:13px;color:var(--muted)}
+.role .lim{margin-top:auto;font-size:13.5px;line-height:1.4;color:var(--text);border-left:2px solid var(--red);padding-left:10px}
+.role .vb{font:12px var(--mono);color:var(--faint)}
+
+/* 5 — herald */
+#s5{grid-template-rows:auto 1fr}
+#flow{width:100%;height:min(56vh,520px);margin-top:26px;display:block;overflow:visible}
+#flow .lane{fill:none;stroke:var(--line);stroke-width:1.2}
+#flow .lane.live{stroke:rgba(198,241,53,.35)}
+#flow .node rect{fill:var(--panel);stroke:var(--line);stroke-width:1.2}
+#flow .node.core rect{stroke:var(--lime);fill:#12150d}
+#flow .node text{fill:var(--text);font:500 14px var(--sans)}
+#flow .node .s{fill:var(--muted);font:11.5px var(--mono)}
+#flow .node .c{fill:var(--lime);font:500 13px var(--mono)}
+#flow .node.dim text{fill:var(--faint)}
+#flow .col{fill:var(--faint);font:11px var(--mono);letter-spacing:.14em;text-transform:uppercase}
+.hstats{display:flex;gap:28px;flex-wrap:wrap;margin-top:18px}
+.hstats div{font-size:13px;color:var(--muted)}
+.hstats b{display:block;font-size:clamp(28px,3vw,44px);color:var(--text);font-weight:500;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.hstats .l b{color:var(--lime)}
+
+/* 6 — intelligence */
+.finds{margin-top:40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}
+.find{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:8px}
+.find .v{font-size:clamp(38px,3.8vw,56px);font-weight:500;letter-spacing:-.03em;color:var(--lime);line-height:1;font-variant-numeric:tabular-nums}
+.find .t{font-size:16px;font-weight:500}
+.find .d{font-size:13.5px;color:var(--muted);line-height:1.45}
+.term{margin-top:22px;font:12.5px/1.7 var(--mono);color:var(--muted);background:#0a0b0a;border:1px solid var(--line);border-radius:12px;padding:14px 16px;max-width:760px;white-space:pre-wrap}
+.term .p{color:var(--lime)}
+
+/* 7 — roadmap */
+.road{margin-top:44px;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:0;border-top:1px solid var(--line)}
+.step{padding:22px 22px 0 0;position:relative}
+.step::before{content:"";position:absolute;top:-5px;left:0;width:9px;height:9px;border-radius:50%;background:var(--lime);box-shadow:0 0 0 5px rgba(198,241,53,.12)}
+.step .w{font:12px var(--mono);color:var(--lime);letter-spacing:.08em}
+.step .t{margin-top:8px;font-size:21px;font-weight:500;line-height:1.2}
+.step .d{margin-top:8px;font-size:14px;color:var(--muted);line-height:1.45;max-width:36ch}
+.close{margin-top:52px;display:flex;gap:10px;flex-wrap:wrap}
+
+@media (max-width: 900px){
+  #s0,#s2,#s3{grid-template-columns:1fr}
+  #s0 canvas{width:70vw}
+  .frame{aspect-ratio:3/4}
+  .frame iframe{width:250%;height:250%;transform:scale(.4)}
+  html{scroll-snap-type:none}
+}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  .rv{transition:none;opacity:1;translate:none}
+}
+</style>
+</head>
+<body class="nojs">
+<div class="progress" id="progress"></div>
+<div class="brand">BEE NETWORK <i>·</i> garden</div>
+<nav class="hud" aria-label="Navigation des scènes">
+  <span><b id="cur">01</b> / <span id="tot">08</span></span>
+  <button id="prev" aria-label="Scène précédente">↑</button>
+  <button id="next" aria-label="Scène suivante">↓</button>
+</nav>
+
+<main>
+<!-- 0 -->
+<section class="scene" id="s0" aria-label="Titre">
+  <div>
+    <p class="eyebrow rv">Digital Africa · <span id="today"></span></p>
+    <h1 class="rv d1">Bee Network</h1>
+    <p class="lede rv d2">Le système d'information des startups de Digital Africa. <b>Vivant</b>, parce que <span class="num" id="t-members">26</span> personnes de 6 équipes y travaillent chaque jour. <b>Gouverné</b>, parce que chaque changement y est tracé. <b>Connecté</b>, parce que la plateforme l'écoute.</p>
+    <div class="tagline rv d3">
+      <span class="tag"><b class="num" id="t-bases">34</b> bases</span>
+      <span class="tag"><b class="num" id="t-rows">26 000</b> fiches</span>
+      <span class="tag"><b class="num" id="t-startups">4 417</b> startups</span>
+    </div>
+  </div>
+  <canvas id="sphere" width="1120" height="1120" aria-hidden="true"></canvas>
+</section>
+
+<!-- 1 -->
+<section class="scene" id="s1" aria-label="Échelle">
+  <p class="eyebrow rv">01 · Un outil de toute l'organisation</p>
+  <h2 class="rv d1">Les personnes passent. La mémoire reste.</h2>
+  <p class="lede rv d2"><b>48 personnes</b> sont passées par l'équipe depuis 2020, <b>22</b> sont parties, <b>17</b> sont arrivées depuis 2025. Avec un tel renouvellement, ce qu'on sait des startups ne peut pas vivre dans les têtes : il vit dans les bases. Chaque alvéole ci-dessous représente <b>100 fiches</b>.</p>
+  <div class="stats rv d3" id="stats"></div>
+  <canvas id="hive" aria-label="Alvéoles : une par centaine de fiches, colorées par famille de bases" role="img"></canvas>
+  <div class="hivekey rv d4" id="hivekey"></div>
+</section>
+
+<!-- 2 -->
+<section class="scene" id="s2" aria-label="Structure">
+  <div>
+    <p class="eyebrow rv">02 · Un contenu structuré</p>
+    <h2 class="rv d1">Les startups au centre. Des référentiels partagés autour.</h2>
+    <p class="lede rv d2">Chaque base a une famille, un rôle et des relations. La carte ci-contre est <b>vivante</b> : elle se lit, se parcourt et s'explore en direct.</p>
+    <div class="fams rv d3" id="fams"></div>
+    <a class="open rv d4" href="bee-network-bases.html" target="_blank" rel="noopener">Ouvrir l'index plein écran ↗</a>
+  </div>
+  <div class="frame rv d2"><span class="live">EN DIRECT</span><iframe id="kiframe" title="Bee Network Index" loading="lazy" data-src="bee-network-bases.html"></iframe></div>
+</section>
+
+<!-- 3 -->
+<section class="scene" id="s3" aria-label="Gouvernance">
+  <div>
+    <p class="eyebrow rv">03 · Gouverné</p>
+    <h2 class="rv d1">Rien ne change sans laisser de trace.</h2>
+    <p class="lede rv d2">Deux centres de contrôle dans Notion encadrent le système : le <b>Forms Control Center</b> pour ce qu'on demande aux candidats, l'<b>Architecture Control Center</b> pour la structure des bases.</p>
+    <div class="rules rv d3" id="rules"></div>
+  </div>
+  <svg id="loop" viewBox="-340 -340 680 680" role="img" aria-label="Boucle de gouvernance : relevé, écart, opération, approbation, registre"></svg>
+</section>
+
+<!-- 4 -->
+<section class="scene" id="s4" aria-label="Rôles">
+  <p class="eyebrow rv">04 · Des rôles, des garde-fous</p>
+  <h2 class="rv d1">Chacun son geste. Personne n'approuve sa propre demande.</h2>
+  <p class="lede rv d2"><b>5 rôles</b>, <b>31 gestes</b> documentés, une limite fondatrice par rôle. La règle des quatre yeux est écrite dans la définition même des rôles : aucun rôle ne peut valider sa propre demande.</p>
+  <div class="roles" id="roles"></div>
+</section>
+
+<!-- 5 -->
+<section class="scene" id="s5" aria-label="Herald">
+  <div>
+    <p class="eyebrow rv">05 · Connecté</p>
+    <h2 class="rv d1">Herald : la plateforme écoute Notion.</h2>
+    <p class="lede rv d2">Chaque modification d'une base écoutée, chaque candidature Typeform devient un <b>événement typé</b>, validé, puis publié aux services qui en ont besoin. Sans ressaisie.</p>
+    <div class="hstats rv d3" id="hstats"></div>
+  </div>
+  <svg id="flow" role="img" aria-label="Flux Herald : sources, passerelle, intents, services consommateurs"></svg>
+</section>
+
+<!-- 6 -->
+<section class="scene" id="s6" aria-label="Intelligence">
+  <p class="eyebrow rv">06 · Innovant</p>
+  <h2 class="rv d1">Des agents qui relisent le système pour nous.</h2>
+  <p class="lede rv d2">Un agent dédié, <b>bee-navigator</b>, parcourt les bases en lecture seule, compte, compare au registre et signale les écarts. Ce qu'un audit manuel ferait en semaines se relit en minutes, et recommence demain.</p>
+  <div class="finds" id="finds"></div>
+  <div class="term rv d5" id="term"></div>
+</section>
+
+<!-- 7 -->
+<section class="scene" id="s7" aria-label="Suite">
+  <p class="eyebrow rv">07 · La suite</p>
+  <h2 class="rv d1">Trois pas pour passer de gouverné à automatique.</h2>
+  <div class="road" id="road"></div>
+  <div class="close rv d5">
+    <a class="open" href="bee-network-bases.html" target="_blank" rel="noopener">Index des bases ↗</a>
+    <a class="open" href="bee-network-index.html" target="_blank" rel="noopener">Les rôles ↗</a>
+    <a class="open" href="bee-network-rives.html" target="_blank" rel="noopener">Vue isométrique ↗</a>
+  </div>
+</section>
+</main>
+
+<script>
+const K = /*KEYNOTE_DATA*/{"bases": 34, "rows": 20443, "startups": 4417, "adoption": {"label": "26", "measured_members": 27}, "scale": [{"v": 26, "k": "membres actifs, 6 équipes"}, {"v": 48, "k": "personnes passées par l'équipe depuis 2020"}, {"v": 17, "k": "arrivées depuis janvier 2025"}, {"v": 34, "k": "bases Notion suivies"}, {"v": 20443, "k": "fiches au total"}], "families": [{"id": "principales", "name": "Bases principales", "bases": 5, "rows": 17746}, {"id": "dossiers", "name": "Dossiers startup", "bases": 7, "rows": 1331}, {"id": "referentiels", "name": "Référentiels", "bases": 14, "rows": 833}, {"id": "ops", "name": "Hors cycle", "bases": 8, "rows": 533}], "ghosts": 15, "governance": {"center_k": "propriétés sous contrat", "center_v": "877", "stations": [{"n": "26", "t": "Relevé", "s": "agent, lecture seule"}, {"n": "20", "t": "Écart", "s": "détecté, qualifié"}, {"n": "55", "t": "Opération", "s": "typée, justifiée"}, {"n": "38", "t": "Exécutée", "s": "après approbation"}, {"n": "53", "t": "Registre", "s": "décision par base"}], "rules": ["<b>814 propriétés sur 877</b> sont conformes à leur contrat de schéma.", "<b>Aucune propriété</b> d'une base Bee Network ne change sans Opération approuvée.", "<b>53 bases</b> ont une décision écrite : 24 à garder, 10 à investiguer, 19 élaguées.", "<b>16 incidents</b> suivis, 13 résolus."]}, "roles": [{"al": "Exécute", "col": "var(--lime)", "name": "Form Owner", "epi": "le capitaine du formulaire", "verbs": 6, "limit": "Demande une publication, ne l'approuve jamais."}, {"al": "Exécute", "col": "var(--lime)", "name": "Reliability Operator", "epi": "le gardien du tuyau", "verbs": 6, "limit": "Peut suspendre un flux, jamais modifier le schéma."}, {"al": "Autorise", "col": "var(--amber)", "name": "Release Approver", "epi": "le gardien de la clé", "verbs": 7, "limit": "N'approuve jamais ce qu'il a demandé lui-même."}, {"al": "Autorise", "col": "var(--amber)", "name": "Sponsor", "epi": "le gardien de la promesse", "verbs": 5, "limit": "Arbitre et clôt, ne touche jamais au formulaire."}, {"al": "Audite", "col": "var(--blue)", "name": "Data Steward", "epi": "le gardien des réponses", "verbs": 7, "limit": "Propose d'élaguer, ne supprime jamais lui-même."}], "herald": {"stats": [{"v": 46849, "k": "webhooks reçus en 30 jours"}, {"v": 21463, "k": "événements typés publiés"}, {"v": 14, "k": "types d'événements"}, {"raw": "299 ms", "k": "temps de réponse médian"}, {"v": 74, "k": "versions déployées depuis mai"}], "flow": {"gateway_sub": "décode · valide · publie", "sources": [{"name": "Notion", "sub": "bases écoutées", "count": 46780, "live": true}, {"name": "Typeform", "sub": "candidatures", "count": 16, "live": true}, {"name": "Todoist", "sub": "prévu", "count": null, "live": false}], "intents": [{"name": "startup.updated", "sub": "Startups Pool", "count": 8222, "live": true, "to": ["À brancher"]}, {"name": "memo.updated", "sub": "Memo", "count": 7974, "live": true, "to": ["À brancher"]}, {"name": "founder.updated", "sub": "Founders", "count": 3650, "live": true, "to": ["À brancher"]}, {"name": "zone_investment.updated", "sub": "Zone Investment", "count": 1459, "live": true, "to": ["À brancher"]}, {"name": "operation.approved", "sub": "Forms Control Center", "count": 135, "live": true, "to": ["forms-operator"]}, {"name": "application.submitted", "sub": "Typeform", "count": 12, "live": true, "to": ["bee_network_intake"]}], "consumers": [{"name": "bee_network_intake", "sub": "candidatures → Notion", "live": true}, {"name": "forms-operator", "sub": "exécute les Opérations", "live": true}, {"name": "À brancher", "sub": "analytics, alertes, sync", "live": false}]}}, "findings": [{"v": 15, "t": "bases non inventoriées", "d": "Citées par une relation vivante, absentes du registre. Détectées automatiquement."}, {"v": 137, "t": "relations cartographiées", "d": "Relues sur 26 bases, comparées au relevé d'août : ce qui a bougé est signalé."}, {"v": 6, "t": "événements déclarés, jamais émis", "d": "Repérés en croisant la configuration de Herald et Pub/Sub sur 30 jours : une dette mesurée, pas supposée."}], "terminal": ["$ /bee survey — relations, 26 bases", "26 of 26 bases read · 137 relations · 211 rollups", "15 scope-inconsistency : relation vers une base absente du registre", "$ /bee records — fiches, 34 bases", "34 bases · 20 443 fiches · 0 illisible", "PII : 7 bases en comptes seulement, aucun nom relevé"], "roadmap": [{"w": "PROCHAIN MOIS", "t": "Faire travailler les événements", "d": "16 000 changements de startups et de mémos publiés par mois attendent leurs premiers consommateurs : tableaux de bord, alertes, synchronisation."}, {"w": "TRIMESTRE", "t": "Attribuer les rôles", "d": "Les 9 rôles sont définis mais vacants : les confier nommément, activer la règle des quatre yeux dans les Opérations."}, {"w": "EN CONTINU", "t": "Inventaire automatique", "d": "Intégrer les 15 bases hors registre, relevé bee-navigator hebdomadaire, dérives traitées par Opération."}]}/*KEYNOTE_DATA_END*/;
+document.body.classList.remove("nojs");
+const $ = s => document.querySelector(s);
+const REDUCE = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const nf = n => n == null ? "—" : Number(n).toLocaleString("fr-FR");
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const COL = {principales:"var(--lime)", dossiers:"var(--amber)", referentiels:"var(--blue)", ops:"var(--grey)"};
+const HEX = {principales:"#c6f135", dossiers:"#f5a524", referentiels:"#8fa8ff", ops:"#6b7069"};
+
+$("#today").textContent = new Date().toLocaleDateString("fr-FR",{day:"numeric",month:"long",year:"numeric"});
+$("#t-members").textContent = K.adoption.label;
+$("#t-bases").textContent = nf(K.bases); $("#t-rows").textContent = nf(K.rows); $("#t-startups").textContent = nf(K.startups);
+
+// count-up on reveal
+function countUp(el){
+  const to = +el.dataset.to; if (!isFinite(to)) return;
+  if (REDUCE){ el.textContent = nf(to); return; }
+  const t0 = performance.now(), d = 1300;
+  (function f(t){ const p = Math.min(1,(t-t0)/d), e = 1-Math.pow(1-p,4); el.textContent = nf(Math.round(to*e)); if (p<1) requestAnimationFrame(f); })(t0);
+}
+const cu = (v, suffix="") => `<span class="cu" data-to="${v}">${REDUCE?nf(v):"0"}</span>${suffix}`;
+
+// 1 — stats + hive
+$("#stats").innerHTML = K.scale.map((s,i)=>`<div class="stat${i===0?" hl":""}"><div class="v">${s.raw ? esc(s.raw) : cu(s.v)}${s.small?`<small>${esc(s.small)}</small>`:""}</div><div class="k">${esc(s.k)}</div></div>`).join("");
+$("#hivekey").innerHTML = K.families.map(f=>`<span><i style="background:${COL[f.id]}"></i>${esc(f.name)} · ${nf(f.rows)} fiches</span>`).join("");
+let hiveDrawn = false;
+function drawHive(){
+  const cv = $("#hive"), r = cv.getBoundingClientRect(), dpr = Math.min(2, devicePixelRatio||1);
+  cv.width = r.width*dpr; cv.height = r.height*dpr; const ctx = cv.getContext("2d"); ctx.scale(dpr,dpr);
+  const cells = []; K.families.forEach(f=>{ for(let i=0;i<Math.max(1,Math.round(f.rows/100));i++) cells.push(HEX[f.id]); });
+  const n = cells.length, W = r.width, H = r.height;
+  // hex size so that n cells fit in W×H
+  let s = Math.sqrt((W*H)/(n*2.6)); s = Math.max(3, Math.min(14, s));
+  const w = Math.sqrt(3)*s, h = 1.5*s, cols = Math.floor((W - w/2)/w), rows = Math.ceil(n/cols);
+  const y0 = Math.max(s, (H - rows*h)/2 + s);
+  const order = cells.map((c,i)=>({c,i,rnd:Math.random()}));
+  const t0 = performance.now(), dur = REDUCE?0:1600;
+  function hex(x,y,a){ ctx.globalAlpha=a; ctx.beginPath(); for(let k=0;k<6;k++){ const an=Math.PI/180*(60*k-30); ctx.lineTo(x+(s-1)*Math.cos(an), y+(s-1)*Math.sin(an)); } ctx.closePath(); ctx.fill(); }
+  (function f(t){
+    const p = dur? Math.min(1,(t-t0)/dur) : 1; ctx.clearRect(0,0,W,H);
+    order.forEach(o=>{ const row=Math.floor(o.i/cols), col=o.i%cols, x=w/2+col*w+(row%2?w/2:0), y=y0+row*h;
+      const local = Math.max(0, Math.min(1, (p*1.6 - (o.i/n)*0.9 - o.rnd*0.25)/0.45));
+      ctx.fillStyle = o.c; hex(x,y, 0.12 + 0.88*local); });
+    ctx.globalAlpha=1; if (p<1) requestAnimationFrame(f);
+  })(t0);
+}
+
+// 2 — families
+$("#fams").innerHTML = K.families.map(f=>`<div class="fam"><i style="background:${COL[f.id]}"></i><span>${esc(f.name)}</span><b>${f.bases} bases · ${nf(f.rows)}</b></div>`).join("")
+  + `<div class="fam"><i style="background:transparent;border:1px dashed var(--red)"></i><span>Hors registre (détectées)</span><b>${K.ghosts} bases</b></div>`;
+
+// 3 — governance loop
+$("#rules").innerHTML = K.governance.rules.map(r=>`<div class="rule"><span>${r}</span></div>`).join("");
+(function(){
+  const S = K.governance.stations, R = 250, svg = $("#loop"); const n = S.length;
+  let h = `<circle class="ring" r="${R}"/><circle class="arc" id="arc" r="${R}" transform="rotate(-90)"/>`;
+  h += `<text class="center" y="-14">${esc(K.governance.center_k)}</text><text class="centerb num" y="22">${esc(K.governance.center_v)}</text>`;
+  S.forEach((s,i)=>{ const a = -Math.PI/2 + i*2*Math.PI/n, x = R*Math.cos(a), y = R*Math.sin(a);
+    h += `<g class="st" id="st${i}" transform="translate(${x.toFixed(1)},${y.toFixed(1)})"><circle r="62"/>
+      <text class="n num" y="-6">${esc(s.n)}</text><text y="16">${esc(s.t)}</text><text class="sub" y="34">${esc(s.s)}</text></g>`; });
+  svg.innerHTML = h;
+})();
+let loopRun = false;
+function runLoop(){
+  if (loopRun) return; loopRun = true;
+  const arc = $("#arc"), n = K.governance.stations.length, C = 2*Math.PI*250; let t0 = performance.now();
+  (function f(t){ const p = ((t-t0)/7000)%1; arc.style.strokeDashoffset = (-C*p).toFixed(1);
+    const k = Math.floor((p*n + .15)%n); document.querySelectorAll("#loop .st").forEach((g,i)=>g.classList.toggle("hot", i===k));
+    if (!REDUCE) requestAnimationFrame(f); })(t0);
+}
+
+// 4 — roles
+$("#roles").innerHTML = K.roles.map((r,i)=>`<div class="role rv d${Math.min(5,i+1)}"><span class="al" style="color:${r.col}">${esc(r.al)}</span><span class="nm">${esc(r.name)}</span><span class="ep">${esc(r.epi)}</span><span class="vb">${r.verbs} gestes</span><span class="lim">${esc(r.limit)}</span></div>`).join("");
+
+// 5 — herald flow
+$("#hstats").innerHTML = K.herald.stats.map((s,i)=>`<div class="${i===0?"l":""}"><b>${s.raw?esc(s.raw):cu(s.v)}</b>${esc(s.k)}</div>`).join("");
+let flowStarted = false;
+function buildFlow(){
+  const svg = $("#flow"), W = svg.clientWidth || 1000, H = svg.clientHeight || 480;
+  svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+  const F = K.herald.flow, colX = [0, W*0.30, W*0.55, W*0.82], nodeW = Math.min(210, W*0.2);
+  const place = (arr, x) => arr.map((d,i)=>({...d, x, y: H*(i+1)/(arr.length+1)}));
+  const srcs = place(F.sources, colX[0]), gw = {name:"Herald", sub:F.gateway_sub, x:colX[1], y:H/2, core:true},
+        ints = place(F.intents, colX[2]), cons = place(F.consumers, colX[3]);
+  let h = ["Sources","Passerelle","Événements typés","Services"].map((t,i)=>`<text class="col" x="${colX[i]}" y="14">${t}</text>`).join("");
+  const lanes = [];
+  const lane = (a,b,live,w) => { const x1=a.x+nodeW, y1=a.y, x2=b.x, y2=b.y, mx=(x1+x2)/2; const d=`M${x1},${y1} C${mx},${y1} ${mx},${y2} ${x2},${y2}`; lanes.push({d,live,w}); return `<path class="lane${live?" live":""}" d="${d}"/>`; };
+  srcs.forEach(s=>h+=lane(s,gw,s.live,s.weight));
+  ints.forEach(i=>h+=lane(gw,i,i.live,i.weight));
+  ints.forEach(i=>(i.to||[]).forEach(c=>{ const t=cons.find(x=>x.name===c); if(t) h+=lane(i,t,i.live,i.weight); }));
+  const node = (d,cls="") => `<g class="node ${cls}${d.live===false?" dim":""}" transform="translate(${d.x},${d.y-26})"><rect width="${nodeW}" height="52" rx="10"/>
+    <text x="14" y="22">${esc(d.name)}</text><text class="s" x="14" y="40">${esc(d.sub||"")}</text>${d.count!=null?`<text class="c" x="${nodeW-12}" y="22" text-anchor="end">${nf(d.count)}</text>`:""}</g>`;
+  h += srcs.map(d=>node(d)).join("") + node(gw,"core") + ints.map(d=>node(d)).join("") + cons.map(d=>node(d)).join("");
+  h += `<g id="dots"></g>`;
+  svg.innerHTML = h;
+  const paths = [...svg.querySelectorAll("path.lane.live")];
+  if (REDUCE || !paths.length) return;
+  const dots = $("#dots"), P = [];
+  const spawn = () => { const p = paths[Math.floor(Math.random()*paths.length)], c = document.createElementNS("http://www.w3.org/2000/svg","circle");
+    c.setAttribute("r","2.6"); c.setAttribute("fill","#c6f135"); dots.appendChild(c); P.push({p,c,t:0,L:p.getTotalLength(),v:0.004+Math.random()*0.004}); };
+  let last = 0;
+  (function f(t){ if (t-last > 90 && P.length < 60){ spawn(); last = t; }
+    for (let i=P.length-1;i>=0;i--){ const o=P[i]; o.t+=o.v; if (o.t>=1){ o.c.remove(); P.splice(i,1); continue; }
+      const pt=o.p.getPointAtLength(o.t*o.L); o.c.setAttribute("cx",pt.x.toFixed(1)); o.c.setAttribute("cy",pt.y.toFixed(1)); o.c.setAttribute("opacity",(Math.sin(Math.PI*o.t)).toFixed(2)); }
+    requestAnimationFrame(f); })(0);
+}
+
+// 6 — findings + terminal
+$("#finds").innerHTML = K.findings.map((f,i)=>`<div class="find rv d${Math.min(5,i+2)}"><span class="v">${cu(f.v)}</span><span class="t">${esc(f.t)}</span><span class="d">${esc(f.d)}</span></div>`).join("");
+let typed = false;
+function typeTerm(){
+  if (typed) return; typed = true; const el = $("#term"), lines = K.terminal;
+  if (REDUCE){ el.innerHTML = lines.map(l=>l.startsWith("$")?`<span class="p">${esc(l)}</span>`:esc(l)).join("\n"); return; }
+  let i=0, j=0, out="";
+  (function f(){ if (i>=lines.length) return; const l = lines[i];
+    j = Math.min(l.length, j + (l.startsWith("$")?2:6));
+    const cur = l.slice(0,j); el.innerHTML = out + (l.startsWith("$")?`<span class="p">${esc(cur)}</span>`:esc(cur)) + "▍";
+    if (j>=l.length){ out += (l.startsWith("$")?`<span class="p">${esc(l)}</span>`:esc(l)) + "\n"; i++; j=0; setTimeout(f, l.startsWith("$")?380:120); } else setTimeout(f, 18); })();
+}
+
+// 7 — roadmap
+$("#road").innerHTML = K.roadmap.map((r,i)=>`<div class="step rv d${i+2}"><div class="w">${esc(r.w)}</div><div class="t">${esc(r.t)}</div><div class="d">${esc(r.d)}</div></div>`).join("");
+
+// sphere (title)
+(function(){
+  const cv=$("#sphere"), ctx=cv.getContext("2d"), N=900, Pn=[], g=Math.PI*(3-Math.sqrt(5)), S=cv.width/2, R=S*0.86;
+  for(let i=0;i<N;i++){ const y=1-(i/(N-1))*2, r=Math.sqrt(1-y*y), th=g*i; Pn.push([Math.cos(th)*r,y,Math.sin(th)*r,Math.random()]); }
+  let a=0, reveal=REDUCE?1:0, t0=performance.now();
+  (function f(t){ reveal = REDUCE?1:Math.min(1,(t-t0)/1800); ctx.clearRect(0,0,cv.width,cv.height);
+    const cs=Math.cos(a), sn=Math.sin(a), ct=Math.cos(.32), st=Math.sin(.32);
+    for(const [x,y,z,th] of Pn){ if (th>reveal) continue; const x1=x*cs+z*sn, z1=-x*sn+z*cs, y2=y*ct-z1*st, z2=y*st+z1*ct, d=(z2+1)/2;
+      ctx.fillStyle = (th<0.06 && d>.5) ? `rgba(198,241,53,${(.35+d*.6).toFixed(2)})` : `rgba(225,228,222,${(.06+d*.6).toFixed(3)})`;
+      ctx.beginPath(); ctx.arc(S+x1*R, S+y2*R, 1.2+d*2.6, 0, Math.PI*2); ctx.fill(); }
+    a+=.0025; if(!REDUCE) requestAnimationFrame(f); })(t0);
+})();
+
+// scene engine
+const scenes = [...document.querySelectorAll(".scene")]; $("#tot").textContent = String(scenes.length).padStart(2,"0");
+let current = 0;
+function enter(i){
+  const s = scenes[i]; if (!s || s.classList.contains("on")) return;
+  s.classList.add("on");
+  s.querySelectorAll(".cu").forEach(countUp);
+  if (s.id==="s1" && !hiveDrawn){ hiveDrawn = true; drawHive(); }
+  if (s.id==="s2"){ const f=$("#kiframe"); if (!f.src) f.src=f.dataset.src; }
+  if (s.id==="s3") runLoop();
+  if (s.id==="s5" && !flowStarted){ flowStarted = true; buildFlow(); }
+  if (s.id==="s6") setTimeout(typeTerm, 700);
+}
+const io = new IntersectionObserver(es=>es.forEach(e=>{ if (e.isIntersecting){ const i=scenes.indexOf(e.target); current=i; enter(i);
+  $("#cur").textContent=String(i+1).padStart(2,"0"); $("#progress").style.width=((i+1)/scenes.length*100)+"%"; } }),{threshold:.45});
+scenes.forEach(s=>io.observe(s));
+const go = d => { const i=Math.max(0,Math.min(scenes.length-1,current+d)); scenes[i].scrollIntoView({behavior:REDUCE?"auto":"smooth"}); };
+$("#next").addEventListener("click",()=>go(1)); $("#prev").addEventListener("click",()=>go(-1));
+addEventListener("keydown",e=>{
+  if (e.target.closest && e.target.closest("iframe")) return;
+  if (["ArrowDown","ArrowRight","PageDown"," "].includes(e.key)){ e.preventDefault(); go(1); }
+  if (["ArrowUp","ArrowLeft","PageUp"].includes(e.key)){ e.preventDefault(); go(-1); }
+  if (e.key==="Home"){ e.preventDefault(); scenes[0].scrollIntoView(); }
+  if (e.key==="End"){ e.preventDefault(); scenes[scenes.length-1].scrollIntoView(); }
+});
+enter(0);
+</script>
+</body>
+</html>
