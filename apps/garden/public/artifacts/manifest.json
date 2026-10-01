@@ -1,5 +1,5 @@
 {
-  "synced_at": "2026-10-01T06:55:03.160Z",
+  "synced_at": "2026-10-01T07:02:25.875Z",
   "domains": [
     {
       "id": "puppy",
@@ -18,8 +18,8 @@
       "file": "bee-network-keynote.html",
       "generator": "Claude Code · bee-navigator 2.1.0 + mesures GCP Herald (30 j)",
       "sensitivity": "internal",
-      "bytes": 61263,
-      "sha256": "13b28031ffc3"
+      "bytes": 65606,
+      "sha256": "2571266bcdf1"
     },
     {
       "id": "bee-network-bases",
