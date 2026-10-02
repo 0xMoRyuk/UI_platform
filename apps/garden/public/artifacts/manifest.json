@@ -1,5 +1,5 @@
 {
-  "synced_at": "2026-10-02T10:47:26.156Z",
+  "synced_at": "2026-10-02T11:02:08.047Z",
   "domains": [
     {
       "id": "puppy",
@@ -33,6 +33,19 @@
       "sensitivity": "internal",
       "bytes": 75930,
       "sha256": "c38936f15259"
+    },
+    {
+      "id": "fcc-form-owner",
+      "domain": "puppy",
+      "title": "Le capitaine du formulaire",
+      "description": "Prise de poste du Form Owner en 7 scènes : le rôle, le cockpit, le tour quotidien, les six verbes, le parc de formulaires, les limites, le journal. Relevé du 02/10.",
+      "date": "2026-10-02",
+      "source": "garden/assets/fcc-form-owner.html",
+      "file": "fcc-form-owner.html",
+      "generator": "Claude Code · rôle Notion, note-joueur et lecture des bases Forms / Field Contracts, 02/10/2026",
+      "sensitivity": "internal",
+      "bytes": 70459,
+      "sha256": "98f8193fd532"
     },
     {
       "id": "bee-network-bases",
