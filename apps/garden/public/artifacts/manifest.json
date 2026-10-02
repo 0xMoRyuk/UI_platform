@@ -1,5 +1,5 @@
 {
-  "synced_at": "2026-10-02T10:10:54.478Z",
+  "synced_at": "2026-10-02T10:47:26.156Z",
   "domains": [
     {
       "id": "puppy",
@@ -18,8 +18,8 @@
       "file": "bee-network-keynote.html",
       "generator": "Claude Code · bee-navigator 2.1.0 + mesures GCP Herald (30 j)",
       "sensitivity": "internal",
-      "bytes": 106904,
-      "sha256": "6d707ef1b3a0"
+      "bytes": 114163,
+      "sha256": "ae29aa3a154f"
     },
     {
       "id": "fcc-lab",
@@ -31,8 +31,8 @@
       "file": "fcc-lab.html",
       "generator": "Claude Code · lecture SQL des bases du Forms Control Center (Notion), 02/10/2026",
       "sensitivity": "internal",
-      "bytes": 68671,
-      "sha256": "04093488afc3"
+      "bytes": 75930,
+      "sha256": "c38936f15259"
     },
     {
       "id": "bee-network-bases",
@@ -44,8 +44,8 @@
       "file": "bee-network-bases.html",
       "generator": "Claude Code · bee-navigator 2.1.0 records + survey",
       "sensitivity": "internal",
-      "bytes": 54374,
-      "sha256": "9d111033cdc1"
+      "bytes": 61633,
+      "sha256": "c1c37dd7cf90"
     },
     {
       "id": "bee-network-index",
@@ -57,8 +57,8 @@
       "file": "bee-network-index.html",
       "generator": "Claude Code · scripts/bee_network_index_gen.py",
       "sensitivity": "internal",
-      "bytes": 38143,
-      "sha256": "39d326eaf50b"
+      "bytes": 45402,
+      "sha256": "e1f7108e9384"
     },
     {
       "id": "bee-network-rives",
@@ -70,8 +70,8 @@
       "file": "bee-network-rives.html",
       "generator": "Claude Code · bee-navigator 2.1.0 records + survey",
       "sensitivity": "internal",
-      "bytes": 60075,
-      "sha256": "84e63a01a9a9"
+      "bytes": 67334,
+      "sha256": "66da7ad07d84"
     },
     {
       "id": "bee-network-city",
@@ -83,8 +83,8 @@
       "file": "bee-network-city.html",
       "generator": "Claude Code · bee-navigator 2.1.0 records",
       "sensitivity": "internal",
-      "bytes": 39035,
-      "sha256": "af2d2bc3dcdf"
+      "bytes": 46294,
+      "sha256": "18a69e8dafdb"
     }
   ]
 }
