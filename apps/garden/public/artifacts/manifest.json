@@ -1,5 +1,5 @@
 {
-  "synced_at": "2026-10-02T07:43:19.388Z",
+  "synced_at": "2026-10-02T09:49:33.042Z",
   "domains": [
     {
       "id": "puppy",
@@ -20,6 +20,19 @@
       "sensitivity": "internal",
       "bytes": 106904,
       "sha256": "6d707ef1b3a0"
+    },
+    {
+      "id": "fcc-lab",
+      "domain": "puppy",
+      "title": "Forms Control Center",
+      "description": "Le tour complet pour le Lab en 7 scènes : la carte des bases, le parcours d'un changement, les rôles et l'axe Agent, les chiffres, les quatre yeux mesurés, les écarts et la suite. Relevé du 02/10.",
+      "date": "2026-10-02",
+      "source": "assets/viz/fcc-lab.html",
+      "file": "fcc-lab.html",
+      "generator": "Claude Code · lecture SQL des bases du Forms Control Center (Notion), 02/10/2026",
+      "sensitivity": "internal",
+      "bytes": 68671,
+      "sha256": "04093488afc3"
     },
     {
       "id": "bee-network-bases",
