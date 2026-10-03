@@ -1,5 +1,5 @@
 {
-  "synced_at": "2026-10-02T11:05:38.813Z",
+  "synced_at": "2026-10-03T08:05:19.814Z",
   "domains": [
     {
       "id": "puppy",
@@ -18,8 +18,8 @@
       "file": "bee-network-keynote.html",
       "generator": "Claude Code · bee-navigator 2.1.0 + mesures GCP Herald (30 j)",
       "sensitivity": "internal",
-      "bytes": 114163,
-      "sha256": "ae29aa3a154f"
+      "bytes": 114824,
+      "sha256": "ff129df122ff"
     },
     {
       "id": "fcc-lab",
@@ -31,8 +31,8 @@
       "file": "fcc-lab.html",
       "generator": "Claude Code · lecture SQL des bases du Forms Control Center (Notion), 02/10/2026",
       "sensitivity": "internal",
-      "bytes": 75930,
-      "sha256": "c38936f15259"
+      "bytes": 76590,
+      "sha256": "9f2c47a816e6"
     },
     {
       "id": "fcc-form-owner",
@@ -44,8 +44,8 @@
       "file": "fcc-form-owner.html",
       "generator": "Claude Code · rôle Notion, note-joueur et lecture des bases Forms / Field Contracts, 02/10/2026",
       "sensitivity": "internal",
-      "bytes": 70594,
-      "sha256": "02e3523c52ba"
+      "bytes": 71254,
+      "sha256": "45e95fabd084"
     },
     {
       "id": "bee-network-bases",
@@ -57,8 +57,8 @@
       "file": "bee-network-bases.html",
       "generator": "Claude Code · bee-navigator 2.1.0 records + survey",
       "sensitivity": "internal",
-      "bytes": 61633,
-      "sha256": "c1c37dd7cf90"
+      "bytes": 62277,
+      "sha256": "b904aafc4a4d"
     },
     {
       "id": "bee-network-index",
@@ -70,8 +70,8 @@
       "file": "bee-network-index.html",
       "generator": "Claude Code · scripts/bee_network_index_gen.py",
       "sensitivity": "internal",
-      "bytes": 45402,
-      "sha256": "e1f7108e9384"
+      "bytes": 46046,
+      "sha256": "b51495cdc9f7"
     },
     {
       "id": "bee-network-rives",
@@ -83,8 +83,8 @@
       "file": "bee-network-rives.html",
       "generator": "Claude Code · bee-navigator 2.1.0 records + survey",
       "sensitivity": "internal",
-      "bytes": 67334,
-      "sha256": "66da7ad07d84"
+      "bytes": 67978,
+      "sha256": "bf0e33ed41ee"
     },
     {
       "id": "bee-network-city",
@@ -96,8 +96,8 @@
       "file": "bee-network-city.html",
       "generator": "Claude Code · bee-navigator 2.1.0 records",
       "sensitivity": "internal",
-      "bytes": 46294,
-      "sha256": "18a69e8dafdb"
+      "bytes": 46938,
+      "sha256": "63853ce02ece"
     }
   ]
 }
