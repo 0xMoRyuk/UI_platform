@@ -1,5 +1,5 @@
 {
-  "synced_at": "2026-10-03T11:47:10.526Z",
+  "synced_at": "2026-10-03T12:08:32.803Z",
   "domains": [
     {
       "id": "puppy",
@@ -18,8 +18,8 @@
       "file": "bee-network-keynote.html",
       "generator": "Claude Code · bee-navigator 2.1.0 + mesures GCP Herald (30 j)",
       "sensitivity": "internal",
-      "bytes": 114824,
-      "sha256": "ff129df122ff"
+      "bytes": 114827,
+      "sha256": "e10334ed11f3"
     },
     {
       "id": "fcc-lab",
@@ -70,8 +70,8 @@
       "file": "bee-network-index.html",
       "generator": "Claude Code · scripts/bee_network_index_gen.py",
       "sensitivity": "internal",
-      "bytes": 46046,
-      "sha256": "b51495cdc9f7"
+      "bytes": 46048,
+      "sha256": "75269c9749d3"
     },
     {
       "id": "bee-network-rives",
