@@ -1,0 +1,155 @@
+{
+  "synced_at": "2026-10-03T14:52:48.558Z",
+  "domains": [
+    {
+      "id": "puppy",
+      "title": "Puppy",
+      "summary": "Bee Network : les joueurs de la loi de partie et le contenu des bases Notion."
+    }
+  ],
+  "artifacts": [
+    {
+      "id": "bee-network-keynote",
+      "domain": "puppy",
+      "title": "Bee Network — un système gouverné",
+      "description": "Support de présentation en 8 scènes : échelle, structure, gouvernance, rôles, Herald, agents, feuille de route. Chiffres réels relevés le 30/09.",
+      "date": "2026-09-30",
+      "source": "garden/assets/bee-network-keynote.html",
+      "file": "bee-network-keynote.html",
+      "generator": "Claude Code · bee-navigator 2.1.0 + mesures GCP Herald (30 j)",
+      "sensitivity": "internal",
+      "bytes": 114836,
+      "sha256": "11c1bce73925"
+    },
+    {
+      "id": "fcc-lab",
+      "domain": "puppy",
+      "title": "Forms Control Center",
+      "description": "Le tour complet pour le Lab en 7 scènes : la carte des bases, le parcours d'un changement, les rôles et l'axe Agent, les chiffres, les quatre yeux mesurés, les écarts et la suite. Relevé du 02/10.",
+      "date": "2026-10-02",
+      "source": "garden/assets/fcc-lab.html",
+      "file": "fcc-lab.html",
+      "generator": "Claude Code · lecture SQL des bases du Forms Control Center (Notion), 02/10/2026",
+      "sensitivity": "internal",
+      "bytes": 76599,
+      "sha256": "0b430c76e643"
+    },
+    {
+      "id": "fcc-form-owner",
+      "domain": "puppy",
+      "title": "Le capitaine du formulaire",
+      "description": "Prise de poste du Form Owner en 7 scènes : le rôle, le cockpit, le tour quotidien, les six verbes, le parc de formulaires, les limites, le journal. Relevé du 02/10.",
+      "date": "2026-10-02",
+      "source": "garden/assets/fcc-form-owner.html",
+      "file": "fcc-form-owner.html",
+      "generator": "Claude Code · rôle Notion, note-joueur et lecture des bases Forms / Field Contracts, 02/10/2026",
+      "sensitivity": "internal",
+      "bytes": 71253,
+      "sha256": "c096ee10cf62"
+    },
+    {
+      "id": "bee-network-bases",
+      "domain": "puppy",
+      "title": "Bee Network Index",
+      "description": "Les bases du Bee Network en cinq familles (principales, dossiers startup, référentiels, hors registre, hors cycle), avec fiches, états, routage Herald et relations.",
+      "date": "2026-09-30",
+      "source": "garden/assets/bee-network-bases.html",
+      "file": "bee-network-bases.html",
+      "generator": "Claude Code · bee-navigator 2.1.0 records + survey",
+      "sensitivity": "internal",
+      "bytes": 62286,
+      "sha256": "a335ea5bf880"
+    },
+    {
+      "id": "bee-network-index",
+      "domain": "puppy",
+      "title": "Joueurs du Bee Network",
+      "description": "Les cinq joueurs de « Pilotage des formulaires de candidature », leurs 31 verbes et les primitives LEUCHTTURM qu'ils mobilisent.",
+      "date": "2026-09-24",
+      "source": "garden/assets/bee-network-index.html",
+      "file": "bee-network-index.html",
+      "generator": "Claude Code · scripts/bee_network_index_gen.py",
+      "sensitivity": "internal",
+      "bytes": 46057,
+      "sha256": "54469fb338b0"
+    },
+    {
+      "id": "bee-network-rives",
+      "domain": "puppy",
+      "title": "Les deux rives du Bee Network",
+      "description": "Vue isométrique : bases de startups en tours, référentiels en dalles, ponts = relations Notion, mât Herald.",
+      "date": "2026-09-25",
+      "source": "garden/assets/bee-network-rives.html",
+      "file": "bee-network-rives.html",
+      "generator": "Claude Code · bee-navigator 2.1.0 records + survey",
+      "sensitivity": "internal",
+      "bytes": 67987,
+      "sha256": "f55534cc9da6"
+    },
+    {
+      "id": "bee-network-city",
+      "domain": "puppy",
+      "title": "La ville des bases",
+      "description": "Vue isométrique : une tour par base (hauteur = fiches, strates = état), un quartier par branche de rattachement.",
+      "date": "2026-09-24",
+      "source": "garden/assets/bee-network-city.html",
+      "file": "bee-network-city.html",
+      "generator": "Claude Code · bee-navigator 2.1.0 records",
+      "sensitivity": "internal",
+      "bytes": 46947,
+      "sha256": "c0da59c1ff0d"
+    },
+    {
+      "id": "ds-design-system-company-v3",
+      "domain": "puppy",
+      "title": "Design System v3 (actif) — maquette",
+      "description": "Le thème en service sur le formulaire de candidature : configuration des 15 règles et aperçus desktop et mobile.",
+      "date": "2026-10-03",
+      "source": "garden/assets/ds-design-system-company-v3.html",
+      "file": "ds-design-system-company-v3.html",
+      "generator": "Claude Code · scripts/garden-design-system (Référentiel d'interface, 03/10/2026)",
+      "sensitivity": "internal",
+      "bytes": 66539,
+      "sha256": "d498cc1f62bb"
+    },
+    {
+      "id": "ds-design-system-company-v2",
+      "domain": "puppy",
+      "title": "Design System v2 (historique) — maquette",
+      "description": "Le canon « Nuit » du 02/10 : règles, écart du logo jamais déployé, aperçus ; réglages absents du référentiel repris du thème Typeform.",
+      "date": "2026-10-03",
+      "source": "garden/assets/ds-design-system-company-v2.html",
+      "file": "ds-design-system-company-v2.html",
+      "generator": "Claude Code · scripts/garden-design-system (Référentiel d'interface, 03/10/2026)",
+      "sensitivity": "internal",
+      "bytes": 65904,
+      "sha256": "2b55804fcc1c"
+    },
+    {
+      "id": "ds-design-system-company",
+      "domain": "puppy",
+      "title": "Design System v1 (référence) — maquette",
+      "description": "Le premier thème clair et la palette de marque ; réglages non définis signalés en repli.",
+      "date": "2026-10-03",
+      "source": "garden/assets/ds-design-system-company.html",
+      "file": "ds-design-system-company.html",
+      "generator": "Claude Code · scripts/garden-design-system (Référentiel d'interface, 03/10/2026)",
+      "sensitivity": "internal",
+      "bytes": 65648,
+      "sha256": "235ad5f7e02f"
+    },
+    {
+      "id": "ds-fixture-validate-design",
+      "domain": "puppy",
+      "title": "Design System — fixture de test",
+      "description": "Le jeu de test de la validation du design : police et thème seulement, couleurs reprises du thème v2.",
+      "date": "2026-10-03",
+      "source": "garden/assets/ds-fixture-validate-design.html",
+      "file": "ds-fixture-validate-design.html",
+      "generator": "Claude Code · scripts/garden-design-system (Référentiel d'interface, 03/10/2026)",
+      "sensitivity": "internal",
+      "bytes": 65247,
+      "sha256": "ff35db970360"
+    }
+  ]
+}
