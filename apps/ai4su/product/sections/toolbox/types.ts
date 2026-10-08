@@ -42,6 +42,7 @@ export interface AIModel {
 }
 
 export interface Study {
+  contentStatus?: 'Done' | 'Coming soon'
   id: string
   type?: string
   title: string
@@ -55,6 +56,10 @@ export interface Study {
 }
 
 export interface BestPractices {
+  publishedDate?: string | null
+  description?: string
+  partner?: string
+  contentStatus?: 'Done' | 'Coming soon'
   id: string
   type?: string
   title: string
@@ -66,6 +71,9 @@ export interface BestPractices {
 }
 
 export interface FinalReport {
+  keyFindings?: string[]
+  partner?: string
+  contentStatus?: 'Done' | 'Coming soon'
   type?: string
   title: string
   description: string

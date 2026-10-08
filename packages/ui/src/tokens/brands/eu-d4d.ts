@@ -120,7 +120,7 @@ export const euD4DBrand: BrandConfig = {
   },
 
   attribution: {
-    short: "Funded by the European Union",
+    short: "Funded by the European Union, France and Germany",
     full: "Co-funded by the European Union, Belgium, Estonia, Finland, France and Germany under EU Global Gateway Strategy. Implemented by Digital Africa, Enabel, ESTDEV, Expertise France, GIZ and HAUS.",
   },
 

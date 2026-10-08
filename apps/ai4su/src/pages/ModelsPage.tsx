@@ -25,17 +25,14 @@ const uiContent = toolboxDataRaw as unknown as {
 export function ModelsPage() {
   const navigate = useNavigate()
 
-  const resolveDocumentUrl = (pdfUrl: string | null | undefined, notionUrl?: string) => {
-    if (pdfUrl && !pdfUrl.startsWith('file://')) {
-      return pdfUrl
-    }
-    return notionUrl ?? null
-  }
-
-  const openDocument = (pdfUrl: string | null | undefined, notionUrl?: string) => {
-    const url = resolveDocumentUrl(pdfUrl, notionUrl)
-    if (!url) return
-    window.open(url, '_blank', 'noopener,noreferrer')
+  const downloadDocument = (fileUrl: string | null | undefined) => {
+    if (!fileUrl || !fileUrl.startsWith('/reports/')) return
+    const link = document.createElement('a')
+    link.href = fileUrl
+    link.download = fileUrl.split('/').pop() || 'resource'
+    document.body.appendChild(link)
+    link.click()
+    link.remove()
   }
 
   const handleSearch = (query: string) => {
@@ -59,7 +56,7 @@ export function ModelsPage() {
     console.log('[Models] Study download:', studyId)
     const study = getStudyById(studyId)
     if (study) {
-      openDocument(study.pdfUrl, study.notionUrl)
+      downloadDocument(study.pdfUrl)
     }
   }
 
@@ -67,13 +64,13 @@ export function ModelsPage() {
     console.log('[Models] Best practices download:', bpId)
     const bp = getBestPracticeById(bpId)
     if (bp) {
-      openDocument(bp.pdfUrl, bp.notionUrl)
+      downloadDocument(bp.pdfUrl)
     }
   }
 
   const handleFinalReportDownload = () => {
     console.log('[Models] Final report download')
-    openDocument(finalReport.pdfUrl, finalReport.notionUrl)
+    downloadDocument(finalReport.pdfUrl)
   }
 
   return (

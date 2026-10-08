@@ -17,7 +17,7 @@ export function Footer({ currentLanguage }: FooterProps) {
           {/* EU Attribution - Mandatory */}
           <div className="space-y-4">
             <div className="flex items-center space-x-3">
-              <span className="text-3xl" role="img" aria-label="European Union flag">🇪🇺</span>
+              <img src="/logos/funders/eu-flag.webp" alt="European Union flag" width={48} height={32} className="w-12 h-8 shrink-0 object-contain" />
               <span className="text-sm font-medium font-[Barlow]">{t.fundedBy}</span>
             </div>
             <p className="text-sm text-white/70">

@@ -67,12 +67,13 @@ function StudyCard({ study, content, onDownload }: StudyCardProps) {
 
         {/* Download */}
         <button
+          disabled={study.contentStatus === 'Coming soon' || !study.pdfUrl}
           onClick={onDownload}
           className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-brand-primary/10 dark:bg-brand-primary/20 text-brand-primary dark:text-brand-secondary font-medium rounded-lg
-                   hover:bg-brand-primary hover:text-brand-primary-foreground transition-colors"
+                   hover:bg-brand-primary hover:text-brand-primary-foreground transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
         >
-          <Download className="w-4 h-4" />
-          {content.downloadLabel}
+          {study.contentStatus !== 'Coming soon' && <Download className="w-4 h-4" />}
+          {study.contentStatus === 'Coming soon' ? 'Coming soon' : !study.pdfUrl ? 'Download unavailable' : content.downloadLabel}
         </button>
       </div>
     </div>
@@ -99,7 +100,7 @@ function BPCard({ bp, downloadLabel, onDownload }: BPCardProps) {
             <Trophy className="w-5 h-5 text-brand-accent" />
           </div>
           <div className="flex flex-col gap-1">
-            <span className="text-sm font-medium text-stone-600 dark:text-stone-400">{bp.hackathonName}</span>
+            <span className="text-sm font-medium text-stone-600 dark:text-stone-400">{bp.partner || bp.hackathonName}</span>
             {bp.type && (
               <Badge variant="secondary" className="w-fit bg-brand-accent/15 text-brand-primary">
                 {bp.type}
@@ -107,6 +108,7 @@ function BPCard({ bp, downloadLabel, onDownload }: BPCardProps) {
             )}
           </div>
         </div>
+        <span className="text-xs text-stone-500">{formatMonthYear(bp.publishedDate)}</span>
       </div>
 
       {/* Content */}
@@ -114,6 +116,12 @@ function BPCard({ bp, downloadLabel, onDownload }: BPCardProps) {
         <h3 className="text-lg font-bold text-brand-primary dark:text-white mb-2 font-[Barlow] group-hover:text-brand-accent transition-colors">
           {bp.title}
         </h3>
+
+        {bp.description && (
+          <p className="text-sm text-stone-600 dark:text-stone-400 mb-4 line-clamp-2">
+            {bp.description}
+          </p>
+        )}
 
         {/* Highlights */}
         <ul className="space-y-1.5 mb-4">
@@ -127,12 +135,13 @@ function BPCard({ bp, downloadLabel, onDownload }: BPCardProps) {
 
         {/* Download */}
         <button
+          disabled={bp.contentStatus === 'Coming soon' || !bp.pdfUrl}
           onClick={onDownload}
           className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-brand-accent/10 dark:bg-brand-accent/20 text-brand-primary dark:text-brand-secondary font-medium rounded-lg
-                   hover:bg-brand-primary hover:text-brand-primary-foreground transition-colors"
+                   hover:bg-brand-primary hover:text-brand-primary-foreground transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
         >
-          <Download className="w-4 h-4" />
-          {downloadLabel}
+          {bp.contentStatus !== 'Coming soon' && <Download className="w-4 h-4" />}
+          {bp.contentStatus === 'Coming soon' ? 'Coming soon' : downloadLabel}
         </button>
       </div>
     </div>

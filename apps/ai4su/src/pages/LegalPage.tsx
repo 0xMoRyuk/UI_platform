@@ -92,9 +92,7 @@ export function LegalPage() {
           </h2>
           <div className="bg-stone-50 dark:bg-stone-900 border border-stone-200 dark:border-stone-700 rounded-lg p-6">
             <div className="flex items-start gap-4">
-              <span className="text-3xl" role="img" aria-label="European Union flag">
-                🇪🇺
-              </span>
+              <img src="/logos/funders/eu-flag.webp" alt="European Union flag" width={48} height={32} className="w-12 h-8 shrink-0 object-contain" />
               <p className="text-stone-700 dark:text-stone-300 m-0">
                 This website is funded by the European Union. Its contents are
                 the sole responsibility of the AI4Startups project and do not

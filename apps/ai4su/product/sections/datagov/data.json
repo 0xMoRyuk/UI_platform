@@ -82,7 +82,7 @@
     "funders": {
       "title": "Funded By",
       "members": [
-        { "id": "eu", "name": "European Union", "flag": "🇪🇺" },
+        { "id": "eu", "name": "European Union", "flagUrl": "/logos/funders/eu-flag.webp" },
         { "id": "germany", "name": "Germany", "flag": "🇩🇪" },
         { "id": "finland", "name": "Finland", "flag": "🇫🇮" },
         { "id": "belgium", "name": "Belgium", "flag": "🇧🇪" },

@@ -18,7 +18,7 @@ AI4Startups uses a top navigation layout optimized for a public showcase website
 - **Mobile**: Hamburger menu icon triggers slide-out drawer
 
 ## Footer Components
-- **EU Attribution**: EU logo + "Funded by the European Union" (mandatory)
+- **EU Attribution**: EU logo + "Funded by the European Union, France and Germany" (mandatory)
 - **Partner Logos**: Digital Africa, Expertise France, GIZ, Team Europe
 - **Legal Links**: Privacy Policy, Legal Notice, Accessibility
 - **Social/Hashtags**: #D4DataGOV #DataGovernanceAfrica #TeamEurope
