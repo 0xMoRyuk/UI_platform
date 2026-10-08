@@ -227,7 +227,7 @@ UI_platform/
 │       ├── Dockerfile.next     # Next.js multi-stage build
 │       ├── Dockerfile.vite     # Vite multi-stage build
 │       ├── .dockerignore
-│       ├── cloudbuild-cicd.yaml # Cloud Build CI/CD config
+│       ├── cloudbuild.yaml # Cloud Build CI/CD config
 │       ├── scripts/
 │       │   ├── deploy.sh       # Deploy single app
 │       │   └── deploy-all.sh   # Deploy all apps

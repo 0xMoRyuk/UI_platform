@@ -47,7 +47,7 @@ cd packages/infra
 ./scripts/deploy.sh <app-name> <project-id> <region>
 
 # Example: Deploy ai4su app
-./scripts/deploy.sh ai4su digital-africa-ai4su europe-west1
+./scripts/deploy.sh ai4su digital-africa-rainbow europe-west1
 
 # Deploy all apps
 ./scripts/deploy-all.sh <project-id> <region>
@@ -123,7 +123,7 @@ UI_platform/
 │   └── infra/                  # Infrastructure code
 │       ├── Dockerfile.next      # Next.js multi-stage build
 │       ├── Dockerfile.vite      # Vite multi-stage build
-│       ├── cloudbuild-cicd.yaml # Cloud Build CI/CD config
+│       ├── cloudbuild.yaml # Cloud Build CI/CD config
 │       └── scripts/            # Deployment scripts
 ├── package.json                # Workspace root
 ├── CLAUDE.md                   # This file

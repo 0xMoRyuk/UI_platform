@@ -2,7 +2,7 @@
 
 ## Project Details
 
-- **Project ID:** `digital-africa-ai4su`
+- **Project ID:** `digital-africa-rainbow`
 - **Region:** `europe-west1`
 - **Service URL:** https://ui-platform-ai4su-jvrtfyxamq-ew.a.run.app
 
@@ -12,19 +12,19 @@
 |------|---------|
 | `packages/infra/Dockerfile.next` | Next.js container build |
 | `packages/infra/Dockerfile.vite` | Vite container build |
-| `packages/infra/cloudbuild-cicd.yaml` | Cloud Build config |
+| `cloudbuild.yaml` | Cloud Build config |
 | `packages/infra/triggers/production.yaml` | Trigger config |
 
 ## Quick Deploy (Manual)
 
 ```bash
 # Ensure correct project
-gcloud config set project digital-africa-ai4su
+gcloud config set project digital-africa-rainbow
 
 # Submit build from repo root
 cd /Users/mo/creative_home/UI_platform
 gcloud builds submit \
-  --config=packages/infra/cloudbuild-cicd.yaml \
+  --config=cloudbuild.yaml \
   --substitutions=SHORT_SHA=$(git rev-parse --short HEAD),_APP_NAME=ai4su,_SERVICE_NAME=ui-platform-ai4su
 
 # Route traffic to latest (if needed)
@@ -43,7 +43,7 @@ Pushes to `main` branch automatically trigger deployment via Cloud Build.
 - **ID:** `2e14e66c-41c4-412d-8725-58f4a7c15524`
 - **Repository:** `0xMoRyuk/UI_platform`
 - **Branch:** `^main$`
-- **Service Account:** `ai4su-aiplatform@digital-africa-ai4su.iam.gserviceaccount.com`
+- **Service Account:** `ai4su-aiplatform@digital-africa-rainbow.iam.gserviceaccount.com`
 
 ## Required Service Account Permissions
 
@@ -59,8 +59,8 @@ The trigger's service account needs these IAM roles:
 
 ```bash
 # Grant permissions to service account (if needed)
-PROJECT_ID="digital-africa-ai4su"
-SA="ai4su-aiplatform@digital-africa-ai4su.iam.gserviceaccount.com"
+PROJECT_ID="digital-africa-rainbow"
+SA="ai4su-aiplatform@digital-africa-rainbow.iam.gserviceaccount.com"
 
 gcloud projects add-iam-policy-binding $PROJECT_ID \
   --member="serviceAccount:$SA" \

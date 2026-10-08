@@ -56,13 +56,13 @@ gcloud builds triggers create github \
   --repo-name="UI_platform" \
   --repo-owner="YOUR_GITHUB_USERNAME" \
   --branch-pattern="^main$" \
-  --build-config="packages/infra/cloudbuild-cicd.yaml" \
+  --build-config="cloudbuild.yaml" \
   --substitutions="_APP_NAME=ai4su,_ENV=production,_REGION=europe-west1" \
-  --project=digital-africa-ai4su
+  --project=digital-africa-rainbow
 
 # Or import from YAML
 gcloud builds triggers import --source=triggers/production.yaml \
-  --project=digital-africa-ai4su
+  --project=digital-africa-rainbow
 ```
 
 #### Staging Trigger
@@ -74,13 +74,13 @@ gcloud builds triggers create github \
   --repo-name="UI_platform" \
   --repo-owner="YOUR_GITHUB_USERNAME" \
   --branch-pattern="^staging/.*$" \
-  --build-config="packages/infra/cloudbuild-cicd.yaml" \
+  --build-config="cloudbuild.yaml" \
   --substitutions="_APP_NAME=ai4su,_ENV=staging,_REGION=europe-west1" \
-  --project=digital-africa-ai4su
+  --project=digital-africa-rainbow
 
 # Or import from YAML
 gcloud builds triggers import --source=triggers/staging.yaml \
-  --project=digital-africa-ai4su
+  --project=digital-africa-rainbow
 ```
 
 ### 3. Configure IAM Permissions
@@ -88,7 +88,7 @@ gcloud builds triggers import --source=triggers/staging.yaml \
 The Cloud Build service account needs permissions to deploy to Cloud Run:
 
 ```bash
-PROJECT_ID="digital-africa-ai4su"
+PROJECT_ID="digital-africa-rainbow"
 PROJECT_NUMBER=$(gcloud projects describe $PROJECT_ID --format='value(projectNumber)')
 SERVICE_ACCOUNT="$PROJECT_NUMBER@cloudbuild.gserviceaccount.com"
 
@@ -141,15 +141,15 @@ git push origin staging/your-feature
 
 ```bash
 # List recent builds
-gcloud builds list --limit=10 --project=digital-africa-ai4su
+gcloud builds list --limit=10 --project=digital-africa-rainbow
 
 # Stream logs for specific build
-gcloud builds log BUILD_ID --project=digital-africa-ai4su --stream
+gcloud builds log BUILD_ID --project=digital-africa-rainbow --stream
 
 # Check Cloud Run service
 gcloud run services describe ui-platform-ai4su \
   --region=europe-west1 \
-  --project=digital-africa-ai4su
+  --project=digital-africa-rainbow
 ```
 
 ## Rollback
@@ -161,26 +161,26 @@ If a deployment fails or causes issues, rollback to a previous version:
 gcloud run revisions list \
   --service=ui-platform-ai4su \
   --region=europe-west1 \
-  --project=digital-africa-ai4su
+  --project=digital-africa-rainbow
 
 # Route 100% traffic to previous revision
 gcloud run services update-traffic ui-platform-ai4su \
   --region=europe-west1 \
   --to-revisions=PREVIOUS_REVISION=100 \
-  --project=digital-africa-ai4su
+  --project=digital-africa-rainbow
 
 # Or use tagged version
 gcloud run services update-traffic ui-platform-ai4su \
   --region=europe-west1 \
   --to-tags=v20260108-abc1234=100 \
-  --project=digital-africa-ai4su
+  --project=digital-africa-rainbow
 ```
 
 ## Configuration
 
 ### Environment Variables
 
-Add environment variables in `cloudbuild-cicd.yaml`:
+Add environment variables in `cloudbuild.yaml`:
 
 ```yaml
 --set-env-vars="NODE_ENV=production,API_URL=https://api.example.com"
@@ -194,13 +194,13 @@ Use Secret Manager for sensitive data:
 # Create secret
 echo -n "secret-value" | gcloud secrets create my-secret \
   --data-file=- \
-  --project=digital-africa-ai4su
+  --project=digital-africa-rainbow
 
 # Grant access to Cloud Build
 gcloud secrets add-iam-policy-binding my-secret \
   --member="serviceAccount:$SERVICE_ACCOUNT" \
   --role="roles/secretmanager.secretAccessor" \
-  --project=digital-africa-ai4su
+  --project=digital-africa-rainbow
 
 # Use in Cloud Build
 steps:
@@ -265,7 +265,7 @@ bun run lint
 
 ### Deployment Timeout
 
-Increase timeout in `cloudbuild-cicd.yaml`:
+Increase timeout in `cloudbuild.yaml`:
 
 ```yaml
 substitutions:
@@ -280,7 +280,7 @@ Check Cloud Run logs:
 gcloud logging read \
   "resource.type=cloud_run_revision AND resource.labels.service_name=ui-platform-ai4su" \
   --limit=50 \
-  --project=digital-africa-ai4su
+  --project=digital-africa-rainbow
 ```
 
 ### Traffic Not Routing
@@ -292,7 +292,7 @@ gcloud run services add-iam-policy-binding ui-platform-ai4su \
   --region=europe-west1 \
   --member=allUsers \
   --role=roles/run.invoker \
-  --project=digital-africa-ai4su
+  --project=digital-africa-rainbow
 ```
 
 ## Best Practices

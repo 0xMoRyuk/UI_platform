@@ -1,0 +1,629 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Le Lab au CA — réponse à la proposition initiale</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  color-scheme: dark;
+  --page:#070706; --panel:#100f0d; --card:#151411; --line:#27241f; --text:#f2f0eb; --muted:#928c80; --faint:#5f5a51;
+  --acc:#c6f135; --amber:#f5a524; --red:#ef4444; --blue:#8fa8ff; --vio:#b79cff; --off:#2c2924; --on-acc:#0b0d06;
+  --sans: "Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono:"Berkeley Mono", "Geist Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: light){
+  :root{
+    color-scheme: light;
+    --page:#f4f3f0; --panel:#ffffff; --card:#fbfaf7; --line:#e1ddd5; --text:#17150f; --muted:#625c50; --faint:#8b8578;
+    --acc:#4f7300; --amber:#a65f00; --red:#c8352b; --blue:#3b5bd6; --vio:#6a4bd6; --off:#e9e5dd; --on-acc:#ffffff;
+  }
+}
+*{box-sizing:border-box}
+html{scroll-snap-type:y proximity;scroll-behavior:smooth;background:var(--page);overflow-x:hidden}
+body{margin:0;background:var(--page);color:var(--text);font-family:var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.scene{min-height:100dvh;scroll-snap-align:start;display:grid;align-content:center;gap:0;padding:56px max(16px,6vw) 84px;max-width:1280px;margin:0 auto}
+.scene.dense{padding-top:34px;padding-bottom:46px}
+.eyebrow{font:500 11.5px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--acc);margin:0 0 14px}
+h1,h2{margin:0;font-weight:500;letter-spacing:-.025em;text-wrap:balance;font-family:var(--mono)}
+h1{font-size:clamp(28px,5vw,66px);line-height:1.04;letter-spacing:-.035em;max-width:24ch}
+h2{font-size:clamp(22px,3.1vw,40px);line-height:1.1;max-width:30ch}
+.lede{margin:16px 0 0;font-size:clamp(14.5px,1.3vw,17px);line-height:1.5;color:var(--muted);max-width:68ch;font-weight:300}
+.lede b{color:var(--text);font-weight:500}
+.mono{font-family:var(--mono)}
+.num{font-variant-numeric:tabular-nums}
+a{color:inherit}
+.note{margin-top:12px;font:12px/1.55 var(--mono);color:var(--faint);max-width:90ch}
+
+/* chrome */
+.progress{position:fixed;top:0;left:0;height:2px;background:var(--acc);width:0;z-index:20;transition:width .5s}
+.hud{position:fixed;right:max(12px,2vw);bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:20;display:flex;gap:10px;align-items:center;font:12px var(--mono);color:var(--faint)}
+.hud b{color:var(--text);font-weight:500}
+.hud button{all:unset;cursor:pointer;width:32px;height:32px;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;color:var(--muted);background:var(--panel)}
+.hud button:hover,.hud button:focus-visible{color:var(--acc);border-color:var(--acc);outline:none}
+.brand{position:fixed;left:max(12px,2vw);bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:20;font:11px var(--mono);color:var(--faint);letter-spacing:.06em}
+.brand i{color:var(--acc);font-style:normal}
+.jump{display:inline-flex;margin-top:16px;font:12px var(--mono);color:var(--acc);text-decoration:none;border:1px solid color-mix(in srgb, var(--acc) 40%, transparent);border-radius:999px;padding:7px 14px}
+.jump:hover,.jump:focus-visible{background:var(--acc);color:var(--on-acc);outline:none}
+
+/* s0 cover */
+.tags{margin-top:20px;display:flex;gap:10px;flex-wrap:wrap}
+.tags span{font:12px var(--mono);border:1px solid var(--line);border-radius:999px;padding:6px 12px;color:var(--muted)}
+
+/* s1 pourquoi */
+.ctxrow{margin-top:22px;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.ctx{border-top:2px solid var(--acc);padding-top:9px}
+.ctx b{display:block;font:500 clamp(22px,2.2vw,32px)/1 var(--mono);letter-spacing:-.02em}
+.ctx span{display:block;margin-top:5px;font-size:12.5px;color:var(--muted);line-height:1.35}
+.ctx em{display:block;margin-top:3px;font:11px var(--mono);color:var(--amber);font-style:normal}
+.measured{margin-top:24px;display:grid;grid-template-columns:1.1fr 1fr 1fr;gap:16px;align-items:start}
+.measured .mcard{font-size:13px;color:var(--muted);line-height:1.5}
+.measured .mcard b{color:var(--text);font-weight:500}
+.bars{display:flex;gap:10px;align-items:flex-end;height:90px;margin-top:6px}
+.bars .bar{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:6px;flex:1;height:100%}
+.bars .bar i{display:block;width:100%;max-width:38px;min-height:3px;background:var(--acc);border-radius:4px 4px 0 0}
+.bars .bar span{font:11px var(--mono);color:var(--faint)}
+.barcap{margin-top:10px;font-size:12.5px;color:var(--muted);font-style:italic}
+@media (max-width:860px){ .measured{grid-template-columns:1fr} }
+
+/* s2 lab transverse */
+.roles2{margin-top:22px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.role2{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px}
+.role2 .nm{font:500 14.5px var(--sans)}
+.role2 .ds{margin-top:5px;font-size:12.5px;color:var(--muted);line-height:1.4}
+.rhythms{margin-top:18px;display:flex;gap:10px;flex-wrap:wrap;font:12px var(--mono);color:var(--muted)}
+.rhythms span{border:1px dashed var(--line);border-radius:999px;padding:5px 11px}
+.macro3{margin-top:20px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.macro3 .m{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px}
+.macro3 .m .k{font:11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--acc)}
+.macro3 .m .d{margin-top:5px;font-size:12.5px;color:var(--muted);line-height:1.4}
+.warn{margin-top:18px;font-size:13.5px;color:var(--text);border-left:2px solid var(--red);padding-left:12px;max-width:62ch;line-height:1.45}
+@media (max-width:860px){ .macro3{grid-template-columns:1fr} }
+
+/* s3 fondations */
+.layers{margin-top:22px;display:flex;flex-direction:column;gap:6px}
+.layer{display:grid;grid-template-columns:150px 1fr;gap:12px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:11px 14px;align-items:start}
+.layer .lk{font:500 12px var(--mono);letter-spacing:.04em;color:var(--acc)}
+.layer .ld{font-size:12.5px;color:var(--muted);line-height:1.45}
+.layer .ld b{color:var(--text);font-weight:500}
+.foundaxes{margin-top:16px;display:flex;gap:9px;flex-wrap:wrap}
+.foundaxes span{font:11.5px var(--mono);border:1px solid var(--line);border-radius:999px;padding:5px 11px;color:var(--muted)}
+.motto2{margin-top:16px;font:400 clamp(15px,1.6vw,19px)/1.4 var(--mono);color:var(--text);max-width:48ch}
+@media (max-width:760px){ .layer{grid-template-columns:1fr} }
+
+/* s4 comité valorisation */
+.vgrid{margin-top:20px;display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.vcol .sl{font:11px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-bottom:8px}
+.vcol ul{margin:0;padding-left:16px;font-size:13px;line-height:1.55;color:var(--muted)}
+.vcol ul b{color:var(--text);font-weight:500}
+.gauges{display:flex;flex-direction:column;gap:10px;margin-top:4px}
+.gauge .gl{display:flex;justify-content:space-between;font-size:12.5px;color:var(--muted);margin-bottom:4px}
+.gauge .gl b{color:var(--text);font-weight:500;font-family:var(--mono)}
+.gauge .gt{height:8px;border-radius:5px;background:var(--off);overflow:hidden}
+.gauge .gt i{display:block;height:100%;background:var(--acc);border-radius:5px}
+.gauge .gn{margin-top:3px;font-size:11.5px;color:var(--faint)}
+@media (max-width:860px){ .vgrid{grid-template-columns:1fr} }
+
+/* s5 ce qui tourne (socles) — compact: 2 columns of pills per state, so the
+   7-item "en service" group stacks in height instead of width, keeping the
+   whole scene inside one 1280×800 screen */
+.pillars{margin-top:22px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;align-items:start}
+.pillar h3{margin:0 0 3px;font:500 13.5px var(--mono);letter-spacing:-.01em}
+.pillar .pd{margin:0 0 10px;font-size:12px;color:var(--muted);line-height:1.35}
+.pgroup{margin-bottom:8px}
+.pgroup .gl{font:10px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-bottom:4px;display:flex;align-items:center;gap:7px}
+.pgroup .gl .n{color:var(--text);font-weight:500}
+.pills{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px}
+.pill{display:flex;flex-direction:column;gap:1px;border:1px solid var(--line);border-left:3px solid var(--c);border-radius:7px;padding:4px 8px;background:var(--panel)}
+.pill .nm{font:500 11.5px var(--sans);color:var(--text)}
+.pill.retired .nm{text-decoration:line-through;color:var(--faint)}
+.pill .nt{font-size:10.5px;color:var(--muted);line-height:1.25}
+.legend{margin-top:10px;display:flex;gap:12px;flex-wrap:wrap;font:10px var(--mono);color:var(--faint)}
+.legend span::before{content:"";display:inline-block;width:9px;height:9px;margin-right:6px;vertical-align:-1px;border-radius:2px;background:var(--c)}
+@media (max-width:860px){ .pillars{grid-template-columns:1fr} }
+@media (max-width:480px){ .pills{grid-template-columns:1fr} }
+.flowwrap{margin-top:22px;overflow-x:auto}
+#flow{width:100%;min-width:640px;height:auto;display:block}
+#flow .box rect{fill:var(--panel);stroke:var(--line);stroke-width:1.2}
+#flow .box.core rect{stroke:var(--acc)}
+#flow .box text.t{fill:var(--text);font:500 12.5px var(--sans)}
+#flow .box text.s{fill:var(--muted);font:10.5px var(--mono)}
+#flow .arrow{stroke:var(--line);stroke-width:1.4;fill:none;marker-end:url(#arrow)}
+#flow .looplabel{fill:var(--faint);font:10px var(--mono);letter-spacing:.08em;text-transform:uppercase}
+.livewrap{margin-top:20px}
+.livewrap .sl{font:11px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-bottom:8px}
+.livestrip{display:flex;flex-wrap:wrap;gap:8px}
+.lv{font-size:12px;border-radius:999px;padding:6px 12px;border:1px solid var(--line);color:var(--muted);display:flex;gap:7px;align-items:center}
+.lv i{width:7px;height:7px;border-radius:50%;background:var(--c)}
+@media (max-width:860px){ .vgrid,.gauges{grid-template-columns:1fr} }
+
+/* s7 agents */
+.aintro{margin-top:20px;max-width:70ch;font-size:13.5px;line-height:1.5;color:var(--muted)}
+.aintro b{color:var(--text);font-weight:500}
+.acards{margin-top:18px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.acard{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:7px}
+.acard .en{font:11px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--acc)}
+.acard .nm{font:500 14.5px var(--sans)}
+.acard .ds{font-size:12.5px;color:var(--muted);line-height:1.4}
+.guard{margin-top:18px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;border-top:1px solid var(--line);padding-top:14px}
+.guard div{font-size:12px;color:var(--muted);line-height:1.4;padding-left:12px;border-left:2px solid var(--blue)}
+.bigrow{margin-top:20px;display:flex;gap:26px;flex-wrap:wrap;align-items:baseline}
+.bigrow .b{min-width:110px}
+.bigrow .b b{display:block;font:500 clamp(26px,2.8vw,38px) var(--mono);color:var(--acc);letter-spacing:-.02em}
+.bigrow .b span{font-size:12px;color:var(--muted)}
+.aquote{margin:14px 0 0;font:400 clamp(15px,1.6vw,19px)/1.35 var(--mono);letter-spacing:-.01em;max-width:46ch;color:var(--text)}
+@media (max-width:860px){ .acards,.guard{grid-template-columns:1fr} }
+
+/* s8 ce qui arrive 2027 */
+.rtablewrap{margin-top:14px;overflow-x:auto}
+table.rt{width:100%;min-width:680px;border-collapse:collapse;font-size:12.5px}
+table.rt th{text-align:left;font:10.5px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--faint);padding:0 12px 7px 0;border-bottom:1px solid var(--line)}
+table.rt td{padding:7px 12px 7px 0;border-bottom:1px solid var(--line);vertical-align:top;color:var(--muted);line-height:1.35}
+table.rt td.axe{color:var(--text);font-weight:500;white-space:nowrap}
+.pistepill{display:inline-flex;margin-top:10px;font:11px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--amber);border:1px solid color-mix(in srgb, var(--amber) 45%, transparent);border-radius:999px;padding:5px 12px}
+.corrwrap{margin-top:12px}
+.corrwrap .sl{font:11px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-bottom:8px}
+table.corr{width:100%;min-width:560px;border-collapse:collapse;font-size:12.5px}
+table.corr td{padding:5px 12px 5px 0;border-bottom:1px solid var(--line);vertical-align:top;color:var(--muted);line-height:1.3}
+table.corr td.ceo{color:var(--text);font-weight:500;white-space:nowrap}
+
+/* s9 cible 12-24 mois */
+.shift{margin-top:14px;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.shift .sc{border-top:2px solid var(--acc);padding-top:9px}
+.shift .sc .sl{font:11px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-bottom:6px}
+.shift .sc p{margin:0;font-size:13px;color:var(--muted);line-height:1.5}
+.targets{margin-top:10px;display:flex;flex-direction:column;gap:5px}
+.targets div{font-size:13px;color:var(--text);line-height:1.4;padding-left:14px;border-left:2px solid var(--blue)}
+.kpi-note{margin-top:12px;font-size:12px;color:var(--faint);line-height:1.4;max-width:60ch}
+.prereqs{margin-top:10px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.preq{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:9px 10px}
+.preq .k{font:11px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--amber)}
+.preq .d{margin-top:5px;font-size:12px;color:var(--muted);line-height:1.4}
+.indicators{margin-top:10px;display:flex;flex-wrap:wrap;gap:6px;font-size:11.5px;color:var(--muted)}
+.indicators span{border:1px dashed var(--line);border-radius:999px;padding:5px 10px}
+@media (max-width:860px){ .shift,.prereqs{grid-template-columns:1fr} }
+
+/* s10 cartographie process */
+.procstats{margin-top:20px;display:flex;gap:26px;flex-wrap:wrap}
+.procstats .p{min-width:110px}
+.procstats .p b{display:block;font:500 clamp(24px,2.6vw,34px) var(--mono);color:var(--acc);letter-spacing:-.02em}
+.procstats .p span{font-size:12px;color:var(--muted)}
+.procnote{margin-top:16px;max-width:66ch;font-size:13px;color:var(--muted);line-height:1.5}
+.procnote b{color:var(--text);font-weight:500}
+
+/* mapping */
+.mapwrap{margin-top:14px;display:flex;flex-direction:column;gap:6px}
+.maprow{display:grid;grid-template-columns:140px 1fr;gap:12px;border-top:1px solid var(--line);padding-top:7px}
+.maprow .v0{font:500 11px var(--mono);color:var(--faint)}
+.maprow .v0 .nm{display:block;margin-top:2px;font:500 12.5px var(--sans);color:var(--text)}
+.chips{display:flex;flex-wrap:wrap;gap:5px;align-items:center}
+.chip{font-size:11px;line-height:1.25;border-radius:999px;padding:4px 10px;border:1px solid var(--line);color:var(--muted)}
+a.chip{text-decoration:none;color:var(--text);border-color:color-mix(in srgb, var(--acc) 45%, transparent);background:color-mix(in srgb, var(--acc) 8%, var(--panel))}
+a.chip:hover,a.chip:focus-visible{border-color:var(--acc);outline:none}
+.chip.anchor{color:var(--blue);border-color:color-mix(in srgb, var(--blue) 45%, transparent)}
+.chip em{font-style:normal;margin-left:6px;font:10.5px var(--mono);color:var(--faint)}
+.chip.none{color:var(--faint);border-style:dashed}
+
+/* verify */
+.checks{margin-top:20px;display:flex;flex-direction:column;gap:9px;max-width:72ch}
+.chk{display:grid;grid-template-columns:18px 1fr;gap:10px;font-size:13.5px;line-height:1.5;color:var(--text)}
+.chk::before{content:"";width:9px;height:9px;margin-top:6px;border-radius:2px;border:1.5px solid var(--amber)}
+.srcwrap{margin-top:20px;border-top:1px solid var(--line);padding-top:12px}
+.srcwrap .sl{font:11px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-bottom:8px}
+.srcwrap ul{margin:0;padding-left:18px;font-size:12.5px;line-height:1.6;color:var(--muted)}
+
+@media (max-width:640px){ .scene{padding:44px 16px 72px} }
+@media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} }
+</style>
+<!--garden-theme:start-->
+<script>
+(function(){
+  var q = null; try { q = new URLSearchParams(location.search).get("theme"); } catch (e) {}
+  var h = location.hostname || "";
+  var dark = (q === "dark" || q === "light") ? q === "dark"
+    : (location.protocol === "file:" || /(^|\.)run\.app$/.test(h) || h === "localhost" || h === "127.0.0.1");
+  var want = dark ? "dark" : "light";
+  document.documentElement.setAttribute("data-garden-theme", want);
+  var RX = /\(\s*prefers-color-scheme\s*:\s*(dark|light)\s*\)/gi;
+  function rewrite(text){
+    return text.split(",").map(function(item){
+      var off = false;
+      var out = item.replace(RX, function(_, m){ if (m.toLowerCase() !== want) off = true; return "(min-width:0px)"; });
+      return off ? "not all" : out.trim();
+    }).join(", ");
+  }
+  function fix(rules){
+    for (var i = 0; i < rules.length; i++){
+      var r = rules[i];
+      if (r.media && r.media.mediaText && /prefers-color-scheme/i.test(r.media.mediaText)) r.media.mediaText = rewrite(r.media.mediaText);
+      if (r.cssRules) fix(r.cssRules);
+    }
+  }
+  var done = new WeakSet();
+  function all(){
+    for (var i = 0; i < document.styleSheets.length; i++){
+      var sh = document.styleSheets[i]; if (done.has(sh)) continue;
+      try { fix(sh.cssRules); done.add(sh); } catch (e) {}
+    }
+  }
+  var mm = window.matchMedia && window.matchMedia.bind(window);
+  if (mm) window.matchMedia = function(query){
+    var m = /prefers-color-scheme\s*:\s*(dark|light)/i.exec(query || "");
+    if (!m) return mm(query);
+    return { matches: m[1].toLowerCase() === want, media: query, onchange: null,
+      addListener: function(){}, removeListener: function(){}, addEventListener: function(){},
+      removeEventListener: function(){}, dispatchEvent: function(){ return false; } };
+  };
+  all();
+  document.addEventListener("DOMContentLoaded", all);
+  window.addEventListener("load", all);
+})();
+</script>
+<!--garden-theme:end-->
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<div class="brand">LAB <i>·</i> CA 23/11 <i>·</i> garden</div>
+<nav class="hud" aria-label="Navigation des diapositives">
+  <span><b id="cur">01</b> / <span id="tot">13</span></span>
+  <button id="prev" aria-label="Diapositive précédente">↑</button>
+  <button id="next" aria-label="Diapositive suivante">↓</button>
+</nav>
+
+<main>
+
+<section class="scene" id="s0" aria-label="Couverture">
+  <p class="eyebrow" id="c-eyebrow"></p>
+  <h1 id="c-title"></h1>
+  <p class="lede" id="c-sub"></p>
+  <div class="tags" id="c-tags"></div>
+</section>
+
+<section class="scene" id="s1" aria-label="Pourquoi">
+  <p class="eyebrow">01 · Pourquoi</p>
+  <h2>Absorber la complexité sans perdre la maîtrise.</h2>
+  <p class="lede" id="p1-enjeu"></p>
+  <div class="ctxrow" id="p1-ctx"></div>
+  <div class="measured" id="p1-measured"></div>
+</section>
+
+<section class="scene" id="s2" aria-label="Le Lab, fonction transverse">
+  <p class="eyebrow">02 · Le Lab</p>
+  <h2>Une fonction transverse, pas une équipe à côté.</h2>
+  <div class="roles2" id="p2-roles"></div>
+  <div class="rhythms" id="p2-rhythms"></div>
+  <p class="note" style="margin-top:20px;color:var(--faint);text-transform:uppercase;letter-spacing:.1em;font-size:11px">Trois macro-process (créés le 08/10/2026)</p>
+  <div class="macro3" id="p2-macro"></div>
+  <p class="warn" id="p2-warn"></p>
+</section>
+
+<section class="scene" id="s3" aria-label="Les fondations">
+  <p class="eyebrow">03 · Les fondations</p>
+  <h2>Une donnée, un référentiel, une piste d'audit.</h2>
+  <p class="motto2" id="p3-motto"></p>
+  <div class="layers" id="p3-layers"></div>
+  <div class="foundaxes" id="p3-axes"></div>
+</section>
+
+<section class="scene" id="s4" aria-label="Exemple concret : le comité de valorisation">
+  <p class="eyebrow">04 · Exemple concret</p>
+  <h2>Le comité de valorisation, vu depuis la base.</h2>
+  <p class="lede" id="p4-lede"></p>
+  <div class="vgrid">
+    <div class="vcol">
+      <p class="sl">Ce que la base révèle</p>
+      <div class="gauges" id="p4-gauges"></div>
+    </div>
+    <div class="vcol">
+      <p class="sl">Avant / après</p>
+      <ul id="p4-avant"></ul>
+      <p class="sl" style="margin-top:14px">À confirmer</p>
+      <ul id="p4-confirm"></ul>
+      <p class="sl" style="margin-top:14px">Corrections pour le S2</p>
+      <ul id="p4-corr"></ul>
+    </div>
+  </div>
+</section>
+
+<section class="scene dense" id="s5" aria-label="Ce qui tourne déjà — les deux socles">
+  <p class="eyebrow">05 · Ce qui tourne déjà</p>
+  <h2>Deux socles techniques, par état.</h2>
+  <div class="pillars" id="pillars"></div>
+  <div class="legend" id="legend"></div>
+</section>
+
+<section class="scene" id="s6" aria-label="Le fil d'une candidature">
+  <p class="eyebrow">06 · Le fil d'une candidature</p>
+  <h2>De Typeform à la base Notion, puis la boucle qui gouverne le formulaire.</h2>
+  <div class="flowwrap">
+    <svg id="flow" viewBox="0 0 1180 300" role="img" aria-label="Flux d'une candidature : Typeform, Herald, Intake Bee Network, Startups Pool, puis la boucle Forms Control Center"></svg>
+  </div>
+  <p class="note" id="loopnote"></p>
+  <div class="livewrap">
+    <p class="sl">Relecture de la liste Live</p>
+    <div class="livestrip" id="livestrip"></div>
+  </div>
+</section>
+
+<section class="scene" id="s7" aria-label="Meet our agents">
+  <p class="eyebrow">07 · Meet our agents</p>
+  <h2>Des services déterministes, pas des agents génératifs.</h2>
+  <p class="aintro" id="a-intro"></p>
+  <div class="acards" id="a-cards"></div>
+  <div class="guard" id="a-guard"></div>
+  <div class="bigrow" id="a-big"></div>
+  <p class="aquote" id="a-quote"></p>
+</section>
+
+<section class="scene dense" id="s8" aria-label="Ce qui arrive en 2027">
+  <p class="eyebrow">08 · Ce qui arrive en 2027</p>
+  <h2>Six axes à nous, et la liste 2027 de la direction.</h2>
+  <div class="rtablewrap">
+    <table class="rt">
+      <thead><tr><th>Axe</th><th>Prochaine étape</th><th>Condition</th></tr></thead>
+      <tbody id="roadmap-body"></tbody>
+    </table>
+  </div>
+  <span class="pistepill">Ce sont des pistes, pas des engagements</span>
+  <div class="corrwrap">
+    <p class="sl">Correspondance avec la liste 2027 de la direction</p>
+    <table class="corr"><tbody id="corr-body"></tbody></table>
+  </div>
+</section>
+
+<section class="scene dense" id="s9" aria-label="Digital Africa dans 12 à 24 mois">
+  <p class="eyebrow">09 · Digital Africa dans 12 à 24 mois</p>
+  <h2>Une cible conditionnée, pas un engagement.</h2>
+  <div class="shift" id="p8-shift"></div>
+  <p class="sl" style="margin-top:14px;font:11px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--faint)">Cible (horizon, pas engagement)</p>
+  <div class="targets" id="p8-targets"></div>
+  <p class="kpi-note" id="p8-kpinote"></p>
+  <p class="sl" style="margin-top:12px;font:11px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--faint)">Quatre prérequis</p>
+  <div class="prereqs" id="p8-prereqs"></div>
+  <p class="sl" style="margin-top:12px;font:11px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--faint)">Indicateurs</p>
+  <div class="indicators" id="p8-indicators"></div>
+</section>
+
+<section class="scene" id="s10" aria-label="Cartographie des process">
+  <p class="eyebrow">10 · Cartographie des process</p>
+  <h2>Un macro-process du Lab qui en cachait trois.</h2>
+  <div class="procstats" id="p9-stats"></div>
+  <p class="procnote" id="p9-note"></p>
+  <p class="sl" style="margin-top:16px;font:11px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--faint)">Indicateurs</p>
+  <div class="indicators" id="p9-indicators"></div>
+</section>
+
+<section class="scene dense" id="s11" aria-label="Où se placent mes productions">
+  <p class="eyebrow">11 · Où se placent mes productions</p>
+  <h2>Ce qui sert déjà chaque diapositive, dans le garden.</h2>
+  <p class="lede" style="margin-top:10px;font-size:13px">Un lien ouvre un support déjà publié (lab). Les autres titres sont <b>proposés</b> ou <b>à produire</b>.</p>
+  <div class="mapwrap" id="mapwrap"></div>
+</section>
+
+<section class="scene" id="s12" aria-label="À vérifier avant le CA">
+  <p class="eyebrow">12 · À vérifier avant le CA</p>
+  <h2>Ce qui peut bouger entre le relevé et le 23/11.</h2>
+  <div class="checks" id="checks"></div>
+  <div class="srcwrap">
+    <p class="sl">Sources</p>
+    <ul id="sources"></ul>
+  </div>
+</section>
+
+</main>
+
+<script>
+const __DATA__ = {"cover":{"eyebrow":"Digital Africa · Lab","date":"Relevé du 08/10/2026 · CA du 23/11/2026","title":"Le Lab au CA — réponse à la proposition initiale","sub":"Pourquoi, comment, ce qui tourne déjà, ce qui arrive — et la place des productions du garden dans ce récit.","tags":["Puppy","UI Platform","Garden"]},"p1":{"enjeu":"Ne plus reconstruire l'information à chaque échéance, prouver chaque décision.","ctx":[{"v":"~25","k":"personnes"},{"v":"76","k":"participations"},{"v":"2","k":"véhicules"},{"v":"4 à 6","k":"bailleurs"},{"v":"—","k":"statut AMF","note":"à sourcer"}],"semesters":[{"l":"2024-S2","v":47},{"l":"2025-S1","v":57},{"l":"2025-S2","v":53},{"l":"2026-S1","v":76}],"measured":[{"t":"Valorisation","d":"<b>233 fiches</b> sur 4 semestres, toutes reliées au Startups Pool."},{"t":"Bee Network","d":"<b>34 bases</b>, <b>20 443 fiches</b> relues (30/09)."},{"t":"Discovery été","d":"<b>8 fiches d'entretiens</b>, <b>112 insights</b>, <b>9 chantiers</b>."}],"barcap":"Une information saisie une fois, réutilisée partout."},"p2":{"roles":[{"n":"Directrice des programmes","d":"Pilotage, Comex, arbitrage de la roadmap."},{"n":"Product Manager","d":"Usages, conception, conduite du changement."},{"n":"Data engineer","d":"Architecture et qualité des données, Puppy et UI Platform, sécurité, maintenance."},{"n":"CEO sponsor","d":""}],"rhythms":["comité Lab hebdomadaire","roadmap trimestrielle","Discovery"],"macro":[{"k":"Interventions","d":"Besoin d'équipe → produit livré, testé, présenté."},{"k":"Exploitation de la plateforme","d":"Changement ou dérive → plateforme conforme."},{"k":"Accès et outils","d":"Entrée/sortie d'une personne ou d'un outil → droits et registre à jour."}],"warn":"Point d'attention : Puppy et UI Platform reposent sur une seule personne."},"p3":{"motto":"D'abord données et process, l'IA vient après.","layers":[{"k":"Sources","d":"Typeform et Notion via <b>Herald</b> ; Visible ; Drive via <b>Archiver</b> ; Pennylane et Spendesk cadrés en lecture seule, pas branchés."},{"k":"Référentiels","d":"Startups Pool, colonne vertébrale. <b>26 bases</b> sous contrat de schéma, <b>137 relations</b>, <b>211 rollups</b> ; tri du 16/09 : <b>24 à garder</b>, <b>12 à investiguer</b>, <b>17 retirées</b>."},{"k":"Gouvernance","d":"Bee Network · Control Center, Forms Control Center, coffre Bitwarden et process d'accès."},{"k":"Documentation","d":"Pages : <b>106 pages</b>, <b>50 étiquettes</b>, <b>7 centres</b> au 05/10."},{"k":"Services","d":"Puppy."},{"k":"Usages","d":"Comité de valorisation, Forms Control Center, digests."}],"axes":["Compliant by Design","Process in Notion","Startups Radar"]},"p4":{"lede":"2026-S1 : <b>76 fiches</b>, toutes reliées au Startups Pool, <b>72 validées</b> avec PV renseigné.","gauges":[{"k":"Justification renseignée","n":20,"d":76,"note":""},{"k":"Runway présent","n":37,"d":76,"note":"runway absent sur 39/76"},{"k":"Résumé Visible","n":41,"d":76,"note":"contre 52/57 en 2025-S1"}],"avant":["<b>Avant</b> : un tableur reconstruit à chaque comité.","<b>Après</b> : une base reliée, des vues par rôle (Invest, Plateforme, Admin)."],"historique":"Historique : 233 fiches.","confirm":["Qui produit le PV.","Comment se calculent les décotes."],"corrections":["Justification obligatoire si variation.","Relance du runway via Visible.","Contrôle de complétude avant le comité."]},"pillars":{"puppy":{"name":"Puppy","desc":"Services sur Google Cloud reliés par un bus d'événements ; une seule porte d'entrée, Herald.","groups":[{"state":"service","label":"En service","n":7,"items":[{"name":"Herald","note":"porte d'entrée des webhooks Typeform et Notion, signature vérifiée, copie brute conservée 730 jours"},{"name":"Intake Bee Network","note":"candidatures vers le Startups Pool"},{"name":"Forms Operator","note":"publie et met en pause les Typeform depuis les approbations Notion"},{"name":"FCC Notifier","note":"digests Form Owner quotidien et Sponsor hebdomadaire, depuis le 30/09"},{"name":"Archiver","note":"archivage de documents à la demande"},{"name":"Identity","note":""},{"name":"Feature flags","note":""}]},{"state":"dev","label":"En développement","n":1,"items":[{"name":"Bee Reconciler","note":""}]},{"state":"designed","label":"Conçus, non construits","n":3,"items":[{"name":"Audit Packet Builder","note":"axe Compliant by Design"},{"name":"Missing Evidence Checker","note":"axe Compliant by Design"},{"name":"Stale Protocol Detector","note":"axe Compliant by Design"}]},{"state":"retired","label":"À retirer","n":11,"items":[{"name":"Ancienne chaîne d'entrée","note":"4 services, remplacés par Herald"},{"name":"Connecteurs jamais branchés","note":"Notion, Pennylane, Spendesk — 3 connecteurs"},{"name":"Explorateurs de registres","note":"4 explorateurs sans trafic"}]}]},"ui":{"name":"UI Platform","desc":"Les interfaces.","items":[{"name":"Garden","state":"service","note":"accès privé — galerie interne des supports"},{"name":"Jobs","state":"service","note":"figé depuis mars — offres d'emploi"},{"name":"Fuzé","state":"dev","note":"portail public de candidature Bee Network, Typeform intégré sur /apply"},{"name":"AI4SU","state":"paused","note":"en pause — programme clos le 31/03"}]}},"flow":{"main":[{"name":"Typeform","sub":"formulaire de candidature"},{"name":"Herald","sub":"signature vérifiée, copie brute 730 j","core":true},{"name":"Intake Bee Network","sub":"enregistre la candidature"},{"name":"Startups Pool","sub":"base Notion"}],"loop":["Approbation dans Notion (Release Approver)","Forms Operator — une action à la fois sur Typeform","FCC Notifier — digest au responsable"]},"loopnote":"Forms Operator et FCC Notifier referment la boucle du Forms Control Center : une approbation dans Notion devient une action sur Typeform, une à la fois ; les responsables reçoivent leur digest.","livestrip":[{"k":"Candidatures → fiche","v":"oui","c":"ok"},{"k":"Base Valorisation","v":"oui","c":"ok"},{"k":"Synchronisation des sources","v":"partielle","c":"amber"},{"k":"Data room automatique","v":"non identifiée","c":"faint"},{"k":"Onboarding","v":"dormant","c":"faint"},{"k":"Orchestration bee_network","v":"ancienne chaîne, à retirer","c":"red"},{"k":"Paiements et contrats","v":"en cadrage","c":"amber"}],"agents":{"intro":"Les « agents » de Digital Africa sont aujourd'hui des <b>services déterministes</b> : même règle à chaque exécution, sans IA générative.","cards":[{"name":"Herald","role":"contrôler et orienter","desc":"Vérifie la signature de chaque webhook Typeform et Notion, décide où l'événement part."},{"name":"Intake Bee Network","role":"enregistrer","desc":"913 requêtes sur la période observée. Incident d'erreurs de septembre résolu — rapport GCP du 05/10."},{"name":"Forms Operator + FCC Notifier","role":"la boucle Forms Control Center","desc":"Une approbation dans Notion devient une action sur Typeform ; les responsables reçoivent leur digest."}],"guard":["Une fiche déclarative par service, configuration dérivée","Contrôles systématiques avant tout déploiement","Un compte et des droits minimaux par service","Secrets dans Secret Manager","Un identifiant de suivi de bout en bout","Aucune modification manuelle en production"],"big":[{"v":"26","k":"inscrits au registre"},{"v":"7","k":"en service"},{"v":"0","k":"IA générative en production"}],"quote":"L'IA sert aujourd'hui à construire les outils, pas à les faire tourner."},"roadmap":{"rows":[{"axe":"Compliant by Design","next":"Construire les 3 agents de preuve","cond":"Règles de preuve validées par les métiers"},{"axe":"Finance et contrats","next":"Connecteurs Pennylane et Spendesk en lecture seule","cond":"Process d'accès validés (Pennylane validé ; Spendesk sous condition de titulaire et de budget)"},{"axe":"Startups Radar","next":"Bee Reconciler, fiches startup tenues à jour","cond":"Fin du nettoyage des bases"},{"axe":"Candidature","next":"Mise en ligne du portail Fuzé","cond":"Design System v3 appliqué"},{"axe":"AI-powered","next":"Lab Intake Advisor, premier assistant à IA générative","cond":"Test encadré, validation humaine, mesure de référence préalable"},{"axe":"Hygiène","next":"Retrait des 11 services morts ou anciens","cond":"≈ 17,50 €/mois économisés, surface de risque réduite"}]},"correspondance":[{"ceo":"Analyse de pitch / mémos","etat":"Axe AI-powered — à arbitrer"},{"ceo":"Archivage intelligent","etat":"Archiver existe ; le volet « intelligent » n'est pas engagé"},{"ceo":"Reporting LP / Comex","etat":"Dépend de la complétude des données"},{"ceo":"CRM synchronisé","etat":"Axes Startups Radar + Bee Reconciler"},{"ceo":"Due diligences","etat":"Non cadré"},{"ceo":"Reporting AEDIB","etat":"Chantier « reporting programmes »"}],"p8":{"shift":[{"k":"Les services prennent","d":"La collecte, la consolidation, les contrôles répétitifs."},{"k":"Les équipes gardent","d":"L'analyse, le jugement, l'accompagnement, les partenaires."}],"targets":["Comités préparés depuis les données saisies.","Reporting bailleurs depuis les bases, AEDIB en premier.","« Audit ready » via les agents de preuve.","Suivi contractuel avec alertes."],"kpinote":"« −30 % sur le cycle d'investissement » est un objectif Comex de Digital Africa — il n'est pas attribué au Lab.","prereqs":[{"k":"Dépendance à une personne","d":"Docs publiées ; rôles Schema Steward, Graph Warden, Architecture Approver vacants."},{"k":"Fiabilité des données","d":"Runway absent sur 39 fiches sur 76."},{"k":"Appropriation","d":"Rôles du Forms Control Center, digests."},{"k":"Sécurité","d":"Bitwarden, process d'accès, droits minimaux, retrait des 11 services."}],"indicators":["complétude de la valorisation par semestre","candidatures sans perte","délai approbation → action","services en service vs morts","postes de gouvernance pourvus","adoption par pôle (à instrumenter)"]},"p9":{"stats":[{"v":"17","k":"macro-process au registre"},{"v":"1","k":"relevait du Lab, mélangeait 3 déclencheurs"},{"v":"3","k":"macro-process Lab créés le 08/10"},{"v":"15","k":"lignes rattachées, dont 7 de l'entretien du 06/10"},{"v":"12","k":"pages du centre Lab non reliées à une ligne"}],"note":"Un seul macro-process relevait du Lab, et il mélangeait trois déclencheurs distincts. Trois macro-process ont été créés le 08/10/2026 pour les séparer : Interventions, Exploitation de la plateforme, Accès et outils.","indicators":["lignes avec owner et macro-process","process reliés à leur documentation","process reliés à un outil"]},"mapping":[{"v0":"Diapo 01","name":"Pourquoi","none":true},{"v0":"Diapo 02","name":"Le Lab, fonction transverse","prods":[{"title":"Lab — par où commencer","status":"proposée"},{"title":"Macro-process du Lab — trois déclencheurs","status":"proposée"}]},{"v0":"Diapo 03","name":"Les fondations","prods":[{"title":"Bee Network — un système gouverné","file":"bee-network-keynote.html"},{"title":"Bee Network Index","file":"bee-network-bases.html"},{"title":"Les deux rives du Bee Network","file":"bee-network-rives.html"},{"title":"La ville des bases","file":"bee-network-city.html"},{"title":"Joueurs du Bee Network","file":"bee-network-index.html"},{"title":"Maintenir une base externe","status":"proposée"},{"title":"Pages et Compass, mode d'emploi","status":"proposée"},{"title":"Bitwarden — coffre, par où commencer","status":"proposée"},{"title":"Bitwarden — la cérémonie de remise","status":"proposée"}]},{"v0":"Diapo 04","name":"Exemple : comité de valorisation","prods":[{"title":"Support dédié au comité de valorisation","status":"à produire"}]},{"v0":"Diapos 05-08","name":"Ce qui tourne · le fil · Meet our agents · 2027","prods":[{"title":"ce support (diapos 05-08)","anchor":"#s5"},{"title":"Bee Network — un système gouverné","file":"bee-network-keynote.html"},{"title":"Forms Control Center","file":"fcc-lab.html"},{"title":"Le capitaine du formulaire","file":"fcc-form-owner.html"},{"title":"Release Approver","status":"proposée"},{"title":"Maquette Design System v1","file":"ds-design-system-company.html"},{"title":"Maquette Design System v2","file":"ds-design-system-company-v2.html"},{"title":"Maquette Design System v3","file":"ds-design-system-company-v3.html"}]},{"v0":"Diapo 09","name":"Digital Africa dans 12-24 mois","prods":[{"title":"RGPD du Forms Control Center","status":"proposée"},{"title":"Bitwarden — coffre et cérémonie de remise","status":"proposée"}]},{"v0":"Diapo 10","name":"Cartographie des process","prods":[{"title":"Macro-process du Lab — trois déclencheurs","status":"proposée"}]}],"checklist":{"items":["Relevé GCP en direct — dernier relevé au 05/10 ; FCC Notifier trop récent pour y figurer","Statut des fiches Missing Evidence Checker et Stale Protocol Detector","Fuzé pas encore versionné","Chiffres de contexte de la diapo 01 (effectifs, participations, véhicules, bailleurs, statut AMF) à sourcer","Qui produit le PV du comité de valorisation, à confirmer"],"sources":["Page « Puppy as platform »","Page « Herald »","Page « Audit Packet Builder »","registre des services Puppy","rapport GCP du 05/10","base Valorisation (233 fiches, 4 semestres)","registre des macro-process · cartographie des process (entretien du 06/10)","Pages et Compass (05/10)","Discovery été 2026"]}};
+const K = __DATA__;
+const GBASE = "";
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const STATE_COL = {service:"var(--acc)", dev:"var(--blue)", designed:"var(--amber)", retired:"var(--faint)", paused:"var(--amber)"};
+const STATE_LABEL = {service:"en service", dev:"en développement", designed:"conçu", retired:"à retirer", paused:"en pause"};
+const LV_COL = {ok:"var(--acc)", amber:"var(--amber)", red:"var(--red)", faint:"var(--faint)"};
+
+// cover
+$("#c-eyebrow").innerHTML = esc(K.cover.eyebrow) + " <span class=\"mono\">·</span> " + esc(K.cover.date);
+$("#c-title").textContent = K.cover.title;
+$("#c-sub").textContent = K.cover.sub;
+$("#c-tags").innerHTML = K.cover.tags.map(t => `<span>${esc(t)}</span>`).join("");
+
+// s1 — pourquoi
+$("#p1-enjeu").innerHTML = "<b>Enjeu.</b> " + esc(K.p1.enjeu);
+$("#p1-ctx").innerHTML = K.p1.ctx.map(c => `<div class="ctx"><b>${esc(c.v)}</b><span>${esc(c.k)}</span>${c.note ? `<em>${esc(c.note)}</em>` : ""}</div>`).join("");
+const maxSem = Math.max(...K.p1.semesters.map(s => s.v));
+const BAR_MAX_PX = 60;
+let measuredHtml = `<div class="mcard"><b>Valorisation — par semestre</b><div class="bars">${K.p1.semesters.map(s => `<div class="bar"><i style="height:${Math.max(3, Math.round(s.v/maxSem*BAR_MAX_PX))}px"></i><span>${s.v}</span><span>${esc(s.l)}</span></div>`).join("")}</div><p class="barcap">${esc(K.p1.barcap)}</p></div>`;
+measuredHtml += K.p1.measured.slice(1).map(m => `<div class="mcard"><b>${esc(m.t)}</b><p>${m.d}</p></div>`).join("");
+$("#p1-measured").innerHTML = measuredHtml;
+
+// s2 — le Lab
+$("#p2-roles").innerHTML = K.p2.roles.map(r => `<div class="role2"><div class="nm">${esc(r.n)}</div>${r.d ? `<div class="ds">${esc(r.d)}</div>` : ""}</div>`).join("");
+$("#p2-rhythms").innerHTML = K.p2.rhythms.map(r => `<span>${esc(r)}</span>`).join("");
+$("#p2-macro").innerHTML = K.p2.macro.map(m => `<div class="m"><div class="k">${esc(m.k)}</div><div class="d">${esc(m.d)}</div></div>`).join("");
+$("#p2-warn").textContent = K.p2.warn;
+
+// s3 — fondations
+$("#p3-motto").textContent = K.p3.motto;
+$("#p3-layers").innerHTML = K.p3.layers.map(l => `<div class="layer"><span class="lk">${esc(l.k)}</span><span class="ld">${l.d}</span></div>`).join("");
+$("#p3-axes").innerHTML = K.p3.axes.map(a => `<span>${esc(a)}</span>`).join("");
+
+// s4 — comité de valorisation
+$("#p4-lede").innerHTML = K.p4.lede;
+$("#p4-gauges").innerHTML = K.p4.gauges.map(g => `<div class="gauge"><div class="gl"><span>${esc(g.k)}</span><b>${g.n}/${g.d}</b></div><div class="gt"><i style="width:${(g.n/g.d*100).toFixed(1)}%"></i></div>${g.note ? `<div class="gn">${esc(g.note)}</div>` : ""}</div>`).join("");
+$("#p4-avant").innerHTML = K.p4.avant.map(a => `<li>${a}</li>`).join("") + `<li>${esc(K.p4.historique)}</li>`;
+$("#p4-confirm").innerHTML = K.p4.confirm.map(a => `<li>${esc(a)}</li>`).join("");
+$("#p4-corr").innerHTML = K.p4.corrections.map(a => `<li>${esc(a)}</li>`).join("");
+
+// s5 — pillars + flow + live strip
+function pill(it, state){
+  const cls = state === "retired" ? "pill retired" : "pill";
+  return `<div class="${cls}" style="--c:${STATE_COL[state]}"><span class="nm">${esc(it.name)}</span>${it.note ? `<span class="nt">${esc(it.note)}</span>` : ""}</div>`;
+}
+let pillsHtml = `<div class="pillar"><h3>${esc(K.pillars.puppy.name)}</h3><p class="pd">${esc(K.pillars.puppy.desc)}</p>`;
+pillsHtml += K.pillars.puppy.groups.map(g => `<div class="pgroup"><div class="gl"><span class="n">${g.n}</span> · ${esc(g.label)}</div><div class="pills">${g.items.map(it => pill(it, g.state)).join("")}</div></div>`).join("");
+pillsHtml += `</div>`;
+pillsHtml += `<div class="pillar"><h3>${esc(K.pillars.ui.name)}</h3><p class="pd">${esc(K.pillars.ui.desc)}</p><div class="pills">${K.pillars.ui.items.map(it => pill(it, it.state)).join("")}</div></div>`;
+$("#pillars").innerHTML = pillsHtml;
+$("#legend").innerHTML = Object.keys(STATE_LABEL).filter(s => s !== "paused").map(s => `<span style="--c:${STATE_COL[s]}">${STATE_LABEL[s]}</span>`).join("");
+(function(){
+  const svg = $("#flow");
+  const defs = `<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--line)"/></marker></defs>`;
+  const w = 260, gap = 40, y = 30, h = 72;
+  let main = "";
+  K.flow.main.forEach((n, i) => {
+    const x = i * (w + gap);
+    main += `<g class="box ${n.core ? "core" : ""}" transform="translate(${x},${y})">
+      <rect width="${w}" height="${h}" rx="10"/>
+      <text class="t" x="16" y="28">${esc(n.name)}</text>
+      <text class="s" x="16" y="48">${esc(n.sub)}</text>
+    </g>`;
+    if (i < K.flow.main.length - 1) main += `<path class="arrow" d="M${x + w},${y + h/2} L${x + w + gap},${y + h/2}"/>`;
+  });
+  const loopY = y + h + 56;
+  let loop = `<text class="looplabel" x="0" y="${loopY - 12}">Boucle Forms Control Center</text>`;
+  const lw = 340, lgap = 32;
+  K.flow.loop.forEach((t, i) => {
+    const x = i * (lw + lgap);
+    loop += `<g class="box" transform="translate(${x},${loopY})">
+      <rect width="${lw}" height="52" rx="10"/>
+      <text class="t" x="14" y="22" style="font-size:12px">${esc(t)}</text>
+    </g>`;
+    if (i < K.flow.loop.length - 1) loop += `<path class="arrow" d="M${x + lw},${loopY + 26} L${x + lw + lgap},${loopY + 26}"/>`;
+  });
+  svg.setAttribute("viewBox", `0 0 ${Math.max(K.flow.main.length * (w + gap), K.flow.loop.length * (340 + 32))} ${loopY + 72}`);
+  svg.innerHTML = defs + main + loop;
+})();
+$("#loopnote").innerHTML = K.loopnote;
+$("#livestrip").innerHTML = K.livestrip.map(l => `<div class="lv" style="--c:${LV_COL[l.c]}"><i></i>${esc(l.k)} — ${esc(l.v)}</div>`).join("");
+
+// s6 — agents
+$("#a-intro").innerHTML = K.agents.intro;
+$("#a-cards").innerHTML = K.agents.cards.map(c => `<div class="acard"><span class="en">${esc(c.role)}</span><span class="nm">${esc(c.name)}</span><span class="ds">${esc(c.desc)}</span></div>`).join("");
+$("#a-guard").innerHTML = K.agents.guard.map(g => `<div>${esc(g)}</div>`).join("");
+$("#a-big").innerHTML = K.agents.big.map(b => `<div class="b"><b>${esc(b.v)}</b><span>${esc(b.k)}</span></div>`).join("");
+$("#a-quote").textContent = K.agents.quote;
+
+// s7 — ce qui arrive en 2027
+$("#roadmap-body").innerHTML = K.roadmap.rows.map(r => `<tr><td class="axe">${esc(r.axe)}</td><td>${esc(r.next)}</td><td>${esc(r.cond)}</td></tr>`).join("");
+$("#corr-body").innerHTML = K.correspondance.map(c => `<tr><td class="ceo">${esc(c.ceo)}</td><td>${esc(c.etat)}</td></tr>`).join("");
+
+// s8 — DA 12-24 mois
+$("#p8-shift").innerHTML = K.p8.shift.map(s => `<div class="sc"><div class="sl">${esc(s.k)}</div><p>${esc(s.d)}</p></div>`).join("");
+$("#p8-targets").innerHTML = K.p8.targets.map(t => `<div>${esc(t)}</div>`).join("");
+$("#p8-kpinote").textContent = K.p8.kpinote;
+$("#p8-prereqs").innerHTML = K.p8.prereqs.map(p => `<div class="preq"><div class="k">${esc(p.k)}</div><div class="d">${esc(p.d)}</div></div>`).join("");
+$("#p8-indicators").innerHTML = K.p8.indicators.map(i => `<span>${esc(i)}</span>`).join("");
+
+// s9 — cartographie des process
+$("#p9-stats").innerHTML = K.p9.stats.map(s => `<div class="p"><b>${esc(s.v)}</b><span>${esc(s.k)}</span></div>`).join("");
+$("#p9-note").innerHTML = K.p9.note;
+$("#p9-indicators").innerHTML = K.p9.indicators.map(i => `<span>${esc(i)}</span>`).join("");
+
+// s10 — mapping
+function prodChip(p){
+  if (p.file) return `<a class="chip" href="${GBASE}${esc(p.file)}" target="_blank" rel="noopener">${esc(p.title)}</a>`;
+  if (p.anchor) return `<a class="chip anchor" href="${esc(p.anchor)}">${esc(p.title)}</a>`;
+  return `<span class="chip">${esc(p.title)}<em>${esc(p.status)}</em></span>`;
+}
+$("#mapwrap").innerHTML = K.mapping.map(r => `<div class="maprow"><div class="v0">${esc(r.v0)}<span class="nm">${esc(r.name)}</span></div><div class="chips">${r.none ? `<span class="chip none">aucune production associée</span>` : r.prods.map(prodChip).join("")}</div></div>`).join("");
+
+// s11 — à vérifier
+$("#checks").innerHTML = K.checklist.items.map(i => `<div class="chk">${esc(i)}</div>`).join("");
+$("#sources").innerHTML = K.checklist.sources.map(s => `<li>${esc(s)}</li>`).join("");
+
+// nav — tall scenes (taller than the viewport) can never reach a 50%
+// IntersectionObserver threshold, so "current" is tracked by nearest-top
+// distance (works for any scene height) and keyboard/button presses set it
+// immediately, never waiting on a scroll-driven callback to catch up.
+const scenes = [...document.querySelectorAll(".scene")];
+$("#tot").textContent = String(scenes.length).padStart(2, "0");
+let current = 0;
+function setHud(i){
+  current = i;
+  $("#cur").textContent = String(i+1).padStart(2,"0");
+  $("#progress").style.width = ((i+1)/scenes.length*100)+"%";
+}
+function nearestScene(){
+  let best = 0, bestDist = Infinity;
+  scenes.forEach((s, i) => { const d = Math.abs(s.getBoundingClientRect().top); if (d < bestDist){ bestDist = d; best = i; } });
+  return best;
+}
+let scrollTick = false;
+addEventListener("scroll", () => {
+  if (scrollTick) return; scrollTick = true;
+  requestAnimationFrame(() => { scrollTick = false; setHud(nearestScene()); });
+}, {passive: true});
+const go = d => { const i = Math.max(0, Math.min(scenes.length-1, current+d)); setHud(i); scenes[i].scrollIntoView({behavior:"smooth"}); };
+$("#next").addEventListener("click", () => go(1));
+$("#prev").addEventListener("click", () => go(-1));
+addEventListener("keydown", e => {
+  if (["ArrowDown","ArrowRight","PageDown"," "].includes(e.key)){ e.preventDefault(); go(1); }
+  if (["ArrowUp","ArrowLeft","PageUp"].includes(e.key)){ e.preventDefault(); go(-1); }
+});
+setHud(0);
+</script>
+<!--notion-links:start-->
+<style>.nl{color:inherit;text-decoration:underline dotted;text-decoration-thickness:1px;text-underline-offset:3px;cursor:pointer}.nl::after{content:" \2197";font-size:.8em;opacity:.55}.nl:hover,.nl:focus-visible{text-decoration-style:solid;opacity:1;outline:none}.nl:hover::after{opacity:1}</style>
+<script>window.__NOTION_LINKS__ = [{"name": "Startups Pool", "url": "https://app.notion.com/p/67853899c6ff4e78aeb2f25b0875b601", "aliases": []}, {"name": "Zone Investment", "url": "https://app.notion.com/p/fe5715570ac747a4aa5452cc3cc9e628", "aliases": []}, {"name": "Zone Platform", "url": "https://app.notion.com/p/9c0c831726e34ff99de32607e779d2c3", "aliases": []}, {"name": "Founders", "url": "https://app.notion.com/p/13619a07ff444d05bbee168b31ff7260", "aliases": []}, {"name": "Memo", "url": "https://app.notion.com/p/96a2609ee4e44a01ae4841dd03672bc4", "aliases": []}, {"name": "Fundraise rounds", "url": "https://app.notion.com/p/2cb0fcf38494809793dfe911dbf79ead", "aliases": []}, {"name": "Our Terms", "url": "https://app.notion.com/p/2840fcf3849480218e57f942e78274e9", "aliases": []}, {"name": "CoInvest", "url": "https://app.notion.com/p/2e00fcf3849480298582c7bd72e3e332", "aliases": []}, {"name": "Valorisation", "url": "https://app.notion.com/p/2840fcf3849480d3b6eccb41715cbd71", "aliases": []}, {"name": "ACTIVATION ROADMAPS", "url": "https://app.notion.com/p/20f0fcf3849480cea08ac121ee8c6f9d", "aliases": ["Activation Roadmaps"]}, {"name": "Contracts", "url": "https://app.notion.com/p/2080fcf384948027bc4fdd3f1a11b5e3", "aliases": []}, {"name": "Zone - Communication", "url": "https://app.notion.com/p/1c70fcf3849480caa46bde43c221d665", "aliases": ["Zone · Communication"]}, {"name": "STOCKS", "url": "https://app.notion.com/p/20f0fcf38494809b881de5ea5c91bfaf", "aliases": []}, {"name": "Labels", "url": "https://app.notion.com/p/29ab6a35591e45f592eca77fd8b1b682", "aliases": []}, {"name": "Taskforce", "url": "https://app.notion.com/p/2fb0fcf3849480728cd6f141b07251d9", "aliases": ["TeamOwner"]}, {"name": "Programs", "url": "https://app.notion.com/p/42299f2803934484ac1abe3b193bc895", "aliases": ["Programmes"]}, {"name": "Mapverse", "url": "https://app.notion.com/p/c4c8efef870e43c298cbd6344b8fb739", "aliases": []}, {"name": "Scenari", "url": "https://app.notion.com/p/90a81b75c2dd461aafedc1860780b50a", "aliases": []}, {"name": "Protocols", "url": "https://app.notion.com/p/d44452661fb84329a45024735b5eed09", "aliases": []}, {"name": "Persona", "url": "https://app.notion.com/p/23e3aaea352c4dba824cedd4d95d2bb8", "aliases": ["Sendemo Persona Classification"]}, {"name": "Outcome", "url": "https://app.notion.com/p/15b0fcf3849480b4b1daed8687ca054b", "aliases": []}, {"name": "Pirate Metrics Framework", "url": "https://app.notion.com/p/023399460c1d4888bbe63a9c3a938dbf", "aliases": ["Data Driven Metrics Framework"]}, {"name": "Base Registry", "url": "https://app.notion.com/p/57ec93d750894e35a235cb2def898a9a", "aliases": []}, {"name": "Schema Contracts", "url": "https://app.notion.com/p/b402cf7695dc422ca847f61ef3a6f9cd", "aliases": []}, {"name": "Forms", "url": "https://app.notion.com/p/b292d77766c040a69baf24e4f6d62d75", "aliases": []}, {"name": "Field Contracts", "url": "https://app.notion.com/p/777bdb05d0a14871a67f14bde32f3464", "aliases": []}, {"name": "Operations", "url": "https://app.notion.com/p/06606f047537434f9b4e44f11b31f3b3", "aliases": []}, {"name": "Releases", "url": "https://app.notion.com/p/de91feac9f644bfca7b4bd6535c43170", "aliases": []}, {"name": "Incidents", "url": "https://app.notion.com/p/f505998cf2594842a412c806b08c6395", "aliases": []}, {"name": "Health Snapshots", "url": "https://app.notion.com/p/329ea747d48f4dd38512280f53886974", "aliases": []}, {"name": "Rôles", "url": "https://app.notion.com/p/7c954592eeb342618d408cb8e8de350b", "aliases": []}, {"name": "Alignements", "url": "https://app.notion.com/p/3d60fcf3849480b9b683fbc399b9bae7", "aliases": []}, {"name": "Pages", "url": "https://app.notion.com/p/1ad0fcf3849480219903ea0f2f8623e3", "aliases": ["Docs - lab", "Doc - lab", "Doc-lab", "Docs-lab"]}, {"name": "Compass", "url": "https://app.notion.com/p/6eec446fce1a40a1ab14efb34bad27e9", "aliases": []}, {"name": "Members", "url": "https://app.notion.com/p/550eb00f314f4f20a3ffd2cb9f5504de", "aliases": []}];
+(function(){
+  const T = window.__NOTION_LINKS__ || [];
+  if (!T.length || !document.body) return;
+  const url = new Map(); const names = [];
+  T.forEach(l => [l.name, ...(l.aliases || [])].forEach(n => { url.set(n, {u: l.url, k: l.name}); names.push(n); }));
+  names.sort((a, b) => b.length - a.length);
+  const esc = s => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const RX = new RegExp("(?<![\\p{L}\\p{N}_])(" + names.map(esc).join("|") + ")(?![\\p{L}\\p{N}_])(?!\\s+(?:Control\\s+Center|Operator))", "gu");
+  const SKIP = "a,button,[role=button],script,style,svg,textarea,input,select,option,label,title,code,pre,[data-nolink],.nl";
+  const SCOPE = ".scene,section,aside,dialog,[role=dialog],[data-scope],[aria-live],#panel,#detail,.panel,.detail,body";
+  function walk(root){
+    const seen = new Map();  // scope → names already linked in it (read from the DOM once per pass)
+    const has = (scope, k) => { let s = seen.get(scope);
+      if (!s){ s = new Set([...scope.querySelectorAll("a.nl")].filter(a => a.parentElement.closest(SCOPE) === scope).map(a => a.dataset.k)); seen.set(scope, s); }
+      return s.has(k); };
+    const tw = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {acceptNode: n => {
+      const p = n.parentElement; if (!p || p.closest(SKIP)) return NodeFilter.FILTER_REJECT;
+      RX.lastIndex = 0; return RX.test(n.nodeValue) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_SKIP; }});
+    const nodes = []; while (tw.nextNode()) nodes.push(tw.currentNode);
+    nodes.forEach(n => {
+      const scope = n.parentElement.closest(SCOPE) || document.body;
+      const s = n.nodeValue; let last = 0, out = null; RX.lastIndex = 0; let m;
+      while ((m = RX.exec(s))){
+        const hit = url.get(m[1]); if (!hit || has(scope, hit.k)) continue;
+        seen.get(scope).add(hit.k);
+        out = out || document.createDocumentFragment();
+        out.append(s.slice(last, m.index));
+        const a = document.createElement("a"); a.className = "nl"; a.href = hit.u; a.target = "_blank"; a.rel = "noopener";
+        a.dataset.k = hit.k; a.title = "Ouvrir « " + hit.k + " » dans Notion"; a.textContent = m[1];
+        a.addEventListener("click", e => e.stopPropagation());
+        out.append(a); last = m.index + m[0].length;
+      }
+      if (out){ out.append(s.slice(last)); n.replaceWith(out); }
+    });
+  }
+  // Inside the Notion app (desktop/mobile), an https link opens the web browser first, which then
+  // hands over to the app. Rewrite Notion links to the notion:// scheme there so they open directly.
+  const UA = navigator.userAgent || "";
+  const IN_APP = /\bNotion\/\d/i.test(UA) || /Electron\//.test(UA);
+  const NRX = /^https:\/\/(?:app\.notion\.com|www\.notion\.so|notion\.so)\/(?:p\/)?([^?#]+)(.*)$/;
+  // DISABLED 2026-10-02: notion:// links are blocked inside Notion embeds (links stopped working in the app).
+  function toApp(root){
+    if (!IN_APP) return;
+    root.querySelectorAll('a[href*="notion.com/"],a[href*="notion.so/"]').forEach(a => {
+      const m = a.getAttribute("href").match(NRX); if (!m) return;
+      a.setAttribute("href", "notion://www.notion.so/" + m[1] + m[2]); a.removeAttribute("target");
+    });
+  }
+  let t = null;
+  const run = () => { t = null; obs.disconnect(); try { walk(document.body); } finally { obs.observe(document.body, {childList: true, subtree: true, characterData: true}); } };
+  const obs = new MutationObserver(() => { if (!t) t = setTimeout(run, 250); });
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", run); else setTimeout(run, 0);
+})();
+</script>
+<!--notion-links:end-->
+</body>
+</html>
