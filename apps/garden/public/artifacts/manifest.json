@@ -1,5 +1,5 @@
 {
-  "synced_at": "2026-10-03T14:52:48.558Z",
+  "synced_at": "2026-10-08T07:15:47.888Z",
   "domains": [
     {
       "id": "puppy",
@@ -18,8 +18,8 @@
       "file": "bee-network-keynote.html",
       "generator": "Claude Code · bee-navigator 2.1.0 + mesures GCP Herald (30 j)",
       "sensitivity": "internal",
-      "bytes": 114836,
-      "sha256": "11c1bce73925"
+      "bytes": 118134,
+      "sha256": "f7be38303134"
     },
     {
       "id": "fcc-lab",
@@ -31,8 +31,8 @@
       "file": "fcc-lab.html",
       "generator": "Claude Code · lecture SQL des bases du Forms Control Center (Notion), 02/10/2026",
       "sensitivity": "internal",
-      "bytes": 76599,
-      "sha256": "0b430c76e643"
+      "bytes": 78546,
+      "sha256": "d29db8a7a7ff"
     },
     {
       "id": "fcc-form-owner",
@@ -44,8 +44,8 @@
       "file": "fcc-form-owner.html",
       "generator": "Claude Code · rôle Notion, note-joueur et lecture des bases Forms / Field Contracts, 02/10/2026",
       "sensitivity": "internal",
-      "bytes": 71253,
-      "sha256": "c096ee10cf62"
+      "bytes": 73200,
+      "sha256": "765d9d2dab69"
     },
     {
       "id": "bee-network-bases",
@@ -57,8 +57,8 @@
       "file": "bee-network-bases.html",
       "generator": "Claude Code · bee-navigator 2.1.0 records + survey",
       "sensitivity": "internal",
-      "bytes": 62286,
-      "sha256": "a335ea5bf880"
+      "bytes": 65497,
+      "sha256": "8c1767f7dc5f"
     },
     {
       "id": "bee-network-index",
@@ -70,8 +70,8 @@
       "file": "bee-network-index.html",
       "generator": "Claude Code · scripts/bee_network_index_gen.py",
       "sensitivity": "internal",
-      "bytes": 46057,
-      "sha256": "54469fb338b0"
+      "bytes": 48004,
+      "sha256": "831da7b130b3"
     },
     {
       "id": "bee-network-rives",
@@ -83,8 +83,8 @@
       "file": "bee-network-rives.html",
       "generator": "Claude Code · bee-navigator 2.1.0 records + survey",
       "sensitivity": "internal",
-      "bytes": 67987,
-      "sha256": "f55534cc9da6"
+      "bytes": 69934,
+      "sha256": "f29701163322"
     },
     {
       "id": "bee-network-city",
@@ -96,8 +96,8 @@
       "file": "bee-network-city.html",
       "generator": "Claude Code · bee-navigator 2.1.0 records",
       "sensitivity": "internal",
-      "bytes": 46947,
-      "sha256": "c0da59c1ff0d"
+      "bytes": 48894,
+      "sha256": "b6efecbc39c0"
     },
     {
       "id": "ds-design-system-company-v3",
@@ -109,8 +109,8 @@
       "file": "ds-design-system-company-v3.html",
       "generator": "Claude Code · scripts/garden-design-system (Référentiel d'interface, 03/10/2026)",
       "sensitivity": "internal",
-      "bytes": 66539,
-      "sha256": "d498cc1f62bb"
+      "bytes": 68486,
+      "sha256": "6f21188d6a51"
     },
     {
       "id": "ds-design-system-company-v2",
@@ -122,8 +122,8 @@
       "file": "ds-design-system-company-v2.html",
       "generator": "Claude Code · scripts/garden-design-system (Référentiel d'interface, 03/10/2026)",
       "sensitivity": "internal",
-      "bytes": 65904,
-      "sha256": "2b55804fcc1c"
+      "bytes": 67851,
+      "sha256": "9614de75f672"
     },
     {
       "id": "ds-design-system-company",
@@ -135,8 +135,8 @@
       "file": "ds-design-system-company.html",
       "generator": "Claude Code · scripts/garden-design-system (Référentiel d'interface, 03/10/2026)",
       "sensitivity": "internal",
-      "bytes": 65648,
-      "sha256": "235ad5f7e02f"
+      "bytes": 67595,
+      "sha256": "56c639d6fbd9"
     },
     {
       "id": "ds-fixture-validate-design",
@@ -148,8 +148,8 @@
       "file": "ds-fixture-validate-design.html",
       "generator": "Claude Code · scripts/garden-design-system (Référentiel d'interface, 03/10/2026)",
       "sensitivity": "internal",
-      "bytes": 65247,
-      "sha256": "ff35db970360"
+      "bytes": 67194,
+      "sha256": "1372cfc094a9"
     }
   ]
 }

@@ -5,6 +5,51 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Bee Network Index — Bases</title>
 <style>html,body{margin:0}</style>
+<!--garden-theme:start-->
+<script>
+(function(){
+  var q = null; try { q = new URLSearchParams(location.search).get("theme"); } catch (e) {}
+  var h = location.hostname || "";
+  var dark = (q === "dark" || q === "light") ? q === "dark"
+    : (location.protocol === "file:" || /(^|\.)run\.app$/.test(h) || h === "localhost" || h === "127.0.0.1");
+  var want = dark ? "dark" : "light";
+  document.documentElement.setAttribute("data-garden-theme", want);
+  var RX = /\(\s*prefers-color-scheme\s*:\s*(dark|light)\s*\)/gi;
+  function rewrite(text){
+    return text.split(",").map(function(item){
+      var off = false;
+      var out = item.replace(RX, function(_, m){ if (m.toLowerCase() !== want) off = true; return "(min-width:0px)"; });
+      return off ? "not all" : out.trim();
+    }).join(", ");
+  }
+  function fix(rules){
+    for (var i = 0; i < rules.length; i++){
+      var r = rules[i];
+      if (r.media && r.media.mediaText && /prefers-color-scheme/i.test(r.media.mediaText)) r.media.mediaText = rewrite(r.media.mediaText);
+      if (r.cssRules) fix(r.cssRules);
+    }
+  }
+  var done = new WeakSet();
+  function all(){
+    for (var i = 0; i < document.styleSheets.length; i++){
+      var sh = document.styleSheets[i]; if (done.has(sh)) continue;
+      try { fix(sh.cssRules); done.add(sh); } catch (e) {}
+    }
+  }
+  var mm = window.matchMedia && window.matchMedia.bind(window);
+  if (mm) window.matchMedia = function(query){
+    var m = /prefers-color-scheme\s*:\s*(dark|light)/i.exec(query || "");
+    if (!m) return mm(query);
+    return { matches: m[1].toLowerCase() === want, media: query, onchange: null,
+      addListener: function(){}, removeListener: function(){}, addEventListener: function(){},
+      removeEventListener: function(){}, dispatchEvent: function(){ return false; } };
+  };
+  all();
+  document.addEventListener("DOMContentLoaded", all);
+  window.addEventListener("load", all);
+})();
+</script>
+<!--garden-theme:end-->
 </head>
 <body>
 <style>
@@ -16,6 +61,20 @@
   --wire:rgba(198,241,53,.38); --wire-w:rgba(241,242,238,.22);
   --sans:"Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   --mono:"Berkeley Mono", "Geist Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+:root{--wire-dim:rgba(241,242,238,.05);--wire-dim2:rgba(241,242,238,.06);--lime-edge:rgba(198,241,53,.6);--hover:rgba(255,255,255,.03);--ic-bg:#1f221f;--pill-bg:#171a17;--on-accent:#0b0d06;--pop-bg:rgba(20,22,20,.96);--pop-shadow:rgba(0,0,0,.55);--ring-off:#3a3e39;--teal:#7cc9a6;--peri:#a3b4ff;--sand:#c9b99a;--dot-rgb:225,228,222}
+@media (prefers-color-scheme: dark){ :root{ color-scheme: dark; } }
+@media (prefers-color-scheme: light){
+  :root{
+    color-scheme: light;
+    --page:#f3f4f1; --panel:#ffffff; --card:#fafbf8; --card-hi:#f4f8e6; --line:#dfe2dc; --line-soft:#e8eae5;
+    --text:#151714; --muted:#5c6259; --faint:#868c83;
+    --lime:#5a7d00; --lime-soft:rgba(90,125,0,.14); --amber:#b86e00; --red:#c8352b; --off:#e6e8e3;
+    --wire:rgba(90,125,0,.45); --wire-w:rgba(21,23,20,.22);
+    --wire-dim:rgba(21,23,20,.06); --wire-dim2:rgba(21,23,20,.08); --lime-edge:rgba(90,125,0,.55); --hover:rgba(21,23,20,.03);
+    --ic-bg:#eceee9; --pill-bg:#f0f1ed; --on-accent:#ffffff; --pop-bg:rgba(255,255,255,.97); --pop-shadow:rgba(21,23,20,.16);
+    --ring-off:#c9ccc5; --teal:#2f8a64; --peri:#3b5bd6; --sand:#8a7550; --dot-rgb:40,44,38;
+  }
 }
 *{box-sizing:border-box}
 body{background:var(--page);color:var(--text);font-family:var(--sans);font-size:14px;line-height:1.45;padding-inline:16px;padding-block:18px 32px}
@@ -31,7 +90,7 @@ body{background:var(--page);color:var(--text);font-family:var(--sans);font-size:
 svg.wires{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
 svg.wires path{fill:none;stroke-width:1}
 svg.wires path.l{stroke:var(--wire)} svg.wires path.w{stroke:var(--wire-w)}
-svg.wires path.root{stroke:var(--wire-w)} svg.wires path.dim{stroke:rgba(241,242,238,.05)}
+svg.wires path.root{stroke:var(--wire-w)} svg.wires path.dim{stroke:var(--wire-dim)}
 svg.wires path.draw{stroke-dasharray:1;stroke-dashoffset:1;animation:draw .65s cubic-bezier(.3,.7,.2,1) forwards}
 @keyframes draw{to{stroke-dashoffset:0}}
 
@@ -46,14 +105,14 @@ svg.wires path.draw{stroke-dasharray:1;stroke-dashoffset:1;animation:draw .65s c
 .conf .k{font-size:11.5px;color:var(--muted)}
 
 .cards{position:relative;z-index:1;display:flex;flex-direction:column;justify-content:center;gap:12px}
-.card{all:unset;box-sizing:border-box;cursor:pointer;display:grid;grid-template-columns:1fr auto;align-items:center;gap:0 10px;background:var(--card);border:1px solid var(--line-soft);border-radius:12px;padding:12px 14px 12px 14px;box-shadow:inset 0 1px 0 rgba(255,255,255,.03);transition:border-color .2s,background .2s}
+.card{all:unset;box-sizing:border-box;cursor:pointer;display:grid;grid-template-columns:1fr auto;align-items:center;gap:0 10px;background:var(--card);border:1px solid var(--line-soft);border-radius:12px;padding:12px 14px 12px 14px;box-shadow:inset 0 1px 0 var(--hover);transition:border-color .2s,background .2s}
 .card:hover{border-color:var(--line)}
 .card:focus-visible{outline:2px solid var(--lime);outline-offset:2px}
-.card[aria-pressed="true"]{background:var(--card-hi);border-color:rgba(198,241,53,.6);box-shadow:0 0 0 3px var(--lime-soft)}
+.card[aria-pressed="true"]{background:var(--card-hi);border-color:var(--lime-edge);box-shadow:0 0 0 3px var(--lime-soft)}
 .card .hd{display:flex;align-items:center;gap:10px;min-width:0}
-.card .ic{width:24px;height:24px;border-radius:6px;display:grid;place-items:center;background:#1f221f;color:var(--muted);flex:none}
+.card .ic{width:24px;height:24px;border-radius:6px;display:grid;place-items:center;background:var(--ic-bg);color:var(--muted);flex:none}
 .card .ic svg{width:14px;height:14px}
-.card[aria-pressed="true"] .ic{background:var(--lime);color:#0b0d06}
+.card[aria-pressed="true"] .ic{background:var(--lime);color:var(--on-accent)}
 .card .nm{font-size:13.5px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .card .ct{display:flex;align-items:baseline;gap:7px;margin-top:10px}
 .card .ct b{font-size:24px;font-weight:500;font-variant-numeric:tabular-nums;line-height:1}
@@ -66,7 +125,7 @@ svg.wires path.draw{stroke-dasharray:1;stroke-dashoffset:1;animation:draw .65s c
 .leaf .d.lime{background:var(--lime)}
 .leaf .d.hollow{background:transparent;border:1px dashed var(--muted);width:7px;height:7px}
 .leaf .t{font-size:13px;color:var(--text)}
-.pill{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);background:#171a17;border:1px solid var(--line);border-radius:4px;padding:1px 6px;font-variant-numeric:tabular-nums}
+.pill{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);background:var(--pill-bg);border:1px solid var(--line);border-radius:4px;padding:1px 6px;font-variant-numeric:tabular-nums}
 .pill b{color:var(--muted);font-weight:500;margin-left:5px;letter-spacing:0}
 .leaf .gl{width:12px;height:12px;color:var(--faint);flex:none}
 .tri{display:inline-flex;gap:3px}
@@ -77,7 +136,7 @@ svg.wires path.draw{stroke-dasharray:1;stroke-dashoffset:1;animation:draw .65s c
 .leaf.in{animation:lin .42s cubic-bezier(.3,.7,.2,1) both}
 @keyframes lin{from{opacity:0;translate:-12px 0}to{opacity:1;translate:0 0}}
 
-.pop{position:absolute;z-index:4;right:22px;top:22px;width:min(360px,calc(100% - 44px));max-height:calc(100% - 44px);overflow:auto;background:rgba(20,22,20,.96);border:1px solid var(--line);border-radius:12px;padding:16px 18px;box-shadow:0 18px 50px rgba(0,0,0,.55);backdrop-filter:blur(6px)}
+.pop{position:absolute;z-index:4;right:22px;top:22px;width:min(360px,calc(100% - 44px));max-height:calc(100% - 44px);overflow:auto;background:var(--pop-bg);border:1px solid var(--line);border-radius:12px;padding:16px 18px;box-shadow:0 18px 50px var(--pop-shadow);backdrop-filter:blur(6px)}
 .pop .x{all:unset;cursor:pointer;position:absolute;top:10px;right:12px;color:var(--muted);font-size:16px;width:24px;height:24px;display:grid;place-items:center;border-radius:6px;border:1px solid var(--line)}
 .pop .x:hover,.pop .x:focus-visible{color:var(--lime);border-color:var(--lime)}
 .pop .kk{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);display:flex;gap:8px;flex-wrap:wrap;padding-right:30px}
@@ -151,7 +210,7 @@ svg.wires path{transition:stroke-opacity .22s, stroke-width .22s, stroke .22s}
 svg.wires path.lp{stroke:var(--wire-w);stroke-dasharray:1;stroke-dashoffset:1}
 svg.wires path.lp.alt{stroke:var(--wire)}
 svg.wires path.cp{stroke:var(--wire-w);stroke-dasharray:1;stroke-dashoffset:1}
-svg.wires path.cp.dim{stroke:rgba(241,242,238,.06)}
+svg.wires path.cp.dim{stroke:var(--wire-dim2)}
 svg.wires.hov path.lp{stroke-opacity:.18}
 svg.wires.hov path.lp.hot{stroke:var(--lime);stroke-opacity:1;stroke-width:1.6}
 .leaf{opacity:0;translate:-10px 0;transition:opacity .28s ease, translate .34s cubic-bezier(.2,.7,.2,1)}
@@ -225,7 +284,7 @@ function ringSVG(g,p,active){
     const parts=[["var(--lime)",g.items.filter(b=>!b.ghost&&!isInv(b)).length],["var(--amber)",g.items.filter(isInv).length],["var(--red)",g.items.filter(b=>b.ghost).length]];
     let off=0; parts.forEach(([col,k])=>{ if(!k) return; const full=c*k/n, len=Math.max(Math.min(full-2.2, c*p-off),0);
       if(len>0) s+=`<circle cx="20" cy="20" r="${r}" fill="none" stroke="${col}" stroke-width="3.5" stroke-dasharray="${len} ${c}" stroke-dashoffset="${-off}"/>`; off+=full; });
-  } else if(share>0){ const len=c*share*.999; s+=`<circle cx="20" cy="20" r="${r}" fill="none" stroke="#3a3e39" stroke-width="3.5" stroke-dasharray="${len} ${c}"/>`; }
+  } else if(share>0){ const len=c*share*.999; s+=`<circle cx="20" cy="20" r="${r}" fill="none" stroke="var(--ring-off)" stroke-width="3.5" stroke-dasharray="${len} ${c}"/>`; }
   const pct=g.rows?Math.round(100*share)+"%":"—";
   return s+`</g><text x="20" y="22.8" text-anchor="middle" font-size="7.5" font-family="Geist Mono, monospace" fill="${active?"var(--text)":"var(--muted)"}">${pct}</text>`;
 }
@@ -329,7 +388,7 @@ addEventListener("keydown",e=>{
 });
 
 // ── detail popover
-const PAL=["var(--lime)","var(--amber)","#7cc9a6","#a3b4ff","var(--red)","#c9b99a","var(--faint)"];
+const PAL=["var(--lime)","var(--amber)","var(--teal)","var(--peri)","var(--red)","var(--sand)","var(--faint)"];
 const link=n=>byName[n]?`<a data-go="${esc(n)}">${esc(lab(n))}</a>`:esc(n);
 async function openPop(n){
   const b=byName[n], gi=GROUPS.findIndex(g=>g.items.includes(b));
@@ -361,12 +420,13 @@ function closePop(){ pop.hidden=true; fanEl.querySelectorAll(".leaf").forEach(l=
 // ── sphere: dots materialise in random order, then rotate
 let sphereReveal=0;
 (function(){
+  const DOT=getComputedStyle(document.documentElement).getPropertyValue("--dot-rgb").trim()||"225,228,222";
   const cv=$("#sphere"), ctx=cv.getContext("2d"), N=520, P=[], g=Math.PI*(3-Math.sqrt(5));
   for(let i=0;i<N;i++){ const y=1-(i/(N-1))*2, r=Math.sqrt(1-y*y), th=g*i; P.push([Math.cos(th)*r,y,Math.sin(th)*r,Math.random()]); }
   let a=0;
   (function f(){ ctx.clearRect(0,0,300,300); const cs=Math.cos(a), sn=Math.sin(a), ct=Math.cos(.3), st=Math.sin(.3);
     for(const [x,y,z,th] of P){ if(th>sphereReveal) continue; const x1=x*cs+z*sn, z1=-x*sn+z*cs, y2=y*ct-z1*st, z2=y*st+z1*ct, d=(z2+1)/2;
-      ctx.fillStyle=`rgba(225,228,222,${(.08+d*.62).toFixed(3)})`; ctx.beginPath(); ctx.arc(150+x1*128,150+y2*128,.7+d*1.5,0,Math.PI*2); ctx.fill(); }
+      ctx.fillStyle=`rgba(${DOT},${(.08+d*.62).toFixed(3)})`; ctx.beginPath(); ctx.arc(150+x1*128,150+y2*128,.7+d*1.5,0,Math.PI*2); ctx.fill(); }
     a+=.003; if(!REDUCE) requestAnimationFrame(f); })();
 })();
 

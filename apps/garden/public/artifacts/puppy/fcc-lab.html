@@ -138,6 +138,51 @@ h2{font-size:clamp(28px,4vw,54px);line-height:1.05;max-width:22ch}
 h1,h2,.num b,.bx .v,.base .t,.stp .t,.motto,.fact b{font-family:var(--mono);letter-spacing:-.02em}
 h1{letter-spacing:-.04em}
 </style>
+<!--garden-theme:start-->
+<script>
+(function(){
+  var q = null; try { q = new URLSearchParams(location.search).get("theme"); } catch (e) {}
+  var h = location.hostname || "";
+  var dark = (q === "dark" || q === "light") ? q === "dark"
+    : (location.protocol === "file:" || /(^|\.)run\.app$/.test(h) || h === "localhost" || h === "127.0.0.1");
+  var want = dark ? "dark" : "light";
+  document.documentElement.setAttribute("data-garden-theme", want);
+  var RX = /\(\s*prefers-color-scheme\s*:\s*(dark|light)\s*\)/gi;
+  function rewrite(text){
+    return text.split(",").map(function(item){
+      var off = false;
+      var out = item.replace(RX, function(_, m){ if (m.toLowerCase() !== want) off = true; return "(min-width:0px)"; });
+      return off ? "not all" : out.trim();
+    }).join(", ");
+  }
+  function fix(rules){
+    for (var i = 0; i < rules.length; i++){
+      var r = rules[i];
+      if (r.media && r.media.mediaText && /prefers-color-scheme/i.test(r.media.mediaText)) r.media.mediaText = rewrite(r.media.mediaText);
+      if (r.cssRules) fix(r.cssRules);
+    }
+  }
+  var done = new WeakSet();
+  function all(){
+    for (var i = 0; i < document.styleSheets.length; i++){
+      var sh = document.styleSheets[i]; if (done.has(sh)) continue;
+      try { fix(sh.cssRules); done.add(sh); } catch (e) {}
+    }
+  }
+  var mm = window.matchMedia && window.matchMedia.bind(window);
+  if (mm) window.matchMedia = function(query){
+    var m = /prefers-color-scheme\s*:\s*(dark|light)/i.exec(query || "");
+    if (!m) return mm(query);
+    return { matches: m[1].toLowerCase() === want, media: query, onchange: null,
+      addListener: function(){}, removeListener: function(){}, addEventListener: function(){},
+      removeEventListener: function(){}, dispatchEvent: function(){ return false; } };
+  };
+  all();
+  document.addEventListener("DOMContentLoaded", all);
+  window.addEventListener("load", all);
+})();
+</script>
+<!--garden-theme:end-->
 </head>
 <body class="nojs">
 <div class="progress" id="progress"></div>
