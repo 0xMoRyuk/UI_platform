@@ -20,9 +20,13 @@ export function PartnersStrip({ partners, onPartnerClick }: PartnersStripProps) 
                 key={funder.id}
                 className="flex items-center gap-2 bg-white dark:bg-stone-900 rounded-xl px-5 py-3 border border-stone-200 dark:border-stone-700 shadow-sm"
               >
-                <span className="text-2xl" role="img" aria-label={funder.name}>
-                  {funder.flag}
-                </span>
+                {funder.flagUrl ? (
+                  <img src={funder.flagUrl} alt={`${funder.name} flag`} width={36} height={24} className="w-9 h-6 shrink-0 object-contain" />
+                ) : (
+                  <span className="text-2xl" role="img" aria-label={funder.name}>
+                    {funder.flag}
+                  </span>
+                )}
                 <span className="text-sm font-medium text-stone-700 dark:text-stone-300">
                   {funder.name}
                 </span>

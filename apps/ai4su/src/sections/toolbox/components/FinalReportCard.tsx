@@ -40,9 +40,17 @@ export function FinalReportCard({ report, content, onDownload }: FinalReportCard
                 {report.title}
               </h2>
 
+              {report.partner && <p className="text-sm text-white/60 mb-2">{report.partner}</p>}
+
               <p className="text-white/80 mb-4 max-w-xl">
                 {report.description}
               </p>
+
+              {report.keyFindings && report.keyFindings.length > 0 && (
+                <ul className="list-disc pl-5 text-sm text-white/80 space-y-2 mb-4 max-w-xl">
+                  {report.keyFindings.slice(0, 2).map((finding) => <li key={finding}>{finding}</li>)}
+                </ul>
+              )}
 
               <div className="flex flex-wrap items-center gap-4 text-sm text-white/60">
                 {formatMonthYear(report.publishedDate) && (
@@ -51,22 +59,25 @@ export function FinalReportCard({ report, content, onDownload }: FinalReportCard
                     <span>{formatMonthYear(report.publishedDate)}</span>
                   </div>
                 )}
-                <div className="flex items-center gap-1.5">
-                  <FileText className="w-4 h-4" />
-                  <span>{report.pages} {content.pagesLabel}</span>
-                </div>
+                {report.pages > 0 && (
+                  <div className="flex items-center gap-1.5">
+                    <FileText className="w-4 h-4" />
+                    <span>{report.pages} {content.pagesLabel}</span>
+                  </div>
+                )}
               </div>
             </div>
 
             {/* Right: Download button */}
             <div className="shrink-0">
               <Button
+                disabled={report.contentStatus === 'Coming soon' || !report.pdfUrl}
                 onClick={() => onDownload(report.pdfUrl)}
                 className="gap-3 px-8 py-4 h-auto bg-brand-accent text-brand-accent-foreground font-bold rounded-xl
                          hover:bg-white shadow-lg shadow-black/20"
               >
-                <Download className="w-5 h-5" />
-                <span>{content.downloadText}</span>
+                {report.contentStatus !== 'Coming soon' && <Download className="w-5 h-5" />}
+                <span>{report.contentStatus === 'Coming soon' ? 'Coming soon' : content.downloadText}</span>
               </Button>
             </div>
           </div>

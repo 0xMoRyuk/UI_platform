@@ -51,7 +51,8 @@ export interface DatagovActivities {
 export interface Funder {
   id: string
   name: string
-  flag: string
+  flag?: string
+  flagUrl?: string
 }
 
 export interface ImplementingPartner {

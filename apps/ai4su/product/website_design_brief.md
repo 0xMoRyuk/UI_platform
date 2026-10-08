@@ -53,7 +53,7 @@ Create a web app to showcase the AI4Startups program results before project clos
 **Status:** Logos to be verified in phase 2
 
 - EU logo (mandatory - cf. PDF guidelines)
-- Mention "Funded by the European Union"
+- Mention "Funded by the European Union, France and Germany"
 - Partner logos: DataGov Initiative, Expertise France, GIZ, Team Europe
 - **Action item:** Add logo files here or link to the logos resource page
 

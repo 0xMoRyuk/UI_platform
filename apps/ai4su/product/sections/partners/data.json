@@ -19,11 +19,11 @@
     "description": "AI4Startups is made possible through the collaboration of funders, implementing organizations, and technical partners committed to building Africa's AI ecosystem. Together, we're supporting startups, developing open-source models, and fostering innovation across the continent."
   },
   "funders": {
-    "sectionTitle": "Funded by the European Union",
+    "sectionTitle": "Funded by the European Union, France and Germany",
     "sectionDescription": "AI4Startups is funded under the EU's Global Gateway initiative, part of Team Europe's commitment to digital transformation in Africa.",
     "euAttribution": {
-      "text": "Funded by the European Union",
-      "flagUrl": "/logos/funders/eu-flag.jpg",
+      "text": "Funded by the European Union, France and Germany",
+      "flagUrl": "/logos/funders/eu-flag.webp",
       "globalGatewayLogo": "/logos/funders/global-gateway-logo.png",
       "dataGovLogo": "/logos/funders/data-gov-logo.png",
       "disclaimer": "This website was created and maintained with the financial support of the European Union. Its contents are the sole responsibility of Digital Africa and do not necessarily reflect the views of the European Union.",

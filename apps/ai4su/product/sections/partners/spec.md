@@ -5,7 +5,7 @@ The Partners section showcases all organizations involved in AI4Startups using a
 
 ## User Flows
 - User lands on Partners page → Sees tiered partner sections → Understands program funding and implementation structure
-- User views Funders section → Sees EU flag and "Funded by the European Union" → Sees Team Europe member logos → Understands EU involvement
+- User views Funders section → Sees EU flag and "Funded by the European Union, France and Germany" → Sees Team Europe member logos → Understands EU involvement
 - User explores Implementing Partners → Reads about Digital Africa's lead role → Sees Expertise France and GIZ contributions
 - User views Service Providers → Sees Data354 and Briter logos → Understands their technical contributions
 - User clicks partner logo or "Visit Website" → Opens partner website in new tab
@@ -18,7 +18,7 @@ The Partners section showcases all organizations involved in AI4Startups using a
 ### Tier 1: Funders (EU Visibility Compliant)
 - Full-width section with EU Dark Blue (#003399) background
 - EU flag (mandatory) prominently displayed
-- "Funded by the European Union" text (mandatory)
+- "Funded by the European Union, France and Germany" text (mandatory)
 - Global Gateway logo and mention
 - Team Europe member state flags/logos in grid (if applicable)
 - Most prominent section with largest logos

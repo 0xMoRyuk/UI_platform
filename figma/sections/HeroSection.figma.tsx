@@ -6,7 +6,7 @@ figma.connect(HeroSection, 'https://www.figma.com/design/r3aZ4vNIoyfID7LJWd7WAz/
   example: () => (
     <HeroSection
       hero={{
-        badge: 'Funded by the European Union',
+        badge: 'Funded by the European Union, France and Germany',
         title: { line1: 'AI4Startups', line2: "Africa's AI Future" },
         description: 'Enabling African startups to innovate with trusted data and AI.',
         ctas: [

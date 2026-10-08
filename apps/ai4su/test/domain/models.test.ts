@@ -119,7 +119,7 @@ describe('getAvailableFilters', () => {
 describe('getAllStudies', () => {
   it('returns all studies', () => {
     const studies = getAllStudies()
-    expect(studies).toHaveLength(4)
+    expect(studies).toHaveLength(6)
     expect(studies[0]).toHaveProperty('id')
     expect(studies[0]).toHaveProperty('title')
   })
@@ -141,7 +141,7 @@ describe('getStudyById', () => {
 describe('getAllBestPractices', () => {
   it('returns all best practices', () => {
     const bps = getAllBestPractices()
-    expect(bps).toHaveLength(1)
+    expect(bps).toHaveLength(2)
     expect(bps[0]).toHaveProperty('id')
     expect(bps[0]).toHaveProperty('title')
   })

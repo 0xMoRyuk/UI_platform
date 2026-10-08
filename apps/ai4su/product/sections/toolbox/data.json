@@ -351,10 +351,10 @@
       "id": "study-001",
       "type": "Report",
       "title": "Unlocking the Data Ecosystem for African AgTech Startups",
-      "description": "This report maps the data and AI-driven agritech ecosystem across eight African countries, analysing key actors, funding dynamics, and policy environments. It highlights structural barriers to data access and proposes a roadmap to strengthen data ecosystems and enable AI innovation.",
+      "description": "This report maps the data and AI ecosystem for AgTech startups across eight African countries, including its key actors, funding dynamics, and policy context. It highlights barriers to data access, fragmentation, and shortages of data and AI expertise.",
       "partner": "Briter Bridges",
       "partnerLogo": "/logos/partners/briter.jpg",
-      "pdfUrl": "https://storage.googleapis.com/ui_platform/ai4su/AI4SU_Unlocking_Data_Ecosystem_African_Startup_FINAL.pdf",
+      "pdfUrl": "/reports/unlocking-data-ecosystem.pdf",
       "notionUrl": "https://www.notion.so/3350fcf38494802ea71efd11c08f29e5",
       "publishedDate": "2026-03-09",
       "keyFindings": [
@@ -363,16 +363,17 @@
         "Data collection, storage, and processing costs are high and constrain startup growth",
         "Data ecosystems are fragmented, with limited incentives for public and private actors to share data",
         "Talent shortages and weak pipelines contribute to a lack of data and AI expertise"
-      ]
+      ],
+      "contentStatus": "Done"
     },
     {
       "id": "study-002",
       "type": "Report",
       "title": "Data & Regulatory Landscape Report",
-      "description": "This report analyses the data governance, regulatory challenges, and AI adoption barriers faced by startups across agritech, climate, energy, and food sectors in eight African countries. It is based on survey data (39 startups) and qualitative interviews, providing actionable insights to support data-driven innovation.",
+      "description": "Based on a survey of 39 startups and 12 interviews across eight African countries, this report examines data access and governance, regulatory conditions, and AI adoption across agritech, climate, energy, and food. It highlights recurring constraints and their implications for startups.",
       "partner": "Cage Patrick & Company Advocates",
       "partnerLogo": "/logos/partners/cage.jpeg",
-      "pdfUrl": "https://storage.googleapis.com/ui_platform/ai4su/AI4Startups%20-%20Data%20Landscape%20Report%20(2026)%20(2).pdf",
+      "pdfUrl": "/reports/data-regulatory-landscape.pdf",
       "notionUrl": "https://www.notion.so/3350fcf3849480f89e26ce5d23bf4218",
       "publishedDate": "2026-03-26",
       "keyFindings": [
@@ -381,16 +382,17 @@
         "Data protection laws are generally seen as enabling, but compliance and internal governance remain complex",
         "Data sharing is already widespread but lacks proper governance frameworks, creating trust and security risks",
         "The biggest gap is the mismatch between active data sharing and insufficient governance infrastructure"
-      ]
+      ],
+      "contentStatus": "Done"
     },
     {
       "id": "study-003",
       "type": "Policy Brief",
       "title": "Policy Brief: Data without border event",
-      "description": "This policy brief synthesizes insights from multi-stakeholder workshops held in Abidjan, bringing together startups, policymakers, and ecosystem actors. It identifies key barriers to data access and proposes concrete policy recommendations to enable AI innovation in Africa.",
+      "description": "This brief draws on ecosystem discussions held in Abidjan on 3 and 5 February 2026. It identifies barriers to African startups’ access to quality, structured data and proposes recommendations to improve data sharing, governance, and trusted collaboration.",
       "partner": "Digital Africa & Data 354",
       "partnerLogo": "/logos/partners/data354.png",
-      "pdfUrl": "https://storage.googleapis.com/ui_platform/ai4su/AI4SU%20-%20Policy%20Brief-2%20(1).pdf",
+      "pdfUrl": "/reports/data-without-borders-policy-brief.pdf",
       "notionUrl": "https://www.notion.so/3350fcf3849480d7a295e0946ce30e26",
       "publishedDate": "2026-02-05",
       "keyFindings": [
@@ -399,21 +401,64 @@
         "Data ecosystems remain fragmented, with limited sharing between public and private actors",
         "Strong need for incentives and frameworks to encourage data sharing (e.g. funding tied to openness)",
         "Trust, standardisation, and governance mechanisms are essential to unlock data collaboration"
-      ]
+      ],
+      "contentStatus": "Done"
     },
     {
       "id": "study-004",
       "type": "Use Case Collection",
-      "title": "AI & Data Use Cases in African Agritech",
-      "description": "This report compiles key AI and data-driven use cases identified throughout the AI4Startups programme in the African agritech sector. It highlights practical applications of AI to address agricultural challenges and improve productivity, resilience, and sustainability.",
+      "title": "AI & Data Use Cases in African Agritech Report",
+      "description": "This report maps nine AI and data use cases across the African agricultural value chain, drawing on ecosystem analysis and eight AI4Startups open-innovation hackathons. It outlines the approaches, data challenges, illustrative startups, and business considerations associated with each use case.",
       "partner": "Digital Africa",
       "partnerLogo": "/logos/partners/digital-africa.png",
-      "pdfUrl": null,
+      "pdfUrl": "/reports/agritech-use-cases.pdf",
       "notionUrl": "https://www.notion.so/3350fcf38494801aad74e91bafa2a6f6",
-      "publishedDate": null,
+      "publishedDate": "2026-03-31",
       "keyFindings": [
-        "Coming soon"
-      ]
+        "Maps nine agritech use cases across eight African markets, drawing on 60+ startups, 30+ workshops, eight hackathons and 24 open-source models.",
+        "The main bottleneck is usable, trustworthy data—not algorithms. Data structuring, collection, sharing, exploitation and governance are interconnected challenges.",
+        "Most solutions are data-driven before they are AI-driven: domain expertise, rules and heuristics remain essential alongside remote sensing and conversational AI.",
+        "Embedded services within lending, insurance, inputs or logistics have stronger commercial prospects than standalone AI tools; farmers benefit, but institutional actors often pay and capture value.",
+        "Scaling requires local data pipelines, distribution and institutional relationships. Clear consent and ownership, export traceability, and voice/SMS/USSD in local languages are critical enabling conditions."
+      ],
+      "contentStatus": "Done"
+    },
+    {
+      "id": "study-005",
+      "type": "Use Case Collection",
+      "title": "AI & Data Use Cases in African Agritech Visualisation",
+      "description": "A visual companion to the AI4Startups agritech use-case report, mapping nine use cases across the agricultural value chain and summarizing their AI approaches, data challenges, startup examples, and business context.",
+      "partner": "Digital Africa",
+      "partnerLogo": "/logos/partners/digital-africa.png",
+      "pdfUrl": "/reports/agritech-use-cases-visualisation.png",
+      "notionUrl": "https://www.notion.so/3f10fcf38494802db3d0e8332893dae4",
+      "publishedDate": "2026-03-31",
+      "keyFindings": [
+        "Maps nine use cases across finance and risk, markets and supply chains, productivity and sustainability, compliance and market access, plus cross-cutting farmer accessibility.",
+        "Connects use cases with startup examples, hackathon outputs and six technical families: predictive scoring, risk modelling, market intelligence, logistics optimisation, remote sensing/computer vision and conversational AI.",
+        "Highlights stronger commercial prospects for embedded credit, operational supply-chain services and regulatory traceability than for standalone advisory or voice tools; ratings are qualitative assessments.",
+        "Recurring constraints include fragmented datasets, scarce labels, local calibration and data governance. Farmer-facing impact also depends on local-language interfaces and practical pathways from recommendations or risk detection to action."
+      ],
+      "contentStatus": "Done"
+    },
+    {
+      "id": "study-006",
+      "type": "Report",
+      "title": "Data & Regulatory Landscape Report (1)",
+      "description": "This slide deck summarizes the March 2026 AI4Startups Data & Regulatory Landscape study. Based on a survey of 39 startups and 12 interviews across eight African countries, it presents findings on data access and governance, regulatory conditions, and AI adoption across agritech, climate, energy, and food.",
+      "partner": "Cage Patrick & Company Advocates",
+      "partnerLogo": "/logos/partners/cage.jpeg",
+      "pdfUrl": null,
+      "notionUrl": "https://www.notion.so/3f10fcf3849480e3a320ddd2d4020ec6",
+      "publishedDate": "2026-03-26",
+      "keyFindings": [
+        "Data is mission-critical for startups, yet access remains severely constrained due to poor data quality and unclear licensing",
+        "AI adoption is growing, but limited by infrastructure costs, talent gaps, and technical constraints",
+        "Data protection laws are generally seen as enabling, but compliance and internal governance remain complex",
+        "Data sharing is already widespread but lacks proper governance frameworks, creating trust and security risks",
+        "The biggest gap is the mismatch between active data sharing and insufficient governance infrastructure"
+      ],
+      "contentStatus": "Done"
     }
   ],
   "bestPractices": [
@@ -423,21 +468,58 @@
       "title": "Best Practices for Startup-Centric Hackathons",
       "hackathonId": null,
       "hackathonName": null,
-      "pdfUrl": null,
+      "pdfUrl": "/reports/hackathon-best-practices.pdf",
       "notionUrl": "https://www.notion.so/3350fcf384948040890bf4b16fff4258",
       "highlights": [
-        "Coming soon"
-      ]
+        "Organises nine best practices across preparation, execution and post-hackathon impact, based on eight hackathons involving more than 4,700 participants and producing 24 models.",
+        "Match the format to startup maturity and objectives: short in-person events support intensive exploration, while longer online competitions enable broader participation and model development.",
+        "Assess actual data capacity before committing; co-design challenges around real operational needs and datasets, with clear go/no-go decisions and realistic demands on startup time.",
+        "Use staged agreements for feasibility and competition participation; prepare datasets as products with documentation, baselines, evaluation metrics and explicit privacy/IP rules.",
+        "Plan beyond the leaderboard: reproducible notebooks, documented alternative approaches, handover workshops and direct winner–startup collaboration are essential to turn models into usable solutions."
+      ],
+      "description": "A practical guide to designing and running hackathons for startups, covering challenge preparation, data readiness, participant support, and follow-up after the event.",
+      "partner": "Digital Africa",
+      "contentStatus": "Done",
+      "publishedDate": "2026-03-31"
+    },
+    {
+      "id": "bp-002",
+      "type": "Practical Guide",
+      "title": "Data Sharing Agreement Template",
+      "description": "A template for structuring data-sharing agreements between organizations, helping clarify the terms under which data is shared and used.",
+      "partner": "Cage Patrick & Company Advocates",
+      "hackathonId": null,
+      "hackathonName": null,
+      "pdfUrl": "/reports/data-sharing-agreement-template.pdf",
+      "notionUrl": "https://www.notion.so/3f10fcf3849480078fc4c557fca3e40c",
+      "highlights": [
+        "Customisable bilateral data-sharing template referencing African Union frameworks and applicable national data-protection laws, with GDPR requirements where applicable.",
+        "Schedules define permitted purposes, datasets, processing, retention, security, transfers and subprocessors. The recipient may act as a processor or an independent controller depending on the purpose.",
+        "Specifies safeguards including encryption, MFA, least-privilege access, logging and audits; requires notification to the provider within 24 hours of becoming aware of a security incident.",
+        "Cross-border transfers require prior written provider consent and appropriate safeguards; subprocessors also require prior written authorisation.",
+        "The provider retains shared-data IP, while the recipient owns derivative AI models subject to restrictions on reconstructing personal data. Return/deletion obligations, publication approval and jurisdiction-specific schedules must be tailored to the arrangement."
+      ],
+      "contentStatus": "Done",
+      "publishedDate": "2026-03-31"
     }
   ],
   "finalReport": {
     "type": "Report",
     "title": "AI4Startups – Hackathon Report: Challenges & Solutions",
-    "description": "This report presents the challenges addressed during the AI4Startups hackathons and showcases the solutions developed by participating startups. It highlights key insights from the experimentation phase and illustrates how data-driven innovation can address real-world problems.",
-    "pdfUrl": null,
+    "description": "This report documents the challenges addressed through AI4Startups hackathons and the solutions developed by participating teams. It brings together the programme’s practical outputs and lessons from the experimentation phase.",
+    "pdfUrl": "/reports/hackathon-challenges-solutions.pdf",
     "notionUrl": "https://www.notion.so/3350fcf38494801ba468c737d596ffde",
-    "publishedDate": null,
-    "pages": 0
+    "publishedDate": "2026-03-31",
+    "pages": 0,
+    "partner": "Digital Africa & Zindi",
+    "contentStatus": "Done",
+    "keyFindings": [
+      "Five online challenges produced 15 open-source AI solutions for Tolbi, agriBORA, Farm to Feed, DigiCow and Rhea, with more than 4,000 participants reported.",
+      "Challenges addressed satellite-based crop classification, maize-price forecasting, shopping-basket recommendations, farmer adoption after training, and soil-nutrient prediction.",
+      "Winning approaches combined domain-specific features with diverse techniques: computer vision, gradient-boosted trees, ensembles, temporal signals and external agricultural datasets.",
+      "Startup data maturity determines the right challenge format. Clarifying data readiness, privacy and open-source expectations early helps prevent withdrawals and misaligned expectations.",
+      "Product-focused preparation, technical support, and dedicated women’s and local-participant prizes strengthened participation and created opportunities for follow-on startup collaboration."
+    ]
   },
   "pageContent": {
     "title": "AI Model Toolbox",
@@ -453,17 +535,17 @@
     "title": "Resources & Reports",
     "description": "Reports, policy briefs, and practical resources from AI4SU partners.",
     "keyFindingsLabel": "Key Findings",
-    "downloadLabel": "Download PDF"
+    "downloadLabel": "Download resource"
   },
   "bestPracticesSection": {
     "title": "Hackathon Best Practices",
     "description": "Guides and lessons emerging from the programme and hackathon delivery experience.",
-    "downloadLabel": "Download Report"
+    "downloadLabel": "Download resource"
   },
   "finalReportSection": {
     "badge": "Final Report",
-    "downloadText": "Download PDF",
-    "fundedByBadge": "Funded by the European Union",
+    "downloadText": "Download resource",
+    "fundedByBadge": "Funded by the European Union, France and Germany",
     "pagesLabel": "pages"
   }
 }
