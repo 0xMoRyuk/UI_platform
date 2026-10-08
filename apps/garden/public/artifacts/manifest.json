@@ -1,5 +1,5 @@
 {
-  "synced_at": "2026-10-08T07:15:47.888Z",
+  "synced_at": "2026-10-08T08:37:48.581Z",
   "domains": [
     {
       "id": "puppy",
@@ -18,8 +18,8 @@
       "file": "bee-network-keynote.html",
       "generator": "Claude Code · bee-navigator 2.1.0 + mesures GCP Herald (30 j)",
       "sensitivity": "internal",
-      "bytes": 118134,
-      "sha256": "f7be38303134"
+      "bytes": 118147,
+      "sha256": "9aa47c33266a"
     },
     {
       "id": "fcc-lab",
@@ -31,8 +31,8 @@
       "file": "fcc-lab.html",
       "generator": "Claude Code · lecture SQL des bases du Forms Control Center (Notion), 02/10/2026",
       "sensitivity": "internal",
-      "bytes": 78546,
-      "sha256": "d29db8a7a7ff"
+      "bytes": 78559,
+      "sha256": "db0c04498baa"
     },
     {
       "id": "fcc-form-owner",
@@ -44,8 +44,8 @@
       "file": "fcc-form-owner.html",
       "generator": "Claude Code · rôle Notion, note-joueur et lecture des bases Forms / Field Contracts, 02/10/2026",
       "sensitivity": "internal",
-      "bytes": 73200,
-      "sha256": "765d9d2dab69"
+      "bytes": 73213,
+      "sha256": "d9cc84c2f2b9"
     },
     {
       "id": "bee-network-bases",
@@ -57,8 +57,8 @@
       "file": "bee-network-bases.html",
       "generator": "Claude Code · bee-navigator 2.1.0 records + survey",
       "sensitivity": "internal",
-      "bytes": 65497,
-      "sha256": "8c1767f7dc5f"
+      "bytes": 65510,
+      "sha256": "b705bf7b40e2"
     },
     {
       "id": "bee-network-index",
@@ -70,8 +70,8 @@
       "file": "bee-network-index.html",
       "generator": "Claude Code · scripts/bee_network_index_gen.py",
       "sensitivity": "internal",
-      "bytes": 48004,
-      "sha256": "831da7b130b3"
+      "bytes": 48017,
+      "sha256": "64047fd61874"
     },
     {
       "id": "bee-network-rives",
@@ -83,8 +83,8 @@
       "file": "bee-network-rives.html",
       "generator": "Claude Code · bee-navigator 2.1.0 records + survey",
       "sensitivity": "internal",
-      "bytes": 69934,
-      "sha256": "f29701163322"
+      "bytes": 69947,
+      "sha256": "73485373e491"
     },
     {
       "id": "bee-network-city",
@@ -96,8 +96,8 @@
       "file": "bee-network-city.html",
       "generator": "Claude Code · bee-navigator 2.1.0 records",
       "sensitivity": "internal",
-      "bytes": 48894,
-      "sha256": "b6efecbc39c0"
+      "bytes": 48907,
+      "sha256": "acbe9de2df2b"
     },
     {
       "id": "ds-design-system-company-v3",
@@ -109,8 +109,8 @@
       "file": "ds-design-system-company-v3.html",
       "generator": "Claude Code · scripts/garden-design-system (Référentiel d'interface, 03/10/2026)",
       "sensitivity": "internal",
-      "bytes": 68486,
-      "sha256": "6f21188d6a51"
+      "bytes": 68499,
+      "sha256": "ba1ca3d3eb7e"
     },
     {
       "id": "ds-design-system-company-v2",
@@ -122,8 +122,8 @@
       "file": "ds-design-system-company-v2.html",
       "generator": "Claude Code · scripts/garden-design-system (Référentiel d'interface, 03/10/2026)",
       "sensitivity": "internal",
-      "bytes": 67851,
-      "sha256": "9614de75f672"
+      "bytes": 67864,
+      "sha256": "303b7a33502d"
     },
     {
       "id": "ds-design-system-company",
@@ -135,8 +135,8 @@
       "file": "ds-design-system-company.html",
       "generator": "Claude Code · scripts/garden-design-system (Référentiel d'interface, 03/10/2026)",
       "sensitivity": "internal",
-      "bytes": 67595,
-      "sha256": "56c639d6fbd9"
+      "bytes": 67608,
+      "sha256": "920c6275d166"
     },
     {
       "id": "ds-fixture-validate-design",
@@ -148,8 +148,21 @@
       "file": "ds-fixture-validate-design.html",
       "generator": "Claude Code · scripts/garden-design-system (Référentiel d'interface, 03/10/2026)",
       "sensitivity": "internal",
-      "bytes": 67194,
-      "sha256": "1372cfc094a9"
+      "bytes": 67207,
+      "sha256": "3ce381d847f3"
+    },
+    {
+      "id": "lab-ca-2026-11",
+      "domain": "puppy",
+      "title": "Le Lab au CA — réponse à la proposition initiale",
+      "description": "Diaporama de cadrage pour le CA du 23/11 : réponse en 9 slides à la proposition initiale (pourquoi, Lab, fondations, comité de valorisation, ce qui tourne, Meet our agents, 2027, 12-24 mois, cartographie des process), puis la place des productions du garden. Relevé du 08/10.",
+      "date": "2026-10-08",
+      "source": "garden/assets/lab-ca-2026-11.html",
+      "file": "lab-ca-2026-11.html",
+      "generator": "Claude Code · busta-garden (registre Puppy, rapport GCP du 05/10, base Valorisation, Pages)",
+      "sensitivity": "internal",
+      "bytes": 55813,
+      "sha256": "bf3b1802772e"
     }
   ]
 }

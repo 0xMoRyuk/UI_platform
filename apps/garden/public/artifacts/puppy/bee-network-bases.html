@@ -476,7 +476,7 @@ let rt; addEventListener("resize",()=>{ clearTimeout(rt); rt=setTimeout(relayout
   T.forEach(l => [l.name, ...(l.aliases || [])].forEach(n => { url.set(n, {u: l.url, k: l.name}); names.push(n); }));
   names.sort((a, b) => b.length - a.length);
   const esc = s => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-  const RX = new RegExp("(?<![\\p{L}\\p{N}_])(" + names.map(esc).join("|") + ")(?![\\p{L}\\p{N}_])(?!\\s+Control\\s+Center)", "gu");
+  const RX = new RegExp("(?<![\\p{L}\\p{N}_])(" + names.map(esc).join("|") + ")(?![\\p{L}\\p{N}_])(?!\\s+(?:Control\\s+Center|Operator))", "gu");
   const SKIP = "a,button,[role=button],script,style,svg,textarea,input,select,option,label,title,code,pre,[data-nolink],.nl";
   const SCOPE = ".scene,section,aside,dialog,[role=dialog],[data-scope],[aria-live],#panel,#detail,.panel,.detail,body";
   function walk(root){
