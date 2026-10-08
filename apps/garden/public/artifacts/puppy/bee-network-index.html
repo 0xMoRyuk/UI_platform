@@ -1,0 +1,507 @@
+<meta charset="utf-8">
+<title>Bee Network Index</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  color-scheme: dark;
+  --ground:#100e0b; --panel:#17140f; --card:#1d1913; --card-hi:#241f17;
+  --line:#2f291f; --line-soft:#231e16;
+  --text:#efe8da; --muted:#9b917f; --faint:#6a6152;
+  --honey:#f2b441; --honey-soft:rgba(242,180,65,.14);
+  --exec:#f2b441; --auth:#7cc9a6; --audit:#a3b4ff; --consult:#c9b99a; --vio:#b79cff;
+  --special:#ff7a59; --pivot:#e8d36b;
+  --curve:rgba(242,180,65,.42); --curve-dim:rgba(239,232,218,.07);
+  --display:"Schibsted Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --mono:"Berkeley Mono", "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: light){
+  :root:not([data-theme="dark"]){
+    color-scheme: light;
+    --ground:#eceef0; --panel:#f6f7f8; --card:#ffffff; --card-hi:#fffaf0;
+    --line:#d6d9dc; --line-soft:#e3e5e8;
+    --text:#1b1a17; --muted:#5f5a50; --faint:#8c877c;
+    --honey:#a86a00; --honey-soft:rgba(168,106,0,.10);
+    --exec:#a86a00; --auth:#1f7d57; --audit:#3a55c9; --consult:#7a6a48; --vio:#6a4bd6;
+    --special:#c8452a; --pivot:#8a7400;
+    --curve:rgba(168,106,0,.5); --curve-dim:rgba(27,26,23,.08);
+  }
+}
+:root[data-theme="light"]{
+  color-scheme: light;
+  --ground:#eceef0; --panel:#f6f7f8; --card:#ffffff; --card-hi:#fffaf0;
+  --line:#d6d9dc; --line-soft:#e3e5e8;
+  --text:#1b1a17; --muted:#5f5a50; --faint:#8c877c;
+  --honey:#a86a00; --honey-soft:rgba(168,106,0,.10);
+  --exec:#a86a00; --auth:#1f7d57; --audit:#3a55c9; --consult:#7a6a48; --vio:#6a4bd6;
+  --special:#c8452a; --pivot:#8a7400;
+  --curve:rgba(168,106,0,.5); --curve-dim:rgba(27,26,23,.08);
+}
+:root[data-theme="dark"]{ color-scheme: dark; }
+
+*{box-sizing:border-box}
+body{background:var(--ground);color:var(--text);font-family:var(--display);font-size:14px;line-height:1.5;padding-inline:16px;padding-block:20px 40px}
+.wrap{max-width:1320px;margin:0 auto;display:flex;flex-direction:column;gap:18px}
+
+header.top{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:8px 24px}
+.crumb{font-family:var(--mono);font-size:12px;color:var(--faint);letter-spacing:.02em}
+.crumb b{color:var(--muted);font-weight:500}
+h1{margin:4px 0 0;font-size:clamp(20px,2.4vw,28px);font-weight:600;letter-spacing:-.01em;text-wrap:balance}
+.anchors{display:flex;gap:8px;flex-wrap:wrap}
+.anchors a{font-family:var(--mono);font-size:12px;color:var(--muted);text-decoration:none;border:1px solid var(--line);padding:5px 10px;border-radius:999px}
+.anchors a:hover,.anchors a:focus-visible{color:var(--honey);border-color:var(--honey);outline:none}
+
+.stage{position:relative;background:var(--panel);border:1px solid var(--line-soft);border-radius:18px;padding:28px;display:grid;grid-template-columns:230px 270px 1fr;gap:40px;min-height:640px;overflow:hidden}
+svg.wires{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+svg.wires path{fill:none;stroke-width:1.1}
+svg.wires path.lead{stroke:var(--curve)}
+svg.wires path.dim{stroke:var(--curve-dim)}
+svg.wires path.draw{stroke-dasharray:1;stroke-dashoffset:1;animation:draw .7s cubic-bezier(.3,.7,.2,1) forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+
+/* root column */
+.root{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center;position:relative;z-index:1}
+.root h2{margin:0;font-size:19px;font-weight:600}
+.root .sub{font-size:12.5px;color:var(--muted);max-width:26ch;text-wrap:balance}
+.root .sub em{font-style:normal;color:var(--honey)}
+#sphere{width:170px;height:170px;max-width:100%}
+.gauge{display:flex;align-items:center;gap:10px;text-align:left}
+.gauge .num{font-size:22px;font-weight:600;font-variant-numeric:tabular-nums;line-height:1}
+.gauge .num small{font-size:13px;color:var(--muted);font-weight:500}
+.gauge .lbl{font-size:11.5px;color:var(--muted);line-height:1.3}
+.facts{display:flex;gap:14px;font-family:var(--mono);font-size:11px;color:var(--faint)}
+.facts b{color:var(--text);font-weight:500}
+
+/* cards column */
+.cards{display:flex;flex-direction:column;gap:10px;justify-content:center;position:relative;z-index:1}
+.card{all:unset;box-sizing:border-box;cursor:pointer;display:grid;grid-template-columns:1fr auto;gap:2px 10px;align-items:center;background:var(--card);border:1px solid var(--line-soft);border-radius:14px;padding:12px 14px;transition:border-color .2s,background .2s,transform .2s}
+.card:hover{border-color:var(--line)}
+.card:focus-visible{outline:2px solid var(--honey);outline-offset:2px}
+.card[aria-pressed="true"]{background:var(--card-hi);border-color:var(--honey);box-shadow:0 0 0 4px var(--honey-soft)}
+.card .head{display:flex;align-items:center;gap:9px;min-width:0}
+.ico{width:26px;height:26px;border-radius:7px;display:grid;place-items:center;background:var(--line-soft);color:var(--muted);flex:none}
+.card[aria-pressed="true"] .ico{background:var(--honey);color:var(--ground)}
+.ico svg{width:15px;height:15px}
+.card .name{font-weight:600;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.card .epi{grid-column:1;font-size:11.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.card .count{grid-column:1;display:flex;align-items:baseline;gap:6px;margin-top:4px}
+.card .count b{font-size:24px;font-weight:600;font-variant-numeric:tabular-nums;line-height:1}
+.card .count span{font-size:11.5px;color:var(--muted)}
+.card .ring{grid-column:2;grid-row:1 / span 3;width:46px;height:46px}
+.chip.ag{color:var(--vio)}
+.chip{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border-radius:999px;border:1px solid currentColor;white-space:nowrap}
+.al-exec{color:var(--exec)} .al-auth{color:var(--auth)} .al-audit{color:var(--audit)} .al-consult{color:var(--consult)}
+
+/* fan column */
+.fan{position:relative;z-index:1;min-height:560px}
+.leaf{all:unset;box-sizing:border-box;position:absolute;left:0;display:flex;align-items:center;gap:10px;cursor:pointer;padding:5px 8px 5px 0;border-radius:8px;transform:translateY(-50%);white-space:nowrap;max-width:calc(100% - 4px)}
+.leaf .dot{width:7px;height:7px;border-radius:50%;background:var(--text);flex:none;box-shadow:0 0 0 3px var(--panel)}
+.leaf[data-al="exec"] .dot{background:var(--exec)} .leaf[data-al="auth"] .dot{background:var(--auth)} .leaf[data-al="audit"] .dot{background:var(--audit)} .leaf[data-al="consult"] .dot{background:var(--consult)}
+.leaf .t{font-size:14.5px;font-weight:500;overflow:hidden;text-overflow:ellipsis}
+.leaf .n{font-family:var(--mono);font-size:11px;color:var(--faint);font-variant-numeric:tabular-nums}
+.badge{font-family:var(--mono);font-size:10.5px;color:var(--muted);background:var(--line-soft);border:1px solid var(--line);padding:1px 7px;border-radius:5px;white-space:nowrap}
+.badge b{color:var(--honey);font-weight:500}
+.mark{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.06em;white-space:nowrap}
+.mark.special{color:var(--special)} .mark.pivot{color:var(--pivot)}
+.leaf:hover .t,.leaf:focus-visible .t{color:var(--honey)}
+.leaf:focus-visible{outline:2px solid var(--honey);outline-offset:2px}
+.leaf[aria-current="true"] .t{color:var(--honey)}
+.leaf[aria-current="true"] .dot{box-shadow:0 0 0 3px var(--panel),0 0 0 5px var(--honey)}
+.leaf.in{animation:leafIn .45s cubic-bezier(.3,.7,.2,1) both}
+@keyframes leafIn{from{opacity:0;translate:-14px 0}to{opacity:1;translate:0 0}}
+.leaf.hl .t{color:var(--honey)}
+
+/* detail */
+.detail{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:16px 32px;background:var(--panel);border:1px solid var(--line-soft);border-radius:18px;padding:22px 26px}
+.detail .kicker{font-family:var(--mono);font-size:11px;color:var(--faint);letter-spacing:.04em;text-transform:uppercase;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.detail h3{margin:6px 0 8px;font-size:20px;font-weight:600;text-wrap:balance}
+.detail p{margin:0;max-width:66ch;color:var(--text);line-height:1.6}
+.detail .side{display:flex;flex-direction:column;gap:12px;font-size:13px}
+.detail .side dt{font-family:var(--mono);font-size:10.5px;color:var(--faint);text-transform:uppercase;letter-spacing:.06em}
+.detail .side dd{margin:2px 0 0;color:var(--muted)}
+.detail .side dd code{font-family:var(--mono);font-size:12px;color:var(--text);word-break:break-all}
+.limit{border-left:2px solid var(--special);padding-left:12px;color:var(--text)}
+.also a{color:var(--honey);text-decoration:none;cursor:pointer}
+.also a:hover{text-decoration:underline}
+
+.legend{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:12px;color:var(--muted);align-items:center}
+.legend i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;vertical-align:1px}
+
+@media (max-width: 980px){
+  .stage{grid-template-columns:1fr;padding:18px;gap:22px;min-height:0}
+  svg.wires{display:none}
+  .root{flex-direction:row;flex-wrap:wrap;justify-content:flex-start;text-align:left}
+  #sphere{width:96px;height:96px}
+  .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
+  .fan{min-height:0;display:flex;flex-direction:column;gap:4px}
+  .leaf{position:static;transform:none;white-space:normal;flex-wrap:wrap;left:auto!important;top:auto!important}
+  .detail{grid-template-columns:1fr;padding:18px}
+}
+@media (prefers-reduced-motion: reduce){
+  .leaf.in{animation:none} svg.wires path.draw{animation:none;stroke-dashoffset:0}
+}
+</style>
+<!--garden-theme:start-->
+<script>
+(function(){
+  var q = null; try { q = new URLSearchParams(location.search).get("theme"); } catch (e) {}
+  var h = location.hostname || "";
+  var dark = (q === "dark" || q === "light") ? q === "dark"
+    : (location.protocol === "file:" || /(^|\.)run\.app$/.test(h) || h === "localhost" || h === "127.0.0.1");
+  var want = dark ? "dark" : "light";
+  document.documentElement.setAttribute("data-garden-theme", want);
+  var RX = /\(\s*prefers-color-scheme\s*:\s*(dark|light)\s*\)/gi;
+  function rewrite(text){
+    return text.split(",").map(function(item){
+      var off = false;
+      var out = item.replace(RX, function(_, m){ if (m.toLowerCase() !== want) off = true; return "(min-width:0px)"; });
+      return off ? "not all" : out.trim();
+    }).join(", ");
+  }
+  function fix(rules){
+    for (var i = 0; i < rules.length; i++){
+      var r = rules[i];
+      if (r.media && r.media.mediaText && /prefers-color-scheme/i.test(r.media.mediaText)) r.media.mediaText = rewrite(r.media.mediaText);
+      if (r.cssRules) fix(r.cssRules);
+    }
+  }
+  var done = new WeakSet();
+  function all(){
+    for (var i = 0; i < document.styleSheets.length; i++){
+      var sh = document.styleSheets[i]; if (done.has(sh)) continue;
+      try { fix(sh.cssRules); done.add(sh); } catch (e) {}
+    }
+  }
+  var mm = window.matchMedia && window.matchMedia.bind(window);
+  if (mm) window.matchMedia = function(query){
+    var m = /prefers-color-scheme\s*:\s*(dark|light)/i.exec(query || "");
+    if (!m) return mm(query);
+    return { matches: m[1].toLowerCase() === want, media: query, onchange: null,
+      addListener: function(){}, removeListener: function(){}, addEventListener: function(){},
+      removeEventListener: function(){}, dispatchEvent: function(){ return false; } };
+  };
+  all();
+  document.addEventListener("DOMContentLoaded", all);
+  window.addEventListener("load", all);
+})();
+</script>
+<!--garden-theme:end-->
+
+<div class="wrap">
+  <header class="top">
+    <div>
+      <div class="crumb">notebook / puppy / <b>bee-network</b> · loi de partie · relevé du <span id="gen"></span></div>
+      <h1>Pilotage des formulaires de candidature</h1>
+    </div>
+    <nav class="anchors" aria-label="Ancres Notion">
+      <a href="https://app.notion.com/p/3cd0fcf384948098a689e44eb434ff37" target="_blank" rel="noopener">Forms Control Center ↗</a>
+      <a href="https://app.notion.com/p/3d60fcf38494814984a7c0b586460bff" target="_blank" rel="noopener">Bee Network · Control Center ↗</a>
+    </nav>
+  </header>
+
+  <section class="stage" id="stage" aria-label="Carte des joueurs et de leurs verbes">
+    <svg class="wires" id="wires" aria-hidden="true"></svg>
+
+    <div class="root" id="root">
+      <canvas id="sphere" width="340" height="340" aria-hidden="true"></canvas>
+      <div>
+        <h2>bee-network</h2>
+        <div class="sub">Carte <em id="rootIdx">1</em> de <em id="rootN"></em> · Notion décide, l'atelier prépare</div>
+      </div>
+      <div class="gauge">
+        <svg width="44" height="44" viewBox="0 0 44 44" aria-hidden="true">
+          <circle cx="22" cy="22" r="17" fill="none" stroke="var(--line)" stroke-width="4"/>
+          <circle id="gaugeArc" cx="22" cy="22" r="17" fill="none" stroke="var(--honey)" stroke-width="4" stroke-linecap="round" transform="rotate(-90 22 22)"/>
+        </svg>
+        <div>
+          <div class="num"><span id="ltUsed">17</span><small>/24</small></div>
+          <div class="lbl">primitives LEUCHTTURM<br>mobilisées</div>
+        </div>
+      </div>
+      <div class="facts"><span><b id="fPanes"></b> panes</span><span><b id="fDocs"></b> relevés</span><span><b id="fAl"></b>/4 alignements</span></div>
+    </div>
+
+    <div class="cards" id="cards" role="group" aria-label="Joueurs"></div>
+    <div class="fan" id="fan" aria-live="polite"></div>
+  </section>
+
+  <section class="detail" id="detail" aria-live="polite"></section>
+
+  <div class="legend">
+    <span><i style="background:var(--exec)"></i>Exécute · operate/</span>
+    <span><i style="background:var(--auth)"></i>Autorise · approve/</span>
+    <span><i style="background:var(--audit)"></i>Audite · govern/</span>
+    <span><i style="background:var(--consult)"></i>Consulte · observe/</span>
+    <span><span class="chip ag">agent</span> porteur · tient la garde</span>
+    <span class="mark special">★ pouvoir spécial</span>
+    <span class="mark pivot">◆ pivot</span>
+  </div>
+</div>
+
+<script>
+const FALLBACK_DATA = /*FALLBACK_START*/{"generated":"2026-10-02","lt":{"01":"Water","04":"Circle Trick","06":"Eisenhower","07":"Habits","08":"Clarity","12":"Marginal Gains","13":"No","14":"Single Tasking","15":"Clearing Out","16":"Pareto","17":"Comfort Zone","19":"Essentialism","20":"Goals","21":"Pomodoro/timebox","22":"Emails","23":"Saving","24":"Journaling"},"roles":[{"id":"form-owner","name":"Form Owner","epi":"le capitaine du formulaire","al":"exec","dir":"operate","ico":"compass","bearer":"humain","oath":"Le Form Owner protège une seule chose : le sens du formulaire — que chaque question posée à un candidat porte un pourquoi qui convainc, serve un destinataire nommé, et ne coûte au répondant que ce que la quête a réellement besoin de savoir. Il n'existe pas pour remplir le formulaire de fonctionnalités, ni pour le vider par principe — il existe pour que personne, jamais, ne pose une question qui n'a ni utilité ni destination.","limit":"Il ne peut JAMAIS approuver son propre changement. Le Form Owner demande — publication, pause, archivage — il n'approuve jamais.","panes":[["expliquer-le-pourquoi","Expliquer le pourquoi","08",null,"Expliquer le pourquoi : LT-08 (Clarity) réapproprié pour formuler en un paragraphe le besoin réel de la case 1 — si ce paragraphe ne convainc pas, la quête s'arrête ici et c'est une victoire, pas un échec."],["choisir-le-levier","Choisir le levier","16",null,"Choisir le levier : LT-16 (Pareto) réapproprié pour repérer les ~20% de questions qui portent ~80% du résultat attendu — chaque question reçoit une utilité et une destination, le semis des Field Contracts."],["eprouver-le-parcours","Éprouver le parcours","17",null,"Éprouver le parcours : LT-17 (Comfort Zone) réapproprié pour sortir de sa position d'auteur et marcher le formulaire dans la peau du candidat — nourrit la carte ✨ Clair du premier coup, mais ne remplace pas la répétition générale."],["supprimer-la-coupe","Supprimer (LA COUPE)","15","special","Supprimer (LA COUPE) : LT-15 (Clearing Out) réapproprié comme pouvoir spécial — toute question sans utilité ni destinataire tombe ; chaque coupe nourrit 🌱 Question en moins et « moins de données, plus de confiance »."],["demander-la-requete","Demander la requête","04",null,"Demander la requête : LT-04 (Circle Trick, file typée) réapproprié pour composer une demande d'Operations — publication, pause, archivage — Action typée + Justification, State=Awaiting approval ; il demande, il n'approuve JAMAIS."],["consigner-le-journal","Consigner le journal","24",null,"Consigner le journal : LT-24 (Journaling) réapproprié pour une ligne par geste notable — question coupée, retour de parcours, demande posée — fermant la boucle du tour pour le suivant."]]},{"id":"reliability-operator","name":"Reliability Operator","epi":"le gardien du tuyau","al":"exec","dir":"operate","ico":"pulse","bearer":"agent","oath":"Le Reliability Operator protège une seule chose : le chemin que les réponses empruntent — que chaque candidature parties de Typeform arrive à Firestore intacte, à temps, et sans perte silencieuse. Il n'existe pas pour accélérer le tuyau à tout prix, ni pour le ralentir par prudence excessive — il existe pour que personne ne découvre une panne d'ingestion après coup, qu'une file DLQ ne s'oublie jamais, et que le flux ne reprenne qu'une fois la mitigation prouvée.","limit":"Il suspend l'exécution, il ne modifie JAMAIS le schéma métier. Le pouvoir spécial de ce rôle est un frein, pas un ciseau : tirer la pause d'un flux (Action Pause form dans Operations) protège le système d'une aggravation, mais ne touche à aucun champ, aucun contrat, aucune donnée.","panes":[["surveiller-le-pouls","Surveiller le pouls","01",null,"Surveiller le pouls : LT-01 (Water, cadence d'ancrage) réapproprié pour lire les Health Snapshots récents (statut, lag d'ingestion, taux de succès, DLQ, parité) à cadence fixe ; c'est le quartier propre du copilote qui produit snapshots et canary sans jamais conclure « sain » sur une sonde muette."],["lire-la-tendance","Lire la tendance","12",null,"Lire la tendance : LT-12 (Marginal Gains) réapproprié pour lire la série de Health Snapshots comme une dérive lente (lag qui monte, parité qui s'effrite), jamais comme une file d'événements isolés ; un Degraded/Down sans incident ouvert est une anomalie de couverture."],["reagir-le-triage","Réagir — le triage","22",null,"Réagir, le triage : LT-22 (Emails) réapproprié pour traiter incidents et DLQ par lots, sévérité d'abord — un SEV-1/2 ouvert prime sur tout le cockpit — jamais au fil de l'eau ; réagir n'est pas réparer le schéma métier."],["freiner-le-frein","Freiner — le frein","13","special","Freiner, le frein : LT-13 (No) réapproprié comme pouvoir spécial de pause du flux (Action Pause form dans Operations) pour éviter d'aggraver ; un frein tiré à raison est une carte 🧯, jamais une faute, et appelle toujours un plan de reprise."],["reprendre-le-retour","Reprendre — le retour","07",null,"Reprendre, le retour : LT-07 (Habits, cue→routine→reward) réapproprié pour la reprise prouvée du flux — cue : incident mitigé ; routine : Resume form + pouls resserré ; reward : carte 🧯 Retour propre. Reprendre sans preuve de mitigation, c'est re-freiner plus fort demain."],["consigner-le-journal-tuyau","Consigner le journal","24",null,"Consigner : LT-24 (Journaling) réapproprié en une ligne par événement — signal, geste, preuve, doute — ferme le tour et nourrit les prises et cartes du gardien du tuyau. Fichier distinct du pane-consigner-le-journal.md du Form Owner (même quartier operate/, rôle différent)."]]},{"id":"release-approver","name":"Release Approver","epi":"le gardien de la clé","al":"auth","dir":"approve","ico":"key","bearer":"humain","oath":"Le Release Approver protège une seule chose : le bouton Publier d'une opération de release dans le Forms Control Center. Il n'existe pas pour accélérer les mises en production, ni pour les ralentir par principe — il existe pour que personne, jamais, ne publie sa propre demande sans un second regard.","limit":"Jamais approuver ce qu'il a demandé lui-même. La règle des quatre yeux n'est pas une formalité : approbateur et demandeur (Requested By) sont deux identités distinctes sur chaque fiche, toujours.","panes":[["trier-la-matrice","Trier","06",null,"Trier : LT-06 (Eisenhower) réapproprié pour ordonner la file Operations·Awaiting Approval par urgence (Review Due) et importance (Risk, Environment), sans jamais rendre de verdict."],["verifier-les-preuves","Vérifier","20",null,"Vérifier : LT-20 (Goals) réapproprié pour confronter le résultat attendu d'une fiche Forms à ses preuves citées (répétition générale, Release Shadow), chaque critère coché sur preuve ou INCONCLUSIVE."],["garantir-la-reserve","Garantir","23",null,"Garantir : LT-23 (Saving) réapproprié pour vérifier qu'un plan de rollback écrit, et testé si possible, existe avant tout passage à l'approbation — la marche arrière comme réserve constituée."],["approuver-la-cle","Approuver","14",null,"Approuver : LT-14 (Single Tasking) réapproprié pour instruire UNE opération à la fois en plein focus, affiche Requested By pour le quatre-yeux ; le clic d'approbation reste dans Notion, jamais dans ce pane."],["refuser-le-non","Refuser","13",null,"Refuser : LT-13 (No) réapproprié pour le refus typé State=Rejected + raison écrite — un non motivé protège les participants, dire non est une carte, jamais une faute."],["differer-le-pas-encore","Différer","21","special","Différer : LT-21 (Pomodoro/timebox) réapproprié comme pouvoir spécial « pas encore sans échec » — reposer Review Due avec une nouvelle borne, visible dans Upcoming Reviews."],["consigner-le-journal","Consigner","24",null,"Consigner : LT-24 (Journaling) réapproprié comme mémoire du gardien — une ligne par verdict (opération · verdict · preuve décisive · doute restant), l'aliment des prises et des cartes de reconnaissance."]]},{"id":"sponsor","name":"Sponsor","epi":"le gardien de la promesse","al":"auth","dir":"approve","ico":"flag","bearer":"humain","oath":"Le Sponsor protège une seule chose : le résultat attendu, tel qu'écrit avant que la quête ne commence. Il n'existe pas pour accélérer la livraison, ni pour la freiner par prudence — il existe pour que la case 1 (le résultat attendu) et la case 7 (le résultat obtenu) soient un jour confrontées, ligne à ligne, par quelqu'un qui n'a pas d'intérêt à arrondir les angles.","limit":"Il valide et arbitre, il ne modifie jamais directement le formulaire. Aucun pane de ce quartier n'édite un champ Typeform, ne change un Lifecycle, ne touche une fiche Field Contracts.","panes":[["sponsor-prioriser-l-essentiel","Prioriser l'essentiel","19",null,"Prioriser : LT-19 (Essentialism) réapproprié pour fixer les priorités du jeu (quelles quêtes vivent, lesquelles attendent), lu depuis les vues Quêtes ouvertes et Review Due — jamais un ordre d'exécution."],["sponsor-arbitrer-le-tranchant","Arbitrer le tranchant","13",null,"Arbitrer : LT-13 (No) réapproprié pour trancher un désaccord important — dire non à une branche, motivé, daté, visible dans Notion (règle d'or 3) — jamais une punition de la branche perdante."],["sponsor-accepter-la-balance","Accepter la balance","23","pivot","Accepter la balance : LT-23 (Saving) réapproprié pour peser le risque RESTANT contre la réserve et l'accepter ou le refuser explicitement, jamais l'ignorer ; un risque accepté est daté et signé."],["sponsor-clore-la-promesse","Clore la promesse","20","special","Clore la promesse : LT-20 (Goals) réapproprié comme le POUVOIR SPÉCIAL du rôle — confronter ligne à ligne le résultat OBTENU au résultat ATTENDU écrit en case 1 ; la victoire se déclare sur preuve, la partie se clôture dans Notion (case 7)."],["sponsor-consigner-le-journal","Consigner le journal","24",null,"Consigner : LT-24 (Journaling) réapproprié comme mémoire du rôle — une ligne par arbitrage/acceptation/clôture (décision · options écartées · preuve · doute), l'aliment des prises et des cartes de reconnaissance."]]},{"id":"data-steward","name":"Data Steward","epi":"le gardien des réponses","al":"audit","dir":"govern","ico":"shield","bearer":"agent","oath":"Le Data Steward protège une seule chose : la qualité et le bon usage des données qui traversent le Forms Control Center — ce qu'un champ dit vraiment, ce qu'une donnée personnelle coûte à collecter, où une réponse doit finir sa course, et si Typeform et Bee Network parlent encore le même langage. Il n'existe pas pour ralentir la collecte, ni pour l'accélérer sans regard — il existe pour que personne ne publie un champ ambigu, ne collecte une donnée sans utilité déclarée, ou ne laisse une dérive de contrat s'installer sans qu'elle soit vue.","limit":"Jamais élaguer lui-même. Le pouvoir de suppression d'un champ appartient au Form Owner — voir pane-elaguer-la-proposition.","panes":[["desambiguiser-la-clarte","Désambiguïser","08",null,"Désambiguïser : LT-08 (Clarity) réapproprié pour relire chaque champ pour son intention — un champ compris différemment par deux lecteurs est ambigu, pas discutable."],["minimiser-l-essentiel","Minimiser l'essentiel","19",null,"Minimiser : LT-19 (Essentialism) réapproprié pour exiger de chaque donnée personnelle qu'elle dise son utilité — « au cas où » n'est pas une utilité."],["suivre-la-destination","Suivre la destination","20",null,"Suivre la destination : LT-20 (Goals) réapproprié pour vérifier que chaque réponse a une destination nommée dans Bee Network, croisée contre Field Contracts — une réponse sans destination est un frein, pas un détail."],["valider-le-contrat","Valider le contrat","12","pivot","Valider le contrat (pivot) : LT-12 (Marginal Gains) réapproprié pour la revue taxonomique base par base, où Typeform et Bee Network sont vérifiés parler le même langage ; c'est ici que le copilote sonde, jamais ne valide."],["elaguer-la-proposition","Élaguer","15",null,"Élaguer : LT-15 (Clearing Out) réapproprié pour repérer doublons et champs morts et les proposer au Form Owner — repérer n'est pas supprimer, le pouvoir de suppression reste chez lui."],["arreter-le-frein","Arrêter — LE FREIN","13","special","Arrêter : LT-13 (No) réapproprié pour le pouvoir spécial LE FREIN — arrêter une partie si personne ne sait expliquer où va une donnée ; un arrêt n'est pas un échec, c'est une protection."],["consigner-le-journal","Consigner le journal","24",null,"Consigner : LT-24 (Journaling) réapproprié pour une ligne par verdict — champ, constat, preuve, doute restant — l'aliment des prises et de la carte 🛡️ Gardien des données."]]},{"id":"releves","name":"Relevés & digests","epi":"ce que l'atelier a produit","al":null,"ico":"doc","docs":true,"oath":"Les notes datées du sous-système : inventaires, audits, propositions et digests. Elles préparent les décisions que Notion porte.","limit":"Rien ici ne décide. Chaque relevé part vers Notion (Compass) sous le label de son alignement.","panes":[["observe/2026-09-21-digest-control-centers","Digest — Control Centers bee-network",null,null,"Premier digest Observe du tour quotidien bee-network — FCC vérifié vue par vue, ACC intégralement INCONCLUSIVE, deux dérives de gouvernance des rôles repérées.","consult","21/09"],["govern/2026-09-22-sortie-satori-pop-audit-distance-mvp","Sortie de Satori Pop — audit de distance au MVP",null,null,"Audit de distance au MVP (2026-09-22) du chantier « Sortie de Satori Pop » — parité fonctionnelle avec Satori Pop via nCZzuxiM mesurée champ par champ (27 colonnes Satori) et gate par gate (12 verrous de bascule) ; verdict et chemin…","audit","22/09"],["govern/2026-09-22-sortie-satori-pop-greenfield-vs-parite","Sortie de Satori Pop — contre-audit greenfield",null,null,"Contre-audit greenfield (2026-09-22) — le formulaire dérivé du schéma live de Startups Pool et Founders opposé à l'audit de parité Satori Pop : quelles propriétés réclament une question, quelles questions n'ont pas de cible, et à quelle…","audit","22/09"],["operate/2026-09-22-sortie-satori-pop-inventaire","Sortie de Satori Pop — inventaire",null,null,"Inventaire mesuré (2026-09-22) de tous les artefacts du chantier « Sortie de Satori Pop » — remplacer le formulaire Satori Pop par Bee Network · Forms Control Center — par couche : contrat, code puppy, Notion FCC, bases cibles, notebook…","exec","22/09"],["approve/2026-09-23-formulaire-candidature-v2-proposition","Formulaire de candidature v2 — proposition",null,null,"Proposition du formulaire de candidature v2 dérivé du schéma live de Startups Pool et Founders — une question par propriété, minimisation RGPD par défaut, sans atelier ; brouillon Typeform créé pour relecture.","auth","23/09"],["operate/2026-09-25-sortie-satori-pop-reste-a-faire","Sortie de Satori Pop — reste à faire",null,null,"Registre vivant de ce qui reste ouvert pour la sortie de Satori Pop (lots 1-7), trié par impact et tenu à jour au fil de l'exécution.","exec","25/09"]]}]}/*FALLBACK_END*/;
+const LT = FALLBACK_DATA.lt;
+const AL = {exec:"Exécute",auth:"Autorise",audit:"Audite",consult:"Consulte"};
+const ICONS = {
+  compass:'<path d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18Zm3.5 5.5-2 5-5 2 2-5 5-2Z"/>',
+  pulse:'<path d="M3 12h4l2-5 4 10 2-5h6"/>',
+  key:'<circle cx="8" cy="12" r="4"/><path d="M12 12h9m-3 0v3m-3-3v2"/>',
+  flag:'<path d="M5 21V4m0 0h11l-2 4 2 4H5"/>',
+  shield:'<path d="M12 3 4 6v6c0 4.5 3.4 8 8 9 4.6-1 8-4.5 8-9V6l-8-3Z"/>',
+  doc:'<path d="M7 3h7l4 4v14H7zM14 3v4h4M10 12h6M10 16h6"/>'
+};
+const ROLES = FALLBACK_DATA.roles;
+
+const $ = s => document.querySelector(s);
+const stage = $("#stage"), cardsEl = $("#cards"), fanEl = $("#fan"), wires = $("#wires"), detail = $("#detail");
+let current = 0, currentLeaf = null;
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+function ring(role){
+  const n = role.panes.length, r = 18, c = 2*Math.PI*r, gap = 3, seg = c/n - gap;
+  let out = `<svg class="ring" viewBox="0 0 46 46" aria-hidden="true"><g transform="rotate(-90 23 23)">`;
+  role.panes.forEach((p,i)=>{
+    const col = role.docs ? `var(--${ {exec:"exec",auth:"auth",audit:"audit",consult:"consult"}[p[5]] })` :
+      p[3]==="special" ? "var(--special)" : p[3]==="pivot" ? "var(--pivot)" : "var(--line)";
+    out += `<circle cx="23" cy="23" r="${r}" fill="none" stroke="${col}" stroke-width="4" stroke-dasharray="${seg} ${c-seg}" stroke-dashoffset="${-i*(c/n)}"/>`;
+  });
+  return out + `</g><text x="23" y="26.5" text-anchor="middle" font-size="9.5" font-family="IBM Plex Mono, monospace" fill="var(--muted)">${n}</text></svg>`;
+}
+
+function renderCards(){
+  cardsEl.innerHTML = ROLES.map((r,i)=>`
+    <button class="card" id="card-${r.id}" aria-pressed="${i===current}" data-i="${i}">
+      <div class="head"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${ICONS[r.ico]}</svg></span><span class="name">${r.name}</span></div>
+      <div class="epi">${r.al ? `<span class="chip al-${r.al}">${AL[r.al]}</span> ` : ""}${r.bearer==="agent" ? `<span class="chip ag">agent</span> ` : ""}${r.epi}</div>
+      <div class="count"><b>${r.panes.length}</b><span>${r.docs ? "notes datées" : "verbes · panes"}</span></div>
+      ${ring(r)}
+    </button>`).join("");
+  cardsEl.querySelectorAll(".card").forEach(b=>b.addEventListener("click",()=>select(+b.dataset.i)));
+}
+
+function leafHTML(role,p,i){
+  if(role.docs){
+    return `<span class="dot"></span><span class="n">${p[6]}</span><span class="t">${p[1]}</span><span class="chip al-${p[5]}">${AL[p[5]]}</span>`;
+  }
+  const mark = p[3]==="special" ? `<span class="mark special">★ pouvoir spécial</span>` : p[3]==="pivot" ? `<span class="mark pivot">◆ pivot</span>` : "";
+  return `<span class="dot"></span><span class="n">${String(i+1).padStart(2,"0")}</span><span class="t">${p[1]}</span><span class="badge"><b>LT-${p[2]}</b> ${LT[p[2]]}</span>${mark}`;
+}
+
+function renderFan(animate){
+  const role = ROLES[current];
+  fanEl.innerHTML = role.panes.map((p,i)=>`<button class="leaf${animate&&!reduce?" in":""}" data-k="${i}" data-al="${role.docs?p[5]:role.al}" style="animation-delay:${i*45}ms">${leafHTML(role,p,i)}</button>`).join("");
+  fanEl.querySelectorAll(".leaf").forEach(b=>{
+    b.addEventListener("click",()=>showPane(+b.dataset.k));
+  });
+  layout(animate);
+}
+
+function layout(animate){
+  const wide = matchMedia("(min-width: 981px)").matches;
+  const leaves = [...fanEl.querySelectorAll(".leaf")];
+  if(!wide){ wires.innerHTML=""; return; }
+  const H = fanEl.clientHeight, n = leaves.length;
+  const pad = n > 6 ? 30 : 60, span = H - pad*2, arc = Math.min(110, fanEl.clientWidth*.18);
+  leaves.forEach((el,i)=>{
+    const t = n===1 ? .5 : i/(n-1);
+    el.style.top = (pad + t*span) + "px";
+    el.style.left = (40 + arc*Math.sin(Math.PI*t)) + "px";
+  });
+  drawWires(animate);
+}
+
+function drawWires(animate){
+  const S = stage.getBoundingClientRect();
+  wires.setAttribute("viewBox",`0 0 ${S.width} ${S.height}`);
+  const sph = $("#sphere").getBoundingClientRect();
+  const rx = sph.right - S.left - 10, ry = sph.top + sph.height/2 - S.top;
+  let paths = "";
+  const cards = [...cardsEl.querySelectorAll(".card")];
+  cards.forEach((c,i)=>{
+    const b = c.getBoundingClientRect(), x = b.left - S.left, y = b.top + b.height/2 - S.top, mx = (rx + x)/2;
+    paths += `<path class="${i===current?"lead"+(animate&&!reduce?" draw":""):"dim"}" pathLength="1" d="M${rx},${ry} C${mx},${ry} ${mx},${y} ${x},${y}"/>`;
+  });
+  const cb = cards[current].getBoundingClientRect();
+  const ox = cb.right - S.left, oy = cb.top + cb.height/2 - S.top;
+  fanEl.querySelectorAll(".leaf").forEach((el,i)=>{
+    const d = el.querySelector(".dot").getBoundingClientRect();
+    const x = d.left - S.left, y = d.top + d.height/2 - S.top, mx = ox + (x-ox)*.45;
+    paths += `<path class="lead${animate&&!reduce?" draw":""}" style="animation-delay:${i*45}ms" pathLength="1" d="M${ox},${oy} C${mx},${oy} ${mx},${y} ${x},${y}"/>`;
+  });
+  wires.innerHTML = paths;
+}
+
+function sameElsewhere(lt, selfRole, selfIdx){
+  const hits = [];
+  ROLES.forEach((r,ri)=>{ if(r.docs) return; r.panes.forEach((p,pi)=>{ if(p[2]===lt && !(ri===selfRole && pi===selfIdx)) hits.push([ri,pi]); }); });
+  return hits;
+}
+
+function showRole(){
+  const r = ROLES[current];
+  currentLeaf = null;
+  fanEl.querySelectorAll(".leaf").forEach(l=>l.removeAttribute("aria-current"));
+  const file = r.docs ? "puppy/bee-network/*/2026-*.md" : `puppy/bee-network/${r.dir}/${r.id}.md`;
+  detail.innerHTML = `
+    <div>
+      <div class="kicker">${r.al?`<span class="chip al-${r.al}">${AL[r.al]}</span>`:""}${r.bearer==="agent"?`<span class="chip ag">agent</span>`:""}<span>${r.docs?"relevés":"note-joueur"}</span></div>
+      <h3>${r.name}, ${r.epi}</h3>
+      <p>${r.oath}</p>
+    </div>
+    <dl class="side">
+      <div><dt>${r.docs?"Règle":"Limite fondatrice"}</dt><dd class="limit">${r.limit}</dd></div>
+      ${r.bearer==="agent"?`<div><dt>Porteur</dt><dd>Tenu au quotidien par un agent, qui tient la garde. L'humain relié au rôle est son point d'escalade ; l'agent peut demander, jamais approuver.</dd></div>`:""}
+      <div><dt>Fichier</dt><dd><code>${file}</code></dd></div>
+      <div><dt>Lecture</dt><dd>Choisis un ${r.docs?"relevé":"verbe"} dans l'éventail pour son détail.</dd></div>
+    </dl>`;
+}
+
+function showPane(k){
+  const r = ROLES[current], p = r.panes[k];
+  currentLeaf = k;
+  fanEl.querySelectorAll(".leaf").forEach(l=>l.toggleAttribute("aria-current", +l.dataset.k===k));
+  if(fanEl.querySelector('[aria-current]')) fanEl.querySelector('[aria-current]').setAttribute("aria-current","true");
+  if(r.docs){
+    detail.innerHTML = `
+      <div><div class="kicker"><span class="chip al-${p[5]}">${AL[p[5]]}</span><span>${p[6]}/2026</span></div>
+      <h3>${p[1]}</h3><p>${p[4]}</p></div>
+      <dl class="side"><div><dt>Fichier</dt><dd><code>puppy/bee-network/${p[0]}.md</code></dd></div>
+      <div><dt>Retour</dt><dd class="also"><a data-back>← Relevés & digests</a></dd></div></dl>`;
+  } else {
+    const hits = sameElsewhere(p[2], current, k);
+    const also = hits.length ? hits.map(([ri,pi])=>`<a data-go="${ri}:${pi}">${ROLES[ri].name} · ${ROLES[ri].panes[pi][1]}</a>`).join("<br>") : "Aucun autre joueur ne mobilise cette primitive.";
+    const mark = p[3]==="special" ? `<span class="mark special">★ pouvoir spécial</span>` : p[3]==="pivot" ? `<span class="mark pivot">◆ pivot</span>` : "";
+    detail.innerHTML = `
+      <div><div class="kicker"><span class="chip al-${r.al}">${AL[r.al]}</span><span>${r.name} · pane ${k+1}/${r.panes.length}</span>${mark}</div>
+      <h3>${p[1]}</h3><p>${p[4]}</p></div>
+      <dl class="side">
+        <div><dt>Primitive citée</dt><dd><span class="badge"><b>LT-${p[2]}</b> ${LT[p[2]]}</span></dd></div>
+        <div><dt>Même primitive ailleurs</dt><dd class="also">${also}</dd></div>
+        <div><dt>Fichier</dt><dd><code>puppy/bee-network/${r.dir}/pane-${p[0]}.md</code></dd></div>
+      </dl>`;
+  }
+  detail.querySelectorAll("[data-go]").forEach(a=>a.addEventListener("click",()=>{
+    const [ri,pi] = a.dataset.go.split(":").map(Number); select(ri); showPane(pi);
+  }));
+  detail.querySelectorAll("[data-back]").forEach(a=>a.addEventListener("click",showRole));
+}
+
+function select(i){
+  if(i===current && fanEl.children.length) { showRole(); return; }
+  current = i;
+  cardsEl.querySelectorAll(".card").forEach((c,j)=>c.setAttribute("aria-pressed", j===i));
+  $("#rootIdx").textContent = i+1;
+  renderFan(true);
+  showRole();
+  try{ localStorage.setItem("bn-role", i); }catch(e){}
+}
+
+/* gauge */
+(function(){
+  const used = new Set(ROLES.flatMap(r=>r.docs?[]:r.panes.map(p=>p[2]))).size;
+  $("#ltUsed").textContent = used;
+  const c = 2*Math.PI*17, a = $("#gaugeArc");
+  a.setAttribute("stroke-dasharray", `${c*used/24} ${c}`);
+})();
+
+/* dotted hive sphere */
+(function(){
+  const cv = $("#sphere"), ctx = cv.getContext("2d"), N = 420, pts = [];
+  const g = Math.PI*(3-Math.sqrt(5));
+  for(let i=0;i<N;i++){ const y = 1 - (i/(N-1))*2, r = Math.sqrt(1-y*y), th = g*i; pts.push([Math.cos(th)*r, y, Math.sin(th)*r]); }
+  let rot = 0;
+  function frame(){
+    const col = getComputedStyle(document.documentElement).getPropertyValue("--honey").trim() || "#f2b441";
+    ctx.clearRect(0,0,340,340);
+    const cs = Math.cos(rot), sn = Math.sin(rot), tilt = .35, ct = Math.cos(tilt), st = Math.sin(tilt);
+    ctx.fillStyle = col;
+    for(const [x,y,z] of pts){
+      const x1 = x*cs + z*sn, z1 = -x*sn + z*cs;
+      const y2 = y*ct - z1*st, z2 = y*st + z1*ct;
+      const depth = (z2+1)/2;
+      ctx.globalAlpha = .12 + depth*.75;
+      ctx.beginPath(); ctx.arc(170 + x1*140, 170 + y2*140, .8 + depth*1.9, 0, Math.PI*2); ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+    rot += .0035;
+    if(!reduce) requestAnimationFrame(frame);
+  }
+  frame();
+})();
+
+let saved = 0;
+try{ saved = +localStorage.getItem("bn-role") || 0; }catch(e){}
+if(!(saved>=0 && saved<ROLES.length)) saved = 0;
+current = saved;
+document.getElementById("gen").textContent = FALLBACK_DATA.generated;
+{ const players = ROLES.filter(r=>!r.docs), docs = ROLES.filter(r=>r.docs);
+  $("#fPanes").textContent = players.reduce((a,r)=>a+r.panes.length,0);
+  $("#fDocs").textContent = docs.reduce((a,r)=>a+r.panes.length,0);
+  $("#fAl").textContent = new Set(players.map(r=>r.al)).size;
+  $("#rootN").textContent = ROLES.length; }
+renderCards();
+renderFan(false);
+showRole();
+$("#rootIdx").textContent = current+1;
+addEventListener("resize",()=>layout(false));
+document.fonts && document.fonts.ready.then(()=>layout(false));
+</script>
+<!--notion-links:start-->
+<style>.nl{color:inherit;text-decoration:underline dotted;text-decoration-thickness:1px;text-underline-offset:3px;cursor:pointer}.nl::after{content:" \2197";font-size:.8em;opacity:.55}.nl:hover,.nl:focus-visible{text-decoration-style:solid;opacity:1;outline:none}.nl:hover::after{opacity:1}</style>
+<script>window.__NOTION_LINKS__ = [{"name": "Startups Pool", "url": "https://app.notion.com/p/67853899c6ff4e78aeb2f25b0875b601", "aliases": []}, {"name": "Zone Investment", "url": "https://app.notion.com/p/fe5715570ac747a4aa5452cc3cc9e628", "aliases": []}, {"name": "Zone Platform", "url": "https://app.notion.com/p/9c0c831726e34ff99de32607e779d2c3", "aliases": []}, {"name": "Founders", "url": "https://app.notion.com/p/13619a07ff444d05bbee168b31ff7260", "aliases": []}, {"name": "Memo", "url": "https://app.notion.com/p/96a2609ee4e44a01ae4841dd03672bc4", "aliases": []}, {"name": "Fundraise rounds", "url": "https://app.notion.com/p/2cb0fcf38494809793dfe911dbf79ead", "aliases": []}, {"name": "Our Terms", "url": "https://app.notion.com/p/2840fcf3849480218e57f942e78274e9", "aliases": []}, {"name": "CoInvest", "url": "https://app.notion.com/p/2e00fcf3849480298582c7bd72e3e332", "aliases": []}, {"name": "Valorisation", "url": "https://app.notion.com/p/2840fcf3849480d3b6eccb41715cbd71", "aliases": []}, {"name": "ACTIVATION ROADMAPS", "url": "https://app.notion.com/p/20f0fcf3849480cea08ac121ee8c6f9d", "aliases": ["Activation Roadmaps"]}, {"name": "Contracts", "url": "https://app.notion.com/p/2080fcf384948027bc4fdd3f1a11b5e3", "aliases": []}, {"name": "Zone - Communication", "url": "https://app.notion.com/p/1c70fcf3849480caa46bde43c221d665", "aliases": ["Zone · Communication"]}, {"name": "STOCKS", "url": "https://app.notion.com/p/20f0fcf38494809b881de5ea5c91bfaf", "aliases": []}, {"name": "Labels", "url": "https://app.notion.com/p/29ab6a35591e45f592eca77fd8b1b682", "aliases": []}, {"name": "Taskforce", "url": "https://app.notion.com/p/2fb0fcf3849480728cd6f141b07251d9", "aliases": ["TeamOwner"]}, {"name": "Programs", "url": "https://app.notion.com/p/42299f2803934484ac1abe3b193bc895", "aliases": ["Programmes"]}, {"name": "Mapverse", "url": "https://app.notion.com/p/c4c8efef870e43c298cbd6344b8fb739", "aliases": []}, {"name": "Scenari", "url": "https://app.notion.com/p/90a81b75c2dd461aafedc1860780b50a", "aliases": []}, {"name": "Protocols", "url": "https://app.notion.com/p/d44452661fb84329a45024735b5eed09", "aliases": []}, {"name": "Persona", "url": "https://app.notion.com/p/23e3aaea352c4dba824cedd4d95d2bb8", "aliases": ["Sendemo Persona Classification"]}, {"name": "Outcome", "url": "https://app.notion.com/p/15b0fcf3849480b4b1daed8687ca054b", "aliases": []}, {"name": "Pirate Metrics Framework", "url": "https://app.notion.com/p/023399460c1d4888bbe63a9c3a938dbf", "aliases": ["Data Driven Metrics Framework"]}, {"name": "Base Registry", "url": "https://app.notion.com/p/57ec93d750894e35a235cb2def898a9a", "aliases": []}, {"name": "Schema Contracts", "url": "https://app.notion.com/p/b402cf7695dc422ca847f61ef3a6f9cd", "aliases": []}, {"name": "Forms", "url": "https://app.notion.com/p/b292d77766c040a69baf24e4f6d62d75", "aliases": []}, {"name": "Field Contracts", "url": "https://app.notion.com/p/777bdb05d0a14871a67f14bde32f3464", "aliases": []}, {"name": "Operations", "url": "https://app.notion.com/p/06606f047537434f9b4e44f11b31f3b3", "aliases": []}, {"name": "Releases", "url": "https://app.notion.com/p/de91feac9f644bfca7b4bd6535c43170", "aliases": []}, {"name": "Incidents", "url": "https://app.notion.com/p/f505998cf2594842a412c806b08c6395", "aliases": []}, {"name": "Health Snapshots", "url": "https://app.notion.com/p/329ea747d48f4dd38512280f53886974", "aliases": []}, {"name": "Rôles", "url": "https://app.notion.com/p/7c954592eeb342618d408cb8e8de350b", "aliases": []}, {"name": "Alignements", "url": "https://app.notion.com/p/3d60fcf3849480b9b683fbc399b9bae7", "aliases": []}, {"name": "Pages", "url": "https://app.notion.com/p/1ad0fcf3849480219903ea0f2f8623e3", "aliases": ["Docs - lab", "Doc - lab", "Doc-lab", "Docs-lab"]}, {"name": "Compass", "url": "https://app.notion.com/p/6eec446fce1a40a1ab14efb34bad27e9", "aliases": []}, {"name": "Members", "url": "https://app.notion.com/p/550eb00f314f4f20a3ffd2cb9f5504de", "aliases": []}];
+(function(){
+  const T = window.__NOTION_LINKS__ || [];
+  if (!T.length || !document.body) return;
+  const url = new Map(); const names = [];
+  T.forEach(l => [l.name, ...(l.aliases || [])].forEach(n => { url.set(n, {u: l.url, k: l.name}); names.push(n); }));
+  names.sort((a, b) => b.length - a.length);
+  const esc = s => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const RX = new RegExp("(?<![\\p{L}\\p{N}_])(" + names.map(esc).join("|") + ")(?![\\p{L}\\p{N}_])(?!\\s+(?:Control\\s+Center|Operator))", "gu");
+  const SKIP = "a,button,[role=button],script,style,svg,textarea,input,select,option,label,title,code,pre,[data-nolink],.nl";
+  const SCOPE = ".scene,section,aside,dialog,[role=dialog],[data-scope],[aria-live],#panel,#detail,.panel,.detail,body";
+  function walk(root){
+    const seen = new Map();  // scope → names already linked in it (read from the DOM once per pass)
+    const has = (scope, k) => { let s = seen.get(scope);
+      if (!s){ s = new Set([...scope.querySelectorAll("a.nl")].filter(a => a.parentElement.closest(SCOPE) === scope).map(a => a.dataset.k)); seen.set(scope, s); }
+      return s.has(k); };
+    const tw = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {acceptNode: n => {
+      const p = n.parentElement; if (!p || p.closest(SKIP)) return NodeFilter.FILTER_REJECT;
+      RX.lastIndex = 0; return RX.test(n.nodeValue) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_SKIP; }});
+    const nodes = []; while (tw.nextNode()) nodes.push(tw.currentNode);
+    nodes.forEach(n => {
+      const scope = n.parentElement.closest(SCOPE) || document.body;
+      const s = n.nodeValue; let last = 0, out = null; RX.lastIndex = 0; let m;
+      while ((m = RX.exec(s))){
+        const hit = url.get(m[1]); if (!hit || has(scope, hit.k)) continue;
+        seen.get(scope).add(hit.k);
+        out = out || document.createDocumentFragment();
+        out.append(s.slice(last, m.index));
+        const a = document.createElement("a"); a.className = "nl"; a.href = hit.u; a.target = "_blank"; a.rel = "noopener";
+        a.dataset.k = hit.k; a.title = "Ouvrir « " + hit.k + " » dans Notion"; a.textContent = m[1];
+        a.addEventListener("click", e => e.stopPropagation());
+        out.append(a); last = m.index + m[0].length;
+      }
+      if (out){ out.append(s.slice(last)); n.replaceWith(out); }
+    });
+  }
+  // Inside the Notion app (desktop/mobile), an https link opens the web browser first, which then
+  // hands over to the app. Rewrite Notion links to the notion:// scheme there so they open directly.
+  const UA = navigator.userAgent || "";
+  const IN_APP = /\bNotion\/\d/i.test(UA) || /Electron\//.test(UA);
+  const NRX = /^https:\/\/(?:app\.notion\.com|www\.notion\.so|notion\.so)\/(?:p\/)?([^?#]+)(.*)$/;
+  // DISABLED 2026-10-02: notion:// links are blocked inside Notion embeds (links stopped working in the app).
+  function toApp(root){
+    if (!IN_APP) return;
+    root.querySelectorAll('a[href*="notion.com/"],a[href*="notion.so/"]').forEach(a => {
+      const m = a.getAttribute("href").match(NRX); if (!m) return;
+      a.setAttribute("href", "notion://www.notion.so/" + m[1] + m[2]); a.removeAttribute("target");
+    });
+  }
+  let t = null;
+  const run = () => { t = null; obs.disconnect(); try { walk(document.body); } finally { obs.observe(document.body, {childList: true, subtree: true, characterData: true}); } };
+  const obs = new MutationObserver(() => { if (!t) t = setTimeout(run, 250); });
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", run); else setTimeout(run, 0);
+})();
+</script>
+<!--notion-links:end-->
