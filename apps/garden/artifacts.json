@@ -6,6 +6,11 @@
       "id": "puppy",
       "title": "Puppy",
       "summary": "Bee Network : les joueurs de la loi de partie et le contenu des bases Notion."
+    },
+    {
+      "id": "rosa",
+      "title": "Rosa",
+      "summary": "Le harnais d'agents : orchestrations, drains, bancs de mesure et ce qu'ils rendent."
     }
   ],
   "artifacts": [
@@ -139,6 +144,17 @@
       "source": "garden/assets/lab-ca-2026-11.html",
       "file": "lab-ca-2026-11.html",
       "generator": "Claude Code · busta-garden (registre Puppy, rapport GCP du 05/10, base Valorisation, Pages)",
+      "sensitivity": "internal"
+    },
+    {
+      "id": "horacia-bench-pitch",
+      "domain": "rosa",
+      "title": "Un résultat nul qui vaut une décision — le banc modèle × rôle d'Horacia",
+      "description": "Pitch de l'orchestration horacia-model-role-bench (close le 10/10/2026) : ce que l'orch a produit (instrument réutilisable, preuve négative avant la dépense, rapport vérifiable, défauts d'instrument débusqués), cinq prochaines étapes, cinq points à améliorer. Chiffres issus de results/summary.json et de l'archive du plan.",
+      "date": "2026-10-10",
+      "source": "garden/assets/horacia-bench-pitch.html",
+      "file": "horacia-bench-pitch.html",
+      "generator": "Claude Code · pilote tokenomics (drain et évaluation), page écrite par busta-garden, 10/10/2026",
       "sensitivity": "internal"
     }
   ]

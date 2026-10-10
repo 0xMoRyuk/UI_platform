@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Un résultat nul qui vaut une décision — banc modèle × rôle d'Horacia</title>
+<style>
+:root{
+  color-scheme: dark;
+  --page:#070706; --panel:#100f0d; --card:#151411; --line:#27241f; --text:#f2f0eb; --muted:#928c80; --faint:#5f5a51;
+  --acc:#c6f135; --amber:#f5a524; --red:#ef4444; --blue:#8fa8ff; --off:#2c2924; --on-acc:#0b0d06;
+  --sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono:"Berkeley Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: light){
+  :root{
+    color-scheme: light;
+    --page:#f4f3f0; --panel:#ffffff; --card:#fbfaf7; --line:#e1ddd5; --text:#17150f; --muted:#625c50; --faint:#8b8578;
+    --acc:#4f7300; --amber:#a65f00; --red:#c8352b; --blue:#3b5bd6; --off:#e9e5dd; --on-acc:#ffffff;
+  }
+}
+*{box-sizing:border-box}
+html{scroll-snap-type:y proximity;scroll-behavior:smooth;background:var(--page)}
+body{margin:0;background:var(--page);color:var(--text);font-family:var(--sans);-webkit-font-smoothing:antialiased}
+.scene{min-height:100dvh;scroll-snap-align:start;display:grid;align-content:center;padding:64px max(16px,6vw) 84px}
+.scene>*{min-width:0;max-width:100%}
+.eyebrow{font:500 12px var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--acc);margin:0 0 16px}
+h1,h2{margin:0;font-weight:500;letter-spacing:-.025em;text-wrap:balance;font-family:var(--mono);hyphens:auto;overflow-wrap:break-word}
+h1{font-size:clamp(30px,5.6vw,80px);line-height:1;letter-spacing:-.04em;max-width:20ch}
+h2{font-size:clamp(24px,3.6vw,48px);line-height:1.06;max-width:26ch}
+.lede{margin:20px 0 0;font-size:clamp(16px,1.5vw,20px);line-height:1.5;color:var(--muted);max-width:64ch;font-weight:300}
+.lede b{color:var(--text);font-weight:500}
+.note{margin-top:14px;font:12px/1.5 var(--mono);color:var(--faint);max-width:90ch;overflow-wrap:anywhere}
+code{font:12px var(--mono);color:var(--text);overflow-wrap:anywhere}
+.rv{opacity:0;translate:0 16px;transition:opacity .8s cubic-bezier(.2,.7,.2,1),translate .9s cubic-bezier(.2,.7,.2,1)}
+.scene.on .rv{opacity:1;translate:0 0}
+.scene.on .d1{transition-delay:.12s}.scene.on .d2{transition-delay:.24s}.scene.on .d3{transition-delay:.36s}.scene.on .d4{transition-delay:.48s}.scene.on .d5{transition-delay:.6s}
+.nojs .rv{opacity:1;translate:none}
+.progress{position:fixed;top:0;left:0;height:2px;background:var(--acc);width:0;z-index:20;transition:width .5s}
+.hud{position:fixed;right:16px;bottom:14px;z-index:20;display:flex;gap:10px;align-items:center;font:12px var(--mono);color:var(--faint)}
+.hud b{color:var(--text);font-weight:500}
+.hud button{all:unset;cursor:pointer;width:30px;height:30px;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;color:var(--muted);background:var(--panel)}
+.hud button:hover,.hud button:focus-visible{color:var(--acc);border-color:var(--acc)}
+/* cards */
+.trio,.cards,.imp{margin-top:28px;display:grid;gap:12px;max-width:1240px}
+.trio{grid-template-columns:repeat(3,minmax(0,1fr));max-width:1100px}
+.cards{grid-template-columns:repeat(3,minmax(0,1fr))}
+.imp{grid-template-columns:repeat(3,minmax(0,1fr))}
+.bx{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:8px}
+.bx .k{font:11px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.bx .t{font:500 18px var(--mono);letter-spacing:-.01em;line-height:1.2;overflow-wrap:break-word;hyphens:auto}
+.bx p{margin:0;font-size:13.5px;line-height:1.5;color:var(--muted)}
+.bx p b{color:var(--text);font-weight:500}
+.bx.no{border-color:var(--amber)}
+.bx.no .k{color:var(--amber)}
+.bx.ok{border-color:var(--acc)}
+.bx.ok .k{color:var(--acc)}
+.g{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--acc);border-radius:10px;padding:14px 16px;display:flex;flex-direction:column;gap:6px}
+.g .n{font:11px var(--mono);letter-spacing:.1em;color:var(--faint)}
+.g .t{font:500 17px var(--mono);line-height:1.2;overflow-wrap:break-word;hyphens:auto}
+.g p{margin:0;font-size:13px;line-height:1.5;color:var(--muted)}
+.g p b{color:var(--text);font-weight:500}
+.g.wide{grid-column:span 2}
+.bg{background:var(--panel);border:1px solid var(--amber);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:8px}
+.bg.red{border-color:var(--red)}
+.bg .k{font:11px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--amber)}
+.bg.red .k{color:var(--red)}
+.bg .t{font:500 17px var(--mono);line-height:1.2;overflow-wrap:break-word;hyphens:auto}
+.bg p{margin:0;font-size:13px;line-height:1.5;color:var(--muted)}
+.bg p b{color:var(--text);font-weight:500}
+/* steps */
+.steps{margin:26px 0 0;padding:0;list-style:none;display:grid;grid-template-columns:minmax(0,1fr);gap:10px;max-width:980px;counter-reset:s}
+.steps li{counter-increment:s;font-size:14px;line-height:1.55;color:var(--muted);background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--blue);border-radius:10px;padding:12px 16px;overflow-wrap:break-word}
+.steps li::before{content:counter(s) " · ";font:500 13px var(--mono);color:var(--blue)}
+.steps b{color:var(--text);font-weight:500}
+.motto{margin:26px 0 0;font:400 clamp(18px,2.2vw,30px)/1.3 var(--mono);letter-spacing:-.02em;max-width:36ch;overflow-wrap:break-word;hyphens:auto}
+.motto b{color:var(--acc);font-weight:500}
+@media (max-width: 1100px){
+  .trio,.cards,.imp{grid-template-columns:minmax(0,1fr)}
+  .g.wide{grid-column:auto}
+  html{scroll-snap-type:none}
+}
+@media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} .rv{transition:none;opacity:1;translate:none} }
+</style>
+</head>
+<body class="nojs">
+<div class="progress" id="progress"></div>
+<nav class="hud" aria-label="Navigation"><span><b id="cur">01</b> / <span id="tot">05</span></span><button id="prev" aria-label="Scène précédente">↑</button><button id="next" aria-label="Scène suivante">↓</button></nav>
+<main>
+
+<section class="scene" id="s0" aria-label="Ouverture">
+  <p class="eyebrow rv">Horacia · orchestration horacia-model-role-bench · relevé du 10/10/2026</p>
+  <h1 class="rv d1">Un résultat nul qui vaut une décision.</h1>
+  <p class="lede rv d2">Le banc modèle × rôle d'Horacia, <b>drainé et clos le 10 octobre 2026</b>. Cette page s'adresse à Mo et à l'équipe Lab : ce que l'orch a produit, ce qu'elle permet de faire ensuite, ce qu'on pourrait améliorer.</p>
+  <div class="trio">
+    <div class="bx rv d3"><span class="k">Ce qu'on cherchait</span><span class="t">Une table rôle → modèle</span><p>Pour Horacia, une table qui dit quel modèle tient quel rôle, <b>justifiée par mesure</b> et non par habitude.</p></div>
+    <div class="bx no rv d4"><span class="k">Ce qu'on a trouvé</span><span class="t">Le matériau ne discrimine pas</span><p>Le modèle le moins cher lit déjà presque tout. Sur ce matériau, aucun modèle plus cher n'a de marge à démontrer.</p></div>
+    <div class="bx ok rv d5"><span class="k">Ce que ça a coûté</span><span class="t">2,7 $ d'appels réels</span><p>Contre <b>~25 $ estimés</b> pour les grilles Opus et Fable, annulées parce que le banc a dit qu'elles ne diraient rien.</p></div>
+  </div>
+</section>
+
+<section class="scene" id="s1" aria-label="Ce que l'orch a produit">
+  <p class="eyebrow rv">01 · Bénéfices obtenus</p>
+  <h2 class="rv d1">Ce que l'orch a produit.</h2>
+  <div class="cards">
+    <div class="g rv d1"><span class="n">01</span><span class="t">Un instrument réutilisable</span>
+      <p>Sous <code>rl_vaults/utilities/harness/eval/horacia-bench/</code> : <b>26 dossiers de preuve</b> (10 reject, 8 accept, 8 inconclusive), un grader déterministe à trois verdicts, <b>122 tests</b>, règles figées par sha256 (<code>rules.lock</code>).</p>
+      <p><code>score.py</code> avec porte baseline (toujours-rejeter ≤ 50 %), <code>leakcheck.py</code>, isolation des appels <code>claude -p</code> : prompt de 11 712 à 4 659 tokens avec <code>--setting-sources ''</code>.</p></div>
+    <div class="g rv d2"><span class="n">02</span><span class="t">Une preuve négative avant la dépense</span>
+      <p><b>v1</b> (10 fixtures, toutes reject) : Sonnet 5.5 effort bas ne rate que 2/10, et un candidat « toujours rejeter » note 10/10. Le banc mesurait l'obéissance, pas la discrimination.</p>
+      <p><b>v2 durcie</b> (décision de Mo « Durcir ») : Sonnet 5.5 effort bas 20/26 (accept 7/8, inconclusive 7/8, reject 6/10), taux d'erreur 0,23 sous le seuil figé 0,40 ; en deux classes attester/refuser, 25/26. Aucune marge pour Opus ou Fable : grilles annulées.</p></div>
+    <div class="g rv d3"><span class="n">03</span><span class="t">Une lecture pour Horacia</span>
+      <p>Sur des dossiers reconstruits depuis le journal, le modèle le moins cher suffit. <b>4 des 6 erreurs</b> sont des cas frontière reject/inconclusive ; une seule est une vraie non-lecture.</p>
+      <p>La table rôle → modèle reste intacte, en attente de la ratification de Mo.</p></div>
+    <div class="g rv d3"><span class="n">04</span><span class="t">Un rapport vérifiable</span>
+      <p><code>horacia/redaction/2026-10-banc-modele-role-rapport.md</code>, écrit par la Rédaction. Chaque % et chaque $ est relu depuis <code>results/summary.json</code> par <code>score.py verify-report</code> (sort 0).</p>
+      <p>Une phrase a été corrigée après prise du pilote (ordre gel-de-règle / correctif-de-prompt).</p></div>
+    <div class="g rv d4"><span class="n">05</span><span class="t">Une évaluation qui a montré son négatif</span>
+      <p><b>10 threads completed</b> rejoués PASS par le pilote ; <b>7 contrôles négatifs</b> qui échouent comme prévu ; 2 failed par conception ; 6 cancelled.</p>
+      <p>Archive : <code>vault-registry/implementations/horacia-model-role-bench.md</code>, commit f97f8166.</p></div>
+    <div class="g rv d5"><span class="n">06</span><span class="t">Quatre défauts d'instrument, dans le drain</span>
+      <p>Débusqués dans le harnais de drain, pas dans le banc. <b>1 ·</b> <code>evaluate.sh</code> rendait « pass=1 fail=0 » sur 18 threads (un <code>claude -p</code> avalait stdin) : corrigé le soir même (abfc34a0), rejoué 18/18. <b>2 ·</b> <code>--add-dir $work</code> variadique avalait le prompt (78 lignes invalides, corrigé en vol).</p>
+      <p><b>3 ·</b> <code>python3 -m pytest</code> sans pytest (27 min perdues, remplacé par <code>uv run --with pytest</code>). <b>4 ·</b> un test_cmd écrit contre un fixture au lieu du contrat réel du producteur (un aller-retour humain).</p></div>
+  </div>
+</section>
+
+<section class="scene" id="s2" aria-label="Prochaines étapes possibles">
+  <p class="eyebrow rv">02 · Prochaines étapes possibles</p>
+  <h2 class="rv d1">Cinq suites, à arbitrer.</h2>
+  <ol class="steps">
+    <li class="rv d1"><b>Banc v3 sur un autre matériau.</b> Des captures brutes prises pendant les drains (sorties de commandes, KV, événements), pas des reconstructions de journal. Nouveau plan, via /plan-author.</li>
+    <li class="rv d2"><b>Garder le banc actuel comme sonde de régression des lois Horacia.</b> Fixtures + grader, zéro appel de modèle pour la baseline ; à rejouer après chaque changement de loi.</li>
+    <li class="rv d3"><b>Ajouter à la règle une porte « plafond du négatif ».</b> Si le modèle de référence dépasse X, le banc ne peut rien dire et les grilles ne partent pas.</li>
+    <li class="rv d4"><b>Lander le heartbeat autonome dans <code>launch.sh</code></b> (item Conductor 291ef50, mainteneur la Centrale le 11/10, péremption 14/10) : les 6 derniers <code>drain.stalled</code> sont tous du bruit (lanceur mort ou drain fini). Et un seau <code>cancelled</code> dans <code>evaluate.sh</code> : les annulés comptent FAIL, rc=1 sur un orch bien clos.</li>
+    <li class="rv d5"><b>Ratifier ou non la table rôle → modèle actuelle.</b> La mesure dit qu'elle n'est pas contredite ; elle n'est pas non plus confirmée au-delà d'attester/refuser.</li>
+  </ol>
+</section>
+
+<section class="scene" id="s3" aria-label="Ce qu'on pourrait améliorer">
+  <p class="eyebrow rv">03 · À améliorer</p>
+  <h2 class="rv d1">Cinq endroits où l'instrument a plafonné.</h2>
+  <div class="imp">
+    <div class="bg red rv d1"><span class="k">Le matériau</span><span class="t">Des dossiers reconstruits qui plafonnent</span>
+      <p>La frontière reject/inconclusive <b>n'est pas définie dans la loi</b> : le grader la tranche à la place du modèle (p14 annoté frontière par son auteur).</p></div>
+    <div class="bg red rv d2"><span class="k">La règle</span><span class="t">Un seuil fixé avant toute mesure</span>
+      <p>Le seuil 0,40 a été posé avant la première mesure. Une règle devrait prévoir <b>ce que le banc fait quand le négatif est trop bon</b>.</p></div>
+    <div class="bg rv d3"><span class="k">L'écriture des test_cmd</span><span class="t">Une clause jamais exercée</span>
+      <p>Exécuter chaque clause sur un cas positif et un cas négatif avant adoption ; lire la fonction qui écrit le fichier, pas un fixture.</p></div>
+    <div class="bg rv d4"><span class="k">L'instrument de drain</span><span class="t">Un détecteur dégradé qui a l'air de marcher</span>
+      <p>Un détecteur à deux signaux dégradé à un seul continue d'émettre. Le pansement heartbeat a été <b>rebâti à la main deux fois</b> (02/10 et 10/10) sans être repris dans le code.</p></div>
+    <div class="bg rv d5"><span class="k">Le temps humain</span><span class="t">Trois allers-retours évitables</span>
+      <p>Pytest absent, clé de test_cmd, phrase du rapport : trois allers-retours sur une drain de ~4 h (lancement 12:46Z, clôture 17:01Z).</p></div>
+  </div>
+</section>
+
+<section class="scene" id="s4" aria-label="Clôture">
+  <p class="eyebrow rv">04 · Clôture</p>
+  <p class="motto rv d1">Ce que l'orch rend à Horacia n'est pas une table : c'est <b>la preuve que la question était mal posée</b> sur ce matériau, et un instrument prêt pour la poser mieux.</p>
+  <p class="note rv d3">Relevé du 10/10/2026 ; chiffres issus de <code>results/summary.json</code> et de l'archive du plan ; page écrite par busta-garden.</p>
+</section>
+
+</main>
+<script>
+const $ = s => document.querySelector(s);
+const REDUCE = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const scenes = [...document.querySelectorAll(".scene")]; $("#tot").textContent = String(scenes.length).padStart(2,"0");
+let current = 0;
+const io = new IntersectionObserver(es=>es.forEach(e=>{ if (e.isIntersecting){ const i = scenes.indexOf(e.target); current = i; e.target.classList.add("on"); $("#cur").textContent = String(i+1).padStart(2,"0"); $("#progress").style.width = ((i+1)/scenes.length*100)+"%"; } }),{threshold:.2});
+scenes.forEach(s=>io.observe(s));
+const go = d => { const i = Math.max(0, Math.min(scenes.length-1, current+d)); scenes[i].scrollIntoView({behavior: REDUCE ? "auto" : "smooth"}); };
+$("#next").addEventListener("click", ()=>go(1)); $("#prev").addEventListener("click", ()=>go(-1));
+addEventListener("keydown", e=>{ if (["ArrowDown","PageDown"].includes(e.key)){ e.preventDefault(); go(1); } if (["ArrowUp","PageUp"].includes(e.key)){ e.preventDefault(); go(-1); } });
+document.body.classList.remove("nojs");
+scenes[0].classList.add("on");
+</script>
+</body>
+</html>
