@@ -289,8 +289,9 @@ h1{letter-spacing:-.04em}
 (function(){
   var q = null; try { q = new URLSearchParams(location.search).get("theme"); } catch (e) {}
   var h = location.hostname || "";
-  var dark = (q === "dark" || q === "light") ? q === "dark"
-    : (location.protocol === "file:" || /(^|\.)run\.app$/.test(h) || h === "localhost" || h === "127.0.0.1");
+  // 2026-10-13 (Mo : « Set light theme default ») : clair partout par défaut, garden compris ;
+  // ?theme=dark force le sombre. L'hôte n'est plus lu (gardé pour un retour éventuel à la règle par hôte).
+  var dark = (q === "dark" || q === "light") ? q === "dark" : false;
   var want = dark ? "dark" : "light";
   document.documentElement.setAttribute("data-garden-theme", want);
   var RX = /\(\s*prefers-color-scheme\s*:\s*(dark|light)\s*\)/gi;
