@@ -156,6 +156,17 @@
       "file": "horacia-bench-pitch.html",
       "generator": "Claude Code · pilote tokenomics (drain et évaluation), page écrite par busta-garden, 10/10/2026",
       "sensitivity": "internal"
+    },
+    {
+      "id": "startup-encoded",
+      "domain": "puppy",
+      "title": "Ce qu'une fiche startup encode",
+      "description": "746 propriétés sous contrat de schéma sur 16 bases, lues à travers 14 familles d'information, et 51 types de mémo en 7 familles ; deux lectures (CA, Atelier), une grappe de points animée par base ou par famille, trois figures isométriques (meuble, horodateur, pupitre de tri) et les trois gestes Puppy sur le journal Memo. Relevé du 12/10, comptes seulement.",
+      "date": "2026-10-13",
+      "source": "garden/assets/startup-encoded.html",
+      "file": "startup-encoded.html",
+      "generator": "Claude Code · scripts/startup-encoded (build.mjs + figures.mjs) · anatomy dbf697a",
+      "sensitivity": "internal"
     }
   ]
 }
