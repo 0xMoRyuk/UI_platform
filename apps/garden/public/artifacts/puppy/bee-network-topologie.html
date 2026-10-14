@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Bee Network — topologie des bases</title>
+<style>
+:root{
+  color-scheme: dark;
+  --page:#070706; --panel:#100f0d; --card:#151411; --line:#27241f; --text:#f2f0eb; --muted:#928c80; --faint:#5f5a51;
+  --acc:#c6f135; --amber:#f5a524; --red:#ef4444; --blue:#8fa8ff; --off:#2c2924; --on-acc:#0b0d06;
+  --sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono:"Berkeley Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: light){
+  :root{
+    color-scheme: light;
+    --page:#f4f3f0; --panel:#ffffff; --card:#fbfaf7; --line:#e1ddd5; --text:#17150f; --muted:#625c50; --faint:#8b8578;
+    --acc:#4f7300; --amber:#a65f00; --red:#c8352b; --blue:#3b5bd6; --off:#e9e5dd; --on-acc:#ffffff;
+  }
+}
+
+*{box-sizing:border-box}
+html{scroll-snap-type:y proximity;scroll-behavior:smooth;background:var(--page)}
+body{margin:0;background:var(--page);color:var(--text);font-family:var(--sans);-webkit-font-smoothing:antialiased}
+.scene{min-height:100dvh;scroll-snap-align:start;display:grid;align-content:center;padding:64px max(16px,6vw) 84px}
+.scene>*{min-width:0;max-width:100%}
+.eyebrow{font:500 12px var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--acc);margin:0 0 16px}
+h1,h2{margin:0;font-weight:500;letter-spacing:-.025em;text-wrap:balance;font-family:var(--mono);hyphens:auto;overflow-wrap:break-word}
+h1{font-size:clamp(30px,5.6vw,80px);line-height:1;letter-spacing:-.04em;max-width:20ch}
+h2{font-size:clamp(24px,3.6vw,48px);line-height:1.06;max-width:26ch}
+.lede{margin:20px 0 0;font-size:clamp(16px,1.5vw,20px);line-height:1.5;color:var(--muted);max-width:64ch;font-weight:300}
+.lede b{color:var(--text);font-weight:500}
+.note{margin-top:14px;font:12px/1.5 var(--mono);color:var(--faint);max-width:90ch;overflow-wrap:anywhere}
+code{font:12px var(--mono);color:var(--text);overflow-wrap:anywhere}
+.rv{opacity:0;translate:0 16px;transition:opacity .8s cubic-bezier(.2,.7,.2,1),translate .9s cubic-bezier(.2,.7,.2,1)}
+.scene.on .rv{opacity:1;translate:0 0}
+.scene.on .d1{transition-delay:.12s}.scene.on .d2{transition-delay:.24s}.scene.on .d3{transition-delay:.36s}.scene.on .d4{transition-delay:.48s}
+.nojs .rv{opacity:1;translate:none}
+.progress{position:fixed;top:0;left:0;height:2px;background:var(--acc);width:0;z-index:20;transition:width .5s}
+.hud{position:fixed;right:16px;bottom:14px;z-index:20;display:flex;gap:10px;align-items:center;font:12px var(--mono);color:var(--faint)}
+.hud b{color:var(--text);font-weight:500}
+.hud button{all:unset;cursor:pointer;width:30px;height:30px;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;color:var(--muted);background:var(--panel)}
+.hud button:hover,.hud button:focus-visible{color:var(--text);border-color:var(--muted)}
+.figure{margin-top:28px;max-width:760px}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin-top:28px;max-width:1100px}
+.card{background:var(--card);border:1px solid var(--line);padding:18px 18px 16px;min-width:0}
+.card .k{font:500 11px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--acc);margin:0 0 10px}
+.card .t{margin:0;font:500 16px/1.3 var(--mono);color:var(--text)}
+.card p{margin:8px 0 0;font-size:14px;line-height:1.5;color:var(--muted)}
+.nums{display:flex;flex-wrap:wrap;gap:10px 28px;margin-top:22px}
+.num{min-width:0}
+.num .v{font:500 clamp(28px,3.4vw,44px)/1 var(--mono);letter-spacing:-.03em;color:var(--text)}
+.num .k{font:12px/1.4 var(--mono);color:var(--faint);margin-top:6px}
+@media (max-width:560px){.scene{padding:48px 16px 84px}}
+
+
+.iso{
+  --anatomy-page:var(--page);--anatomy-card:var(--card);--anatomy-text:var(--muted);--anatomy-strong:var(--text);--anatomy-muted:var(--faint);
+  --anatomy-paper:var(--card);--anatomy-face:#1c1b17;--anatomy-top:#1d1c18;
+  --anatomy-shade-0:#100f0c;--anatomy-shade-1:#131210;--anatomy-shade-2:#161513;--anatomy-shade-3:#191815;
+  --anatomy-lit-top:#28261f;--anatomy-lit-shade:#1f1d18;
+  --anatomy-hi:#d8d4cb;--anatomy-mid:#6c675e;--anatomy-lo:#403c35;--anatomy-faint:#2b2823;--anatomy-lit:#ffffff;
+  --anatomy-halo:#050504;--anatomy-halo-opacity:.9;--anatomy-dot:#e6e2d9;
+  --anatomy-mono:var(--mono);
+}
+.iso[data-theme="light"]{
+  --anatomy-face:#ffffff;--anatomy-top:#ffffff;
+  --anatomy-shade-0:#dcdad4;--anatomy-shade-1:#e5e3dd;--anatomy-shade-2:#edebe5;--anatomy-shade-3:#f4f3ee;
+  --anatomy-lit-top:#ffffff;--anatomy-lit-shade:#eeece6;
+  --anatomy-hi:#26241f;--anatomy-mid:#8a867c;--anatomy-lo:#b4b0a6;--anatomy-faint:#d6d2ca;--anatomy-lit:#000000;
+  --anatomy-halo:#8a8578;--anatomy-halo-opacity:.32;--anatomy-dot:#3a3832;
+}
+.iso-plate{box-shadow:0 0 0 1px var(--line);background:var(--card)}
+.iso-figure{margin:0}
+.iso-legend{color:var(--muted);font-family:var(--sans)}
+.iso-caption{color:var(--muted)}
+.iso-plate-corner{font-family:var(--mono)}
+.iso-stage{outline:none}
+.iso-stage:focus-visible{outline:1px solid var(--muted);outline-offset:6px}
+
+:root{--f-ID:#f2f0eb;--f-SUP:#ffd166;--f-ORG:#d99cff;--f-GEO:#7cc9a6;--f-LIF:#c6f135;--f-EVA:#ef4444;--f-FIN:#f5a524;--f-GOV:#ff7a59;--f-PRG:#8fa8ff;--f-OPS:#c9b99a;--f-COM:#ff9ecb;--f-SYS:#80d8ff;--f-TIM:#928c80;--f-REV:#5f5a51;--wire:rgba(242,240,235,.14);--hover:rgba(255,255,255,.04)}
+@media (prefers-color-scheme: light){:root{--f-ID:#17150f;--f-SUP:#9a6b00;--f-ORG:#7a3fbf;--f-GEO:#2f8a64;--f-LIF:#4f7300;--f-EVA:#c8352b;--f-FIN:#a65f00;--f-GOV:#b84a2b;--f-PRG:#3b5bd6;--f-OPS:#8a7550;--f-COM:#b8336f;--f-SYS:#1f7fa8;--f-TIM:#8b8578;--f-REV:#a9a397;--wire:rgba(23,21,15,.16);--hover:rgba(23,21,15,.04)}}
+.th{all:unset;cursor:pointer;position:fixed;top:14px;left:16px;z-index:21;width:30px;height:30px;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;color:var(--muted);background:var(--panel);font:13px var(--mono)}
+.map-wrap{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(300px,.8fr);gap:26px;align-items:start;margin-top:22px;max-width:1500px}
+.map{width:100%;height:auto;display:block;user-select:none}
+.map .ring{fill:none;stroke:var(--line);stroke-dasharray:2 5}
+.map .sect{stroke:var(--line);stroke-width:1}
+.map .sl{font:10.5px var(--mono);fill:var(--faint);letter-spacing:.06em;text-transform:uppercase}
+.map .e{fill:none;stroke-width:1.2;opacity:.32;transition:opacity .25s}
+.map.sel .e{opacity:.05}.map .e.on{opacity:.95;stroke-width:2}
+.map .nd{cursor:pointer}.map .nd text{font:11.5px var(--mono);fill:var(--muted);paint-order:stroke;stroke:var(--page);stroke-width:3px;stroke-linejoin:round}
+.map .nd .core{fill:var(--card);stroke:var(--muted);stroke-width:1}
+.map .nd.inv .core{stroke-dasharray:3 2}
+.map .nd.pr{opacity:.32}.map.hidep .nd.pr,.map.hidep .e.pr{display:none}
+.map .nd.dim{opacity:.12}.map .nd.on text{fill:var(--text);font-weight:600}.map .nd.on .core{stroke:var(--acc);stroke-width:2}
+.map .nd:focus{outline:none}.map .nd:focus-visible .core{stroke:var(--acc);stroke-width:2}
+.tools{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:18px}
+.chip{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:6px;padding:4px 9px;border:1px solid var(--line);font:11.5px var(--mono);color:var(--muted);background:var(--card)}
+.chip i{width:9px;height:9px;border-radius:50%;background:var(--fc)}
+.chip[aria-pressed="true"]{border-color:var(--text);color:var(--text)}
+.chip:focus-visible{outline:1px solid var(--acc)}
+.tools .sep{width:1px;height:18px;background:var(--line);margin:0 4px}
+.panel{background:var(--card);border:1px solid var(--line);padding:18px 18px 16px;min-width:0}
+.panel .k{font:500 11px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--acc);margin:0}
+.panel h3{margin:6px 0 2px;font:500 20px/1.2 var(--mono)}
+.panel .m{font:12px/1.5 var(--mono);color:var(--faint);margin:0}
+.panel dl{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;margin:14px 0 0;font:12.5px var(--mono)}
+.panel dt{color:var(--faint)}.panel dd{margin:0;color:var(--text)}
+.panel h4{margin:16px 0 6px;font:500 11px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.panel ul{list-style:none;margin:0;padding:0;font:12.5px/1.55 var(--mono);color:var(--muted)}
+.panel li i{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--fc);margin-right:7px}
+.panel li b{color:var(--text);font-weight:500}
+.fbar{display:flex;height:9px;margin-top:12px;background:var(--off)}.fbar i{display:block;height:100%;background:var(--fc)}
+.fleg{display:flex;flex-wrap:wrap;gap:3px 10px;margin-top:6px;font:11px var(--mono);color:var(--faint)}
+.fleg span i{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--fc);margin-right:4px}
+.dec{display:inline-block;padding:1px 7px;font:11px var(--mono);border:1px solid var(--line)}
+.dec.g{color:var(--acc);border-color:currentColor}.dec.i{color:var(--amber);border-color:currentColor;border-style:dashed}.dec.p{color:var(--faint)}
+.ctxs{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));margin-top:24px;max-width:1500px}
+.ctx{background:var(--card);border:1px solid var(--line);padding:14px 14px 12px;min-width:0}
+.ctx .t{margin:0;font:500 14px var(--mono);color:var(--text)}.ctx .s{font:11.5px var(--mono);color:var(--faint);margin:2px 0 10px}
+.brow{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 10px;align-items:center;padding:5px 0;border-top:1px solid var(--line);cursor:pointer}
+.brow:hover{background:var(--hover)}.brow .n{font:12.5px var(--mono);color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.brow .c{font:11px var(--mono);color:var(--faint)}.brow .fbar{grid-column:1/-1;margin-top:3px;height:5px}
+.gaps{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));margin-top:24px;max-width:1500px}
+.gaps .card ul{margin:10px 0 0;padding:0 0 0 16px;font:12.5px/1.6 var(--mono);color:var(--muted)}
+.gaps .card .v{font:500 30px/1 var(--mono);color:var(--text);margin-top:8px}
+.cyc{display:flex;gap:2px;margin-top:12px;height:12px}.cyc i{display:block;height:100%;background:var(--fc)}
+@media (max-width:980px){.map-wrap{grid-template-columns:1fr}}
+@media (max-width:560px){.map .nd text{font-size:13px}.map .sl{display:none}}
+</style>
+<!--garden-theme:start-->
+<script>
+(function(){
+  var q = null; try { q = new URLSearchParams(location.search).get("theme"); } catch (e) {}
+  var h = location.hostname || "";
+  // 2026-10-13 (Mo : « Set light theme default ») : clair partout par défaut, garden compris ;
+  // ?theme=dark force le sombre. L'hôte n'est plus lu (gardé pour un retour éventuel à la règle par hôte).
+  var dark = (q === "dark" || q === "light") ? q === "dark" : false;
+  var want = dark ? "dark" : "light";
+  document.documentElement.setAttribute("data-garden-theme", want);
+  var RX = /\(\s*prefers-color-scheme\s*:\s*(dark|light)\s*\)/gi;
+  function rewrite(text){
+    return text.split(",").map(function(item){
+      var off = false;
+      var out = item.replace(RX, function(_, m){ if (m.toLowerCase() !== want) off = true; return "(min-width:0px)"; });
+      return off ? "not all" : out.trim();
+    }).join(", ");
+  }
+  function fix(rules){
+    for (var i = 0; i < rules.length; i++){
+      var r = rules[i];
+      if (r.media && r.media.mediaText && /prefers-color-scheme/i.test(r.media.mediaText)) r.media.mediaText = rewrite(r.media.mediaText);
+      if (r.cssRules) fix(r.cssRules);
+    }
+  }
+  var done = new WeakSet();
+  function all(){
+    for (var i = 0; i < document.styleSheets.length; i++){
+      var sh = document.styleSheets[i]; if (done.has(sh)) continue;
+      try { fix(sh.cssRules); done.add(sh); } catch (e) {}
+    }
+  }
+  var mm = window.matchMedia && window.matchMedia.bind(window);
+  if (mm) window.matchMedia = function(query){
+    var m = /prefers-color-scheme\s*:\s*(dark|light)/i.exec(query || "");
+    if (!m) return mm(query);
+    return { matches: m[1].toLowerCase() === want, media: query, onchange: null,
+      addListener: function(){}, removeListener: function(){}, addEventListener: function(){},
+      removeEventListener: function(){}, dispatchEvent: function(){ return false; } };
+  };
+  all();
+  document.addEventListener("DOMContentLoaded", all);
+  window.addEventListener("load", all);
+})();
+</script>
+<!--garden-theme:end-->
+</head>
+<body class="nojs">
+<div class="progress" id="progress" aria-hidden="true"></div>
+<nav class="hud" aria-label="Navigation"><span><b id="cur">01</b> / <span id="tot">04</span></span><button id="prev" aria-label="Scène précédente">↑</button><button id="next" aria-label="Scène suivante">↓</button></nav>
+<button class="th" data-th aria-label="Changer de thème" title="Sombre / clair">◐</button>
+<main>
+<section class="scene">
+<p class="eyebrow rv">Bee Network · relevé du 14 octobre 2026</p>
+<h1 class="rv d1">La topologie des bases</h1>
+<p class="lede rv d2">Le Bee Network tient en <b>53 bases Notion</b> reliées autour d'une fiche, <b>Startups Pool</b>. Cette carte les place par <b>distance en relations</b> à la fiche et par <b>contexte de base</b> ; chaque base porte la signature de ce qu'elle encode, dans les <b>quatorze familles d'information</b> de la taxonomie.</p>
+<div class="nums rv d3">
+<div class="num"><div class="v">53</div><div class="k">bases au registre</div></div>
+<div class="num"><div class="v">24</div><div class="k">à garder</div></div>
+<div class="num"><div class="v">10</div><div class="k">à investiguer</div></div>
+<div class="num"><div class="v">19</div><div class="k">pruned</div></div>
+<div class="num"><div class="v">830</div><div class="k">propriétés sous contrat · 23 bases</div></div>
+<div class="num"><div class="v">128</div><div class="k">relations vivantes</div></div>
+</div>
+<p class="note rv d4">Lecture seule Notion par bee-navigator le 14/10/2026 : Schema Contracts (État ≠ Supprimé/Absent), Bases Bee Network — keep / prune, Registre des mémo, Memo. Aucun titre de fiche, aucune personne. Remplace la carte des orbites du 27 août.</p></section>
+<section class="scene">
+<p class="eyebrow rv">01 · la carte</p>
+<h2 class="rv d1">Autour de la fiche</h2>
+<p class="lede rv d2">Le rayon dit combien de relations séparent une base de Startups Pool ; l'angle, son <b>contexte</b>. L'anneau coloré autour d'une base est sa signature : la part de chaque famille dans ses propriétés. Les fils prennent la couleur de la famille qu'ils transportent. Cliquez une base, ou une famille.</p>
+<div class="rv d3"><div class="map-wrap"><div><svg id="map" class="map hidep" viewBox="-70 -30 1140 790" role="img" aria-label="Carte des bases du Bee Network autour de Startups Pool"></svg><div id="tools" class="tools" role="group" aria-label="Filtres"></div></div><aside id="panel" class="panel" aria-live="polite"></aside></div></div>
+<p class="note rv d4">Taille d'un nœud : nombre de fiches (échelle logarithmique). Contour plein : à garder ; tiret : à investiguer ; estompé : pruned. Sans anneau : base hors Schema Contracts.</p></section>
+<section class="scene">
+<p class="eyebrow rv">02 · les contextes</p>
+<h2 class="rv d1">Dix contextes, une base de plus à chaque fois</h2>
+<p class="lede rv d2">La taxonomie range chaque base dans un <b>contexte</b> : le rôle de la base qui porte la propriété. Sous chaque base, sa signature de familles ; un clic la retrouve sur la carte.</p>
+<div id="ctxs" class="ctxs rv d3"></div></section>
+<section class="scene">
+<p class="eyebrow rv">03 · les écarts</p>
+<h2 class="rv d1">Ce que le relevé ne réconcilie pas</h2>
+<p class="lede rv d2">Le registre des bases, Schema Contracts et les schémas vivants ne disent pas tout à fait la même chose. Ces écarts sont relevés, pas jugés : ils alimentent le cycle de pilotage de la taxonomie.</p>
+<div class="rv d3"><div class="gaps">
+<div class="card"><p class="k">Relations vers des bases pruned</p><div class="v">6</div><ul><li>STOCKS · Contrat* (à supp) → OLD - Suivi des contrats</li><li>Mapverse · Access to activities → Activités DA</li><li>Mapverse · by tech product → Activités DA</li><li>Mapverse · 🐣 Actualités - Fundraising Startups → Actualités - Fundraising Startups</li><li>Programmes · Table des points - Activities → Activités DA</li><li>Zone Platform · Hall of Fame → Hall of Fame</li></ul><p>Encore vivantes dans Schema Contracts alors que la base cible est sortie du périmètre.</p></div>
+<div class="card"><p class="k">Cibles hors du registre des bases</p><div class="v">10</div><ul><li>Secteurs — référentiel</li><li>data source 2a10fcf3…</li><li>data source 8e5ceb99…</li><li>data source a20e20f0…</li><li>data source 344f7333…</li><li>data source 5716a9fb…</li><li>data source c6330f88…</li><li>data source ee96b9c1…</li><li>Référentiel des postes</li><li>Registre des mémo</li></ul><p>Des relations visent des bases qu'aucune ligne du registre keep / prune ne décrit.</p></div>
+<div class="card"><p class="k">Cibles non résolues</p><div class="v">11</div><p>Sur 128 relations, 11 n'ont ni cible dans Schema Contracts ni correspondance dans le relevé du 12/10 : il faut relire leur schéma.</p></div>
+<div class="card"><p class="k">Bases hors graphe</p><div class="v">17</div><p>Aucune relation relevée ne les relie à Startups Pool (dont 15 pruned). Pour les bases sans contrat de schéma, c'est une présomption : leurs propres relations ne sont pas relevées.</p></div>
+<div class="card"><p class="k">Cycle de pilotage du schéma</p><div class="v">15 / 830</div><div class="cyc"><i style="--fc:var(--faint);flex:799" title="Observé · 799"></i><i style="--fc:var(--blue);flex:7" title="Appliqué · 7"></i><i style="--fc:var(--amber);flex:6" title="Décidé · 5"></i><i style="--fc:var(--acc);flex:6" title="Vérifié · 3"></i></div><p>Observé 799 · Appliqué 7 · Décidé 5 · Vérifié 3, 16 sans statut. Taxonomie vérifiée par un humain : 16 propriétés (Startups Pool et Memo).</p></div>
+<div class="card"><p class="k">Registre des bases</p><div class="v">30</div><p>bases sans contrat de schéma : leurs propriétés ne sont pas classées par famille. La colonne « Schéma lu » du registre est périmée — les 53 bases ont répondu au comptage de leurs fiches.</p></div>
+</div></div></section>
+</main>
+<script>const __DATA__ = {"asof":"2026-10-14","method":"Lecture seule Notion par bee-navigator le 14/10/2026 : Schema Contracts (État ≠ Supprimé/Absent), Bases Bee Network — keep / prune, Registre des mémo, Memo. Aucun titre de fiche, aucune personne.","fams":[{"c":"ID","n":"Identité & référentiels","p":"3dc0fcf3849480c893bde04f4e5c2625"},{"c":"SUP","n":"Profil startup & segmentation","p":"3dc0fcf38494802ea8d1c24b8723a55d"},{"c":"ORG","n":"Personnes & organisation","p":"3dc0fcf3849480ec8506d064867eb116"},{"c":"GEO","n":"Géographie & marchés","p":"3dc0fcf3849480cc986aceeb6fb84d72"},{"c":"LIF","n":"Cycle de vie & workflow","p":"3dc0fcf3849480b6a707e03eccf190be"},{"c":"EVA","n":"Évaluation & impact & résultats","p":"3dc0fcf3849480a68386f64de6d54de4"},{"c":"FIN","n":"Finance & investissement & valorisation","p":"3dc0fcf3849480048294f7e07af364cc"},{"c":"GOV","n":"Gouvernance & conformité & risque","p":"3dc0fcf3849480b98a9ad60c266c5fba"},{"c":"PRG","n":"Programmes & accompagnement","p":"3dc0fcf3849480658242c8116743bd24"},{"c":"OPS","n":"Opérations & ressources","p":"3dc0fcf3849480f7b57fea5cafd2fb6b"},{"c":"COM","n":"Contenu & communication","p":"3dc0fcf3849480ae8febd3b658e5d449"},{"c":"SYS","n":"Système & intégrations & automatisation","p":"3dc0fcf384948061954aed89a482e76f"},{"c":"TIM","n":"Temps & audit","p":"3dc0fcf38494800e9fb6cccb3a042610"},{"c":"REV","n":"À qualifier","p":"3dc0fcf38494800e81def8b856d25ab2"}],"ctx":["Core startup","Finance & investissement","Plateforme & accompagnement","Cycle de vie","Mesure & résultats","Référentiels","Géographie","Opérations & ressources","Communication","Connaissance & intégrations","Hors contrat de schéma"],"arcs":[{"c":"Core startup","a0":-1.571,"a1":-1.236,"lm":-1.461},{"c":"Finance & investissement","a0":-1.236,"a1":-0.554,"lm":-0.953},{"c":"Plateforme & accompagnement","a0":-0.554,"a1":-0.104,"lm":-0.387},{"c":"Cycle de vie","a0":-0.104,"a1":0.462,"lm":0.121},{"c":"Mesure & résultats","a0":0.462,"a1":0.681,"lm":0.514},{"c":"Référentiels","a0":0.681,"a1":0.901,"lm":0.733},{"c":"Géographie","a0":0.901,"a1":1.12,"lm":0.953},{"c":"Opérations & ressources","a0":1.12,"a1":1.571,"lm":1.288},{"c":"Communication","a0":1.571,"a1":1.79,"lm":1.623},{"c":"Connaissance & intégrations","a0":1.79,"a1":2.01,"lm":1.842},{"c":"Hors contrat de schéma","a0":2.01,"a1":4.712,"lm":2.495}],"rings":[175,262,318,352],"cx":500,"cy":360,"bases":[{"n":"Action","x":730.3,"y":395.8,"a":0.179,"d":2,"dec":"À garder","k":null,"ra":"Protocols","cx":"Cycle de vie","rows":24,"p":4,"ch":0,"cm":4,"v":0,"f":[2,0,0,0,1,0,0,0,0,0,1,0,0,0],"ds":"f38b7cc6-caa2-4448-9d42-741c859f9552"},{"n":"ACTIVATION ROADMAPS","x":653.4,"y":287.5,"a":-0.502,"d":1,"dec":"À garder","k":"Startups","ra":"Zone Platform","cx":"Plateforme & accompagnement","rows":499,"p":75,"ch":25,"cm":50,"v":0,"f":[2,0,5,0,3,0,3,1,50,4,2,0,5,0],"ds":"20f0fcf3-8494-80da-97b9-000b0d5de334"},{"n":"Activités AEDIB","x":259,"y":516.5,"a":2.495,"d":2,"dec":"À investiguer","k":null,"ra":"Zone Platform","cx":"Hors contrat de schéma","rows":7,"p":null,"ch":null,"cm":null,"v":null,"f":null,"ds":"37d0fcf3-8494-803a-aeb9-000b2efb72ad"},{"n":"Activités DA","x":222.3,"y":390.5,"a":3.015,"d":2,"dec":"pruned","k":null,"ra":"Mapverse","cx":"Hors contrat de schéma","rows":71,"p":null,"ch":null,"cm":null,"v":null,"f":null,"ds":"8a3317c6-f651-404e-905b-b38960493acb"},{"n":"Actualités - Fundraising Startups","x":238.2,"y":369.1,"a":3.101,"d":2,"dec":"pruned","k":null,"ra":"Mapverse","cx":"Hors contrat de schéma","rows":61,"p":null,"ch":null,"cm":null,"v":null,"f":null,"ds":"0de5f357-70af-4126-a4ed-c21667692e31"},{"n":"Agent docs","x":405.6,"y":651.6,"a":1.842,"d":null,"dec":"À garder","k":null,"ra":"Scenari","cx":"Connaissance & intégrations","rows":231,"p":27,"ch":7,"cm":20,"v":0,"f":[1,0,3,0,4,0,0,0,0,0,2,13,4,0],"ds":"1ad0fcf3-8494-8045-b1d3-000bd2d29050"},{"n":"Annuaire des experts","x":355.8,"y":518.5,"a":2.235,"d":2,"dec":"À investiguer","k":null,"ra":"Zone Platform","cx":"Hors contrat de schéma","rows":58,"p":null,"ch":null,"cm":null,"v":null,"f":null,"ds":"3140fcf3-8494-809d-94c3-000b4115d26e"},{"n":"Baromètre","x":175.2,"y":214.8,"a":3.621,"d":null,"dec":"pruned","k":null,"ra":"Memo","cx":"Hors contrat de schéma","rows":222,"p":null,"ch":null,"cm":null,"v":null,"f":null,"ds":"4e8eb286-b5e4-48b9-a65f-4e86514811f4"},{"n":"Calls Expert","x":158,"y":451.1,"a":2.841,"d":3,"dec":"À investiguer","k":null,"ra":"Zone Platform","cx":"Hors contrat de schéma","rows":4,"p":null,"ch":null,"cm":null,"v":null,"f":null,"ds":"7615efe3-f948-4cd0-8dc1-a09e8d00826d"},{"n":"CoInvest","x":738.7,"y":179.3,"a":-0.722,"d":3,"dec":"À garder","k":"Startups","ra":"Fundraise rounds","cx":"Finance & investissement","rows":36,"p":2,"ch":2,"cm":0,"v":0,"f":[0,0,0,0,0,0,2,0,0,0,0,0,0,0],"ds":"2e00fcf3-8494-800a-806a-000b27f85e56"},{"n":"Contracts","x":376.5,"y":558.7,"a":2.062,"d":2,"dec":"À garder","k":null,"ra":"Zone Platform","cx":"Hors contrat de schéma","rows":435,"p":null,"ch":null,"cm":null,"v":null,"f":null,"ds":"2080fcf3-8494-8159-b4ab-000bb51327fc"},{"n":"Database Experts","x":143.4,"y":233,"a":3.534,"d":null,"dec":"pruned","k":null,"ra":"Zone Platform","cx":"Hors contrat de schéma","rows":307,"p":null,"ch":null,"cm":null,"v":null,"f":null,"ds":"7c04b554-60cc-4f1d-ae97-43762dcc3356"},{"n":"Database tools","x":220.3,"y":176.2,"a":3.794,"d":null,"dec":"pruned","k":null,"ra":"Zone Platform","cx":"Hors contrat de schéma","rows":81,"p":null,"ch":null,"cm":null,"v":null,"f":null,"ds":"1a7751db-ccfc-4d06-9b9c-a9222df53934"},{"n":"Dépenses Perk/Spendesk AEDIB","x":142.3,"y":426.7,"a":2.928,"d":null,"dec":"À investiguer","k":null,"ra":"Zone Platform","cx":"Hors contrat de schéma","rows":71,"p":null,"ch":null,"cm":null,"v":null,"f":null,"ds":"d602dfef-81d1-4f47-9ffd-c063f2fc6aab"},{"n":"Event - Missions DA","x":335.1,"y":577.6,"a":2.148,"d":2,"dec":"À investiguer","k":null,"ra":"Mapverse","cx":"Hors contrat de schéma","rows":304,"p":null,"ch":null,"cm":null,"v":null,"f":null,"ds":"7b6d276b-87ad-4d7a-99d5-b34645f8ba53"},{"n":"Founders","x":509.1,"y":209.7,"a":-1.519,"d":1,"dec":"À garder","k":"Startups","ra":"Startups Pool","cx":"Core startup","rows":2484,"p":17,"ch":8,"cm":8,"v":0,"f":[0,1,11,1,0,0,1,0,0,0,0,1,2,0],"ds":"ad5be62b-de5a-4d9b-ba83-180c9be66a88"},{"n":"Fundraise rounds","x":687.4,"y":181.1,"a":-0.837,"d":2,"dec":"À garder","k":"Startups","ra":"Zone Investment","cx":"Finance & investissement","rows":14,"p":13,"ch":9,"cm":4,"v":0,"f":[1,0,0,0,0,0,9,1,0,0,1,0,1,0],"ds":"2cb0fcf3-8494-8050-b959-000bd7ae359c"},{"n":"Hall of Fame","x":198.3,"y":348,"a":3.188,"d":2,"dec":"pruned","k":null,"ra":"Zone Platform","cx":"Hors contrat de schéma","rows":13,"p":null,"ch":null,"cm":null,"v":null,"f":null,"ds":"15735ad9-bb86-4103-8b0b-3bfa0788fc27"},{"n":"Label Notebook","x":160.7,"y":174.6,"a":3.708,"d":null,"dec":"pruned","k":null,"ra":"Protocols","cx":"Hors contrat de schéma","rows":83,"p":null,"ch":null,"cm":null,"v":null,"f":null,"ds":"3d41f139-061f-47b2-a788-a75179d7b8bc"},{"n":"Labels","x":630,"y":460.7,"a":0.733,"d":1,"dec":"À garder","k":"Reference","ra":"Startups Pool","cx":"Référentiels","rows":184,"p":12,"ch":3,"cm":9,"v":0,"f":[8,0,0,0,0,0,0,0,1,0,1,0,2,0],"ds":"04007b1f-a34d-4ffa-92ac-c4adabd3f9ab"},{"n":"Mapverse","x":601.4,"y":482.7,"a":0.953,"d":1,"dec":"À garder","k":"Reference","ra":"Startups Pool","cx":"Géographie","rows":260,"p":76,"ch":31,"cm":45,"v":0,"f":[0,4,1,54,3,2,5,0,3,1,1,0,2,0],"ds":"4fe3e28c-8286-4e17-80e4-c4ebe5a0dff9"},{"n":"Matching EXP <> SU","x":309.5,"y":105.4,"a":4.141,"d":null,"dec":"pruned","k":null,"ra":"Zone Platform","cx":"Hors contrat de schéma","rows":47,"p":null,"ch":null,"cm":null,"v":null,"f":null,"ds":"2fdf68e1-8fc2-4fd7-9f8f-f474bfa1e554"},{"n":"Matching OPP <> SUs","x":214.7,"y":136.4,"a":3.881,"d":null,"dec":"pruned","k":null,"ra":"Zone Platform","cx":"Hors contrat de schéma","rows":74,"p":null,"ch":null,"cm":null,"v":null,"f":null,"ds":"746d1a86-8cc6-429c-98af-7aa48f3af232"},{"n":"Matching OUTIL <> SUs","x":358,"y":69.9,"a":4.314,"d":null,"dec":"pruned","k":null,"ra":"Zone Platform","cx":"Hors contrat de schéma","rows":34,"p":null,"ch":null,"cm":null,"v":null,"f":null,"ds":"84cd7807-1774-4bdb-9e79-ae8306dc8a6c"},{"n":"Memo","x":567.9,"y":498.7,"a":1.172,"d":1,"dec":"À garder","k":"Operation","ra":"Startups Pool","cx":"Opérations & ressources","rows":6584,"p":44,"ch":17,"cm":27,"v":2,"f":[3,3,2,1,2,3,3,0,1,1,12,6,7,0],"ds":"dc676689-f48d-4151-a134-14fe37321609"},{"n":"Milestones","x":376.7,"y":31,"a":4.401,"d":null,"dec":"pruned","k":null,"ra":"Protocols","cx":"Hors contrat de schéma","rows":14,"p":null,"ch":null,"cm":null,"v":null,"f":null,"ds":"62c5d6dc-152e-45cb-b380-81027211e003"},{"n":"Milestones plateform","x":305.4,"y":510.8,"a":2.408,"d":2,"dec":"À investiguer","k":null,"ra":"Zone Platform","cx":"Hors contrat de schéma","rows":11,"p":null,"ch":null,"cm":null,"v":null,"f":null,"ds":"392ea617-5db3-45c6-8e1b-028096b90a82"},{"n":"OLD - Suivi des contrats","x":212.6,"y":327,"a":3.274,"d":3,"dec":"pruned","k":null,"ra":"Zone Platform","cx":"Hors contrat de schéma","rows":178,"p":null,"ch":null,"cm":null,"v":null,"f":null,"ds":"1a50fcf3-8494-80cc-b399-000bcf22b18c"},{"n":"Opportunité","x":320,"y":66.3,"a":4.227,"d":null,"dec":"pruned","k":null,"ra":"Zone Platform","cx":"Hors contrat de schéma","rows":38,"p":null,"ch":null,"cm":null,"v":null,"f":null,"ds":"3b27d062-ee9e-4df2-b056-c7110a6b5a77"},{"n":"Our Terms","x":585.2,"y":257,"a":-0.953,"d":1,"dec":"À garder","k":"Startups","ra":"Startups Pool","cx":"Finance & investissement","rows":86,"p":35,"ch":16,"cm":19,"v":0,"f":[1,2,3,0,1,0,24,2,1,0,1,0,0,0],"ds":"2840fcf3-8494-8155-bfe8-000b57c714d1"},{"n":"Our Terms - Depreciated","x":251.9,"y":128.6,"a":3.967,"d":null,"dec":"pruned","k":null,"ra":"Zone Investment","cx":"Hors contrat de schéma","rows":66,"p":null,"ch":null,"cm":null,"v":null,"f":null,"ds":"3223ca94-5957-4a9c-9fcf-32384e22f52a"},{"n":"Outcome","x":714.6,"y":371.7,"a":0.064,"d":1,"dec":"À garder","k":"lifecycle","ra":"Startups Pool","cx":"Cycle de vie","rows":9,"p":8,"ch":2,"cm":6,"v":0,"f":[1,0,0,0,0,6,0,0,0,0,1,0,0,0],"ds":"2ac8c71d-ea63-409a-ae0d-5bc1c5e865cf"},{"n":"Patch","x":309,"y":536.1,"a":2.322,"d":2,"dec":"À investiguer","k":null,"ra":"Protocols","cx":"Hors contrat de schéma","rows":24,"p":null,"ch":null,"cm":null,"v":null,"f":null,"ds":"d73b2d68-875b-4fac-9633-f7c6c738e358"},{"n":"Persona","x":543.7,"y":137.8,"a":-1.403,"d":2,"dec":"À garder","k":null,"ra":"Founders","cx":"Core startup","rows":15,"p":7,"ch":3,"cm":4,"v":0,"f":[1,3,0,2,0,0,0,0,0,0,1,0,0,0],"ds":"6a358c72-7f67-4b09-9bfc-e322d82e88e1"},{"n":"Pirate Metrics Framework","x":776.9,"y":494.5,"a":0.514,"d":3,"dec":"À garder","k":null,"ra":"Scenari","cx":"Mesure & résultats","rows":7,"p":6,"ch":2,"cm":4,"v":0,"f":[2,0,0,0,0,4,0,0,0,0,0,0,0,0],"ds":"e5454f52-b75c-46a5-8020-ab4f4f90f4b4"},{"n":"Plan d'action - communication experts","x":205.5,"y":463.2,"a":2.755,"d":3,"dec":"À investiguer","k":null,"ra":"Zone Platform","cx":"Hors contrat de schéma","rows":50,"p":null,"ch":null,"cm":null,"v":null,"f":null,"ds":"3910fcf3-8494-80a5-b2ee-000be7fed5ef"},{"n":"Programmes","x":725.4,"y":306,"a":-0.271,"d":2,"dec":"À garder","k":"Reference","ra":"Mapverse","cx":"Plateforme & accompagnement","rows":29,"p":22,"ch":6,"cm":16,"v":0,"f":[1,0,1,0,0,0,0,0,16,0,3,0,1,0],"ds":"89609995-05fd-42eb-9d47-717ebcd9f23b"},{"n":"Protocols","x":674.8,"y":352.2,"a":-0.052,"d":1,"dec":"À garder","k":"lifecycle","ra":"Startups Pool","cx":"Cycle de vie","rows":31,"p":56,"ch":21,"cm":35,"v":0,"f":[1,0,4,0,44,0,2,0,0,0,1,0,4,0],"ds":"7ab0e8d9-6370-4f45-94f9-fc3d4594c158"},{"n":"Puppy Documentation","x":107.6,"y":284.7,"a":3.361,"d":null,"dec":"pruned","k":null,"ra":"Protocols","cx":"Hors contrat de schéma","rows":573,"p":null,"ch":null,"cm":null,"v":null,"f":null,"ds":"7d77cdda-bdc1-4366-87ad-d8a395213eb6"},{"n":"Scenari","x":767.9,"y":429.9,"a":0.295,"d":2,"dec":"À garder","k":"lifecycle","ra":"Protocols","cx":"Cycle de vie","rows":5,"p":13,"ch":5,"cm":8,"v":0,"f":[2,0,0,0,6,5,0,0,0,0,0,0,0,0],"ds":"86ae24f8-35df-4ba9-b1b3-12d0d1a2a92c"},{"n":"Score Notebook","x":446.7,"y":31.2,"a":4.574,"d":null,"dec":"pruned","k":null,"ra":"Protocols","cx":"Hors contrat de schéma","rows":1,"p":null,"ch":null,"cm":null,"v":null,"f":null,"ds":"9bc04fd8-29c3-48d8-b8a6-8054a3645b57"},{"n":"Sendemo","x":301.8,"y":466.9,"a":2.581,"d":2,"dec":"À investiguer","k":null,"ra":"Mapverse","cx":"Hors contrat de schéma","rows":5,"p":null,"ch":null,"cm":null,"v":null,"f":null,"ds":"0b7a1e89-a5e0-4ecb-8307-a17e4658c12f"},{"n":"Startups Pool","x":500,"y":360,"a":0,"d":0,"dec":"À garder","k":"Zone","ra":"—","cx":"Core startup","rows":4467,"p":81,"ch":52,"cm":29,"v":14,"f":[3,9,8,2,2,3,14,1,6,0,6,15,12,0],"ds":"4abdd163-a737-4df1-9e0d-55b899ea5e29"},{"n":"STOCKS","x":584.3,"y":609.4,"a":1.288,"d":2,"dec":"À garder","k":"Ressource","ra":"Zone Platform","cx":"Opérations & ressources","rows":200,"p":98,"ch":43,"cm":55,"v":0,"f":[3,1,9,0,12,2,3,12,8,42,0,0,6,0],"ds":"20f0fcf3-8494-8030-9969-000b0c940393"},{"n":"Suivi accompagnement","x":421.4,"y":64.9,"a":4.487,"d":null,"dec":"pruned","k":null,"ra":"Zone Platform","cx":"Hors contrat de schéma","rows":5,"p":null,"ch":null,"cm":null,"v":null,"f":null,"ds":"932bdd5a-01c0-4d35-8f9f-1258bbe92d4d"},{"n":"Team Digital Africa","x":254.1,"y":86.5,"a":4.054,"d":null,"dec":"pruned","k":null,"ra":"Vote Notebook","cx":"Hors contrat de schéma","rows":48,"p":null,"ch":null,"cm":null,"v":null,"f":null,"ds":"fa5a5622-89fc-4b4e-92fb-1327eaf464a8"},{"n":"TeamOwner","x":539,"y":558.4,"a":1.403,"d":2,"dec":"À garder","k":"Operation","ra":"Labels","cx":"Opérations & ressources","rows":10,"p":5,"ch":0,"cm":5,"v":0,"f":[1,0,4,0,0,0,0,0,0,0,0,0,0,0],"ds":"2fb0fcf3-8494-801c-aaf2-000b351289cb"},{"n":"Tips voyage","x":250.8,"y":469.8,"a":2.668,"d":2,"dec":"À investiguer","k":null,"ra":"Mapverse","cx":"Hors contrat de schéma","rows":5,"p":null,"ch":null,"cm":null,"v":null,"f":null,"ds":"2ee0fcf3-8494-8042-a270-000bb28b3867"},{"n":"Valorisation","x":603.5,"y":198,"a":-1.068,"d":1,"dec":"À garder","k":"Startups","ra":"Startups Pool","cx":"Finance & investissement","rows":233,"p":89,"ch":46,"cm":43,"v":0,"f":[2,1,5,1,3,8,50,1,1,0,7,4,6,0],"ds":"2840fcf3-8494-8070-bc55-000b8cce88ee"},{"n":"Vote Notebook","x":164.4,"y":268.8,"a":3.448,"d":null,"dec":"pruned","k":null,"ra":"Zone Investment","cx":"Hors contrat de schéma","rows":448,"p":null,"ch":null,"cm":null,"v":null,"f":null,"ds":"56796ac4-3963-413c-9d35-094e71de22af"},{"n":"Zone - Communication","x":490.9,"y":510.3,"a":1.623,"d":1,"dec":"À garder","k":"Zone","ra":"Startups Pool","cx":"Communication","rows":53,"p":7,"ch":2,"cm":5,"v":0,"f":[1,0,0,2,0,0,0,0,1,0,3,0,0,0],"ds":"1c70fcf3-8494-803b-a345-000bf9ddf515"},{"n":"Zone Investment","x":566,"y":220.6,"a":-1.184,"d":1,"dec":"À garder","k":"Zone","ra":"Startups Pool","cx":"Finance & investissement","rows":4470,"p":74,"ch":41,"cm":33,"v":0,"f":[2,2,6,2,9,1,35,2,1,0,7,3,4,0],"ds":"105d8a30-0a28-407f-9464-5ee0dd46b596"},{"n":"Zone Platform","x":699.1,"y":290.2,"a":-0.387,"d":1,"dec":"À garder","k":"Zone","ra":"Startups Pool","cx":"Plateforme & accompagnement","rows":81,"p":59,"ch":23,"cm":36,"v":0,"f":[2,4,3,0,5,3,14,1,14,1,2,3,7,0],"ds":"c3305c87-0a8b-410c-bf7c-d0717bf54742"}],"rels":[["Labels","Startups Pool","Startups Pool","ID","schema_contracts"],["Labels","TeamOwner","TeamOwner","ID","schema_contracts"],["Labels","Zone Investment","Zone Investment","ID","schema_contracts"],["Zone Investment","_self_","Zone Investment","FIN","releve_12_10"],["Zone Investment","Fundraising","Fundraise rounds","FIN","releve_12_10"],["Zone Investment","Labels #Invest","Labels","FIN","releve_12_10"],["Zone Investment","Our Terms - Bee Network","Our Terms","GOV","releve_12_10"],["Zone Investment","Startups Pool","Startups Pool","FIN","releve_12_10"],["Zone Investment","Valorisation","Valorisation","FIN","releve_12_10"],["Agent docs","Related Scenari",null,"SYS","non_resolue"],["Zone - Communication","Les startups","Startups Pool","COM","releve_12_10"],["Zone - Communication","Zone: Platform","Zone Platform","PRG","releve_12_10"],["STOCKS","(…) Lien contrat","Contracts","GOV","schema_contracts"],["STOCKS","*Besoins liés (2-way)","ACTIVATION ROADMAPS","OPS","schema_contracts"],["STOCKS","Base de données sans titre","Annuaire des experts","ID","schema_contracts"],["STOCKS","Calls Expert","Calls Expert","ORG","schema_contracts"],["STOCKS","Contracts (doublon)","Contracts","OPS","schema_contracts"],["STOCKS","Contrat* (à supp)","OLD - Suivi des contrats","GOV","schema_contracts"],["STOCKS","Matchings associés","ACTIVATION ROADMAPS","OPS","schema_contracts"],["STOCKS","PLAN D'ACTION","Plan d'action - communication experts","LIF","releve_12_10"],["STOCKS","Sous expertises activable (…)","Annuaire des experts","OPS","releve_12_10"],["STOCKS","Sous expertises mobilisés (…)","Annuaire des experts","OPS","schema_contracts"],["STOCKS","🌍 Mapverse","Mapverse","OPS","releve_12_10"],["ACTIVATION ROADMAPS","*Matching stock","STOCKS","OPS","releve_12_10"],["ACTIVATION ROADMAPS","*Matching stock (2-way)","STOCKS","OPS","releve_12_10"],["ACTIVATION ROADMAPS","Activités AEDIB","Activités AEDIB","FIN","releve_12_10"],["ACTIVATION ROADMAPS","Annuaire des experts","Annuaire des experts","PRG","releve_12_10"],["ACTIVATION ROADMAPS","APPUIS HISTORIQUES","Annuaire des experts","PRG","releve_12_10"],["ACTIVATION ROADMAPS","BCO/ CP Associé","Contracts","PRG","releve_12_10"],["ACTIVATION ROADMAPS","Dépenses AEDIB",null,"FIN","non_resolue"],["ACTIVATION ROADMAPS","Historique des Appuis",null,"PRG","non_resolue"],["ACTIVATION ROADMAPS","Startup Pool","Startups Pool","PRG","releve_12_10"],["ACTIVATION ROADMAPS","Zone Platform","Zone Platform","PRG","releve_12_10"],["Valorisation","_self_","Valorisation","FIN","releve_12_10"],["Valorisation","Event",null,"COM","non_resolue"],["Valorisation","Memo","Memo","COM","releve_12_10"],["Valorisation","Our Terms","Our Terms","GOV","releve_12_10"],["Valorisation","Startups pool","Startups Pool","FIN","releve_12_10"],["Valorisation","Zone Invest","Zone Investment","FIN","releve_12_10"],["Valorisation","Zone Platform","Zone Platform","PRG","releve_12_10"],["Our Terms","Co-Invest - RELATION","Fundraise rounds","FIN","schema_contracts"],["Our Terms","Startups Pool","Startups Pool","SUP","schema_contracts"],["Our Terms","Valorisation","Valorisation","FIN","schema_contracts"],["Our Terms","Zone Platform","Zone Platform","PRG","schema_contracts"],["Our Terms","Zone: Investment","Zone Investment","FIN","schema_contracts"],["Outcome","Outcome","Outcome","EVA","schema_contracts"],["Outcome","Parent item","Outcome","EVA","schema_contracts"],["Outcome","Related back to Outcome","Outcome","EVA","schema_contracts"],["Outcome","Startups Pool","Startups Pool","EVA","schema_contracts"],["Outcome","Sub-item","Outcome","EVA","schema_contracts"],["Fundraise rounds","CoInvest","CoInvest","FIN","schema_contracts"],["Fundraise rounds","Our Terms","Our Terms","GOV","schema_contracts"],["Fundraise rounds","Zone Invest","Zone Investment","FIN","schema_contracts"],["CoInvest","Fundraising","Fundraise rounds","FIN","schema_contracts"],["TeamOwner","Liste Compétences et Besoins␠",null,"ORG","non_resolue"],["TeamOwner","Members",null,"ORG","non_resolue"],["TeamOwner","Protocols",null,"ORG","non_resolue"],["Startups Pool","_self_","Startups Pool","SYS","releve_12_10"],["Startups Pool","Country Incorporation","Mapverse","GEO","releve_12_10"],["Startups Pool","Country Operation","Mapverse","GEO","releve_12_10"],["Startups Pool","Founders","Founders","ORG","releve_12_10"],["Startups Pool","labels","Labels","ID","releve_12_10"],["Startups Pool","Memo","Memo","COM","releve_12_10"],["Startups Pool","Our Terms","Our Terms","GOV","releve_12_10"],["Startups Pool","Outcome.low","Outcome","EVA","releve_12_10"],["Startups Pool","sector","Secteurs — référentiel","SUP","schema_contracts"],["Startups Pool","sector (ref)","Secteurs — référentiel","SUP","releve_12_10"],["Startups Pool","Startups Pool.Protocols","Protocols","LIF","releve_12_10"],["Startups Pool","Valorisation","Valorisation","FIN","releve_12_10"],["Startups Pool","Zone - Communication","Zone - Communication","COM","releve_12_10"],["Startups Pool","Zone - Investment","Zone Investment","FIN","releve_12_10"],["Startups Pool","Zone - Platform","Zone Platform","PRG","releve_12_10"],["Mapverse","Access to activities","Activités DA","GEO","releve_12_10"],["Mapverse","by tech product","Activités DA","SUP","releve_12_10"],["Mapverse","Event - Missions DA","Event - Missions DA","COM","releve_12_10"],["Mapverse","Founders","Founders","ORG","releve_12_10"],["Mapverse","Groups","Mapverse","GEO","releve_12_10"],["Mapverse","raw - Country Incorporation","Startups Pool","GEO","releve_12_10"],["Mapverse","raw - Country Operation","Startups Pool","GEO","releve_12_10"],["Mapverse","Sendemo","Sendemo","GEO","releve_12_10"],["Mapverse","STOCKS","STOCKS","GEO","releve_12_10"],["Mapverse","Tips voyage","Tips voyage","GEO","releve_12_10"],["Mapverse","🐣 Actualités - Fundraising Startups","Actualités - Fundraising Startups","FIN","releve_12_10"],["Mapverse","🚀 Programmes","Programmes","GEO","releve_12_10"],["Persona","Sendemo Country Classification",null,"GEO","non_resolue"],["Persona","✨ CoFounders","Founders","SUP","schema_contracts"],["Protocols","Action␠","Action","LIF","schema_contracts"],["Protocols","Next","Protocols","LIF","schema_contracts"],["Protocols","Patch Process","Patch","LIF","schema_contracts"],["Protocols","Patch Protocol","Patch","LIF","schema_contracts"],["Protocols","Previous","Protocols","LIF","schema_contracts"],["Protocols","Red Post-it","Protocols","LIF","schema_contracts"],["Protocols","Related back to Protocols","Protocols","LIF","schema_contracts"],["Protocols","Scenario","Scenari","LIF","schema_contracts"],["Protocols","Startups Pool","Startups Pool","LIF","schema_contracts"],["Protocols","Step process SU","Protocols","LIF","schema_contracts"],["Protocols","Sub-process","Protocols","LIF","schema_contracts"],["Protocols","Taskforce","TeamOwner","ORG","schema_contracts"],["Scenari","Agent docs",null,"LIF","non_resolue"],["Scenari","Pirate Metrics Framework",null,"EVA","non_resolue"],["Scenari","Protocols",null,"LIF","non_resolue"],["Programmes","Activities","2a10fcf3-8494-8046-b37d-000b4300c2dd","PRG","schema_contracts"],["Programmes","Contrats","Contracts","PRG","schema_contracts"],["Programmes","Entities","8e5ceb99-135b-48d1-9503-b56f4f98b08c","PRG","schema_contracts"],["Programmes","Event Communication","a20e20f0-5718-49cd-8c38-6f92cf9eef4e","COM","schema_contracts"],["Programmes","Events","Event - Missions DA","PRG","schema_contracts"],["Programmes","Lié à Calendrier Editorial (1) ( Programmes)","344f7333-6142-4215-afcd-b3a23a6135e7","PRG","schema_contracts"],["Programmes","Pillar","5716a9fb-2ea8-4a72-b2aa-c80e2aa977a4","PRG","schema_contracts"],["Programmes","Program indicators","c6330f88-9ebe-41e8-860a-42daf47aeeed","PRG","schema_contracts"],["Programmes","Table des points - Activities","Activités DA","PRG","schema_contracts"],["Programmes","🌍 Mapverse","Mapverse","PRG","schema_contracts"],["Programmes","👀 EU projects","ee96b9c1-72d9-4aac-b430-970e84717b48","PRG","schema_contracts"],["Founders","Nationality","Mapverse","GEO","schema_contracts"],["Founders","Position (ref)","Référentiel des postes","ORG","releve_12_10"],["Founders","Startups Pool","Startups Pool","ORG","schema_contracts"],["Zone Platform","_self_","Zone Platform","SYS","releve_12_10"],["Zone Platform","ACTIVATION ROADMAPS","ACTIVATION ROADMAPS","PRG","releve_12_10"],["Zone Platform","Hall of Fame","Hall of Fame","PRG","releve_12_10"],["Zone Platform","Milestones plateform","Milestones plateform","LIF","releve_12_10"],["Zone Platform","Our Terms","Our Terms","GOV","releve_12_10"],["Zone Platform","Startups Pool","Startups Pool","SUP","releve_12_10"],["Zone Platform","Valorisation","Valorisation","FIN","releve_12_10"],["Memo","_self_","Memo","SYS","schema_contracts"],["Memo","Exercice valorisation","Valorisation","FIN","schema_contracts"],["Memo","Startups Pool","Startups Pool","SUP","schema_contracts"],["Memo","Type de mémo","Registre des mémo","ID","releve_12_10"],["Pirate Metrics Framework","Scenario","Scenari","EVA","schema_contracts"],["Action","Protocols","Protocols","LIF","schema_contracts"]]};</script>
+<script>
+(function(){
+  var root = document.documentElement;
+  function want(){
+    var forced = root.getAttribute("data-theme");
+    if (forced === "dark" || forced === "light") return forced;
+    var g = root.getAttribute("data-garden-theme");
+    if (g === "dark" || g === "light") return g;
+    return (window.matchMedia && matchMedia("(prefers-color-scheme: light)").matches) ? "light" : "dark";
+  }
+  function apply(){ var t = want(); document.querySelectorAll(".iso").forEach(function(el){ el.setAttribute("data-theme", t); }); }
+  apply();
+  new MutationObserver(apply).observe(root, { attributes: true, attributeFilter: ["data-theme", "data-garden-theme"] });
+  if (window.matchMedia) { var mq = matchMedia("(prefers-color-scheme: light)"); if (mq.addEventListener) mq.addEventListener("change", apply); }
+})();</script>
+<script>
+const $ = s => document.querySelector(s);
+const REDUCE = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const scenes = [...document.querySelectorAll(".scene")]; $("#tot").textContent = String(scenes.length).padStart(2,"0");
+let current = 0;
+const io = new IntersectionObserver(es=>es.forEach(e=>{ if (e.isIntersecting){ const i = scenes.indexOf(e.target); current = i; e.target.classList.add("on"); $("#cur").textContent = String(i+1).padStart(2,"0"); $("#progress").style.width = ((i+1)/scenes.length*100)+"%"; } }),{threshold:.2});
+scenes.forEach(s=>io.observe(s));
+const go = d => { const i = Math.max(0, Math.min(scenes.length-1, current+d)); scenes[i].scrollIntoView({behavior: REDUCE ? "auto" : "smooth"}); };
+$("#next").addEventListener("click", ()=>go(1)); $("#prev").addEventListener("click", ()=>go(-1));
+addEventListener("keydown", e=>{ if (e.target.closest(".iso-stage")) return; if (["ArrowDown","PageDown"].includes(e.key)){ e.preventDefault(); go(1); } if (["ArrowUp","PageUp"].includes(e.key)){ e.preventDefault(); go(-1); } });
+document.body.classList.remove("nojs");
+scenes[0].classList.add("on");</script>
+<script type="module">
+const D = __DATA__;
+const FC = c => "var(--f-" + c + ")";
+const FAMS = D.fams, FN = Object.fromEntries(FAMS.map(f => [f.c, f.n]));
+const esc = s => String(s ?? "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+const fmt = n => n == null ? "—" : String(n).replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+const B = Object.fromEntries(D.bases.map(b => [b.n, b]));
+const decCls = d => d === "À garder" ? "g" : d === "À investiguer" ? "i" : "p";
+const NS = "http://www.w3.org/2000/svg";
+const svg = document.getElementById("map");
+let sel = null, fam = null;
+function fbar(f){ if (!f) return ""; const t = f.reduce((s, x) => s + x, 0) || 1; return '<div class="fbar">' + f.map((x, i) => x ? '<i style="--fc:' + FC(FAMS[i].c) + ';width:' + (100 * x / t).toFixed(2) + '%" title="' + esc(FAMS[i].n) + ' · ' + x + '"></i>' : "").join("") + "</div>"; }
+function nodeR(b){ return 5 + 3.2 * Math.log10((b.rows || 0) + 1); }
+function draw(){
+  let h = "";
+  D.rings.forEach(r => h += '<ellipse class="ring" cx="' + D.cx + '" cy="' + D.cy + '" rx="' + r + '" ry="' + (r * .86) + '"/>');
+  D.arcs.forEach(a => { const R = 400, x = D.cx + R * Math.cos(a.a0), y = D.cy + R * Math.sin(a.a0) * .86;
+    h += '<line class="sect" x1="' + D.cx + '" y1="' + D.cy + '" x2="' + x.toFixed(1) + '" y2="' + y.toFixed(1) + '" opacity=".35"/>';
+    const m = a.lm, lx = D.cx + 412 * Math.cos(m), ly = D.cy + 412 * Math.sin(m) * .86;
+    h += '<text class="sl" x="' + lx.toFixed(1) + '" y="' + ly.toFixed(1) + '" text-anchor="' + (Math.cos(m) > .25 ? "start" : Math.cos(m) < -.25 ? "end" : "middle") + '">' + esc(a.c) + '</text>'; });
+  D.rels.forEach((r, i) => { const a = B[r[0]], b = B[r[2]]; if (!a || !b || a === b) return;
+    const mx = (a.x + b.x) / 2, my = (a.y + b.y) / 2, qx = mx + (D.cx - mx) * .35, qy = my + (D.cy - my) * .35;
+    h += '<path class="e' + (a.dec === "pruned" || b.dec === "pruned" ? " pr" : "") + '" data-i="' + i + '" d="M' + a.x + ' ' + a.y + 'Q' + qx.toFixed(1) + ' ' + qy.toFixed(1) + ' ' + b.x + ' ' + b.y + '" stroke="' + FC(r[3] || "REV") + '"/>'; });
+  D.bases.forEach(b => { const r = nodeR(b), out = Math.cos(b.a) >= 0;
+    let ring = "";
+    if (b.f){ const t = b.f.reduce((s, x) => s + x, 0), C = 2 * Math.PI * (r + 3.5); let off = 0;
+      b.f.forEach((x, i) => { if (!x) return; const L = C * x / t; ring += '<circle r="' + (r + 3.5) + '" fill="none" stroke="' + FC(FAMS[i].c) + '" stroke-width="4" stroke-dasharray="' + L.toFixed(2) + ' ' + (C - L).toFixed(2) + '" stroke-dashoffset="' + (-off).toFixed(2) + '" transform="rotate(-90)"/>'; off += L; }); }
+    const lab = b.n === "Startups Pool" ? '<text y="' + (r + 20) + '" text-anchor="middle">' + esc(b.n) + '</text>' : '<text x="' + ((out ? 1 : -1) * (r + 8)) + '" y="4" text-anchor="' + (out ? "start" : "end") + '">' + esc(b.n.length > 24 ? b.n.slice(0, 22) + "…" : b.n) + '<title>' + esc(b.n) + '</title></text>';
+    h += '<g class="nd ' + decCls(b.dec) + (b.dec === "pruned" ? " pr" : b.dec === "À investiguer" ? " inv" : "") + '" data-n="' + esc(b.n) + '" tabindex="0" role="button" aria-label="' + esc(b.n) + '" transform="translate(' + b.x + ' ' + b.y + ')">' + ring + '<circle class="core" r="' + r.toFixed(1) + '"/>' + lab + '</g>'; });
+  svg.innerHTML = h;
+  declutter();
+  svg.querySelectorAll(".nd").forEach(g => { g.addEventListener("click", () => pick(g.dataset.n)); g.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " "){ e.preventDefault(); pick(g.dataset.n); } }); });
+}
+// labels: greedy de-overlap, top to bottom, among visible nodes (re-run when pruned are shown/hidden)
+function declutter(){
+  const hidden = svg.classList.contains("hidep");
+  const items = [...svg.querySelectorAll(".nd")].filter(g => !(hidden && g.classList.contains("pr"))).map(g => {
+    const t = g.querySelector("text"); t.removeAttribute("dy"); const bb = t.getBBox(), b = B[g.dataset.n];
+    return { n: b.n, t, x: b.x + bb.x, y: b.y + bb.y, w: bb.width, h: bb.height, ny: b.y }; }).sort((u, v) => u.ny - v.ny);
+  // nodes are obstacles too: a label never sits on another base
+  const placed = [...svg.querySelectorAll(".nd")].filter(g => !(hidden && g.classList.contains("pr"))).map(g => { const b = B[g.dataset.n], r = nodeR(b) + 6; return { n: b.n, x: b.x - r + 2, y: b.y - r + 2, w: 2 * r - 4, h: 2 * r - 4 }; });
+  const hit = (q, dy) => placed.some(p => p.n !== q.n && q.x < p.x + p.w + 4 && p.x < q.x + q.w + 4 && q.y + dy < p.y + p.h && p.y < q.y + dy + q.h);
+  for (const q of items){ let dy = 0; for (const c of [0, 11, -11, 22, -22, 33, -33, 44, -44]) { if (!hit(q, c)) { dy = c; break; } dy = c; }
+    if (dy) q.t.setAttribute("dy", dy); placed.push({ ...q, n: null, y: q.y + dy }); }
+}
+function apply(){
+  svg.classList.toggle("sel", !!(sel || fam));
+  svg.querySelectorAll(".e").forEach(p => { const r = D.rels[+p.dataset.i]; p.classList.toggle("on", (sel ? (r[0] === sel || r[2] === sel) : true) && (fam ? r[3] === fam : !!sel)); });
+  svg.querySelectorAll(".nd").forEach(g => { const b = B[g.dataset.n];
+    const linked = sel && (g.dataset.n === sel || D.rels.some(r => (r[0] === sel && r[2] === b.n) || (r[2] === sel && r[0] === b.n)));
+    const hasF = fam && b.f && b.f[FAMS.findIndex(f => f.c === fam)] > 0;
+    g.classList.toggle("on", g.dataset.n === sel); g.classList.toggle("dim", (sel && !linked) || (fam && !hasF && !sel)); });
+  document.querySelectorAll("[data-fam]").forEach(c => c.setAttribute("aria-pressed", String(c.dataset.fam === fam)));
+}
+function pick(n){ sel = sel === n ? null : n; apply(); panel(sel || "Startups Pool"); }
+function relList(list, side){ if (!list.length) return '<p class="m">aucune</p>';
+  return "<ul>" + list.map(r => '<li><i style="--fc:' + FC(r[3] || "REV") + '"></i><b>' + esc(side ? r[2] || "cible non résolue" : r[0]) + '</b> · ' + esc(r[1]) + '</li>').join("") + "</ul>"; }
+function panel(n){ const b = B[n], el = document.getElementById("panel"); if (!b || !el) return;
+  const out = D.rels.filter(r => r[0] === n && r[2] !== n), inn = D.rels.filter(r => r[2] === n && r[0] !== n), self = D.rels.filter(r => r[0] === n && r[2] === n).length;
+  const top = b.f ? b.f.map((x, i) => [x, i]).filter(x => x[0]).sort((u, v) => v[0] - u[0]).slice(0, 5) : [];
+  el.innerHTML = '<p class="k">' + esc(b.cx) + '</p><h3>' + esc(b.n) + '</h3><p class="m"><span class="dec ' + decCls(b.dec) + '">' + esc(b.dec) + '</span>' + (b.d == null ? " · hors graphe" : b.d ? " · à " + b.d + " relation" + (b.d > 1 ? "s" : "") + " de Startups Pool" : " · le centre") + '</p>'
+    + '<dl><dt>fiches</dt><dd>' + fmt(b.rows) + '</dd><dt>rattachement</dt><dd>' + esc(b.ra || "—") + '</dd>' + (b.k ? '<dt>kind</dt><dd>' + esc(b.k) + '</dd>' : "")
+    + (b.p ? '<dt>propriétés</dt><dd>' + b.p + ' sous contrat</dd><dt>confiance</dt><dd>' + b.ch + ' haute · ' + b.cm + ' moyenne</dd><dt>vérifiées</dt><dd>' + b.v + ' sur ' + b.p + '</dd>' : '<dt>schéma</dt><dd>hors Schema Contracts</dd>') + '</dl>'
+    + (b.f ? '<h4>Ce qu\'elle encode</h4>' + fbar(b.f) + '<div class="fleg">' + top.map(([x, i]) => '<span style="--fc:' + FC(FAMS[i].c) + '"><i></i>' + esc(FAMS[i].n) + ' ' + x + '</span>').join("") + '</div>' : "")
+    + '<h4>Elle lit (' + out.length + ')</h4>' + relList(out, true) + '<h4>Elle est lue par (' + inn.length + ')</h4>' + relList(inn, false)
+    + (self ? '<p class="m" style="margin-top:8px">+ ' + self + ' relation' + (self > 1 ? "s" : "") + ' vers elle-même</p>' : ""); }
+function chips(){ const t = document.getElementById("tools"); if (!t) return;
+  t.innerHTML = '<button class="chip" data-hp aria-pressed="true">bases pruned masquées</button><span class="sep"></span>' + FAMS.filter(f => D.rels.some(r => r[3] === f.c)).map(f => '<button class="chip" data-fam="' + f.c + '" aria-pressed="false" style="--fc:' + FC(f.c) + '"><i></i>' + esc(f.n) + '</button>').join("");
+  t.querySelectorAll("[data-fam]").forEach(c => c.addEventListener("click", () => { fam = fam === c.dataset.fam ? null : c.dataset.fam; apply(); }));
+  const hp = t.querySelector("[data-hp]"); hp.addEventListener("click", () => { const on = !svg.classList.contains("hidep"); svg.classList.toggle("hidep", on); hp.setAttribute("aria-pressed", String(on)); hp.textContent = on ? "bases pruned masquées" : "bases pruned affichées"; declutter(); }); }
+function contexts(){ const el = document.getElementById("ctxs"); if (!el) return;
+  el.innerHTML = D.ctx.map(c => { const bs = D.bases.filter(b => b.cx === c).sort((u, v) => (u.dec === "pruned") - (v.dec === "pruned") || (v.rows || 0) - (u.rows || 0)); if (!bs.length) return "";
+    const p = bs.reduce((s, b) => s + (b.p || 0), 0);
+    return '<article class="ctx"><p class="t">' + esc(c) + '</p><p class="s">' + bs.length + ' base' + (bs.length > 1 ? "s" : "") + (p ? ' · ' + p + ' propriétés' : '') + '</p>' + bs.map(b => '<div class="brow" data-go="' + esc(b.n) + '"><span class="n">' + esc(b.n) + '</span><span class="c"><span class="dec ' + decCls(b.dec) + '">' + esc(b.dec === "À garder" ? "garder" : b.dec === "À investiguer" ? "investiguer" : "pruned") + '</span> ' + fmt(b.rows) + '</span>' + fbar(b.f) + '</div>').join("") + '</article>'; }).join("");
+  el.querySelectorAll("[data-go]").forEach(r => r.addEventListener("click", () => { sel = null; pick(r.dataset.go); const m = document.getElementById("map"); m.scrollIntoView({ behavior: "smooth", block: "center" }); if (window.__tab) window.__tab("map"); })); }
+document.querySelectorAll("[data-th]").forEach(b => b.addEventListener("click", () => { const u = new URL(location.href); const cur = document.documentElement.getAttribute("data-garden-theme") || "light"; u.searchParams.set("theme", cur === "dark" ? "light" : "dark"); location.assign(u.toString()); }));
+const tabs = [...document.querySelectorAll("[data-tab]")];
+window.__tab = id => { tabs.forEach(t => t.setAttribute("aria-selected", String(t.dataset.tab === id))); document.querySelectorAll("[data-tabp]").forEach(p => p.hidden = p.dataset.tabp !== id); };
+tabs.forEach(t => t.addEventListener("click", () => window.__tab(t.dataset.tab)));
+draw(); chips(); contexts(); apply(); panel("Startups Pool");
+</script>
+<!--notion-links:start-->
+<style>.nl{color:inherit;text-decoration:underline dotted;text-decoration-thickness:1px;text-underline-offset:3px;cursor:pointer}.nl::after{content:" \2197";font-size:.8em;opacity:.55}.nl:hover,.nl:focus-visible{text-decoration-style:solid;opacity:1;outline:none}.nl:hover::after{opacity:1}</style>
+<script>window.__NOTION_LINKS__ = [{"name": "Startups Pool", "url": "https://app.notion.com/p/67853899c6ff4e78aeb2f25b0875b601", "aliases": []}, {"name": "Zone Investment", "url": "https://app.notion.com/p/fe5715570ac747a4aa5452cc3cc9e628", "aliases": []}, {"name": "Zone Platform", "url": "https://app.notion.com/p/9c0c831726e34ff99de32607e779d2c3", "aliases": []}, {"name": "Founders", "url": "https://app.notion.com/p/13619a07ff444d05bbee168b31ff7260", "aliases": []}, {"name": "Memo", "url": "https://app.notion.com/p/96a2609ee4e44a01ae4841dd03672bc4", "aliases": []}, {"name": "Fundraise rounds", "url": "https://app.notion.com/p/2cb0fcf38494809793dfe911dbf79ead", "aliases": []}, {"name": "Our Terms", "url": "https://app.notion.com/p/2840fcf3849480218e57f942e78274e9", "aliases": []}, {"name": "CoInvest", "url": "https://app.notion.com/p/2e00fcf3849480298582c7bd72e3e332", "aliases": []}, {"name": "Valorisation", "url": "https://app.notion.com/p/2840fcf3849480d3b6eccb41715cbd71", "aliases": []}, {"name": "ACTIVATION ROADMAPS", "url": "https://app.notion.com/p/20f0fcf3849480cea08ac121ee8c6f9d", "aliases": ["Activation Roadmaps"]}, {"name": "Contracts", "url": "https://app.notion.com/p/2080fcf384948027bc4fdd3f1a11b5e3", "aliases": []}, {"name": "Zone - Communication", "url": "https://app.notion.com/p/1c70fcf3849480caa46bde43c221d665", "aliases": ["Zone · Communication"]}, {"name": "STOCKS", "url": "https://app.notion.com/p/20f0fcf38494809b881de5ea5c91bfaf", "aliases": []}, {"name": "Labels", "url": "https://app.notion.com/p/29ab6a35591e45f592eca77fd8b1b682", "aliases": []}, {"name": "Taskforce", "url": "https://app.notion.com/p/2fb0fcf3849480728cd6f141b07251d9", "aliases": ["TeamOwner"]}, {"name": "Programs", "url": "https://app.notion.com/p/42299f2803934484ac1abe3b193bc895", "aliases": ["Programmes"]}, {"name": "Mapverse", "url": "https://app.notion.com/p/c4c8efef870e43c298cbd6344b8fb739", "aliases": []}, {"name": "Scenari", "url": "https://app.notion.com/p/90a81b75c2dd461aafedc1860780b50a", "aliases": []}, {"name": "Protocols", "url": "https://app.notion.com/p/d44452661fb84329a45024735b5eed09", "aliases": []}, {"name": "Persona", "url": "https://app.notion.com/p/23e3aaea352c4dba824cedd4d95d2bb8", "aliases": ["Sendemo Persona Classification"]}, {"name": "Outcome", "url": "https://app.notion.com/p/15b0fcf3849480b4b1daed8687ca054b", "aliases": []}, {"name": "Pirate Metrics Framework", "url": "https://app.notion.com/p/023399460c1d4888bbe63a9c3a938dbf", "aliases": ["Data Driven Metrics Framework"]}, {"name": "Base Registry", "url": "https://app.notion.com/p/57ec93d750894e35a235cb2def898a9a", "aliases": []}, {"name": "Schema Contracts", "url": "https://app.notion.com/p/b402cf7695dc422ca847f61ef3a6f9cd", "aliases": []}, {"name": "Forms", "url": "https://app.notion.com/p/b292d77766c040a69baf24e4f6d62d75", "aliases": []}, {"name": "Field Contracts", "url": "https://app.notion.com/p/777bdb05d0a14871a67f14bde32f3464", "aliases": []}, {"name": "Operations", "url": "https://app.notion.com/p/06606f047537434f9b4e44f11b31f3b3", "aliases": []}, {"name": "Releases", "url": "https://app.notion.com/p/de91feac9f644bfca7b4bd6535c43170", "aliases": []}, {"name": "Incidents", "url": "https://app.notion.com/p/f505998cf2594842a412c806b08c6395", "aliases": []}, {"name": "Health Snapshots", "url": "https://app.notion.com/p/329ea747d48f4dd38512280f53886974", "aliases": []}, {"name": "Rôles", "url": "https://app.notion.com/p/7c954592eeb342618d408cb8e8de350b", "aliases": []}, {"name": "Alignements", "url": "https://app.notion.com/p/3d60fcf3849480b9b683fbc399b9bae7", "aliases": []}, {"name": "Pages", "url": "https://app.notion.com/p/1ad0fcf3849480219903ea0f2f8623e3", "aliases": ["Docs - lab", "Doc - lab", "Doc-lab", "Docs-lab"]}, {"name": "Compass", "url": "https://app.notion.com/p/6eec446fce1a40a1ab14efb34bad27e9", "aliases": []}, {"name": "Members", "url": "https://app.notion.com/p/550eb00f314f4f20a3ffd2cb9f5504de", "aliases": []}];
+(function(){
+  const T = window.__NOTION_LINKS__ || [];
+  if (!T.length || !document.body) return;
+  const url = new Map(); const names = [];
+  T.forEach(l => [l.name, ...(l.aliases || [])].forEach(n => { url.set(n, {u: l.url, k: l.name}); names.push(n); }));
+  names.sort((a, b) => b.length - a.length);
+  const esc = s => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const RX = new RegExp("(?<![\\p{L}\\p{N}_])(" + names.map(esc).join("|") + ")(?![\\p{L}\\p{N}_])(?!\\s+(?:Control\\s+Center|Operator))", "gu");
+  const SKIP = "a,button,[role=button],script,style,svg,textarea,input,select,option,label,title,code,pre,[data-nolink],.nl";
+  const SCOPE = ".scene,section,aside,dialog,[role=dialog],[data-scope],[aria-live],#panel,#detail,.panel,.detail,body";
+  function walk(root){
+    const seen = new Map();  // scope → names already linked in it (read from the DOM once per pass)
+    const has = (scope, k) => { let s = seen.get(scope);
+      if (!s){ s = new Set([...scope.querySelectorAll("a.nl")].filter(a => a.parentElement.closest(SCOPE) === scope).map(a => a.dataset.k)); seen.set(scope, s); }
+      return s.has(k); };
+    const tw = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {acceptNode: n => {
+      const p = n.parentElement; if (!p || p.closest(SKIP)) return NodeFilter.FILTER_REJECT;
+      RX.lastIndex = 0; return RX.test(n.nodeValue) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_SKIP; }});
+    const nodes = []; while (tw.nextNode()) nodes.push(tw.currentNode);
+    nodes.forEach(n => {
+      const scope = n.parentElement.closest(SCOPE) || document.body;
+      const s = n.nodeValue; let last = 0, out = null; RX.lastIndex = 0; let m;
+      while ((m = RX.exec(s))){
+        const hit = url.get(m[1]); if (!hit || has(scope, hit.k)) continue;
+        seen.get(scope).add(hit.k);
+        out = out || document.createDocumentFragment();
+        out.append(s.slice(last, m.index));
+        const a = document.createElement("a"); a.className = "nl"; a.href = hit.u; a.target = "_blank"; a.rel = "noopener";
+        a.dataset.k = hit.k; a.title = "Ouvrir « " + hit.k + " » dans Notion"; a.textContent = m[1];
+        a.addEventListener("click", e => e.stopPropagation());
+        out.append(a); last = m.index + m[0].length;
+      }
+      if (out){ out.append(s.slice(last)); n.replaceWith(out); }
+    });
+  }
+  // Inside the Notion app (desktop/mobile), an https link opens the web browser first, which then
+  // hands over to the app. Rewrite Notion links to the notion:// scheme there so they open directly.
+  const UA = navigator.userAgent || "";
+  const IN_APP = /\bNotion\/\d/i.test(UA) || /Electron\//.test(UA);
+  const NRX = /^https:\/\/(?:app\.notion\.com|www\.notion\.so|notion\.so)\/(?:p\/)?([^?#]+)(.*)$/;
+  // DISABLED 2026-10-02: notion:// links are blocked inside Notion embeds (links stopped working in the app).
+  function toApp(root){
+    if (!IN_APP) return;
+    root.querySelectorAll('a[href*="notion.com/"],a[href*="notion.so/"]').forEach(a => {
+      const m = a.getAttribute("href").match(NRX); if (!m) return;
+      a.setAttribute("href", "notion://www.notion.so/" + m[1] + m[2]); a.removeAttribute("target");
+    });
+  }
+  let t = null;
+  const run = () => { t = null; obs.disconnect(); try { walk(document.body); } finally { obs.observe(document.body, {childList: true, subtree: true, characterData: true}); } };
+  const obs = new MutationObserver(() => { if (!t) t = setTimeout(run, 250); });
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", run); else setTimeout(run, 0);
+})();
+</script>
+<!--notion-links:end-->
+</body>
+</html>

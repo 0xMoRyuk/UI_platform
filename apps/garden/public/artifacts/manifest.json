@@ -1,5 +1,5 @@
 {
-  "synced_at": "2026-10-13T09:37:46.925Z",
+  "synced_at": "2026-10-14T11:50:55.793Z",
   "domains": [
     {
       "id": "puppy",
@@ -56,14 +56,14 @@
       "id": "bee-network-bases",
       "domain": "puppy",
       "title": "Bee Network Index",
-      "description": "Les bases du Bee Network en cinq familles (principales, dossiers startup, référentiels, hors registre, hors cycle), avec fiches, états, routage Herald et relations.",
-      "date": "2026-09-30",
+      "description": "Les bases du Bee Network en deux lentilles — par contexte de base (fiches) et par famille d'information (propriétés) — avec arbitrage, routage Herald, états et relations. Relevé du 14/10, comptes seulement.",
+      "date": "2026-10-14",
       "source": "garden/assets/bee-network-bases.html",
       "file": "bee-network-bases.html",
-      "generator": "Claude Code · bee-navigator 2.1.0 records + survey",
+      "generator": "Claude Code · scripts/bee-network-bases/build.py · relevé commun scripts/bee-network-releve",
       "sensitivity": "internal",
-      "bytes": 65622,
-      "sha256": "35442aaddf63"
+      "bytes": 98955,
+      "sha256": "f4c6332081b1"
     },
     {
       "id": "bee-network-index",
@@ -88,8 +88,8 @@
       "file": "bee-network-rives.html",
       "generator": "Claude Code · bee-navigator 2.1.0 records + survey",
       "sensitivity": "internal",
-      "bytes": 70059,
-      "sha256": "3a788d20c453"
+      "bytes": 70054,
+      "sha256": "7103aed3227f"
     },
     {
       "id": "bee-network-city",
@@ -183,17 +183,43 @@
       "sha256": "fa490eff5333"
     },
     {
-      "id": "startup-encoded",
+      "id": "startup-encoded-ca",
       "domain": "puppy",
-      "title": "Ce qu'une fiche startup encode",
-      "description": "746 propriétés sous contrat de schéma sur 16 bases, lues à travers 14 familles d'information, et 51 types de mémo en 7 familles ; deux lectures (CA, Atelier), une grappe de points animée par base ou par famille, trois figures isométriques (meuble, horodateur, pupitre de tri) et les trois gestes Puppy sur le journal Memo. Relevé du 12/10, comptes seulement.",
-      "date": "2026-10-13",
-      "source": "garden/assets/startup-encoded.html",
-      "file": "startup-encoded.html",
-      "generator": "Claude Code · scripts/startup-encoded (build.mjs + figures.mjs) · anatomy dbf697a",
+      "title": "Ce qu'une fiche startup encode — lecture CA",
+      "description": "Les propriétés sous contrat de schéma lues à travers 14 familles d'information, et les 51 types de mémo en 7 familles ; lecture CA : l'essentiel en langage courant. Relevé du 12/10, comptes seulement.",
+      "date": "2026-10-14",
+      "source": "garden/assets/startup-encoded.ca.html",
+      "file": "startup-encoded.ca.html",
+      "generator": "Claude Code · scripts/startup-encoded/ca/build.mjs + figures.mjs · anatomy dbf697a",
       "sensitivity": "internal",
-      "bytes": 400894,
-      "sha256": "add795adcfe7"
+      "bytes": 401008,
+      "sha256": "6362d20c74fe"
+    },
+    {
+      "id": "startup-encoded-atelier",
+      "domain": "puppy",
+      "title": "Ce qu'une fiche startup encode — lecture Atelier",
+      "description": "Les propriétés sous contrat de schéma lues à travers 14 familles d'information, et les 51 types de mémo en 7 familles ; lecture Atelier : chaque propriété, chaque type de mémo, chaque lien entre bases. Relevé du 12/10, comptes seulement.",
+      "date": "2026-10-14",
+      "source": "garden/assets/startup-encoded.atelier.html",
+      "file": "startup-encoded.atelier.html",
+      "generator": "Claude Code · scripts/startup-encoded/atelier/build.mjs + figures.mjs · anatomy dbf697a",
+      "sensitivity": "internal",
+      "bytes": 401020,
+      "sha256": "35f24e26415e"
+    },
+    {
+      "id": "bee-network-topologie",
+      "domain": "puppy",
+      "title": "Bee Network — topologie des bases",
+      "description": "53 bases autour de Startups Pool : rayon = distance en relations, angle = contexte de base, anneau = signature des 14 familles d'information, fils colorés par famille ; contextes et écarts du relevé. Relevé du 14/10, comptes seulement.",
+      "date": "2026-10-14",
+      "source": "garden/assets/bee-network-topologie.html",
+      "file": "bee-network-topologie.html",
+      "generator": "Claude Code · scripts/bee-network-topologie/build.mjs · relevé commun scripts/bee-network-releve",
+      "sensitivity": "internal",
+      "bytes": 63052,
+      "sha256": "81bfc228dd5e"
     }
   ]
 }
