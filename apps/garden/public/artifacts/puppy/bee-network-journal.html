@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Bee Network — le journal des mémos</title>
+<style>
+:root{
+  color-scheme: dark;
+  --page:#070706; --panel:#100f0d; --card:#151411; --line:#27241f; --text:#f2f0eb; --muted:#928c80; --faint:#5f5a51;
+  --acc:#c6f135; --amber:#f5a524; --red:#ef4444; --blue:#8fa8ff; --off:#2c2924; --on-acc:#0b0d06;
+  --sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono:"Berkeley Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: light){
+  :root{
+    color-scheme: light;
+    --page:#f4f3f0; --panel:#ffffff; --card:#fbfaf7; --line:#e1ddd5; --text:#17150f; --muted:#625c50; --faint:#8b8578;
+    --acc:#4f7300; --amber:#a65f00; --red:#c8352b; --blue:#3b5bd6; --off:#e9e5dd; --on-acc:#ffffff;
+  }
+}
+
+*{box-sizing:border-box}
+html{scroll-snap-type:y proximity;scroll-behavior:smooth;background:var(--page)}
+body{margin:0;background:var(--page);color:var(--text);font-family:var(--sans);-webkit-font-smoothing:antialiased}
+.scene{min-height:100dvh;scroll-snap-align:start;display:grid;align-content:center;padding:64px max(16px,6vw) 84px}
+.scene>*{min-width:0;max-width:100%}
+.eyebrow{font:500 12px var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--acc);margin:0 0 16px}
+h1,h2{margin:0;font-weight:500;letter-spacing:-.025em;text-wrap:balance;font-family:var(--mono);hyphens:auto;overflow-wrap:break-word}
+h1{font-size:clamp(30px,5.6vw,80px);line-height:1;letter-spacing:-.04em;max-width:20ch}
+h2{font-size:clamp(24px,3.6vw,48px);line-height:1.06;max-width:26ch}
+.lede{margin:20px 0 0;font-size:clamp(16px,1.5vw,20px);line-height:1.5;color:var(--muted);max-width:64ch;font-weight:300}
+.lede b{color:var(--text);font-weight:500}
+.note{margin-top:14px;font:12px/1.5 var(--mono);color:var(--faint);max-width:90ch;overflow-wrap:anywhere}
+code{font:12px var(--mono);color:var(--text);overflow-wrap:anywhere}
+.rv{opacity:0;translate:0 16px;transition:opacity .8s cubic-bezier(.2,.7,.2,1),translate .9s cubic-bezier(.2,.7,.2,1)}
+.scene.on .rv{opacity:1;translate:0 0}
+.scene.on .d1{transition-delay:.12s}.scene.on .d2{transition-delay:.24s}.scene.on .d3{transition-delay:.36s}.scene.on .d4{transition-delay:.48s}
+.nojs .rv{opacity:1;translate:none}
+.progress{position:fixed;top:0;left:0;height:2px;background:var(--acc);width:0;z-index:20;transition:width .5s}
+.hud{position:fixed;right:16px;bottom:14px;z-index:20;display:flex;gap:10px;align-items:center;font:12px var(--mono);color:var(--faint)}
+.hud b{color:var(--text);font-weight:500}
+.hud button{all:unset;cursor:pointer;width:30px;height:30px;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;color:var(--muted);background:var(--panel)}
+.hud button:hover,.hud button:focus-visible{color:var(--text);border-color:var(--muted)}
+.figure{margin-top:28px;max-width:760px}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin-top:28px;max-width:1100px}
+.card{background:var(--card);border:1px solid var(--line);padding:18px 18px 16px;min-width:0}
+.card .k{font:500 11px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--acc);margin:0 0 10px}
+.card .t{margin:0;font:500 16px/1.3 var(--mono);color:var(--text)}
+.card p{margin:8px 0 0;font-size:14px;line-height:1.5;color:var(--muted)}
+.nums{display:flex;flex-wrap:wrap;gap:10px 28px;margin-top:22px}
+.num{min-width:0}
+.num .v{font:500 clamp(28px,3.4vw,44px)/1 var(--mono);letter-spacing:-.03em;color:var(--text)}
+.num .k{font:12px/1.4 var(--mono);color:var(--faint);margin-top:6px}
+@media (max-width:560px){.scene{padding:48px 16px 84px}}
+
+
+.iso{
+  --anatomy-page:var(--page);--anatomy-card:var(--card);--anatomy-text:var(--muted);--anatomy-strong:var(--text);--anatomy-muted:var(--faint);
+  --anatomy-paper:var(--card);--anatomy-face:#1c1b17;--anatomy-top:#1d1c18;
+  --anatomy-shade-0:#100f0c;--anatomy-shade-1:#131210;--anatomy-shade-2:#161513;--anatomy-shade-3:#191815;
+  --anatomy-lit-top:#28261f;--anatomy-lit-shade:#1f1d18;
+  --anatomy-hi:#d8d4cb;--anatomy-mid:#6c675e;--anatomy-lo:#403c35;--anatomy-faint:#2b2823;--anatomy-lit:#ffffff;
+  --anatomy-halo:#050504;--anatomy-halo-opacity:.9;--anatomy-dot:#e6e2d9;
+  --anatomy-mono:var(--mono);
+}
+.iso[data-theme="light"]{
+  --anatomy-face:#ffffff;--anatomy-top:#ffffff;
+  --anatomy-shade-0:#dcdad4;--anatomy-shade-1:#e5e3dd;--anatomy-shade-2:#edebe5;--anatomy-shade-3:#f4f3ee;
+  --anatomy-lit-top:#ffffff;--anatomy-lit-shade:#eeece6;
+  --anatomy-hi:#26241f;--anatomy-mid:#8a867c;--anatomy-lo:#b4b0a6;--anatomy-faint:#d6d2ca;--anatomy-lit:#000000;
+  --anatomy-halo:#8a8578;--anatomy-halo-opacity:.32;--anatomy-dot:#3a3832;
+}
+.iso-plate{box-shadow:0 0 0 1px var(--line);background:var(--card)}
+.iso-figure{margin:0}
+.iso-legend{color:var(--muted);font-family:var(--sans)}
+.iso-caption{color:var(--muted)}
+.iso-plate-corner{font-family:var(--mono)}
+.iso-stage{outline:none}
+.iso-stage:focus-visible{outline:1px solid var(--muted);outline-offset:6px}
+
+:root{--f-ID:#f2f0eb;--f-SUP:#ffd166;--f-ORG:#d99cff;--f-GEO:#7cc9a6;--f-LIF:#c6f135;--f-EVA:#ef4444;--f-FIN:#f5a524;--f-GOV:#ff7a59;--f-PRG:#8fa8ff;--f-OPS:#c9b99a;--f-COM:#ff9ecb;--f-SYS:#80d8ff;--f-TIM:#928c80;--f-REV:#5f5a51;--hover:rgba(255,255,255,.04)}
+@media (prefers-color-scheme: light){:root{--f-ID:#17150f;--f-SUP:#9a6b00;--f-ORG:#7a3fbf;--f-GEO:#2f8a64;--f-LIF:#4f7300;--f-EVA:#c8352b;--f-FIN:#a65f00;--f-GOV:#b84a2b;--f-PRG:#3b5bd6;--f-OPS:#8a7550;--f-COM:#b8336f;--f-SYS:#1f7fa8;--f-TIM:#8b8578;--f-REV:#a9a397;--hover:rgba(23,21,15,.04)}}
+.th{all:unset;cursor:pointer;position:fixed;top:14px;left:16px;z-index:21;width:30px;height:30px;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;color:var(--muted);background:var(--panel);font:13px var(--mono)}
+.mf{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));margin-top:24px;max-width:1500px}
+.mfc{all:unset;cursor:pointer;box-sizing:border-box;background:var(--card);border:1px solid var(--line);border-top:3px solid var(--fc);padding:14px 14px 12px;min-width:0}
+.mfc[aria-pressed="true"]{border-color:var(--fc);box-shadow:0 0 0 1px var(--fc) inset}
+.mfc:focus-visible{outline:1px solid var(--acc)}
+.mfc .t{margin:0;font:500 14px var(--mono);color:var(--text)}.mfc .v{font:500 30px/1 var(--mono);margin-top:10px;color:var(--text)}
+.mfc .s{font:11.5px var(--mono);color:var(--faint);margin-top:6px}
+.mfc .bar{height:5px;background:var(--off);margin-top:10px}.mfc .bar i{display:block;height:100%;background:var(--fc)}
+.tools{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:20px}
+.tools input{all:unset;box-sizing:border-box;border:1px solid var(--line);background:var(--card);padding:6px 10px;font:12.5px var(--mono);color:var(--text);min-width:220px}
+.tools .cnt{font:11.5px var(--mono);color:var(--faint)}
+.tl{margin-top:12px;max-width:1500px;border-top:1px solid var(--line)}
+.tr{display:grid;grid-template-columns:minmax(0,1.3fr) 90px minmax(0,2fr) minmax(0,1.2fr);gap:4px 16px;align-items:baseline;padding:8px 2px;border-bottom:1px solid var(--line)}
+.tr:hover{background:var(--hover)}
+.tr .n{font:500 13px var(--mono);color:var(--text)}.tr .n i{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--fc);margin-right:8px}
+.tr .n small{display:block;margin:2px 0 0 16px;font:11px var(--mono);color:var(--faint)}
+.tr .c{font:500 13px var(--mono);color:var(--text);text-align:right}
+.tr .rq{display:flex;flex-wrap:wrap;gap:4px}.rq span{font:10.5px var(--mono);padding:1px 6px;border:1px solid var(--line);color:var(--muted)}
+.rq span.s{border-color:var(--acc);color:var(--acc)}
+.tr .m{font:12px var(--mono);color:var(--muted)}.tr .off{color:var(--faint);font-style:italic}
+.tr.hd{font:10.5px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}.tr.hd:hover{background:none}
+.q{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));margin-top:24px;max-width:1500px}
+.q .card .v{font:500 30px/1 var(--mono);color:var(--text);margin-top:8px}.q .card .v small{font-size:13px;color:var(--faint);margin-left:6px}
+.mo{display:flex;align-items:flex-end;gap:6px;height:180px;margin:26px 0 30px;max-width:900px;border-bottom:1px solid var(--line)}
+.mo div{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;min-width:0}
+.mo i{display:block;width:100%;background:var(--acc);opacity:.8}.mo i.p{opacity:.35}
+.mo b{font:500 10.5px var(--mono);color:var(--muted);margin-bottom:4px}.mo span{font:10px var(--mono);color:var(--faint);margin-top:4px;position:absolute;transform:translateY(16px)}
+.mo div{position:relative}
+.cy{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));margin-top:24px;max-width:1500px}
+.cy .card{position:relative}.cy .card.dash{border-style:dashed}
+.cy .card .k{margin-bottom:6px}
+@media (max-width:760px){.tr{grid-template-columns:minmax(0,1fr) 70px}.tr .rq,.tr .m{grid-column:1/-1}.tr.hd{display:none}}
+</style>
+<!--garden-theme:start-->
+<script>
+(function(){
+  var q = null; try { q = new URLSearchParams(location.search).get("theme"); } catch (e) {}
+  var h = location.hostname || "";
+  // 2026-10-13 (Mo : « Set light theme default ») : clair partout par défaut, garden compris ;
+  // ?theme=dark force le sombre. L'hôte n'est plus lu (gardé pour un retour éventuel à la règle par hôte).
+  var dark = (q === "dark" || q === "light") ? q === "dark" : false;
+  var want = dark ? "dark" : "light";
+  document.documentElement.setAttribute("data-garden-theme", want);
+  var RX = /\(\s*prefers-color-scheme\s*:\s*(dark|light)\s*\)/gi;
+  function rewrite(text){
+    return text.split(",").map(function(item){
+      var off = false;
+      var out = item.replace(RX, function(_, m){ if (m.toLowerCase() !== want) off = true; return "(min-width:0px)"; });
+      return off ? "not all" : out.trim();
+    }).join(", ");
+  }
+  function fix(rules){
+    for (var i = 0; i < rules.length; i++){
+      var r = rules[i];
+      if (r.media && r.media.mediaText && /prefers-color-scheme/i.test(r.media.mediaText)) r.media.mediaText = rewrite(r.media.mediaText);
+      if (r.cssRules) fix(r.cssRules);
+    }
+  }
+  var done = new WeakSet();
+  function all(){
+    for (var i = 0; i < document.styleSheets.length; i++){
+      var sh = document.styleSheets[i]; if (done.has(sh)) continue;
+      try { fix(sh.cssRules); done.add(sh); } catch (e) {}
+    }
+  }
+  var mm = window.matchMedia && window.matchMedia.bind(window);
+  if (mm) window.matchMedia = function(query){
+    var m = /prefers-color-scheme\s*:\s*(dark|light)/i.exec(query || "");
+    if (!m) return mm(query);
+    return { matches: m[1].toLowerCase() === want, media: query, onchange: null,
+      addListener: function(){}, removeListener: function(){}, addEventListener: function(){},
+      removeEventListener: function(){}, dispatchEvent: function(){ return false; } };
+  };
+  all();
+  document.addEventListener("DOMContentLoaded", all);
+  window.addEventListener("load", all);
+})();
+</script>
+<!--garden-theme:end-->
+</head>
+<body class="nojs">
+<div class="progress" id="progress" aria-hidden="true"></div>
+<nav class="hud" aria-label="Navigation"><span><b id="cur">01</b> / <span id="tot">05</span></span><button id="prev" aria-label="Scène précédente">↑</button><button id="next" aria-label="Scène suivante">↓</button></nav>
+<button class="th" data-th aria-label="Changer de thème" title="Sombre / clair">◐</button>
+<main>
+<section class="scene">
+<p class="eyebrow rv">Bee Network · relevé du 14 octobre 2026</p>
+<h1 class="rv d1">Le journal des mémos</h1>
+<p class="lede rv d2">La base <b>Memo</b> est le journal de chaque startup : chaque appel, vote, revue ou fichier est un mémo daté, rangé par <b>son type</b> dans le registre des mémos — sept familles, cinquante-deux types, chacun avec son modèle et ses propriétés obligatoires.</p>
+<div class="nums rv d3">
+<div class="num"><div class="v">6 584</div><div class="k">mémos</div></div>
+<div class="num"><div class="v">52</div><div class="k">types · 7 familles</div></div>
+<div class="num"><div class="v">192</div><div class="k">sans startup</div></div>
+<div class="num"><div class="v">61</div><div class="k">sans type</div></div>
+<div class="num"><div class="v">≈ 426</div><div class="k">créations par mois</div></div>
+</div>
+<p class="note rv d4">Lecture seule Notion par bee-navigator le 14/10/2026 : Schema Contracts (État ≠ Supprimé/Absent), Bases Bee Network — keep / prune, Registre des mémo, Memo. Aucun titre de fiche, aucune personne. Herald : Cloud Monitoring pubsub.googleapis.com/topic/send_message_operation_count (response_code=success), un topic intent.&lt;name&gt; par intent ; config puppy/config/notion_sources.yaml + intents.yaml (checkout local, Herald herald-00087-x86). Lecture seule, puppy-executor.</p></section>
+<section class="scene">
+<p class="eyebrow rv">01 · les familles</p><h2 class="rv d1">Sept familles, très inégales</h2>
+<p class="lede rv d2">La famille dit <b>ce que le mémo documente</b>. Le pipeline d'investissement porte presque tout le journal : les votes à eux seuls dépassent la moitié des rattachements. Cliquez une famille pour lire ses types.</p>
+<div id="mf" class="mf rv d3"></div></section>
+<section class="scene">
+<p class="eyebrow rv">02 · les types</p><h2 class="rv d1">Choisir le type avant d'écrire</h2>
+<p class="lede rv d2">Le type fixe trois choses : <b>le modèle</b> de page, <b>les propriétés obligatoires</b>, et si le mémo <b>exige une startup</b>.</p>
+<div class="tools rv d3"><input id="tq" type="search" placeholder="chercher un type, une propriété, un modèle" aria-label="Recherche"><span id="tcnt" class="cnt"></span></div>
+<div id="tl" class="tl rv d3"></div></section>
+<section class="scene">
+<p class="eyebrow rv">03 · la qualité du journal</p><h2 class="rv d1">Ce qui se retrouve, et ce qui se perd</h2>
+<div class="q">
+<div class="card"><p class="k">Sans startup</p><div class="v">192<small>2.9 %</small></div><p>On ne les retrouve que par hasard : ils ne remontent ni sur la fiche ni dans les comptes.</p></div>
+<div class="card"><p class="k">Sans type</p><div class="v">61<small>0.9 %</small></div><p>Sans type, pas de modèle ni de propriétés obligatoires : le mémo échappe au registre.</p></div>
+<div class="card"><p class="k">Résumés</p><div class="v">5 164<small>78 %</small></div><p>« Résumé du memo » renseigné : un fait, une décision, une prochaine étape.</p></div>
+<div class="card"><p class="k">Avec fichier</p><div class="v">479<small>7 %</small></div><p>« Files &amp; media » renseigné. Les types Actifs &amp; fichiers l'exigent.</p></div>
+<div class="card"><p class="k">Plusieurs types</p><div class="v">376</div><p>6 899 rattachements de type pour 6 523 mémos typés : un mémo peut porter plusieurs types.</p></div>
+</div>
+<div id="mo" class="mo rv d3" role="img" aria-label="Créations de mémos par mois"></div>
+<p class="note rv d4">Créations par mois, 2025-10 → 2026-10 (le dernier mois est partiel). Les mémos d'exercice de l'Atelier (Is Demo, Startup École) sont à exclure des comptes : 1 au relevé.</p></section>
+<section class="scene">
+<p class="eyebrow rv">04 · le cycle</p><h2 class="rv d1">Du mémo à la fiche</h2><div class="cy">
+<div class="card"><p class="k">1 · Écrire</p><p class="t">Un mémo, depuis le modèle de son type</p><p>Le type se pose par la relation « Type de mémo » ; il fixe le modèle, les propriétés obligatoires et la startup requise.</p></div>
+<div class="card"><p class="k">2 · Herald</p><p class="t">memo.updated · 7 468 en 30 jours</p><p>Chaque mise à jour de Memo est publiée depuis le 29/08/2026. 6 331 le 16/09 (édition en masse) ; 2 à 190 par jour ensuite. memo.created est enregistré mais non routé.</p></div>
+<div class="card dash"><p class="k">3 · Puppy</p><p class="t">Aucun consommateur</p><p>Trois gestes proposés sur ce flux : résumer, dériver l'étape, préparer le dossier d'un comité — sur un socle contrôler / tracer.</p></div>
+<div class="card"><p class="k">4 · Consulter</p><p class="t">La fiche à jour</p><p>Le mémo remonte sur la fiche startup par la relation Startups Pool — sauf les 192 qui n'en ont pas.</p></div>
+</div></section>
+</main>
+<script>const __DATA__ = {"fams":[{"name":"Pipeline investissement","tok":"FIN","types":20,"n":5111,"req":6,"tpl":14},{"name":"Actifs & fichiers","tok":"SYS","types":6,"n":899,"req":6,"tpl":1},{"name":"Accompagnement","tok":"PRG","types":11,"n":433,"req":10,"tpl":4},{"name":"Reporting & communication","tok":"COM","types":4,"n":258,"req":3,"tpl":0},{"name":"Valorisation & finance","tok":"EVA","types":4,"n":121,"req":4,"tpl":0},{"name":"Juridique & post-closing","tok":"GOV","types":4,"n":72,"req":4,"tpl":2},{"name":"Notes & système","tok":"TIM","types":3,"n":5,"req":1,"tpl":0}],"types":[["Baromètre trimestriel","Accompagnement",0,1,0,["Résumé du memo","Startups Pool"],null],["Call Trimestriel","Accompagnement",181,1,1,["Résumé du memo","Startups Pool","Destination"],"Call Trimestriel Plateforme"],["Cycle 2","Accompagnement",64,1,1,["Résumé du memo","Startups Pool","Destination"],null],["Cycle 3","Accompagnement",37,1,1,["Résumé du memo","Startups Pool","Destination"],null],["Cycle 4","Accompagnement",12,1,1,["Résumé du memo","Startups Pool","Destination"],null],["Feedback call","Accompagnement",3,1,1,["Résumé du memo","Startups Pool"],null],["Offboarding","Accompagnement",5,1,1,["Résumé du memo","Startups Pool"],"Offboarding"],["Onboarding","Accompagnement",82,1,1,["Résumé du memo","Startups Pool","Destination"],"Agenda Onboarding Call"],["Onboarding email","Accompagnement",1,1,1,["Startups Pool","Destination","external link"],null],["Roadmap Accompagnement","Accompagnement",47,0,1,[],"[Depreciated] Roadmap Accompagnement"],["Support Ad Hoc","Accompagnement",1,1,1,["Résumé du memo","Startups Pool"],null],["attachment","Actifs & fichiers",2,1,1,["Files & média","Startups Pool"],null],["logo","Actifs & fichiers",94,1,1,["Files & média","Startups Pool"],null],["pitch_desc","Actifs & fichiers",778,1,1,["Files & média","Startups Pool"],null],["portfolio_logo","Actifs & fichiers",0,1,1,["Files & média","Startups Pool"],null],["project_roadmap","Actifs & fichiers",24,1,1,["Files & média","Startups Pool"],null],["simple file","Actifs & fichiers",1,1,1,["Files & média","Startups Pool"],"Simple File"],["Conditions post closing","Juridique & post-closing",0,1,1,["description","Startups Pool"],"Rappel - Conditions post closing"],["Contract","Juridique & post-closing",1,1,1,["description","Startups Pool","Files & média"],null],["Conversion Safe","Juridique & post-closing",0,1,1,["description","Startups Pool"],"Rappel - Conversion Safe"],["kbis","Juridique & post-closing",71,1,1,["description","Startups Pool","Files & média"],null],["Affinity Notetaker","Notes & système",0,1,1,["Startups Pool"],null],["Personal notes","Notes & système",3,0,1,[],null],["reminder","Notes & système",2,0,1,[],null],["Additional Exchange","Pipeline investissement",51,0,1,[],"Additional Exchange"],["Candidature","Pipeline investissement",8,1,1,["Startups Pool","description"],null],["DASF Investment memo","Pipeline investissement",5,1,1,["Résumé du memo","Startups Pool","Destination"],"DASF Investment Memo"],["Debt Investment Memo","Pipeline investissement",0,1,1,["Résumé du memo","Startups Pool","Destination"],"Debt Investment Memo"],["Due diligence","Pipeline investissement",6,0,1,[],null],["Extended Closing Memo","Pipeline investissement",0,1,1,["Résumé du memo","Startups Pool","Destination"],"Extended Closing Memo"],["First Call","Pipeline investissement",97,0,1,[],"First call"],["First Review","Pipeline investissement",915,0,1,[],"[First Review]"],["Follow-On Ticket - Investment memo","Pipeline investissement",7,1,1,["Résumé du memo","Startups Pool","Destination"],"Follow-on ticket Investment Memo"],["Fundings","Pipeline investissement",1,0,1,[],null],["Fundraise","Pipeline investissement",0,0,1,[],null],["Investment Memo","Pipeline investissement",98,1,1,["Résumé du memo","Startups Pool","Destination"],"Investment Memo"],["No go","Pipeline investissement",14,0,1,[],"No go reason"],["Notes Challenge","Pipeline investissement",22,0,1,[],null],["Second Call","Pipeline investissement",28,0,1,[],"Second call"],["Vote 1","Pipeline investissement",167,0,1,[],"Voting record #1"],["Vote 2","Pipeline investissement",6,0,1,[],"Voting record #2"],["Vote 3","Pipeline investissement",2,0,1,[],"Voting record #3"],["Vote 4","Pipeline investissement",1,0,1,[],null],["Votes","Pipeline investissement",3683,0,1,[],"Voting Receipt"],["Hall of Fame","Reporting & communication",13,1,1,["Résumé du memo","Startups Pool","external link"],null],["Intro DA Weekly","Reporting & communication",1,1,1,["Résumé du memo","Startups Pool","Destination"],null],["Rapport narratif","Reporting & communication",180,1,1,["Résumé du memo","Startups Pool","Destination"],null],["Reporting - Portfolio","Reporting & communication",64,0,1,["Résumé du memo","Destination"],null],["budget_estimate","Valorisation & finance",19,1,1,["Résumé du memo","Startups Pool"],null],["financial_projections","Valorisation & finance",28,1,1,["Résumé du memo","Startups Pool"],null],["P&L","Valorisation & finance",1,1,1,["Résumé du memo","Startups Pool"],null],["Valorisation","Valorisation & finance",73,1,1,["Résumé du memo","Startups Pool"],null]],"months":[["2025-10",187],["2025-11",408],["2025-12",112],["2026-01",387],["2026-02",421],["2026-03",159],["2026-04",820],["2026-05",349],["2026-06",772],["2026-07",473],["2026-08",240],["2026-09",789],["2026-10",146]]};</script>
+<script>
+(function(){
+  var root = document.documentElement;
+  function want(){
+    var forced = root.getAttribute("data-theme");
+    if (forced === "dark" || forced === "light") return forced;
+    var g = root.getAttribute("data-garden-theme");
+    if (g === "dark" || g === "light") return g;
+    return (window.matchMedia && matchMedia("(prefers-color-scheme: light)").matches) ? "light" : "dark";
+  }
+  function apply(){ var t = want(); document.querySelectorAll(".iso").forEach(function(el){ el.setAttribute("data-theme", t); }); }
+  apply();
+  new MutationObserver(apply).observe(root, { attributes: true, attributeFilter: ["data-theme", "data-garden-theme"] });
+  if (window.matchMedia) { var mq = matchMedia("(prefers-color-scheme: light)"); if (mq.addEventListener) mq.addEventListener("change", apply); }
+})();</script>
+<script>
+const $ = s => document.querySelector(s);
+const REDUCE = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const scenes = [...document.querySelectorAll(".scene")]; $("#tot").textContent = String(scenes.length).padStart(2,"0");
+let current = 0;
+const io = new IntersectionObserver(es=>es.forEach(e=>{ if (e.isIntersecting){ const i = scenes.indexOf(e.target); current = i; e.target.classList.add("on"); $("#cur").textContent = String(i+1).padStart(2,"0"); $("#progress").style.width = ((i+1)/scenes.length*100)+"%"; } }),{threshold:.2});
+scenes.forEach(s=>io.observe(s));
+const go = d => { const i = Math.max(0, Math.min(scenes.length-1, current+d)); scenes[i].scrollIntoView({behavior: REDUCE ? "auto" : "smooth"}); };
+$("#next").addEventListener("click", ()=>go(1)); $("#prev").addEventListener("click", ()=>go(-1));
+addEventListener("keydown", e=>{ if (e.target.closest(".iso-stage")) return; if (["ArrowDown","PageDown"].includes(e.key)){ e.preventDefault(); go(1); } if (["ArrowUp","PageUp"].includes(e.key)){ e.preventDefault(); go(-1); } });
+document.body.classList.remove("nojs");
+scenes[0].classList.add("on");</script>
+<script type="module">
+const D = __DATA__;
+const FC = t => "var(--f-" + t + ")";
+const TOK = Object.fromEntries(D.fams.map(f => [f.name, f.tok]));
+const esc = s => String(s ?? "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+const fmt = n => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+let fam = null, q = "";
+function cards(){ const el = document.getElementById("mf"); if (!el) return; const mx = Math.max(...D.fams.map(f => f.n));
+  el.innerHTML = D.fams.map(f => '<button class="mfc" data-f="' + esc(f.name) + '" aria-pressed="false" style="--fc:' + FC(f.tok) + '"><p class="t" data-nolink>' + esc(f.name) + '</p><div class="v">' + fmt(f.n) + '</div><div class="s">rattachements · ' + f.types + ' types · ' + f.req + ' exigent une startup · ' + f.tpl + ' avec modèle</div><div class="bar"><i style="width:' + (100 * Math.sqrt(f.n / mx)).toFixed(1) + '%"></i></div></button>').join("");
+  el.querySelectorAll(".mfc").forEach(b => b.addEventListener("click", () => { fam = fam === b.dataset.f ? null : b.dataset.f; list(); if (window.__tab) window.__tab("types"); })); }
+function list(){ const el = document.getElementById("tl"); if (!el) return;
+  document.querySelectorAll(".mfc").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.f === fam)));
+  const rows = D.types.filter(t => (!fam || t[1] === fam) && (!q || (t[0] + " " + t[6] + " " + t[5].join(" ")).toLowerCase().includes(q))).sort((a, b) => b[2] - a[2]);
+  document.getElementById("tcnt").textContent = rows.length + " type" + (rows.length > 1 ? "s" : "") + (fam ? " · " + fam : "");
+  el.innerHTML = '<div class="tr hd"><span>type · famille</span><span style="text-align:right">mémos</span><span>propriétés obligatoires</span><span>modèle</span></div>' + rows.map(t => '<div class="tr" style="--fc:' + FC(TOK[t[1]]) + '"><span class="n"><i></i>' + esc(t[0]) + (t[4] ? "" : ' <span class="off">inactif</span>') + '<small>' + esc(t[1]) + '</small></span><span class="c">' + fmt(t[2]) + '</span><span class="rq">' + (t[3] ? '<span class="s">startup requise</span>' : '') + t[5].filter(p => p !== "Startups Pool").map(p => '<span>' + esc(p) + '</span>').join("") + '</span><span class="m">' + (t[6] ? esc(t[6]) : '<span class="off">sans modèle</span>') + '</span></div>').join(""); }
+function months(){ const el = document.getElementById("mo"); if (!el) return; const mx = Math.max(...D.months.map(m => m[1]));
+  el.innerHTML = D.months.map(([m, n], i) => '<div title="' + m + ' · ' + n + ' créations"><b>' + n + '</b><i class="' + (i === D.months.length - 1 ? "p" : "") + '" style="height:' + (100 * n / mx).toFixed(1) + '%"></i><span>' + m.slice(2).replace("-", "/") + '</span></div>').join(""); }
+const s = document.getElementById("tq"); if (s) s.addEventListener("input", () => { q = s.value.trim().toLowerCase(); list(); });
+document.querySelectorAll("[data-th]").forEach(b => b.addEventListener("click", () => { const u = new URL(location.href); const cur = document.documentElement.getAttribute("data-garden-theme") || "light"; u.searchParams.set("theme", cur === "dark" ? "light" : "dark"); location.assign(u.toString()); }));
+const tabs = [...document.querySelectorAll("[data-tab]")];
+window.__tab = id => { if (!tabs.length) return; tabs.forEach(t => t.setAttribute("aria-selected", String(t.dataset.tab === id))); document.querySelectorAll("[data-tabp]").forEach(p => p.hidden = p.dataset.tabp !== id); };
+tabs.forEach(t => t.addEventListener("click", () => window.__tab(t.dataset.tab)));
+cards(); list(); months();
+</script>
+<!--notion-links:start-->
+<style>.nl{color:inherit;text-decoration:underline dotted;text-decoration-thickness:1px;text-underline-offset:3px;cursor:pointer}.nl::after{content:" \2197";font-size:.8em;opacity:.55}.nl:hover,.nl:focus-visible{text-decoration-style:solid;opacity:1;outline:none}.nl:hover::after{opacity:1}</style>
+<script>window.__NOTION_LINKS__ = [{"name": "Startups Pool", "url": "https://app.notion.com/p/67853899c6ff4e78aeb2f25b0875b601", "aliases": []}, {"name": "Zone Investment", "url": "https://app.notion.com/p/fe5715570ac747a4aa5452cc3cc9e628", "aliases": []}, {"name": "Zone Platform", "url": "https://app.notion.com/p/9c0c831726e34ff99de32607e779d2c3", "aliases": []}, {"name": "Founders", "url": "https://app.notion.com/p/13619a07ff444d05bbee168b31ff7260", "aliases": []}, {"name": "Memo", "url": "https://app.notion.com/p/96a2609ee4e44a01ae4841dd03672bc4", "aliases": []}, {"name": "Fundraise rounds", "url": "https://app.notion.com/p/2cb0fcf38494809793dfe911dbf79ead", "aliases": []}, {"name": "Our Terms", "url": "https://app.notion.com/p/2840fcf3849480218e57f942e78274e9", "aliases": []}, {"name": "CoInvest", "url": "https://app.notion.com/p/2e00fcf3849480298582c7bd72e3e332", "aliases": []}, {"name": "Valorisation", "url": "https://app.notion.com/p/2840fcf3849480d3b6eccb41715cbd71", "aliases": []}, {"name": "ACTIVATION ROADMAPS", "url": "https://app.notion.com/p/20f0fcf3849480cea08ac121ee8c6f9d", "aliases": ["Activation Roadmaps"]}, {"name": "Contracts", "url": "https://app.notion.com/p/2080fcf384948027bc4fdd3f1a11b5e3", "aliases": []}, {"name": "Zone - Communication", "url": "https://app.notion.com/p/1c70fcf3849480caa46bde43c221d665", "aliases": ["Zone · Communication"]}, {"name": "STOCKS", "url": "https://app.notion.com/p/20f0fcf38494809b881de5ea5c91bfaf", "aliases": []}, {"name": "Labels", "url": "https://app.notion.com/p/29ab6a35591e45f592eca77fd8b1b682", "aliases": []}, {"name": "Taskforce", "url": "https://app.notion.com/p/2fb0fcf3849480728cd6f141b07251d9", "aliases": ["TeamOwner"]}, {"name": "Programs", "url": "https://app.notion.com/p/42299f2803934484ac1abe3b193bc895", "aliases": ["Programmes"]}, {"name": "Mapverse", "url": "https://app.notion.com/p/c4c8efef870e43c298cbd6344b8fb739", "aliases": []}, {"name": "Scenari", "url": "https://app.notion.com/p/90a81b75c2dd461aafedc1860780b50a", "aliases": []}, {"name": "Protocols", "url": "https://app.notion.com/p/d44452661fb84329a45024735b5eed09", "aliases": []}, {"name": "Persona", "url": "https://app.notion.com/p/23e3aaea352c4dba824cedd4d95d2bb8", "aliases": ["Sendemo Persona Classification"]}, {"name": "Outcome", "url": "https://app.notion.com/p/15b0fcf3849480b4b1daed8687ca054b", "aliases": []}, {"name": "Pirate Metrics Framework", "url": "https://app.notion.com/p/023399460c1d4888bbe63a9c3a938dbf", "aliases": ["Data Driven Metrics Framework"]}, {"name": "Base Registry", "url": "https://app.notion.com/p/57ec93d750894e35a235cb2def898a9a", "aliases": []}, {"name": "Schema Contracts", "url": "https://app.notion.com/p/b402cf7695dc422ca847f61ef3a6f9cd", "aliases": []}, {"name": "Forms", "url": "https://app.notion.com/p/b292d77766c040a69baf24e4f6d62d75", "aliases": []}, {"name": "Field Contracts", "url": "https://app.notion.com/p/777bdb05d0a14871a67f14bde32f3464", "aliases": []}, {"name": "Operations", "url": "https://app.notion.com/p/06606f047537434f9b4e44f11b31f3b3", "aliases": []}, {"name": "Releases", "url": "https://app.notion.com/p/de91feac9f644bfca7b4bd6535c43170", "aliases": []}, {"name": "Incidents", "url": "https://app.notion.com/p/f505998cf2594842a412c806b08c6395", "aliases": []}, {"name": "Health Snapshots", "url": "https://app.notion.com/p/329ea747d48f4dd38512280f53886974", "aliases": []}, {"name": "Rôles", "url": "https://app.notion.com/p/7c954592eeb342618d408cb8e8de350b", "aliases": []}, {"name": "Alignements", "url": "https://app.notion.com/p/3d60fcf3849480b9b683fbc399b9bae7", "aliases": []}, {"name": "Pages", "url": "https://app.notion.com/p/1ad0fcf3849480219903ea0f2f8623e3", "aliases": ["Docs - lab", "Doc - lab", "Doc-lab", "Docs-lab"]}, {"name": "Compass", "url": "https://app.notion.com/p/6eec446fce1a40a1ab14efb34bad27e9", "aliases": []}, {"name": "Members", "url": "https://app.notion.com/p/550eb00f314f4f20a3ffd2cb9f5504de", "aliases": []}];
+(function(){
+  const T = window.__NOTION_LINKS__ || [];
+  if (!T.length || !document.body) return;
+  const url = new Map(); const names = [];
+  T.forEach(l => [l.name, ...(l.aliases || [])].forEach(n => { url.set(n, {u: l.url, k: l.name}); names.push(n); }));
+  names.sort((a, b) => b.length - a.length);
+  const esc = s => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const RX = new RegExp("(?<![\\p{L}\\p{N}_])(" + names.map(esc).join("|") + ")(?![\\p{L}\\p{N}_])(?!\\s+(?:Control\\s+Center|Operator))", "gu");
+  const SKIP = "a,button,[role=button],script,style,svg,textarea,input,select,option,label,title,code,pre,[data-nolink],.nl";
+  const SCOPE = ".scene,section,aside,dialog,[role=dialog],[data-scope],[aria-live],#panel,#detail,.panel,.detail,body";
+  function walk(root){
+    const seen = new Map();  // scope → names already linked in it (read from the DOM once per pass)
+    const has = (scope, k) => { let s = seen.get(scope);
+      if (!s){ s = new Set([...scope.querySelectorAll("a.nl")].filter(a => a.parentElement.closest(SCOPE) === scope).map(a => a.dataset.k)); seen.set(scope, s); }
+      return s.has(k); };
+    const tw = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {acceptNode: n => {
+      const p = n.parentElement; if (!p || p.closest(SKIP)) return NodeFilter.FILTER_REJECT;
+      RX.lastIndex = 0; return RX.test(n.nodeValue) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_SKIP; }});
+    const nodes = []; while (tw.nextNode()) nodes.push(tw.currentNode);
+    nodes.forEach(n => {
+      const scope = n.parentElement.closest(SCOPE) || document.body;
+      const s = n.nodeValue; let last = 0, out = null; RX.lastIndex = 0; let m;
+      while ((m = RX.exec(s))){
+        const hit = url.get(m[1]); if (!hit || has(scope, hit.k)) continue;
+        seen.get(scope).add(hit.k);
+        out = out || document.createDocumentFragment();
+        out.append(s.slice(last, m.index));
+        const a = document.createElement("a"); a.className = "nl"; a.href = hit.u; a.target = "_blank"; a.rel = "noopener";
+        a.dataset.k = hit.k; a.title = "Ouvrir « " + hit.k + " » dans Notion"; a.textContent = m[1];
+        a.addEventListener("click", e => e.stopPropagation());
+        out.append(a); last = m.index + m[0].length;
+      }
+      if (out){ out.append(s.slice(last)); n.replaceWith(out); }
+    });
+  }
+  // Inside the Notion app (desktop/mobile), an https link opens the web browser first, which then
+  // hands over to the app. Rewrite Notion links to the notion:// scheme there so they open directly.
+  const UA = navigator.userAgent || "";
+  const IN_APP = /\bNotion\/\d/i.test(UA) || /Electron\//.test(UA);
+  const NRX = /^https:\/\/(?:app\.notion\.com|www\.notion\.so|notion\.so)\/(?:p\/)?([^?#]+)(.*)$/;
+  // DISABLED 2026-10-02: notion:// links are blocked inside Notion embeds (links stopped working in the app).
+  function toApp(root){
+    if (!IN_APP) return;
+    root.querySelectorAll('a[href*="notion.com/"],a[href*="notion.so/"]').forEach(a => {
+      const m = a.getAttribute("href").match(NRX); if (!m) return;
+      a.setAttribute("href", "notion://www.notion.so/" + m[1] + m[2]); a.removeAttribute("target");
+    });
+  }
+  let t = null;
+  const run = () => { t = null; obs.disconnect(); try { walk(document.body); } finally { obs.observe(document.body, {childList: true, subtree: true, characterData: true}); } };
+  const obs = new MutationObserver(() => { if (!t) t = setTimeout(run, 250); });
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", run); else setTimeout(run, 0);
+})();
+</script>
+<!--notion-links:end-->
+</body>
+</html>

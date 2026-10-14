@@ -1,5 +1,5 @@
 {
-  "synced_at": "2026-10-14T11:50:55.793Z",
+  "synced_at": "2026-10-14T12:05:27.930Z",
   "domains": [
     {
       "id": "puppy",
@@ -62,8 +62,8 @@
       "file": "bee-network-bases.html",
       "generator": "Claude Code · scripts/bee-network-bases/build.py · relevé commun scripts/bee-network-releve",
       "sensitivity": "internal",
-      "bytes": 98955,
-      "sha256": "f4c6332081b1"
+      "bytes": 101427,
+      "sha256": "deaf4e9ba9e1"
     },
     {
       "id": "bee-network-index",
@@ -83,26 +83,26 @@
       "domain": "puppy",
       "title": "Les deux rives du Bee Network",
       "description": "Vue isométrique : bases de startups en tours, référentiels en dalles, ponts = relations Notion, mât Herald.",
-      "date": "2026-09-25",
+      "date": "2026-10-14",
       "source": "garden/assets/bee-network-rives.html",
       "file": "bee-network-rives.html",
       "generator": "Claude Code · bee-navigator 2.1.0 records + survey",
       "sensitivity": "internal",
-      "bytes": 70054,
-      "sha256": "7103aed3227f"
+      "bytes": 70197,
+      "sha256": "33fa0eeaa74f"
     },
     {
       "id": "bee-network-city",
       "domain": "puppy",
       "title": "La ville des bases",
       "description": "Vue isométrique : une tour par base (hauteur = fiches, strates = état), un quartier par branche de rattachement.",
-      "date": "2026-09-24",
+      "date": "2026-10-14",
       "source": "garden/assets/bee-network-city.html",
       "file": "bee-network-city.html",
       "generator": "Claude Code · bee-navigator 2.1.0 records",
       "sensitivity": "internal",
-      "bytes": 49019,
-      "sha256": "9d23e11820d2"
+      "bytes": 58649,
+      "sha256": "7f728e281e8a"
     },
     {
       "id": "ds-design-system-company-v3",
@@ -193,7 +193,7 @@
       "generator": "Claude Code · scripts/startup-encoded/ca/build.mjs + figures.mjs · anatomy dbf697a",
       "sensitivity": "internal",
       "bytes": 401008,
-      "sha256": "6362d20c74fe"
+      "sha256": "541b16d344db"
     },
     {
       "id": "startup-encoded-atelier",
@@ -205,8 +205,8 @@
       "file": "startup-encoded.atelier.html",
       "generator": "Claude Code · scripts/startup-encoded/atelier/build.mjs + figures.mjs · anatomy dbf697a",
       "sensitivity": "internal",
-      "bytes": 401020,
-      "sha256": "35f24e26415e"
+      "bytes": 414041,
+      "sha256": "19dd90c61216"
     },
     {
       "id": "bee-network-topologie",
@@ -218,8 +218,21 @@
       "file": "bee-network-topologie.html",
       "generator": "Claude Code · scripts/bee-network-topologie/build.mjs · relevé commun scripts/bee-network-releve",
       "sensitivity": "internal",
-      "bytes": 63052,
-      "sha256": "81bfc228dd5e"
+      "bytes": 63012,
+      "sha256": "6606072f7a2e"
+    },
+    {
+      "id": "bee-network-journal",
+      "domain": "puppy",
+      "title": "Bee Network — le journal des mémos",
+      "description": "Sept familles et 52 types de mémo (modèle, propriétés obligatoires, startup requise), qualité du journal (sans startup, sans type, résumés), créations par mois et cycle Herald memo.updated. Relevé du 14/10, comptes seulement.",
+      "date": "2026-10-14",
+      "source": "garden/assets/bee-network-journal.html",
+      "file": "bee-network-journal.html",
+      "generator": "Claude Code · scripts/bee-network-journal/build.mjs · relevé commun scripts/bee-network-releve",
+      "sensitivity": "internal",
+      "bytes": 35323,
+      "sha256": "07889e81db4f"
     }
   ]
 }
