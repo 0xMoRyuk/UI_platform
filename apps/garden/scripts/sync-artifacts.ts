@@ -15,6 +15,7 @@ type Artifact = {
   file: string
   generator: string
   sensitivity: string
+  audiences?: string[]
 }
 type Manifest = {
   notebook_root: string

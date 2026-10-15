@@ -1,5 +1,5 @@
 {
-  "$comment": "Manifest of Claude Code artifacts served by apps/garden. `source` is relative to the notebook root; `scripts/sync-artifacts.ts` copies it to public/artifacts/<domain>/<file>. Only the manifest decides what ships.",
+  "$comment": "Manifest of Claude Code artifacts served by apps/garden. `source` is relative to the notebook root; `scripts/sync-artifacts.ts` copies it to public/artifacts/<domain>/<file>. Only the manifest decides what ships. `audiences` (optional) lists the extra audiences a page is approved for in the garden manifest; scripts/prune-audience.ts keeps only those pages when Cloud Build runs with _AUDIENCE.",
   "notebook_root": "../../../notebook",
   "domains": [
     {
@@ -188,7 +188,10 @@
       "source": "garden/assets/startup-encoded.tv.html",
       "file": "startup-encoded.tv.html",
       "generator": "Claude Code · scripts/startup-encoded/atelier/build.mjs + tv/tv.mjs + figures.mjs · anatomy dbf697a",
-      "sensitivity": "internal"
+      "sensitivity": "internal",
+      "audiences": [
+        "observe"
+      ]
     },
     {
       "id": "bee-network-topologie",

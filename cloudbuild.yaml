@@ -20,6 +20,8 @@ substitutions:
   _CPU: '1'
   _TIMEOUT: '300s'
   _AUTH: 'public'  # 'public' (allUsers invoker) or 'iap' (private: Google sign-in via Cloud Run IAP)
+  _SERVICE: ''  # Cloud Run service name; empty = ui-platform-<app>. A second service of the same app (e.g. ui-platform-garden-observe).
+  _AUDIENCE: ''  # garden only: when set, apps/<app>/scripts/prune-audience.ts keeps only the artifacts approved for this audience before the build.
 
 options:
   # Build optimizations
@@ -65,6 +67,15 @@ steps:
         echo "🧹 Running lint for ${_APP_NAME}..."
         (cd "apps/${_APP_NAME}" && bun run lint)
 
+        if [ -n "${_AUDIENCE}" ]; then
+          if [ -f "apps/${_APP_NAME}/scripts/prune-audience.ts" ]; then
+            echo "✂️  Pruning artifacts to audience ${_AUDIENCE}..."
+            (cd "apps/${_APP_NAME}" && bun scripts/prune-audience.ts "${_AUDIENCE}")
+          else
+            echo "❌ _AUDIENCE set but apps/${_APP_NAME} has no scripts/prune-audience.ts"; exit 1
+          fi
+        fi
+
         echo "✅ Validation passed"
     waitFor: ['generate-version']
 
@@ -76,8 +87,10 @@ steps:
       - '-c'
       - |
         VERSION=$(cat /workspace/VERSION)
-        # Compute service name from app name (no nested substitution)
-        SERVICE_LOWER=$(echo "ui-platform-${_APP_NAME}" | tr '[:upper:]' '[:lower:]')
+        # Compute service name from app name (no nested substitution); _SERVICE overrides it
+        SVC="${_SERVICE}"
+        if [ -z "$$SVC" ]; then SVC="ui-platform-${_APP_NAME}"; fi
+        SERVICE_LOWER=$(echo "$$SVC" | tr '[:upper:]' '[:lower:]')
 
         # Detect app type from project files
         if grep -q '"next"' apps/${_APP_NAME}/package.json 2>/dev/null; then
