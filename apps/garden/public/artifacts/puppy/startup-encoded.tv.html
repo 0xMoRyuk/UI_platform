@@ -344,7 +344,7 @@ body[data-mode="atelier"] .ca-only{display:none!important}
 [data-mf].on{border-color:var(--acc)}
 .iso-plate-corner[data-corner="hint"]{max-width:38%;white-space:normal;line-height:1.35}
 .iso-plate-corner[data-corner="readout"]{max-width:56%;white-space:normal;text-align:right;line-height:1.35}
-html[data-tv]{scroll-snap-type:none;overflow:hidden;--W:1920px;--H:1080px}
+html[data-tv]{scroll-snap-type:none;overflow:hidden;--W:1920px;--H:1080px;--ease:cubic-bezier(.2,.7,.2,1);--fast:.25s;--slow:.9s}
 /* MacBook Air (16:10, 1470 × 919 sous l'encoche) : même composition, cadre 1920 × 1200 mis à l'échelle */
 html[data-tv=air]{--H:1200px}
 html[data-tv] body{overflow:hidden;height:100vh;margin:0}
@@ -357,14 +357,15 @@ html[data-tv] .mode{transition:opacity .4s}html[data-tv].idle .mode,html[data-tv
 .tv.wide .recit{display:none}.tv.wide .stage{grid-column:1/-1}
 /* colonne récit */
 .recit{grid-column:1;grid-row:1;display:flex;flex-direction:column;min-height:0;min-width:0}
-.recit .eyebrow{font-size:17px;letter-spacing:.18em;margin:0 0 20px;transition:opacity .5s}
-.recit .cap{font:500 46px/1.06 var(--mono);letter-spacing:-.03em;margin:0;color:var(--text);text-wrap:balance;hyphens:manual;transition:opacity .5s,translate .6s}
-.recit .sub{margin:16px 0 0;font:300 21px/1.45 var(--sans);color:var(--muted);max-width:30ch;min-height:0;transition:opacity .5s}
+.recit .eyebrow{font-size:17px;letter-spacing:.18em;margin:0 0 20px;transition:opacity var(--slow) var(--ease)}
+.recit .cap{font:500 46px/1.06 var(--mono);letter-spacing:-.03em;margin:0;color:var(--text);text-wrap:balance;hyphens:manual;transition:opacity var(--slow) var(--ease) .08s,translate var(--slow) var(--ease) .08s}
+.recit .sub{margin:16px 0 0;font:300 21px/1.45 var(--sans);color:var(--muted);max-width:30ch;min-height:0;transition:opacity var(--slow) var(--ease) .16s}
 .recit .sub b{color:var(--text);font-weight:500}
-.recit.swap .eyebrow,.recit.swap .cap,.recit.swap .sub{opacity:0}.recit.swap .cap{translate:0 10px}
+.recit.swap .eyebrow,.recit.swap .cap,.recit.swap .sub{opacity:0;transition-duration:var(--fast);transition-delay:0s}.recit.swap .cap{translate:0 10px}
 .recit .big{margin-top:34px;flex:1 1 0;min-height:0;position:relative}
-.slot{position:absolute;inset:0;opacity:0;visibility:hidden;translate:0 14px;transition:opacity .55s cubic-bezier(.2,.7,.2,1),translate .65s cubic-bezier(.2,.7,.2,1),visibility 0s .55s;overflow:hidden}
-.slot.cur{opacity:1;visibility:visible;translate:0 0;transition-delay:0s}
+.slot{position:absolute;inset:0;opacity:0;visibility:hidden;translate:0 0;transition:opacity var(--fast) var(--ease),visibility 0s var(--fast);overflow:hidden}
+.slot.cur{opacity:1;visibility:visible;translate:0 0;transition:opacity var(--slow) var(--ease) .3s;animation:tvrise var(--slow) var(--ease) .3s both}
+@keyframes tvrise{from{translate:0 14px}to{translate:0 0}}
 /* 00 · les six nombres */
 .tv .nums{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:40px 24px;margin:8px 0 0}
 .tv .num .v{font:500 92px/1 var(--mono);letter-spacing:-.045em;color:var(--text);font-variant-numeric:tabular-nums}
@@ -377,7 +378,9 @@ html[data-tv] .mode{transition:opacity .4s}html[data-tv].idle .mode,html[data-tv
 .tv .panel .links{font-size:17px;line-height:1.75;margin-top:18px}.tv .panel .hint{display:none}
 /* 02 · la famille au tiroir ouvert */
 .tv .fam{border:0;border-left:5px solid var(--fc);background:none;padding:4px 0 4px 24px;cursor:default;display:none}
-.tv .fam.tv-on{display:block;animation:tvin .55s cubic-bezier(.2,.7,.2,1) both}
+.tv .fam.tv-on{display:block;animation:tvin .55s var(--ease) .15s both}
+.tv .fam .where i{transition:background var(--fast),border-color var(--fast)}.tv .fam.tv-on .where i.on{animation:tvsq .3s var(--ease) both;animation-delay:calc(.25s + var(--i,0) * 22ms)}
+@keyframes tvsq{from{background:var(--off);border-color:var(--line)}to{background:var(--fc);border-color:var(--fc)}}
 .tv .fam .k{font-size:16px;margin-bottom:10px}.tv .fam .k span{font-size:16px}.tv .fam .t{font-size:36px;line-height:1.15}
 .tv .fam p{font-size:20px;line-height:1.45;margin-top:14px}.tv .fam p.atelier{font-size:17px!important;color:var(--muted)!important}
 .tv .fam .ex{font-size:15px;margin-top:12px;line-height:1.5}.tv .fam .where{margin-top:18px;gap:5px}.tv .fam .where i{width:20px;height:20px}
@@ -387,7 +390,7 @@ html[data-tv] .mode{transition:opacity .4s}html[data-tv].idle .mode,html[data-tv
 /* 04 · la famille sous le tampon */
 .tv .mfams{columns:auto;margin:0;max-width:none}
 .tv .mfam{display:none;background:none;border:0;padding:0;margin:0}
-.tv .mfam.on{display:block;animation:tvin .55s both}
+.tv .mfam.on{display:block;animation:tvin .55s var(--ease) .15s both}
 .tv .mfam .k{font-size:15px}.tv .mfam .t{font-size:36px;line-height:1.15}
 .tv .mfam .v{font-size:96px;letter-spacing:-.045em;margin-top:14px;font-variant-numeric:tabular-nums}
 .tv .mfam .s{font-size:17px;margin-top:8px;color:var(--muted)}
@@ -396,7 +399,7 @@ html[data-tv] .mode{transition:opacity .4s}html[data-tv].idle .mode,html[data-tv
 /* 05 · le geste en cours */
 .tv .gest{display:block;margin:0;max-width:none}
 .tv .gest .card{display:none;background:none;border:0;padding:0}
-.tv .gest .card.on{display:block;animation:tvin .55s both}
+.tv .gest .card.on{display:block;animation:tvin .55s var(--ease) .15s both}
 .tv .gest .card .k{font-size:15px;margin-bottom:12px}.tv .gest .card .st{font-size:12px;padding:3px 10px}
 .tv .gest .card .t{font-size:44px;line-height:1.1}
 .tv .gest .card p{font-size:20px;line-height:1.45;margin-top:16px}
@@ -405,8 +408,10 @@ html[data-tv] .mode{transition:opacity .4s}html[data-tv].idle .mode,html[data-tv
 .tv .socle{display:none}
 /* scène */
 .stage{grid-column:2;grid-row:1;position:relative;min-height:0;min-width:0}
-.temp{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:22px;opacity:0;translate:0 18px;transition:opacity .7s cubic-bezier(.2,.7,.2,1),translate .8s cubic-bezier(.2,.7,.2,1)}
-.temp.cur{opacity:1;translate:0 0}
+.temp{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:22px;opacity:0;translate:0 0;transition:opacity var(--fast) var(--ease)}
+.temp.cur{opacity:1;transition:opacity var(--slow) var(--ease) .3s;animation:tvrise2 var(--slow) var(--ease) .3s both}
+@keyframes tvrise2{from{translate:0 18px}to{translate:0 0}}
+.tv.slow .temp.cur{transition-duration:1.6s;animation-duration:1.6s}
 .temp[hidden]{display:none}
 .temp .figure{margin:0;max-width:none;width:100%;max-height:100%;min-height:0;display:flex;flex-direction:column}
 .temp .iso-figure{min-height:0;display:flex;flex-direction:column}
@@ -416,12 +421,13 @@ html[data-tv] .mode{transition:opacity .4s}html[data-tv].idle .mode,html[data-tv
 .temp[data-stage=ring] .grp,.temp[data-stage=ring] p{display:none}
 .temp[data-stage=ring]>div{width:100%;height:100%;display:flex;flex-direction:column;min-height:0}
 .temp[data-stage=ring] .ring{flex:1 1 0;min-height:0}
+.tv .ring.hold .pt{opacity:0!important;transition:none!important}
 .temp[data-stage=cabinet] .figure{max-width:var(--figw,940px)}
 .temp[data-stage=memo] .figure{max-width:var(--figw,940px)}
 .temp[data-stage=trieur] .figure{max-width:var(--figw,1040px);flex:0 1 auto}
 .temp[data-stage=trieur]{gap:34px}
 .temp .pipe{margin:0;max-width:none;width:100%;flex:0 0 auto;gap:10px;flex-wrap:nowrap}
-.temp .pst{padding:14px 18px;gap:6px;transition:border-color .4s,background .4s}
+.temp .pst{padding:14px 18px;gap:6px;transition:border-color var(--fast),translate var(--fast) var(--ease)}.temp .pst.lit{translate:0 -4px}
 .temp .pst b{font-size:24px;transition:color .4s}.temp .pst span{font-size:16px}
 .temp .pst.lit{border-color:var(--acc);border-style:solid}.temp .pst.lit b{color:var(--acc)}
 .temp .pipe .arr{font-size:22px}
@@ -449,6 +455,7 @@ html[data-tv] .mode{transition:opacity .4s}html[data-tv].idle .mode,html[data-tv
 .exs{width:100%;height:100%;display:flex;flex-direction:column;gap:18px;min-height:0}
 .exh{display:flex;align-items:baseline;gap:24px;font:14px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--faint);padding-bottom:14px;border-bottom:1px solid var(--line)}
 .exh .clock{margin-left:auto;font:500 54px/1 var(--mono);letter-spacing:-.03em;color:var(--text);font-variant-numeric:tabular-nums;text-transform:none;letter-spacing:0}
+.exh .clock{animation:tvpulse 2s ease-in-out infinite}@keyframes tvpulse{50%{opacity:.55}}
 .exh .clock.low{color:var(--amber)}.exh .clock.zero{color:var(--red);animation:tvblink 1.2s steps(2,end) infinite}
 .exh .r{transition:opacity .4s}.exs.done .exh .r{opacity:0}
 @keyframes tvblink{50%{opacity:.25}}
@@ -457,7 +464,7 @@ html[data-tv] .mode{transition:opacity .4s}html[data-tv].idle .mode,html[data-tv
 .exc .q b{font:500 16px var(--mono);color:var(--amber);border:1px solid var(--amber);border-radius:50%;width:34px;height:34px;display:grid;place-items:center;margin-top:2px}
 .exc .q p{margin:0;font:500 25px/1.3 var(--mono);color:var(--text)}.exc .q code{font:inherit;color:var(--acc)}
 .exc .q small{display:block;font:300 17px/1.4 var(--sans);color:var(--muted);margin-top:6px}
-.exc .a{opacity:0;translate:14px 0;transition:opacity .6s cubic-bezier(.2,.7,.2,1),translate .7s cubic-bezier(.2,.7,.2,1);padding-left:28px;border-left:3px solid var(--off)}
+.exc .a{opacity:0;translate:14px 0;transition:opacity .6s var(--ease) .2s,translate .7s var(--ease) .2s,border-left-color var(--fast);padding-left:28px;border-left:3px solid var(--off)}
 .exc.on .a{opacity:1;translate:0 0;border-left-color:var(--amber)}
 .exc .a .k{margin:0;font:500 30px/1.2 var(--mono);color:var(--text)}
 .exc .a .k.typed{font:400 23px/1.45 var(--sans);color:var(--text);min-height:1.45em}.exc .a .k.typed::after{content:"▍";color:var(--amber);opacity:0}.exc.typing .a .k.typed::after{opacity:1}
@@ -476,7 +483,7 @@ html[data-tv] .mode{transition:opacity .4s}html[data-tv].idle .mode,html[data-tv
 .rail .seg b{font-weight:500;color:var(--faint);margin-right:8px;transition:color .4s}
 .rail .seg .bar{height:3px;background:var(--off);border-radius:2px;overflow:hidden}
 .rail .seg .bar i{display:block;height:100%;width:0;background:var(--acc);transition:width .25s linear}
-.rail .seg.cur{color:var(--text)}.rail .seg.cur b{color:var(--acc)}
+.rail .seg.cur{color:var(--text);transition-delay:.3s}.rail .seg.cur b{color:var(--acc);transition-delay:.3s}
 .rail .seg.done .bar i{width:100%;background:var(--muted)}
 .rail .seg.x{flex:1 1 0}.rail .seg.x .bar{background:transparent}
 .rail .keys{position:absolute;right:64px;top:22px;color:var(--faint);font-size:13px;letter-spacing:.04em;transition:opacity .4s}
@@ -1795,6 +1802,8 @@ put(".xp", ".tvx");
 auto = false; clearTimeout(autoT);
 window.__ring = { select, setGrp, grp: () => grp, clear(){ sel = -1; const rg = $("#ring"); if (rg) { rg.classList.remove("sel"); rg.querySelectorAll(".node.on").forEach(n => n.classList.remove("on")); rg.querySelector(".rel").innerHTML = ""; } } };
 document.querySelectorAll("#ring .pt").forEach(c => { c.style.transitionDelay = Math.round(+c.dataset.d * 1.2) + "ms"; });
+// carrés « bases présentes » des familles : index pour l'allumage en séquence
+document.querySelectorAll(".fam .where").forEach(w => [...w.children].forEach((i, k) => i.style.setProperty("--i", k)));
 const inner = D.bases.map((b, i) => i).filter(i => i !== 0 && D.bases[i].orbite === 1);
 const CF = D.figs.cabinet, HF = D.figs.memo;
 // ── the six temps ─────────────────────────────────────────────────────────────────────────────
@@ -1802,10 +1811,10 @@ const STEP = 3.4, FAMHOLD = 10;
 const T = [
   { id: "ouverture", stage: "ring", slot: 0, dur: 18, eyebrow: "Bee Network · relevé du 12 octobre 2026", cap: "Ce qu'une fiche startup encode",
     sub: "Une startup est <b>une fiche</b> de Startups Pool. Dix-sept bases la décrivent ; chaque point est une propriété, sa couleur dit de quoi elle parle.",
-    enter(){ window.__ring.clear(); if (grp !== "base") setGrp("base"); countAll(); } },
+    enter(){ window.__ring.clear(); if (grp !== "base") setGrp("base"); const rg = $("#ring"); if (rg) { rg.classList.add("hold"); setTimeout(() => rg.classList.remove("hold"), still ? 0 : 2300); } countAll(); } },
   { id: "fiche", stage: "ring", slot: 1, dur: (inner.length + 1) * STEP + FAMHOLD, eyebrow: "01 · autour de la fiche", cap: "Une fiche, dix-sept bases autour d'elle",
     sub: "Au centre, <b>Startups Pool</b>. Premier cercle : les onze bases rattachées à la fiche. Second : un pas de plus. La base allumée tend ses fils vers ce qu'elle lit.",
-    at: -1, enter(){ this.at = -1; if (grp !== "base") setGrp("base"); },
+    at: -1, enter(){ this.at = -1; const rg = $("#ring"); if (rg) rg.classList.remove("hold"); if (grp !== "base") setGrp("base"); },
     step(t){ const k = Math.min(inner.length, Math.floor(t / STEP)); if (k !== this.at) { this.at = k; if (k < inner.length) select(k === 0 ? 0 : inner[k - 1]); } if (k === inner.length && grp !== "fam") { setGrp("fam"); setSub("Même nuage, <b>par famille d'information</b> : une grappe par famille, toutes bases confondues."); } },
     leave(){ if (grp !== "fam") return; setGrp("base"); } },
   // the cabinet tours alone (2.6 s a drawer, 14 drawers, a pause closed); the column follows the open drawer
@@ -1817,7 +1826,7 @@ const T = [
   // the time clock stamps its seven families alone; the figure already lights [data-mf]
   { id: "journal", stage: "memo", slot: 3, dur: 36, eyebrow: "04 · le journal", cap: HF.fams.reduce((s, f) => s + f.types, 0) + " types de mémo, sept familles",
     sub: "La base <b>Memo</b> est le journal de la startup : chaque appel, vote, revue, rapport ou fichier est une carte datée d'un <b>type gouverné</b>. L'horodateur tamponne une famille à la fois.",
-    fam: null, enter(){ this.fam = null; }, step(){ const s = window.__horo && window.__horo.state(); const f = s ? s.fam : -1; if (f === this.fam) return; this.fam = f; pick(".slot[data-s='3'] .rest").classList.toggle("tv-on", f < 0); } },
+    fam: null, enter(){ this.fam = null; }, step(){ const s = window.__horo && window.__horo.state(); const f = s ? s.fam : -1; if (f === this.fam) return; this.fam = f; pick(".slot[data-s='3'] .rest").classList.toggle("tv-on", f < 0); if (f >= 0) { const v = pick(".slot[data-s='3'] .mfam.on .v"); if (v) { const n = +(v.dataset.n || (v.dataset.n = v.textContent.replace(/\D/g, ""))); setTimeout(() => countTo(v, n, 600, 0), 150); } } } },
   // the sorting desk cycles its three gestures; the verbs strip lights with the card's phase
   { id: "puppy", stage: "trieur", slot: 4, dur: 48, eyebrow: "05 · puppy sur le journal", cap: "Ce que Puppy peut faire d'un mémo",
     sub: "Chaque mémo écrit dans Notion est aussi <b>un événement</b> : Herald le tamponne depuis le 29 août 2026, personne ne l'écoute encore. Trois gestes ; <b>Puppy propose, un humain autorise</b>.",
@@ -1833,22 +1842,24 @@ const EXT = [{"id":"c2","code":"C2","parcours":"Chercher · 2 / 5","min":10,"tit
 T.splice(3, 0, EXT[0]); T.splice(5, 0, EXT[1]); T.splice(7, 0, EXT[2]);
 const stage = tp => pick(".temp[data-stage=" + tp.stage + "] .exs");
 function clock(tp){ const el = stage(tp).querySelector("[data-clock]"); if (!el) return; const s = Math.max(0, Math.ceil(tp.dur - t)); el.textContent = String(Math.floor(s / 60)).padStart(2, "0") + ":" + String(s % 60).padStart(2, "0"); el.classList.toggle("low", s > 0 && s <= 60); el.classList.toggle("zero", s === 0); }
-function type(card, el, text){ if (still) { el.textContent = text; return; } let i = 0; card.classList.add("typing"); const step = () => { i += 1; el.textContent = text.slice(0, i); if (i < text.length && card.classList.contains("on")) setTimeout(step, 28); else card.classList.remove("typing"); }; step(); }
+function type(card, el, text){ if (still) { el.textContent = text; return; } let i = 0; card.classList.add("typing"); const step = () => { i += 1; el.textContent = text.slice(0, i); if (i < text.length && card.classList.contains("on")) setTimeout(step, /[.!?]$/.test(text.slice(0, i)) ? 320 : 28); else card.classList.remove("typing"); }; step(); }
 let autoRun = true;
 let k = -1, t = 0, paused = false, cur = null;
 // ── the column ────────────────────────────────────────────────────────────────────────────────
 function setSub(html){ const s = pick(".recit .sub"); if (s) s.innerHTML = html; }
 function showRecit(tp){ recit.classList.add("swap"); setTimeout(() => { pick(".recit .eyebrow").textContent = tp.eyebrow; pick(".recit .cap").textContent = tp.cap; setSub(tp.sub); recit.classList.remove("swap"); }, 320); }
 function showSlot(i){ document.querySelectorAll(".slot").forEach(s => s.classList.toggle("cur", +s.dataset.s === i)); }
-function showStage(id){ document.querySelectorAll(".temp").forEach(el => { const on = el.dataset.stage === id; if (on) { if (el.hidden) { el.hidden = false; void el.offsetWidth; } el.classList.add("cur"); } else if (el.classList.contains("cur")) { el.classList.remove("cur"); setTimeout(() => { if (!el.classList.contains("cur")) el.hidden = true; }, 760); } }); }
+function showStage(id){ document.querySelectorAll(".temp").forEach(el => { const on = el.dataset.stage === id; if (on) { if (el.hidden) { el.hidden = false; void el.offsetWidth; } el.classList.add("cur"); } else if (el.classList.contains("cur")) { el.classList.remove("cur"); setTimeout(() => { if (!el.classList.contains("cur")) el.hidden = true; }, 300); } }); }
 // counters of the opening: from zero to the figure, staggered
-function countAll(){ document.querySelectorAll(".slot[data-s='0'] .num .v").forEach((el, i) => { const n = +(el.dataset.n || (el.dataset.n = el.textContent.replace(/\D/g, ""))); if (still) { el.textContent = fmtN(n); return; } const t0 = performance.now() + i * 160, DUR = 1700; const ease = x => 1 - Math.pow(1 - x, 4);
-  const step = now => { const u = Math.max(0, Math.min(1, (now - t0) / DUR)); el.textContent = fmtN(Math.round(n * ease(u))); if (u < 1) requestAnimationFrame(step); }; requestAnimationFrame(step); }); }
+function countTo(el, n, DUR, over){ if (still) { el.textContent = fmtN(n); return; } const t0 = performance.now(); const ease = x => 1 - Math.pow(1 - x, 4);
+  const step = now => { const u = Math.max(0, Math.min(1, (now - t0) / DUR)); let v = n * ease(u); if (over && u > .55 && u < 1) v = n * (1 + over * Math.sin((u - .55) / .45 * Math.PI)); el.textContent = fmtN(Math.round(v)); if (u < 1) requestAnimationFrame(step); else el.textContent = fmtN(n); }; requestAnimationFrame(step); }
+function countAll(){ document.querySelectorAll(".slot[data-s='0'] .num .v").forEach((el, i) => { const n = +(el.dataset.n || (el.dataset.n = el.textContent.replace(/\D/g, ""))); const big = n > 500; setTimeout(() => countTo(el, n, big ? 2000 : 500, big ? .025 : 0), i * 140); }); }
 // ── the conductor ─────────────────────────────────────────────────────────────────────────────
 function go(i, byHand){
   const n = T.length; i = ((i % n) + n) % n; if (cur && cur.leave) cur.leave();
+  const fromEnd = !!cur && cur.id === "cartouche" && i === 0;
   k = i; cur = T[k]; t = 0;
-  tv.classList.toggle("wide", !!cur.wide); tv.classList.toggle("ex", !!cur.ex);
+  tv.classList.toggle("wide", !!cur.wide); tv.classList.toggle("ex", !!cur.ex); tv.classList.toggle("slow", fromEnd);
   if (!cur.wide) showRecit(cur); showSlot(cur.slot); showStage(cur.stage);
   if (cur.enter) cur.enter();
   railEl.querySelectorAll(".seg[data-i]").forEach(s => { const j = +s.dataset.i; s.classList.toggle("cur", j === k); s.classList.toggle("done", j < k); if (j > k) s.querySelector("i").style.width = "0"; });

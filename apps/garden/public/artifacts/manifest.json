@@ -1,5 +1,5 @@
 {
-  "synced_at": "2026-10-15T05:22:56.083Z",
+  "synced_at": "2026-10-15T06:52:52.625Z",
   "domains": [
     {
       "id": "puppy",
@@ -218,8 +218,8 @@
       "file": "startup-encoded.tv.html",
       "generator": "Claude Code · scripts/startup-encoded/atelier/build.mjs + tv/tv.mjs + figures.mjs · anatomy dbf697a",
       "sensitivity": "internal",
-      "bytes": 453609,
-      "sha256": "474ec7f75aa8"
+      "bytes": 455647,
+      "sha256": "26766b8d82d7"
     },
     {
       "id": "bee-network-topologie",
