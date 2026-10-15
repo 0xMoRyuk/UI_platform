@@ -1,5 +1,5 @@
 {
-  "synced_at": "2026-10-14T12:05:27.930Z",
+  "synced_at": "2026-10-15T05:22:56.083Z",
   "domains": [
     {
       "id": "puppy",
@@ -166,8 +166,8 @@
       "file": "lab-ca-2026-11.html",
       "generator": "Claude Code · busta-garden (registre Puppy, rapport GCP du 05/10, base Valorisation, Pages)",
       "sensitivity": "internal",
-      "bytes": 55925,
-      "sha256": "442a24810ca7"
+      "bytes": 55913,
+      "sha256": "2a282176c319"
     },
     {
       "id": "horacia-bench-pitch",
@@ -205,8 +205,21 @@
       "file": "startup-encoded.atelier.html",
       "generator": "Claude Code · scripts/startup-encoded/atelier/build.mjs + figures.mjs · anatomy dbf697a",
       "sensitivity": "internal",
-      "bytes": 414041,
-      "sha256": "19dd90c61216"
+      "bytes": 429957,
+      "sha256": "a4b2383761b7"
+    },
+    {
+      "id": "startup-encoded-tv",
+      "domain": "puppy",
+      "title": "Ce qu'une fiche startup encode — lecture TV",
+      "description": "Un seul écran 16:9 (ou 16:10 avec ?deck=air), neuf temps en boucle : la fiche et ses bases, les quatorze familles, le journal, Puppy sur le journal, les limites, et les trois exercices de l'atelier du 15/10 (C2, E1, E3) avec chrono et réponse révélée. Support de présentation ; relevé du 12/10, comptes seulement.",
+      "date": "2026-10-15",
+      "source": "garden/assets/startup-encoded.tv.html",
+      "file": "startup-encoded.tv.html",
+      "generator": "Claude Code · scripts/startup-encoded/atelier/build.mjs + tv/tv.mjs + figures.mjs · anatomy dbf697a",
+      "sensitivity": "internal",
+      "bytes": 453609,
+      "sha256": "474ec7f75aa8"
     },
     {
       "id": "bee-network-topologie",

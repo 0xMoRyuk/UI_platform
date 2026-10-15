@@ -180,6 +180,17 @@
       "sensitivity": "internal"
     },
     {
+      "id": "startup-encoded-tv",
+      "domain": "puppy",
+      "title": "Ce qu'une fiche startup encode — lecture TV",
+      "description": "Un seul écran 16:9 (ou 16:10 avec ?deck=air), neuf temps en boucle : la fiche et ses bases, les quatorze familles, le journal, Puppy sur le journal, les limites, et les trois exercices de l'atelier du 15/10 (C2, E1, E3) avec chrono et réponse révélée. Support de présentation ; relevé du 12/10, comptes seulement.",
+      "date": "2026-10-15",
+      "source": "garden/assets/startup-encoded.tv.html",
+      "file": "startup-encoded.tv.html",
+      "generator": "Claude Code · scripts/startup-encoded/atelier/build.mjs + tv/tv.mjs + figures.mjs · anatomy dbf697a",
+      "sensitivity": "internal"
+    },
+    {
       "id": "bee-network-topologie",
       "domain": "puppy",
       "title": "Bee Network — topologie des bases",
