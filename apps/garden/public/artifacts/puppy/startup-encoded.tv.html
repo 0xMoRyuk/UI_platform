@@ -377,8 +377,8 @@ html[data-tv] .mode{transition:opacity .4s}html[data-tv].idle .mode,html[data-tv
 .tv .panel .leg{font-size:15px;gap:6px 16px;margin-top:14px}.tv .panel .dot{width:12px;height:12px}
 .tv .panel .links{font-size:17px;line-height:1.75;margin-top:18px}.tv .panel .hint{display:none}
 /* 02 · la rubrique au tiroir ouvert */
-.tv .fam{border:0;border-left:5px solid var(--fc);background:none;padding:4px 0 4px 24px;cursor:default;display:none}
-.tv .fam.tv-on{display:block;animation:tvin .55s var(--ease) .15s both}
+.tv .slot .fam{border:0;border-left:5px solid var(--fc);background:none;padding:4px 0 4px 24px;cursor:default;display:none}
+.tv .slot .fam.tv-on{display:block;animation:tvin .55s var(--ease) .15s both}
 .tv .fam .where i{transition:background var(--fast),border-color var(--fast)}.tv .fam.tv-on .where i.on{animation:tvsq .3s var(--ease) both;animation-delay:calc(.25s + var(--i,0) * 22ms)}
 @keyframes tvsq{from{background:var(--off);border-color:var(--line)}to{background:var(--fc);border-color:var(--fc)}}
 .tv .fam .k{font-size:16px;margin-bottom:10px}.tv .fam .k span{font-size:16px}.tv .fam .t{font-size:36px;line-height:1.15}
@@ -1807,17 +1807,24 @@ document.querySelectorAll(".fam .where").forEach(w => [...w.children].forEach((i
 const inner = D.bases.map((b, i) => i).filter(i => i !== 0 && D.bases[i].orbite === 1);
 const CF = D.figs.cabinet, HF = D.figs.memo;
 // ── the six temps ─────────────────────────────────────────────────────────────────────────────
-const STEP = 3.4, FAMHOLD = 10;
+const STEP = 3.4, FAMHOLD = 10, RSTEP = 2.4;
+const RUBS = D.fams.filter(f => P.some(p => p.fam.code === f.code));
+// allume une rubrique sur le cercle (la part « cercle » de famFilter, sans ouvrir le tiroir du meuble ni filtrer l'explorateur)
+function ringFam(code){ famSel = code; const rg = $("#ring"); if (!rg) return; rg.classList.toggle("ff", !!code); rg.querySelectorAll(".pt").forEach(el => el.classList.toggle("fon", el.dataset.f === code)); rg.querySelectorAll(".node[data-f]").forEach(n => n.classList.toggle("on", n.dataset.f === code)); }
 const T = [
   // ouverture : les points arrivent par base (après les compteurs), puis le nuage se regroupe par rubrique (Mo, 15/10 :
   // « sur l'ouverture je veux une animation entre la vue par base vers les rubriques »)
-  { id: "ouverture", stage: "ring", slot: 0, dur: 26, eyebrow: "Bee Network · relevé du 12 octobre 2026", cap: "Ce qu'une fiche startup encode",
+  // … puis dispatch par rubrique (Mo, 15/10 : « allonger l'animation avec dispatch par rubrique ») : les quatorze
+  // rubriques s'allument tour à tour, les autres points s'estompent, le sous-titre lit la rubrique.
+  { id: "ouverture", stage: "ring", slot: 0, dur: 11 + 3 + RUBS.length * RSTEP + 3, eyebrow: "Bee Network · relevé du 12 octobre 2026", cap: "Ce qu'une fiche startup encode",
     sub: "Une startup est <b>une fiche</b> de Startups Pool. Dix-sept bases la décrivent ; chaque point est une propriété, sa couleur dit de quoi elle parle.",
-    ph: 0, enter(){ this.ph = 0; window.__ring.clear(); if (grp !== "base") setGrp("base"); const rg = $("#ring"); if (rg) { rg.classList.add("hold"); setTimeout(() => rg.classList.remove("hold"), still ? 0 : 2300); } countAll(); },
-    step(t){ if (t >= 11 && this.ph === 0) { this.ph = 1; setGrp("fam"); setSub("Même nuage, trié <b>par rubrique</b> : quatorze grappes, toutes bases confondues. C'est le tri que la page suit.", true); } } },
+    ph: 0, at: -1, enter(){ this.ph = 0; this.at = -1; window.__ring.clear(); ringFam(null); if (grp !== "base") setGrp("base"); const rg = $("#ring"); if (rg) { rg.classList.add("hold"); setTimeout(() => rg.classList.remove("hold"), still ? 0 : 2300); } countAll(); },
+    step(t){ if (t >= 11 && this.ph === 0) { this.ph = 1; setSub("Même nuage, trié <b>par rubrique</b> : quatorze grappes, toutes bases confondues. C'est le tri que la page suit.", true); setGrp("fam"); }
+      if (t >= 14) { const k = Math.min(RUBS.length, Math.floor((t - 14) / RSTEP)); if (k !== this.at) { this.at = k; if (k < RUBS.length) { const f = RUBS[k]; ringFam(f.code); setSub("<b>" + f.code + "</b> · " + esc(f.name) + " · " + P.filter(p => p.fam.code === f.code).length + " propriétés — " + esc(f.ca), true); } else { ringFam(null); setSub("Quatorze rubriques, <b>746 propriétés</b> : tout ce qu'une fiche peut encoder.", true); } } } },
+    leave(){ ringFam(null); } },
   { id: "fiche", stage: "ring", slot: 1, dur: (inner.length + 1) * STEP + FAMHOLD, eyebrow: "01 · autour de la fiche", cap: "Une fiche, dix-sept bases autour d'elle",
     sub: "Au centre, <b>Startups Pool</b>. Premier cercle : les onze bases rattachées à la fiche. Second : un pas de plus. La base allumée tend ses fils vers ce qu'elle lit.",
-    at: -1, enter(){ this.at = -1; const rg = $("#ring"); if (rg) rg.classList.remove("hold"); if (grp !== "base") setGrp("base"); },
+    at: -1, enter(){ this.at = -1; const rg = $("#ring"); if (rg) rg.classList.remove("hold"); ringFam(null); if (grp !== "base") setGrp("base"); },
     step(t){ const k = Math.min(inner.length, Math.floor(t / STEP)); if (k !== this.at) { this.at = k; if (k < inner.length) select(k === 0 ? 0 : inner[k - 1]); } if (k === inner.length && grp !== "fam") { setGrp("fam"); setSub("Même nuage, <b>par rubrique</b> : une grappe par rubrique, toutes bases confondues.", true); } },
     leave(){ if (grp !== "fam") return; setGrp("base"); } },
   // the cabinet tours alone (2.6 s a drawer, 14 drawers, a pause closed); the column follows the open drawer
