@@ -1,5 +1,5 @@
 {
-  "synced_at": "2026-10-15T06:52:52.625Z",
+  "synced_at": "2026-10-15T07:04:53.910Z",
   "domains": [
     {
       "id": "puppy",
@@ -192,8 +192,8 @@
       "file": "startup-encoded.ca.html",
       "generator": "Claude Code · scripts/startup-encoded/ca/build.mjs + figures.mjs · anatomy dbf697a",
       "sensitivity": "internal",
-      "bytes": 401008,
-      "sha256": "541b16d344db"
+      "bytes": 401071,
+      "sha256": "d1fa242f87d3"
     },
     {
       "id": "startup-encoded-atelier",
@@ -205,8 +205,8 @@
       "file": "startup-encoded.atelier.html",
       "generator": "Claude Code · scripts/startup-encoded/atelier/build.mjs + figures.mjs · anatomy dbf697a",
       "sensitivity": "internal",
-      "bytes": 429957,
-      "sha256": "a4b2383761b7"
+      "bytes": 429912,
+      "sha256": "85e64bf08509"
     },
     {
       "id": "startup-encoded-tv",
@@ -218,8 +218,8 @@
       "file": "startup-encoded.tv.html",
       "generator": "Claude Code · scripts/startup-encoded/atelier/build.mjs + tv/tv.mjs + figures.mjs · anatomy dbf697a",
       "sensitivity": "internal",
-      "bytes": 455647,
-      "sha256": "26766b8d82d7"
+      "bytes": 456162,
+      "sha256": "9b5f9212d200"
     },
     {
       "id": "bee-network-topologie",
