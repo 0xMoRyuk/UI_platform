@@ -64,7 +64,6 @@
       "dependencies": {
         "@tailwindcss/vite": "^4.1.17",
         "@typeform/embed-react": "^4.0.2",
-        "@ui-platform/ui": "workspace:*",
         "react": "^19.2.0",
         "react-dom": "^19.2.0",
         "react-router-dom": "^7.9.6",

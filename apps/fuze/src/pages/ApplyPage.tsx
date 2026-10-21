@@ -1,5 +1,4 @@
 import { Widget } from '@typeform/embed-react'
-import { trackFormSubmit } from '@ui-platform/ui'
 
 const CANONICAL_FORM_ID = 'nCZzuxiM'
 
@@ -11,7 +10,6 @@ export function ApplyPage() {
   return (
     <Widget
       id={formId}
-      onSubmit={() => trackFormSubmit('bee-apply')}
       style={{ width: '100%', height: '100vh', border: 0 }}
       opacity={100}
       inlineOnMobile
