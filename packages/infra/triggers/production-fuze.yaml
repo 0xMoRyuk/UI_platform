@@ -1,0 +1,53 @@
+# Cloud Build Trigger for Production Deployments — fuze
+# Bee Network application surface; embeds canonical Typeform.
+# Automatically deploys to production when apps/fuze or shared packages change.
+
+name: ui-platform-production-deploy-fuze
+description: 'Production deployment for UI Platform fuze (Bee Network application surface)'
+
+# Trigger on push to main branch
+github:
+  owner: 0xMoRyuk
+  name: UI_platform
+  push:
+    branch: '^main$'
+
+# Use the shared CI/CD configuration (auto-detects Vite via Dockerfile.vite)
+filename: cloudbuild.yaml
+
+# Production environment substitutions
+substitutions:
+  _APP_NAME: 'fuze'
+  _ENV: 'production'
+  _REGION: 'europe-west1'
+  _MIN_INSTANCES: '0'
+  _MAX_INSTANCES: '10'
+  _MEMORY: '512Mi'
+  _CPU: '1'
+  _TIMEOUT: '300s'
+
+# Include files - only trigger if these paths change
+includedFiles:
+  - 'apps/fuze/**'
+  - 'packages/ui/**'
+  - 'packages/config/**'
+  - 'packages/types/**'
+  - 'packages/utils/**'
+  - 'packages/infra/**'
+  - 'package.json'
+
+# Ignored files - don't trigger on these
+ignoredFiles:
+  - '**/*.md'
+  - 'docs/**'
+  - '.github/**'
+  - '**/*.test.ts'
+  - '**/*.test.tsx'
+
+# Cloud Run service that gets deployed: ui-platform-fuze (europe-west1)
+# Build prebuild step requires service account access to:
+#   - Pub/Sub subscription `puppy.canon.forms.build-reader` (digital-africa-fuze)
+# Grant via: gcloud pubsub subscriptions add-iam-policy-binding \
+#   puppy.canon.forms.build-reader \
+#   --member=serviceAccount:<cloudbuild-sa>@digital-africa-fuze.iam.gserviceaccount.com \
+#   --role=roles/pubsub.subscriber
