@@ -133,6 +133,7 @@ steps:
           --image=gcr.io/$PROJECT_ID/$$SERVICE_LOWER:$$VERSION \
           --platform=managed \
           --region=${_REGION} \
+          --service-account=ui-platform-runtime@$PROJECT_ID.iam.gserviceaccount.com \
           $$AUTH_FLAGS \
           --min-instances=${_MIN_INSTANCES} \
           --max-instances=${_MAX_INSTANCES} \
